@@ -40,4 +40,11 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 border-t border-[#1d2731]/8 pt-6 flex flex-col gap-2 text-xs text-[#1d2731]/40 md:flex-row md:justify-betwe
+        <div className="mt-10 border-t border-[#1d2731]/8 pt-6 flex flex-col gap-2 text-xs text-[#1d2731]/40 md:flex-row md:justify-between">
+          <span>&copy; 2026 reverb.ro &mdash; Toate drepturile rezervate.</span>
+          <span>Human Digital Marketing AI</span>
+        </div>
+      </div>
+    </footer>
+  );
+}

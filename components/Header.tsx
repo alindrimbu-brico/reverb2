@@ -81,4 +81,10 @@ export default function Header() {
             onClick={() => setOpen(false)}
             className="mt-3 inline-flex w-full items-center justify-center rounded-full bg-[#1d2731] py-3 text-sm font-medium text-white"
           >
-            Prog
+            Programează un call
+          </Link>
+        </div>
+      )}
+    </header>
+  );
+}
