@@ -12,7 +12,7 @@ const services = [
   {
     id: "01",
     title: "Creare site",
-    context: "Puritate vizuală și structură care convertește",
+    context: "Design clar și structură care convertește",
     tagline: "Un site care lucrează pentru tine, nu pentru portofoliul nostru.",
     text: "Site-uri clare, rapide și construite pentru conversie, nu pentru a impresiona doar designerii. Fiecare pagină are un scop, fiecare element are un rol. Construim site-uri care explică clar, inspiră încredere și transformă vizitatorii în clienți.",
     includes: [
@@ -66,7 +66,7 @@ const services = [
   {
     id: "04",
     title: "Branding & AI",
-    context: "Identitate curată, amplificată cu precizie",
+    context: "Identitate coerentă, amplificată cu precizie",
     tagline: "Poziționare autentică, amplificată inteligent.",
     text: "Poziționare, mesaje și sisteme în care AI amplifică munca umană, fără să-i ia sufletul. Construim identități de brand care spun ceva real despre tine, nu identități generice produse la scară industrială. AI-ul accelerează procesul, dar vocea brandului rămâne a ta.",
     includes: [

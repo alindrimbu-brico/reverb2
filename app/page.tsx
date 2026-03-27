@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const trajectory = [
   { label: "Zgomot", desc: "Haos, jargon, decizii reactive, mesaje confuze" },
   { label: "Curățare", desc: "Scoatem tot ce este în plus. Ce rămâne e fundația" },
-  { label: "Structură", desc: "Fiecare element are un rol clar și o formă curată" },
+  { label: "Structură", desc: "Fiecare element are un rol clar și o formă precisă" },
   { label: "Claritate", desc: "Conversia nu mai e un accident. Totul are sens" },
   { label: "Liniște", desc: "Știi exact unde ești, unde mergi și ce urmează" },
 ];
@@ -21,7 +21,7 @@ const trajectory = [
 const services = [
   {
     title: "Creare site",
-    context: "Puritate vizuală și structură care convertește",
+    context: "Design clar și structură care convertește",
     text: "Site-uri clare, rapide și construite pentru conversie, nu pentru a impresiona doar designerii.",
     href: "/servicii",
   },
@@ -39,7 +39,7 @@ const services = [
   },
   {
     title: "Branding & AI",
-    context: "Identitate curată, amplificată cu precizie",
+    context: "Identitate coerentă, amplificată cu precizie",
     text: "Poziționare, mesaje și sisteme în care AI amplifică munca umană, fără să-i ia sufletul.",
     href: "/servicii",
   },
@@ -64,7 +64,7 @@ export default function HomePage() {
             <div>
               <Reveal>
                 <div className="mb-6 inline-flex items-center rounded-full border border-[#1d2731]/10 bg-white/70 px-4 py-2 text-xs uppercase tracking-[0.28em] text-[#1d2731]/70 shadow-sm backdrop-blur">
-                  Claritate · Puritate · Focus
+                  Claritate · Structură · Focus
                 </div>
               </Reveal>
 
@@ -76,7 +76,7 @@ export default function HomePage() {
 
               <Reveal delay={160}>
                 <p className="mt-8 max-w-2xl text-lg leading-8 text-[#1d2731]/72 md:text-xl">
-                  Site-uri, magazine și sisteme de marketing construite cu puritate, structură și sens. Fără zgomot. Fără haos frumos ambalat.
+                  Site-uri, magazine și sisteme de marketing construite cu grijă, structură și sens. Fără zgomot. Fără haos frumos ambalat.
                 </p>
               </Reveal>
 
@@ -146,7 +146,7 @@ export default function HomePage() {
                   <div className="mt-6 rounded-[28px] bg-[#1d2731] p-6 text-white">
                     <div className="text-xs uppercase tracking-[0.3em] text-white/55">Filosofie</div>
                     <p className="mt-4 text-base leading-7 text-white/88">
-                      Reverb nu amplifică zgomotul. Reverb reverberează claritatea. Construim afaceri digitale în care fiecare element vibrează la aceeași frecvență: claritate, puritate, frumusețe funcțională.
+                      Reverb nu amplifică zgomotul. Reverb reverberează claritatea. Construim afaceri digitale în care fiecare element vibrează la aceeași frecvență: claritate, precizie, frumusețe funcțională.
                     </p>
                   </div>
                 </div>
@@ -223,7 +223,7 @@ export default function HomePage() {
                   text: "Scoatem tot ce este în plus: jargon, zgomot vizual, promisiuni vagi. Ce rămâne după curățare este fundația reală.",
                 },
                 {
-                  title: "Puritate în structură",
+                  title: "Precizie în structură",
                   text: "Un sistem bine construit nu are nevoie de manual. Structura lui vorbește singură. Fiecare pagină are un rol clar.",
                 },
                 {
@@ -232,7 +232,7 @@ export default function HomePage() {
                 },
                 {
                   title: "Focus ca disciplină",
-                  text: "Fiecare proiect are un obiectiv principal, un mesaj principal. Focusul este forma cea mai curată a respectului.",
+                  text: "Fiecare proiect are un obiectiv principal, un mesaj principal. Focusul este forma cea mai directă a respectului.",
                 },
               ].map((item, i) => (
                 <Reveal key={item.title} delay={i * 80}>

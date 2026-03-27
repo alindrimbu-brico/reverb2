@@ -27,7 +27,7 @@ export default function Footer() {
               </div>
             </Link>
             <p className="mt-4 text-sm leading-6 text-[#1d2731]/60">
-              Reverb — reîntoarcerea la vibrația curată. Claritate, puritate, frumusețe funcțională.
+              Reverb — reîntoarcerea la vibrația clară. Claritate, precizie, frumusețe funcțională.
             </p>
           </div>
 

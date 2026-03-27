@@ -5,7 +5,7 @@ import Reveal from "@/components/Reveal";
 export const metadata: Metadata = {
   title: "Despre",
   description:
-    "Reverb vine din reverberation — întoarcerea sunetului la sursa sa. Aducem afacerile digitale înapoi la esență: claritate, puritate, frumusețe funcțională.",
+    "Reverb vine din reverberation — întoarcerea sunetului la sursa sa. Aducem afacerile digitale înapoi la esență: claritate, precizie, frumusețe funcțională.",
 };
 
 const values = [
@@ -14,8 +14,8 @@ const values = [
     text: "Înainte de orice execuție, curățăm. Scoatem tot ce este în plus: jargon, zgomot vizual, promisiuni vagi, haos de proces. Ce rămâne după curățare este fundația reală a afacerii digitale.",
   },
   {
-    title: "Puritate în structură",
-    text: "Un sistem bine construit nu are nevoie de manual. Structura lui vorbește singură. Fiecare pagină, fiecare pas în funnel, fiecare email are un rol clar și o formă curată.",
+    title: "Precizie în structură",
+    text: "Un sistem bine construit nu are nevoie de manual. Structura lui vorbește singură. Fiecare pagină, fiecare pas în funnel, fiecare email are un rol clar și o formă precisă.",
   },
   {
     title: "Frumusețe funcțională",
@@ -23,7 +23,7 @@ const values = [
   },
   {
     title: "Focus ca disciplină",
-    text: "Nu lucrăm pe toate fronturile în același timp. Fiecare proiect are un obiectiv principal, un mesaj principal, un client principal. Focusul este forma cea mai curată a respectului față de client.",
+    text: "Nu lucrăm pe toate fronturile în același timp. Fiecare proiect are un obiectiv principal, un mesaj principal, un client principal. Focusul este forma cea mai directă a respectului față de client.",
   },
   {
     title: "Omul în centru, AI ca amplificator",
@@ -31,7 +31,7 @@ const values = [
   },
   {
     title: "Parteneriat, nu tranzacție",
-    text: "Nu dispărem după lansare. Construim relații în care clientul crește, iar noi creștem cu el. Relația sănătoasă este ea însăși o formă de puritate.",
+    text: "Nu dispărem după lansare. Construim relații în care clientul crește, iar noi creștem cu el. Relația sănătoasă este ea însăși o formă de profesionalism.",
   },
 ];
 
@@ -96,10 +96,10 @@ export default function DesprePage() {
               <Reveal delay={120}>
                 <div className="space-y-6 text-base leading-8 text-white/80">
                   <p>
-                    Reverb este agenția care aduce afacerile digitale înapoi la esență. La ceea ce contează cu adevărat. La frumusețea unui sistem care funcționează simplu, la puritatea unui mesaj care nu are nevoie de explicații, la focusarea care face ca fiecare decizie să aibă sens.
+                    Reverb este agenția care aduce afacerile digitale înapoi la esență. La ceea ce contează cu adevărat. La frumusețea unui sistem care funcționează simplu, la claritatea unui mesaj care nu are nevoie de explicații, la focusarea care face ca fiecare decizie să aibă sens.
                   </p>
                   <p>
-                    Construim afaceri digitale în care fiecare element — site, magazin, marketing, branding — vibrează la aceeași frecvență: claritate, puritate, frumusețe funcțională. Nu adăugăm straturi inutile. Nu complicăm ce poate fi simplu.
+                    Construim afaceri digitale în care fiecare element — site, magazin, marketing, branding — vibrează la aceeași frecvență: claritate, precizie, frumusețe funcțională. Nu adăugăm straturi inutile. Nu complicăm ce poate fi simplu.
                   </p>
                   <p>
                     Căutăm întotdeauna esența: ce anume, spus sau construit exact cum trebuie, face ca totul să se liniștească.
@@ -128,7 +128,7 @@ export default function DesprePage() {
               {[
                 { label: "Zgomot", desc: "Haos, jargon, canale deconectate, mesaje confuze" },
                 { label: "Curățare", desc: "Scoatem tot ce e în plus. Rămâne fundația reală" },
-                { label: "Structură", desc: "Fiecare element are un rol clar și o formă curată" },
+                { label: "Structură", desc: "Fiecare element are un rol clar și o formă precisă" },
                 { label: "Claritate", desc: "Conversia nu mai e un accident. Totul are sens" },
                 { label: "Liniște", desc: "Un sistem care vibrează la frecvența potrivită" },
               ].map((step, i) => (
