@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -22,6 +23,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <Script src="https://nevronix.ai/nevronix-sdk.js" strategy="afterInteractive" />
+        <Script id="nevronix-init" strategy="afterInteractive">{`
+          NevronixAI.init({
+            apiUrl: 'https://platform.nevronix.ai?id=59&s=efb92348-b235-4209-974e-4f8a69b14dee',
+            position: 'bottom-right',
+            iframeWidth: '340px',
+            iframeHeight: '340px',
+            iframeMobileWidth: '300px',
+            iframeMobileHeight: '300px',
+            buttonText: 'Hi! Click here to start a conversation',
+          });
+        `}</Script>
       </body>
     </html>
   );
