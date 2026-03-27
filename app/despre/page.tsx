@@ -5,226 +5,250 @@ import Reveal from "@/components/Reveal";
 export const metadata: Metadata = {
   title: "Despre",
   description:
-    "Reverb — Human Digital Marketing AI. Omul dă direcția, AI-ul accelerează execuția, sistemul livrează rezultate. Structură, implementare, performanță.",
+    "Reverb — Human Digital Marketing AI. Execuție digitală pentru IMM-uri. Omul dă direcția, AI-ul accelerează, sistemul livrează.",
 };
 
 const values = [
   {
-    title: "Revenirea la esență",
-    text: "Înainte de orice execuție, curățăm. Scoatem tot ce este în plus: jargon, zgomot vizual, promisiuni vagi, haos de proces. Ce rămâne după curățare este fundația reală a afacerii digitale.",
+    title: "Prețuri fixe & transparente",
+    text: "Știi de la început cât plătești și ce primești. Fără estimări vagi, fără costuri ascunse.",
   },
   {
-    title: "Precizie în structură",
-    text: "Un sistem bine construit nu are nevoie de manual. Structura lui vorbește singură. Fiecare pagină, fiecare pas în funnel, fiecare email are un scop definit și o formă precisă.",
+    title: "Proces clar în 4 pași",
+    text: "Fără improvizații. Fără schimbări haotice. Fiecare etapă are un scop definit și un rezultat concret.",
+  },
+  {
+    title: "Focus pe rezultate",
+    text: "Nu trafic. Nu vizualizări. Ci cereri, conversii și vânzări. Măsurăm ce contează cu adevărat.",
   },
   {
     title: "Implementare, nu doar strategie",
-    text: "Nu livrăm doar prezentări și recomandări. Construim și configurăm sisteme funcționale. Fiecare proiect se predă gata de utilizare.",
+    text: "Construim și configurăm. Nu livrăm doar prezentări și recomandări. Fiecare proiect se predă gata de utilizare.",
   },
   {
-    title: "Focus ca disciplină",
-    text: "Nu lucrăm pe toate fronturile în același timp. Fiecare proiect are un obiectiv principal, un mesaj principal, un client principal. Focusul este forma cea mai directă a respectului față de client.",
+    title: "Human + AI",
+    text: "Omul dă direcția strategică. AI-ul comprimă timpul de execuție. Reverb integrează ambele într-un sistem care livrează.",
   },
   {
-    title: "Omul în centru, AI ca amplificator",
-    text: "Direcția, sensul și discernământul rămân umane. AI-ul comprimă timpul și crește precizia execuției — nu înlocuiește gândirea. Reverb folosește AI fără să piardă vocea umană.",
-  },
-  {
-    title: "Parteneriat, nu tranzacție",
-    text: "Nu dispărem după lansare. Construim relații în care clientul crește, iar noi creștem cu el. Relația sănătoasă este ea însăși o formă de profesionalism.",
+    title: "Selectăm proiectele",
+    text: "Lucrăm cu firme care vor creștere reală. Nu acceptăm proiecte fără obiectiv concret sau buget definit.",
   },
 ];
 
 const approach = [
   {
     step: "01",
-    title: "Discuție & Esență",
-    text: "Înțelegem ce contează cu adevărat pentru afacerea ta. Modelul de venituri, publicul, oferta, concurența și direcția în care vrei să crești. Nu construim nimic fără context solid.",
+    title: "Discuție & Obiectiv",
+    text: "Clarificăm ce vrei să obții: apeluri, leaduri sau vânzări. Modelul de venituri, publicul, oferta, concurența.",
   },
   {
     step: "02",
-    title: "Structură & Curățare",
-    text: "Eliminăm zgomotul. Arhitectura site-ului, mesajele de brand, funnel-urile de conversie și logica comercială — toate trebuie să formeze un sistem coerent, curat, înainte de implementare.",
+    title: "Structură & Implementare",
+    text: "Construim sistemul pe baza obiectivului stabilit. Arhitectură, mesaje, design, configurări.",
   },
   {
     step: "03",
-    title: "Implementare & Lansare",
-    text: "Construim, configurăm, testăm. Design premium, cod curat, copy comercial eficient și integrări funcționale. Fiecare decizie are un motiv.",
+    title: "Lansare & Configurare",
+    text: "Activăm, testăm și verificăm conversiile. Totul funcțional la predare.",
   },
   {
     step: "04",
-    title: "Optimizare continuă",
-    text: "Performanța nu este un punct de sosire, este o practică. Monitorizăm, măsurăm și ajustăm continuu. Un sistem digital sănătos se îmbunătățește cu fiecare lună.",
+    title: "Optimizare & Ajustare",
+    text: "Monitorizăm și ajustăm pentru performanță stabilă. Un sistem digital sănătos se îmbunătățește cu fiecare lună.",
   },
 ];
 
 export default function DesprePage() {
   return (
     <div className="bg-[#f5f1ea] text-[#1d2731]">
-        {/* Hero */}
-        <section className="relative overflow-hidden border-b border-[#1d2731]/8">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(118,86,143,0.10),transparent_35%),radial-gradient(circle_at_bottom_left,rgba(49,88,79,0.08),transparent_30%)]" />
-          <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
-            <Reveal>
-              <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">Despre noi</div>
-            </Reveal>
-            <Reveal delay={80}>
-              <h1 className="mt-4 max-w-4xl text-5xl font-medium leading-[0.94] tracking-[-0.04em] md:text-7xl lg:text-[80px]">
-                Human Digital Marketing AI.
-              </h1>
-            </Reveal>
-            <Reveal delay={160}>
-              <p className="mt-8 max-w-2xl text-lg leading-8 text-[#1d2731]/70 md:text-xl">
-                Reverb vine din reverberation — întoarcerea sunetului la sursa sa. Noi aducem afacerile digitale înapoi la esență: la ce contează cu adevărat, la ce funcționează cu adevărat.
-              </p>
-            </Reveal>
-          </div>
-        </section>
+      {/* Hero */}
+      <section className="relative overflow-hidden border-b border-[#1d2731]/8">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(118,86,143,0.10),transparent_35%),radial-gradient(circle_at_bottom_left,rgba(49,88,79,0.08),transparent_30%)]" />
+        <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+          <Reveal>
+            <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">Despre noi</div>
+          </Reveal>
+          <Reveal delay={80}>
+            <h1 className="mt-4 max-w-4xl text-5xl font-medium leading-[0.94] tracking-[-0.04em] md:text-7xl lg:text-[80px]">
+              Human Digital Marketing AI.
+            </h1>
+          </Reveal>
+          <Reveal delay={160}>
+            <p className="mt-8 max-w-2xl text-lg leading-8 text-[#1d2731]/70 md:text-xl">
+              Reverb vine din reverberation — semnalul se întoarce mai curat decât a plecat. La fel lucrăm și noi: omul dă direcția, AI-ul accelerează, sistemul livrează.
+            </p>
+          </Reveal>
+        </div>
+      </section>
 
-        {/* Manifest */}
-        <section className="bg-[#1d2731] text-white">
-          <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
-            <div className="grid gap-12 lg:grid-cols-2">
-              <Reveal>
-                <div>
-                  <div className="text-xs uppercase tracking-[0.3em] text-white/40">Manifest</div>
-                  <h2 className="mt-4 text-3xl font-medium leading-tight tracking-[-0.03em] md:text-5xl">
-                    Nu amplifică zgomotul. Îl elimină.
-                  </h2>
-                </div>
-              </Reveal>
-              <Reveal delay={120}>
-                <div className="space-y-6 text-base leading-8 text-white/80">
-                  <p>
-                    Reverb este agenția care aduce afacerile digitale înapoi la esență. La ceea ce contează cu adevărat. La un sistem care funcționează simplu, la un mesaj care nu are nevoie de explicații, la focusarea care face ca fiecare decizie să aibă sens.
-                  </p>
-                  <p>
-                    Construim afaceri digitale în care fiecare element — site, magazin, marketing, branding — vibrează la aceeași frecvență: structură, execuție, rezultate. Nu adăugăm straturi inutile. Nu complicăm ce poate fi simplu.
-                  </p>
-                  <p>
-                    Căutăm întotdeauna esența: ce anume, spus sau construit exact cum trebuie, face ca totul să se liniștească.
-                  </p>
-                </div>
-              </Reveal>
-            </div>
-          </div>
-        </section>
-
-        {/* Trajectory */}
-        <section className="border-b border-[#1d2731]/8 bg-white/45">
-          <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+      {/* Manifest */}
+      <section className="bg-[#1d2731] text-white">
+        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+          <div className="grid gap-12 lg:grid-cols-2">
             <Reveal>
-              <div className="mb-12">
-                <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">Traiectoria</div>
-                <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
-                  De la zgomot la liniște.
+              <div>
+                <div className="text-xs uppercase tracking-[0.3em] text-white/40">Manifest</div>
+                <h2 className="mt-4 text-3xl font-medium leading-tight tracking-[-0.03em] md:text-5xl">
+                  Nu amplifică zgomotul. Îl elimină.
                 </h2>
-                <p className="mt-4 max-w-2xl text-base leading-7 text-[#1d2731]/65">
-                  Liniștea nu este absența activității — este starea unui antreprenor care știe exact unde este, unde merge și ce urmează.
+              </div>
+            </Reveal>
+            <Reveal delay={120}>
+              <div className="space-y-6 text-base leading-8 text-white/80">
+                <p>
+                  Reverb este agenția care aduce afacerile digitale înapoi la esență. Nu adăugăm straturi inutile. Nu complicăm ce poate fi simplu. Construim sisteme care funcționează — cu structură, disciplină și rezultate măsurabile.
+                </p>
+                <p>
+                  Folosim AI pentru a comprima timpul de execuție, nu pentru a înlocui gândirea. Omul dă direcția. AI-ul accelerează. Sistemul livrează. Asta e Reverb.
+                </p>
+                <p>
+                  Lucrăm cu IMM-uri care vor prezență online reală — nu decorativă. Site-uri care generează cereri, magazine care vând, campanii care aduc clienți. Fără jargon. Fără haos.
                 </p>
               </div>
             </Reveal>
-            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
-              {[
-                { label: "Zgomot", desc: "Haos, jargon, canale deconectate, mesaje confuze" },
-                { label: "Curățare", desc: "Scoatem tot ce e în plus. Rămâne fundația reală" },
-                { label: "Structură", desc: "Fiecare element are un scop definit și o formă precisă" },
-                { label: "Claritate", desc: "Conversia nu mai e un accident. Totul are sens" },
-                { label: "Liniște", desc: "Un sistem care vibrează la frecvența potrivită" },
-              ].map((step, i) => (
-                <Reveal key={step.label} delay={i * 70}>
-                  <div className="card-hover rounded-[28px] border border-[#1d2731]/8 bg-[#faf7f2] p-6">
-                    <div className="mb-3 text-3xl font-medium tracking-[-0.04em] text-[#1d2731]/20">0{i + 1}</div>
-                    <h3 className="text-lg font-medium text-[#1d2731]">{step.label}</h3>
-                    <p className="mt-2 text-sm leading-6 text-[#1d2731]/70">{step.desc}</p>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Values / Piloni */}
-        <section className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+      {/* De ce Reverb — Values */}
+      <section className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+        <Reveal>
+          <div className="mb-12">
+            <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">De ce Reverb</div>
+            <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
+              Nu suntem cea mai ieftină opțiune. Suntem opțiunea structurată.
+            </h2>
+          </div>
+        </Reveal>
+
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {values.map((v, i) => (
+            <Reveal key={v.title} delay={i * 70}>
+              <div className="card-hover rounded-[28px] border border-[#1d2731]/8 bg-white/70 p-8 shadow-[0_10px_40px_rgba(29,39,49,0.05)]">
+                <h3 className="text-xl font-medium text-[#1d2731]">{v.title}</h3>
+                <p className="mt-4 text-[15px] leading-7 text-[#1d2731]/70">{v.text}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* Pentru cine */}
+      <section className="border-y border-[#1d2731]/8 bg-white/45">
+        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
           <Reveal>
             <div className="mb-12">
-              <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">Pilonii</div>
+              <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">Pentru cine lucrăm</div>
               <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
-                Principiile care ghidează fiecare decizie.
+                Lucrăm cu firme care vor structură și rezultate.
               </h2>
             </div>
           </Reveal>
 
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {values.map((v, i) => (
-              <Reveal key={v.title} delay={i * 70}>
-                <div className="card-hover rounded-[28px] border border-[#1d2731]/8 bg-white/70 p-8 shadow-[0_10px_40px_rgba(29,39,49,0.05)]">
-                  <h3 className="text-xl font-medium text-[#1d2731]">{v.title}</h3>
-                  <p className="mt-4 text-[15px] leading-7 text-[#1d2731]/70">{v.text}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </section>
-
-        {/* Approach */}
-        <section className="border-y border-[#1d2731]/8 bg-white/45">
-          <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+          <div className="grid gap-8 md:grid-cols-2">
             <Reveal>
-              <div className="mb-12">
-                <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">Cum lucrăm</div>
-                <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
-                  Un proces fără improvizații.
-                </h2>
-                <p className="mt-4 max-w-2xl text-base leading-7 text-[#1d2731]/65">
-                  Știi de la început ce plătești și ce primești. Fără improvizații. Fără ambiguitate.
-                </p>
+              <div className="rounded-[28px] border border-[#1d2731]/8 bg-white/70 p-8">
+                <div className="text-sm font-semibold text-[#1d2731] mb-5">✔ Este potrivit pentru:</div>
+                <ul className="space-y-3">
+                  {[
+                    "IMM-uri locale care vor mai multe cereri și apeluri",
+                    "Firme tradiționale care intră în digital",
+                    "Businessuri care au buget real și vor rezultate",
+                    "Antreprenori care caută structură, nu experimente",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-3 text-[15px] leading-7 text-[#1d2731]/70">
+                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#31584f]" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </Reveal>
 
-            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-              {approach.map((a, i) => (
-                <Reveal key={a.step} delay={i * 80}>
-                  <div className="card-hover rounded-[28px] border border-[#1d2731]/8 bg-[#faf7f2] p-7">
-                    <div className="mb-6 text-4xl font-medium tracking-[-0.04em] text-[#1d2731]/20">{a.step}</div>
-                    <h3 className="text-xl font-medium text-[#1d2731]">{a.title}</h3>
-                    <p className="mt-4 text-[15px] leading-7 text-[#1d2731]/70">{a.text}</p>
-                  </div>
-                </Reveal>
-              ))}
+            <Reveal delay={100}>
+              <div className="rounded-[28px] border border-[#1d2731]/8 bg-[#faf7f2] p-8">
+                <div className="text-sm font-semibold text-[#1d2731] mb-5">✖ Nu este potrivit pentru:</div>
+                <ul className="space-y-3">
+                  {[
+                    "Start-up fără buget definit",
+                    "Antreprenori care schimbă direcția constant",
+                    'Clienți care caută „cel mai ieftin preț"',
+                    "Proiecte fără obiectiv concret",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-3 text-[15px] leading-7 text-[#1d2731]/70">
+                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#1d2731]/25" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Approach */}
+      <section className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+        <Reveal>
+          <div className="mb-12">
+            <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">Cum lucrăm</div>
+            <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
+              Proces clar. Fără improvizații.
+            </h2>
+            <p className="mt-4 max-w-2xl text-base leading-7 text-[#1d2731]/65">
+              Fiecare proiect urmează aceeași structură simplă, astfel încât știi exact ce urmează.
+            </p>
+          </div>
+        </Reveal>
+
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          {approach.map((a, i) => (
+            <Reveal key={a.step} delay={i * 80}>
+              <div className="card-hover rounded-[28px] border border-[#1d2731]/8 bg-[#faf7f2] p-7">
+                <div className="mb-6 text-4xl font-medium tracking-[-0.04em] text-[#1d2731]/20">{a.step}</div>
+                <h3 className="text-xl font-medium text-[#1d2731]">{a.title}</h3>
+                <p className="mt-4 text-[15px] leading-7 text-[#1d2731]/70">{a.text}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal delay={400}>
+          <p className="mt-8 text-center text-sm text-[#1d2731]/50">
+            Durată medie implementare: 7–30 zile, în funcție de pachet și complexitate.
+          </p>
+        </Reveal>
+      </section>
+
+      {/* CTA */}
+      <Reveal>
+        <section className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+          <div className="rounded-[36px] bg-[#1d2731] p-8 text-white md:p-12 lg:flex lg:items-center lg:justify-between lg:gap-12">
+            <div className="max-w-2xl">
+              <h2 className="text-3xl font-medium tracking-[-0.03em] md:text-4xl">
+                Gata să construim ceva solid pentru afacerea ta?
+              </h2>
+              <p className="mt-4 text-lg leading-8 text-white/70">
+                Discuție inițială de 20–30 minute. Fără obligații. Stabilim obiectivul și vedem dacă suntem potriviți.
+              </p>
+            </div>
+            <div className="mt-8 flex flex-col gap-4 lg:mt-0 lg:shrink-0">
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-sm font-medium text-[#1d2731] transition hover:-translate-y-0.5 hover:shadow-lg"
+              >
+                Programează o discuție
+              </Link>
+              <Link
+                href="/servicii"
+                className="inline-flex items-center justify-center rounded-full border border-white/15 px-8 py-4 text-sm font-medium text-white transition hover:bg-white/5"
+              >
+                Vezi serviciile și prețurile
+              </Link>
             </div>
           </div>
         </section>
-
-        {/* CTA */}
-        <Reveal>
-          <section className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
-            <div className="rounded-[36px] bg-[#1d2731] p-8 text-white md:p-12 lg:flex lg:items-center lg:justify-between lg:gap-12">
-              <div className="max-w-2xl">
-                <h2 className="text-3xl font-medium tracking-[-0.03em] md:text-4xl">
-                  Gata să construim ceva solid pentru afacerea ta?
-                </h2>
-                <p className="mt-4 text-lg leading-8 text-white/70">
-                  Din prima discuție, știi exact la ce să te aștepți. Fără improvizații. Fără ambiguitate.
-                </p>
-              </div>
-              <div className="mt-8 flex flex-col gap-4 lg:mt-0 lg:shrink-0">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-sm font-medium text-[#1d2731] transition hover:-translate-y-0.5 hover:shadow-lg"
-                >
-                  Programează un call gratuit
-                </Link>
-                <Link
-                  href="/servicii"
-                  className="inline-flex items-center justify-center rounded-full border border-white/15 px-8 py-4 text-sm font-medium text-white transition hover:bg-white/5"
-                >
-                  Vezi toate serviciile
-                </Link>
-              </div>
-            </div>
-          </section>
-        </Reveal>
-      </div>
+      </Reveal>
+    </div>
   );
 }

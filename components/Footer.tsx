@@ -5,6 +5,7 @@ const nav = [
   { href: "/", label: "Acasă" },
   { href: "/despre", label: "Despre" },
   { href: "/servicii", label: "Servicii" },
+  { href: "/pachete", label: "Pachete" },
   { href: "/magazine-online", label: "Magazine Online" },
   { href: "/portofoliu", label: "Portofoliu" },
   { href: "/blog", label: "Blog" },
