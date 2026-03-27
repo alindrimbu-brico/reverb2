@@ -27,7 +27,7 @@ export default function Footer() {
               </div>
             </Link>
             <p className="mt-4 text-sm leading-6 text-[#1d2731]/60">
-              Construim afaceri digitale clare, stabile și pe sufletul tău. Fără jargon. Cu structură și sens.
+              De la haos digital la infrastructură care funcționează. Claritate, structură, execuție disciplinată.
             </p>
           </div>
 
@@ -42,7 +42,7 @@ export default function Footer() {
 
         <div className="mt-10 border-t border-[#1d2731]/8 pt-6 flex flex-col gap-2 text-xs text-[#1d2731]/40 md:flex-row md:justify-between">
           <span>&copy; 2026 reverb.ro &mdash; Toate drepturile rezervate.</span>
-          <span>Human Digital Marketing AI</span>
+          <span>Omul gândește. AI-ul execută. Reverb livrează.</span>
         </div>
       </div>
     </footer>

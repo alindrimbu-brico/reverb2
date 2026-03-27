@@ -10,7 +10,7 @@ const geist = Geist({ subsets: ["latin"], variable: "--font-geist-sans" });
 export const metadata: Metadata = {
   title: { default: "Reverb — Human Digital Marketing AI", template: "%s | Reverb" },
   description:
-    "Construim afaceri digitale clare, stabile și pe sufletul tău. Site-uri, magazine online și sisteme de marketing în care omul și AI-ul lucrează împreună.",
+    "Reverb construiește infrastructură digitală pentru IMM-uri: site-uri, magazine online și sisteme de marketing în care omul și AI-ul lucrează împreună. Claritate, structură, rezultate.",
   metadataBase: new URL("https://reverb.ro"),
 };
 
