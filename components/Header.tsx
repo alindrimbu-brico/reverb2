@@ -27,7 +27,7 @@ export default function Header() {
           </div>
           <div>
             <div className="text-sm font-semibold tracking-[0.35em] uppercase text-[#1d2731]">reverb.ro</div>
-            <div className="text-xs text-[#1d2731]/55">Human Digital Marketing AI</div>
+            <div className="text-xs text-[#1d2731]/55">Afaceri digitale clare și pe sufletul tău</div>
           </div>
         </Link>
 
