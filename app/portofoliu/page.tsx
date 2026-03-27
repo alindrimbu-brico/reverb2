@@ -158,7 +158,7 @@ export default function PortofoliuPage() {
             <div className="rounded-[36px] bg-[#1d2731] p-8 text-white md:p-12 lg:p-16">
               <div className="mx-auto max-w-3xl text-center">
                 <h2 className="text-3xl font-medium leading-tight tracking-[-0.03em] md:text-4xl">
-                  Vrei același nivel de claritate și pentru business-ul tău?
+                  Vrei același nivel de precizie și pentru business-ul tău?
                 </h2>
                 <p className="mt-5 text-lg leading-8 text-white/70">
                   Nu promitem rezultate identice — fiecare business e diferit. Dar promitem onestitate, structură și execuție disciplinată.

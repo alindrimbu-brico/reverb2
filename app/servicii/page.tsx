@@ -5,18 +5,18 @@ import Reveal from "@/components/Reveal";
 export const metadata: Metadata = {
   title: "Servicii",
   description:
-    "Tot ce ai nevoie pentru un ecosistem digital curat: site-uri, magazine online, marketing digital, branding și consultanță continuă. Structură, sens și rezultate.",
+    "Tot ce ai nevoie pentru un ecosistem digital funcțional: site-uri, magazine online, marketing digital, branding și consultanță continuă. Structură, sens și rezultate.",
 };
 
 const services = [
   {
     id: "01",
     title: "Creare site",
-    context: "Design clar și structură care convertește",
+    context: "Design precis și structură care convertește",
     tagline: "Un site care lucrează pentru tine, nu pentru portofoliul nostru.",
-    text: "Site-uri clare, rapide și construite pentru conversie, nu pentru a impresiona doar designerii. Fiecare pagină are un scop, fiecare element are un rol. Construim site-uri care explică clar, inspiră încredere și transformă vizitatorii în clienți.",
+    text: "Site-uri rapide, esențiale și construite pentru conversie, nu pentru a impresiona doar designerii. Fiecare pagină are un scop, fiecare element are un rol. Construim site-uri care explică bine, inspiră încredere și transformă vizitatorii în clienți.",
     includes: [
-      "Design premium, clar și responsive",
+      "Design premium și responsive",
       "Pagini esențiale: Home, Servicii, Despre, Contact",
       "Arhitectură SEO de bază",
       "Copy comercial de bază inclus",
@@ -24,13 +24,13 @@ const services = [
       "Integrare formulare și instrumente de analiză",
       "Suport la lansare",
     ],
-    ideal: "Antreprenori, freelanceri, companii de servicii care vor prezență digitală clară și profesionistă.",
+    ideal: "Antreprenori, freelanceri, companii de servicii care vor o prezență digitală serioasă și profesionistă.",
     href: "/contact",
   },
   {
     id: "02",
     title: "Magazine online complete",
-    context: "Sistem de vânzare clar, fără fricțiune",
+    context: "Sistem de vânzare fluid, fără fricțiune",
     tagline: "Nu doar un magazin. Un sistem de vânzare construit pe logică comercială.",
     text: "Arhitectură de vânzare, structură de categorie, checkout curat și logică de business sănătoasă. Construim magazine online care nu doar arată bine, ci și vând. De la structura categoriilor la pagina de produs, fiecare decizie are o logică comercială în spate.",
     includes: [
@@ -50,14 +50,14 @@ const services = [
     title: "Marketing digital",
     context: "Mesaje focusate, cereri constante",
     tagline: "Campanii care fac parte dintr-un sistem, nu acțiuni izolate.",
-    text: "Ads, email, content și funnel-uri care lucrează împreună, nu campanii aruncate în aer și uitate. Construim strategii de marketing care se potrivesc cu business-ul tău real, nu cu tendințele din newslettere. Fiecare canal are un rol clar în ecosistemul tău digital.",
+    text: "Ads, email, content și funnel-uri care lucrează împreună, nu campanii aruncate în aer și uitate. Construim strategii de marketing care se potrivesc cu business-ul tău real, nu cu tendințele din newslettere. Fiecare canal are un rol definit în ecosistemul tău digital.",
     includes: [
       "Strategie de marketing personalizată",
       "Campanii Meta Ads și Google Ads",
       "Email marketing și automatizări",
       "Content strategy și calendar editorial",
       "Funnel-uri de conversie",
-      "Raportare clară și optimizare continuă",
+      "Raportare transparentă și optimizare continuă",
       "Integrare cu site-ul și magazinul existent",
     ],
     ideal: "Business-uri cu prezență digitală existentă care vor să crească traficul, lead-urile sau vânzările.",
@@ -68,7 +68,7 @@ const services = [
     title: "Branding & AI",
     context: "Identitate coerentă, amplificată cu precizie",
     tagline: "Poziționare autentică, amplificată inteligent.",
-    text: "Poziționare, mesaje și sisteme în care AI amplifică munca umană, fără să-i ia sufletul. Construim identități de brand care spun ceva real despre tine, nu identități generice produse la scară industrială. AI-ul accelerează procesul, dar vocea brandului rămâne a ta.",
+    text: "Poziționare, mesaje și sisteme în care AI amplifică munca umană, fără să o depersonalizeze. Construim identități de brand care spun ceva real despre tine, nu identități generice produse la scară industrială. AI-ul accelerează procesul, dar vocea brandului rămâne a ta.",
     includes: [
       "Strategie de poziționare și diferențiere",
       "Mesaje de brand: tagline, manifesto, about",
@@ -78,7 +78,7 @@ const services = [
       "Sistem de conținut AI-assisted pentru echipa ta",
       "Consultanță de implementare",
     ],
-    ideal: "Antreprenori care vor să-și clarifice sau să-și redescopere brandul înainte de o relansare sau creștere.",
+    ideal: "Antreprenori care vor să-și redefinească sau să-și redescopere brandul înainte de o relansare sau creștere.",
     href: "/contact",
   },
   {
@@ -93,7 +93,7 @@ const services = [
       "Suport tehnic și mentenanță",
       "Consultanță strategică (call lunar inclus)",
       "Prioritizare acțiuni de creștere",
-      "Rapoarte clare și interpretate",
+      "Rapoarte detaliate și interpretate",
       "Acces la echipa Reverb pentru întrebări punctuale",
     ],
     ideal: "Business-uri care au deja o prezență digitală și vor un partener pe termen lung, nu un furnizor de servicii.",
@@ -120,7 +120,7 @@ const faq = [
   },
   {
     q: "Cum folosiți AI în proiecte?",
-    a: "Omul gândește. AI-ul execută. Reverb clarifică. Folosim AI pentru cercetare, claritate și viteză de execuție. Direcția strategică și vocea brandului rămân umane.",
+    a: "Omul gândește. AI-ul execută. Reverb livrează. Folosim AI pentru cercetare, eficiență și viteză de execuție. Direcția strategică și vocea brandului rămân umane.",
   },
 ];
 
@@ -136,12 +136,12 @@ export default function ServiciiPage() {
             </Reveal>
             <Reveal delay={80}>
               <h1 className="mt-4 max-w-4xl text-5xl font-medium leading-[0.94] tracking-[-0.04em] md:text-7xl lg:text-[80px]">
-                Tot ce ai nevoie pentru un ecosistem digital curat.
+                Tot ce ai nevoie pentru un ecosistem digital funcțional.
               </h1>
             </Reveal>
             <Reveal delay={160}>
               <p className="mt-8 max-w-2xl text-lg leading-8 text-[#1d2731]/70 md:text-xl">
-                Serviciile sunt grupate clar, ca să nu te pierzi în ofertă. Exact cum ar trebui să arate și site-ul tău. Fiecare serviciu are un scop precis și se poate combina cu celelalte.
+                Serviciile sunt grupate logic, ca să nu te pierzi în ofertă. Exact cum ar trebui să arate și site-ul tău. Fiecare serviciu are un scop precis și se poate combina cu celelalte.
               </p>
             </Reveal>
           </div>
@@ -224,10 +224,10 @@ export default function ServiciiPage() {
               <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
                 <div>
                   <h2 className="text-3xl font-medium leading-tight tracking-[-0.03em] md:text-5xl">
-                    Nu știi de unde să începi? Hai să clarificăm împreună.
+                    Nu știi de unde să începi? Hai să stabilim împreună.
                   </h2>
                   <p className="mt-5 text-lg leading-8 text-white/70">
-                    Un call de 30 de minute e suficient ca să înțelegem situația ta și să-ți propunem ce are sens. Fără pitch. Fără presiune. Claritate din primul minut.
+                    Un call de 30 de minute e suficient ca să înțelegem situația ta și să-ți propunem ce are sens. Fără pitch. Fără presiune. Direcție din primul minut.
                   </p>
                 </div>
                 <div className="flex flex-col gap-4 lg:items-end">

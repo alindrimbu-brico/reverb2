@@ -20,7 +20,7 @@ export default function ContactPage() {
             </Reveal>
             <Reveal delay={80}>
               <h1 className="mt-4 max-w-3xl text-5xl font-medium leading-[0.94] tracking-[-0.04em] md:text-7xl lg:text-[80px]">
-                Dacă vrei claritate, vorbește cu noi.
+                Hai să vorbim despre afacerea ta.
               </h1>
             </Reveal>
             <Reveal delay={160}>

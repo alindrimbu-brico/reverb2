@@ -5,7 +5,7 @@ import Reveal from "@/components/Reveal";
 export const metadata: Metadata = {
   title: "Magazine Online Complete",
   description:
-    "Construim magazine online clare, premium și pregătite să vândă pe termen lung. Arhitectură de vânzare, design premium, copy comercial și suport la lansare.",
+    "Construim magazine online premium, funcționale și pregătite să vândă pe termen lung. Arhitectură de vânzare, design premium, copy comercial și suport la lansare.",
 };
 
 const included = [
@@ -21,7 +21,7 @@ const included = [
   {
     category: "Design & Experiență",
     items: [
-      "Design premium, clar și responsive",
+      "Design premium și responsive",
       "Pagina principală (Home) orientată spre conversie",
       "Pagini de categorie și filtrare",
       "Template pagină de produs optimizat pentru vânzare",
@@ -53,8 +53,8 @@ const included = [
 const steps = [
   {
     num: "01",
-    title: "Strategie & claritate",
-    text: "Clarificăm modelul de business, oferta și direcția brandului. Înțelegem ce vinzi, cui vinzi și ce te diferențiază de concurență. Fără această etapă, orice design e decorativ.",
+    title: "Strategie & direcție",
+    text: "Definim modelul de business, oferta și direcția brandului. Înțelegem ce vinzi, cui vinzi și ce te diferențiază de concurență. Fără această etapă, orice design e decorativ.",
     duration: "Săpt. 1–2",
   },
   {
@@ -78,7 +78,7 @@ const steps = [
 ];
 
 const benefits = [
-  "Claritate în ofertă și în experiența de cumpărare",
+  "Coerență în ofertă și în experiența de cumpărare",
   "Poziționare mai matură și mai coerentă a brandului",
   "Bază solidă pentru ads, email și conținut",
   "Flux de vânzare mai curat și mai ușor de optimizat",
@@ -90,12 +90,12 @@ const testimonials = [
   {
     name: "Slot testimonial 01",
     role: "Antreprenor e-commerce",
-    text: "Reverb ne-a pus ordine în ofertă, în mesaj și în procesul de vânzare. În sfârșit, site-ul nostru spune clar ce facem și pentru cine.",
+    text: "Reverb ne-a pus ordine în ofertă, în mesaj și în procesul de vânzare. În sfârșit, site-ul nostru spune exact ce facem și pentru cine.",
   },
   {
     name: "Slot testimonial 02",
     role: "Fondator brand online",
-    text: "Au folosit AI inteligent, fără să piardă vocea umană a brandului. Rezultatul a fost mai clar, mai rapid și mai stabil.",
+    text: "Au folosit AI inteligent, fără să piardă vocea umană a brandului. Rezultatul a fost mai precis, mai rapid și mai stabil.",
   },
   {
     name: "Slot testimonial 03",
@@ -122,7 +122,7 @@ export default function MagazineOnlinePage() {
               </Reveal>
               <Reveal delay={160}>
                 <p className="mt-6 text-lg leading-8 text-[#1d2731]/70 md:text-xl">
-                  Magazinul tău nu trebuie doar să arate bine. Trebuie să explice clar, să inspire încredere și să transforme traficul în comenzi. Asta construim.
+                  Magazinul tău nu trebuie doar să arate bine. Trebuie să explice, să inspire încredere și să transforme traficul în comenzi. Asta construim.
                 </p>
               </Reveal>
               <Reveal delay={240}>
@@ -148,7 +148,7 @@ export default function MagazineOnlinePage() {
               <div className="rounded-[30px] border border-[#1d2731]/8 bg-[#1d2731] p-8 text-white shadow-[0_20px_70px_rgba(29,39,49,0.14)]">
                 <div className="text-xs uppercase tracking-[0.3em] text-white/50">Promisiune principală</div>
                 <div className="mt-4 text-2xl font-medium leading-tight tracking-[-0.03em] md:text-3xl">
-                  Îți construim un magazin online clar, premium și pregătit să vândă pe termen lung.
+                  Îți construim un magazin online premium, funcțional și pregătit să vândă pe termen lung.
                 </div>
                 <div className="mt-8 space-y-3">
                   {benefits.map((b) => (
@@ -172,7 +172,7 @@ export default function MagazineOnlinePage() {
                 Cum construim un magazin care vinde.
               </h2>
               <p className="mt-4 max-w-2xl text-base leading-7 text-[#1d2731]/65">
-                Fiecare etapă are un scop clar. Nu există pași de umplutură. Fie contribuie la rezultat, fie nu sunt acolo.
+                Fiecare etapă are un scop precis. Nu există pași de umplutură. Fie contribuie la rezultat, fie nu sunt acolo.
               </p>
             </div>
           </Reveal>
@@ -232,11 +232,11 @@ export default function MagazineOnlinePage() {
               <div className="card-hover rounded-[28px] border border-[#1d2731]/8 bg-[#eef1f0] p-8 lg:col-span-1">
                 <h3 className="text-xl font-medium text-[#1d2731]">Garanții și mod de lucru</h3>
                 <p className="mt-4 text-[15px] leading-7 text-[#1d2731]/72">
-                  Fără promisiuni umflate. Lucrăm transparent, în etape clare, cu feedback real și logică de business. Nu livrăm doar „ce e frumos". Livrăm ceea ce are sens comercial.
+                  Fără promisiuni umflate. Lucrăm transparent, în etape definite, cu feedback real și logică de business. Nu livrăm doar „ce e frumos". Livrăm ceea ce are sens comercial.
                 </p>
                 <ul className="mt-6 space-y-3">
                   {[
-                    "Etape clare cu livrabile definite",
+                    "Etape structurate cu livrabile definite",
                     "Feedback la fiecare etapă majoră",
                     "Revizii incluse în procesul standard",
                     "Comunicare directă, fără intermediari",
@@ -256,9 +256,9 @@ export default function MagazineOnlinePage() {
                 <div className="mt-6 flex flex-col gap-4">
                   {[
                     { label: "Hai să ne sincronizăm", primary: true },
-                    { label: "Vreau un magazin pe sufletul meu", primary: false },
+                    { label: "Vreau un magazin pe măsura mea", primary: false },
                     { label: "Pornește magazinul tău complet", primary: false },
-                    { label: "Cere o ofertă clară", primary: false },
+                    { label: "Cere o ofertă detaliată", primary: false },
                   ].map(({ label, primary }) => (
                     <Link
                       key={label}
@@ -280,7 +280,7 @@ export default function MagazineOnlinePage() {
               <div className="rounded-[28px] bg-[#1d2731] p-8 text-white md:col-span-2 lg:col-span-1">
                 <div className="text-xs uppercase tracking-[0.3em] text-white/50">Ideal pentru</div>
                 <p className="mt-4 text-base leading-7 text-white/80">
-                  Antreprenori care lansează sau relansează un magazin online și vor o bază solidă: clar, estetic, rapid și orientat spre vânzare.
+                  Antreprenori care lansează sau relansează un magazin online și vor o bază solidă: estetic, rapid și orientat spre vânzare.
                 </p>
                 <div className="mt-6 space-y-2 text-sm text-white/60">
                   {[
@@ -337,7 +337,7 @@ export default function MagazineOnlinePage() {
                   Gata să construim un magazin care chiar vinde?
                 </h2>
                 <p className="mt-6 text-lg leading-8 text-white/70">
-                  Hai să vorbim 30 de minute. Îți spunem clar ce avem nevoie de la tine, cum arată procesul și ce rezultate poți aștepta în mod realist.
+                  Hai să vorbim 30 de minute. Îți spunem exact ce avem nevoie de la tine, cum arată procesul și ce rezultate poți aștepta în mod realist.
                 </p>
                 <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
                   <Link

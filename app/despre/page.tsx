@@ -5,7 +5,7 @@ import Reveal from "@/components/Reveal";
 export const metadata: Metadata = {
   title: "Despre",
   description:
-    "Reverb vine din reverberation — întoarcerea sunetului la sursa sa. Aducem afacerile digitale înapoi la esență: claritate, precizie, frumusețe funcțională.",
+    "Reverb vine din reverberation — întoarcerea sunetului la sursa sa. Aducem afacerile digitale înapoi la esență: structură, precizie, rezultate reale.",
 };
 
 const values = [
@@ -15,11 +15,11 @@ const values = [
   },
   {
     title: "Precizie în structură",
-    text: "Un sistem bine construit nu are nevoie de manual. Structura lui vorbește singură. Fiecare pagină, fiecare pas în funnel, fiecare email are un rol clar și o formă precisă.",
+    text: "Un sistem bine construit nu are nevoie de manual. Structura lui vorbește singură. Fiecare pagină, fiecare pas în funnel, fiecare email are un scop definit și o formă precisă.",
   },
   {
     title: "Frumusețe funcțională",
-    text: "Frumosul la Reverb nu este decorativ — este funcțional. Un site frumos este unul în care vizitatorul știe imediat unde se află și ce are de făcut. Frumusețea și claritatea sunt același lucru.",
+    text: "Frumosul la Reverb nu este decorativ — este funcțional. Un site frumos este unul în care vizitatorul știe imediat unde se află și ce are de făcut. Frumusețea și utilitatea sunt același lucru.",
   },
   {
     title: "Focus ca disciplină",
@@ -27,7 +27,7 @@ const values = [
   },
   {
     title: "Omul în centru, AI ca amplificator",
-    text: "Direcția, sensul și discernământul rămân umane. AI-ul comprimă timpul și crește precizia execuției — nu înlocuiește gândirea. Reverb știe să folosească AI fără să îi cedeze sufletul.",
+    text: "Direcția, sensul și discernământul rămân umane. AI-ul comprimă timpul și crește precizia execuției — nu înlocuiește gândirea. Reverb folosește AI fără să piardă vocea umană.",
   },
   {
     title: "Parteneriat, nu tranzacție",
@@ -39,7 +39,7 @@ const approach = [
   {
     step: "01",
     title: "Discuție & Esență",
-    text: "Înțelegem ce contează cu adevărat pentru afacerea ta. Modelul de venituri, publicul, oferta, concurența și direcția în care vrei să crești. Nu construim nimic fără context clar.",
+    text: "Înțelegem ce contează cu adevărat pentru afacerea ta. Modelul de venituri, publicul, oferta, concurența și direcția în care vrei să crești. Nu construim nimic fără context solid.",
   },
   {
     step: "02",
@@ -49,12 +49,12 @@ const approach = [
   {
     step: "03",
     title: "Implementare & Lansare",
-    text: "Construim, configurăm, testăm. Design premium, cod curat, copy comercial clar și integrări funcționale. Fiecare decizie are un motiv.",
+    text: "Construim, configurăm, testăm. Design premium, cod curat, copy comercial eficient și integrări funcționale. Fiecare decizie are un motiv.",
   },
   {
     step: "04",
     title: "Optimizare continuă",
-    text: "Claritatea nu este un punct de sosire, este o practică. Monitorizăm, măsurăm și ajustăm continuu. Un sistem digital sănătos se îmbunătățește cu fiecare lună.",
+    text: "Performanța nu este un punct de sosire, este o practică. Monitorizăm, măsurăm și ajustăm continuu. Un sistem digital sănătos se îmbunătățește cu fiecare lună.",
   },
 ];
 
@@ -96,10 +96,10 @@ export default function DesprePage() {
               <Reveal delay={120}>
                 <div className="space-y-6 text-base leading-8 text-white/80">
                   <p>
-                    Reverb este agenția care aduce afacerile digitale înapoi la esență. La ceea ce contează cu adevărat. La frumusețea unui sistem care funcționează simplu, la claritatea unui mesaj care nu are nevoie de explicații, la focusarea care face ca fiecare decizie să aibă sens.
+                    Reverb este agenția care aduce afacerile digitale înapoi la esență. La ceea ce contează cu adevărat. La frumusețea unui sistem care funcționează simplu, la un mesaj care nu are nevoie de explicații, la focusarea care face ca fiecare decizie să aibă sens.
                   </p>
                   <p>
-                    Construim afaceri digitale în care fiecare element — site, magazin, marketing, branding — vibrează la aceeași frecvență: claritate, precizie, frumusețe funcțională. Nu adăugăm straturi inutile. Nu complicăm ce poate fi simplu.
+                    Construim afaceri digitale în care fiecare element — site, magazin, marketing, branding — vibrează la aceeași frecvență: structură, precizie, frumusețe funcțională. Nu adăugăm straturi inutile. Nu complicăm ce poate fi simplu.
                   </p>
                   <p>
                     Căutăm întotdeauna esența: ce anume, spus sau construit exact cum trebuie, face ca totul să se liniștească.
@@ -128,7 +128,7 @@ export default function DesprePage() {
               {[
                 { label: "Zgomot", desc: "Haos, jargon, canale deconectate, mesaje confuze" },
                 { label: "Curățare", desc: "Scoatem tot ce e în plus. Rămâne fundația reală" },
-                { label: "Structură", desc: "Fiecare element are un rol clar și o formă precisă" },
+                { label: "Structură", desc: "Fiecare element are un scop definit și o formă precisă" },
                 { label: "Claritate", desc: "Conversia nu mai e un accident. Totul are sens" },
                 { label: "Liniște", desc: "Un sistem care vibrează la frecvența potrivită" },
               ].map((step, i) => (
@@ -174,7 +174,7 @@ export default function DesprePage() {
               <div className="mb-12">
                 <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">Cum lucrăm</div>
                 <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
-                  Cum aducem claritatea.
+                  Un proces fără improvizații.
                 </h2>
                 <p className="mt-4 max-w-2xl text-base leading-7 text-[#1d2731]/65">
                   Știi de la început ce plătești și ce primești. Fără improvizații. Fără ambiguitate.
@@ -202,10 +202,10 @@ export default function DesprePage() {
             <div className="rounded-[36px] bg-[#1d2731] p-8 text-white md:p-12 lg:flex lg:items-center lg:justify-between lg:gap-12">
               <div className="max-w-2xl">
                 <h2 className="text-3xl font-medium tracking-[-0.03em] md:text-4xl">
-                  Gata să aducem claritate în afacerea ta digitală?
+                  Gata să construim ceva solid pentru afacerea ta?
                 </h2>
                 <p className="mt-4 text-lg leading-8 text-white/70">
-                  Din prima discuție, totul este clar. Fără improvizații. Fără ambiguitate.
+                  Din prima discuție, știi exact la ce să te aștepți. Fără improvizații. Fără ambiguitate.
                 </p>
               </div>
               <div className="mt-8 flex flex-col gap-4 lg:mt-0 lg:shrink-0">

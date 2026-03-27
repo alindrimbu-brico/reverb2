@@ -3,9 +3,9 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
-  title: "Reverb — Afaceri Digitale Clare și pe Sufletul Tău",
+  title: "Reverb — Afaceri Digitale cu Structură, Sens și Rezultate",
   description:
-    "Reverb construiește afaceri digitale curate, clare și pe sufletul tău: site-uri, magazine online și sisteme de marketing cu structură, sens și rezultate reale.",
+    "Reverb construiește afaceri digitale cu structură, sens și rezultate reale: site-uri, magazine online și sisteme de marketing fără zgomot.",
 };
 
 /* ── Trajectory ── */
@@ -21,13 +21,13 @@ const trajectory = [
 const services = [
   {
     title: "Creare site",
-    context: "Design clar și structură care convertește",
-    text: "Site-uri clare, rapide și construite pentru conversie, nu pentru a impresiona doar designerii.",
+    context: "Design precis și structură care convertește",
+    text: "Site-uri rapide, esențiale și construite pentru conversie, nu pentru a impresiona doar designerii.",
     href: "/servicii",
   },
   {
     title: "Magazine online complete",
-    context: "Sistem de vânzare clar, fără fricțiune",
+    context: "Sistem de vânzare fluid, fără fricțiune",
     text: "Arhitectură de vânzare, structură de categorie, checkout curat și logică de business sănătoasă.",
     href: "/magazine-online",
   },
@@ -40,7 +40,7 @@ const services = [
   {
     title: "Branding & AI",
     context: "Identitate coerentă, amplificată cu precizie",
-    text: "Poziționare, mesaje și sisteme în care AI amplifică munca umană, fără să-i ia sufletul.",
+    text: "Poziționare, mesaje și sisteme în care AI amplifică munca umană, fără să o depersonalizeze.",
     href: "/servicii",
   },
   {
@@ -64,13 +64,13 @@ export default function HomePage() {
             <div>
               <Reveal>
                 <div className="mb-6 inline-flex items-center rounded-full border border-[#1d2731]/10 bg-white/70 px-4 py-2 text-xs uppercase tracking-[0.28em] text-[#1d2731]/70 shadow-sm backdrop-blur">
-                  Claritate · Structură · Focus
+                  Esență · Structură · Focus
                 </div>
               </Reveal>
 
               <Reveal delay={80}>
                 <h1 className="max-w-4xl text-5xl font-medium leading-[0.94] tracking-[-0.04em] text-[#1d2731] md:text-7xl lg:text-[88px]">
-                  Construim afaceri digitale curate, clare și pe sufletul tău.
+                  Construim afaceri digitale cu sens, structură și rezultate.
                 </h1>
               </Reveal>
 
@@ -101,7 +101,7 @@ export default function HomePage() {
               <div className="mt-12 grid max-w-2xl gap-5 sm:grid-cols-3">
                 {[
                   ["Revenire la esență", "Scoatem tot ce e în plus. Ce rămâne este fundația reală."],
-                  ["Frumusețe funcțională", "Frumosul la Reverb nu e decorativ — e clar și precis."],
+                  ["Frumusețe funcțională", "Frumosul la Reverb nu e decorativ — e util și precis."],
                   ["Parteneriat real", "Nu dispărem după lansare. Creștem împreună cu tine."],
                 ].map(([title, text], i) => (
                   <Reveal key={title} delay={320 + i * 80}>
@@ -146,7 +146,7 @@ export default function HomePage() {
                   <div className="mt-6 rounded-[28px] bg-[#1d2731] p-6 text-white">
                     <div className="text-xs uppercase tracking-[0.3em] text-white/55">Filosofie</div>
                     <p className="mt-4 text-base leading-7 text-white/88">
-                      Reverb nu amplifică zgomotul. Reverb reverberează claritatea. Construim afaceri digitale în care fiecare element vibrează la aceeași frecvență: claritate, precizie, frumusețe funcțională.
+                      Reverb nu amplifică zgomotul — îl elimină. Construim afaceri digitale în care fiecare element vibrează la aceeași frecvență: structură, precizie, frumusețe funcțională.
                     </p>
                   </div>
                 </div>
@@ -163,7 +163,7 @@ export default function HomePage() {
                 <div>
                   <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">Servicii</div>
                   <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
-                    Tot ce ai nevoie pentru un ecosistem digital curat.
+                    Tot ce ai nevoie pentru un ecosistem digital funcțional.
                   </h2>
                 </div>
                 <Link
@@ -224,7 +224,7 @@ export default function HomePage() {
                 },
                 {
                   title: "Precizie în structură",
-                  text: "Un sistem bine construit nu are nevoie de manual. Structura lui vorbește singură. Fiecare pagină are un rol clar.",
+                  text: "Un sistem bine construit nu are nevoie de manual. Structura lui vorbește singură. Fiecare pagină are un scop precis.",
                 },
                 {
                   title: "Frumusețe funcțională",
@@ -253,7 +253,7 @@ export default function HomePage() {
               <div className="mb-12">
                 <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">Cum lucrăm</div>
                 <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
-                  Cum aducem claritatea.
+                  Un proces fără improvizații.
                 </h2>
                 <p className="mt-4 max-w-2xl text-base leading-7 text-[#1d2731]/65">
                   Știi de la început ce plătești și ce primești. Fără improvizații. Fără ambiguitate.
@@ -262,10 +262,10 @@ export default function HomePage() {
             </Reveal>
             <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
               {[
-                { step: "01", title: "Discuție & Esență", text: "Înțelegem ce contează cu adevărat pentru afacerea ta. Obiectiv clar, parametri definiți." },
+                { step: "01", title: "Discuție & Esență", text: "Înțelegem ce contează cu adevărat pentru afacerea ta. Obiectiv definit, parametri stabiliți." },
                 { step: "02", title: "Structură & Curățare", text: "Eliminăm zgomotul, construim fundația. Arhitectură, mesaje, logica comercială." },
                 { step: "03", title: "Implementare & Lansare", text: "Construim, configurăm, testăm. Design, cod, copy — totul cu disciplină." },
-                { step: "04", title: "Optimizare continuă", text: "Claritatea nu este un punct de sosire, este o practică. Monitorizăm și ajustăm." },
+                { step: "04", title: "Optimizare continuă", text: "Un sistem digital sănătos se îmbunătățește cu fiecare lună. Monitorizăm și ajustăm." },
               ].map((a, i) => (
                 <Reveal key={a.step} delay={i * 80}>
                   <div className="card-hover rounded-[28px] border border-[#1d2731]/8 bg-[#faf7f2] p-7">
@@ -287,7 +287,7 @@ export default function HomePage() {
                 <div>
                   <div className="text-xs uppercase tracking-[0.3em] text-white/40">Hai să vorbim</div>
                   <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
-                    Din prima discuție, totul este clar.
+                    Din prima discuție, știi exact la ce să te aștepți.
                   </h2>
                   <p className="mt-6 max-w-2xl text-lg leading-8 text-white/70">
                     Stabilim obiectivul, structura și termenul de implementare. Fără improvizații. Fără ambiguitate. Structură, sens și rezultate — fără nimic în plus.

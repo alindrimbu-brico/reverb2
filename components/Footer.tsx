@@ -23,11 +23,11 @@ export default function Footer() {
               </div>
               <div>
                 <div className="text-sm font-semibold tracking-[0.35em] uppercase text-[#1d2731]">reverb.ro</div>
-                <div className="text-xs text-[#1d2731]/55">Afaceri digitale clare și pe sufletul tău</div>
+                <div className="text-xs text-[#1d2731]/55">Structură · Sens · Rezultate</div>
               </div>
             </Link>
             <p className="mt-4 text-sm leading-6 text-[#1d2731]/60">
-              Reverb — reîntoarcerea la vibrația clară. Claritate, precizie, frumusețe funcțională.
+              Reverb — reîntoarcerea la esența digitală. Structură, precizie, frumusețe funcțională.
             </p>
           </div>
 
@@ -42,7 +42,7 @@ export default function Footer() {
 
         <div className="mt-10 border-t border-[#1d2731]/8 pt-6 flex flex-col gap-2 text-xs text-[#1d2731]/40 md:flex-row md:justify-between">
           <span>&copy; 2026 reverb.ro &mdash; Toate drepturile rezervate.</span>
-          <span>Omul gândește. AI-ul execută. Reverb clarifică.</span>
+          <span>Omul gândește. AI-ul execută. Reverb livrează.</span>
         </div>
       </div>
     </footer>
