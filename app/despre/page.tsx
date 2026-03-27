@@ -5,7 +5,7 @@ import Reveal from "@/components/Reveal";
 export const metadata: Metadata = {
   title: "Despre",
   description:
-    "Reverb vine din reverberation — întoarcerea sunetului la sursa sa. Aducem afacerile digitale înapoi la esență: structură, precizie, rezultate reale.",
+    "Reverb — Human Digital Marketing AI. Omul dă direcția, AI-ul accelerează execuția, sistemul livrează rezultate. Structură, implementare, performanță.",
 };
 
 const values = [
@@ -18,8 +18,8 @@ const values = [
     text: "Un sistem bine construit nu are nevoie de manual. Structura lui vorbește singură. Fiecare pagină, fiecare pas în funnel, fiecare email are un scop definit și o formă precisă.",
   },
   {
-    title: "Frumusețe funcțională",
-    text: "Frumosul la Reverb nu este decorativ — este funcțional. Un site frumos este unul în care vizitatorul știe imediat unde se află și ce are de făcut. Frumusețea și utilitatea sunt același lucru.",
+    title: "Implementare, nu doar strategie",
+    text: "Nu livrăm doar prezentări și recomandări. Construim și configurăm sisteme funcționale. Fiecare proiect se predă gata de utilizare.",
   },
   {
     title: "Focus ca disciplină",
@@ -70,7 +70,7 @@ export default function DesprePage() {
             </Reveal>
             <Reveal delay={80}>
               <h1 className="mt-4 max-w-4xl text-5xl font-medium leading-[0.94] tracking-[-0.04em] md:text-7xl lg:text-[80px]">
-                Reîntoarcerea la esența digitală.
+                Human Digital Marketing AI.
               </h1>
             </Reveal>
             <Reveal delay={160}>
@@ -89,17 +89,17 @@ export default function DesprePage() {
                 <div>
                   <div className="text-xs uppercase tracking-[0.3em] text-white/40">Manifest</div>
                   <h2 className="mt-4 text-3xl font-medium leading-tight tracking-[-0.03em] md:text-5xl">
-                    Nu amplifică zgomotul. Reverberează claritatea.
+                    Nu amplifică zgomotul. Îl elimină.
                   </h2>
                 </div>
               </Reveal>
               <Reveal delay={120}>
                 <div className="space-y-6 text-base leading-8 text-white/80">
                   <p>
-                    Reverb este agenția care aduce afacerile digitale înapoi la esență. La ceea ce contează cu adevărat. La frumusețea unui sistem care funcționează simplu, la un mesaj care nu are nevoie de explicații, la focusarea care face ca fiecare decizie să aibă sens.
+                    Reverb este agenția care aduce afacerile digitale înapoi la esență. La ceea ce contează cu adevărat. La un sistem care funcționează simplu, la un mesaj care nu are nevoie de explicații, la focusarea care face ca fiecare decizie să aibă sens.
                   </p>
                   <p>
-                    Construim afaceri digitale în care fiecare element — site, magazin, marketing, branding — vibrează la aceeași frecvență: structură, precizie, frumusețe funcțională. Nu adăugăm straturi inutile. Nu complicăm ce poate fi simplu.
+                    Construim afaceri digitale în care fiecare element — site, magazin, marketing, branding — vibrează la aceeași frecvență: structură, execuție, rezultate. Nu adăugăm straturi inutile. Nu complicăm ce poate fi simplu.
                   </p>
                   <p>
                     Căutăm întotdeauna esența: ce anume, spus sau construit exact cum trebuie, face ca totul să se liniștească.

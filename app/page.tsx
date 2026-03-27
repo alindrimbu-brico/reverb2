@@ -3,9 +3,9 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
-  title: "Reverb — Afaceri Digitale cu Structură, Sens și Rezultate",
+  title: "Reverb — Human Digital Marketing AI",
   description:
-    "Reverb construiește afaceri digitale cu structură, sens și rezultate reale: site-uri, magazine online și sisteme de marketing fără zgomot.",
+    "Construim prezență online care inspiră încredere și generează cereri. Website, magazine online, marketing digital — structură, execuție, rezultate. Fără jargon. Fără haos.",
 };
 
 /* ── Trajectory ── */
@@ -64,19 +64,19 @@ export default function HomePage() {
             <div>
               <Reveal>
                 <div className="mb-6 inline-flex items-center rounded-full border border-[#1d2731]/10 bg-white/70 px-4 py-2 text-xs uppercase tracking-[0.28em] text-[#1d2731]/70 shadow-sm backdrop-blur">
-                  Esență · Structură · Focus
+                  Human Digital Marketing AI
                 </div>
               </Reveal>
 
               <Reveal delay={80}>
                 <h1 className="max-w-4xl text-5xl font-medium leading-[0.94] tracking-[-0.04em] text-[#1d2731] md:text-7xl lg:text-[88px]">
-                  Construim afaceri digitale cu sens, structură și rezultate.
+                  Construim prezență online care inspiră încredere și generează cereri.
                 </h1>
               </Reveal>
 
               <Reveal delay={160}>
                 <p className="mt-8 max-w-2xl text-lg leading-8 text-[#1d2731]/72 md:text-xl">
-                  Site-uri, magazine și sisteme de marketing construite cu grijă, structură și sens. Fără zgomot. Fără haos frumos ambalat.
+                  Website modern + structură + integrare instrumente. Omul gândește, AI-ul execută, Reverb livrează. Fără jargon. Fără haos.
                 </p>
               </Reveal>
 
@@ -100,9 +100,9 @@ export default function HomePage() {
 
               <div className="mt-12 grid max-w-2xl gap-5 sm:grid-cols-3">
                 {[
-                  ["Revenire la esență", "Scoatem tot ce e în plus. Ce rămâne este fundația reală."],
-                  ["Frumusețe funcțională", "Frumosul la Reverb nu e decorativ — e util și precis."],
-                  ["Parteneriat real", "Nu dispărem după lansare. Creștem împreună cu tine."],
+                  ["Proces structurat", "Știi exact ce primești, când și la ce preț. Fără improvizații."],
+                  ["Execuție reală", "Implementăm, nu doar prezentăm strategii. Construim și configurăm."],
+                  ["Parteneriat real", "Nu dispărem după lansare. Monitorizăm și optimizăm continuu."],
                 ].map(([title, text], i) => (
                   <Reveal key={title} delay={320 + i * 80}>
                     <div className="card-hover rounded-3xl border border-white/60 bg-white/55 p-5 shadow-[0_10px_40px_rgba(29,39,49,0.06)] backdrop-blur-sm">
@@ -146,7 +146,7 @@ export default function HomePage() {
                   <div className="mt-6 rounded-[28px] bg-[#1d2731] p-6 text-white">
                     <div className="text-xs uppercase tracking-[0.3em] text-white/55">Filosofie</div>
                     <p className="mt-4 text-base leading-7 text-white/88">
-                      Reverb nu amplifică zgomotul — îl elimină. Construim afaceri digitale în care fiecare element vibrează la aceeași frecvență: structură, precizie, frumusețe funcțională.
+                      Reverb nu amplifică zgomotul — îl elimină. Omul dă direcția, AI-ul accelerează execuția, iar sistemul livrează rezultate. Structură, implementare, performanță.
                     </p>
                   </div>
                 </div>
@@ -203,10 +203,10 @@ export default function HomePage() {
               <div>
                 <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">Despre noi</div>
                 <h2 className="mt-4 text-3xl font-medium leading-tight tracking-[-0.03em] md:text-5xl">
-                  Reîntoarcerea la esența digitală.
+                  Human Digital Marketing AI.
                 </h2>
                 <p className="mt-5 text-base leading-7 text-[#1d2731]/65">
-                  Reverb vine din reverberation — întoarcerea sunetului la sursa sa. Noi aducem afacerile digitale înapoi la esență: la ce contează cu adevărat, la ce funcționează cu adevărat.
+                  Reverb vine din reverberation — semnalul se întoarce mai curat decât a plecat. La fel lucrăm și noi: omul dă direcția, AI-ul accelerează, sistemul livrează.
                 </p>
                 <Link
                   href="/despre"
@@ -219,20 +219,20 @@ export default function HomePage() {
             <div className="grid gap-6 md:grid-cols-2">
               {[
                 {
-                  title: "Revenirea la esență",
-                  text: "Scoatem tot ce este în plus: jargon, zgomot vizual, promisiuni vagi. Ce rămâne după curățare este fundația reală.",
+                  title: "Implementare, nu doar strategie",
+                  text: "Construim și configurăm. Nu livrăm doar prezentări. Fiecare sistem e funcțional la predare.",
                 },
                 {
-                  title: "Precizie în structură",
-                  text: "Un sistem bine construit nu are nevoie de manual. Structura lui vorbește singură. Fiecare pagină are un scop precis.",
+                  title: "Proces structurat",
+                  text: "Fiecare proiect urmează 4 pași. Știi exact ce urmează, când și de ce.",
                 },
                 {
-                  title: "Frumusețe funcțională",
-                  text: "Frumosul la Reverb nu este decorativ — este funcțional. Vizitatorul știe imediat unde se află și ce are de făcut.",
+                  title: "Human + AI",
+                  text: "Omul dă direcția strategică. AI-ul comprimă timpul de execuție. Reverb integrează ambele.",
                 },
                 {
-                  title: "Focus ca disciplină",
-                  text: "Fiecare proiect are un obiectiv principal, un mesaj principal. Focusul este forma cea mai directă a respectului.",
+                  title: "Focus pe rezultate",
+                  text: "Nu trafic. Nu vizualizări. Ci cereri, conversii și vânzări reale.",
                 },
               ].map((item, i) => (
                 <Reveal key={item.title} delay={i * 80}>

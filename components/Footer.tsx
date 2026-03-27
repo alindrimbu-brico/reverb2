@@ -23,11 +23,11 @@ export default function Footer() {
               </div>
               <div>
                 <div className="text-sm font-semibold tracking-[0.35em] uppercase text-[#1d2731]">reverb.ro</div>
-                <div className="text-xs text-[#1d2731]/55">Structură · Sens · Rezultate</div>
+                <div className="text-xs text-[#1d2731]/55">Human Digital Marketing AI</div>
               </div>
             </Link>
             <p className="mt-4 text-sm leading-6 text-[#1d2731]/60">
-              Reverb — reîntoarcerea la esența digitală. Structură, precizie, frumusețe funcțională.
+              Reverb — Human Digital Marketing AI. Structură, execuție, rezultate.
             </p>
           </div>
 

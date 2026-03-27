@@ -8,9 +8,9 @@ import ScrollProgress from "@/components/ScrollProgress";
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist-sans" });
 
 export const metadata: Metadata = {
-  title: { default: "Reverb — Afaceri Digitale cu Structură, Sens și Rezultate", template: "%s | Reverb" },
+  title: { default: "Reverb — Human Digital Marketing AI", template: "%s | Reverb" },
   description:
-    "Reverb construiește afaceri digitale cu structură, sens și rezultate reale: site-uri, magazine online și sisteme de marketing fără zgomot.",
+    "Construim prezență online care inspiră încredere și generează cereri. Website, magazine online, marketing digital — structură, execuție, rezultate. Fără jargon. Fără haos.",
   metadataBase: new URL("https://reverb.ro"),
 };
 
