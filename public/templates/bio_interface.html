@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYS.BIO_INTERFACE | Downlink Interface</title>
+    <link rel="stylesheet" href="downlink_system.css">
+    <style>
+        .dl-header {
+            height: var(--dl-header-h);
+            display: grid;
+            grid-template-columns: 2fr 6fr 4fr;
+            border-bottom: 1px solid var(--dl-grid-line);
+            align-items: center;
+            background-color: var(--dl-void);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .dl-header > div {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0 var(--dl-space-md);
+        }
+        .header-left { border-right: 1px solid var(--dl-grid-line); }
+        .header-center { gap: var(--dl-space-xl); }
+        .header-right { border-left: 1px solid var(--dl-grid-line); justify-content: space-between; }
+
+        .hero-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: calc(100vh - var(--dl-header-h));
+            border-bottom: 1px solid var(--dl-grid-line);
+        }
+
+        .panel-left {
+            border-right: 1px solid var(--dl-grid-line);
+            padding: var(--dl-space-xl);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: var(--dl-space-xl);
+        }
+
+        .panel-right {
+            display: grid;
+            grid-template-rows: 1fr auto;
+        }
+
+        /* Wireframe anatomy graphic */
+        .wireframe-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            min-height: 300px;
+        }
+
+        .wireframe-svg {
+            width: 200px;
+            height: 280px;
+            opacity: 0.5;
+        }
+
+        .vertex-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--dl-accent-medical);
+            box-shadow: 0 0 8px var(--dl-accent-medical);
+            position: absolute;
+            animation: vertex-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes vertex-pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.7); }
+        }
+
+        .panel-content {
+            padding: var(--dl-space-xl) var(--dl-space-xl) var(--dl-space-lg);
+        }
+
+        .stats-panel {
+            padding: var(--dl-space-md) var(--dl-space-xl);
+            border-top: 1px solid var(--dl-grid-line);
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: var(--dl-space-md);
+        }
+
+        .stat-item {
+            padding: var(--dl-space-md);
+            border: 1px solid var(--dl-grid-line);
+        }
+
+        .stat-value {
+            font-family: var(--font-primary);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dl-accent-medical);
+            letter-spacing: -0.04em;
+        }
+
+        /* Ticker bar */
+        .ticker-bar {
+            border-top: 1px solid var(--dl-grid-line);
+            overflow: hidden;
+            white-space: nowrap;
+            padding: var(--dl-space-sm) 0;
+            background: rgba(0, 87, 255, 0.05);
+        }
+
+        .ticker-content {
+            display: inline-block;
+            animation: ticker 20s linear infinite;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
+            color: rgba(0,87,255,0.7);
+        }
+
+        @keyframes ticker {
+            0% { transform: translateX(100vw); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .subtitle-ping {
+            display: inline-flex;
+            align-items: center;
+            color: var(--dl-accent-medical);
+            margin-bottom: var(--dl-space-md);
+        }
+
+        .paragraph-text {
+            margin-top: var(--dl-space-lg);
+            max-width: 500px;
+            color: rgba(255,255,255,0.7);
+            font-size: 1rem;
+        }
+
+        .glitch-reveal {
+            animation: text-reveal 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        @keyframes text-reveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .medic-log {
+            margin-top: var(--dl-space-lg);
+            border-top: 1px solid var(--dl-grid-line);
+            padding-top: var(--dl-space-md);
+        }
+
+        .medic-log-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--dl-space-sm) 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .status-available { color: var(--dl-accent-medical); }
+        .status-busy { color: rgba(255,255,255,0.3); }
+    </style>
+</head>
+<body>
+    <div class="dl-scanline-trigger">
+
+        <!-- TICKER -->
+        <div class="ticker-bar">
+            <span class="ticker-content">
+                DR. ANDREI POPESCU → DISPONIBIL_20:00 &nbsp;·&nbsp; SALA M3 → STATUS: CURATĂ &nbsp;·&nbsp; DR. ELENA IONESCU → DISPONIBIL_IMEDIAT &nbsp;·&nbsp; URGENȚE: 0 CAZURI ACTIVE &nbsp;·&nbsp; LABORATOR PCR → REZULTATE_ÎN_2H &nbsp;·&nbsp; CT SCAN → PROGRAM_LIBER &nbsp;·&nbsp;
+            </span>
+        </div>
+
+        <!-- HEADER -->
+        <header class="dl-header">
+            <div class="header-left">
+                <span class="dl-status-ping" style="color: var(--dl-accent-medical)"></span>
+                <span class="dl-text-mono" style="font-weight: 700;">SYS.BIO_INTERFACE</span>
+            </div>
+            <div class="header-center">
+                <a class="dl-nav-link dl-text-mono" style="font-size: 0.875rem;">Servicii Clinice</a>
+                <a class="dl-nav-link dl-text-mono" style="font-size: 0.875rem;">Programări</a>
+                <a class="dl-nav-link dl-text-mono" style="font-size: 0.875rem;">Rezultate</a>
+            </div>
+            <div class="header-right">
+                <span class="dl-text-mono">v. 5.11.0-PROD</span>
+                <button class="dl-btn" style="border-color: var(--dl-accent-medical); color: var(--dl-accent-medical);">PROGRAMEAZĂ →</button>
+            </div>
+        </header>
+
+        <!-- HERO -->
+        <main class="hero-section">
+
+            <!-- PANEL LEFT: Content -->
+            <div class="panel-left">
+                <div>
+                    <div class="subtitle-ping glitch-reveal" style="animation-delay: 0.2s;">
+                        <span class="dl-text-mono" style="color: var(--dl-accent-medical);">[BIO.DIAGNOSTIC_LIVE] // SISTEM_ACTIV</span>
+                    </div>
+
+                    <h1 class="dl-heading-1 glitch-reveal" style="animation-delay: 0.4s;">
+                        Sănătate ca<br>Precizie Digitală.
+                    </h1>
+
+                    <p class="paragraph-text glitch-reveal" style="animation-delay: 0.5s;">
+                        Protocoale clinice arhitecturate pentru acuratețe maximă. Diagnostic imediat, date clare, intervenție precisă. Fără ambiguitate.
+                    </p>
+
+                    <div class="glitch-reveal" style="animation-delay: 0.65s; margin-top: var(--dl-space-lg); display: flex; gap: var(--dl-space-md);">
+                        <button class="dl-btn" style="border-color: var(--dl-accent-medical); color: var(--dl-accent-medical);">PROGRAMEAZĂ_ACUM →</button>
+                        <button class="dl-btn">SERVICII_CLINICE</button>
+                    </div>
+                </div>
+
+                <!-- Medic log -->
+                <div class="medic-log glitch-reveal" style="animation-delay: 0.8s;">
+                    <div class="dl-text-mono" style="margin-bottom: var(--dl-space-sm); color: rgba(255,255,255,0.45);">DISPONIBILITATE_LIVE:</div>
+                    <div class="medic-log-row">
+                        <span class="dl-text-mono">DR. A. POPESCU</span>
+                        <span class="dl-text-mono status-available">● DISPONIBIL 20:00</span>
+                    </div>
+                    <div class="medic-log-row">
+                        <span class="dl-text-mono">DR. E. IONESCU</span>
+                        <span class="dl-text-mono status-available">● DISPONIBIL IMEDIAT</span>
+                    </div>
+                    <div class="medic-log-row">
+                        <span class="dl-text-mono">DR. M. DUMITRESCU</span>
+                        <span class="dl-text-mono status-busy">○ OCUPAT — LIBER 21:30</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL RIGHT -->
+            <div class="panel-right">
+                <!-- Wireframe visual -->
+                <div class="wireframe-container">
+                    <svg class="wireframe-svg" viewBox="0 0 200 280" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="rgba(0,87,255,0.4)" stroke-width="1">
+                        <!-- Abstract human wireframe -->
+                        <ellipse cx="100" cy="40" rx="30" ry="35"/>
+                        <line x1="100" y1="75" x2="100" y2="160"/>
+                        <line x1="100" y1="90" x2="50" y2="140"/>
+                        <line x1="100" y1="90" x2="150" y2="140"/>
+                        <line x1="100" y1="160" x2="70" y2="240"/>
+                        <line x1="100" y1="160" x2="130" y2="240"/>
+                        <!-- Vertices -->
+                        <circle cx="100" cy="40" r="3" fill="rgba(0,87,255,0.8)" stroke="none"/>
+                        <circle cx="100" cy="90" r="3" fill="rgba(0,87,255,0.8)" stroke="none"/>
+                        <circle cx="50" cy="140" r="3" fill="rgba(0,87,255,0.8)" stroke="none"/>
+                        <circle cx="150" cy="140" r="3" fill="rgba(0,87,255,0.8)" stroke="none"/>
+                        <circle cx="100" cy="160" r="3" fill="rgba(0,87,255,0.8)" stroke="none"/>
+                        <circle cx="70" cy="240" r="3" fill="rgba(0,87,255,0.8)" stroke="none"/>
+                        <circle cx="130" cy="240" r="3" fill="rgba(0,87,255,0.8)" stroke="none"/>
+                        <!-- Cross hairs -->
+                        <line x1="85" y1="40" x2="115" y2="40" stroke="rgba(0,87,255,0.3)" stroke-dasharray="2,4"/>
+                        <line x1="100" y1="25" x2="100" y2="55" stroke="rgba(0,87,255,0.3)" stroke-dasharray="2,4"/>
+                    </svg>
+                    <div style="position: absolute; top: var(--dl-space-md); right: var(--dl-space-md);">
+                        <div class="dl-text-mono" style="color: rgba(0,87,255,0.6); font-size: 0.6rem;">WIREFRAME.ROTATIE<br>AUTO: 0.3° / SEC</div>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="stats-panel">
+                    <div class="stat-item">
+                        <div class="stat-value">98%</div>
+                        <div class="dl-text-mono" style="margin-top: 4px;">Acuratețe<br>Diagnostic</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">&lt;2h</div>
+                        <div class="dl-text-mono" style="margin-top: 4px;">Timp<br>Rezultate</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">24/7</div>
+                        <div class="dl-text-mono" style="margin-top: 4px;">Urgențe<br>Active</div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</body>
+</html>

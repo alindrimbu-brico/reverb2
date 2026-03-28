@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYS.CIVIC_HUB | Downlink Interface</title>
+    <link rel="stylesheet" href="downlink_system.css">
+    <style>
+        .dl-header {
+            height: var(--dl-header-h);
+            display: grid;
+            grid-template-columns: 2fr 6fr 4fr;
+            border-bottom: 1px solid var(--dl-grid-line);
+            align-items: center;
+            background-color: var(--dl-void);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .dl-header > div {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0 var(--dl-space-md);
+        }
+        .header-left { border-right: 1px solid var(--dl-grid-line); }
+        .header-center { gap: var(--dl-space-xl); }
+        .header-right { border-left: 1px solid var(--dl-grid-line); justify-content: space-between; }
+
+        /* Modular card grid */
+        .civic-hero {
+            border-bottom: 1px solid var(--dl-grid-line);
+        }
+
+        .hero-top {
+            padding: var(--dl-space-xl);
+            border-bottom: 1px solid var(--dl-grid-line);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--dl-space-xl);
+            align-items: center;
+        }
+
+        .massive-label {
+            font-family: var(--font-primary);
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            color: white;
+            line-height: 0.9;
+        }
+
+        .massive-label span {
+            color: var(--dl-accent-civic);
+        }
+
+        .hero-desc {
+            color: rgba(255,255,255,0.6);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Services modular grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-top: 1px solid var(--dl-grid-line);
+        }
+
+        .service-module {
+            border-right: 1px solid var(--dl-grid-line);
+            padding: var(--dl-space-lg) var(--dl-space-md);
+            position: relative;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        .service-module:last-child { border-right: none; }
+        .service-module:hover { background: rgba(154,160,166,0.05); }
+
+        /* Flow lines connecting modules */
+        .flow-connector {
+            position: absolute;
+            right: -1px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+        }
+        .flow-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--dl-accent-civic);
+            box-shadow: 0 0 6px var(--dl-accent-civic);
+            animation: flow-pulse 1.5s ease-in-out infinite;
+        }
+        @keyframes flow-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
+        }
+
+        .module-id {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--dl-accent-civic);
+            letter-spacing: 0.1em;
+            margin-bottom: var(--dl-space-md);
+        }
+
+        .module-title {
+            font-family: var(--font-primary);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            letter-spacing: -0.02em;
+            margin-bottom: var(--dl-space-sm);
+        }
+
+        .module-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .module-status.active {
+            color: var(--dl-accent-civic);
+        }
+
+        .cmd-button {
+            display: block;
+            width: 100%;
+            margin-top: var(--dl-space-md);
+            padding: var(--dl-space-sm) var(--dl-space-md);
+            border: 1px solid rgba(154,160,166,0.3);
+            background: transparent;
+            color: var(--dl-accent-civic);
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            text-align: left;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .cmd-button:hover {
+            border-color: var(--dl-accent-civic);
+            background: rgba(154,160,166,0.08);
+        }
+        .cmd-button::before {
+            content: '> ';
+            opacity: 0.6;
+        }
+
+        /* Status board */
+        .status-board {
+            border-top: 1px solid var(--dl-grid-line);
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+        }
+
+        .board-main {
+            border-right: 1px solid var(--dl-grid-line);
+            padding: var(--dl-space-lg) var(--dl-space-xl);
+        }
+
+        .board-side {
+            padding: var(--dl-space-lg) var(--dl-space-xl);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: var(--dl-space-md);
+        }
+
+        .request-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--dl-space-sm) 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+        }
+
+        .status-solved { color: var(--dl-accent-civic); }
+        .status-pending { color: rgba(255,255,255,0.35); }
+        .status-processing { color: rgba(255,200,50,0.7); }
+
+        .glitch-reveal {
+            animation: text-reveal 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        @keyframes text-reveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="dl-scanline-trigger">
+
+        <!-- HEADER -->
+        <header class="dl-header">
+            <div class="header-left">
+                <span class="dl-status-ping" style="color: var(--dl-accent-civic)"></span>
+                <span class="dl-text-mono" style="font-weight: 700;">SYS.CIVIC_HUB</span>
+            </div>
+            <div class="header-center">
+                <a class="dl-nav-link dl-text-mono" style="font-size: 0.875rem;">Servicii Publice</a>
+                <a class="dl-nav-link dl-text-mono" style="font-size: 0.875rem;">Cereri Online</a>
+                <a class="dl-nav-link dl-text-mono" style="font-size: 0.875rem;">Transparență</a>
+            </div>
+            <div class="header-right">
+                <span class="dl-text-mono">PRIMĂRIE_SEC.1 // v. 2.08.0</span>
+                <button class="dl-btn" style="border-color: var(--dl-accent-civic); color: var(--dl-accent-civic);">INIȚIAZĂ_CERERE</button>
+            </div>
+        </header>
+
+        <!-- HERO -->
+        <div class="civic-hero">
+            <div class="hero-top">
+                <div>
+                    <div class="dl-text-mono" style="color: var(--dl-accent-civic); margin-bottom: var(--dl-space-md);">[CIVIC.HUB_ACTIV] // TRANSPARENȚĂ_DIGITALĂ</div>
+                    <div class="massive-label glitch-reveal" style="animation-delay: 0.2s;">
+                        Stat<br><span>Transparent.</span><br>Digital.
+                    </div>
+                </div>
+                <div class="hero-desc glitch-reveal" style="animation-delay: 0.4s;">
+                    O hartă de sistem a entităților publice transparentizate. Cereri, documente și servicii interconectate printr-o arhitectură modulară clară, eficientă și auditabilă.
+                    <div style="margin-top: var(--dl-space-lg); display: flex; gap: var(--dl-space-md);">
+                        <button class="dl-btn" style="border-color: var(--dl-accent-civic); color: var(--dl-accent-civic);">PORTAL_CETĂȚEAN →</button>
+                        <button class="dl-btn">CERERI_ACTIVE</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SERVICES MODULES -->
+            <div class="services-grid">
+                <div class="service-module">
+                    <div class="flow-connector"><div class="flow-dot"></div></div>
+                    <div class="module-id">[/DOCUMENTE_AUTO]</div>
+                    <div class="module-title">Acte Auto & Permise</div>
+                    <div class="module-status active">● SERVICIU ACTIV</div>
+                    <button class="cmd-button">inițializare_formular_auto.exe</button>
+                </div>
+                <div class="service-module">
+                    <div class="flow-connector"><div class="flow-dot" style="animation-delay: 0.4s;"></div></div>
+                    <div class="module-id">[/TAXE_LOCALE]</div>
+                    <div class="module-title">Plată Taxe & Impozite</div>
+                    <div class="module-status active">● SERVICIU ACTIV</div>
+                    <button class="cmd-button">acces_portal_taxe.exe</button>
+                </div>
+                <div class="service-module">
+                    <div class="flow-connector"><div class="flow-dot" style="animation-delay: 0.8s;"></div></div>
+                    <div class="module-id">[/URBANISM]</div>
+                    <div class="module-title">Autorizații Construcție</div>
+                    <div class="module-status" style="color: rgba(255,200,50,0.7);">◔ ÎN PROCESARE</div>
+                    <button class="cmd-button">depunere_dosar_aut.exe</button>
+                </div>
+                <div class="service-module">
+                    <div class="module-id">[/STARE_CIVILĂ]</div>
+                    <div class="module-title">Acte Stare Civilă</div>
+                    <div class="module-status active">● SERVICIU ACTIV</div>
+                    <button class="cmd-button">programare_ghișeu.exe</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- STATUS BOARD -->
+        <div class="status-board">
+            <div class="board-main">
+                <div class="dl-text-mono" style="color: rgba(255,255,255,0.4); margin-bottom: var(--dl-space-md);">LOG_CERERI_RECENTE:</div>
+                <div class="request-row">
+                    <span class="dl-text-mono">CERERE_AUT.2024.0847 — Autorizație Renovare</span>
+                    <span class="status-solved">● REZOLVATĂ</span>
+                </div>
+                <div class="request-row">
+                    <span class="dl-text-mono">CERERE_TAX.2024.1203 — Impozit Proprietate Q4</span>
+                    <span class="status-solved">● PLĂTIT</span>
+                </div>
+                <div class="request-row">
+                    <span class="dl-text-mono">CERERE_DOC.2024.1341 — Certificat Urbanism</span>
+                    <span class="status-processing">◔ ÎN PROCESARE (3 ZILE)</span>
+                </div>
+                <div class="request-row">
+                    <span class="dl-text-mono">CERERE_AUTO.2024.1412 — Viza ITP</span>
+                    <span class="status-pending">○ ÎN AȘTEPTARE</span>
+                </div>
+            </div>
+            <div class="board-side">
+                <div class="dl-text-mono" style="text-align: center; color: var(--dl-accent-civic);">TIMP MEDIU<br>SOLUȚIONARE</div>
+                <div style="font-family: var(--font-primary); font-size: 3rem; font-weight: 700; color: white; letter-spacing: -0.04em; line-height: 1;">2.4<br><span style="font-size: 1rem; color: rgba(255,255,255,0.4); font-family: var(--font-mono); font-size: 0.75rem;">ZILE LUCRĂTOARE</span></div>
+                <button class="dl-btn" style="width: 100%; border-color: var(--dl-accent-civic); color: var(--dl-accent-civic);">URMĂRIRE_CERERE</button>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

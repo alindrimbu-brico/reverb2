@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYS.LEGAL_LOGIC | Downlink Interface</title>
+    <link rel="stylesheet" href="downlink_system.css">
+    <style>
+        /* Override accent for legal */
+        :root {
+            --dl-accent-legal-primary: #8B2520;
+            --dl-accent-legal-light: rgba(139,37,32,0.15);
+        }
+
+        .dl-header {
+            height: var(--dl-header-h);
+            display: grid;
+            grid-template-columns: 2fr 6fr 4fr;
+            border-bottom: 1px solid var(--dl-grid-line);
+            align-items: center;
+            background-color: var(--dl-void);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .dl-header > div {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0 var(--dl-space-md);
+        }
+        .header-left { border-right: 1px solid var(--dl-grid-line); }
+        .header-center { gap: var(--dl-space-xl); }
+        .header-right { border-left: 1px solid var(--dl-grid-line); justify-content: space-between; }
+
+        /* Full bleed monolith */
+        .monolith-hero {
+            min-height: calc(100vh - var(--dl-header-h));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: var(--dl-space-xl);
+            position: relative;
+            border-bottom: 1px solid var(--dl-grid-line);
+            overflow: hidden;
+        }
+
+        /* Blade lines — infinite horizontals sectioning the text */
+        .blade-line {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--dl-accent-legal-primary);
+            opacity: 0.6;
+            z-index: 1;
+        }
+
+        .content-block {
+            position: relative;
+            z-index: 2;
+        }
+
+        .massive-title {
+            font-family: var(--font-primary);
+            font-size: clamp(4rem, 12vw, 11rem);
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            text-transform: uppercase;
+            line-height: 0.88;
+            color: white;
+        }
+
+        .legal-seal {
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--dl-accent-legal-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--dl-space-lg);
+            color: var(--dl-accent-legal-primary);
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .sub-blade {
+            width: 100%;
+            height: 1px;
+            background: var(--dl-accent-legal-primary);
+            opacity: 0.4;
+            margin: var(--dl-space-lg) 0;
+        }
+
+        .legal-descriptor {
+            color: rgba(255,255,255,0.5);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        /* Stats row */
+        .stats-row {
+            border-top: 1px solid var(--dl-grid-line);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .stat-cell {
+            border-right: 1px solid var(--dl-grid-line);
+            padding: var(--dl-space-lg) var(--dl-space-xl);
+            text-align: center;
+        }
+        .stat-cell:last-child { border-right: none; }
+
+        .stat-number {
+            font-family: var(--font-primary);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            color: var(--dl-accent-legal-primary);
+            line-height: 1;
+        }
+
+        .stat-label {
+            margin-top: var(--dl-space-sm);
+            color: rgba(255,255,255,0.45);
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* Practice areas */
+        .practice-grid {
+            border-top: 1px solid var(--dl-grid-line);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .practice-cell {
+            border-right: 1px solid var(--dl-grid-line);
+            padding: var(--dl-space-xl) var(--dl-space-xl);
+            position: relative;
+        }
+        .practice-cell:last-child { border-right: none; }
+        .practice-cell::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 0;
+            background: var(--dl-accent-legal-primary);
+            transition: height 0.4s ease;
+        }
+        .practice-cell:hover::before { height: 100%; }
+
+        .practice-number {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--dl-accent-legal-primary);
+            letter-spacing: 0.1em;
+            margin-bottom: var(--dl-space-md);
+        }
+
+        .practice-title {
+            font-family: var(--font-primary);
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: white;
+            letter-spacing: -0.02em;
+        }
+
+        .glitch-reveal {
+            animation: text-reveal 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        @keyframes text-reveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="dl-scanline-trigger">
+
+        <!-- HEADER -->
+        <header class="dl-header">
+            <div class="header-left">
+                <span class="dl-status-ping" style="color: var(--dl-accent-legal-primary)"></span>
+                <span class="dl-text-mono" style="font-weight: 700;">SYS.LEGAL_LOGIC</span>
+            </div>
+            <div class="header-center">
+                <a class="dl-nav-link dl-text-mono" style="font-size: 0.875rem;">Arii de Practică</a>
+                <a class="dl-nav-link dl-text-mono" style="font-size: 0.875rem;">Cazuri Notabile</a>
+                <a class="dl-nav-link dl-text-mono" style="font-size: 0.875rem;">Echipă</a>
+            </div>
+            <div class="header-right">
+                <span class="dl-text-mono">BAROUL_BUC // v. 7.01.3</span>
+                <button class="dl-btn" style="border-color: var(--dl-accent-legal-primary); color: var(--dl-accent-legal-primary);">CONSULTAȚIE →</button>
+            </div>
+        </header>
+
+        <!-- MONOLITH HERO -->
+        <main class="monolith-hero">
+            <!-- Blade lines -->
+            <div class="blade-line" style="top: 25%;"></div>
+            <div class="blade-line" style="top: 75%;"></div>
+
+            <div class="content-block">
+                <div class="legal-seal glitch-reveal" style="animation-delay: 0.1s;">
+                    <span>BAROU<br>2009</span>
+                </div>
+
+                <div class="massive-title glitch-reveal" style="animation-delay: 0.3s;">
+                    LEGE<br>
+                    <span style="color: var(--dl-accent-legal-primary);">&amp;</span><br>
+                    ORDINE
+                </div>
+
+                <div class="sub-blade glitch-reveal" style="animation-delay: 0.5s;"></div>
+
+                <div class="legal-descriptor glitch-reveal" style="animation-delay: 0.6s;">
+                    Drept Comercial · Litigii · Fuziuni & Achiziții · Proprietate Intelectuală
+                </div>
+
+                <div class="glitch-reveal" style="animation-delay: 0.75s; margin-top: var(--dl-space-xl); display: flex; gap: var(--dl-space-md); justify-content: center;">
+                    <button class="dl-btn" style="border-color: var(--dl-accent-legal-primary); color: var(--dl-accent-legal-primary);">SOLICITĂ_CONSULTAȚIE</button>
+                    <button class="dl-btn">ARII_DE_PRACTICĂ</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- STATS ROW -->
+        <div class="stats-row">
+            <div class="stat-cell">
+                <div class="stat-number">94%</div>
+                <div class="stat-label">Rată Succes Litigii</div>
+            </div>
+            <div class="stat-cell">
+                <div class="stat-number">15+</div>
+                <div class="stat-label">Ani Experiență</div>
+            </div>
+            <div class="stat-cell">
+                <div class="stat-number">840</div>
+                <div class="stat-label">Cazuri Câștigate</div>
+            </div>
+            <div class="stat-cell">
+                <div class="stat-number">12</div>
+                <div class="stat-label">Avocați Specializați</div>
+            </div>
+        </div>
+
+        <!-- PRACTICE AREAS -->
+        <div class="practice-grid">
+            <div class="practice-cell">
+                <div class="practice-number">01 // COMERCIAL</div>
+                <div class="practice-title">Drept Comercial & Corporate</div>
+                <div class="dl-text-mono" style="margin-top: var(--dl-space-md); color: rgba(255,255,255,0.4); line-height: 1.8;">
+                    Contracte, fuziuni, achiziții, înființare și dizolvare societăți comerciale.
+                </div>
+            </div>
+            <div class="practice-cell">
+                <div class="practice-number">02 // LITIGII</div>
+                <div class="practice-title">Litigii & Arbitraj</div>
+                <div class="dl-text-mono" style="margin-top: var(--dl-space-md); color: rgba(255,255,255,0.4); line-height: 1.8;">
+                    Reprezentare în instanță, arbitraj comercial, executare silită.
+                </div>
+            </div>
+            <div class="practice-cell">
+                <div class="practice-number">03 // IP</div>
+                <div class="practice-title">Proprietate Intelectuală</div>
+                <div class="dl-text-mono" style="margin-top: var(--dl-space-md); color: rgba(255,255,255,0.4); line-height: 1.8;">
+                    Mărci, brevete, drepturi de autor, protecție IP internațională.
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
