@@ -27,12 +27,12 @@ export default function CheckoutPage() {
 
       <div className="max-w-6xl mx-auto px-6 py-12 lg:py-24 grid grid-cols-1 lg:grid-cols-12 gap-16">
          
-         {/* Partea stângă: Sumarul Comenzii (Zylaris/Reverb info) */}
+         {/* Partea stângă: Sumarul Comenzii */}
          <div className="lg:col-span-5 flex flex-col justify-between">
             <div>
                <Link href="/" className="inline-block mb-12">
                   <div className="text-2xl font-bold tracking-tight">Reverb.ro</div>
-                  <div className="text-[9px] uppercase tracking-widest text-[#ec4899] font-bold">A Zylaris Group Company</div>
+                  <div className="text-[9px] uppercase tracking-widest text-[#ec4899] font-bold">Liniște Digitală</div>
                </Link>
                
                <div className="text-[10px] uppercase tracking-widest text-white/40 mb-3 font-mono">Invoice_Ref: RVB-5509-X</div>
@@ -46,7 +46,7 @@ export default function CheckoutPage() {
                      <span className="text-[#8b5cf6] mt-1">✔</span>
                      <div>
                         <div className="font-semibold text-[15px]">Setup Landing Pagă Vies & SEO Local</div>
-                        <div className="text-xs text-white/50 mt-1">Implementarea infrastructurii tehnice Zylaris.</div>
+                        <div className="text-xs text-white/50 mt-1">Implementarea completă a deciziilor, oferindu-ți claritate.</div>
                      </div>
                   </li>
                   <li className="flex gap-4 items-start">
@@ -60,7 +60,7 @@ export default function CheckoutPage() {
                      <span className="text-[#8b5cf6] mt-1">✔</span>
                      <div>
                         <div className="font-semibold text-[15px]">Parteneriat Stabil & Predictibil</div>
-                        <div className="text-xs text-white/50 mt-1">Susținut tehnic de serverele Zylaris Group.</div>
+                        <div className="text-xs text-white/50 mt-1">Pace mintală totală. Tu te ocupi de business, noi de cod.</div>
                      </div>
                   </li>
                </ul>

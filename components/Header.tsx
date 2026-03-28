@@ -8,12 +8,7 @@ import Logo from "@/components/Logo";
 const nav = [
   { href: "/despre", label: "Despre" },
   { href: "/servicii", label: "Servicii" },
-  { href: "/pachete", label: "Pachete" },
-  { href: "/magazine-online", label: "Magazine Online" },
-  { href: "/templates", label: "Templates" },
-  { href: "/portofoliu", label: "Portofoliu" },
-  { href: "/blog", label: "Blog" },
-  { href: "/contact", label: "Contact" },
+  { href: "/showcase", label: "Showcase" },
 ];
 
 export default function Header() {
@@ -21,15 +16,15 @@ export default function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[#1d2731]/8 bg-[#f5f1ea]/90 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-[#1d2731]/8 bg-[#f5f1ea]/90 backdrop-blur-md transition-all duration-300">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[#1d2731]/12 bg-white/70 shadow-sm transition group-hover:shadow-md text-[#1d2731]">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[#1d2731]/12 bg-white/70 shadow-sm transition-all duration-500 group-hover:shadow-[0_8px_20px_rgba(29,39,49,0.15)] group-hover:-translate-y-0.5 text-[#1d2731]">
             <Logo size={28} />
           </div>
           <div>
-            <div className="text-sm font-semibold tracking-[0.35em] uppercase text-[#1d2731]">reverb.ro</div>
-            <div className="text-xs text-[#1d2731]/55">Human Digital Marketing AI</div>
+            <div className="text-sm font-semibold tracking-[0.35em] uppercase text-[#1d2731] transition-colors duration-300">reverb.ro</div>
+            <div className="text-[9px] uppercase tracking-widest font-bold text-[#1d2731]/50">Claritate & Structură</div>
           </div>
         </Link>
 
@@ -38,23 +33,29 @@ export default function Header() {
             <Link
               key={href}
               href={href}
-              className={`transition hover:text-[#1d2731] ${
-                pathname === href ? "font-medium text-[#1d2731]" : "text-[#1d2731]/65"
+              className={`transition-colors duration-300 text-xs uppercase tracking-widest font-semibold hover:text-[#1d2731] ${
+                pathname === href ? "text-[#1d2731]" : "text-[#1d2731]/50"
               }`}
             >
               {label}
             </Link>
           ))}
           <Link
-            href="/contact"
-            className="ml-2 inline-flex items-center justify-center rounded-full bg-[#1d2731] px-5 py-2.5 text-sm font-medium text-white transition hover:-translate-y-0.5 hover:shadow-lg"
+            href="/portal"
+            className="ml-2 inline-flex items-center justify-center rounded-full border border-[#1d2731] bg-transparent hover:bg-[#1d2731]/5 px-5 py-2.5 text-xs font-bold uppercase tracking-widest text-[#1d2731] transition-all duration-300 hover:-translate-y-0.5"
           >
-            Programează un call
+            Client Login
+          </Link>
+          <Link
+            href="/contact"
+            className="ml-2 inline-flex items-center justify-center rounded-full bg-[#1d2731] px-6 py-2.5 text-xs font-bold uppercase tracking-widest text-[#f5f1ea] transition-all duration-300 hover:-translate-y-0.5 shadow-[0_5px_15px_rgba(29,39,49,0.2)] hover:shadow-[0_10px_20px_rgba(29,39,49,0.4)]"
+          >
+            Start Proiect
           </Link>
         </nav>
 
         <button
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-[#1d2731]/10 bg-white/60 md:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-[#1d2731]/10 bg-white/60 md:hidden transition-transform duration-300 hover:scale-105"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
         >
@@ -71,19 +72,26 @@ export default function Header() {
               key={href}
               href={href}
               onClick={() => setOpen(false)}
-              className={`block py-3 text-base transition ${
-                pathname === href ? "font-medium text-[#1d2731]" : "text-[#1d2731]/70"
+              className={`block py-3 text-sm uppercase tracking-widest font-bold transition-colors ${
+                pathname === href ? "text-[#1d2731]" : "text-[#1d2731]/60"
               }`}
             >
               {label}
             </Link>
           ))}
           <Link
+            href="/portal"
+            onClick={() => setOpen(false)}
+            className="mt-4 inline-flex w-full items-center justify-center rounded-full border border-[#1d2731] py-3 text-xs font-bold uppercase tracking-widest text-[#1d2731] hover:bg-[#1d2731]/5 transition-colors"
+          >
+            Client Login
+          </Link>
+          <Link
             href="/contact"
             onClick={() => setOpen(false)}
-            className="mt-3 inline-flex w-full items-center justify-center rounded-full bg-[#1d2731] py-3 text-sm font-medium text-white"
+            className="mt-3 inline-flex w-full items-center justify-center rounded-full bg-[#1d2731] py-3 text-xs font-bold uppercase tracking-widest text-white hover:opacity-90 transition-opacity"
           >
-            Programează un call
+            Start Proiect
           </Link>
         </div>
       )}

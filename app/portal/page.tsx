@@ -122,7 +122,7 @@ export default function ClientPortal() {
            </div>
            
            <div className="mt-8 text-center text-xs text-white/40">
-              Securizat de platforma internă Reverb/Zylaris. Accesele nemotivate sunt logate.
+              Securizat de platforma internă Reverb. Accesele nemotivate sunt logate.
            </div>
 
         </div>
