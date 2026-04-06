@@ -1,191 +1,282 @@
 # MEMORY.md — Reverb.ro Project Brain
 
-> Citește acest fișier la începutul fiecărei sesiuni de lucru pe proiect.
-> Actualizat: 2026-04-06
+> Citește acest fișier la **începutul fiecărei sesiuni** de lucru pe proiect.
+> Ultima actualizare: 2026-04-06
 
 ---
 
-## 🎯 Ce este reverb.ro
+## 🌐 ECOSISTEMUL COMPLET — Viziunea OpenCloud
 
-Agenție digitală românească fondată de Alin Dragoș. Site live la **https://www.reverb.ro**.
-Deployment: **Vercel** (auto-deploy din GitHub la fiecare `git push origin master`).
-Repository GitHub: proiect privat al lui Alin.
+```
+┌─────────────────────────────────────────────────────────┐
+│                    ALIN DRAGOȘ                          │
+│                  (fondator + operator)                  │
+└──────────────────┬──────────────────┬───────────────────┘
+                   │                  │
+        ┌──────────▼──────┐    ┌──────▼──────────┐
+        │  REVERB.RO      │    │  BRICOLANDO.RO  │
+        │  (Agenție)      │    │  (E-commerce)   │
+        │  - Web design   │    │  - Dropshipping │
+        │  - Marketing    │    │  - DIY/Bricolaj │
+        │  - AI Humans    │    │  - Automatizare │
+        └──────────┬──────┘    └──────┬──────────┘
+                   │                  │
+        ┌──────────▼──────────────────▼──────────┐
+        │              BOX.COM                    │
+        │     „Creierul Central / OpenCloud"      │
+        │  - Single Source of Truth               │
+        │  - Box AI (Gemini powered)              │
+        │  - Metadata + workflows + approvals     │
+        └──────────┬──────────────────┬───────────┘
+                   │                  │
+        ┌──────────▼──────┐    ┌──────▼──────────┐
+        │  NEVRONIX.AI    │    │  GOOGLE CLOUD   │
+        │  AI Digital     │    │  Vertex AI +    │
+        │  Humans         │    │  Gemini 2.5 Pro │
+        └─────────────────┘    └─────────────────┘
+```
+
+---
+
+## 🎯 REVERB.RO — Agenția
+
+Fondator: **Alin Dragoș** · Site: **https://www.reverb.ro**
+Deployment: **Vercel** (auto-deploy la `git push origin master`)
+GitHub: `https://github.com/alindrimbu-brico/reverb2.git`
 
 **Tagline**: Claritate & Structură
 **Poziționare**: Infrastructură corporativă. Interfață umană. Fără jargon.
-**Ton**: precizie tehnică + empatie umană, zero buzzwords, limbaj direct.
+**Servicii**: Web design, magazine online, marketing digital, AI Digital Human (Nevronix)
 
 ---
 
-## 🛠 Stack tehnic
+## 🏪 BRICOLANDO.RO — Primul client oficial al Reverb
 
-- **Next.js 16.2.1** — App Router (nu Pages Router). ATENȚIE: are breaking changes față de Next.js 13-14.
-- **React 19**
-- **TypeScript**
-- **Tailwind CSS 4** — util classes standard, fără config personalizat
-- **Nodemailer** — pentru contact form (SMTP Hostinger)
-- **Vercel** — hosting și CI/CD
+**Bricolando.ro** = e-commerce DIY/bricolaj, dropshipping, operat de Alin.
+Este **clientul PILOT** al agenției Reverb — vitrina vie a capacităților.
 
-### Structura critică
+### Servicii Reverb active pentru Bricolando
+1. **Site e-commerce** — construit și gestionat de Reverb
+2. **Marketing digital** — campanii, SEO, conținut social
+3. **Automatizare operațională**:
+   - Heartbeat comenzi (verificare la fiecare 2h)
+   - Price monitoring — comparare prețuri furnizori
+   - Auto-invoicing
+   - **Golden Rules**: ajustările de preț cer confirmarea lui Alin
+4. **AI Digital Human** (în curs) — avatar Nevronix pentru asistență produse
+5. **Box.com integration** — stocare centralizată documente + cataloage + media
 
+### Stack tehnic Bricolando
+- Email: bricolando.ro@gmail.com
+- Automatizare: Python scripts cu heartbeat 2h
+- Price monitor: SKILL.md în `.openclaw/workspace/skills/bricolando-price-monitor/`
+
+---
+
+## 📦 BOX.COM — Creierul Central (OpenCloud)
+
+### Ce face Box în ecosistemul nostru
+
+Box este **Single Source of Truth** — toate activele digitale din Bricolando + Reverb + Live-Reverb trec prin Box.
+
+**Structura de foldere propusă în Box:**
 ```
-app/
-  page.tsx             — Homepage
-  layout.tsx           — Root layout cu Header + Footer
-  servicii/            — Pagina servicii
-  ai-humans/           — Pagina AI Digital Human (Nevronix)
-  nevronix/            — Pagina parteneriat Nevronix
-  contact/             — Formular contact
-  despre/              — Despre agenție
-  showcase/            — Portofoliu
-  pachete/             — Prețuri pachete
-  portofoliu/          — Portofoliu extins
-  checkout/            — Checkout ("use client"!)
-  portal/              — Portal client ("use client"!)
-  blog/                — Blog
-  legal/               — Termeni și condiții
-  magazine-online/     — Landing page magazine online
-  templates/           — Template showcase
-  xiaolong/            — Pagina specială
-  en/                  — Versiunea engleză (oglindă)
-  api/contact/         — API route pentru trimitere email
+📁 OpenCloud/
+├── 📁 Bricolando/
+│   ├── 📁 Cataloage-Produse/      ← PDF-uri furnizori, CSV-uri stocuri
+│   ├── 📁 Media-Produse/          ← Imagini, video-uri produse
+│   ├── 📁 Marketing/              ← Materiale campanii, texte SEO
+│   ├── 📁 Contracte/              ← Box Sign pentru furnizori
+│   └── 📁 Rapoarte/               ← Rapoarte preț, comenzi, performanță
+├── 📁 Reverb/
+│   ├── 📁 Clienti/                ← Dosare per client
+│   ├── 📁 Showcase/               ← Demo-uri finalizate
+│   └── 📁 Templates/              ← Șabloane contracte, prezentări
+└── 📁 Live-Reverb/
+    ├── 📁 Footage-Brut/           ← Video-uri raw
+    ├── 📁 Scripturi/              ← Scripturi aprobate
+    └── 📁 Output-Final/           ← Conținut gata de publicat
+```
+
+### Capacitățile Box AI (powered by Gemini)
+- `ai_qa_single_file` — întreabă AI despre un document specific
+- `ai_qa_multi_file` — analiză cross-document
+- `ai_qa_hub` — întreabă întreaga bază de cunoștințe Box
+- `search_files_metadata` — căutare după metadata custom
+- Box AI Extract — extrage date structurate din documente nestructurate
+
+### Automatizări Box Relay planificate
+1. **Trigger produs nou Bricolando** → Box AI generează descriere SEO + strategie social
+2. **Video nou în Live-Reverb/Footage-Brut** → Gemini analizează, extrage highlights
+3. **Aprobări materiale** → Box Relay trimite la Alin pentru aprobare, fără email
+
+### Integrare cu Google Cloud / Vertex AI
+- Box are integrare nativă cu Google Cloud
+- Foldere Box conectate la Gemini 2.5 Pro prin Vertex AI
+- Use case: Gemini "vizionează" clipuri din Live-Reverb și extrage 5-6 momente cheie/zi pentru postări Bricolando
+
+### Securitate Box (Shield + Governance)
+- Documente confidențiale (chei API, date Nano Baryana 2) protejate cu Shield
+- Accese granulare: echipa Live-Reverb vede doar media, nu datele de business
+- Detectare automată date sensibile + blocare partajare necorespunzătoare
+
+---
+
+## 🎬 LIVE-REVERB.RO — Producție Media
+
+Live-Reverb este entitatea de **producție video/live streaming** din ecosistem.
+
+**Rol**: Creează conținut video pentru Bricolando și clienții Reverb.
+
+**Flux de lucru cu Box:**
+1. Echipa filmează → upload footage brut în `Box/Live-Reverb/Footage-Brut/`
+2. Box AI + Gemini analizează și extrage momentele bune
+3. Materialele aprobate merg în `Box/Live-Reverb/Output-Final/`
+4. Reverb publică pe canalele Bricolando
+
+---
+
+## ⚡ NANO BARYANA 2 — Procesul de Optimizare Conținut
+
+**Nano Baryana 2** este procesul/tehnologia proprietară de optimizare a activelor digitale înainte de publicare.
+
+**Integrare cu Box Custom Metadata:**
+- Fiecare activ digital primit un tag metadata: `NB2-Status: pending | processing | approved`
+- Sistemul OpenCloud (Box API) interoghează doar activele cu `NB2-Status: approved`
+- Înainte de orice postare pe social media sau publicare pe Bricolando, activul trebuie să fi trecut prin procesul NB2
+
+**Tag-uri metadata NB2 propuse:**
+```json
+{
+  "NB2-Status": "approved",
+  "NB2-Version": "2.4",
+  "NB2-Date": "2026-04-06",
+  "NB2-Type": "image | video | document | product",
+  "Platform-Ready": ["instagram", "tiktok", "bricolando", "reverb"]
+}
+```
+
+---
+
+## 🤖 NEVRONIX.AI — Infrastructura AI Digital Human
+
+Platformă de AI Digital Humans — Reverb o revinde ca serviciu propriu.
+
+**Tehnologii**: ElevenLabs TTS, RAG Knowledge Builder, OpenAI GPT-4, 140+ limbi
+**Integrare Box**: Knowledge base-ul avatarului se antrenează pe documente din Box
+  → Catalog produse Bricolando (PDF din Box) → Avatarul știe toate produsele
+
+### Planuri Nevronix (costul nostru)
+| Plan | Preț/lună | Minute | DH |
+|------|-----------|--------|----|
+| Mini | €20 | 100 | 1 |
+| Basic | €139 | 1.500 | 2 |
+| Start | €440 | 5.500 | 6 |
+| Pro | €1.240 | 15.500 | ∞ |
+
+### Prețuri Reverb către client
+| Pachet | Preț | Bazat pe |
+|--------|------|----------|
+| AI Starter | €290/lună | Basic |
+| AI Growth | €590/lună | Start |
+| AI Enterprise | cerere | Pro |
++ Setup fee: €500–1.500
+
+**IMPORTANT**: Reverb NU menționează "Nevronix" la client. Serviciul = "AI Digital Human by Reverb".
+
+---
+
+## 🛠 STACK TEHNIC REVERB.RO
+
+- **Next.js 16.2.1** App Router — CITEȘTI docs din `node_modules/next/dist/docs/`
+- **React 19**, **TypeScript**, **Tailwind CSS 4**
+- **Nodemailer** — SMTP Hostinger pentru contact form
+- **Vercel** — CI/CD auto
+
+### Structura app/
+```
+page.tsx, layout.tsx, globals.css
+servicii/, ai-humans/, nevronix/
+contact/, despre/, showcase/
+  artisan-cafe/     ← Extraction Lab (café specialty) ✅ complet
+  urban-culture/    ← DRIP.OS (streetwear) ✅ complet
+  [alte showcase-uri]
+pachete/, portofoliu/, checkout/ (client!), portal/ (client!)
+blog/, legal/, magazine-online/, templates/, xiaolong/
+en/ (versiune engleză), api/contact/
 
 components/
-  Header.tsx           — Navigație
-  Footer.tsx           — Footer cu branding
-  Reveal.tsx           — Animație fade-in la scroll (folosit peste tot)
-  Logo.tsx             — Logo component
-  PageEnter.tsx        — Animație intrare pagină
-  ScrollProgress.tsx   — Bara de progres scroll
+  Header, Footer, Reveal, Logo, PageEnter, ScrollProgress
 ```
 
 ---
 
-## 🎨 Design System
+## 🎨 DESIGN SYSTEM REVERB
 
-### Culori principale
-
-| Rol | Valoare |
+| Rol | Culoare |
 |-----|---------|
-| Background dark | `#1a0533` (violet închis) |
+| Background dark | `#1a0533` |
+| Background negru | `#050505` |
 | Accent violet | `#8b5cf6` |
 | Accent roz | `#ec4899` |
-| Background light (homepage) | `#f5efe8` (bej/crem) |
-| Text pe dark | `white` / `white/60` / `white/40` |
-| Text pe light | `#1a0533` / dark slate |
+| Accent café | `#D64933` |
+| Accent streetwear | `#E2FF00` |
+| Accent cyber | `#ccff00` |
+| Background light | `#f5efe8` |
 
-### Convențiile de stil
-
-- Carduri dark: `bg-white/5 border border-white/10 rounded-2xl backdrop-blur-md`
-- Glow button: `bg-gradient-to-r from-[#8b5cf6] to-[#ec4899] rounded-full`
-- Heading large: `font-light tracking-[-0.03em]`
-- Badge: `border border-white/10 rounded-full px-5 py-1.5 bg-white/5 text-[11px] uppercase tracking-[0.25em]`
-- Glow decorativ: `bg-[#8b5cf6]/20 blur-[120px] rounded-full pointer-events-none`
-- Toate animațiile de scroll: `<Reveal delay={număr}>` din `@/components/Reveal`
-
-### Pagini cu design deschis (light)
-Homepage și câteva landing-uri folosesc background bej `#f5efe8` cu text dark.
-
-### Pagini cu design închis (dark)
-`/ai-humans`, `/nevronix` și altele folosesc `bg-[#1a0533]` sau `bg-[#050505]`.
-
----
-
-## 🚨 Reguli critice — NU uita
-
-### 1. Client Components
-Orice pagină care are event handlers (`onClick`, `onSubmit`, `onChange` etc.) **TREBUIE** să aibă `"use client"` ca primă linie.
-Paginile cu `"use client"` **NU POT** exporta `metadata` — trebuie eliminat.
-
-```tsx
-// ✅ Corect pentru pagini cu interactivitate
-"use client";
-// NO: export const metadata = ...
-
-// ✅ Corect pentru pagini statice
-import type { Metadata } from "next";
-export const metadata: Metadata = { ... };
-// NO: event handlers direct în component
+```
+Carduri dark:  bg-white/5 border border-white/10 rounded-2xl backdrop-blur-md
+Butoane glow:  bg-gradient-to-r from-[#8b5cf6] to-[#ec4899] rounded-full
+Heading:       font-light tracking-[-0.03em]
+Animații:      <Reveal delay={ms}> din @/components/Reveal
 ```
 
-Pagini care au deja `"use client"`: `checkout/page.tsx`, `portal/page.tsx`
+---
 
-### 2. Git push
-Din VM Linux **nu se poate face push** (nu există credențiale GitHub).
-Alin face întotdeauna `git push origin master` din **Windows Terminal** în `C:\Users\alind\Projects\reverb`.
+## 🚨 REGULI CRITICE
 
-### 3. Environment Variables
-Secretele sunt în Vercel Dashboard → Settings → Environment Variables.
-Local nu există `.env.local` (nu e nevoie pentru dev, dar e nevoie pentru prod).
-
-Variabile active:
-- `REVERB_EMAIL_USER` = `reverb@reverb.ro`
-- `REVERB_EMAIL_PASS` = parola Hostinger pentru reverb@reverb.ro
+1. **"use client"** pe orice pagină cu event handlers → elimini `export const metadata`
+2. **NU `overflow-hidden`** pe wrapper-ul principal de pagină (blochează Reveal/IntersectionObserver)
+3. **Git push**: DOAR din Windows Terminal (`git push origin master --force`)
+4. **Env vars**: în Vercel Dashboard (`REVERB_EMAIL_USER`, `REVERB_EMAIL_PASS`)
+5. **Next.js 16**: citești docs înainte de cod nou
 
 ---
 
-## 📧 Contact Form
+## 📋 STATUS (2026-04-06)
 
-Implementat în `app/api/contact/route.ts` cu Nodemailer.
-- SMTP: `smtp.hostinger.com` port `465` (SSL)
-- Trimite email la `reverb@reverb.ro`
-- `replyTo` setat la emailul celui care completează formularul
+### ✅ Livrat
+- reverb.ro live cu DNS + Vercel
+- Contact form funcțional
+- /ai-humans, /nevronix, /showcase complet
+- Showcase: artisan-cafe + urban-culture (complete)
+- MEMORY.md + REVY_PROMPT.md
+- Arhitectura OpenCloud documentată
 
----
-
-## 🤖 Parteneriat Nevronix.ai
-
-Reverb revinde servicii AI Digital Human bazate pe platforma **Nevronix** (nevronix.ai).
-
-### Ce este Nevronix
-- Avatare AI / Digital Humans cu TTS ElevenLabs
-- RAG Knowledge Builder (antrenare pe documente/URL-uri)
-- 140+ limbi, integrare WordPress, hosted în cloud
-- Pricing Nevronix: Mini €20/lună, Basic €139, Start €440, Pro €1240
-
-### Cum vinde Reverb
-Reverb NU menționează "Nevronix" direct ca brand — avatarele sunt vândute ca serviciu propriu "AI Digital Human".
-Structura de prețuri Reverb:
-- **Starter** €290/lună (bazat pe Nevronix Basic)
-- **Growth** €590/lună (bazat pe Nevronix Start) — **recomandat**
-- **Enterprise** la cerere (bazat pe Nevronix Pro)
-
-### Pagini Nevronix pe site
-- `/nevronix` — pagina de parteneriat (design cyber-lime pe negru `#050505`)
-- `/ai-humans` — pagina de vânzare pentru clienți (design violet-roz pe `#1a0533`)
+### 🔲 De făcut
+- [ ] **Box.com**: Conectare MCP + creare structură foldere
+- [ ] **Box + Gemini**: Integrare Vertex AI pentru analiza video Live-Reverb
+- [ ] **Box Metadata NB2**: Configurare câmpuri custom pentru Nano Baryana 2
+- [ ] **Bricolando showcase**: Pagină case study pe reverb.ro
+- [ ] **Avatar Nevronix pe Bricolando**: Primul deployment real AI Digital Human
+- [ ] **/ai-humans**: Verificat scroll după fix overflow-hidden
+- [ ] **Versiunea /en/** completă
+- [ ] **Blog**: Articole reale SEO
 
 ---
 
-## 📋 Starea curentă a proiectului (2026-04-06)
+## 💡 INSTRUCȚIUNI REVY
 
-### ✅ Făcut
-- Site live pe vercel.ro cu domeniu custom reverb.ro
-- DNS configurat: A record `@` → `76.76.21.21`, CNAME `www` → `cname.vercel-dns.com`
-- Contact form funcțional cu Nodemailer + Hostinger SMTP
-- Pagina `/ai-humans` creată și integrată în homepage + servicii
-- Pagina `/nevronix` cu design parteneriat
-- Versiunea engleză `/en/` parțial implementată
-
-### 🔲 Pending / De făcut
-- [ ] **URGENT**: Alin să facă `git push origin master` pentru a deploya `/ai-humans`
-- [ ] Verificat funcționarea contact form pe live (trimis email test)
-- [ ] Completat versiunea engleză `/en/` (toate paginile oglindă)
-- [ ] Adăugat proiecte reale în `/portofoliu` și `/showcase`
-- [ ] SEO: meta descriptions personalizate per pagină
-- [ ] Blog: articole reale (acum e probabil placeholder)
-- [ ] Testimoniale reale de la clienți
+```
+LA FIECARE SESIUNE:
+1. Citești MEMORY.md complet
+2. Verifici app/ înainte de fișiere noi
+3. Design system — nu inventezi culori noi
+4. event handlers → "use client" → elimini metadata
+5. NU overflow-hidden pe wrapper de pagină
+6. NU git push — Alin face din Windows Terminal --force
+```
 
 ---
 
-## 💡 Cum funcționează Revy pe acest proiect
-
-1. Citești MEMORY.md (acest fișier) la fiecare sesiune nouă
-2. Verifici întotdeauna `app/` structura înainte de a crea fișiere noi
-3. Respecti design system-ul — nu inventezi culori/stiluri noi fără motiv
-4. Dacă o pagină are event handlers → `"use client"` + elimini `metadata`
-5. Commit-ezi cu mesaje clare în română sau engleză
-6. **NU faci push** — Alin face push din Windows Terminal
-
----
-
-*Menținut de Claude (Cowork) + Revy (Antigravity)*
+*Menținut de Claude (Cowork) + Revy (Antigravity) · bricolando.ro@gmail.com · 2026-04-06*

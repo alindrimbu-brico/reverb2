@@ -1,0 +1,240 @@
+:root {
+    --bg-color: #050505;
+    --text-main: #f5f1ea;
+    --text-muted: #888;
+    --accent: #f5a623;
+    --accent-glow: rgba(245, 166, 35, 0.4);
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+}
+
+.glow-bg {
+    position: fixed;
+    top: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 60%);
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 5%;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--accent);
+}
+
+.cart-icon {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    padding: 0.75rem 1.5rem;
+    border-radius: 30px;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    transition: 0.3s ease;
+}
+
+.cart-icon:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px var(--accent-glow);
+}
+
+.hero {
+    text-align: center;
+    padding: 6rem 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+}
+
+.highlight {
+    color: var(--accent);
+    text-shadow: 0 0 20px var(--accent-glow);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    font-weight: 300;
+}
+
+.ideas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 0 5% 5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.idea-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    transition: 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.idea-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px var(--accent-glow);
+}
+
+.idea-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.idea-desc {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.idea-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.buy-btn {
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 0.5rem 1.25rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.buy-btn:hover {
+    background: var(--accent);
+    color: var(--bg-color);
+}
+
+/* Cart Modal */
+.cart-modal {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 400px;
+    height: 100vh;
+    background: rgba(15, 15, 15, 0.95);
+    backdrop-filter: blur(20px);
+    border-left: 1px solid var(--glass-border);
+    transition: 0.4s ease;
+    z-index: 100;
+    padding: 2rem;
+    box-shadow: -10px 0 30px rgba(0,0,0,0.8);
+}
+
+.cart-modal.active {
+    right: 0;
+}
+
+.close-btn {
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--text-muted);
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+}
+
+.close-btn:hover {
+    color: var(--text-main);
+}
+
+.cart-content h2 {
+    margin-bottom: 2rem;
+    color: var(--accent);
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.cart-total {
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: right;
+}
+
+.checkout-btn {
+    width: 100%;
+    background: var(--accent);
+    color: var(--bg-color);
+    border: none;
+    padding: 1rem;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.checkout-btn:hover {
+    background: #e0981e;
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+@media (max-width: 600px) {
+    .cart-modal {
+        width: 100%;
+    }
+    .hero h1 {
+        font-size: 3rem;
+    }
+}

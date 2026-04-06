@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guru - Magazin de Idei</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="glow-bg"></div>
+    <header>
+        <div class="logo">GURU.</div>
+        <div class="cart-icon" id="cart-button">
+            🛒 Coș (<span id="cart-count">0</span>)
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Aducem <span class="highlight">Lumină.</span></h1>
+            <p>Descoperă idei premium și hint-uri educaționale care îți vor schimba perspectiva. Plătești pentru claritate, primești revelație. Noul tău portal Guru.</p>
+        </section>
+
+        <section class="ideas-grid" id="ideas-container">
+            <!-- Ideas will be injected by JS -->
+        </section>
+    </main>
+
+    <div class="cart-modal" id="cart-modal">
+        <div class="cart-content">
+            <span class="close-btn" id="close-cart">&times;</span>
+            <h2>Coșul tău de idei</h2>
+            <div id="cart-items">
+                <p>Coșul este gol. Alege niște idei!</p>
+            </div>
+            <div class="cart-total">
+                Total: <span id="total-price">0</span> RON
+            </div>
+            <button class="checkout-btn" onclick="alert('Mecanica de plată va fi integrată aici! (Ex: Stripe/Netopia)')">Cumpără Lumina</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

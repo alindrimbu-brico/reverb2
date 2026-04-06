@@ -73,8 +73,38 @@ export default function PachetePage() {
         </div>
       </section>
 
+      {/* Guru Store Promo */}
+      <section className="mx-auto max-w-7xl px-6 pt-20 lg:px-10 lg:pt-28">
+        <Reveal>
+          <div className="relative overflow-hidden rounded-[36px] bg-[#050505] border border-[#f5a623]/20 p-10 md:p-14 mb-8 shadow-2xl">
+            <div className="absolute -top-[50%] -right-[20%] h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle,rgba(245,166,35,0.15)_0%,transparent_60%)] blur-3xl pointer-events-none" />
+            <div className="relative z-10 md:flex md:items-center md:justify-between md:gap-12">
+              <div className="max-w-2xl">
+                <div className="mb-4 inline-flex items-center rounded-full bg-[#f5a623]/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#f5a623]">
+                  Noutate Exclusivă
+                </div>
+                <h2 className="text-3xl font-medium tracking-tight text-[#f5f1ea] md:text-5xl">
+                  GURU. <span className="text-[#f5a623] drop-shadow-[0_0_15px_rgba(245,166,35,0.3)]">Magazin de Idei.</span>
+                </h2>
+                <p className="mt-4 text-lg leading-relaxed text-white/70">
+                  Am transformat consultanța premium într-un magazin digital. Descoperă hint-uri educaționale și strategii scalabile care răspund exact nevoilor tale. Plătești pentru claritate.
+                </p>
+              </div>
+              <div className="mt-8 shrink-0 md:mt-0">
+                <Link
+                  href="/guru"
+                  className="inline-flex items-center justify-center rounded-full bg-[#f5a623] px-8 py-4 text-sm font-bold text-[#050505] transition hover:-translate-y-0.5 hover:shadow-[0_0_15px_rgba(245,166,35,0.4)] hover:bg-[#e0981e]"
+                >
+                  Descoperă Lumina →
+                </Link>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
       {/* One-time Packages */}
-      <section className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+      <section className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-20">
         <Reveal>
           <div className="mb-12">
             <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">Pachete one-time</div>
