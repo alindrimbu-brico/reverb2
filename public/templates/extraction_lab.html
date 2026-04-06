@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYS.EXTRACTION_LAB | Downlink Interface</title>
+    <link rel="stylesheet" href="downlink_system.css">
+    <style>
+        /* =========================================================================
+           PAGE SPECIFIC LAYOUT - THE EXTRACTION LAB
+           ========================================================================= */
+        
+        /* The Header Grid */
+        .dl-header {
+            height: var(--dl-header-h);
+            display: grid;
+            grid-template-columns: 2fr 6fr 4fr;
+            border-bottom: 1px solid var(--dl-grid-line);
+            align-items: center;
+            background-color: var(--dl-void);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .dl-header > div {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0 var(--dl-space-md);
+        }
+        
+        .header-left { 
+            border-right: 1px solid var(--dl-grid-line); 
+        }
+        
+        .header-center { 
+            gap: var(--dl-space-xl); 
+        }
+
+        .header-right { 
+            border-left: 1px solid var(--dl-grid-line); 
+            justify-content: space-between; 
+            background-color: var(--dl-void); 
+        }
+
+        /* The Hero Section Grid */
+        .hero-section {
+            display: grid;
+            grid-template-columns: 2fr 6fr 4fr;
+            min-height: calc(100vh - var(--dl-header-h));
+            border-bottom: 1px solid var(--dl-grid-line);
+        }
+
+        /* Panel 1 (Left): Rotated technical data */
+        .panel-left {
+            border-right: 1px solid var(--dl-grid-line);
+            padding: var(--dl-space-md);
+            position: relative;
+            background-color: rgba(5,5,5,0.5);
+            backdrop-filter: blur(4px);
+        }
+        
+        .rotated-text-container {
+            position: absolute;
+            left: var(--dl-space-lg);
+            bottom: var(--dl-space-xl);
+            transform: rotate(-90deg);
+            transform-origin: left bottom;
+            white-space: nowrap;
+        }
+
+        /* Panel 2 (Center): Main Content */
+        .panel-center {
+            padding: var(--dl-space-xl);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .subtitle-ping {
+            display: inline-flex;
+            align-items: center;
+            color: var(--dl-accent-extraction);
+            margin-bottom: var(--dl-space-md);
+        }
+
+        .paragraph-text {
+            margin-top: var(--dl-space-lg); 
+            max-width: 600px; 
+            color: rgba(255,255,255,0.7); 
+            font-size: 1.125rem;
+            font-weight: 400;
+        }
+        
+        /* Data Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: var(--dl-space-xl);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--dl-grid-line);
+        }
+        
+        .data-table th, .data-table td {
+            text-align: left;
+            padding: var(--dl-space-md) 0;
+            border-bottom: 1px solid var(--dl-grid-line);
+        }
+        
+        .data-table th {
+            color: rgba(255,255,255,0.4);
+            font-weight: 400;
+            padding-bottom: var(--dl-space-sm);
+        }
+
+        .data-table td {
+            color: rgba(255,255,255,0.9);
+        }
+
+        /* Panel 3 (Right): Solid Color Brutalist Block */
+        .panel-right {
+            border-left: 1px solid var(--dl-grid-line);
+            background-color: var(--dl-accent-extraction);
+            color: var(--dl-void);
+            padding: var(--dl-space-xl);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Ensure mono text in right panel is readable against orange */
+        .panel-right .dl-text-mono {
+            color: rgba(5, 5, 5, 0.8);
+            font-weight: 700;
+        }
+        
+        .graphic-symbol {
+            font-family: var(--font-primary);
+            font-size: clamp(8rem, 15vw, 16rem);
+            font-weight: 700;
+            line-height: 0.8;
+            letter-spacing: -0.06em;
+            text-align: right;
+            opacity: 0.9;
+            transform: translateX(10px);
+        }
+        
+        .blueprint-lines {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: rgba(5,5,5,0.1);
+            z-index: 1;
+        }
+
+        .blueprint-lines::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: -50vh;
+            width: 1px;
+            height: 100vh;
+            background-color: rgba(5,5,5,0.1);
+        }
+
+        .panel-right > * {
+            z-index: 2;
+        }
+
+        /* Glitch reveal effect for center text */
+        .glitch-reveal {
+            animation: text-reveal 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        @keyframes text-reveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="dl-scanline-trigger">
+        
+        <!-- TELEMETRY HEADER -->
+        <header class="dl-header">
+            <div class="header-left">
+                <span class="dl-status-ping" style="color: var(--dl-accent-extraction)"></span>
+                <span class="dl-text-mono" style="font-weight: 700;">SYS.EXTRACTION_LAB</span>
+            </div>
+            <div class="header-center">
+                <a class="dl-nav-link dl-text-mono" style="font-size: 0.875rem">Index Produse</a>
+                <a class="dl-nav-link dl-text-mono" style="font-size: 0.875rem">Parametrii de Prăjire</a>
+                <a class="dl-nav-link dl-text-mono" style="font-size: 0.875rem">Metrici Extracție</a>
+            </div>
+            <div class="header-right">
+                <span class="dl-text-mono">v. 4.09.2-PROD</span>
+                <button class="dl-btn">INIȚIAZĂ_COMANDĂ</button>
+            </div>
+        </header>
+
+        <!-- MAIN LAYOUT -->
+        <main class="hero-section">
+            
+            <!-- PANEL 1: Rotated Metdata -->
+            <div class="panel-left">
+                <div class="rotated-text-container">
+                    <span class="dl-text-mono" style="font-size: 0.85rem; letter-spacing: 0.1em; color: var(--dl-accent-extraction);">EXPECTATION_MET_LOG: 100% // YIRGACHEFFE_PROFILE</span>
+                </div>
+            </div>
+            
+            <!-- PANEL 2: Core Data / Content -->
+            <div class="panel-center">
+                <div class="subtitle-ping glitch-reveal" style="animation-delay: 0.2s;">
+                    <span class="dl-text-mono" style="color: var(--dl-accent-extraction);">[DATA_STREAM.ACTIVE] // INIȚIALIZARE_TERMICĂ</span>
+                </div>
+                
+                <h1 class="dl-heading-1 glitch-reveal" style="animation-delay: 0.4s;">
+                    Cofeină ca<br>Știință Exactă.
+                </h1>
+                
+                <p class="paragraph-text glitch-reveal" style="animation-delay: 0.5s;">
+                    Nu lăsăm nimic la voia întâmplării. Eliminăm variabila umană din prăjirea cafelei, aplicând protocoale termodinamice arhitecturate pentru a forța potențialul chimic maxim al fiecărui lot izolat.
+                </p>
+                
+                <table class="data-table glitch-reveal" style="animation-delay: 0.6s;">
+                    <thead>
+                        <tr>
+                            <th>ORIGINE BOABE</th>
+                            <th>TEMPERATURĂ OPTIMĂ</th>
+                            <th>TIMP EXTRACȚIE</th>
+                            <th>STATUS CURENT</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ETHIOPIA YIRGACHEFFE [LOT.01]</td>
+                            <td>93.4 °C</td>
+                            <td>28.4 SECUNDE</td>
+                            <td style="color: var(--dl-accent-extraction); font-weight: 700;">PREGĂTIT</td>
+                        </tr>
+                        <tr>
+                            <td>COLOMBIA HUILA [LOT.02]</td>
+                            <td>91.8 °C</td>
+                            <td>32.0 SECUNDE</td>
+                            <td style="color: rgba(255,255,255,0.4);">ÎN CALIBRARE</td>
+                        </tr>
+                        <tr>
+                            <td>KENYA AA GRAND [LOT.03]</td>
+                            <td>94.2 °C</td>
+                            <td>25.5 SECUNDE</td>
+                            <td style="color: rgba(255,255,255,0.4);">AȘTEAPTARE</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- PANEL 3: Solid Accent Block with Technical Decals -->
+            <div class="panel-right">
+                <div class="blueprint-lines"></div>
+                
+                <div>
+                    <div class="dl-text-mono">Build_Identifier:</div>
+                    <div class="dl-text-mono" style="font-size: 1.5rem; letter-spacing: -0.02em;">EXTR-4.09.2-PROD</div>
+                </div>
+                
+                <div class="graphic-symbol">
+                    EX
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+                    <div>
+                        <div class="dl-text-mono" style="margin-bottom: 4px;">SYSTEM DATA [LIVE]</div>
+                        <div class="dl-text-mono" style="font-size: 0.65rem; line-height: 1.6;">
+                            Replication_Seed<br>
+                            Validation_Cycle<br>
+                            Branch_Coverage
+                        </div>
+                    </div>
+                    <button class="dl-btn dl-btn-dark">RULEAZĂ_DIAGNOZĂ</button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</body>
+</html>

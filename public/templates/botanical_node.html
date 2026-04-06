@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYS.BOTANICAL_NODE | Downlink Interface</title>
+    <link rel="stylesheet" href="downlink_system.css">
+    <style>
+        .dl-header {
+            height: var(--dl-header-h);
+            display: grid;
+            grid-template-columns: 2fr 6fr 4fr;
+            border-bottom: 1px solid var(--dl-grid-line);
+            align-items: center;
+            background-color: var(--dl-void);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .dl-header > div {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0 var(--dl-space-md);
+        }
+        .header-left { border-right: 1px solid var(--dl-grid-line); }
+        .header-center { gap: var(--dl-space-xl); }
+        .header-right {
+            border-left: 1px solid var(--dl-grid-line);
+            justify-content: space-between;
+        }
+
+        .hero-section {
+            display: grid;
+            grid-template-columns: 8fr 4fr;
+            min-height: calc(100vh - var(--dl-header-h));
+            border-bottom: 1px solid var(--dl-grid-line);
+        }
+
+        .panel-main {
+            border-right: 1px solid var(--dl-grid-line);
+            display: grid;
+            grid-template-rows: 1fr auto;
+        }
+
+        .panel-content {
+            padding: var(--dl-space-xl);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .image-container {
+            position: relative;
+            border-top: 1px solid var(--dl-grid-line);
+            height: 280px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0a1a0f 0%, #061208 100%);
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            background:
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 39px,
+                    rgba(0,255,170,0.06) 39px,
+                    rgba(0,255,170,0.06) 40px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 39px,
+                    rgba(0,255,170,0.06) 39px,
+                    rgba(0,255,170,0.06) 40px
+                );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gps-tag-left {
+            position: absolute;
+            left: var(--dl-space-md);
+            top: 50%;
+            transform: rotate(-90deg) translateX(-50%);
+            transform-origin: left center;
+            white-space: nowrap;
+        }
+        .gps-tag-right {
+            position: absolute;
+            right: var(--dl-space-md);
+            top: 50%;
+            transform: rotate(90deg) translateX(50%);
+            transform-origin: right center;
+            white-space: nowrap;
+        }
+
+        .panel-side {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: var(--dl-space-xl);
+            background-color: rgba(5,5,5,0.5);
+        }
+
+        .scroll-indicator {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--dl-space-sm);
+            color: var(--dl-accent-botanical);
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 80px;
+            background: linear-gradient(to bottom, var(--dl-accent-botanical), transparent);
+        }
+
+        .flora-symbol {
+            font-size: clamp(6rem, 10vw, 12rem);
+            font-weight: 700;
+            line-height: 0.8;
+            letter-spacing: -0.06em;
+            color: rgba(0,255,170,0.12);
+            text-align: right;
+            font-family: var(--font-primary);
+        }
+
+        .subtitle-ping {
+            display: inline-flex;
+            align-items: center;
+            color: var(--dl-accent-botanical);
+            margin-bottom: var(--dl-space-md);
+        }
+
+        .paragraph-text {
+            margin-top: var(--dl-space-lg);
+            max-width: 560px;
+            color: rgba(255,255,255,0.7);
+            font-size: 1.125rem;
+            font-weight: 400;
+        }
+
+        .glitch-reveal {
+            animation: text-reveal 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        @keyframes text-reveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border-top: 1px solid var(--dl-grid-line);
+        }
+        .product-cell {
+            border-right: 1px solid var(--dl-grid-line);
+            padding: var(--dl-space-lg) var(--dl-space-md);
+        }
+        .product-cell:last-child { border-right: none; }
+        .product-name {
+            font-family: var(--font-primary);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            letter-spacing: -0.02em;
+        }
+        .product-meta {
+            margin-top: var(--dl-space-sm);
+            color: rgba(255,255,255,0.45);
+            font-size: 0.75rem;
+            font-family: var(--font-mono);
+        }
+        .product-tag {
+            display: inline-block;
+            margin-top: var(--dl-space-sm);
+            padding: 2px 8px;
+            border: 1px solid var(--dl-accent-botanical);
+            color: var(--dl-accent-botanical);
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            letter-spacing: 0.08em;
+        }
+    </style>
+</head>
+<body>
+    <div class="dl-scanline-trigger">
+
+        <!-- HEADER -->
+        <header class="dl-header">
+            <div class="header-left">
+                <span class="dl-status-ping" style="color: var(--dl-accent-botanical)"></span>
+                <span class="dl-text-mono" style="font-weight: 700;">SYS.BOTANICAL_NODE</span>
+            </div>
+            <div class="header-center">
+                <a class="dl-nav-link dl-text-mono" style="font-size: 0.875rem; --dl-accent-extraction: var(--dl-accent-botanical)">Flora Index</a>
+                <a class="dl-nav-link dl-text-mono" style="font-size: 0.875rem;">Sezon Curent</a>
+                <a class="dl-nav-link dl-text-mono" style="font-size: 0.875rem;">Comenzi</a>
+            </div>
+            <div class="header-right">
+                <span class="dl-text-mono">v. 3.02.1-LIVE</span>
+                <button class="dl-btn" style="border-color: var(--dl-accent-botanical); color: var(--dl-accent-botanical);">COMANDĂ_ACUM</button>
+            </div>
+        </header>
+
+        <!-- HERO -->
+        <main class="hero-section">
+
+            <!-- PANEL MAIN -->
+            <div class="panel-main">
+                <div class="panel-content">
+                    <div class="subtitle-ping glitch-reveal" style="animation-delay: 0.2s;">
+                        <span class="dl-text-mono" style="color: var(--dl-accent-botanical);">[FLORA.INDEX_01] // SEZON_PRIMĂVARĂ</span>
+                    </div>
+
+                    <h1 class="dl-heading-1 glitch-reveal" style="animation-delay: 0.4s;">
+                        Sintetizând<br>Natura.
+                    </h1>
+
+                    <p class="paragraph-text glitch-reveal" style="animation-delay: 0.5s;">
+                        Fiecare aranjament este un protocol chimic precis. Selecție botanică bazată pe date de prospețime, arhitecturată pentru longevitate maximă și impact vizual calculat.
+                    </p>
+
+                    <div class="glitch-reveal" style="animation-delay: 0.65s; margin-top: var(--dl-space-lg); display: flex; gap: var(--dl-space-md);">
+                        <button class="dl-btn" style="border-color: var(--dl-accent-botanical); color: var(--dl-accent-botanical);">EXPLOREAZĂ_COLECȚIA →</button>
+                        <button class="dl-btn">CATALOG_SEZONAL</button>
+                    </div>
+                </div>
+
+                <!-- IMAGE ZONE -->
+                <div class="image-container">
+                    <div class="image-placeholder">
+                        <div style="text-align: center; color: rgba(0,255,170,0.25); font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em;">
+                            [ IMAGINE_MACRO_BOTANICĂ ]<br>
+                            <span style="font-size: 0.6rem; color: rgba(0,255,170,0.12);">BUFFER_LOAD: 100% // ALCHIMIA FLORALĂ</span>
+                        </div>
+                    </div>
+                    <div class="gps-tag-left">
+                        <span class="dl-text-mono" style="color: rgba(0,255,170,0.5);">LAT: 44.4268° N // LON: 26.1025° E</span>
+                    </div>
+                    <div class="gps-tag-right">
+                        <span class="dl-text-mono" style="color: rgba(0,255,170,0.5);">ORIGIN: CÂMPIE_DUNĂREANĂ // ALTITUDINE: 82m</span>
+                    </div>
+                </div>
+
+                <!-- PRODUCT GRID -->
+                <div class="product-grid">
+                    <div class="product-cell">
+                        <div class="product-name">Trandafiri Garden</div>
+                        <div class="product-meta">STOC: 12 BUCHETE // PROSPEȚIME: 98%</div>
+                        <div class="product-tag">DISPONIBIL</div>
+                    </div>
+                    <div class="product-cell">
+                        <div class="product-name">Orhidee Phalaenopsis</div>
+                        <div class="product-meta">STOC: 4 GHIVECE // PROSPEȚIME: 100%</div>
+                        <div class="product-tag">PREMIUM</div>
+                    </div>
+                    <div class="product-cell">
+                        <div class="product-name">Mix Sălbatic</div>
+                        <div class="product-meta">STOC: 8 ARANJAMENTE // PROSPEȚIME: 95%</div>
+                        <div class="product-tag">SEZONIER</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL SIDE -->
+            <div class="panel-side">
+                <div>
+                    <div class="dl-text-mono">Node_Identifier:</div>
+                    <div class="dl-text-mono" style="font-size: 1.2rem; letter-spacing: -0.02em; color: var(--dl-accent-botanical);">BOT-3.02.1-LIVE</div>
+                </div>
+
+                <div class="flora-symbol">BN</div>
+
+                <div class="scroll-indicator">
+                    <div class="scroll-line"></div>
+                    <span class="dl-text-mono" style="color: var(--dl-accent-botanical); font-size: 0.65rem;">SCROLL_TO_EXPLORE</span>
+                </div>
+
+                <div>
+                    <div class="dl-text-mono" style="margin-bottom: 4px;">SISTEM DATE [LIVE]</div>
+                    <div class="dl-text-mono" style="font-size: 0.65rem; line-height: 1.6; color: rgba(0,255,170,0.6);">
+                        Temperatura_Depozit: 4°C<br>
+                        Umiditate_Relativă: 78%<br>
+                        Stoc_Total: 247 unități
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</body>
+</html>

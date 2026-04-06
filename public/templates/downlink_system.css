@@ -1,0 +1,196 @@
+/* =========================================================================
+   DOWNLINK DESIGN SYSTEM - CORE VARIABLES & TOKENS
+   ========================================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
+
+:root {
+  /* Core Colors */
+  --dl-void: #050505;
+  --dl-white-full: #FFFFFF;
+  --dl-grid-line: rgba(255, 255, 255, 0.15); /* Slightly more visible for brutalism */
+  --dl-grid-line-strong: rgba(255, 255, 255, 0.3);
+
+  /* Vertical Accents (Updated for Dribbble Cassette Futurism vibe) */
+  --dl-accent-botanical: #00FFAA;
+  --dl-accent-extraction: #D64933; /* Industrial Burnt Orange din referință */
+  --dl-accent-medical: #0057FF;
+  --dl-accent-legal: #8B2520;
+  --dl-accent-civic: #9AA0A6;
+
+  /* Typography */
+  --font-primary: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Spacing Grid (4/8/16 multiplier) */
+  --dl-space-xs: 0.25rem; /* 4px */
+  --dl-space-sm: 0.5rem;  /* 8px */
+  --dl-space-md: 1rem;    /* 16px */
+  --dl-space-lg: 2rem;    /* 32px */
+  --dl-space-xl: 4rem;    /* 64px */
+
+  /* Layout Constants */
+  --dl-header-h: 64px;
+}
+
+/* =========================================================================
+   GLOBAL RESET & BASE
+   ========================================================================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--dl-void);
+  color: var(--dl-white-full);
+  font-family: var(--font-primary);
+  line-height: 1.5;
+  /* subtle 1px grid background for raw wireframe feel */
+  background-image: 
+    linear-gradient(var(--dl-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--dl-grid-line) 1px, transparent 1px);
+  background-size: var(--dl-space-xl) var(--dl-space-xl);
+  background-position: center top;
+  overflow-x: hidden;
+}
+
+/* =========================================================================
+   TYPOGRAPHY UTILITIES
+   ========================================================================= */
+.dl-heading-1 {
+  font-family: var(--font-primary);
+  font-weight: 600; /* Sturdy heading */
+  font-size: clamp(3rem, 6vw, 5rem);
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  line-height: 1.05;
+}
+
+.dl-text-mono {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 0.75rem; /* 12px */
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* =========================================================================
+   STRUCTURAL GRID (The 1px Aesthetic)
+   ========================================================================= */
+.dl-grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 0; /* Strict 0 gap, separation is made via borders */
+}
+
+/* =========================================================================
+   COMPONENTS
+   ========================================================================= */
+
+/* Command Module / Button */
+.dl-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--dl-space-sm) var(--dl-space-md);
+  border: 1px solid var(--dl-grid-line-strong);
+  background: transparent;
+  color: var(--dl-white-full);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s cubic-bezier(0.19, 1, 0.22, 1);
+  letter-spacing: 0.05em;
+}
+
+.dl-btn:hover {
+  background-color: var(--dl-white-full);
+  color: var(--dl-void);
+  border-color: var(--dl-white-full);
+}
+
+/* Dark mode button for orange panels */
+.dl-btn-dark {
+  border-color: rgba(5,5,5,0.3);
+  color: var(--dl-void);
+}
+.dl-btn-dark:hover {
+  background-color: var(--dl-void);
+  color: var(--dl-white-full);
+  border-color: var(--dl-void);
+}
+
+/* Hover Loading Bar (pentru Navigație) */
+.dl-nav-link {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  padding-bottom: 2px;
+}
+.dl-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: var(--dl-accent-extraction); /* Toggled to extraction accent */
+  transition: width 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.dl-nav-link:hover::after {
+  width: 100%;
+}
+
+/* Indicator de Status (Ping) */
+.dl-status-ping {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background-color: currentColor; 
+  margin-right: var(--dl-space-sm);
+  animation: dl-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* =========================================================================
+   ANIMATIONS & EFFECTS
+   ========================================================================= */
+
+@keyframes dl-pulse {
+  0% { opacity: 1; box-shadow: 0 0 0 0 currentColor; }
+  50% { opacity: 0.2; }
+  100% { opacity: 1; box-shadow: 0 0 0 6px rgba(255, 255, 255, 0); }
+}
+
+/* Animație Flash Scanline la intrarea pe secțiune */
+.dl-scanline-trigger {
+  position: relative;
+  overflow: hidden;
+}
+
+.dl-scanline-trigger::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--dl-accent-extraction);
+  box-shadow: 0 0 12px var(--dl-accent-extraction);
+  animation: scan-vertical 1.5s cubic-bezier(0.86, 0, 0.07, 1) forwards;
+  z-index: 50;
+  pointer-events: none;
+}
+
+@keyframes scan-vertical {
+  0% { transform: translateY(-10px); opacity: 0; }
+  5% { opacity: 1; }
+  90% { transform: translateY(100vh); opacity: 0.8; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
