@@ -86,7 +86,7 @@ const faqs = [
 
 export default function AIHumansPage() {
   return (
-    <div className="bg-[#1a0533] min-h-screen text-white font-sans selection:bg-[#ec4899] selection:text-white overflow-hidden">
+    <div className="bg-[#1a0533] text-white font-sans selection:bg-[#ec4899] selection:text-white">
       
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-6 lg:px-10 max-w-7xl mx-auto flex flex-col items-center text-center">
