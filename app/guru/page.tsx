@@ -33,6 +33,7 @@ const ideas = [
 export default function GuruStore() {
     const [cart, setCart] = useState<typeof ideas>([]);
     const [isCartOpen, setIsCartOpen] = useState(false);
+    const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
     const [addedId, setAddedId] = useState<number | null>(null);
 
     const addToCart = (idea: typeof ideas[0]) => {
@@ -45,6 +46,11 @@ export default function GuruStore() {
         const newCart = [...cart];
         newCart.splice(index, 1);
         setCart(newCart);
+    };
+
+    const handleCheckout = () => {
+        setIsCartOpen(false);
+        setIsCheckoutOpen(true);
     };
 
     const total = cart.reduce((sum, item) => sum + item.price, 0);
@@ -150,13 +156,61 @@ export default function GuruStore() {
                     <button 
                         className="w-full rounded-2xl bg-[#f5a623] py-4 text-center text-lg font-bold text-[#050505] transition hover:bg-[#e0981e] hover:shadow-[0_0_20px_rgba(245,166,35,0.4)] disabled:opacity-50 disabled:cursor-not-allowed"
                         disabled={cart.length === 0}
-                        onClick={() => alert('Mecanica de plată Reverb/Stripe va fi integrată aici!')}
+                        onClick={handleCheckout}
                     >
-                        Cumpără Lumina
+                        Plătește & Revendică
                     </button>
                 </div>
             </div>
             
+            {/* Checkout Modal */}
+            <div 
+                className={`fixed inset-0 z-50 flex items-center justify-center p-4 transition-all duration-300 ${
+                    isCheckoutOpen ? "opacity-100 visible" : "opacity-0 invisible"
+                }`}
+            >
+                <div className="absolute inset-0 bg-black/80 backdrop-blur-md" onClick={() => setIsCheckoutOpen(false)} />
+                <div className="relative z-10 w-full max-w-lg rounded-[32px] border border-white/10 bg-[#0a0a0a] p-10 shadow-2xl">
+                    <button 
+                        onClick={() => setIsCheckoutOpen(false)}
+                        className="absolute right-6 top-6 text-2xl text-white/50 hover:text-white"
+                    >
+                        &times;
+                    </button>
+                    <h2 className="mb-2 text-3xl font-semibold text-[#f5a623]">Finalizare Plată</h2>
+                    <p className="mb-8 text-white/50">Ai ales {cart.length} idei esențiale.</p>
+
+                    <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); alert("Plată simulată cu succes! Vei primi ideile pe email."); setIsCheckoutOpen(false); setCart([]); }}>
+                        <div>
+                            <label className="mb-2 block text-sm font-medium text-white/70">Nume Complet</label>
+                            <input type="text" required className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-white/30 focus:border-[#f5a623] focus:outline-none focus:ring-1 focus:ring-[#f5a623]" placeholder="Ex: Alin Dragoș" />
+                        </div>
+                        <div>
+                            <label className="mb-2 block text-sm font-medium text-white/70">Adresa de Email (unde primești accesul)</label>
+                            <input type="email" required className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-white/30 focus:border-[#f5a623] focus:outline-none focus:ring-1 focus:ring-[#f5a623]" placeholder="alin@reverb.ro" />
+                        </div>
+                        <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+                            <div className="mb-4 flex items-center justify-between text-white/70">
+                                <span>Detalii Card (Prototip)</span>
+                                <span>🔒 Securizat</span>
+                            </div>
+                            <input type="text" className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white placeholder-white/30 focus:border-[#f5a623] focus:outline-none" placeholder="0000 0000 0000 0000" />
+                            <div className="mt-3 flex gap-3">
+                                <input type="text" className="w-1/2 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white placeholder-white/30 focus:border-[#f5a623] focus:outline-none" placeholder="LL/AA" />
+                                <input type="text" className="w-1/2 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white placeholder-white/30 focus:border-[#f5a623] focus:outline-none" placeholder="CVC" />
+                            </div>
+                        </div>
+
+                        <button 
+                            type="submit"
+                            className="mt-4 w-full rounded-full bg-[#f5a623] py-4 text-lg font-bold text-[#050505] transition hover:bg-[#e0981e] hover:shadow-[0_0_15px_rgba(245,166,35,0.4)]"
+                        >
+                            Achită {total} RON
+                        </button>
+                    </form>
+                </div>
+            </div>
+
             {/* Overlay */}
             {isCartOpen && (
                 <div 
