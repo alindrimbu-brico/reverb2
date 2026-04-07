@@ -1,0 +1,124 @@
+:root {
+    --bg-dark: #0a0310;
+    --text-main: #f3ebf5;
+    --text-muted: #b4a8c0;
+    --gold: #dfb256;
+    --gold-glow: rgba(223, 178, 86, 0.4);
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    position: relative;
+    line-height: 1.6;
+}
+
+h1, h2, h3, .logo, .chapter-title {
+    font-family: 'Cinzel', serif;
+}
+
+/* Background Orbs */
+.glow-orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(100px);
+    z-index: -1;
+    opacity: 0.4;
+    animation: floating 30s infinite ease-in-out alternate;
+}
+
+.orb-1 {
+    top: -10%; left: -10%; width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(121, 40, 202, 0.5), transparent 70%);
+}
+
+.orb-2 {
+    bottom: -20%; right: -10%; width: 600px; height: 600px;
+    background: radial-gradient(circle, var(--gold-glow), transparent 70%);
+    animation-delay: -5s;
+}
+
+@keyframes floating {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(50px, 50px) scale(1.1); }
+}
+
+header {
+    display: flex; justify-content: center; align-items: center;
+    padding: 2rem 5%; position: absolute; top: 0; width: 100%; z-index: 10;
+}
+.logo { font-size: 2rem; font-weight: 600; color: var(--gold); letter-spacing: 4px; text-decoration: none;}
+
+section { padding: 6rem 5%; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+.hero { text-align: center; }
+.hero h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem; }
+.hero h1 span { color: var(--gold); text-shadow: 0 0 30px var(--gold-glow); }
+
+.grid { display: grid; gap: 2rem; width: 100%; max-width: 1200px; }
+.glass-card {
+    background: var(--glass-bg); border: 1px solid var(--glass-border);
+    backdrop-filter: blur(16px); border-radius: 20px; transition: 0.4s;
+}
+
+/* Book Cover styles */
+.toc-grid { grid-template-columns: 1fr; gap: 1.5rem; text-align: left; }
+.toc-card { 
+    padding: 2rem 3rem; display: flex; flex-direction: column; text-decoration: none;
+    border-left: 4px solid transparent; 
+}
+.toc-card:hover { transform: translateX(10px); border-left-color: var(--gold); background: rgba(255,255,255,0.06);}
+.chapter-num { font-size: 0.8rem; font-weight: 600; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 0.5rem;}
+.toc-card h3 { font-size: 1.8rem; color: var(--text-main); margin-bottom: 0.5rem;}
+.toc-card p { color: var(--text-muted); font-size: 1.1rem;}
+
+/* Reading Layout Styles */
+.reading-body { background-color: #050209; }
+.reading-header { justify-content: space-between; position: relative; padding: 2rem 5%; border-bottom: 1px solid var(--glass-border);}
+.current-chapter { font-family: 'Cinzel', serif; color: var(--text-muted); font-size: 1.2rem; letter-spacing: 2px;}
+
+.reading-container {
+    max-width: 800px; margin: 4rem auto 8rem; padding: 0 5%;
+}
+.reading-card {
+    padding: 4rem 5rem;
+}
+.chapter-title {
+    font-size: 2.5rem; color: var(--gold); margin-bottom: 3rem; text-align: center;
+}
+.text-content p {
+    font-size: 1.25rem; font-weight: 300; line-height: 1.8; color: var(--text-main); margin-bottom: 2rem; text-align: justify;
+}
+.text-content strong { color: var(--gold); font-weight: 500;}
+
+.reading-nav {
+    display: flex; justify-content: space-between; margin-top: 3rem;
+}
+.nav-btn {
+    text-decoration: none; padding: 1rem 2rem; border-radius: 30px; font-weight: 500; font-size: 1.1rem;
+    border: 1px solid var(--glass-border); background: var(--glass-bg); transition: 0.3s;
+}
+.nav-btn.active { color: var(--text-main); cursor: pointer;}
+.nav-btn.active:hover { border-color: var(--gold); color: var(--gold); }
+.nav-btn.disabled { color: var(--text-muted); opacity: 0.3; cursor: not-allowed;}
+
+footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid var(--glass-border); }
+
+.fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+.delay-1 { transition-delay: 0.2s; } .delay-2 { transition-delay: 0.4s; }
+
+@media (max-width: 768px) {
+    .reading-card { padding: 2rem; }
+    .text-content p { font-size: 1.1rem; }
+    .hero h1 { font-size: 3rem; }
+}
