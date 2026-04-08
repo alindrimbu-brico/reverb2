@@ -45,7 +45,8 @@ export default function Header() {
       "/blog": "/en/blog",
       "/legal": "/en/legal",
       "/checkout": "/en/checkout",
-      "/nevronix": "/en/nevronix"
+      "/nevronix": "/en/nevronix",
+      "/ai-humans": "/en/ai-humans"
     };
 
     const routesEnToRo: Record<string, string> = {
@@ -61,7 +62,8 @@ export default function Header() {
       "/en/blog": "/blog",
       "/en/legal": "/legal",
       "/en/checkout": "/checkout",
-      "/en/nevronix": "/nevronix"
+      "/en/nevronix": "/nevronix",
+      "/en/ai-humans": "/ai-humans"
     };
 
     if (lang === "en") {

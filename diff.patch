@@ -1,0 +1,148 @@
+﻿diff --git a/app/page.tsx b/app/page.tsx
+index e081475..df862af 100644
+--- a/app/page.tsx
++++ b/app/page.tsx
+@@ -356,20 +356,78 @@ export default function HomePage() {
+         </div>
+       </section>
+ 
+-      {/* Minimalism final */}
+-      <section className="relative overflow-hidden py-32 text-center bg-[#f5f1ea]">
+-         <Reveal>
+-            <div className="w-px h-24 bg-gradient-to-b from-[#1d2731]/0 via-[#1d2731]/20 to-[#1d2731]/0 mx-auto mb-10" style={{ animation: "float-d 6s ease-in-out infinite" }}></div>
+-            <h2 className="text-4xl lg:text-5xl font-light tracking-tight mb-8" style={{ animation: "float-b 7s ease-in-out infinite" }}>
+-               Afacerea ta, ancorat─â <br className="hidden md:block"/> ├«n structur─â.
+-            </h2>
+-            <Link
+-               href="/portal"
+-               className="inline-flex items-center justify-center rounded-full border border-[#1d2731]/20 bg-white/50 px-8 py-4 text-[11px] font-bold uppercase tracking-widest text-[#1d2731] transition-all duration-300 hover:bg-[#1d2731] hover:text-white float-button"
+-            >
+-               Sincronizeaz─â ReverbHub
+-            </Link>
+-         </Reveal>
++      {/* Navigation Hub - Clear Button Structure */}
++      <section className="relative overflow-hidden py-24 lg:py-32 bg-white border-y border-[#1d2731]/5">
++        <div className="mx-auto max-w-7xl px-6 lg:px-10">
++          <Reveal>
++            <div className="text-center mb-16">
++              <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#1d2731]/40 mb-4">Navegare</p>
++              <h2 className="text-4xl lg:text-5xl font-light tracking-tight text-[#1d2731]">
++                Exploreaz─â Ecosistemul
++              </h2>
++            </div>
++          </Reveal>
++
++          {/* Main Navigation Grid */}
++          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
++            {[
++              { label: "Servicii", href: "/servicii", icon: "ÔÜÖ´ŞĆ", desc: "Strategie & Execu╚Ťie" },
++              { label: "Showcase", href: "/showcase", icon: "­čÄĘ", desc: "18 Modele Func╚Ťionale" },
++              { label: "Portofoliu", href: "/portofoliu", icon: "­čôé", desc: "Cazuri de Succes" },
++              { label: "Contact", href: "/contact", icon: "­čĺČ", desc: "Discu╚Ťie Direct─â" },
++            ].map((item, i) => (
++              <Reveal key={item.label} delay={i * 60}>
++                <Link
++                  href={item.href}
++                  className="group relative block h-full rounded-2xl border border-[#1d2731]/10 bg-white hover:border-[#1d2731]/30 transition-all duration-300 p-8"
++                >
++                  <div className="absolute inset-0 bg-gradient-to-br from-[#1d2731]/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl" />
++                  <div className="relative z-10 text-center">
++                    <p className="text-3xl mb-3">{item.icon}</p>
++                    <h3 className="text-lg font-light text-[#1d2731] mb-2">{item.label}</h3>
++                    <p className="text-sm text-[#1d2731]/50 font-extralight">{item.desc}</p>
++                  </div>
++                </Link>
++              </Reveal>
++            ))}
++          </div>
++
++          {/* Specialized Sections */}
++          <Reveal delay={300}>
++            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
++              {[
++                { label: "Spiritual", href: "/showcase/spiritual-blog", icon: "­čĽ»´ŞĆ", desc: "Inteligen╚Ť─â & Transformare" },
++                { label: "Magazine", href: "/magazine-online", icon: "­čŤŹ´ŞĆ", desc: "E-Commerce Implacabil" },
++                { label: "AI Humans", href: "/ai-humans", icon: "­čĄľ", desc: "Angaja╚Ťi Virtuali 24/7" },
++              ].map((item, i) => (
++                <Link
++                  key={item.label}
++                  href={item.href}
++                  className="group relative block rounded-xl border border-[#1d2731]/8 bg-gradient-to-br from-white via-[#f5f1ea]/50 to-[#f5f1ea] hover:border-[#1d2731]/20 transition-all duration-300 p-6"
++                >
++                  <div className="absolute inset-0 bg-gradient-to-tr from-[#1d2731]/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl" />
++                  <div className="relative z-10">
++                    <p className="text-2xl mb-2">{item.icon}</p>
++                    <h3 className="font-light text-[#1d2731] mb-1">{item.label}</h3>
++                    <p className="text-xs text-[#1d2731]/50 font-extralight">{item.desc}</p>
++                  </div>
++                </Link>
++              ))}
++            </div>
++          </Reveal>
++
++          {/* CTA */}
++          <Reveal delay={400}>
++            <div className="mt-16 text-center">
++              <Link
++                href="/contact"
++                className="inline-flex items-center justify-center rounded-full bg-[#1d2731] px-12 py-5 text-[11px] font-bold uppercase tracking-widest text-[#f5f1ea] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(29,39,49,0.2)]"
++              >
++                Ini╚Ťiaz─â Proiect Acum Ôćĺ
++              </Link>
++            </div>
++          </Reveal>
++        </div>
+       </section>
+ 
+     </div>
+diff --git a/app/showcase/spiritual-blog/mel-gibson/page.tsx b/app/showcase/spiritual-blog/mel-gibson/page.tsx
+index 078c36c..9bfc9f9 100644
+--- a/app/showcase/spiritual-blog/mel-gibson/page.tsx
++++ b/app/showcase/spiritual-blog/mel-gibson/page.tsx
+@@ -363,9 +363,8 @@ export default function MelGibsonPage() {
+             </div>
+ 
+             <p className="text-gray-300 leading-relaxed">
+-              Aceasta este lec╚Ťia pentru Reverb ÔÇö 
+-              <span className="text-[#DC143C] font-bold"> oricine car─â durere ├«n suflete trebuie s─â stie: 
+-              arta ta din nebunia asta va deveni m├óntuire pentru al╚Ťii</span>.
++              <span className="text-[#FFD700] font-bold">Lec╚Ťia Universal─â:</span> 
++              <span className="text-[#DC143C] font-bold">oricine car─â durere ├«n suflete trebuie s─â ╚Ötie c─â arta ta din nebunia asta va deveni m├óntuire pentru al╚Ťii</span>.
+             </p>
+           </div>
+ 
+@@ -410,7 +409,7 @@ export default function MelGibsonPage() {
+             <blockquote className="border border-[#FFD700] p-6 rounded-lg bg-black/70 italic text-center text-gray-200">
+               "Voi sunte╚Ťi dumnezei. Voi pute╚Ťi crea. Iar voastr─â crea╚Ť are valoare ve╚Önic─â. 
+               Filmul, c├óntecul, cuv├óntul, gestul ÔÇö toate sunt Rug─âciuni c─âtre Eternitate." 
+-              <span className="block text-[#FFD700] text-sm mt-4 font-bold not-italic">ÔÇö Mel Gibson & Reverb Spirit</span>
++              <span className="block text-[#FFD700] text-sm mt-4 font-bold not-italic">ÔÇö Mel Gibson</span>
+             </blockquote>
+           </div>
+         </div>
+diff --git a/app/showcase/spiritual-blog/page.tsx b/app/showcase/spiritual-blog/page.tsx
+index 61a936b..3fe0d3b 100644
+--- a/app/showcase/spiritual-blog/page.tsx
++++ b/app/showcase/spiritual-blog/page.tsx
+@@ -284,7 +284,7 @@ export default function SpiritualAppMaximal() {
+         
+         {/* Footer */}
+         <section className="relative z-10 border-t border-white/5 px-6 py-12 text-center">
+-          <p className="text-gray-500 text-xs font-mono uppercase tracking-[0.2em] mb-4">Arhitectur─â de Prezen╚Ť─â Digital─â. Sistem Reverb.</p>
++          <p className="text-gray-500 text-xs font-mono uppercase tracking-[0.2em] mb-4">Inteligen╚Ť─â Spiritual─â. Arhitectur─â de Prezen╚Ť─â Digital─â.</p>
+           <div className="inline-block w-1 h-1 bg-pink-500 rounded-full animate-pulse-glow"></div>
+         </section>
+       </div>
+diff --git a/components/Header.tsx b/components/Header.tsx
+index af533da..5cefcea 100644
+--- a/components/Header.tsx
++++ b/components/Header.tsx
+@@ -115,7 +115,7 @@ export default function Header() {
+             <Logo size={28} />
+           </div>
+           <div>
+-            <div className="text-sm font-semibold tracking-[0.35em] uppercase text-[#1d2731] transition-colors duration-300">reverb.ro</div>
++            <div className="text-sm font-semibold tracking-[0.35em] uppercase text-[#1d2731] transition-colors duration-300">Clarity</div>
+             <div className="text-[9px] uppercase tracking-widest font-bold text-[#1d2731]/50">{translations.clarity}</div>
+           </div>
+         </Link>

@@ -99,6 +99,24 @@ const services = [
     ideal: "Brands needing direction before a launch or relaunch.",
     href: "/en/contact",
   },
+  {
+    id: "06",
+    title: "AI Digital Human",
+    tagline: "A virtual employee integrated onto your site, active 24/7.",
+    text: "Conversational avatar capable of sales and customer support, integrated with your systems and permanently trained.",
+    price: "from €290/month",
+    delivery: "Initial setup: 5 days",
+    includes: [
+      "Visually personalized AI avatar",
+      "Training based on your knowledge base (URL/PDF)",
+      "24/7 natural interaction with users",
+      "Contact collection (Lead Gen) and FAQ support",
+      "Non-stop operation, without human errors",
+      "Premium technological structure (Nevronix)"
+    ],
+    ideal: "Clinics, real estate, e-commerce, B2B services and any business with constant support volume.",
+    href: "/en/ai-humans",
+  },
 ];
 
 const monthlyPackages = [

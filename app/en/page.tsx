@@ -38,6 +38,14 @@ const services = [
     href: "/en/services",
     anim: "float-a"
   },
+  {
+    title: "AI Digital Human",
+    desc: "Your virtual employee, active 24/7.",
+    text: "We integrate intelligent AI avatars capable of interacting, selling, and offering support to your clients in real time. A structure based on Nevronix, designed to relieve your team.",
+    href: "/en/ai-humans",
+    anim: "float-b",
+    badge: "NEW"
+  },
 ];
 
 /* ── Structured Pricing ── */

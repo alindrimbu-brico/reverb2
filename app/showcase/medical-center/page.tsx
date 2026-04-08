@@ -1,10 +1,36 @@
-import type { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "SYS.BIO_INTERFACE | Medical Center Showcase",
-};
+import { useState } from "react";
+import ShowcaseAIAgent from "@/components/ShowcaseAIAgent";
 
 export default function MedicalCenterShowcase() {
+  const [symptom, setSymptom] = useState("");
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [triageResult, setTriageResult] = useState<{ priority: string, doctor: string, recommended_action: string } | null>(null);
+
+  const handleTriage = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!symptom) return;
+    setIsProcessing(true);
+    setTriageResult(null);
+
+    setTimeout(() => {
+      let result = { priority: "SCAZUT", doctor: "Consultație Generală", recommended_action: "Programare Medicină de Familie" };
+      
+      const lowerSymptom = symptom.toLowerCase();
+      if (lowerSymptom.includes("durere") && lowerSymptom.includes("cap")) {
+        result = { priority: "MODERAT", doctor: "Dr. M. Andrei — Neuro.", recommended_action: "Programare Consultație Neurologie și eventual RM Cranian" };
+      } else if (lowerSymptom.includes("inima") || lowerSymptom.includes("piept") || lowerSymptom.includes("stang")) {
+        result = { priority: "CRITIC", doctor: "Camera de Gardă Cardio", recommended_action: "Prezentare imediată la Urgențe Cardio" };
+      } else if (lowerSymptom.includes("picior") || lowerSymptom.includes("mana") || lowerSymptom.includes("fractura")) {
+        result = { priority: "MODERAT", doctor: "Ortopedie Triage", recommended_action: "Radiografie de urgență." };
+      }
+
+      setTriageResult(result);
+      setIsProcessing(false);
+    }, 2500);
+  }
+
   return (
     <div className="min-h-screen bg-white text-[#0A0A0B] selection:bg-[#0057FF] selection:text-white"
          style={{
@@ -17,6 +43,9 @@ export default function MedicalCenterShowcase() {
         @keyframes text-reveal { to { opacity: 1; transform: translateY(0); } }
         @keyframes wireframe-spin { from { transform: rotateY(0deg) rotateX(20deg); } to { transform: rotateY(360deg) rotateX(20deg); } }
       `}</style>
+
+      {/* Universal Showcase AI Agent */}
+      <ShowcaseAIAgent industryContext="medical" />
 
       <div className="relative overflow-hidden before:absolute before:inset-0 before:h-[2px] before:w-full before:bg-[#0057FF] before:shadow-[0_0_15px_#0057FF] before:animate-[scan-white_1.5s_cubic-bezier(0.86,0,0.07,1)_forwards] before:z-50 before:pointer-events-none">
         
@@ -62,9 +91,9 @@ export default function MedicalCenterShowcase() {
                   </p>
                </div>
                <div>
-                  <h3 className="font-mono text-xs font-bold text-[#0A0A0B] uppercase tracking-widest mb-3">Rezultate Imediate</h3>
+                  <h3 className="font-mono text-xs font-bold text-[#0A0A0B] uppercase tracking-widest mb-3">Triage Inteligent AI</h3>
                   <p className="text-[15px] text-[#0A0A0B]/60 leading-relaxed font-sans">
-                     Sistemul digital Bio-Interface transmite imagistica către medicii primari în timp real. Timp de diagnostic redus cu 40%.
+                     Sistemul Nevronix Triage pre-evaluează pacientul înainte de prezentarea la recepție. Prioritare obiectivă.
                   </p>
                </div>
             </div>
@@ -85,8 +114,8 @@ export default function MedicalCenterShowcase() {
                      <span className="text-[#0057FF]">ACTIVĂ</span>
                   </div>
                   <div className="flex justify-between items-center pb-1">
-                     <span className="text-white/60">Aparat RMN 3T</span>
-                     <span className="text-white">STANDBY</span>
+                     <span className="text-white/60">Sistem AI Nevronix</span>
+                     <span className="text-white">ONLINE</span>
                   </div>
                </div>
             </div>
@@ -96,11 +125,11 @@ export default function MedicalCenterShowcase() {
             </div>
           </div>
 
-          {/* Panel 2 (White Sterility & Wireframe effect) */}
+          {/* Panel 2 (AI Triage Simulator) */}
           <div className="col-span-12 lg:col-span-4 border-l border-[#0057FF]/10 bg-white relative p-8 flex flex-col justify-center items-center overflow-hidden">
              
              {/* Abstract Wireframe Sphere pure CSS */}
-             <div className="relative w-64 h-64 md:w-80 md:h-80 mb-12" style={{ perspective: '1000px' }}>
+             <div className="absolute top-10 left-1/2 -translate-x-1/2 w-48 h-48 mb-12 opacity-50 pointer-events-none" style={{ perspective: '1000px' }}>
                 <div className="absolute inset-0 w-full h-full animate-[wireframe-spin_20s_linear_infinite]" style={{ transformStyle: 'preserve-3d' }}>
                    {Array.from({length: 6}).map((_, i) => (
                       <div key={i} className="absolute inset-0 rounded-full border border-[#0057FF]/20" style={{ transform: `rotateY(${i * 30}deg)` }}></div>
@@ -110,15 +139,56 @@ export default function MedicalCenterShowcase() {
                    ))}
                 </div>
                 {/* Central Core */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-gradient-to-br from-[#0057FF] to-[#60A5FA] rounded-full blur-xl opacity-50"></div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-gradient-to-br from-[#0057FF] to-[#60A5FA] rounded-full blur-xl opacity-30"></div>
              </div>
              
-             <div className="text-center w-full z-10 bg-white/80 p-6 backdrop-blur-sm border border-[#0057FF]/10 rounded-2xl">
-                <div className="font-mono text-[10px] text-[#0057FF] mb-2 font-bold tracking-[0.2em] uppercase">Setează o examinare</div>
-                <div className="text-2xl font-medium tracking-tight mb-6">Programări RMN</div>
-                <button className="w-full bg-[#0057FF] hover:bg-[#0040DD] text-white py-4 font-mono text-[11px] font-bold uppercase tracking-widest transition rounded-lg shadow-[0_10px_20px_rgba(0,87,255,0.2)]">
-                  Inițializare Acces
-                </button>
+             <div className="w-full z-10 bg-white/90 p-8 backdrop-blur-md border border-[#0057FF]/10 rounded-2xl shadow-xl mt-32 relative">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-[#0A0A0B] text-white px-4 py-1 rounded-full shadow-lg">
+                   <div className="w-1 h-1 bg-[#0057FF] rounded-full animate-pulse"></div>
+                   <span className="font-mono text-[9px] font-bold tracking-[0.2em] uppercase">AI Triage Module</span>
+                </div>
+                
+                <h3 className="text-xl font-medium tracking-tight mb-4 text-[#0A0A0B] text-center mt-2">Ce simptome aveți?</h3>
+                <p className="text-xs text-center text-[#0A0A0B]/50 mb-6">Un asistent AI evaluează gradul de urgență și pre-alocă medicul corespunzător.</p>
+
+                <form onSubmit={handleTriage} className="flex flex-col gap-4">
+                  <textarea 
+                    value={symptom}
+                    onChange={e => setSymptom(e.target.value)}
+                    placeholder="Ex: Mă doare capul foarte tare de 3 zile..."
+                    className="w-full h-24 p-3 bg-[#f5f5f7] border border-[#0057FF]/20 rounded-lg outline-none focus:border-[#0057FF]/60 text-sm font-sans resize-none disabled:opacity-50"
+                    disabled={isProcessing}
+                  />
+                  <button type="submit" disabled={isProcessing || !symptom} className="w-full bg-[#0057FF] hover:bg-[#0040DD] disabled:bg-[#0057FF]/50 text-white py-3 font-mono text-[11px] font-bold uppercase tracking-widest transition rounded-lg flex items-center justify-center gap-2 shadow-[0_10px_20px_rgba(0,87,255,0.2)]">
+                    {isProcessing ? (
+                      <>
+                        <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        Asteptati analiza...
+                      </>
+                    ) : 'Rulează Evaluarea'}
+                  </button>
+                </form>
+
+                {triageResult && (
+                  <div className="mt-6 p-4 bg-[#f1f5f9] border border-[#0057FF]/20 rounded-lg animate-[fadeIn_0.5s_ease-out]">
+                     <div className="flex justify-between items-center mb-3">
+                        <span className="text-xs text-[#0A0A0B]/60 font-mono uppercase tracking-widest">Prioritate:</span>
+                        <span className={`text-xs font-bold font-mono tracking-widest uppercase ${triageResult.priority === 'CRITIC' ? 'text-red-600' : triageResult.priority === 'MODERAT' ? 'text-amber-500' : 'text-green-600'}`}>
+                           [{triageResult.priority}]
+                        </span>
+                     </div>
+                     <div className="space-y-2">
+                        <div>
+                          <span className="text-[10px] text-[#0A0A0B]/50 font-mono uppercase tracking-widest">Alocare medic:</span>
+                          <p className="text-sm font-medium">{triageResult.doctor}</p>
+                        </div>
+                        <div>
+                          <span className="text-[10px] text-[#0A0A0B]/50 font-mono uppercase tracking-widest">Acțiune sistem:</span>
+                          <p className="text-sm font-medium text-[#0057FF]">{triageResult.recommended_action}</p>
+                        </div>
+                     </div>
+                  </div>
+                )}
              </div>
           </div>
         </main>
