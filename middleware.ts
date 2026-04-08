@@ -36,6 +36,22 @@ export function middleware(request: NextRequest) {
     }
   }
 
+  // Intercept the request if the visitor is accessing via oglinda.eu
+  if (hostname === 'oglinda.eu' || hostname === 'www.oglinda.eu') {
+    // If they hit the root, silently serve the standalone html
+    if (url.pathname === '/') {
+      url.pathname = '/aura/index.html';
+      return NextResponse.rewrite(url);
+    }
+    
+    // For local assets (e.g. /aura.css loading from the index.html) or node HTMLs
+    // they arrive as relative paths matching root, so we map them to /aura/
+    if (!url.pathname.startsWith('/aura')) {
+      url.pathname = `/aura${url.pathname}`;
+      return NextResponse.rewrite(url);
+    }
+  }
+
   // Normal request to reverb.ro proceeds unchanged
   return NextResponse.next();
 }
