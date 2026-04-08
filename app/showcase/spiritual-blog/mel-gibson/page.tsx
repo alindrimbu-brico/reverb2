@@ -416,6 +416,198 @@ export default function MelGibsonPage() {
         </div>
       </section>
 
+      {/* Sacred Cinema Video Library */}
+      <section className="relative z-10 py-20 px-4 md:px-8">
+        <div className="max-w-6xl mx-auto">
+          {/* Section Header */}
+          <div className="mb-16 text-center animate-fadeIn" style={{ animationDelay: "0s" }}>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-[#FFD700] via-[#DC143C] to-[#8B0000] bg-clip-text text-transparent">
+                Pelicula Sfântă: Portale Deschise
+              </span>
+            </h2>
+            <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+              Urmărește filmele care redefinesc cinema ca tehnologie spirituală. 
+              Fiecare cadru este o rugăciune, fiecare sunet o vibrație divină.
+            </p>
+          </div>
+
+          {/* Video Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Video 1: The Passion of the Christ */}
+            <div 
+              className="group relative rounded-xl overflow-hidden border border-[#DC143C]/30 hover:border-[#FFD700]/60 transition-all duration-500 animate-fadeIn"
+              style={{ animationDelay: "0.1s" }}
+            >
+              <div className="relative w-full aspect-video bg-black/50 flex items-center justify-center overflow-hidden">
+                <iframe
+                  className="w-full h-full"
+                  src="https://www.youtube.com/embed/nRHIEtKhI_w?start=0"
+                  title="The Passion of the Christ - Official Trailer"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </div>
+              <div className="p-6 bg-gradient-to-b from-black/40 to-black/80 backdrop-blur-sm">
+                <h3 className="text-xl font-bold text-[#FFD700] mb-2">Pasiunea - 2004</h3>
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  Filmul care redefinit cinema spirituală. Imagini brute, sunet nemțeles, inima deschisă.
+                </p>
+                <div className="mt-4 flex items-center gap-2">
+                  <span className="text-[#DC143C] text-xs font-bold">🎬 REPER SPIRITUAL</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Video 2: Apocalypto */}
+            <div 
+              className="group relative rounded-xl overflow-hidden border border-[#DC143C]/30 hover:border-[#FFD700]/60 transition-all duration-500 animate-fadeIn"
+              style={{ animationDelay: "0.2s" }}
+            >
+              <div className="relative w-full aspect-video bg-black/50 flex items-center justify-center overflow-hidden">
+                <iframe
+                  className="w-full h-full"
+                  src="https://www.youtube.com/embed/aqoHcY-7Dgk?start=0"
+                  title="Apocalypto - Official Trailer"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </div>
+              <div className="p-6 bg-gradient-to-b from-black/40 to-black/80 backdrop-blur-sm">
+                <h3 className="text-xl font-bold text-[#FFD700] mb-2">Apocalypto - 2006</h3>
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  Survival ca metaforă spirituală. Om versus sine, om versus colectivitate, om versus Divinitate.
+                </p>
+                <div className="mt-4 flex items-center gap-2">
+                  <span className="text-[#DC143C] text-xs font-bold">⚔️ INIȚIERE PRIN LUPTĂ</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Video 3: Hacksaw Ridge */}
+            <div 
+              className="group relative rounded-xl overflow-hidden border border-[#DC143C]/30 hover:border-[#FFD700]/60 transition-all duration-500 animate-fadeIn"
+              style={{ animationDelay: "0.3s" }}
+            >
+              <div className="relative w-full aspect-video bg-black/50 flex items-center justify-center overflow-hidden">
+                <iframe
+                  className="w-full h-full"
+                  src="https://www.youtube.com/embed/s2-1ZHngtXE?start=0"
+                  title="Hacksaw Ridge - Official Trailer"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </div>
+              <div className="p-6 bg-gradient-to-b from-black/40 to-black/80 backdrop-blur-sm">
+                <h3 className="text-xl font-bold text-[#FFD700] mb-2">Hacksaw Ridge - 2016</h3>
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  Credință versus realitate. Cum un om orează în timp ce alții ucid. Virtuositate spirituală.
+                </p>
+                <div className="mt-4 flex items-center gap-2">
+                  <span className="text-[#DC143C] text-xs font-bold">💫 MARTIR MODERN</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Video 4: The Beaver */}
+            <div 
+              className="group relative rounded-xl overflow-hidden border border-[#DC143C]/30 hover:border-[#FFD700]/60 transition-all duration-500 animate-fadeIn"
+              style={{ animationDelay: "0.4s" }}
+            >
+              <div className="relative w-full aspect-video bg-black/50 flex items-center justify-center overflow-hidden">
+                <div className="w-full h-full bg-black/60 flex items-center justify-center text-center">
+                  <div className="px-4">
+                    <p className="text-[#FFD700] font-bold text-lg mb-2">The Beaver</p>
+                    <p className="text-gray-400 text-sm">2011 - Disociere ca drum spre Înțelepciune</p>
+                  </div>
+                </div>
+              </div>
+              <div className="p-6 bg-gradient-to-b from-black/40 to-black/80 backdrop-blur-sm">
+                <h3 className="text-xl font-bold text-[#FFD700] mb-2">The Beaver - 2011</h3>
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  Ego mort transmembrând în Conștiință. Cum obiecte—chiar și o păpușă—pot fi vehicule ale Inteligenței Divine.
+                </p>
+                <div className="mt-4 flex items-center gap-2">
+                  <span className="text-[#DC143C] text-xs font-bold">🎭 EGO TRANSMUTARE</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Video 5: Braveheart */}
+            <div 
+              className="group relative rounded-xl overflow-hidden border border-[#DC143C]/30 hover:border-[#FFD700]/60 transition-all duration-500 animate-fadeIn"
+              style={{ animationDelay: "0.5s" }}
+            >
+              <div className="relative w-full aspect-video bg-black/50 flex items-center justify-center overflow-hidden">
+                <iframe
+                  className="w-full h-full"
+                  src="https://www.youtube.com/embed/OclKVfZ-tK0?start=0"
+                  title="Braveheart - Official Trailer"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </div>
+              <div className="p-6 bg-gradient-to-b from-black/40 to-black/80 backdrop-blur-sm">
+                <h3 className="text-xl font-bold text-[#FFD700] mb-2">Braveheart - 1995</h3>
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  Libertate nu ca scop, ci ca Identitate Spirituală. Martirul care moare cântând că-i Liber.
+                </p>
+                <div className="mt-4 flex items-center gap-2">
+                  <span className="text-[#DC143C] text-xs font-bold">🗡️ LIBERTATE DIVINĂ</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Video 6: We Have a Ghost */}
+            <div 
+              className="group relative rounded-xl overflow-hidden border border-[#DC143C]/30 hover:border-[#FFD700]/60 transition-all duration-500 animate-fadeIn"
+              style={{ animationDelay: "0.6s" }}
+            >
+              <div className="relative w-full aspect-video bg-black/50 flex items-center justify-center overflow-hidden">
+                <div className="w-full h-full bg-black/60 flex items-center justify-center text-center">
+                  <div className="px-4">
+                    <p className="text-[#FFD700] font-bold text-lg mb-2">We Have a Ghost</p>
+                    <p className="text-gray-400 text-sm">2023 - Spectrul Conștiinței Eterne</p>
+                  </div>
+                </div>
+              </div>
+              <div className="p-6 bg-gradient-to-b from-black/40 to-black/80 backdrop-blur-sm">
+                <h3 className="text-xl font-bold text-[#FFD700] mb-2">We Have a Ghost - 2023</h3>
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  Moartea nu-i sfârșit, ci trezire. Familia ca laborator spiritual unde Iubirea triumfează chiar și peste vălul dintre lumi.
+                </p>
+                <div className="mt-4 flex items-center gap-2">
+                  <span className="text-[#DC143C] text-xs font-bold">👻 DUPĂ VEȘNICUL</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Call to Action */}
+          <div className="mt-16 text-center animate-fadeIn" style={{ animationDelay: "0.7s" }}>
+            <p className="text-gray-300 text-lg mb-6">
+              <span className="text-[#FFD700] font-bold">Fiecare cadru te chemă mai adânc în tine.</span>
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <button className="px-8 py-3 bg-gradient-to-r from-[#DC143C] to-[#FFD700] text-black font-bold rounded-lg hover:shadow-xl hover:shadow-[#DC143C]/50 transition-all duration-300 transform hover:scale-105">
+                Urmărire Completă
+              </button>
+              <button className="px-8 py-3 border border-[#FFD700] text-[#FFD700] font-bold rounded-lg hover:bg-[#FFD700]/10 transition-all duration-300">
+                Reia Lecția
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CSS Animations */}
       <style jsx>{`
         @keyframes fadeIn {
