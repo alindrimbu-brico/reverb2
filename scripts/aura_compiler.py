@@ -264,7 +264,7 @@ def main():
             <a href="node-{node_id}.html" class="mirror-node reveal stagger-{delay}">
                 <span class="node-sigil">Poarta {node_id}</span>
                 <h3 class="node-title">Oglinda {node_id}</h3>
-                <p class="node-desc">O sesiune de reflecție asupra sinelui și tiparelor interioare.</p>
+                <p class="node-desc">O sesiune de reflecție asupra sinelui și a tiparelor interioare.</p>
             </a>"""
 
     dashboard_html = f"""<!DOCTYPE html>
@@ -289,7 +289,7 @@ def main():
     <main class="app-shell">
         <section class="greeting reveal">
             <h1>Bine ai venit acasă.</h1>
-            <p>Acest spațiu a fost desenat pentru liniștea ta minții. Relaxează-te și alege una dintre porțile de mai jos pentru a începe sesiunea de introspecție.</p>
+            <p>Acest spațiu a fost desenat pentru liniștea minții tale. Relaxează-te și alege una dintre porțile de mai jos pentru a începe sesiunea de introspecție.</p>
         </section>
 
         <section class="mirror-grid">
