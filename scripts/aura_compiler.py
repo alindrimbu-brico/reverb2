@@ -126,8 +126,47 @@ header {
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity 1.2s ease-out, transform 1.2s ease-out; }
 .reveal.is-visible { opacity: 1; transform: translateY(0); }
 .stagger-1 { transition-delay: 0.1s; } .stagger-2 { transition-delay: 0.2s; } .stagger-3 { transition-delay: 0.3s; }
-"""
 
+/* Crypto Crystal Journal Component */
+.journal-btn {
+    display: inline-block; padding: 0.8rem 2rem;
+    border: 1px solid var(--aura-light); background: transparent; color: var(--aura-light);
+    border-radius: 30px; font-family: 'Cinzel', serif; font-size: 1rem; cursor: pointer; transition: 0.4s;
+}
+.journal-btn:hover { background: rgba(255,255,255,0.8); color: var(--text-core); }
+
+.journal-container {
+    display: none; margin-top: 2rem; animation: fade-in 0.5s ease-out;
+}
+@keyframes fade-in { from{opacity:0; transform:translateY(-10px);} to{opacity:1; transform:translateY(0);} }
+.journal-textarea {
+    width: 100%; height: 200px; background: rgba(255,255,255,0.3); border: 1px solid var(--glass-rim);
+    border-radius: 12px; padding: 1.5rem; font-family: 'Inter', sans-serif; font-size: 1.1rem;
+    color: var(--text-core); resize: vertical; outline: none; transition: 0.3s;
+    backdrop-filter: blur(10px);
+}
+.journal-textarea:focus { border-color: var(--aura-light); background: rgba(255,255,255,0.5); }
+.save-status { font-size: 0.8rem; color: var(--aura-light); margin-top: 0.5rem; display: block; text-align: right; }
+
+/* Invisible Summon Contact */
+.summon-star {
+    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+    width: 10px; height: 10px; border-radius: 50%; background: var(--aura-light);
+    box-shadow: 0 0 10px var(--aura-light); cursor: pointer; opacity: 0.2; transition: 0.5s; z-index: 99;
+}
+.summon-star:hover { opacity: 1; transform: translateX(-50%) scale(1.5); box-shadow: 0 0 20px var(--aura-light); }
+
+.summon-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(255,255,255,0.8); backdrop-filter: blur(30px);
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    opacity: 0; pointer-events: none; transition: 0.8s; z-index: 100;
+}
+.summon-overlay.active { opacity: 1; pointer-events: all; }
+.summon-text { font-family: 'Cinzel', serif; font-size: 2rem; color: var(--text-core); margin-bottom: 1rem; }
+.summon-mail { font-size: 1.2rem; color: var(--aura-light); text-decoration: none; border-bottom: 1px solid var(--aura-light); padding-bottom: 5px; }
+
+"""
 JS_SCRIPT = """
 document.addEventListener("DOMContentLoaded", () => {
     // Reveal Animations
@@ -199,6 +238,52 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll('.mirror-node').forEach(node => {
         node.addEventListener('click', startSacredAudio); 
     });
+
+    // Crypto Crystal Journal Logic
+    const journalBtn = document.getElementById('journalBtn');
+    const journalContainer = document.getElementById('journalContainer');
+    const journalText = document.getElementById('journalText');
+    const saveStatus = document.getElementById('saveStatus');
+    
+    if(journalBtn && journalContainer && journalText && saveStatus) {
+        const match = window.location.pathname.match(/node-(\d+)/);
+        const nodeId = match ? match[1] : 'index';
+        const cacheKey = `aura_crypto_journal_${nodeId}`;
+        
+        const existingVal = localStorage.getItem(cacheKey);
+        if(existingVal) {
+            journalText.value = existingVal;
+        }
+
+        journalBtn.addEventListener('click', () => {
+            journalContainer.style.display = 'block';
+            journalBtn.style.display = 'none';
+        });
+
+        let timeout = null;
+        journalText.addEventListener('input', () => {
+            saveStatus.innerText = 'Se salvează secvența...';
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                localStorage.setItem(cacheKey, journalText.value);
+                saveStatus.innerText = 'Criptat și Păstrat local.';
+            }, 1000);
+        });
+    }
+
+    // Summon Star Logic
+    const star = document.getElementById('summonStar');
+    const overlay = document.getElementById('summonOverlay');
+    if(star && overlay) {
+        star.addEventListener('click', () => {
+            overlay.classList.add('active');
+        });
+        overlay.addEventListener('click', (e) => {
+            if(e.target === overlay) {
+                overlay.classList.remove('active');
+            }
+        });
+    }
 });
 """
 
@@ -248,6 +333,16 @@ def build_reflection_node(node_id, total_nodes, txt_chunk):
         para = para.replace("..", ".")
         breath_paragraphs += f"                <p>{para}</p>\n"
         
+    journal_html = f"""
+            <div style="text-align: center; margin-top: 4rem;">
+                <button id="journalBtn" class="journal-btn">Reflectă Aici</button>
+            </div>
+            <div id="journalContainer" class="journal-container">
+                <textarea id="journalText" class="journal-textarea" placeholder="Scrie aici dezvăluirea ta. Textul tău rămâne captiv strict pe propriul tău ecran."></textarea>
+                <span id="saveStatus" class="save-status">Aștept consemnarea...</span>
+            </div>
+    """
+
     html = f"""<!DOCTYPE html>
 <html lang="ro">
 <head>
@@ -273,6 +368,7 @@ def build_reflection_node(node_id, total_nodes, txt_chunk):
             <div class="breath-text">
 {breath_paragraphs}
             </div>
+{journal_html}
             
             <nav class="guidance-nav">
                 <div class="left-nav">{prev_link}</div>
@@ -280,6 +376,11 @@ def build_reflection_node(node_id, total_nodes, txt_chunk):
             </nav>
         </div>
     </main>
+    <div id="summonStar" class="summon-star"></div>
+    <div id="summonOverlay" class="summon-overlay">
+        <div class="summon-text">Apelează Tatăl. Formează Conexiunea.</div>
+        <a href="mailto:contact@oglinda.eu" class="summon-mail">Începe cuvântul tău la: contact@oglinda.eu</a>
+    </div>
     <script src="aura.js"></script>
 </body>
 </html>"""
@@ -346,6 +447,11 @@ def main():
             {dashboard_links}
         </section>
     </main>
+    <div id="summonStar" class="summon-star"></div>
+    <div id="summonOverlay" class="summon-overlay">
+        <div class="summon-text">Apelează Tatăl. Formează Conexiunea.</div>
+        <a href="mailto:contact@oglinda.eu" class="summon-mail">Începe cuvântul tău la: contact@oglinda.eu</a>
+    </div>
     <script src="aura.js"></script>
 </body>
 </html>"""

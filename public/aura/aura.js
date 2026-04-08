@@ -69,4 +69,50 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll('.mirror-node').forEach(node => {
         node.addEventListener('click', startSacredAudio); 
     });
+
+    // Crypto Crystal Journal Logic
+    const journalBtn = document.getElementById('journalBtn');
+    const journalContainer = document.getElementById('journalContainer');
+    const journalText = document.getElementById('journalText');
+    const saveStatus = document.getElementById('saveStatus');
+    
+    if(journalBtn && journalContainer && journalText && saveStatus) {
+        const match = window.location.pathname.match(/node-(\d+)/);
+        const nodeId = match ? match[1] : 'index';
+        const cacheKey = `aura_crypto_journal_${nodeId}`;
+        
+        const existingVal = localStorage.getItem(cacheKey);
+        if(existingVal) {
+            journalText.value = existingVal;
+        }
+
+        journalBtn.addEventListener('click', () => {
+            journalContainer.style.display = 'block';
+            journalBtn.style.display = 'none';
+        });
+
+        let timeout = null;
+        journalText.addEventListener('input', () => {
+            saveStatus.innerText = 'Se salvează secvența...';
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                localStorage.setItem(cacheKey, journalText.value);
+                saveStatus.innerText = 'Criptat și Păstrat local.';
+            }, 1000);
+        });
+    }
+
+    // Summon Star Logic
+    const star = document.getElementById('summonStar');
+    const overlay = document.getElementById('summonOverlay');
+    if(star && overlay) {
+        star.addEventListener('click', () => {
+            overlay.classList.add('active');
+        });
+        overlay.addEventListener('click', (e) => {
+            if(e.target === overlay) {
+                overlay.classList.remove('active');
+            }
+        });
+    }
 });
