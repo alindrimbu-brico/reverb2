@@ -167,7 +167,7 @@ header {
 .summon-mail { font-size: 1.2rem; color: var(--aura-light); text-decoration: none; border-bottom: 1px solid var(--aura-light); padding-bottom: 5px; }
 
 """
-JS_SCRIPT = """
+JS_SCRIPT = r"""
 document.addEventListener("DOMContentLoaded", () => {
     // Reveal Animations
     const observer = new IntersectionObserver((entries) => {
