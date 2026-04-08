@@ -1,155 +1,291 @@
 'use client';
 
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 
+// -------------------------------------------------------------
+// DATA ARLECHIN - Baza Filosofică Brianna Wiest
+// -------------------------------------------------------------
 const articles = [
-  { id: "hipnagogic-state", title: "Starea Hipnagogică", category: "Neurobiologie Spirituală", excerpt: "Punctul dulce al creativității. Tranziția magică dintre veghe și somn unde se nasc ideile geniurii.", color: "#9333ea", readTime: "12 min", icon: "🌙✨", href: "/showcase/spiritual-blog/hipnagogic-state" },
-  { id: "emotional-intelligence", title: "Inteligența Emoțională", category: "Dezvoltare Personală", excerpt: "Arta de a te înțelege și a înțelege pe alții. Fundamentul adevăratei relații cu tine și cu lumea.", color: "#ec4899", readTime: "14 min", icon: "❤️🌟", href: "/showcase/spiritual-blog/emotional-intelligence" },
-  { id: "relationships", title: "Inteligența Relațiilor", category: "Relații & Conexiuni", excerpt: "Prietenia, iubirea și conexiunea. Cum construim relații care ne ridică mutual la nivel superior.", color: "#06b6d4", readTime: "13 min", icon: "🤝✨", href: "/showcase/spiritual-blog/relationships" },
-  { id: "night-genius", title: "Geniul Nocturn", category: "Cronobiologie", excerpt: "O noapte lungă pentru cei aleși. Cum unii oameni se-nfloare în întuneric când alții sunt legați de lumină.", color: "#3b82f6", readTime: "16 min", icon: "🦉🧠", href: "/showcase/spiritual-blog/night-genius" },
-  { id: "happiness-science", title: "Știința Fericirii", category: "Psihologie Pozitivă", excerpt: "Fericirea nu este destinație — este skill care se poate antrena. Cum construim o viață cu sens și plenitudine.", color: "#f59e0b", readTime: "15 min", icon: "🌈💫", href: "/showcase/spiritual-blog/happiness-science" },
-  { id: "night-wisdom", title: "Înțelepciunea Nocturnă", category: "Tradiții Spirituale", excerpt: "Ce au descoperit miile de ani tradiții despre noaptă, viziuni și conexiunea cu Sacrul.", color: "#fbbf24", readTime: "17 min", icon: "🕯️📖", href: "/showcase/spiritual-blog/night-wisdom" },
+  { id: "subconscious-shift", title: "101 Eseuri: Decodarea Subconștientului", category: "Brianna Wiest Paradigm", excerpt: "Schimbă-ți modul de a gândi înlocuind convingerile limitative cu adevăruri raționale. Tu ești sursa propriei vindecări.", color: "#9333ea", readTime: "12 min", icon: "🧠", fullContent: "Adevărata schimbare nu vine din repetarea mecanică a unor afirmații, ci din a permite creierului tău să recunoască adevărul rațional că tu ești în siguranță acum. Modul în care te-ai auto-sabotat nu a fost o eroare de sistem, ci un mecanism strălucit al subconștientului tău pentru a te menține în viață în medii toxice. Acum, ești la control." },
+  { id: "sabotage", title: "Anatomia Auto-Sabotajului", category: "Dezvoltare Psihologică", excerpt: "Cum reflexele tale cele mai distructive sunt de fapt eforturi mascate ale subconștientului de a te proteja.", color: "#ec4899", readTime: "9 min", icon: "🛡️", fullContent: "Auto-sabotajul apare pur și simplu când ai un conflict între nevoile tale conștiente (ex: 'vreau succes') și rănile tale subconștiente (ex: 'succesul aduce așteptări care mă pot distruge'). Ceea ce numești sabotaj este doar mintea ta refuzând să accepte o fericire pentru care nu se simte capabilă să facă față consecințelor." },
+  { id: "familiar-pain", title: "Durerea Familiară vs. Fericirea Necunoscută", category: "Analiză Profundă", excerpt: "De ce creierul alege repetarea durerii cu care este obişnuit în loc să riște disconfortul fericirii.", color: "#06b6d4", readTime: "15 min", icon: "⚖️", fullContent: "Sistemul tău limbic nu diferențiază între durere 'bună' și durere 'rea'. El caută predictibilitate. Dacă ai trăit în haos emoțional toată viața, bucuria neașteptată va declanșa anxietate pentru că mintea ta va aștepta dezastrul următor. Vindecarea presupune să reînveți capacitatea celulară de a tolera fericirea fără să intri în teroare." },
+  { id: "happiness-discipline", title: "Fericirea nu e Accident, e Disciplină", category: "Mindset Rutinar", excerpt: "Starea de bine constantă necesită efort zilnic intenționat. Cum să decuplezi bucuria de la stimulii externi.", color: "#f59e0b", readTime: "11 min", icon: "🌞", fullContent: "Am romantizat идеa că fericirea se întâmplă magic. În realitate, a rămâne funcțional și pozitiv într-un univers entropic este un exercițiu violent de mușchi mental. Fericirea este neuro-plasticitate aplicată zi de zi. Alegi intenționat la ce stimuli te expui până când nervul tău vagal decide că devine un obicei natural." },
+  { id: "letting-go", title: "Arta de a Da Drumul", category: "Vindecare Emoțională", excerpt: "Nu poți vindeca ceva ce nu ești dispus să simți complet. Secretul eliberării bagajelor emoționale reziduale.", color: "#10b981", readTime: "10 min", icon: "🌊", fullContent: "A 'da drumul' nu înseamnă să te prefaci că nu ești rănit. Înseamnă a permite sistemului tău nervos să proceseze cantitatea chimică a furiei sau durerii respective fără să blochezi valul prin negare. Durează doar 90 de secunde pentru ca o substanță chimică emoțională să se ardă complet. Stai cu ea. Las-o să treacă." },
+  { id: "purpose", title: "Scopul tău nu este o Carieră", category: "Sens Existențial", excerpt: "Găsirea a ceea ce ești menit să faci nu are legătură strict cu job-ul tău, ci cu recablarea sinapselor pentru esența pură.", color: "#8b5cf6", readTime: "14 min", icon: "✨", fullContent: "Societatea a ambalat și vândut ideea de 'scop suprem' legându-l de productivitatea financiară. E o capcană masivă de ego. Scopul tău suprem ar putea fi să ai o viață mediocră și liniștită într-o grădină, trăind intens prezentul, sau ar putea fi o corporație giga-tech. Sensul tău este simplul fapt de A FI complet asumat, nu neapărat ceea ce oferi forței de muncă." },
 ];
 
-const SubconsciousInfographic = () => <svg viewBox="0 0 320 240" className="w-full h-auto" style={{ filter: 'drop-shadow(0 0 20px rgba(147, 51, 234, 0.3))' }}><defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#9333ea" stopOpacity="0.1" /><stop offset="100%" stopColor="#ec4899" stopOpacity="0.1" /></linearGradient></defs><rect width="320" height="240" fill="url(#grad1)" rx="12" /><circle cx="160" cy="100" r="50" fill="none" stroke="#9333ea" strokeWidth="2" opacity="0.6" /><circle cx="80" cy="60" r="25" fill="#fbbf24" opacity="0.7" /><line x1="80" y1="25" x2="80" y2="10" stroke="#fbbf24" strokeWidth="2" /><circle cx="240" cy="60" r="20" fill="#c084fc" opacity="0.7" /><circle cx="245" cy="55" r="20" fill="#0f0a1a" /><circle cx="160" cy="50" r="3" fill="#06b6d4" opacity="0.8" /><text x="80" y="180" fontSize="12" fill="#fbbf24" textAnchor="middle" fontWeight="bold">CONȘTIENT</text><text x="240" y="180" fontSize="12" fill="#c084fc" textAnchor="middle" fontWeight="bold">SUBCONȘTIENT</text><text x="160" y="160" fontSize="11" fill="#06b6d4" textAnchor="middle" fontStyle="italic">95% AUTOPILOT</text></svg>;
+const REFRAMES = [
+  "Paradigm Shift: Aceasta nu este o slăbiciune a ta. Este doar un tipar protectiv din trecut care acum îți stă în cale. Poți alege să nu îl mai folosești.",
+  "Decuplare Subconștientă: Creierul tău te minte că necunoscutul e periculos. Nu confunda anxietatea de o schimbare pozitivă cu frica reală.",
+  "Recablare Neuroplastică: Ceea ce numești blocaj e doar incapacitatea de a tolera cantitatea masivă de disconfort necesară pentru dezvoltarea ta. Suportă senzația.",
+  "Axioma Vindecării: Nu poți repara cu aceeași minte cu care ai stricat. Ceea ce introduci în acest câmp a fost dizolvat acum. Alege un gând funcțional."
+];
 
-const EmotionalHealingInfographic = () => <svg viewBox="0 0 320 240" className="w-full h-auto" style={{ filter: 'drop-shadow(0 0 20px rgba(236, 72, 153, 0.3))' }}><defs><linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#ec4899" stopOpacity="0.1" /><stop offset="100%" stopColor="#f43f5e" stopOpacity="0.1" /></linearGradient></defs><rect width="320" height="240" fill="url(#grad2)" rx="12" /><polygon points="160,30 60,180 260,180" fill="none" stroke="#ec4899" strokeWidth="2" opacity="0.6" /><line x1="85" y1="135" x2="235" y2="135" stroke="#ec4899" strokeWidth="1.5" opacity="0.4" /><path d="M 160 80 Q 150 70 145 75 Q 140 70 135 75 Q 130 80 130 85 Q 130 100 145 110 Q 160 122 160 122 Q 160 122 175 110 Q 190 100 190 85 Q 190 80 185 75 Q 180 70 175 75 Q 170 70 160 80 Z" fill="#ec4899" opacity="0.8" /><text x="160" y="200" fontSize="12" fill="#ec4899" textAnchor="middle" fontWeight="bold">PROCESAREA DURERII</text></svg>;
+export default function SpiritualAppMaximal() {
+  const [therapyInput, setTherapyInput] = useState("");
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [therapyResult, setTherapyResult] = useState("");
+  const [activeArticle, setActiveArticle] = useState<any>(null);
 
-const ParadigmShiftInfographic = () => <svg viewBox="0 0 320 240" className="w-full h-auto" style={{ filter: 'drop-shadow(0 0 20px rgba(139, 92, 246, 0.3))' }}><defs><linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.1" /><stop offset="100%" stopColor="#6366f1" stopOpacity="0.1" /></linearGradient></defs><rect width="320" height="240" fill="url(#grad3)" rx="12" /><circle cx="160" cy="110" r="70" fill="none" stroke="#8b5cf6" strokeWidth="2" opacity="0.5" /><circle cx="160" cy="45" r="3" fill="#8b5cf6" /><path d="M 95 110 A 70 70 0 0 1 225 110" fill="none" stroke="#6366f1" strokeWidth="4" opacity="0.8" strokeLinecap="round" /><circle cx="160" cy="50" r="15" fill="#fef3c7" opacity="0.9" /><circle cx="168" cy="45" r="15" fill="#0f0a1a" /><text x="160" y="200" fontSize="12" fill="#8b5cf6" textAnchor="middle" fontWeight="bold">SCHIMBAREA PARADIGMEI</text></svg>;
+  // -------------------------------------------------------------
+  // DISSOLVE ENGINE: Handler pentru distrugerea durerii/anxietății
+  // -------------------------------------------------------------
+  const handleDissolve = () => {
+    if(!therapyInput.trim()) return;
+    setIsProcessing(true);
+    setTherapyResult("");
+    
+    // Simulating deep neural network API / Subconscious breakdown (3 seconds)
+    setTimeout(() => {
+      // Pick a random profound Truth Reframe
+      const randomReframe = REFRAMES[Math.floor(Math.random() * REFRAMES.length)];
+      setTherapyInput(""); // Dissolve the text visually
+      setTherapyResult(randomReframe);
+      setIsProcessing(false);
+    }, 3000);
+  };
 
-export default function SpiritualBlogShowcase() {
   return (
     <>
       <style dangerouslySetInnerHTML={{__html: `
-        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } } 
-        .animate-float { animation: float 6s ease-in-out infinite; }
+        /* MAXIMAL COMPLEXITY CSS ANIMATIONS */
+        body { margin: 0; background: #05050A; color: white; overflow-x: hidden; }
         
-        @keyframes slideUp { 
-          from { opacity: 0; transform: translateY(40px); } 
-          to { opacity: 1; transform: translateY(0); } 
+        /* 1. Breathing Background (4-7-8 Technique) 
+           Inhale: 4s (Grow), Hold: 7s (Stable), Exhale: 8s (Shrink). Total 19s */
+        @keyframes therapeutic-breathing {
+          0% { transform: scale(0.8); opacity: 0.1; filter: blur(50px); }
+          21% { transform: scale(1.5); opacity: 0.35; filter: blur(30px); } /* Inhale (4s/19s) */
+          58% { transform: scale(1.48); opacity: 0.4; filter: blur(30px); } /* Hold (7s/19s) */
+          100% { transform: scale(0.8); opacity: 0.1; filter: blur(50px); } /* Exhale (8s/19s) */
         }
-        .animate-slide-up { animation: slideUp 0.8s ease-out forwards; }
-        
-        @keyframes fadeIn { 
-          from { opacity: 0; } 
-          to { opacity: 1; } 
+        .breathing-orb {
+          animation: therapeutic-breathing 19s ease-in-out infinite;
+          background: radial-gradient(circle at center, #9333ea, #ec4899 70%, transparent 100%);
         }
-        .animate-fade-in { animation: fadeIn 1s ease-out forwards; }
-        
-        @keyframes glow { 
-          0%, 100% { box-shadow: 0 0 10px rgba(147, 51, 234, 0.3); } 
-          50% { box-shadow: 0 0 30px rgba(147, 51, 234, 0.8); } 
+
+        /* 2. Dissolve Text Effect */
+        @keyframes text-dissolve {
+          0% { opacity: 1; filter: blur(0); letter-spacing: normal; transform: translateY(0); }
+          50% { opacity: 0.5; filter: blur(8px); letter-spacing: 15px; transform: translateY(-20px) scale(1.1); color: #ec4899; }
+          100% { opacity: 0; filter: blur(20px); letter-spacing: 30px; transform: translateY(-50px) scale(1.5); }
         }
-        .animate-glow { animation: glow 3s ease-in-out infinite; }
-        
-        @keyframes shimmer {
-          0% { background-position: -1000px 0; }
-          100% { background-position: 1000px 0; }
+        .is-dissolving {
+          animation: text-dissolve 2.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+          color: rgba(255,255,255,0.7);
         }
-        .animate-shimmer {
-          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-          background-size: 1000px 100%;
-          animation: shimmer 3s infinite;
+
+        /* 3. Reframe Text Reveal */
+        @keyframes text-reveal-glow {
+          0% { opacity: 0; transform: translateY(30px); filter: blur(10px) brightness(4); }
+          100% { opacity: 1; transform: translateY(0); filter: blur(0) brightness(1); }
         }
-        
-        @keyframes pulse-glow {
-          0%, 100% { filter: drop-shadow(0 0 5px rgba(147, 51, 234, 0.5)); }
-          50% { filter: drop-shadow(0 0 20px rgba(147, 51, 234, 1)); }
+        .reframe-reveal-active {
+          animation: text-reveal-glow 2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         }
-        .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
-        
-        @keyframes bounce-in {
-          0% { opacity: 0; transform: scale(0.8); }
-          50% { opacity: 1; }
-          100% { opacity: 1; transform: scale(1); }
+
+        /* 4. Immersive Modal Blur Overlay */
+        .modal-overlay {
+          backdrop-filter: blur(20px) saturate(150%);
+          background: rgba(5, 5, 10, 0.85);
         }
-        .animate-bounce-in { animation: bounce-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
-        
-        @keyframes rotate-slow {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
+
+        /* Standard Smooth Appearances */
+        @keyframes slideUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+        .slideUp { animation: slideUp 0.8s ease forwards; opacity: 0; }
+        .delay-1 { animation-delay: 0.1s; } .delay-2 { animation-delay: 0.2s; } 
+        .delay-3 { animation-delay: 0.3s; } .delay-4 { animation-delay: 0.4s; }
+
+        /* Neuro-cards */
+        .neuro-card {
+          background: rgba(255,255,255,0.02);
+          border: 1px solid rgba(147, 51, 234, 0.15);
+          box-shadow: inset 0 0 20px rgba(147, 51, 234, 0.05);
+          transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
-        .animate-rotate { animation: rotate-slow 20s linear infinite; }
-        
-        .stagger-1 { animation-delay: 0.1s; }
-        .stagger-2 { animation-delay: 0.2s; }
-        .stagger-3 { animation-delay: 0.3s; }
-        .stagger-4 { animation-delay: 0.4s; }
-        .stagger-5 { animation-delay: 0.5s; }
-        .stagger-6 { animation-delay: 0.6s; }
+        .neuro-card:hover {
+          background: rgba(255,255,255,0.05);
+          border-color: rgba(236, 72, 153, 0.4);
+          transform: translateY(-10px) scale(1.02);
+          box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 0 30px rgba(236, 72, 153, 0.1);
+        }
       `}} />
-      <div className="min-h-screen bg-gradient-to-b from-[#0f0a1a] via-[#1a1330] to-[#0f0a1a]" style={{ backgroundImage: `radial-gradient(circle at 20% 50%, rgba(147, 51, 234, 0.1) 0%, transparent 50%),radial-gradient(circle at 80% 30%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),radial-gradient(circle at 50% 90%, rgba(139, 92, 246, 0.05) 0%, transparent 50%)` }}>
-        {/* Hero */}
-        <section className="relative px-6 py-24 lg:px-10 lg:py-40 overflow-hidden">
-          <div className="absolute inset-0 opacity-20 pointer-events-none">
-            <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-screen filter blur-3xl animate-pulse animate-rotate"></div>
-            <div className="absolute bottom-20 right-10 w-72 h-72 bg-pink-500 rounded-full mix-blend-screen filter blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-          </div>
-          <div className="max-w-5xl mx-auto relative z-10">
-            <Link href="/showcase" className="inline-flex items-center text-xs font-mono mb-12 border rounded-full px-4 py-1.5 text-purple-300 border-purple-500/30 hover:border-purple-500/60 transition-all animate-slide-up">← Înapoi</Link>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-300 via-pink-300 to-purple-300 animate-slide-up stagger-1">Inteligență Spirituală<br/><span className="text-3xl md:text-5xl opacity-80">& Reprogramare</span></h1>
-            <p className="text-xl text-gray-300 max-w-2xl mb-8 animate-slide-up stagger-2">Arhitectură digitală construită integral pe fundamentele psihologice din <i>101 Eseuri Care Îți Vor Schimba Modul de a Gândi</i>. Decodarea subconștientului tău.</p>
-            <div className="flex gap-4 animate-slide-up stagger-3"><button className="px-8 py-3 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg transition transform hover:scale-110 active:scale-95">Începe Terapia</button><button className="px-8 py-3 border border-purple-500/50 text-purple-300 rounded-lg hover:bg-purple-500/10 transition">Vezi Articolele</button></div>
+      
+      <div className="min-h-screen relative font-sans">
+        {/* THERAPEUTIC SYSTEM BACKGROUND (4-7-8 Breathing Alpha State Generator) */}
+        <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] breathing-orb rounded-full mix-blend-screen opacity-0"></div>
+          <div className="absolute top-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
+        </div>
+
+        {/* ========================================================
+            HERO SECTION - Paradigm Entry
+        ======================================================== */}
+        <section className="relative z-10 px-6 py-24 lg:px-10 lg:py-40 max-w-6xl mx-auto flex flex-col justify-center min-h-[80vh]">
+          <Link href="/showcase" className="w-fit inline-flex items-center text-xs font-mono mb-12 border rounded-full px-4 py-1.5 text-purple-300 border-purple-500/30 hover:border-purple-500/60 hover:bg-purple-500/10 transition-all slideUp">← Exit Simulation</Link>
+          <div className="mb-2 text-[10px] font-mono uppercase tracking-[0.5em] text-pink-500 slideUp delay-1">Software Terapeutic V2.0</div>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black leading-[0.95] mb-8 tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-purple-200 to-pink-500 slideUp delay-2">
+            Decodarea<br/>Subconștientului.
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mb-12 font-light leading-relaxed slideUp delay-3">
+            O aplicație de reprogramare cognitivă bazată pe arhitectura psihologică a cărții <strong className="text-purple-300 font-medium whitespace-nowrap">"101 Eseuri"</strong> de Brianna Wiest. Durerea familiară moare aici.
+          </p>
+          <div className="flex gap-4 slideUp delay-4">
+            <a href="#dissolve-engine" className="px-8 py-4 bg-white text-black font-bold uppercase tracking-widest text-sm rounded-none hover:bg-pink-500 hover:text-white transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+              Inițiază Recablarea
+            </a>
           </div>
         </section>
 
-        {/* Features */}
-        <section className="max-w-6xl mx-auto px-6 lg:px-10 py-24 grid md:grid-cols-4 gap-8">
-          {[{ icon: '🧭', title: 'Subconștient', desc: 'Înțelege de ce opui rezistență.' }, { icon: '🛡️', title: 'Auto-sabotajul', desc: 'Mecanism ascuns de protecție.' }, { icon: '⚖️', title: 'Rutina Banală', desc: 'Adevăratul loc de joacă al minții.' }, { icon: '🧠', title: 'Paradigma', desc: 'Re-cablare neuronală activă.' }].map((f, i) => (
-            <div key={i} className={`p-6 rounded-xl border border-purple-500/20 bg-purple-500/5 group hover:bg-purple-500/10 transition animate-bounce-in stagger-${i+1}`} style={{animationDelay: `${i * 0.1}s`}}><div className="text-4xl mb-4 group-hover:scale-125 group-hover:rotate-12 transition duration-300 transform">{f.icon}</div><h3 className="text-lg font-semibold text-white mb-2 group-hover:text-purple-300 transition">{f.title}</h3><p className="text-sm text-gray-400 group-hover:text-gray-300 transition">{f.desc}</p></div>
-          ))}
+        {/* ========================================================
+            DISSOLVE ENGINE - THE THERAPY INTERACTIVE FORM
+        ======================================================== */}
+        <section id="dissolve-engine" className="relative z-10 max-w-5xl mx-auto px-6 py-32 border-y border-white/5 bg-black/40 backdrop-blur-sm">
+          <div className="text-center mb-16 slideUp">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Motorul de Decuplare (Dissolve Engine)</h2>
+            <p className="text-gray-500">Introdu o convingere dureroasă sau un "auto-sabotaj" care te ține pururi captiv în limitare zilnică.</p>
+          </div>
+
+          <div className="bg-gray-900/50 p-8 md:p-12 border border-gray-800 rounded-[2rem] shadow-2xl relative overflow-hidden">
+            {!therapyResult && (
+              <div className="relative z-10">
+                <textarea 
+                  value={therapyInput}
+                  onChange={(e) => setTherapyInput(e.target.value)}
+                  placeholder="EX: Nu cred că merit succesul; am o rezistență masivă la disciplină..."
+                  className={`w-full bg-transparent border-b-2 border-purple-900/50 text-2xl md:text-3xl text-white font-light focus:outline-none focus:border-pink-500 transition-colors resize-none py-4 placeholder-gray-700 min-h-[150px] ${isProcessing ? 'is-dissolving pointer-events-none' : ''}`}
+                />
+                
+                <div className="mt-8 flex justify-end">
+                  <button 
+                    onClick={handleDissolve}
+                    disabled={isProcessing || !therapyInput.trim()}
+                    className={`px-8 py-4 text-sm uppercase tracking-widest font-bold rounded-full transition-all duration-500 ${isProcessing || !therapyInput.trim() ? 'bg-gray-800 text-gray-600 cursor-not-allowed' : 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-[0_0_30px_rgba(236,72,153,0.4)] hover:shadow-[0_0_50px_rgba(236,72,153,0.8)] hover:scale-105'}`}
+                  >
+                    {isProcessing ? 'SE DIZOLVĂ...' : 'DECUPEAZĂ PARADIGMA'}
+                  </button>
+                </div>
+              </div>
+            )}
+            
+            {/* The Output Reframe */}
+            {therapyResult && (
+              <div className="min-h-[200px] flex items-center justify-center relative z-10 reframe-reveal-active">
+                <div className="text-center">
+                  <div className="text-xs font-mono text-pink-500 mb-6 tracking-[0.3em]">-- REZOLUTIE PSIHOLOGICA CALCULATA --</div>
+                  <h3 className="text-3xl md:text-4xl text-white font-serif italic font-light leading-snug mb-10 border-l-4 border-pink-500 pl-6 text-left shadow-pink">
+                    "{therapyResult}"
+                  </h3>
+                  <button 
+                    onClick={() => { setTherapyResult(""); setTherapyInput(""); }}
+                    className="text-gray-400 hover:text-white underline decoration-gray-700 underline-offset-4 transition uppercase tracking-widest text-xs"
+                  >
+                    Incarcă Altman Tipar Mental
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Glowing borders around machine */}
+            <div className="absolute inset-0 border-2 border-white/5 pointer-events-none rounded-[2rem] mix-blend-overlay"></div>
+          </div>
         </section>
 
-        {/* Infographics */}
-        <section className="max-w-6xl mx-auto px-6 lg:px-10 py-24 border-t border-purple-500/10">
-          <h2 className="text-5xl font-bold text-white mb-16 text-center animate-slide-up">Mecanica Minții Tale</h2>
-          <div className="grid md:grid-cols-3 gap-12">
-            {[{ graphic: <SubconsciousInfographic />, title: '🧠 Rădăcina Invizibilă', desc: 'Programarea subconștientă preluată în copilărie dictează 95% din deciziile tale de adult (autopilot).', delay: 0 }, { graphic: <EmotionalHealingInfographic />, title: '❤️ Procesarea Durerii', desc: 'Trauma și rezistența: Nu ignori stările grele, ci înveți să le decodifici și să le traversezi complet.', delay: 1 }, { graphic: <ParadigmShiftInfographic />, title: '🔄 Schimbarea Paradigmei', desc: 'Suferința este utilă doar până te face să te schimbi. După aceea devine abuz, iar recablarea devine necesară.', delay: 2 }].map((item, i) => (
-              <div key={i} className={`space-y-6 hover:scale-105 transition duration-500 animate-slide-up stagger-${i+1}`} style={{animationDelay: `${i * 0.2}s`}}>
-                <div className="bg-gray-900/50 border border-purple-500/20 rounded-xl p-8 hover:border-purple-500/50 hover:shadow-2xl hover:shadow-purple-500/30 transition duration-300 group"><div className="group-hover:animate-pulse-glow transition">{item.graphic}</div></div>
-                <div><h3 className="text-2xl font-bold text-purple-300 mb-3 group-hover:text-pink-300 transition animate-fade-in" style={{animationDelay: `${i * 0.3}s`}}>{item.title}</h3><p className="text-gray-400 group-hover:text-gray-300 transition">{item.desc}</p></div>
+        {/* ========================================================
+            ARTICLES/ESSAYS GRID
+        ======================================================== */}
+        <section className="relative z-10 max-w-7xl mx-auto px-6 py-32">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 slideUp">
+            <div>
+              <div className="text-pink-500 text-xs font-mono tracking-widest mb-3">LECTURI CLINICE</div>
+              <h2 className="text-5xl font-bold">101 Eseuri Filosofice</h2>
+            </div>
+            <p className="text-gray-500 max-w-[300px] mt-6 md:mt-0 text-sm">Biblioteca principală de restructurare cognitivă. Click pentru imersiune terapeutică completă.</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {articles.map((a, idx) => (
+              <div 
+                key={a.id} 
+                onClick={() => setActiveArticle(a)}
+                className={`neuro-card rounded-2xl p-8 cursor-pointer relative overflow-hidden group slideUp`} 
+                style={{animationDelay: `${(idx % 6) * 0.1}s`}}
+              >
+                <div className="absolute top-0 right-0 p-6 text-4xl opacity-50 group-hover:opacity-100 group-hover:scale-125 transition duration-500 transform origin-top-right">{a.icon}</div>
+                <div className="text-[10px] font-mono tracking-widest mb-6" style={{color: a.color}}>{a.category}</div>
+                <h3 className="text-2xl font-bold text-white mb-4 pr-8 line-clamp-2 leading-tight group-hover:text-transparent group-hover:bg-clip-text transition" style={{backgroundImage: `linear-gradient(to right, white, ${a.color})`}}>{a.title}</h3>
+                <p className="text-gray-400 text-sm font-light mb-8 line-clamp-3 leading-relaxed">{a.excerpt}</p>
+                
+                <div className="flex justify-between items-center text-xs border-t border-white/10 pt-4 mt-auto">
+                  <span className="text-gray-600 font-mono">{a.readTime}</span>
+                  <span className="text-white font-medium bg-white/5 px-4 py-1.5 rounded-full group-hover:bg-pink-500 transition">Încarcă Matricea</span>
+                </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* Articles */}
-        <section className="max-w-6xl mx-auto px-6 lg:px-10 py-24 border-t border-purple-500/10">
-          <h2 className="text-5xl font-bold text-white mb-12 animate-slide-up">Colecția de Articole</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {articles.map((a, idx) => (
-              <Link key={a.id} href={a.href} className={`group p-6 rounded-xl border border-gray-800 bg-gray-900/50 hover:bg-gray-900/80 transition transform hover:-translate-y-3 cursor-pointer animate-bounce-in stagger-${(idx % 6) + 1}`} style={{animationDelay: `${idx * 0.1}s`}}>
-                <div className="flex justify-between items-center mb-4">
-                  <span className="px-3 py-1 rounded-full text-xs font-semibold text-white animate-shimmer" style={{ backgroundColor: a.color }}>{a.category}</span>
-                  <span className="text-2xl animate-float group-hover:animate-bounce" style={{animationDelay: `${idx * 0.1}s`}}>{a.icon}</span>
+        {/* ========================================================
+            IMMERSIVE ARTICLE MODAL (State Based)
+        ======================================================== */}
+        {activeArticle && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-10 modal-overlay opacity-100 animate-fade-in text-left font-sans">
+            <div className="absolute inset-0 bg-black/60 pointer-events-none"></div>
+            
+            <div className="relative bg-[#0a0a0f] border border-white/10 w-full max-w-4xl h-full md:h-[80vh] rounded-[2rem] shadow-2xl p-8 md:p-16 flex flex-col overflow-y-auto animate-slide-up transform translate-y-0">
+              
+              <button 
+                onClick={() => setActiveArticle(null)}
+                className="sticky top-0 ml-auto w-12 h-12 flex items-center justify-center bg-white/5 hover:bg-pink-500 text-white rounded-full transition-colors z-20 backdrop-blur-md"
+              >
+                ✕
+              </button>
+
+              <div className="max-w-2xl mx-auto w-full pb-20 relative z-10 pt-8">
+                <div className="flex items-center gap-4 mb-8">
+                  <span className="text-5xl">{activeArticle.icon}</span>
+                  <div>
+                    <div className="text-xs font-mono tracking-widest uppercase mb-1" style={{color: activeArticle.color}}>
+                      {activeArticle.category} • {activeArticle.readTime}
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text transition duration-300" style={{backgroundImage: `linear-gradient(to right, ${a.color}, #ec4899)`}}>{a.title}</h3>
-                <p className="text-gray-400 text-sm mb-6 line-clamp-3 group-hover:text-gray-300 transition">{a.excerpt}</p>
-                <div className="flex justify-between text-xs text-gray-500 border-t border-gray-800/50 pt-4 group-hover:border-gray-700/80 transition"><span className="font-mono group-hover:text-gray-400 transition">{a.readTime}</span><span style={{ color: a.color }} className="group-hover:translate-x-2 group-hover:text-lg transition duration-300">→</span></div>
-              </Link>
-            ))}
+                
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-10 leading-tight">
+                  {activeArticle.title}
+                </h1>
+                
+                <div className="h-px w-24 bg-gradient-to-r from-pink-500 to-transparent mb-12"></div>
+                
+                <div className="prose prose-invert prose-lg max-w-none text-gray-300 font-light leading-relaxed">
+                  <p className="text-2xl text-gray-200 mb-8 border-l-4 pl-6 italic" style={{borderColor: activeArticle.color}}>
+                    {activeArticle.excerpt}
+                  </p>
+                  
+                  <p className="text-lg">
+                    {activeArticle.fullContent}
+                  </p>
+                  
+                  <div className="mt-16 p-8 bg-white/5 rounded-xl border border-white/10">
+                    <h4 className="text-sm font-mono text-pink-400 mb-4 tracking-widest uppercase">EXERCIȚIU DE INTEGRARE (JURNAL)</h4>
+                    <p className="text-base text-gray-400 mb-6">Dacă această rezistență sau tipar s-ar dizolva complet până mâine dimineață, la ce durere familiară ar trebui să renunți și ce fericire grea ar trebui să accepți în schimb?</p>
+                    <textarea 
+                      placeholder="Scrie reflectarea aici (datele nu sunt salvate nicăieri)..." 
+                      className="w-full bg-black/50 border border-white/10 rounded-lg p-4 text-white placeholder-gray-700 min-h-[100px] focus:outline-none focus:border-pink-500 transition-colors"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </section>
-
-        {/* Pillars */}
-        <section className="max-w-6xl mx-auto px-6 lg:px-10 py-24 border-t border-purple-500/10">
-          <h2 className="text-5xl font-bold text-white mb-12">Piloni de Conținut Terapeutic</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            {[{ icon: '🧠', title: 'Reprogramare Activă', desc: 'Cum să transformi biasurile cognitive distructive.' }, { icon: '❤️', title: 'Inteligență Emoțională', desc: 'Acceptarea sentimentelor negative ca hartă spre vindecare.' }, { icon: '✨', title: 'Scop vs Muncă', desc: 'Detașarea obsesiilor externe de identitatea ta pură.' }, { icon: '🌙', title: 'Rutina Banală', desc: 'Singurul spațiu real unde se construiesc imperii interioare.' }].map((p, i) => (
-              <div key={i} className="p-8 rounded-xl border border-purple-500/20 bg-purple-500/5 group hover:bg-purple-500/10 transition"><h3 className="text-2xl font-bold text-purple-300 mb-4 group-hover:text-purple-200">{p.icon} {p.title}</h3><p className="text-gray-400">{p.desc}</p></div>
-            ))}
-          </div>
-        </section>
-
-        {/* CTA */}
-        <section className="max-w-4xl mx-auto px-6 lg:px-10 py-32 text-center border-t border-purple-500/10">
-          <h2 className="text-5xl font-bold text-white mb-6">Incepe să gândești altfel</h2>
-          <p className="text-xl text-gray-400 mb-10">Primești fragmente zilnice extrase și traduse vizual din "101 Eseuri Care Îți Vor Schimba Modul de a Gândi".</p>
-          <div className="flex gap-4 max-w-md mx-auto"><input type="email" placeholder="Email..." className="flex-1 px-6 py-3 bg-gray-900/50 border border-purple-500/30 rounded-lg text-white focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20" /><button className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg transform hover:scale-105 transition">Aplică Principiile</button></div>
-        </section>
-
+        )}
+        
         {/* Footer */}
-        <section className="border-t border-gray-800/50 px-6 py-12 text-center text-gray-500 text-sm"><p>© 2024 Reverb.ro // Brianna Wiest Paradigm Shift 🌙✨</p></section>
+        <section className="relative z-10 border-t border-white/5 px-6 py-12 text-center">
+          <p className="text-gray-500 text-xs font-mono uppercase tracking-[0.2em] mb-4">Arhitectură de Prezență Digitală. Sistem Reverb.</p>
+          <div className="inline-block w-1 h-1 bg-pink-500 rounded-full animate-pulse-glow"></div>
+        </section>
       </div>
     </>
   );
