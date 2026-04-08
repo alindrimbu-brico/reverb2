@@ -3,13 +3,13 @@ import PyPDF2
 
 CSS_STYLE = """
 :root {
-    --bg-void: #030107;
-    --text-core: #eae6f0;
-    --text-dim: #8b809a;
-    --aura-light: #c09054;
-    --aura-glow: rgba(192, 144, 84, 0.25);
-    --glass-plate: rgba(255, 255, 255, 0.02);
-    --glass-rim: rgba(255, 255, 255, 0.05);
+    --bg-void: #fdfdfd;
+    --text-core: #1e293b;
+    --text-dim: #64748b;
+    --aura-light: #94a3b8;
+    --aura-glow: rgba(148, 163, 184, 0.4);
+    --glass-plate: rgba(255, 255, 255, 0.6);
+    --glass-rim: rgba(255, 255, 255, 0.8);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -56,11 +56,12 @@ header {
     padding: 3rem 5%; position: relative; z-index: 10;
 }
 .brand { 
-    font-size: 1.5rem; letter-spacing: 10px; color: var(--aura-light); 
+    font-size: 1.5rem; letter-spacing: 10px; color: var(--text-core); 
     text-decoration: none; text-transform: uppercase; opacity: 0.9;
     transition: 0.4s;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
 }
-.brand:hover { text-shadow: 0 0 20px var(--aura-glow); letter-spacing: 12px; }
+.brand:hover { text-shadow: 0 0 25px rgba(255, 255, 255, 1); letter-spacing: 12px; }
 
 /* Dashboard Shell */
 .app-shell {
@@ -79,6 +80,7 @@ header {
     border-radius: 24px; padding: 2.5rem 2rem; text-decoration: none;
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     display: flex; flex-direction: column; position: relative; overflow: hidden;
+    backdrop-filter: blur(20px);
 }
 .mirror-node::before {
     content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
@@ -87,8 +89,8 @@ header {
 }
 .mirror-node:hover::before { opacity: 1; }
 .mirror-node:hover {
-    transform: translateY(-5px); border-color: rgba(192, 144, 84, 0.3);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+    transform: translateY(-5px); border-color: rgba(255, 255, 255, 1);
+    box-shadow: 0 20px 40px rgba(148, 163, 184, 0.1), inset 0 1px 0 rgba(255,255,255,0.8);
 }
 
 .node-sigil { font-size: 0.75rem; letter-spacing: 3px; color: var(--aura-light); margin-bottom: 1rem; text-transform: uppercase;}
@@ -148,6 +150,54 @@ document.addEventListener("DOMContentLoaded", () => {
             card.style.setProperty('--mouse-x', `${x}px`);
             card.style.setProperty('--mouse-y', `${y}px`);
         });
+    });
+
+    // 432 Hz Sacred Drone audio engine
+    let audioCtx;
+    let isPlaying = false;
+    
+    function startSacredAudio() {
+        if(isPlaying) return;
+        isPlaying = true;
+        
+        try {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const mainGain = audioCtx.createGain();
+            mainGain.gain.value = 0; // fade in slowly
+            mainGain.connect(audioCtx.destination);
+            
+            // 432 Hz oscillator
+            const osc1 = audioCtx.createOscillator();
+            osc1.type = 'sine';
+            osc1.frequency.value = 432;
+            
+            // LFO for volume pulsing
+            const lfo = audioCtx.createOscillator();
+            lfo.type = 'sine';
+            lfo.frequency.value = 0.05; // very slow wave
+            
+            const lfoGain = audioCtx.createGain();
+            lfoGain.gain.value = 0.02; // max volume variation
+            
+            lfo.connect(lfoGain.gain);
+            osc1.connect(lfoGain);
+            lfoGain.connect(mainGain);
+            
+            osc1.start();
+            lfo.start();
+            
+            // Fade in over 10 seconds to not startle
+            mainGain.gain.linearRampToValueAtTime(0.05, audioCtx.currentTime + 10);
+        } catch(e) {
+            console.log('Web Audio nu a putut fi inițializat.');
+        }
+    }
+    
+    // Start audio on first interaction seamlessly
+    document.body.addEventListener('click', startSacredAudio, { once: true });
+    // Or on clicking any mirror specifically (in case body capture gets blocked)
+    document.querySelectorAll('.mirror-node').forEach(node => {
+        node.addEventListener('click', startSacredAudio); 
     });
 });
 """
@@ -288,8 +338,8 @@ def main():
 
     <main class="app-shell">
         <section class="greeting reveal">
-            <h1>Bine ai venit acasă.</h1>
-            <p>Acest spațiu a fost desenat pentru liniștea minții tale. Relaxează-te și alege una dintre porțile de mai jos pentru a începe sesiunea de introspecție.</p>
+            <h1>"Oglinda – Ceea ce este sus, este și jos. Puritatea se vede în tine."</h1>
+            <p>Pășește. Lasă zgomotul la intrare. Emanația luminii tale a creat acest portal pentru liniștea minții tale.</p>
         </section>
 
         <section class="mirror-grid">
