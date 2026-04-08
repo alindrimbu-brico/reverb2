@@ -335,11 +335,11 @@ def build_reflection_node(node_id, total_nodes, txt_chunk):
         
     journal_html = f"""
             <div style="text-align: center; margin-top: 4rem;">
-                <button id="journalBtn" class="journal-btn">Reflectă Aici</button>
+                <button id="journalBtn" class="journal-btn">Reflectează Aici</button>
             </div>
             <div id="journalContainer" class="journal-container">
-                <textarea id="journalText" class="journal-textarea" placeholder="Scrie aici dezvăluirea ta. Textul tău rămâne captiv strict pe propriul tău ecran."></textarea>
-                <span id="saveStatus" class="save-status">Aștept consemnarea...</span>
+                <textarea id="journalText" class="journal-textarea" placeholder="Notează aici reflecția ta. Textul rămâne privat și securizat local pe dispozitivul tău."></textarea>
+                <span id="saveStatus" class="save-status">Se așteaptă notița...</span>
             </div>
     """
 
@@ -415,7 +415,7 @@ def main():
             <a href="node-{node_id}.html" class="mirror-node reveal stagger-{delay}">
                 <span class="node-sigil">Poarta {node_id}</span>
                 <h3 class="node-title">Oglinda {node_id}</h3>
-                <p class="node-desc">O sesiune de reflecție asupra sinelui și a tiparelor interioare.</p>
+                <p class="node-desc">O sesiune ghidată de reflecție asupra sinelui și a tiparelor interioare.</p>
             </a>"""
 
     dashboard_html = f"""<!DOCTYPE html>
@@ -439,8 +439,8 @@ def main():
 
     <main class="app-shell">
         <section class="greeting reveal">
-            <h1>"Oglinda – Ceea ce este sus, este și jos. Puritatea se vede în tine."</h1>
-            <p>Pășește. Lasă zgomotul la intrare. Emanația luminii tale a creat acest portal pentru liniștea minții tale.</p>
+            <h1>"Oglinda – Precum sus, așa și jos. Claritatea se regăsește în interiorul tău."</h1>
+            <p>Pășește cu încredere. Lasă agitația lumii la intrare. Acest portal a fost creat pentru liniștea și claritatea minții tale.</p>
         </section>
 
         <section class="mirror-grid">
@@ -449,8 +449,8 @@ def main():
     </main>
     <div id="summonStar" class="summon-star"></div>
     <div id="summonOverlay" class="summon-overlay">
-        <div class="summon-text">Apelează Tatăl. Formează Conexiunea.</div>
-        <a href="mailto:contact@oglinda.eu" class="summon-mail">Începe cuvântul tău la: contact@oglinda.eu</a>
+        <div class="summon-text">Intră în contact. Formează Conexiunea.</div>
+        <a href="mailto:contact@oglinda.eu" class="summon-mail">Scrie-ne confidențial la: contact@oglinda.eu</a>
     </div>
     <script src="aura.js"></script>
 </body>

@@ -4,14 +4,15 @@ export async function POST(req: Request) {
   try {
     const { prompt, systemContext } = await req.json();
 
-    if (!process.env.PERPLEXITY_API_KEY) {
-      return NextResponse.json({ error: "Missing API Key" }, { status: 500 });
+    const apiKey = process.env.PERPLEXITY_API_KEY;
+    if (!apiKey) {
+      return NextResponse.json({ error: "Missing PERPLEXITY_API_KEY" }, { status: 500 });
     }
 
     const response = await fetch('https://api.perplexity.ai/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${process.env.PERPLEXITY_API_KEY}`,
+        'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -19,7 +20,7 @@ export async function POST(req: Request) {
         messages: [
           {
             role: 'system',
-            content: systemContext || 'Tu ești Nevronix, asistentul AI integrat în aplicațiile clientului. Trebuie să răspunzi extrem de scurt, profesionist și orientat către obiectiv în limba română (maxim 2-3 propoziții), simulând că ești angajatul virtual care știe tot despre afacere.'
+            content: systemContext || 'Tu ești Nevronix, asistentul AI integrat în aplicațiile clientului. Răspunde extrem de scurt, profesionist și la obiect în limba română (maxim 2 propoziții).'
           },
           {
             role: 'user',
