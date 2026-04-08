@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
+import AiDemoSimulator from "@/components/AiDemoSimulator";
 
 export const metadata: Metadata = {
   title: "AI Digital Human | Angajat Virtual pentru Afacerea Ta | Reverb",
@@ -129,23 +130,9 @@ export default function AIHumansPage() {
       </section>
 
       {/* Video Demo Section */}
-      <section className="relative px-6 lg:px-10 max-w-6xl mx-auto mb-32 z-10">
+      <section className="relative px-6 lg:px-10 max-w-6xl mx-auto mb-32 z-10 w-full">
         <Reveal>
-           <div className="relative aspect-video rounded-3xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm shadow-[0_0_50px_rgba(139,92,246,0.15)] flex justify-center items-center group">
-              <div className="absolute inset-0 bg-[#1a0533]/80 group-hover:bg-[#1a0533]/60 transition-colors z-10 flex flex-col justify-center items-center">
-                 <div className="w-20 h-20 rounded-full border border-white/20 bg-white/10 flex items-center justify-center backdrop-blur-md transition-transform group-hover:scale-110">
-                    <div className="w-0 h-0 border-t-[12px] border-t-transparent border-l-[20px] border-l-white border-b-[12px] border-b-transparent ml-2"></div>
-                 </div>
-                 <p className="mt-6 text-sm uppercase tracking-[0.2em] font-medium text-white/50">Apasă pentru Demo</p>
-              </div>
-              {/* Placeholder Content inside Video Box */}
-              <img 
-                className="absolute inset-0 w-full h-full object-cover rounded-3xl"
-                src="/video_demo.webp"
-                alt="AI Digital Human Demo Video"
-              />
-              <div className="absolute inset-0 bg-gradient-to-br from-[#8b5cf6]/20 to-[#ec4899]/20 pointer-events-none mix-blend-overlay"></div>
-           </div>
+           <AiDemoSimulator />
         </Reveal>
       </section>
 
