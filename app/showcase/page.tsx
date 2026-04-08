@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Industry Showcase — Reverb.ro",
-  description: "Portofoliu aplicat de prezențe digitale. 19 Verticale Absolute, executate cu precizie structurală.",
+  description: "Portofoliu aplicat de prezențe digitale. 20 Verticale Absolute, executate cu precizie structurală.",
 };
 
 const showcases = [
@@ -26,6 +26,7 @@ const showcases = [
   { id: "logistics-hub", name: "Logistics & Cargo", vibe: "Terminal Gate Cobalt", color: "#1D4ED8", description: "Tabele dense simulând plecări din aeroport. Grid rigid pentru logistica de top.", href: "/showcase/logistics-hub" },
   { id: "ai-future", name: "AI Tech Core", vibe: "Holographic Orbital", color: "#06B6D4", description: "Platforme software vectoriale. 3D CSS de finețe reprezentând noduri activate.", href: "/showcase/ai-future" },
   { id: "aura", name: "AURA Retreat", vibe: "Ethereal Glass", color: "#c09054", description: "Aplicație digitală terapeutică (SPA). Meniuri de conștientizare și design fluid ancorat în cognitive ease.", href: "/aura/index.html" },
+  { id: "spiritual-blog", name: "Creativ Noaptea", vibe: "Nocturnal Sacred", color: "#1e3a8a", description: "Platformă curată Midnight-Blue dedicată analizei „bufnițelor de noapte”. Arhitectura somnului, cronotipuri și tradiții antice.", href: "/noapte/index.html" },
 ];
 
 export default function ShowcaseIndex() {
@@ -70,11 +71,11 @@ export default function ShowcaseIndex() {
           </Link>
           <div className="mb-4 text-[10px] font-mono uppercase tracking-[0.4em] transition-colors duration-1000" style={{ color: 'var(--text-faint)' }}>SYS.SHOWCASE_MATRIX_V2</div>
           <h1 className="text-5xl font-medium leading-[1.0] tracking-[-0.03em] md:text-7xl transition-colors duration-1000">
-            19 Verticale<br />
+            20 Verticale<br />
             <span style={{ color: 'var(--text-muted)' }} className="transition-colors duration-1000">Absolute.</span>
           </h1>
           <p className="mt-8 max-w-xl text-lg leading-8 font-sans transition-colors duration-1000" style={{ color: 'var(--text-secondary)' }}>
-            Am depășit stadiul de "teme predefinite". 19 interfețe front-end unice, cu identități tăioase dictate de psihologia fiecărei nișe — de la rigiditatea medicală, până la arhitectura industrială B2B.
+            Am depășit stadiul de "teme predefinite". 20 interfețe front-end unice, cu identități tăioase dictate de psihologia fiecărei nișe — de la rigiditatea medicală, până la arhitectura industrială B2B.
           </p>
         </div>
       </section>
