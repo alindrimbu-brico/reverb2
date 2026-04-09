@@ -10,11 +10,13 @@ const navInfo = {
     { href: "/despre", label: "Despre" },
     { href: "/servicii", label: "Servicii" },
     { href: "/showcase", label: "Showcase" },
+    { href: "/clarity-architecture", label: "Claritate" },
   ],
   en: [
     { href: "/en/about", label: "About" },
     { href: "/en/services", label: "Services" },
     { href: "/en/showcase", label: "Showcase" },
+    { href: "/clarity-architecture", label: "Clarity" },
   ]
 };
 

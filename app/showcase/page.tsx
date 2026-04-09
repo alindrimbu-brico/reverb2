@@ -28,6 +28,7 @@ const showcases = [
   { id: "aura", name: "AURA Retreat", vibe: "Ethereal Glass", color: "#c09054", description: "Aplicație digitală terapeutică (SPA). Meniuri de conștientizare și design fluid ancorat în cognitive ease.", href: "/aura/index.html" },
   { id: "noapte", name: "Creativ Noaptea", vibe: "Nocturnal Sacred", color: "#1e3a8a", description: "Platformă curată Midnight-Blue dedicată analizei „bufnițelor de noapte”. Arhitectura somnului, cronotipuri și tradiții antice.", href: "/noapte/index.html" },
   { id: "spiritual-app", name: "Inteligență Spirituală (APP)", vibe: "Cognitive Reprogramming", color: "#9333ea", description: "Aplicație web complexă (React State). Motor interactiv pentru dizolvarea auto-sabotajului pe baza psihologiei Brianna Wiest.", href: "/showcase/spiritual-blog" },
+  { id: "metanoia", name: "Metanoia Studio", vibe: "Ethereal Sacred", color: "#D4AF37", description: "Arhitectura Clarității. Eliminarea zgomotului vizual și metoda flip cards aplicată pentru conținut filozofic profund.", href: "/showcase/metanoia" },
 ];
 
 export default function ShowcaseIndex() {

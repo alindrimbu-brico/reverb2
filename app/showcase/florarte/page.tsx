@@ -60,7 +60,7 @@ export default function FlorarteShowcase() {
         </div>
       </section>
 
-      {/* ── Colecțiile (Zylaris Blur Group) ── */}
+      {/* ── Colecțiile (Reverb Blur Group) ── */}
       <section className="py-24 md:py-32 bg-white relative">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <Reveal>
@@ -76,7 +76,7 @@ export default function FlorarteShowcase() {
             {categories.map((cat, i) => (
               <Reveal key={cat.id} delay={i * 80}>
                 <div className="group relative block h-full rounded-2xl">
-                  {/* Background-ul Zylaris float-a/b/c */}
+                  {/* Background-ul Reverb float-a/b/c */}
                   <div 
                     className="absolute inset-0 tab-blur-item border border-[#2C3831]/5 bg-[#FAF9F5] rounded-2xl"
                   ></div>
@@ -135,7 +135,7 @@ export default function FlorarteShowcase() {
 
       {/* ── Footer Animatic & Cald ── */}
       <footer className="relative bg-white py-32 text-center border-t border-[#2C3831]/5 overflow-hidden">
-        {/* Lumini de fundal plutitoare (Zylaris effect soft) */}
+        {/* Lumini de fundal plutitoare (Reverb effect soft) */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#4E6E59]/[0.03] rounded-full blur-[80px] float-item"></div>
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#d9ab55]/[0.03] rounded-full blur-[80px] float-item delay-3"></div>
 
