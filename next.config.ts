@@ -9,6 +9,20 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  rewrites: async () => ({
+    beforeFiles: [
+      {
+        source: '/:path*',
+        destination: '/aura/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'oglinda.eu',
+          },
+        ],
+      },
+    ],
+  }),
 };
 
 export default nextConfig;
