@@ -44,13 +44,13 @@ export default function MegaClarityPage() {
 
         <Reveal delay={240}>
           <div className="flex justify-center gap-6 flex-wrap">
-            <Link href="#philosophy" className="px-8 py-3 border border-amber-500/50 hover:bg-amber-500/10 rounded-lg transition-all text-sm uppercase tracking-widest font-bold">
+            <Link href="#philosophy" className="px-8 py-3 border border-amber-500/50 hover:bg-amber-500/10 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(217,119,6,0.3)] rounded-lg transition-all duration-300 text-sm uppercase tracking-widest font-bold">
               Filozofie
             </Link>
-            <Link href="#architecture" className="px-8 py-3 bg-amber-600 hover:bg-amber-500 rounded-lg transition-all text-sm uppercase tracking-widest font-bold text-black">
+            <Link href="#architecture" className="px-8 py-3 bg-amber-600 hover:bg-amber-500 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(217,119,6,0.5)] rounded-lg transition-all duration-300 text-sm uppercase tracking-widest font-bold text-black">
               Arhitectură
             </Link>
-            <Link href="#structure" className="px-8 py-3 border border-amber-500/50 hover:bg-amber-500/10 rounded-lg transition-all text-sm uppercase tracking-widest font-bold">
+            <Link href="#structure" className="px-8 py-3 border border-amber-500/50 hover:bg-amber-500/10 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(217,119,6,0.3)] rounded-lg transition-all duration-300 text-sm uppercase tracking-widest font-bold">
               Structură
             </Link>
           </div>
@@ -70,8 +70,8 @@ export default function MegaClarityPage() {
         <div className="grid lg:grid-cols-3 gap-8 mb-16">
           {/* Auditul Distilare */}
           <Reveal delay={100}>
-            <div className="border border-amber-500/20 rounded-2xl p-10 bg-gradient-to-br from-amber-950/20 to-transparent backdrop-blur hover:border-amber-500/40 transition-all group">
-              <div className="w-14 h-14 rounded-full border-2 border-amber-500/50 flex items-center justify-center mb-6 group-hover:bg-amber-500/10 transition-all">
+            <div className="border border-amber-500/20 rounded-2xl p-10 bg-gradient-to-br from-amber-950/20 to-transparent backdrop-blur hover:border-amber-500/40 hover:-translate-y-2 hover:shadow-[0_10px_40px_-10px_rgba(217,119,6,0.2)] transition-all duration-300 group">
+              <div className="w-14 h-14 rounded-full border-2 border-amber-500/50 flex items-center justify-center mb-6 group-hover:bg-amber-500/20 group-hover:scale-110 transition-all duration-300">
                 <span className="text-2xl">✨</span>
               </div>
               <h3 className="text-2xl font-light text-amber-300 mb-4">Auditrul Distilării</h3>
@@ -86,8 +86,8 @@ export default function MegaClarityPage() {
 
           {/* Decizii Binare */}
           <Reveal delay={150}>
-            <div className="border border-amber-500/20 rounded-2xl p-10 bg-gradient-to-br from-amber-950/20 to-transparent backdrop-blur hover:border-amber-500/40 transition-all group">
-              <div className="w-14 h-14 rounded-full border-2 border-amber-500/50 flex items-center justify-center mb-6 group-hover:bg-amber-500/10 transition-all">
+            <div className="border border-amber-500/20 rounded-2xl p-10 bg-gradient-to-br from-amber-950/20 to-transparent backdrop-blur hover:border-amber-500/40 hover:-translate-y-2 hover:shadow-[0_10px_40px_-10px_rgba(217,119,6,0.2)] transition-all duration-300 group">
+              <div className="w-14 h-14 rounded-full border-2 border-amber-500/50 flex items-center justify-center mb-6 group-hover:bg-amber-500/20 group-hover:scale-110 transition-all duration-300">
                 <span className="text-2xl">⚖️</span>
               </div>
               <h3 className="text-2xl font-light text-amber-300 mb-4">Decizii Binare</h3>
@@ -102,8 +102,8 @@ export default function MegaClarityPage() {
 
           {/* Claritatea ca Forță */}
           <Reveal delay={200}>
-            <div className="border border-amber-500/20 rounded-2xl p-10 bg-gradient-to-br from-amber-950/20 to-transparent backdrop-blur hover:border-amber-500/40 transition-all group">
-              <div className="w-14 h-14 rounded-full border-2 border-amber-500/50 flex items-center justify-center mb-6 group-hover:bg-amber-500/10 transition-all">
+            <div className="border border-amber-500/20 rounded-2xl p-10 bg-gradient-to-br from-amber-950/20 to-transparent backdrop-blur hover:border-amber-500/40 hover:-translate-y-2 hover:shadow-[0_10px_40px_-10px_rgba(217,119,6,0.2)] transition-all duration-300 group">
+              <div className="w-14 h-14 rounded-full border-2 border-amber-500/50 flex items-center justify-center mb-6 group-hover:bg-amber-500/20 group-hover:scale-110 transition-all duration-300">
                 <span className="text-2xl">🔥</span>
               </div>
               <h3 className="text-2xl font-light text-amber-300 mb-4">Forță Activă</h3>
@@ -229,8 +229,8 @@ export default function MegaClarityPage() {
             { num: "4", label: "EXERCIȚIU", desc: "Practic", icon: "⚙️" }
           ].map((step, i) => (
             <Reveal key={i} delay={i * 80}>
-              <div className="border border-amber-500/20 rounded-2xl p-8 bg-gradient-to-br from-amber-950/20 to-transparent backdrop-blur text-center hover:border-amber-500/40 transition-all group">
-                <div className="text-4xl font-light text-amber-400 mb-3">{step.num}</div>
+              <div className="border border-amber-500/20 rounded-2xl p-8 bg-gradient-to-br from-amber-950/20 to-transparent backdrop-blur text-center hover:border-amber-500/40 hover:-translate-y-2 hover:shadow-[0_10px_40px_-10px_rgba(217,119,6,0.2)] transition-all duration-300 group">
+                <div className="text-4xl font-light text-amber-400 mb-3 transform group-hover:scale-110 transition-transform duration-300">{step.num}</div>
                 <div className="text-3xl mb-3">{step.icon}</div>
                 <h3 className="text-xs font-bold uppercase tracking-widest text-amber-300 mb-2">{step.label}</h3>
                 <p className="text-xs text-white/60 font-light">{step.desc}</p>
