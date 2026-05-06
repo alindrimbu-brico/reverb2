@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgress";
+import Script from "next/script";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist-sans" });
 
@@ -75,6 +76,28 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        
+        {/* NevronixAI SDK */}
+        <Script src="https://nevronix.ai/nevronix-sdk.js" strategy="lazyOnload" />
+        <Script id="nevronix-init" strategy="lazyOnload">
+          {`
+            // Așteptăm încărcarea SDK-ului
+            let checkInterval = setInterval(function() {
+              if (window.NevronixAI) {
+                clearInterval(checkInterval);
+                window.NevronixAI.init({
+                  apiUrl: 'https://platform.nevronix.ai?id=59&s=efb92348-b235-4209-974e-4f8a69b14dee',
+                  position: 'bottom-right',
+                  iframeWidth: '340px',
+                  iframeHeight: '340px',
+                  iframeMobileWidth: '300px',
+                  iframeMobileHeight: '300px',
+                  buttonText: 'Talk to Anna',
+                });
+              }
+            }, 500);
+          `}
+        </Script>
       </body>
     </html>
   );

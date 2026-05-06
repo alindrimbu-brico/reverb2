@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import Logo from "@/components/Logo";
 
 const navInfo = {
@@ -33,6 +34,17 @@ export default function Footer() {
   const pathname = usePathname() || "";
   const isEn = pathname.startsWith("/en");
   const nav = isEn ? navInfo.en : navInfo.ro;
+  
+  const [activeTab, setActiveTab] = useState("navigare");
+
+  const showcaseLinks = [
+    { href: "/showcase", label: "Index Matrice" },
+    { href: "/showcase/the-anchor", label: "The Anchor" },
+    { href: "/showcase/jim-curtis", label: "Jim Curtis" },
+    { href: "/showcase/vespa-urban", label: "Veloce Mobility" },
+    { href: "/ai-humans", label: "AI Humans" },
+    { href: "/nevronix", label: "Nevronix Core" },
+  ];
 
   const translations = {
     tagline1: isEn ? "Structure" : "Structură",
@@ -70,21 +82,62 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Coloana 2: Matricea de Navigare */}
-          <div className="p-8 lg:p-16 lg:col-span-4 xl:col-span-5 flex items-center bg-[#f2eee7]/50 shadow-inner rounded-3xl m-4 lg:m-0 lg:rounded-none">
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 w-full">
-              {nav.map(({ href, label }) => (
-                <Link 
-                  key={href} 
-                  href={href} 
-                  className="group flex justify-center items-center w-full rounded-full border border-[#1d2731] bg-transparent px-4 py-2.5 text-[#1d2731] transition-all duration-300 hover:bg-[#1d2731]/5 hover:-translate-y-0.5"
-                >
-                  <span className="text-[9px] font-bold uppercase tracking-[0.2em] transition-transform duration-300 group-hover:scale-[1.02]">
-                    {label}
-                  </span>
-                </Link>
-              ))}
+          {/* Coloana 2: Matricea de Navigare (Tab-uri Funcționale) */}
+          <div className="p-8 lg:p-12 lg:col-span-4 xl:col-span-5 flex flex-col bg-[#f2eee7]/50 shadow-inner rounded-3xl m-4 lg:m-0 lg:rounded-none">
+            
+            {/* Headers Tab-uri */}
+            <div className="flex items-center gap-2 mb-8 border-b border-[#1d2731]/10 pb-4">
+               <button 
+                  onClick={() => setActiveTab("navigare")} 
+                  className={`text-[10px] font-bold uppercase tracking-[0.2em] transition-all px-3 py-1.5 rounded-full ${activeTab === "navigare" ? "bg-[#1d2731] text-white" : "text-[#1d2731]/50 hover:text-[#1d2731]"}`}
+               >
+                  Navigare
+               </button>
+               <button 
+                  onClick={() => setActiveTab("ecosistem")} 
+                  className={`text-[10px] font-bold uppercase tracking-[0.2em] transition-all px-3 py-1.5 rounded-full ${activeTab === "ecosistem" ? "bg-[#1d2731] text-white" : "text-[#1d2731]/50 hover:text-[#1d2731]"}`}
+               >
+                  Ecosistem AI
+               </button>
             </div>
+
+            {/* Conținut Tab-uri */}
+            <div className="flex-1 w-full relative">
+               {/* TAB: NAVIGARE */}
+               <div className={`transition-all duration-500 absolute w-full ${activeTab === "navigare" ? "opacity-100 z-10 translate-x-0" : "opacity-0 -z-10 translate-x-4 pointer-events-none"}`}>
+                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                   {nav.map(({ href, label }) => (
+                     <Link 
+                       key={href} 
+                       href={href} 
+                       className="group flex justify-center items-center w-full rounded-full border border-[#1d2731]/20 bg-transparent px-3 py-2 text-[#1d2731] transition-all duration-300 hover:bg-[#1d2731]/5 hover:border-[#1d2731]/50"
+                     >
+                       <span className="text-[9px] font-bold uppercase tracking-[0.2em] transition-transform duration-300 group-hover:scale-[1.02]">
+                         {label}
+                       </span>
+                     </Link>
+                   ))}
+                 </div>
+               </div>
+
+               {/* TAB: ECOSISTEM */}
+               <div className={`transition-all duration-500 absolute w-full ${activeTab === "ecosistem" ? "opacity-100 z-10 translate-x-0" : "opacity-0 -z-10 -translate-x-4 pointer-events-none"}`}>
+                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-2">
+                   {showcaseLinks.map(({ href, label }) => (
+                     <Link 
+                       key={href} 
+                       href={href} 
+                       className="group flex justify-center items-center w-full rounded-full border border-[#8A1C14]/30 bg-[#8A1C14]/5 px-3 py-2 text-[#8A1C14] transition-all duration-300 hover:bg-[#8A1C14] hover:text-white"
+                     >
+                       <span className="text-[9px] font-bold uppercase tracking-[0.2em] transition-transform duration-300 group-hover:scale-[1.02]">
+                         {label}
+                       </span>
+                     </Link>
+                   ))}
+                 </div>
+               </div>
+            </div>
+            
           </div>
 
           {/* Coloana 3: Comunicații & Date Oficiale */}
