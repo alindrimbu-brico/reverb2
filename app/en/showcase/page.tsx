@@ -25,6 +25,7 @@ const showcases = [
   { id: "event-music", name: "Festival Promoters", vibe: "Kinetic Blob Marquee", color: "#EC4899", description: "Liquid shapes combined with massive infinite bands of artists.", href: "/en/showcase/event-music" },
   { id: "logistics-hub", name: "Logistics & Cargo", vibe: "Terminal Gate Cobalt", color: "#1D4ED8", description: "Dense tables simulating airport departures. Rigid grid for top-tier logistics.", href: "/en/showcase/logistics-hub" },
   { id: "ai-future", name: "AI Tech Core", vibe: "Holographic Orbital", color: "#06B6D4", description: "Vector software platforms. Fine CSS 3D representing activated neural nodes.", href: "/en/showcase/ai-future" },
+  { id: "ai-first-framework", name: "AI-First Framework", vibe: "Operating System Logic", color: "#6366f1", description: "Premium presentation blog for the AI-First business transformation framework. Technical typography, indigo-cyan gradients and a 5-chapter narrative on AI as the company's operating system.", href: "https://alindrimbu-brico.github.io/ai-first-framework/" },
 ];
 
 export default function ShowcaseIndexEN() {
@@ -80,8 +81,11 @@ export default function ShowcaseIndexEN() {
 
       {/* Grid */}
       <section className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-24 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {showcases.map((s) => (
-          <Link href={s.href} key={s.id} className="showcase-card group relative border transition-all duration-1000 p-8 lg:p-10 flex flex-col h-full overflow-hidden rounded-xl shadow-sm hover:shadow-xl hover:-translate-y-1" style={{ borderColor: 'var(--border-color)', backgroundColor: 'var(--card-bg)' }}>
+        {showcases.map((s) => {
+          const isExternal = /^https?:\/\//.test(s.href);
+          const linkProps = isExternal ? { target: "_blank" as const, rel: "noopener noreferrer" } : {};
+          return (
+          <Link href={s.href} key={s.id} {...linkProps} className="showcase-card group relative border transition-all duration-1000 p-8 lg:p-10 flex flex-col h-full overflow-hidden rounded-xl shadow-sm hover:shadow-xl hover:-translate-y-1" style={{ borderColor: 'var(--border-color)', backgroundColor: 'var(--card-bg)' }}>
             
             <div className="mb-8 z-20">
               <span className="inline-block px-3 py-1 font-mono text-[9px] uppercase tracking-widest text-white shadow-md rounded-full" style={{ backgroundColor: s.color }}>
@@ -97,7 +101,8 @@ export default function ShowcaseIndexEN() {
               <span className="transition-all duration-500 group-hover:translate-x-1 text-sm font-sans" style={{ color: s.color }}>→</span>
             </div>
           </Link>
-        ))}
+          );
+        })}
       </section>
     </div>
     </>

@@ -98,8 +98,11 @@ export default function ShowcaseIndex() {
 
       {/* Grid */}
       <section className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-24 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {showcases.map((s) => (
-          <Link href={s.href} key={s.id} className="showcase-card group relative border transition-all duration-1000 p-8 lg:p-10 flex flex-col h-full overflow-hidden rounded-xl shadow-sm hover:shadow-xl hover:-translate-y-1" style={{ borderColor: 'var(--border-color)', backgroundColor: 'var(--card-bg)' }}>
+        {showcases.map((s) => {
+          const isExternal = /^https?:\/\//.test(s.href);
+          const linkProps = isExternal ? { target: "_blank" as const, rel: "noopener noreferrer" } : {};
+          return (
+          <Link href={s.href} key={s.id} {...linkProps} className="showcase-card group relative border transition-all duration-1000 p-8 lg:p-10 flex flex-col h-full overflow-hidden rounded-xl shadow-sm hover:shadow-xl hover:-translate-y-1" style={{ borderColor: 'var(--border-color)', backgroundColor: 'var(--card-bg)' }}>
             
             <div className="mb-8 z-20">
               <span className="inline-block px-3 py-1 font-mono text-[9px] uppercase tracking-widest text-white shadow-md rounded-full" style={{ backgroundColor: s.color }}>
@@ -115,7 +118,8 @@ export default function ShowcaseIndex() {
               <span className="transition-all duration-500 group-hover:translate-x-1 text-sm font-sans" style={{ color: s.color }}>→</span>
             </div>
           </Link>
-        ))}
+          );
+        })}
       </section>
     </div>
     </>
