@@ -37,7 +37,7 @@ export default function AbyssIOGame() {
   const [mass, setMass] = useState(INITIAL_RADIUS);
   
   // Refs for Engine Loop
-  const requestRef = useRef<number>();
+  const requestRef = useRef<number>(0);
   const playerRef = useRef<Entity>({ id: "p1", x: WORLD_SIZE/2, y: WORLD_SIZE/2, r: INITIAL_RADIUS, vx: 0, vy: 0, color: "#00E5FF", type: "player" });
   const enemiesRef = useRef<Entity[]>([]);
   const foodRef = useRef<Entity[]>([]);
