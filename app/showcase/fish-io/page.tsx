@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, Play, ShieldAlert, ShoppingCart, Zap } from "lucide-react";
+import { ArrowLeft, Play, ShieldAlert, ShoppingCart, Zap, Trophy, History, Palette } from "lucide-react";
 
 // --- ENGINE CONSTANTS ---
 const WORLD_SIZE = 3000;
@@ -10,6 +10,13 @@ const INITIAL_RADIUS = 20;
 const SPEED_FACTOR = 4;
 const ENEMY_COUNT = 30;
 const FOOD_COUNT = 400;
+
+const THEMES = [
+  { id: "cyan", color: "#00E5FF", name: "Cyber Cyan" },
+  { id: "pink", color: "#FF00FF", name: "Plasma Pink" },
+  { id: "green", color: "#00FF00", name: "Neon Green" },
+  { id: "gold", color: "#FFD700", name: "Solar Gold" },
+];
 
 // --- TYPES ---
 interface Vector {
@@ -26,26 +33,117 @@ interface Entity {
   color: string;
   type: "player" | "enemy" | "food";
 }
+interface MatchHistory {
+  date: string;
+  score: number;
+  mass: number;
+}
+
+// --- AUDIO ENGINE ---
+class AudioEngine {
+  ctx: AudioContext | null = null;
+  osc: OscillatorNode | null = null;
+  gain: GainNode | null = null;
+
+  init() {
+    if (this.ctx) return;
+    this.ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+    this.osc = this.ctx.createOscillator();
+    this.gain = this.ctx.createGain();
+    
+    // Wave pattern for whistling
+    this.osc.type = "sine"; 
+    this.osc.frequency.value = 400; 
+    
+    this.gain.gain.value = 0; 
+    
+    this.osc.connect(this.gain);
+    this.gain.connect(this.ctx.destination);
+    
+    this.osc.start();
+  }
+
+  updateProximity(closestDistance: number, playerRadius: number) {
+    if (!this.gain || !this.osc || !this.ctx) return;
+    const maxThreatDist = 800; // distanța la care se aude
+
+    if (closestDistance > maxThreatDist) {
+       this.gain.gain.setTargetAtTime(0, this.ctx.currentTime, 0.1);
+       return;
+    }
+
+    const minDistance = playerRadius * 1.5;
+    const intensity = 1 - (closestDistance - minDistance) / (maxThreatDist - minDistance);
+    const clampedIntensity = Math.max(0, Math.min(1, Math.pow(intensity, 2))); // parabolic pt dramatism
+
+    // Volum max 0.4
+    this.gain.gain.setTargetAtTime(clampedIntensity * 0.4, this.ctx.currentTime, 0.1);
+    
+    // Frecvența fluieratului crește (de la 400Hz spre 1600Hz)
+    this.osc.frequency.setTargetAtTime(400 + clampedIntensity * 1200, this.ctx.currentTime, 0.1);
+  }
+
+  stop() {
+    if (this.gain && this.ctx) {
+       this.gain.gain.setTargetAtTime(0, this.ctx.currentTime, 0.1);
+    }
+  }
+}
 
 export default function AbyssIOGame() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const audioRef = useRef<AudioEngine | null>(null);
   
-  // Game States
-  const [gameState, setGameState] = useState<"menu" | "playing" | "gameover">("menu");
+  // States
+  const [gameState, setGameState] = useState<"menu" | "playing" | "gameover" | "history">("menu");
+  const [theme, setTheme] = useState(THEMES[0].color);
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
   const [mass, setMass] = useState(INITIAL_RADIUS);
+  const [history, setHistory] = useState<MatchHistory[]>([]);
   
+  // Load History & Highscore on mount
+  useEffect(() => {
+    const savedHistory = localStorage.getItem('abyss_history');
+    if (savedHistory) {
+      const parsed: MatchHistory[] = JSON.parse(savedHistory);
+      setHistory(parsed);
+      const topScore = parsed.reduce((max, h) => Math.max(max, h.score), 0);
+      setHighScore(topScore);
+    }
+  }, []);
+
+  const saveToHistory = (finalScore: number, finalMass: number) => {
+    const entry: MatchHistory = {
+      date: new Date().toLocaleString("ro-RO"),
+      score: finalScore,
+      mass: Math.floor(finalMass)
+    };
+    const newHistory = [entry, ...history].slice(0, 10); // Keep top 10 most recent
+    setHistory(newHistory);
+    localStorage.setItem('abyss_history', JSON.stringify(newHistory));
+    
+    if (finalScore > highScore) setHighScore(finalScore);
+  };
+
   // Refs for Engine Loop
   const requestRef = useRef<number>(0);
-  const playerRef = useRef<Entity>({ id: "p1", x: WORLD_SIZE/2, y: WORLD_SIZE/2, r: INITIAL_RADIUS, vx: 0, vy: 0, color: "#00E5FF", type: "player" });
+  const playerRef = useRef<Entity>({ id: "p1", x: WORLD_SIZE/2, y: WORLD_SIZE/2, r: INITIAL_RADIUS, vx: 0, vy: 0, color: theme, type: "player" });
   const enemiesRef = useRef<Entity[]>([]);
   const foodRef = useRef<Entity[]>([]);
   const mouseRef = useRef<Vector>({ x: 0, y: 0 });
   const cameraRef = useRef<Vector>({ x: WORLD_SIZE/2, y: WORLD_SIZE/2 });
 
-  // Init World
+  // Update player color when theme changes
+  useEffect(() => {
+    playerRef.current.color = theme;
+  }, [theme]);
+
   const initWorld = (premium = false) => {
+    // Initialize Audio
+    if (!audioRef.current) audioRef.current = new AudioEngine();
+    audioRef.current.init();
+
     playerRef.current = { 
       id: "p1", 
       x: WORLD_SIZE/2, 
@@ -53,7 +151,7 @@ export default function AbyssIOGame() {
       r: premium ? INITIAL_RADIUS * 3 : INITIAL_RADIUS, 
       vx: 0, 
       vy: 0, 
-      color: "#00E5FF", 
+      color: theme, 
       type: "player" 
     };
     
@@ -64,10 +162,10 @@ export default function AbyssIOGame() {
         id: `e${i}`,
         x: Math.random() * WORLD_SIZE,
         y: Math.random() * WORLD_SIZE,
-        r: Math.random() * 60 + 10, // 10 to 70 radius
+        r: Math.random() * 60 + 10,
         vx: (Math.random() - 0.5) * 4,
         vy: (Math.random() - 0.5) * 4,
-        color: "#FF0055",
+        color: "#FF0055", // All enemies are menacing red
         type: "enemy"
       });
     }
@@ -99,7 +197,10 @@ export default function AbyssIOGame() {
 
   // The Core Loop
   useEffect(() => {
-    if (gameState !== "playing") return;
+    if (gameState !== "playing") {
+      audioRef.current?.stop();
+      return;
+    }
 
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -107,7 +208,7 @@ export default function AbyssIOGame() {
     if (!ctx) return;
 
     const update = () => {
-      // 1. Update Player Physics (Steer towards mouse relative to center of screen)
+      // 1. Update Player Physics
       const p = playerRef.current;
       const hw = window.innerWidth / 2;
       const hh = window.innerHeight / 2;
@@ -117,7 +218,6 @@ export default function AbyssIOGame() {
       const dist = Math.hypot(dx, dy);
       
       if (dist > 0) {
-        // Normalize and scale speed based on mass (bigger = slower)
         const speed = Math.max(1, SPEED_FACTOR * (30 / p.r)); 
         p.vx = (dx / dist) * speed;
         p.vy = (dy / dist) * speed;
@@ -126,42 +226,42 @@ export default function AbyssIOGame() {
       p.x += p.vx;
       p.y += p.vy;
       
-      // Clamp player to world
       p.x = Math.max(p.r, Math.min(WORLD_SIZE - p.r, p.x));
       p.y = Math.max(p.r, Math.min(WORLD_SIZE - p.r, p.y));
 
-      // Update Camera (Lerp towards player)
       cameraRef.current.x += (p.x - cameraRef.current.x) * 0.1;
       cameraRef.current.y += (p.y - cameraRef.current.y) * 0.1;
 
       // 2. Update Enemies AI
+      let closestEnemyDist = Infinity;
+
       enemiesRef.current.forEach(e => {
-        // Simple Wander
         if (Math.random() < 0.02) {
           e.vx += (Math.random() - 0.5) * 2;
           e.vy += (Math.random() - 0.5) * 2;
         }
 
-        // Flee or Chase Player
         const pdx = p.x - e.x;
         const pdy = p.y - e.y;
         const pdist = Math.hypot(pdx, pdy);
+        
+        // Audio Logic: Track closest enemy that is BIGGER than player
+        if (e.r > p.r) {
+          if (pdist < closestEnemyDist) closestEnemyDist = pdist;
+        }
         
         if (pdist < 400) {
           const forceX = pdx / pdist;
           const forceY = pdy / pdist;
           if (p.r > e.r * 1.1) {
-            // Flee
             e.vx -= forceX * 0.1;
             e.vy -= forceY * 0.1;
           } else if (p.r < e.r * 0.9) {
-            // Chase
             e.vx += forceX * 0.1;
             e.vy += forceY * 0.1;
           }
         }
 
-        // Limit speed
         const speed = Math.hypot(e.vx, e.vy);
         const maxSpeed = Math.max(1, SPEED_FACTOR * (30 / e.r));
         if (speed > maxSpeed) {
@@ -172,10 +272,12 @@ export default function AbyssIOGame() {
         e.x += e.vx;
         e.y += e.vy;
 
-        // Bounce walls
         if (e.x < e.r || e.x > WORLD_SIZE - e.r) e.vx *= -1;
         if (e.y < e.r || e.y > WORLD_SIZE - e.r) e.vy *= -1;
       });
+
+      // Update Audio Proximity
+      audioRef.current?.updateProximity(closestEnemyDist, p.r);
 
       // 3. Collision Detection
       let currentMass = p.r;
@@ -188,7 +290,7 @@ export default function AbyssIOGame() {
         if (dist < p.r) {
           currentMass += 0.5;
           currentScore += 10;
-          return false; // eaten
+          return false;
         }
         return true;
       });
@@ -196,14 +298,12 @@ export default function AbyssIOGame() {
       // Enemies vs Player
       enemiesRef.current = enemiesRef.current.filter(e => {
         const dist = Math.hypot(p.x - e.x, p.y - e.y);
-        if (dist < p.r + e.r - Math.min(p.r, e.r)*0.3) { // 30% overlap required
+        if (dist < p.r + e.r - Math.min(p.r, e.r)*0.3) { 
           if (p.r > e.r * 1.1) {
-            // Player eats enemy
             currentMass += e.r * 0.2;
             currentScore += Math.floor(e.r * 10);
             return false;
           } else if (e.r > p.r * 1.1) {
-            // Enemy eats player
             isDead = true;
           }
         }
@@ -211,7 +311,8 @@ export default function AbyssIOGame() {
       });
 
       if (isDead) {
-        setHighScore(prev => Math.max(prev, currentScore));
+        audioRef.current?.stop();
+        saveToHistory(currentScore, currentMass);
         setGameState("gameover");
         return;
       }
@@ -220,7 +321,6 @@ export default function AbyssIOGame() {
       setMass(Math.floor(currentMass));
       setScore(currentScore);
 
-      // Respawn food if low
       if (foodRef.current.length < FOOD_COUNT / 2) {
         for (let i=0; i<50; i++) {
           foodRef.current.push({
@@ -234,7 +334,6 @@ export default function AbyssIOGame() {
     };
 
     const draw = () => {
-      // Setup
       ctx.fillStyle = "#050B14";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       
@@ -246,8 +345,8 @@ export default function AbyssIOGame() {
       ctx.save();
       ctx.translate(hw - cx, hh - cy);
 
-      // Draw Grid (Cyber Matrix)
-      ctx.strokeStyle = "rgba(0, 229, 255, 0.05)";
+      // Grid
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.03)";
       ctx.lineWidth = 1;
       const gridSize = 100;
       for (let x = 0; x <= WORLD_SIZE; x += gridSize) {
@@ -257,14 +356,11 @@ export default function AbyssIOGame() {
         ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(WORLD_SIZE, y); ctx.stroke();
       }
 
-      // Draw World Borders
       ctx.strokeStyle = "#FF0055";
       ctx.lineWidth = 5;
       ctx.strokeRect(0, 0, WORLD_SIZE, WORLD_SIZE);
 
-      // Draw Entities
       const drawEntity = (e: Entity) => {
-        // Skip rendering if offscreen
         if (e.x < cx - hw - e.r || e.x > cx + hw + e.r ||
             e.y < cy - hh - e.r || e.y > cy + hh + e.r) return;
 
@@ -272,14 +368,11 @@ export default function AbyssIOGame() {
         ctx.arc(e.x, e.y, e.r, 0, Math.PI * 2);
         ctx.fillStyle = e.color;
         
-        // Neon Glow
         ctx.shadowBlur = e.type === 'food' ? 5 : 20;
         ctx.shadowColor = e.color;
-        
         ctx.fill();
         ctx.shadowBlur = 0;
 
-        // Eyes for fish
         if (e.type !== 'food') {
           const angle = Math.atan2(e.vy, e.vx);
           const eyeDist = e.r * 0.5;
@@ -318,9 +411,8 @@ export default function AbyssIOGame() {
     return () => {
       if (requestRef.current) cancelAnimationFrame(requestRef.current);
     };
-  }, [gameState, score]); // score dependency to ensure closure updates, though refs handle physics
+  }, [gameState, score]);
 
-  // Window Resize & Mouse Events
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -344,12 +436,12 @@ export default function AbyssIOGame() {
   }, []);
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden bg-[#050B14] font-mono selection:bg-[#00E5FF] selection:text-black">
+    <div className="relative w-screen h-screen overflow-hidden bg-[#050B14] font-mono selection:bg-white selection:text-black">
       
       {/* CANAVAS ENGINE */}
       <canvas 
         ref={canvasRef} 
-        className={`absolute inset-0 cursor-crosshair ${gameState === 'playing' ? 'opacity-100' : 'opacity-30 blur-sm'} transition-all duration-1000`} 
+        className={`absolute inset-0 cursor-crosshair ${gameState === 'playing' ? 'opacity-100' : 'opacity-10 blur-sm'} transition-all duration-1000`} 
       />
 
       {/* REVERB NAV OVERLAY */}
@@ -362,12 +454,12 @@ export default function AbyssIOGame() {
       {/* GAME UI IN-PLAY */}
       {gameState === "playing" && (
         <div className="absolute top-6 right-6 z-40 flex flex-col items-end gap-2 text-right">
-          <div className="bg-[#00E5FF]/10 border border-[#00E5FF]/30 px-4 py-2 rounded-lg backdrop-blur-md">
-             <div className="text-[10px] text-[#00E5FF] uppercase tracking-widest font-bold mb-1">SCORE</div>
+          <div className="bg-white/5 border border-white/10 px-4 py-2 rounded-lg backdrop-blur-md" style={{ borderColor: `${theme}40` }}>
+             <div className="text-[10px] uppercase tracking-widest font-bold mb-1" style={{ color: theme }}>SCORE</div>
              <div className="text-2xl text-white font-bold">{score}</div>
           </div>
-          <div className="bg-[#FF0055]/10 border border-[#FF0055]/30 px-4 py-2 rounded-lg backdrop-blur-md">
-             <div className="text-[10px] text-[#FF0055] uppercase tracking-widest font-bold mb-1">MASS (RADIUS)</div>
+          <div className="bg-white/5 border border-white/10 px-4 py-2 rounded-lg backdrop-blur-md" style={{ borderColor: `${theme}40` }}>
+             <div className="text-[10px] uppercase tracking-widest font-bold mb-1" style={{ color: theme }}>MASS (RADIUS)</div>
              <div className="text-lg text-white font-bold">{mass}</div>
           </div>
         </div>
@@ -376,38 +468,64 @@ export default function AbyssIOGame() {
       {/* MENU STATE */}
       {gameState === "menu" && (
         <div className="absolute inset-0 z-50 flex items-center justify-center p-4">
-           <div className="max-w-xl w-full bg-[#0A1220]/90 border border-[#00E5FF]/20 rounded-2xl p-10 backdrop-blur-xl shadow-[0_0_50px_rgba(0,229,255,0.1)] text-center">
-              <div className="inline-flex items-center justify-center p-3 rounded-full bg-[#00E5FF]/10 text-[#00E5FF] mb-6">
+           <div className="max-w-xl w-full bg-[#0A1220]/90 border rounded-2xl p-10 backdrop-blur-xl transition-colors duration-500 text-center" style={{ borderColor: `${theme}40`, boxShadow: `0 0 50px ${theme}10` }}>
+              <div className="inline-flex items-center justify-center p-3 rounded-full mb-6 transition-colors duration-500" style={{ backgroundColor: `${theme}15`, color: theme }}>
                  <Zap size={32} />
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-2 tracking-tighter">Abyss.io</h1>
-              <p className="text-[#00E5FF] uppercase tracking-[0.3em] text-xs font-bold mb-8">Reverb Engine Showcase</p>
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-2 tracking-tighter">Abyss.io <span className="text-xs align-top bg-white/10 px-2 py-1 rounded text-white/50 tracking-widest">V2</span></h1>
+              <p className="uppercase tracking-[0.3em] text-xs font-bold mb-8 transition-colors duration-500" style={{ color: theme }}>Reverb Engine Showcase</p>
               
-              <div className="text-white/60 text-sm leading-relaxed mb-10 space-y-4">
-                 <p>Demonstrație de randare HTML5 Canvas integrată în arhitectura Next.js. O experiență 60FPS fluidă, fizică spațială și AI comportamental.</p>
-                 <p className="p-3 bg-white/5 rounded text-xs border border-white/10">
-                   <strong>Reguli:</strong> Mută mouse-ul pentru a înota. Mănâncă verde (plancton) și pești mai mici. Fugi de roșu masiv. Supraviețuiește!
-                 </p>
+              {/* Color Picker / Theme Selector */}
+              <div className="mb-8 p-4 bg-white/5 rounded-xl border border-white/10">
+                 <div className="flex items-center justify-center gap-2 mb-4 text-[10px] text-white/50 uppercase tracking-widest font-bold">
+                   <Palette size={14} /> Alege Pielea Jucătorului
+                 </div>
+                 <div className="flex gap-4 justify-center">
+                    {THEMES.map(t => (
+                      <button
+                        key={t.id}
+                        onClick={() => setTheme(t.color)}
+                        className={`w-10 h-10 rounded-full transition-all duration-300 relative ${theme === t.color ? 'scale-125' : 'hover:scale-110'}`}
+                        style={{ backgroundColor: t.color, boxShadow: theme === t.color ? `0 0 20px ${t.color}80` : 'none' }}
+                      >
+                         {theme === t.color && <div className="absolute inset-0 border-2 border-white rounded-full"></div>}
+                      </button>
+                    ))}
+                 </div>
               </div>
 
-              <button 
-                onClick={() => startGame(false)}
-                className="group relative w-full flex items-center justify-center gap-3 bg-[#00E5FF] text-black px-8 py-4 rounded-xl font-bold uppercase tracking-widest hover:bg-white transition-all overflow-hidden"
-              >
-                 <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-                 <span className="relative flex items-center gap-2"><Play size={18} /> Enter The Abyss</span>
-              </button>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                 <button 
+                   onClick={() => startGame(false)}
+                   className="flex-1 flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-bold uppercase tracking-widest text-black transition-all overflow-hidden relative group"
+                   style={{ backgroundColor: theme }}
+                 >
+                    <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                    <span className="relative z-10 flex items-center gap-2"><Play size={18} /> Enter</span>
+                 </button>
+                 <button 
+                   onClick={() => setGameState("history")}
+                   className="flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-bold uppercase tracking-widest text-white bg-white/5 hover:bg-white/10 transition-colors border border-white/10"
+                 >
+                    <History size={18} /> Istoric
+                 </button>
+              </div>
            </div>
         </div>
       )}
 
       {/* GAME OVER & MONETIZATION HOOK STATE */}
       {gameState === "gameover" && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md">
-           <div className="max-w-2xl w-full bg-[#110505]/90 border border-[#FF0055]/30 rounded-2xl p-10 shadow-[0_0_100px_rgba(255,0,85,0.15)] text-center">
+        <div className="absolute inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+           <div className="max-w-2xl w-full bg-[#110505]/90 border border-[#FF0055]/30 rounded-2xl p-10 shadow-[0_0_100px_rgba(255,0,85,0.15)] text-center relative">
+              
+              <button onClick={() => setGameState("history")} className="absolute top-6 right-6 p-2 rounded-full bg-white/5 hover:bg-white/10 text-white/50 hover:text-white transition-colors">
+                <Trophy size={20} />
+              </button>
+
               <ShieldAlert size={48} className="text-[#FF0055] mx-auto mb-6" />
               <h2 className="text-5xl font-bold text-white mb-2">YOU DIED</h2>
-              <p className="text-[#FF0055] uppercase tracking-widest text-xs font-bold mb-8">A bigger predator swallowed you whole.</p>
+              <p className="text-[#FF0055] uppercase tracking-widest text-xs font-bold mb-8">Un prădător mai mare te-a înghițit.</p>
               
               <div className="grid grid-cols-2 gap-4 mb-10">
                  <div className="bg-white/5 p-4 rounded-xl border border-white/10">
@@ -416,7 +534,7 @@ export default function AbyssIOGame() {
                  </div>
                  <div className="bg-white/5 p-4 rounded-xl border border-white/10">
                     <div className="text-[10px] text-white/40 uppercase tracking-widest">High Score</div>
-                    <div className="text-3xl text-[#00E5FF] font-bold">{highScore}</div>
+                    <div className="text-3xl font-bold" style={{ color: theme }}>{highScore}</div>
                  </div>
               </div>
 
@@ -424,7 +542,6 @@ export default function AbyssIOGame() {
                  <div className="text-[10px] text-white/50 uppercase tracking-[0.3em] font-bold mb-6">Monetization Demo (Reverb Hook)</div>
                  
                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    {/* Free Play */}
                     <button 
                       onClick={() => startGame(false)}
                       className="flex-1 px-6 py-4 rounded-xl bg-white/5 text-white/70 hover:bg-white/10 hover:text-white border border-white/10 transition-colors uppercase tracking-widest text-xs font-bold"
@@ -433,7 +550,6 @@ export default function AbyssIOGame() {
                        <span className="block text-[9px] text-white/30 normal-case tracking-normal mt-1">(Start as Plankton)</span>
                     </button>
                     
-                    {/* Premium Play */}
                     <button 
                       onClick={() => startGame(true)}
                       className="flex-1 relative overflow-hidden group px-6 py-4 rounded-xl bg-gradient-to-r from-[#FF0055] to-[#7000FF] text-white border border-transparent hover:shadow-[0_0_30px_rgba(255,0,85,0.4)] transition-all uppercase tracking-widest text-xs font-bold flex flex-col items-center justify-center"
@@ -451,6 +567,54 @@ export default function AbyssIOGame() {
         </div>
       )}
 
+      {/* HISTORY SCREEN */}
+      {gameState === "history" && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md">
+           <div className="max-w-2xl w-full bg-[#0A1220]/90 border border-white/10 rounded-2xl p-10 shadow-2xl text-left">
+              <div className="flex items-center justify-between mb-8">
+                 <div>
+                   <h2 className="text-3xl font-bold text-white flex items-center gap-3">
+                     <History className="text-white/50" /> Istoric Meciuri
+                   </h2>
+                   <p className="text-[10px] text-white/40 uppercase tracking-widest mt-2">Salvat local în memoria browserului</p>
+                 </div>
+                 <button onClick={() => setGameState("menu")} className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg text-xs font-bold uppercase tracking-widest transition-colors">
+                   Meniu
+                 </button>
+              </div>
+
+              {history.length === 0 ? (
+                 <div className="text-center py-12 text-white/30 text-sm">Nu ai jucat niciun meci încă. Intră în Abyss!</div>
+              ) : (
+                 <div className="space-y-2 max-h-[50vh] overflow-y-auto pr-2 custom-scrollbar">
+                    {history.map((h, i) => (
+                      <div key={i} className="flex items-center justify-between p-4 bg-white/5 border border-white/5 rounded-xl hover:bg-white/10 transition-colors">
+                         <div className="flex flex-col">
+                            <span className="text-white/40 text-xs">{h.date}</span>
+                         </div>
+                         <div className="flex gap-8">
+                            <div className="text-right">
+                               <div className="text-[9px] uppercase tracking-widest text-white/40">Score</div>
+                               <div className="font-bold" style={{ color: theme }}>{h.score}</div>
+                            </div>
+                            <div className="text-right">
+                               <div className="text-[9px] uppercase tracking-widest text-white/40">Mass</div>
+                               <div className="font-bold text-white">{h.mass}</div>
+                            </div>
+                         </div>
+                      </div>
+                    ))}
+                 </div>
+              )}
+           </div>
+        </div>
+      )}
+
+      <style jsx global>{`
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+      `}</style>
     </div>
   );
 }
