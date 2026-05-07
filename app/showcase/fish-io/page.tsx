@@ -41,7 +41,7 @@ export default function AbyssIOGame() {
   const playerRef = useRef<Entity>({ id: "p1", x: WORLD_SIZE/2, y: WORLD_SIZE/2, r: INITIAL_RADIUS, vx: 0, vy: 0, color: "#00E5FF", type: "player" });
   const enemiesRef = useRef<Entity[]>([]);
   const foodRef = useRef<Entity[]>([]);
-  const mouseRef = useRef<Vector>({ x: window.innerWidth/2, y: window.innerHeight/2 });
+  const mouseRef = useRef<Vector>({ x: 0, y: 0 });
   const cameraRef = useRef<Vector>({ x: WORLD_SIZE/2, y: WORLD_SIZE/2 });
 
   // Init World
