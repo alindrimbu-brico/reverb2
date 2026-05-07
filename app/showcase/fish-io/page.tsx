@@ -472,7 +472,7 @@ export default function AbyssIOGame() {
               <div className="inline-flex items-center justify-center p-3 rounded-full mb-6 transition-colors duration-500" style={{ backgroundColor: `${theme}15`, color: theme }}>
                  <Zap size={32} />
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-2 tracking-tighter">Abyss.io <span className="text-xs align-top bg-white/10 px-2 py-1 rounded text-white/50 tracking-widest">V2</span></h1>
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-2 tracking-tighter">Abyss.io <span className="text-xs align-top bg-white/10 px-2 py-1 rounded text-white/50 tracking-widest">V3 (UPDATE MAJOR)</span></h1>
               <p className="uppercase tracking-[0.3em] text-xs font-bold mb-8 transition-colors duration-500" style={{ color: theme }}>Reverb Engine Showcase</p>
               
               {/* Color Picker / Theme Selector */}
