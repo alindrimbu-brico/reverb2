@@ -41,7 +41,8 @@ const showcases = [
   { id: "origini", name: "Origini & Măsură", vibe: "Ancestral Minimalism", color: "#A0402C", description: "Un manifesto vizual dedicat artelor populare, tradiției și bunului simț pământesc. Echilibru nealterat pe un fundal pur de cânepă și lemn.", href: "/showcase/origini" },
   { id: "inhale-exhale", name: "Inhale Exhale", vibe: "Rhythmic Flow", color: "#2E4F4F", description: "O experiență digitală meditativă care respiră. Echilibrul perfect între absorbția de date și expresia creativă prin design pulsatil.", href: "/showcase/inhale-exhale" },
   { id: "vespa-urban", name: "Veloce Mobility", vibe: "Dolce Vita Efficiency", color: "#E0F2EC", description: "Minimalism rotunjit, curbe aerodinamice și nuanțe de pastel mint. Un concept Vespa-vibe dedicat startup-urilor de mobilitate urbană.", href: "/showcase/vespa-urban" },
-  { id: "the-anchor", name: "The Anchor", vibe: "Ethereal Brutalism", color: "#8A1C14", description: "Eseu filosofic vizual despre masculinitatea matură și susținerea partenerului în haos. Estetică întunecată și typography tensionat.", href: "/showcase/the-anchor" }
+  { id: "the-anchor", name: "The Anchor", vibe: "Ethereal Brutalism", color: "#8A1C14", description: "Eseu filosofic vizual despre masculinitatea matură și susținerea partenerului în haos. Estetică întunecată și typography tensionat.", href: "/showcase/the-anchor" },
+  { id: "ai-first-framework", name: "AI-First Framework", vibe: "Operating System Logic", color: "#6366f1", description: "Blog-prezentare premium pentru framework-ul de transformare AI-First. Tipografie tehnică, gradient indigo-cyan și narative pe 5 capitole despre AI ca sistem de operare al companiei.", href: "https://alindrimbu-brico.github.io/ai-first-framework/" }
 ];
 
 export default function ShowcaseIndex() {
