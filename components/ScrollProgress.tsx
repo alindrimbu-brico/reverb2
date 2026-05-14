@@ -13,6 +13,7 @@ export default function ScrollProgress() {
       <div
         id="scroll-progress"
         aria-hidden="true"
+        suppressHydrationWarning
         style={{
           position: "fixed",
           top: 0,

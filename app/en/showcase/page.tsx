@@ -26,6 +26,7 @@ const showcases = [
   { id: "logistics-hub", name: "Logistics & Cargo", vibe: "Terminal Gate Cobalt", color: "#1D4ED8", description: "Dense tables simulating airport departures. Rigid grid for top-tier logistics.", href: "/en/showcase/logistics-hub" },
   { id: "ai-future", name: "AI Tech Core", vibe: "Holographic Orbital", color: "#06B6D4", description: "Vector software platforms. Fine CSS 3D representing activated neural nodes.", href: "/en/showcase/ai-future" },
   { id: "ai-first-framework", name: "AI-First Framework", vibe: "Operating System Logic", color: "#6366f1", description: "Premium presentation blog for the AI-First business transformation framework. Technical typography, indigo-cyan gradients and a 5-chapter narrative on AI as the company's operating system.", href: "https://alindrimbu-brico.github.io/ai-first-framework/" },
+  { id: "neuro-recovery", name: "NeuroLumina", vibe: "Dark to Golden Homeostasis", color: "#FBBF24", description: "Interactive scroll-telling experience exploring the biology of addiction, dopamine hijacking, and the beautiful explosion of joy in recovery. Features procedural Web Audio API sounds.", href: "/en/showcase/neuro-recovery" }
 ];
 
 export default function ShowcaseIndexEN() {

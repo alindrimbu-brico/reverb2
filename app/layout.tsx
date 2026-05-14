@@ -66,8 +66,8 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ro" className={geist.variable}>
-      <body>
+    <html lang="ro" className={geist.variable} suppressHydrationWarning>
+      <body suppressHydrationWarning>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -76,28 +76,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
-        
-        {/* NevronixAI SDK */}
-        <Script src="https://nevronix.ai/nevronix-sdk.js" strategy="lazyOnload" />
-        <Script id="nevronix-init" strategy="lazyOnload">
-          {`
-            // Așteptăm încărcarea SDK-ului
-            let checkInterval = setInterval(function() {
-              if (window.NevronixAI) {
-                clearInterval(checkInterval);
-                window.NevronixAI.init({
-                  apiUrl: 'https://platform.nevronix.ai?id=59&s=efb92348-b235-4209-974e-4f8a69b14dee',
-                  position: 'bottom-right',
-                  iframeWidth: '340px',
-                  iframeHeight: '340px',
-                  iframeMobileWidth: '300px',
-                  iframeMobileHeight: '300px',
-                  buttonText: 'Talk to Anna',
-                });
-              }
-            }, 500);
-          `}
-        </Script>
+
       </body>
     </html>
   );

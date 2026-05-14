@@ -44,6 +44,7 @@ interface Entity {
   vy: number;
   color: string;
   type: "player" | "enemy" | "food";
+  imgIndex?: number;
 }
 interface MatchHistory {
   date: string;
@@ -58,45 +59,86 @@ interface UserProfile {
 // --- AUDIO ENGINE ---
 class AudioEngine {
   ctx: AudioContext | null = null;
-  osc: OscillatorNode | null = null;
-  gain: GainNode | null = null;
+  ambientOsc: OscillatorNode | null = null;
+  ambientGain: GainNode | null = null;
+  threatOsc: OscillatorNode | null = null;
+  threatGain: GainNode | null = null;
 
   init() {
-    if (this.ctx) return;
+    if (this.ctx) {
+      if (this.ctx.state === 'suspended') {
+        this.ctx.resume();
+      }
+      return;
+    }
     this.ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
-    this.osc = this.ctx.createOscillator();
-    this.gain = this.ctx.createGain();
     
-    this.osc.type = "sine"; 
-    this.osc.frequency.value = 400; 
-    this.gain.gain.value = 0; 
+    // Ambient rumble
+    this.ambientOsc = this.ctx.createOscillator();
+    this.ambientGain = this.ctx.createGain();
+    this.ambientOsc.type = "sine";
+    this.ambientOsc.frequency.value = 80; 
+    this.ambientGain.gain.value = 0.05; 
+    this.ambientOsc.connect(this.ambientGain);
+    this.ambientGain.connect(this.ctx.destination);
+    this.ambientOsc.start();
+
+    // Threat sound
+    this.threatOsc = this.ctx.createOscillator();
+    this.threatGain = this.ctx.createGain();
+    this.threatOsc.type = "sine"; 
+    this.threatOsc.frequency.value = 400; 
+    this.threatGain.gain.value = 0; 
+    this.threatOsc.connect(this.threatGain);
+    this.threatGain.connect(this.ctx.destination);
+    this.threatOsc.start();
+  }
+
+  resumeAmbient() {
+    if (this.ctx && this.ambientGain) {
+       this.ambientGain.gain.setTargetAtTime(0.05, this.ctx.currentTime, 0.1);
+    }
+  }
+
+  playEatSound(isEnemy: boolean) {
+    if (!this.ctx) return;
+    const eatOsc = this.ctx.createOscillator();
+    const eatGain = this.ctx.createGain();
+    eatOsc.type = isEnemy ? "square" : "sine";
+    eatOsc.frequency.setValueAtTime(isEnemy ? 150 : 800, this.ctx.currentTime);
+    eatOsc.frequency.exponentialRampToValueAtTime(isEnemy ? 50 : 1600, this.ctx.currentTime + 0.1);
     
-    this.osc.connect(this.gain);
-    this.gain.connect(this.ctx.destination);
+    eatGain.gain.setValueAtTime(isEnemy ? 0.1 : 0.03, this.ctx.currentTime);
+    eatGain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.1);
     
-    this.osc.start();
+    eatOsc.connect(eatGain);
+    eatGain.connect(this.ctx.destination);
+    eatOsc.start();
+    eatOsc.stop(this.ctx.currentTime + 0.1);
   }
 
   updateProximity(closestDistance: number, playerRadius: number) {
-    if (!this.gain || !this.osc || !this.ctx) return;
+    if (!this.threatGain || !this.threatOsc || !this.ctx) return;
     const maxThreatDist = 800; 
 
     if (closestDistance > maxThreatDist) {
-       this.gain.gain.setTargetAtTime(0, this.ctx.currentTime, 0.1);
+       this.threatGain.gain.setTargetAtTime(0, this.ctx.currentTime, 0.1);
        return;
     }
 
-    const minDistance = playerRadius * 1.5;
-    const intensity = 1 - (closestDistance - minDistance) / (maxThreatDist - minDistance);
+    const minDistance = playerRadius * 1.1;
+    let intensity = 1 - (closestDistance - minDistance) / (maxThreatDist - minDistance);
+    if (!isFinite(intensity)) intensity = 0;
     const clampedIntensity = Math.max(0, Math.min(1, Math.pow(intensity, 2))); 
 
-    this.gain.gain.setTargetAtTime(clampedIntensity * 0.4, this.ctx.currentTime, 0.1);
-    this.osc.frequency.setTargetAtTime(400 + clampedIntensity * 1200, this.ctx.currentTime, 0.1);
+    this.threatGain.gain.setTargetAtTime(clampedIntensity * 0.3, this.ctx.currentTime, 0.1);
+    this.threatOsc.frequency.setTargetAtTime(400 + clampedIntensity * 800, this.ctx.currentTime, 0.1);
   }
 
   stop() {
-    if (this.gain && this.ctx) {
-       this.gain.gain.setTargetAtTime(0, this.ctx.currentTime, 0.1);
+    if (this.ctx) {
+       if (this.threatGain) this.threatGain.gain.setTargetAtTime(0, this.ctx.currentTime, 0.1);
+       if (this.ambientGain) this.ambientGain.gain.setTargetAtTime(0, this.ctx.currentTime, 0.1);
     }
   }
 }
@@ -106,7 +148,7 @@ export default function AbyssIOGame() {
   const audioRef = useRef<AudioEngine | null>(null);
   
   // States
-  const [gameState, setGameState] = useState<"menu" | "playing" | "gameover" | "history">("menu");
+  const [gameState, setGameState] = useState<"menu" | "playing" | "gameover" | "history" | "victory">("menu");
   const [theme, setTheme] = useState(THEMES[0].color);
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
@@ -176,6 +218,33 @@ export default function AbyssIOGame() {
   const foodRef = useRef<Entity[]>([]);
   const mouseRef = useRef<Vector>({ x: 0, y: 0 });
   const cameraRef = useRef<Vector>({ x: WORLD_SIZE/2, y: WORLD_SIZE/2 });
+  const avatarsRef = useRef<HTMLImageElement[]>([]);
+  const enemiesAvatarsRef = useRef<HTMLImageElement[]>([]);
+
+  useEffect(() => {
+    const urls = [
+      "/abyss-assets/gaina.png",
+      "/abyss-assets/pisica.png",
+      "/abyss-assets/caine.png",
+      "/abyss-assets/delfin.png",
+      "/abyss-assets/rechin.png",
+      "/abyss-assets/trex.png"
+    ];
+    const loadedImages = urls.map(url => {
+      const img = new Image();
+      img.src = url;
+      return img;
+    });
+    avatarsRef.current = loadedImages;
+
+    const enemyUrls = Array.from({length: 150}, (_, i) => `/abyss-assets/enemies/enemy_${i + 1}.jpg`);
+    const loadedEnemyImages = enemyUrls.map(url => {
+      const img = new Image();
+      img.src = url;
+      return img;
+    });
+    enemiesAvatarsRef.current = loadedEnemyImages;
+  }, []);
 
   useEffect(() => {
     playerRef.current.color = theme;
@@ -184,6 +253,7 @@ export default function AbyssIOGame() {
   const initWorld = (premium = false) => {
     if (!audioRef.current) audioRef.current = new AudioEngine();
     audioRef.current.init();
+    audioRef.current.resumeAmbient();
 
     playerRef.current = { 
       id: "p1", x: WORLD_SIZE/2, y: WORLD_SIZE/2, r: premium ? INITIAL_RADIUS * 3 : INITIAL_RADIUS, vx: 0, vy: 0, color: theme, type: "player" 
@@ -192,7 +262,7 @@ export default function AbyssIOGame() {
     const enemies: Entity[] = [];
     for (let i=0; i<ENEMY_COUNT; i++) {
       enemies.push({
-        id: `e${i}`, x: Math.random() * WORLD_SIZE, y: Math.random() * WORLD_SIZE, r: Math.random() * 60 + 10, vx: (Math.random() - 0.5) * 4, vy: (Math.random() - 0.5) * 4, color: "#FF0055", type: "enemy"
+        id: `e${i}`, x: Math.random() * WORLD_SIZE, y: Math.random() * WORLD_SIZE, r: Math.random() * 60 + 10, vx: (Math.random() - 0.5) * 4, vy: (Math.random() - 0.5) * 4, color: "#FF0055", type: "enemy", imgIndex: Math.floor(Math.random() * 150)
       });
     }
     enemiesRef.current = enemies;
@@ -294,7 +364,9 @@ export default function AbyssIOGame() {
 
       foodRef.current = foodRef.current.filter(f => {
         if (Math.hypot(p.x - f.x, p.y - f.y) < p.r) {
-          currentMass += 0.5; currentScore += 10; return false;
+          currentMass += 0.5; currentScore += 10; 
+          audioRef.current?.playEatSound(false);
+          return false;
         }
         return true;
       });
@@ -302,7 +374,9 @@ export default function AbyssIOGame() {
       enemiesRef.current = enemiesRef.current.filter(e => {
         if (Math.hypot(p.x - e.x, p.y - e.y) < p.r + e.r - Math.min(p.r, e.r)*0.3) { 
           if (p.r > e.r * 1.1) {
-            currentMass += e.r * 0.2; currentScore += Math.floor(e.r * 10); return false;
+            currentMass += e.r * 0.2; currentScore += Math.floor(e.r * 10); 
+            audioRef.current?.playEatSound(true);
+            return false;
           } else if (e.r > p.r * 1.1) {
             isDead = true;
           }
@@ -314,6 +388,14 @@ export default function AbyssIOGame() {
         audioRef.current?.stop();
         saveToHistory(currentScore, currentMass);
         setGameState("gameover");
+        return;
+      }
+
+      const totalEnemyMass = enemiesRef.current.reduce((sum, e) => sum + e.r, 0);
+      if (currentMass > totalEnemyMass) {
+        audioRef.current?.stop();
+        saveToHistory(currentScore, currentMass);
+        setGameState("victory");
         return;
       }
 
@@ -341,17 +423,66 @@ export default function AbyssIOGame() {
 
       ctx.strokeStyle = "#FF0055"; ctx.lineWidth = 5; ctx.strokeRect(0, 0, WORLD_SIZE, WORLD_SIZE);
 
+      const getStageForEntity = (e: Entity, currentScore: number) => {
+        if (e.type === 'player') {
+          if (currentScore < 50) return 0;
+          if (currentScore < 100) return 1;
+          if (currentScore < 150) return 2;
+          if (currentScore < 200) return 3;
+          if (currentScore < 250) return 4;
+          return 5;
+        } else {
+          const eqScore = (e.r - INITIAL_RADIUS) * 20;
+          if (eqScore < 50) return 0;
+          if (eqScore < 100) return 1;
+          if (eqScore < 150) return 2;
+          if (eqScore < 200) return 3;
+          if (eqScore < 250) return 4;
+          return 5;
+        }
+      };
+
       const drawEntity = (e: Entity) => {
         if (e.x < cx - hw - e.r || e.x > cx + hw + e.r || e.y < cy - hh - e.r || e.y > cy + hh + e.r) return;
 
-        ctx.beginPath(); ctx.arc(e.x, e.y, e.r, 0, Math.PI * 2); ctx.fillStyle = e.color;
-        ctx.shadowBlur = e.type === 'food' ? 5 : 20; ctx.shadowColor = e.color; ctx.fill(); ctx.shadowBlur = 0;
+        if (e.type === 'food') {
+          ctx.beginPath(); ctx.arc(e.x, e.y, e.r, 0, Math.PI * 2); ctx.fillStyle = e.color;
+          ctx.shadowBlur = 5; ctx.shadowColor = e.color; ctx.fill(); ctx.shadowBlur = 0;
+        } else {
+          let img: HTMLImageElement | undefined;
+          if (e.type === 'player') {
+            const stage = getStageForEntity(e, score);
+            img = avatarsRef.current[stage];
+          } else {
+            img = enemiesAvatarsRef.current[e.imgIndex || 0];
+          }
+          
+          if (img && img.complete && img.naturalWidth !== 0) {
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(e.x, e.y, e.r, 0, Math.PI * 2);
+            ctx.clip(); 
+            ctx.drawImage(img, e.x - e.r, e.y - e.r, e.r * 2, e.r * 2);
+            ctx.restore();
+            
+            ctx.beginPath();
+            ctx.arc(e.x, e.y, e.r, 0, Math.PI * 2);
+            ctx.strokeStyle = e.color;
+            ctx.lineWidth = Math.max(2, e.r * 0.05);
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = e.color;
+            ctx.stroke();
+            ctx.shadowBlur = 0;
 
-        if (e.type !== 'food') {
-          const angle = Math.atan2(e.vy, e.vx); const eyeDist = e.r * 0.5;
-          const eyeX = e.x + Math.cos(angle) * eyeDist; const eyeY = e.y + Math.sin(angle) * eyeDist;
-          ctx.beginPath(); ctx.arc(eyeX, eyeY, e.r * 0.2, 0, Math.PI * 2); ctx.fillStyle = "#fff"; ctx.fill();
-          ctx.beginPath(); ctx.arc(eyeX + Math.cos(angle)*(e.r*0.05), eyeY + Math.sin(angle)*(e.r*0.05), e.r * 0.1, 0, Math.PI * 2); ctx.fillStyle = "#000"; ctx.fill();
+            // Optional: Draw player name or score over them? No, user didn't ask for it.
+          } else {
+            ctx.beginPath(); ctx.arc(e.x, e.y, e.r, 0, Math.PI * 2); ctx.fillStyle = e.color;
+            ctx.shadowBlur = 20; ctx.shadowColor = e.color; ctx.fill(); ctx.shadowBlur = 0;
+            const angle = Math.atan2(e.vy, e.vx); const eyeDist = e.r * 0.5;
+            const eyeX = e.x + Math.cos(angle) * eyeDist; const eyeY = e.y + Math.sin(angle) * eyeDist;
+            ctx.beginPath(); ctx.arc(eyeX, eyeY, e.r * 0.2, 0, Math.PI * 2); ctx.fillStyle = "#fff"; ctx.fill();
+            ctx.beginPath(); ctx.arc(eyeX + Math.cos(angle)*(e.r*0.05), eyeY + Math.sin(angle)*(e.r*0.05), e.r * 0.1, 0, Math.PI * 2); ctx.fillStyle = "#000"; ctx.fill();
+          }
         }
       };
 
@@ -514,6 +645,40 @@ export default function AbyssIOGame() {
                     </button>
                     <button onClick={() => startGame(true)} className="flex-1 relative overflow-hidden group px-6 py-4 rounded-xl bg-gradient-to-r from-[#FF0055] to-[#7000FF] text-white border border-transparent hover:shadow-[0_0_30px_rgba(255,0,85,0.4)] transition-all uppercase tracking-widest text-xs font-bold flex flex-col items-center justify-center">
                        <span className="relative z-10 flex items-center gap-2"> <ShoppingCart size={14} /> Buy Titan Respawn </span>
+                    </button>
+                 </div>
+              </div>
+           </div>
+        </div>
+      )}
+
+      {/* VICTORY STATE */}
+      {gameState === "victory" && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+           <div className="max-w-2xl w-full bg-[#051A10]/90 border border-[#00FF00]/30 rounded-2xl p-10 shadow-[0_0_100px_rgba(0,255,0,0.15)] text-center relative">
+              <button onClick={() => setGameState("history")} className="absolute top-6 right-6 p-2 rounded-full bg-white/5 hover:bg-white/10 text-white/50 hover:text-white transition-colors">
+                <Trophy size={20} />
+              </button>
+
+              <Trophy size={48} className="text-[#00FF00] mx-auto mb-6" />
+              <h2 className="text-5xl font-bold text-white mb-2">DOMINARE</h2>
+              <p className="text-[#00FF00] uppercase tracking-widest text-xs font-bold mb-8">Ai atins pragul matematic. Domini întreaga masă a abisului.</p>
+              
+              <div className="grid grid-cols-2 gap-4 mb-10">
+                 <div className="bg-white/5 p-4 rounded-xl border border-white/10">
+                    <div className="text-[10px] text-white/40 uppercase tracking-widest">Final Score</div>
+                    <div className="text-3xl text-white font-bold">{score}</div>
+                 </div>
+                 <div className="bg-white/5 p-4 rounded-xl border border-white/10">
+                    <div className="text-[10px] text-white/40 uppercase tracking-widest">High Score</div>
+                    <div className="text-3xl font-bold" style={{ color: theme }}>{highScore}</div>
+                 </div>
+              </div>
+
+              <div className="border-t border-white/10 pt-8 mt-4">
+                 <div className="flex justify-center">
+                    <button onClick={() => startGame(false)} className="px-8 py-4 rounded-xl bg-white/5 text-white/70 hover:bg-white/10 hover:text-white border border-white/10 transition-colors uppercase tracking-widest text-xs font-bold">
+                       Play Again
                     </button>
                  </div>
               </div>
