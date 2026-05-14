@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShieldPlus, Brain, Users, HeartHandshake } from "lucide-react";
+import { Brain, HeartHandshake, ShieldPlus, PlayCircle } from "lucide-react";
 import { setTheme } from "./AudioEngine";
 
 export default function RecoveryAlgorithm() {
@@ -31,6 +31,13 @@ export default function RecoveryAlgorithm() {
           <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-neutral-900 mb-6">
             The Road Back to Light
           </h2>
+          <button
+            onClick={() => setTheme("recovery", true)}
+            className="flex items-center space-x-2 text-sm font-mono tracking-widest uppercase text-neutral-600 bg-neutral-200/50 hover:bg-neutral-300/50 px-6 py-3 rounded-full transition-colors border border-neutral-300 mx-auto"
+          >
+            <PlayCircle className="w-5 h-5" />
+            <span>Play Theme</span>
+          </button>
         </motion.div>
 
         {/* Steps */}

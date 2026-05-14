@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Sparkles, Sun } from "lucide-react";
+import { Sparkles, Sun, PlayCircle } from "lucide-react";
 import { setTheme } from "./AudioEngine";
 
 export default function JoyCelebration() {
@@ -70,6 +70,13 @@ export default function JoyCelebration() {
           <h2 className="text-5xl md:text-7xl font-extrabold tracking-tight text-neutral-900 mb-6 bg-clip-text text-transparent bg-gradient-to-r from-amber-500 via-orange-400 to-rose-400">
             The Explosion of Joy
           </h2>
+          <button
+            onClick={() => setTheme("joy", true)}
+            className="flex items-center space-x-2 text-sm font-mono tracking-widest uppercase text-amber-700 bg-amber-100 hover:bg-amber-200 px-6 py-3 rounded-full transition-colors border border-amber-200 mx-auto"
+          >
+            <PlayCircle className="w-5 h-5" />
+            <span>Play Theme</span>
+          </button>
         </motion.div>
 
         <motion.div

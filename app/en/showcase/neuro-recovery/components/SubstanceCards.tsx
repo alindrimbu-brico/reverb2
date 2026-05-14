@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Hammer, PaintBucket, Zap, Volume2, Image as ImageIcon, Music } from "lucide-react";
+import { Hammer, PaintBucket, Zap, ImageIcon, Music, PlayCircle, Activity } from "lucide-react";
 import { setTheme } from "./AudioEngine";
 import Image from "next/image";
 
@@ -88,13 +88,12 @@ export default function SubstanceCards() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.8 }}
               onViewportEnter={() => {
-                // On mobile they stack, so amount: 0.8 works.
                 if (window.innerWidth < 768) {
-                  setTheme(sub.id);
+                  setTheme(sub.id as any);
                 }
               }}
-              onHoverStart={() => setTheme(sub.id)}
-              onFocusCapture={() => setTheme(sub.id)}
+              onHoverStart={() => setTheme(sub.id as any)}
+              onFocusCapture={() => setTheme(sub.id as any)}
               transition={{ duration: 0.6, delay: index * 0.2 }}
               className={`p-8 rounded-3xl bg-neutral-100 dark:bg-neutral-900/60 border border-neutral-300 dark:border-neutral-800 shadow-xl backdrop-blur-md transition-all duration-500 ${sub.borderHover} relative overflow-hidden group min-h-[450px] flex flex-col`}
             >
@@ -115,10 +114,22 @@ export default function SubstanceCards() {
                         {sub.icon}
                       </div>
                       
-                      <div className="flex items-center justify-between mb-1">
-                        <h3 className="text-2xl font-bold text-neutral-900 dark:text-white transition-colors duration-1000">{sub.title}</h3>
+                      <div className="flex flex-col gap-4 mb-6">
+                        <div className="flex items-center justify-between">
+                          <h4 className="text-3xl font-bold text-neutral-900 dark:text-white transition-colors duration-1000">{sub.title}</h4>
+                          <div className="flex items-center space-x-2 text-neutral-500 font-mono text-sm tracking-widest uppercase">
+                            <Activity className="w-4 h-4" />
+                            <span>{sub.subtitle}</span>
+                          </div>
+                        </div>
+                        <button
+                          onClick={() => setTheme(sub.id as any, true)}
+                          className="flex items-center space-x-2 text-xs font-mono tracking-widest uppercase text-neutral-600 bg-neutral-200/50 hover:bg-neutral-300/50 dark:text-neutral-400 dark:bg-neutral-800/50 dark:hover:bg-neutral-700/50 px-4 py-2 rounded-full transition-colors w-max"
+                        >
+                          <PlayCircle className="w-4 h-4" />
+                          <span>Play Theme</span>
+                        </button>
                       </div>
-                      <h4 className="text-sm font-mono tracking-widest uppercase mb-6 text-neutral-500 dark:text-neutral-400">{sub.subtitle}</h4>
                       
                       <div className="space-y-6 mt-auto">
                         <div>

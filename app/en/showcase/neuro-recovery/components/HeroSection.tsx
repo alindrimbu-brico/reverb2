@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { BrainCircuit, Dna, History } from "lucide-react";
+import { BrainCircuit, Dna, History, PlayCircle } from "lucide-react";
 import { setTheme } from "./AudioEngine";
 
 export default function HeroSection() {
@@ -43,9 +43,17 @@ export default function HeroSection() {
             </span>
           </h1>
 
-          <p className="text-xl text-neutral-300 leading-relaxed font-light border-l-4 border-purple-900 pl-6">
+          <p className="text-xl text-neutral-300 leading-relaxed font-light border-l-4 border-purple-900 pl-6 mb-8">
             Addiction is not a wrong choice or a lack of willpower, but a profound disease—a disorder of emotions and behavior. It is a desperate attempt of the brain to survive and regulate an overwhelmed nervous system.
           </p>
+
+          <button
+            onClick={() => setTheme("chaos", true)}
+            className="flex items-center space-x-2 text-sm font-mono tracking-widest uppercase text-white bg-white/10 hover:bg-white/20 px-6 py-3 rounded-full transition-colors border border-white/20"
+          >
+            <PlayCircle className="w-5 h-5" />
+            <span>Play Theme</span>
+          </button>
         </motion.div>
 
         <div className="space-y-6">
