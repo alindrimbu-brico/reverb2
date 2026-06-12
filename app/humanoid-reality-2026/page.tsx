@@ -1,10 +1,5 @@
 import type { Metadata } from "next";
-import HeroSection from "@/components/humanoid/HeroSection";
-import EconomicImpact from "@/components/humanoid/EconomicImpact";
-import MarketLeaders from "@/components/humanoid/MarketLeaders";
-import BrainBehind from "@/components/humanoid/BrainBehind";
-import SurvivalGuide from "@/components/humanoid/SurvivalGuide";
-import FooterCTA from "@/components/humanoid/FooterCTA";
+import HumanoidSite from "@/components/humanoid/HumanoidSite";
 
 export const metadata: Metadata = {
   title: "Realitatea Umanoidă 2026 — De la Science Fiction la Realitate Industrială",
@@ -13,20 +8,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Realitatea Umanoidă 2026",
     description:
-      "De la Science Fiction la Realitate Industrială. Piața de 750 Miliarde $, liderii pieței și ghidul de supraviețuire pentru companii.",
+      "De la Science Fiction la Realitate Industrială. Piața de 750 Miliarde $, liderii AI, VLA models și ghidul de supraviețuire pentru companii.",
     type: "website",
   },
 };
 
 export default function HumanoidRealityPage() {
-  return (
-    <div className="bg-[#080810] text-white min-h-screen">
-      <HeroSection />
-      <EconomicImpact />
-      <MarketLeaders />
-      <BrainBehind />
-      <SurvivalGuide />
-      <FooterCTA />
-    </div>
-  );
+  return <HumanoidSite />;
 }
