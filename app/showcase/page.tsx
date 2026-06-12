@@ -44,7 +44,8 @@ const showcases = [
   { id: "the-anchor", name: "The Anchor", vibe: "Ethereal Brutalism", color: "#8A1C14", description: "Eseu filosofic vizual despre masculinitatea matură și susținerea partenerului în haos. Estetică întunecată și typography tensionat.", href: "/showcase/the-anchor" },
   { id: "ai-first-framework", name: "AI-First Framework", vibe: "Operating System Logic", color: "#6366f1", description: "Blog-prezentare premium pentru framework-ul de transformare AI-First. Tipografie tehnică, gradient indigo-cyan și narative pe 5 capitole despre AI ca sistem de operare al companiei.", href: "https://alindrimbu-brico.github.io/ai-first-framework/" },
   { id: "fish-io", name: "Abyss.io (Game Engine)", vibe: "Cyber-Ocean Collision", color: "#00E5FF", description: "Joc HTML5 Canvas 60FPS integrat în React. Detecție de coliziuni (eat & grow), AI Boids inamici și demo de monetizare (Stripe/Crypto).", href: "/showcase/fish-io" },
-  { id: "neuro-recovery", name: "NeuroLumina", vibe: "Dark to Light Recovery", color: "#10B981", description: "Platformă interactivă de tip scroll-telling. O explorare empatică, bazată pe neuroștiință a adicției, trecând de la haos la homeostazie.", href: "/showcase/neuro-recovery" }
+  { id: "neuro-recovery", name: "NeuroLumina", vibe: "Dark to Light Recovery", color: "#10B981", description: "Platformă interactivă de tip scroll-telling. O explorare empatică, bazată pe neuroștiință a adicției, trecând de la haos la homeostazie.", href: "/showcase/neuro-recovery" },
+  { id: "humanoid-reality-2026", name: "Realitatea Umanoidă 2026", vibe: "Deep Space Cyberpunk", color: "#00E5FF", description: "Website premium de prezentare despre revoluția robotică. Piața de 750 Mld $, liderii AI, VLA models și ghidul de supraviețuire pentru era post-umanoide.", href: "/humanoid-reality-2026" }
 ];
 
 export default function ShowcaseIndex() {
