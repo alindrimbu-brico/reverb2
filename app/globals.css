@@ -9,6 +9,14 @@
   --font-sans: var(--font-geist-sans);
 }
 
+@theme {
+  --color-electric-blue: #00E5FF;
+  --color-cyber-yellow: #FFE600;
+  --color-space-black: #080810;
+  --color-space-card: #0e0e1a;
+  --color-space-border: rgba(0, 229, 255, 0.12);
+}
+
 html {
   background: var(--bg);
   color: var(--ink);

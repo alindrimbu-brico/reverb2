@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Brain, HeartHandshake, ShieldPlus, PlayCircle } from "lucide-react";
+import { Brain, HeartHandshake, ShieldPlus, PlayCircle, Users } from "lucide-react";
 import { setTheme } from "./AudioEngine";
 
 export default function RecoveryAlgorithm() {
