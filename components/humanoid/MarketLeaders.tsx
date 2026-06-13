@@ -1,12 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Brain, Factory, Zap, Globe } from "lucide-react";
+import { Brain, Factory, Zap, Globe, ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { useLanguage } from "./LanguageContext";
 import { translations } from "./translations";
 
 const catIcons = [Brain, Factory, Zap, Globe];
 const catAccents = ["#00E5FF", "#FFE600", "#00E5FF", "#FFE600"];
+const catSlugs = ["ai-leaders", "mass-production", "peak-performance", "democratization"];
 
 const robotsData = [
   [
@@ -41,7 +43,7 @@ export default function MarketLeaders() {
   const tx = translations[lang].market;
 
   return (
-    <section className="relative bg-[#0a0a14] py-24 md:py-32 px-6 overflow-hidden">
+    <section id="market-leaders" className="relative bg-[#0a0a14] py-24 md:py-32 px-6 overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#FFE600]/15 to-transparent" />
 
       <div className="max-w-7xl mx-auto">
@@ -67,6 +69,7 @@ export default function MarketLeaders() {
             const Icon = catIcons[i];
             const accent = catAccents[i];
             const robots = robotsData[i];
+            const slug = catSlugs[i];
             return (
               <motion.div
                 key={i}
@@ -130,6 +133,20 @@ export default function MarketLeaders() {
                     </div>
                   ))}
                 </div>
+                {/* Detail page link */}
+                <div className="mt-5 pt-4 border-t border-white/5">
+                  <Link
+                    href={`/humanoid-reality-2026/${slug}`}
+                    className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-widest transition-colors duration-200"
+                    style={{ color: `${accent}70` }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = accent)}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = `${accent}70`)}
+                  >
+                    {lang === "ro" ? "Detalii complete" : "Full details"}
+                    <ArrowRight size={12} />
+                  </Link>
+                </div>
+
                 <div
                   className="absolute bottom-0 left-8 right-8 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                   style={{ background: `linear-gradient(90deg, transparent, ${accent}50, transparent)` }}

@@ -13,7 +13,7 @@ export default function BrainBehind() {
   const tx = translations[lang].brain;
 
   return (
-    <section className="relative bg-[#080810] py-24 md:py-32 px-6 overflow-hidden">
+    <section id="brain-behind" className="relative bg-[#080810] py-24 md:py-32 px-6 overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#00E5FF]/15 to-transparent" />
       <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-[#00E5FF]/4 blur-[120px] pointer-events-none" />
 

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, Download, CheckCircle, AlertCircle, ExternalLink } from "lucide-react";
+import { Mail, Download, CheckCircle, AlertCircle, ExternalLink, Share2, Users, Play } from "lucide-react";
 import Link from "next/link";
 import { useLanguage } from "./LanguageContext";
 import { translations } from "./translations";
@@ -43,7 +43,7 @@ export default function FooterCTA() {
   };
 
   return (
-    <footer className="relative bg-[#080810] overflow-hidden">
+    <footer id="footer-cta" className="relative bg-[#080810] overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#00E5FF]/20 to-transparent" />
 
       {/* Background */}
@@ -240,7 +240,7 @@ export default function FooterCTA() {
                   RO
                 </button>
                 <button
-                  className={`text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full transition-all ${
+                  className={`text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full transition-all cursor-pointer ${
                     lang === "en"
                       ? "bg-[#00E5FF]/15 text-[#00E5FF] border border-[#00E5FF]/30"
                       : "text-white/30 hover:text-white/60"
@@ -249,6 +249,34 @@ export default function FooterCTA() {
                 >
                   EN
                 </button>
+              </div>
+
+              {/* Social links */}
+              <div className="mt-6 flex items-center gap-3">
+                <a
+                  href="https://x.com/reverbro"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-xl border border-white/8 bg-white/[0.03] flex items-center justify-center text-white/30 hover:text-[#00E5FF] hover:border-[#00E5FF]/30 hover:bg-[#00E5FF]/5 transition-all duration-300"
+                >
+                  <Share2 size={14} strokeWidth={1.5} />
+                </a>
+                <a
+                  href="https://linkedin.com/company/reverbro"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-xl border border-white/8 bg-white/[0.03] flex items-center justify-center text-white/30 hover:text-[#00E5FF] hover:border-[#00E5FF]/30 hover:bg-[#00E5FF]/5 transition-all duration-300"
+                >
+                  <Users size={14} strokeWidth={1.5} />
+                </a>
+                <a
+                  href="https://youtube.com/@reverbro"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-xl border border-white/8 bg-white/[0.03] flex items-center justify-center text-white/30 hover:text-[#FFE600] hover:border-[#FFE600]/30 hover:bg-[#FFE600]/5 transition-all duration-300"
+                >
+                  <Play size={14} strokeWidth={1.5} />
+                </a>
               </div>
             </div>
 

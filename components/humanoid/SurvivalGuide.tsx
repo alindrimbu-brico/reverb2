@@ -15,7 +15,7 @@ export default function SurvivalGuide() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="relative bg-[#06060f] py-24 md:py-32 px-6 overflow-hidden">
+    <section id="survival-guide" className="relative bg-[#06060f] py-24 md:py-32 px-6 overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#FFE600]/15 to-transparent" />
       <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[400px] h-[600px] rounded-full bg-[#FFE600]/3 blur-[120px] pointer-events-none" />
 
