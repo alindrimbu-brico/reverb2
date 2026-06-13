@@ -6,6 +6,7 @@ import EconomicImpact from "./EconomicImpact";
 import MarketLeaders from "./MarketLeaders";
 import BrainBehind from "./BrainBehind";
 import SurvivalGuide from "./SurvivalGuide";
+import Certifications from "./Certifications";
 import FooterCTA from "./FooterCTA";
 import AudioEngine from "./AudioEngine";
 import HumanoidScrollProgress from "./HumanoidScrollProgress";
@@ -21,6 +22,7 @@ export default function HumanoidSite() {
         <MarketLeaders />
         <BrainBehind />
         <SurvivalGuide />
+        <Certifications />
         <FooterCTA />
         <AudioEngine />
         <BackToTop />

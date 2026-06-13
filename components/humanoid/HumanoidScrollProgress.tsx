@@ -8,6 +8,7 @@ const SECTIONS = [
   { id: "market-leaders", label: "Lideri", labelEn: "Leaders" },
   { id: "brain-behind", label: "Creier", labelEn: "Brain" },
   { id: "survival-guide", label: "Ghid", labelEn: "Guide" },
+  { id: "certifications", label: "Cert.", labelEn: "Certs" },
   { id: "footer-cta", label: "Raport", labelEn: "Report" },
 ];
 

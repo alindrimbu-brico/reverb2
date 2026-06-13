@@ -30,6 +30,11 @@ const SECTIONS: Record<string, Layer[]> = {
     { freq: 73.4, type: "sine", gain: 0.05, lfoRate: 0.08 },
     { freq: 146.8, type: "sine", gain: 0.02, lfoRate: 0.13 },
   ],
+  "certifications": [
+    { freq: 92.5, type: "sine", gain: 0.04, lfoRate: 0.06 },
+    { freq: 185, type: "sine", gain: 0.02, lfoRate: 0.10 },
+    { freq: 277.5, type: "sine", gain: 0.012, lfoRate: 0.17 },
+  ],
   "footer-cta": [
     { freq: 87.3, type: "sine", gain: 0.04, lfoRate: 0.07 },
     { freq: 130.8, type: "sine", gain: 0.022, lfoRate: 0.11 },
