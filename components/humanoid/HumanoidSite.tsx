@@ -10,6 +10,7 @@ import Certifications from "./Certifications";
 import FooterCTA from "./FooterCTA";
 import AudioEngine from "./AudioEngine";
 import HumanoidScrollProgress from "./HumanoidScrollProgress";
+import HumanoidNav from "./HumanoidNav";
 import BackToTop from "./BackToTop";
 
 export default function HumanoidSite() {
@@ -17,6 +18,7 @@ export default function HumanoidSite() {
     <LanguageProvider>
       <div className="bg-[#080810] text-white min-h-screen">
         <HumanoidScrollProgress />
+        <HumanoidNav />
         <HeroSection />
         <EconomicImpact />
         <MarketLeaders />
