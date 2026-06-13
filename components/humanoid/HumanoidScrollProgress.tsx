@@ -60,20 +60,24 @@ export default function HumanoidScrollProgress() {
 
   return (
     <>
-      {/* Top progress bar */}
-      <div className="fixed top-0 left-0 right-0 z-[100] h-[2px] bg-white/5">
+      {/* Top progress bar — 3px, track visible, overrides global ScrollProgress */}
+      <div
+        className="fixed left-0 right-0 z-[200] pointer-events-none"
+        style={{ top: 0, height: "3px", background: "rgba(255,255,255,0.08)" }}
+      >
         <div
-          className="h-full transition-none"
           style={{
+            height: "100%",
             width: `${progress}%`,
-            background: "linear-gradient(90deg, #00E5FF, #FFE600)",
-            boxShadow: "0 0 8px rgba(0,229,255,0.6)",
+            background: "linear-gradient(90deg, #00E5FF, #00b8cc 50%, #FFE600)",
+            boxShadow: "0 0 10px rgba(0,229,255,0.7)",
+            transition: "width 0.1s linear",
           }}
         />
       </div>
 
-      {/* Right side section nav */}
-      <div className="fixed right-5 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-3 items-end">
+      {/* Right side section nav — hidden on mobile */}
+      <div className="hidden md:flex fixed right-5 top-1/2 -translate-y-1/2 z-50 flex-col gap-3 items-end">
         {SECTIONS.map((sec) => {
           const isActive = activeSection === sec.id;
           return (
@@ -83,14 +87,12 @@ export default function HumanoidScrollProgress() {
               title={lang === "ro" ? sec.label : sec.labelEn}
               className="group flex items-center gap-2 cursor-pointer"
             >
-              {/* Label */}
               <span
                 className="text-[9px] uppercase tracking-[0.2em] font-semibold transition-all duration-300 opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0"
                 style={{ color: isActive ? "#00E5FF" : "rgba(255,255,255,0.4)" }}
               >
                 {lang === "ro" ? sec.label : sec.labelEn}
               </span>
-              {/* Dot */}
               <div
                 className="rounded-full transition-all duration-300"
                 style={{
@@ -103,7 +105,6 @@ export default function HumanoidScrollProgress() {
             </button>
           );
         })}
-        {/* Progress percentage */}
         <div className="mt-2 text-[8px] font-mono text-white/20 text-right tabular-nums">
           {Math.round(progress)}%
         </div>

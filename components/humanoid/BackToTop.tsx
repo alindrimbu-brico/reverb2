@@ -27,7 +27,8 @@ export default function BackToTop() {
           }}
           whileTap={{ scale: 0.9 }}
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="fixed bottom-5 left-5 z-50 w-10 h-10 rounded-full flex items-center justify-center cursor-pointer border border-[#00E5FF]/25 bg-[#080810]/90 backdrop-blur-sm transition-colors hover:bg-[#00E5FF]/10"
+          className="fixed left-4 z-50 w-11 h-11 rounded-full flex items-center justify-center cursor-pointer border border-[#00E5FF]/25 bg-[#080810]/90 backdrop-blur-sm transition-colors hover:bg-[#00E5FF]/10"
+          style={{ bottom: "calc(1.25rem + env(safe-area-inset-bottom, 0px))" }}
         >
           <ArrowUp size={16} className="text-[#00E5FF]" />
         </motion.button>

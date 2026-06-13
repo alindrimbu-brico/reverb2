@@ -92,12 +92,19 @@ export default function AudioEngine() {
       if (!ctxRef.current) {
         const ctx = new AudioContext();
         ctxRef.current = ctx;
-        const master = ctx.createGain();
-        master.gain.value = 0.28;
-        master.connect(ctx.destination);
-        masterRef.current = master;
+        // iOS Safari: AudioContext starts suspended even inside a gesture handler
+        ctx.resume().then(() => {
+          const master = ctx.createGain();
+          master.gain.value = 0.28;
+          master.connect(ctx.destination);
+          masterRef.current = master;
+          startSection(currentSection);
+        });
       } else if (ctxRef.current.state === "suspended") {
         ctxRef.current.resume();
+      }
+      if (ctxRef.current && ctxRef.current.state !== "suspended" && masterRef.current) {
+        masterRef.current.gain.setTargetAtTime(0.28, ctxRef.current.currentTime, 0.5);
       }
       setEnabled(true);
     } else {
@@ -109,13 +116,11 @@ export default function AudioEngine() {
   };
 
   useEffect(() => {
-    if (enabled) {
-      if (masterRef.current && ctxRef.current) {
-        masterRef.current.gain.setTargetAtTime(0.28, ctxRef.current.currentTime, 0.5);
-      }
+    if (enabled && masterRef.current && ctxRef.current && ctxRef.current.state === "running") {
+      masterRef.current.gain.setTargetAtTime(0.28, ctxRef.current.currentTime, 0.5);
       startSection(currentSection);
     }
-  }, [enabled, currentSection, startSection]);
+  }, [currentSection, startSection]);
 
   // IntersectionObserver watcher
   useEffect(() => {
@@ -147,24 +152,28 @@ export default function AudioEngine() {
     <button
       onClick={toggle}
       title={enabled ? "Mute ambient sound" : "Enable ambient sound"}
-      className="fixed bottom-[5.5rem] left-5 z-50 w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-sm border transition-all duration-500 cursor-pointer group"
+      className="fixed left-4 z-50 flex items-center gap-2 rounded-full backdrop-blur-sm border transition-all duration-500 cursor-pointer group"
       style={{
-        background: enabled ? "rgba(0,229,255,0.1)" : "rgba(8,8,16,0.8)",
-        borderColor: enabled ? "rgba(0,229,255,0.35)" : "rgba(255,255,255,0.10)",
-        boxShadow: enabled ? "0 0 24px rgba(0,229,255,0.2)" : "none",
+        bottom: "calc(5rem + env(safe-area-inset-bottom, 0px))",
+        padding: "8px 14px",
+        background: enabled ? "rgba(0,229,255,0.12)" : "rgba(8,8,16,0.85)",
+        borderColor: enabled ? "rgba(0,229,255,0.40)" : "rgba(255,255,255,0.12)",
+        boxShadow: enabled ? "0 0 28px rgba(0,229,255,0.25)" : "none",
       }}
     >
       {enabled ? (
-        <Volume2 size={15} className="text-[#00E5FF]" />
+        <Volume2 size={14} className="text-[#00E5FF] shrink-0" />
       ) : (
-        <VolumeX size={15} className="text-white/35 group-hover:text-white/60 transition-colors" />
+        <VolumeX size={14} className="text-white/40 group-hover:text-white/70 transition-colors shrink-0" />
       )}
-      {/* Sound wave rings when active */}
+      <span
+        className="text-[10px] font-semibold uppercase tracking-wider"
+        style={{ color: enabled ? "#00E5FF" : "rgba(255,255,255,0.35)" }}
+      >
+        {enabled ? "On" : "Sound"}
+      </span>
       {enabled && (
-        <>
-          <span className="absolute inset-0 rounded-full border border-[#00E5FF]/30 animate-ping" style={{ animationDuration: "2s" }} />
-          <span className="absolute inset-[-4px] rounded-full border border-[#00E5FF]/15 animate-ping" style={{ animationDuration: "2.5s", animationDelay: "0.5s" }} />
-        </>
+        <span className="absolute inset-0 rounded-full border border-[#00E5FF]/25 animate-ping" style={{ animationDuration: "2s" }} />
       )}
     </button>
   );
