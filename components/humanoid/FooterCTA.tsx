@@ -6,6 +6,7 @@ import { Mail, Download, CheckCircle, AlertCircle, ExternalLink, Share2, Users, 
 import Link from "next/link";
 import { useLanguage } from "./LanguageContext";
 import { translations } from "./translations";
+import SectionPlayButton from "./SectionPlayButton";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -72,9 +73,12 @@ export default function FooterCTA() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <div className="inline-flex items-center gap-2 mb-6 border border-[#00E5FF]/20 rounded-full px-5 py-2 bg-[#00E5FF]/5">
-              <Download size={12} className="text-[#00E5FF]" />
-              <span className="text-[10px] uppercase tracking-[0.25em] text-[#00E5FF]/80 font-semibold">{tx.badge}</span>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="inline-flex items-center gap-2 border border-[#00E5FF]/20 rounded-full px-5 py-2 bg-[#00E5FF]/5">
+                <Download size={12} className="text-[#00E5FF]" />
+                <span className="text-[10px] uppercase tracking-[0.25em] text-[#00E5FF]/80 font-semibold">{tx.badge}</span>
+              </div>
+              <SectionPlayButton sectionId="footer-cta" />
             </div>
 
             <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-5 leading-tight">

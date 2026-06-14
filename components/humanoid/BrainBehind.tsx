@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Eye, Cpu, GitMerge } from "lucide-react";
 import { useLanguage } from "./LanguageContext";
 import { translations } from "./translations";
+import SectionPlayButton from "./SectionPlayButton";
 
 const conceptIcons = [Eye, Cpu, GitMerge];
 const conceptAccents = ["#00E5FF", "#FFE600", "#00E5FF"];
@@ -28,8 +29,11 @@ export default function BrainBehind() {
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
             >
-              <div className="inline-flex items-center gap-2 mb-6 border border-[#00E5FF]/15 rounded-full px-4 py-1.5 bg-[#00E5FF]/5">
-                <span className="text-[10px] uppercase tracking-[0.3em] text-[#00E5FF]/70 font-semibold">{tx.badge}</span>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="inline-flex items-center gap-2 border border-[#00E5FF]/15 rounded-full px-4 py-1.5 bg-[#00E5FF]/5">
+                  <span className="text-[10px] uppercase tracking-[0.3em] text-[#00E5FF]/70 font-semibold">{tx.badge}</span>
+                </div>
+                <SectionPlayButton sectionId="brain-behind" />
               </div>
               <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-6 leading-tight">
                 {tx.title}{" "}

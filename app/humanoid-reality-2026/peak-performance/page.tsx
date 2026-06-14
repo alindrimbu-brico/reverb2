@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, Zap, Globe, ChevronRight, Shield } from "lucide-react";
+import { ArrowLeft, Zap, Globe, ChevronRight, Shield, Play, Square } from "lucide-react";
 
 type Lang = "ro" | "en";
 
@@ -253,9 +254,98 @@ const fadeUp = {
   }),
 };
 
+const AUDIO_LAYERS = [
+  { freq: 110, type: "sine" as OscillatorType, gain: 0.04, lfoRate: 0.05 },
+  { freq: 220, type: "sine" as OscillatorType, gain: 0.02, lfoRate: 0.09 },
+];
+
+function usePageAudio() {
+  const ctxRef = useRef<AudioContext | null>(null);
+  const masterRef = useRef<GainNode | null>(null);
+  const activeRef = useRef<{ osc: OscillatorNode; lfo: OscillatorNode; gain: GainNode }[]>([]);
+  const [enabled, setEnabled] = useState(false);
+
+  const start = useCallback(() => {
+    const ctx = ctxRef.current!;
+    const master = masterRef.current!;
+    AUDIO_LAYERS.forEach(({ freq, type, gain: gainVal, lfoRate }) => {
+      const osc = ctx.createOscillator();
+      const gainNode = ctx.createGain();
+      const lfo = ctx.createOscillator();
+      const lfoGain = ctx.createGain();
+      osc.type = type; osc.frequency.value = freq;
+      gainNode.gain.setValueAtTime(0, ctx.currentTime);
+      gainNode.gain.setTargetAtTime(gainVal, ctx.currentTime, 2.5);
+      lfo.type = "sine"; lfo.frequency.value = lfoRate;
+      lfoGain.gain.value = freq * 0.003;
+      lfo.connect(lfoGain); lfoGain.connect(osc.frequency);
+      osc.connect(gainNode); gainNode.connect(master);
+      lfo.start(); osc.start();
+      activeRef.current.push({ osc, lfo, gain: gainNode });
+    });
+  }, []);
+
+  const toggle = useCallback(() => {
+    if (!enabled) {
+      if (!ctxRef.current) {
+        const ctx = new AudioContext();
+        ctxRef.current = ctx;
+        ctx.resume().then(() => {
+          const master = ctx.createGain();
+          master.gain.value = 0.28;
+          master.connect(ctx.destination);
+          masterRef.current = master;
+          start();
+        });
+      } else if (ctxRef.current.state === "suspended") {
+        ctxRef.current.resume();
+      }
+      setEnabled(true);
+    } else {
+      if (masterRef.current && ctxRef.current) {
+        masterRef.current.gain.setTargetAtTime(0, ctxRef.current.currentTime, 0.4);
+      }
+      setEnabled(false);
+    }
+  }, [enabled, start]);
+
+  useEffect(() => {
+    return () => {
+      activeRef.current.forEach(({ osc, lfo }) => { try { osc.stop(); lfo.stop(); } catch {} });
+      ctxRef.current?.close();
+    };
+  }, []);
+
+  return { enabled, toggle };
+}
+
+function RobotImageHero({ name, company, accent }: { name: string; company: string; accent: string }) {
+  return (
+    <div
+      className="relative w-full h-52 md:h-64 rounded-2xl overflow-hidden mb-8"
+      style={{ background: `linear-gradient(135deg, ${accent}06 0%, #0a0a14 60%, #080810 100%)` }}
+    >
+      <Image
+        src="/ai_human_poster.png"
+        alt={name}
+        fill
+        className="object-cover object-top"
+        style={{ opacity: 0.15, mixBlendMode: "luminosity" }}
+        sizes="100vw"
+      />
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
+        <div className="text-[10px] font-mono uppercase tracking-[0.35em]" style={{ color: `${accent}60` }}>{company}</div>
+        <div className="text-4xl md:text-5xl font-black tracking-tight" style={{ color: accent, textShadow: `0 0 40px ${accent}35` }}>{name}</div>
+      </div>
+      <div className="absolute bottom-0 left-0 right-0 h-12" style={{ background: "linear-gradient(to top, #080810, transparent)" }} />
+    </div>
+  );
+}
+
 export default function PeakPerformancePage() {
   const [lang, setLang] = useState<Lang>("ro");
   const tx = content[lang];
+  const { enabled: audioEnabled, toggle: toggleAudio } = usePageAudio();
 
   return (
     <div className="min-h-screen bg-[#080810] text-white">
@@ -270,14 +360,28 @@ export default function PeakPerformancePage() {
             <span className="text-[10px] uppercase tracking-widest hidden sm:inline">{tx.nav}</span>
           </Link>
           <span className="text-[10px] uppercase tracking-widest text-white/30 font-mono">{tx.chapterLabel} {tx.chapterNum}</span>
-          <button
-            onClick={() => setLang((l) => (l === "ro" ? "en" : "ro"))}
-            className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest border border-white/10 rounded-full px-3 py-1.5 hover:border-[#00E5FF]/40 hover:text-[#00E5FF] transition-all duration-200"
-          >
-            <span className={lang === "ro" ? "text-[#00E5FF]" : "text-white/40"}>RO</span>
-            <span className="text-white/20">/</span>
-            <span className={lang === "en" ? "text-[#00E5FF]" : "text-white/40"}>EN</span>
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={toggleAudio}
+              className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest rounded-full px-3 py-1.5 transition-all duration-200 cursor-pointer"
+              style={{
+                border: `1px solid ${audioEnabled ? "rgba(0,229,255,0.45)" : "rgba(255,255,255,0.10)"}`,
+                background: audioEnabled ? "rgba(0,229,255,0.12)" : "transparent",
+                color: audioEnabled ? "#00E5FF" : "rgba(255,255,255,0.35)",
+              }}
+            >
+              {audioEnabled ? <Square size={10} fill="currentColor" strokeWidth={0} /> : <Play size={10} fill="currentColor" strokeWidth={0} />}
+              <span>{audioEnabled ? "On" : "Sound"}</span>
+            </button>
+            <button
+              onClick={() => setLang((l) => (l === "ro" ? "en" : "ro"))}
+              className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest border border-white/10 rounded-full px-3 py-1.5 hover:border-[#00E5FF]/40 hover:text-[#00E5FF] transition-all duration-200"
+            >
+              <span className={lang === "ro" ? "text-[#00E5FF]" : "text-white/40"}>RO</span>
+              <span className="text-white/20">/</span>
+              <span className={lang === "en" ? "text-[#00E5FF]" : "text-white/40"}>EN</span>
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -312,6 +416,7 @@ export default function PeakPerformancePage() {
       <section className="py-20 px-6 bg-[#0a0a14]">
         <div className="max-w-6xl mx-auto">
           <motion.div custom={0} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}>
+            <RobotImageHero name={tx.atlas.title} company={tx.atlas.company} accent="#00E5FF" />
             <div className="flex items-center gap-3 mb-3">
               <div className="w-8 h-8 rounded-lg bg-[#00E5FF]/10 border border-[#00E5FF]/25 flex items-center justify-center">
                 <Zap size={16} className="text-[#00E5FF]" strokeWidth={1.5} />
@@ -370,6 +475,7 @@ export default function PeakPerformancePage() {
       <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <motion.div custom={0} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}>
+            <RobotImageHero name={tx.apollo.title} company={tx.apollo.company} accent="#FFE600" />
             <div className="flex items-center gap-3 mb-3">
               <div className="w-8 h-8 rounded-lg bg-[#FFE600]/10 border border-[#FFE600]/25 flex items-center justify-center">
                 <Globe size={16} className="text-[#FFE600]" strokeWidth={1.5} />

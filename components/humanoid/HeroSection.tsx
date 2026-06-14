@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { useLanguage } from "./LanguageContext";
 import { translations } from "./translations";
+import SectionPlayButton from "./SectionPlayButton";
 
 function ParticleCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -123,13 +124,14 @@ export default function HeroSection() {
         }}
       />
 
-      {/* Language switcher */}
+      {/* Controls top-right */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.8 }}
-        className="absolute top-6 right-6 z-20"
+        className="absolute top-6 right-6 z-20 flex items-center gap-2"
       >
+        <SectionPlayButton sectionId="hero" label="Ambient" />
         <button
           onClick={toggle}
           className="group flex items-center gap-1.5 border border-white/10 rounded-full px-4 py-2 bg-[#080810]/80 backdrop-blur-sm hover:border-[#00E5FF]/40 transition-all duration-300 cursor-pointer"

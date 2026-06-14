@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { TrendingUp, Users, DollarSign } from "lucide-react";
 import { useLanguage } from "./LanguageContext";
 import { translations } from "./translations";
+import SectionPlayButton from "./SectionPlayButton";
 
 const icons = [TrendingUp, Users, DollarSign];
 const accents = ["#00E5FF", "#FFE600", "#00E5FF"];
@@ -144,8 +145,11 @@ export default function EconomicImpact() {
           transition={{ duration: 0.7 }}
           className="text-center mb-16 md:mb-20"
         >
-          <div className="inline-flex items-center gap-2 mb-4 border border-[#00E5FF]/15 rounded-full px-4 py-1.5 bg-[#00E5FF]/5">
-            <span className="text-[10px] uppercase tracking-[0.3em] text-[#00E5FF]/70 font-semibold">{tx.badge}</span>
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="inline-flex items-center gap-2 border border-[#00E5FF]/15 rounded-full px-4 py-1.5 bg-[#00E5FF]/5">
+              <span className="text-[10px] uppercase tracking-[0.3em] text-[#00E5FF]/70 font-semibold">{tx.badge}</span>
+            </div>
+            <SectionPlayButton sectionId="economic-impact" />
           </div>
           <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-4">
             {tx.title}{" "}

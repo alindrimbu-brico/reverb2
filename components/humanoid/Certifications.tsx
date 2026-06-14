@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Award, ExternalLink, Clock, DollarSign, ChevronRight, Zap, BookOpen, Star, Users, TrendingUp, Lock } from "lucide-react";
+import SectionPlayButton from "./SectionPlayButton";
 
 const CATS = [
   { id: "microsoft", label: "Microsoft", color: "#0078D4", bg: "rgba(0,120,212,0.12)", border: "rgba(0,120,212,0.3)" },
@@ -408,11 +409,14 @@ export default function Certifications() {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 border border-[#A855F7]/25 rounded-full px-4 py-1.5 bg-[#A855F7]/8 mb-6">
-            <Award size={12} className="text-[#A855F7]" />
-            <span className="text-[10px] uppercase tracking-[0.2em] text-[#A855F7]/80 font-semibold">
-              Hartă completă · Certificări 2025–2026
-            </span>
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <div className="inline-flex items-center gap-2 border border-[#A855F7]/25 rounded-full px-4 py-1.5 bg-[#A855F7]/8">
+              <Award size={12} className="text-[#A855F7]" />
+              <span className="text-[10px] uppercase tracking-[0.2em] text-[#A855F7]/80 font-semibold">
+                Hartă completă · Certificări 2025–2026
+              </span>
+            </div>
+            <SectionPlayButton sectionId="certifications" accent="#A855F7" />
           </div>
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
             Certificările care deschid{" "}

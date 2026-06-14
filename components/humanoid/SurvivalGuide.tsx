@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Database, UserCheck, ShieldAlert, Scale } from "lucide-react";
 import { useLanguage } from "./LanguageContext";
 import { translations } from "./translations";
+import SectionPlayButton from "./SectionPlayButton";
 
 const tipIcons = [Database, UserCheck, ShieldAlert, Scale];
 const tipAccents = ["#00E5FF", "#FFE600", "#00E5FF", "#FFE600"];
@@ -28,8 +29,11 @@ export default function SurvivalGuide() {
           transition={{ duration: 0.7 }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 mb-4 border border-[#FFE600]/15 rounded-full px-4 py-1.5 bg-[#FFE600]/5">
-            <span className="text-[10px] uppercase tracking-[0.3em] text-[#FFE600]/70 font-semibold">{tx.badge}</span>
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="inline-flex items-center gap-2 border border-[#FFE600]/15 rounded-full px-4 py-1.5 bg-[#FFE600]/5">
+              <span className="text-[10px] uppercase tracking-[0.3em] text-[#FFE600]/70 font-semibold">{tx.badge}</span>
+            </div>
+            <SectionPlayButton sectionId="survival-guide" accent="#FFE600" />
           </div>
           <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-4">
             {tx.title}{" "}

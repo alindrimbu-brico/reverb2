@@ -2,9 +2,11 @@
 
 import { motion } from "framer-motion";
 import { Brain, Factory, Zap, Globe, ArrowRight } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useLanguage } from "./LanguageContext";
 import { translations } from "./translations";
+import SectionPlayButton from "./SectionPlayButton";
 
 const catIcons = [Brain, Factory, Zap, Globe];
 const catAccents = ["#00E5FF", "#FFE600", "#00E5FF", "#FFE600"];
@@ -54,8 +56,11 @@ export default function MarketLeaders() {
           transition={{ duration: 0.7 }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 mb-4 border border-[#FFE600]/15 rounded-full px-4 py-1.5 bg-[#FFE600]/5">
-            <span className="text-[10px] uppercase tracking-[0.3em] text-[#FFE600]/70 font-semibold">{tx.badge}</span>
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="inline-flex items-center gap-2 border border-[#FFE600]/15 rounded-full px-4 py-1.5 bg-[#FFE600]/5">
+              <span className="text-[10px] uppercase tracking-[0.3em] text-[#FFE600]/70 font-semibold">{tx.badge}</span>
+            </div>
+            <SectionPlayButton sectionId="market-leaders" accent="#FFE600" />
           </div>
           <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-4">
             {tx.title}{" "}
@@ -107,29 +112,71 @@ export default function MarketLeaders() {
                   {robots.map((robot) => (
                     <div
                       key={robot.name}
-                      className="rounded-xl border border-white/5 bg-white/[0.02] p-4 hover:border-white/10 transition-colors duration-200"
+                      className="rounded-xl border border-white/5 bg-white/[0.02] overflow-hidden hover:border-white/10 transition-colors duration-200"
                     >
-                      <div className="flex items-start justify-between gap-3 mb-2">
-                        <div>
-                          <span className="text-white font-semibold text-base">{robot.name}</span>
-                          <span className="text-white/40 text-sm font-light ml-2">{robot.company}</span>
+                      {/* Robot image area */}
+                      <div
+                        className="relative h-36 overflow-hidden"
+                        style={{
+                          background: `linear-gradient(135deg, ${accent}06 0%, #0a0a14 60%, #080810 100%)`,
+                        }}
+                      >
+                        <Image
+                          src="/ai_human_poster.png"
+                          alt={robot.name}
+                          fill
+                          className="object-cover object-top"
+                          style={{ opacity: 0.13, mixBlendMode: "luminosity" }}
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                        />
+                        <div className="absolute inset-0 flex flex-col items-center justify-center gap-1">
+                          <div
+                            className="text-[9px] font-mono uppercase tracking-[0.3em]"
+                            style={{ color: `${accent}60` }}
+                          >
+                            {robot.company}
+                          </div>
+                          <div
+                            className="text-2xl font-black tracking-tight"
+                            style={{
+                              color: accent,
+                              textShadow: `0 0 30px ${accent}40`,
+                            }}
+                          >
+                            {robot.name}
+                          </div>
                         </div>
-                        <span
-                          className="shrink-0 text-[9px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full"
+                        <div
+                          className="absolute bottom-0 left-0 right-0 h-8"
                           style={{
-                            background: `${accent}15`,
-                            color: accent,
-                            border: `1px solid ${accent}30`,
+                            background: "linear-gradient(to top, rgba(14,14,26,1), transparent)",
                           }}
-                        >
-                          {robot.badge}
-                        </span>
+                        />
                       </div>
-                      <p className="text-white/40 text-sm font-light leading-relaxed">
-                        {lang === "ro"
-                          ? robot.detail.split(" / ")[0]
-                          : robot.detail.split(" / ")[1] || robot.detail.split(" / ")[0]}
-                      </p>
+
+                      <div className="p-4">
+                        <div className="flex items-start justify-between gap-3 mb-2">
+                          <div>
+                            <span className="text-white font-semibold text-base">{robot.name}</span>
+                            <span className="text-white/40 text-sm font-light ml-2">{robot.company}</span>
+                          </div>
+                          <span
+                            className="shrink-0 text-[9px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full"
+                            style={{
+                              background: `${accent}15`,
+                              color: accent,
+                              border: `1px solid ${accent}30`,
+                            }}
+                          >
+                            {robot.badge}
+                          </span>
+                        </div>
+                        <p className="text-white/40 text-sm font-light leading-relaxed">
+                          {lang === "ro"
+                            ? robot.detail.split(" / ")[0]
+                            : robot.detail.split(" / ")[1] || robot.detail.split(" / ")[0]}
+                        </p>
+                      </div>
                     </div>
                   ))}
                 </div>

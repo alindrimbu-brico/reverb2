@@ -127,6 +127,47 @@ export default function AudioEngine() {
     }
   }, [currentSection, startSection]);
 
+  // Broadcast audio state so SectionPlayButtons can reflect it
+  useEffect(() => {
+    window.dispatchEvent(
+      new CustomEvent("humanoid-audio-state", {
+        detail: { sectionId: currentSection, enabled },
+      })
+    );
+  }, [currentSection, enabled]);
+
+  // Listen for external play requests from SectionPlayButton
+  useEffect(() => {
+    const onPlay = (e: Event) => {
+      const { sectionId } = (e as CustomEvent<{ sectionId: string }>).detail;
+      setCurrentSection(sectionId);
+      if (!enabled) {
+        if (!ctxRef.current) {
+          const ctx = new AudioContext();
+          ctxRef.current = ctx;
+          ctx.resume().then(() => {
+            const master = ctx.createGain();
+            master.gain.value = 0.28;
+            master.connect(ctx.destination);
+            masterRef.current = master;
+            startSection(sectionId);
+          });
+        } else if (ctxRef.current.state === "suspended") {
+          ctxRef.current.resume();
+        }
+        if (ctxRef.current && ctxRef.current.state !== "suspended" && masterRef.current) {
+          masterRef.current.gain.setTargetAtTime(0.28, ctxRef.current.currentTime, 0.5);
+          startSection(sectionId);
+        }
+        setEnabled(true);
+      } else {
+        startSection(sectionId);
+      }
+    };
+    window.addEventListener("humanoid-play-section", onPlay);
+    return () => window.removeEventListener("humanoid-play-section", onPlay);
+  }, [enabled, startSection]);
+
   // IntersectionObserver watcher
   useEffect(() => {
     const ids = Object.keys(SECTIONS);
