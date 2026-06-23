@@ -8,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/despre',
     '/servicii',
     '/pachete',
+    '/guru',
     '/magazine-online',
     '/portofoliu',
     '/blog',
