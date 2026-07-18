@@ -34,7 +34,7 @@ export default function GlobalAudioToggle() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 2, duration: 1 }}
         onClick={toggleAudio}
-        className={`flex items-center justify-center w-14 h-14 rounded-full transition-all duration-500 backdrop-blur-md border shadow-lg ${
+        className={`flex items-center justify-center px-4 h-12 rounded-full transition-all duration-500 backdrop-blur-md border shadow-lg ${
           enabled 
             ? "bg-white/90 dark:bg-neutral-900/90 text-neutral-900 dark:text-white border-neutral-200 dark:border-neutral-800" 
             : "bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 border-transparent animate-pulse"
@@ -42,9 +42,15 @@ export default function GlobalAudioToggle() {
         aria-label="Audio Menu"
       >
         {enabled ? (
-          <Volume2 strokeWidth={1.5} className="w-6 h-6" />
+          <>
+            <Volume2 strokeWidth={1.5} className="w-5 h-5 mr-2" />
+            <span className="font-medium text-sm">Sunet: ON</span>
+          </>
         ) : (
-          <VolumeX strokeWidth={1.5} className="w-6 h-6" />
+          <>
+            <VolumeX strokeWidth={1.5} className="w-5 h-5 mr-2" />
+            <span className="font-medium text-sm">Sunet: OFF</span>
+          </>
         )}
       </motion.button>
     </div>
