@@ -148,9 +148,9 @@
                         <label class="text-[10px] font-bold uppercase tracking-widest text-amber-600">Data Nașterii</label>
                         <input type="text" id="userDob" placeholder="DD.MM.YYYY" inputmode="numeric" maxlength="10" class="w-full bg-slate-950 border border-slate-800 p-4 rounded text-white focus:border-amber-500 outline-none transition">
                     </div>
-                    <div class="space-y-2">
+                    <div class="space-y-2 relative">
                         <label class="text-[10px] font-bold uppercase tracking-widest text-amber-600">Locul Nașterii</label>
-                        <input type="text" id="userPlace" placeholder="Localitatea" class="w-full bg-slate-950 border border-slate-800 p-4 rounded text-white focus:border-amber-500 outline-none transition">
+                        <input type="text" id="userPlace" placeholder="Localitatea" class="w-full bg-slate-950 border border-slate-800 p-4 rounded text-white focus:border-amber-500 outline-none transition" autocomplete="off">
                     </div>
                 </div>
 
@@ -509,14 +509,73 @@
             }
         }
 
-        // Init Google Autocomplete on window load callback
+        // Init Google Autocomplete Service with custom mobile-friendly overlay
+        let autocompleteService;
+        let suggestionsContainer;
+
         function initAutocomplete() {
             const input = document.getElementById('userPlace');
             if(!input) return;
-            // Disable default browser autofills
-            input.setAttribute('autocomplete', 'new-password');
-            autocomplete = new google.maps.places.Autocomplete(input, {
-                types: ['(cities)']
+
+            // Create suggestions dropdown overlay
+            suggestionsContainer = document.createElement('div');
+            suggestionsContainer.id = 'placeSuggestions';
+            suggestionsContainer.className = 'absolute left-0 right-0 bg-slate-950 border border-slate-800 rounded mt-1 hidden z-50 max-h-60 overflow-y-auto';
+            input.parentNode.appendChild(suggestionsContainer);
+
+            try {
+                autocompleteService = new google.maps.places.AutocompleteService();
+            } catch(e) {
+                console.error("Google Places AutocompleteService failed to initialize:", e);
+            }
+
+            input.addEventListener('input', function(e) {
+                const query = e.target.value;
+                if (!query || query.length < 2) {
+                    suggestionsContainer.innerHTML = '';
+                    suggestionsContainer.classList.add('hidden');
+                    return;
+                }
+
+                if (autocompleteService) {
+                    autocompleteService.getPlacePredictions({
+                        input: query,
+                        types: ['(cities)']
+                    }, function(predictions, status) {
+                        if (status === google.maps.places.PlacesServiceStatus.OK && predictions) {
+                            suggestionsContainer.innerHTML = '';
+                            predictions.forEach(prediction => {
+                                const item = document.createElement('div');
+                                item.className = 'px-4 py-3 hover:bg-amber-600/10 cursor-pointer text-sm text-slate-300 border-b border-slate-900/50';
+                                item.innerText = prediction.description;
+                                
+                                // Prevent input blur / keyboard close on tap
+                                item.addEventListener('mousedown', function(evt) {
+                                    evt.preventDefault();
+                                });
+
+                                item.addEventListener('click', function() {
+                                    input.value = prediction.description;
+                                    suggestionsContainer.innerHTML = '';
+                                    suggestionsContainer.classList.add('hidden');
+                                });
+                                suggestionsContainer.appendChild(item);
+                            });
+                            suggestionsContainer.classList.remove('hidden');
+                        } else {
+                            suggestionsContainer.innerHTML = '';
+                            suggestionsContainer.classList.add('hidden');
+                        }
+                    });
+                }
+            });
+
+            // Close suggestions dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (e.target !== input && e.target !== suggestionsContainer) {
+                    suggestionsContainer.innerHTML = '';
+                    suggestionsContainer.classList.add('hidden');
+                }
             });
         }
 
