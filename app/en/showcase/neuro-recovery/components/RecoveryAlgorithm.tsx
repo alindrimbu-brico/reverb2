@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Brain, HeartHandshake, ShieldPlus, PlayCircle } from "lucide-react";
+import { ShieldPlus, Brain, Users, HeartHandshake, PlayCircle, BookOpen } from "lucide-react";
+import Link from "next/link";
 import { setTheme } from "./AudioEngine";
 
 export default function RecoveryAlgorithm() {
@@ -28,16 +29,19 @@ export default function RecoveryAlgorithm() {
               <span className="uppercase tracking-widest text-xs font-mono font-semibold">Recovery Algorithm</span>
             </div>
           </div>
-          <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-neutral-900 mb-6">
+          <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-neutral-900 mb-8">
             The Road Back to Light
           </h2>
-          <button
-            onClick={() => setTheme("recovery", true)}
-            className="flex items-center space-x-2 text-sm font-mono tracking-widest uppercase text-neutral-600 bg-neutral-200/50 hover:bg-neutral-300/50 px-6 py-3 rounded-full transition-colors border border-neutral-300 mx-auto"
-          >
-            <PlayCircle className="w-5 h-5" />
-            <span>Play Theme</span>
-          </button>
+          <div className="flex flex-wrap justify-center items-center gap-4">
+
+            <Link 
+              href="/en/showcase/neuro-recovery/recovery"
+              className="flex items-center space-x-2 text-sm font-mono tracking-widest uppercase text-rose-500 bg-rose-100/50 hover:bg-rose-200/50 px-6 py-3 rounded-full transition-colors border border-rose-300"
+            >
+              <BookOpen className="w-5 h-5" />
+              <span>Read More</span>
+            </Link>
+          </div>
         </motion.div>
 
         {/* Steps */}

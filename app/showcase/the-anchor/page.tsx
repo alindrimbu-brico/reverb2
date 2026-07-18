@@ -70,7 +70,7 @@ export default function TheAnchorShowcase() {
             
             <div className="order-2 lg:order-1 relative group">
                <div className="absolute inset-0 bg-[#8A1C14] blur-[50px] opacity-20 group-hover:opacity-40 transition-opacity duration-1000" />
-               <img src="https://images.unsplash.com/photo-1544032128-444c1ee202f5?auto=format&fit=crop&q=80" alt="Chaos" className="relative z-10 w-full aspect-[4/5] object-cover grayscale contrast-125 rounded-[2px]" />
+               <img src="/showcase/the-anchor/barbat-adevarat.png" alt="Bărbat adevărat" className="relative z-10 w-full aspect-[4/5] object-cover grayscale contrast-125 rounded-[2px]" />
                <div className="absolute top-10 -right-10 w-full aspect-[4/5] border border-white/10 rounded-[2px] -z-10" />
             </div>
 

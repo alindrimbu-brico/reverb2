@@ -1,25 +1,21 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Volume2, VolumeX, Repeat, Repeat1 } from "lucide-react";
-import { initAudioEngine, stopAudioEngine, isAudioEnabled, isAutoPlayEnabled, setAutoPlay } from "./AudioEngine";
+import { Volume2, VolumeX } from "lucide-react";
+import { initAudioEngine, stopAudioEngine, isAudioEnabled } from "./AudioEngine";
 import { motion } from "framer-motion";
 
 export default function GlobalAudioToggle() {
   const [enabled, setEnabled] = useState(false);
-  const [autoPlay, setAutoPlayState] = useState(true);
 
   useEffect(() => {
     const interval = setInterval(() => {
       if (enabled !== isAudioEnabled()) {
         setEnabled(isAudioEnabled());
       }
-      if (autoPlay !== isAutoPlayEnabled()) {
-        setAutoPlayState(isAutoPlayEnabled());
-      }
     }, 1000);
     return () => clearInterval(interval);
-  }, [enabled, autoPlay]);
+  }, [enabled]);
 
   const toggleAudio = () => {
     if (enabled) {
@@ -31,44 +27,26 @@ export default function GlobalAudioToggle() {
     }
   };
 
-  const toggleAutoPlay = () => {
-    const newVal = !autoPlay;
-    setAutoPlay(newVal);
-    setAutoPlayState(newVal);
-  };
-
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 1, duration: 1 }}
-      className="fixed bottom-6 right-6 z-50 flex items-center bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md rounded-full shadow-2xl border border-neutral-200 dark:border-neutral-800 p-1"
-    >
-      <button
-        onClick={toggleAutoPlay}
-        className={`flex items-center space-x-2 px-4 py-2 rounded-full text-xs font-mono font-medium transition-all ${
-          autoPlay 
-            ? "bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100" 
-            : "text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300"
-        }`}
-      >
-        {autoPlay ? <Repeat className="w-3.5 h-3.5" /> : <Repeat1 className="w-3.5 h-3.5" />}
-        <span>Auto: {autoPlay ? "ON" : "OFF"}</span>
-      </button>
-
-      <div className="w-px h-6 bg-neutral-300 dark:bg-neutral-700 mx-1"></div>
-
-      <button
+    <div className="fixed bottom-6 right-6 z-50 flex items-center justify-center">
+      <motion.button
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 2, duration: 1 }}
         onClick={toggleAudio}
-        className={`flex items-center space-x-2 px-4 py-2 rounded-full text-xs font-mono font-medium transition-all ${
+        className={`flex items-center justify-center w-14 h-14 rounded-full transition-all duration-500 backdrop-blur-md border shadow-lg ${
           enabled 
-            ? "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400" 
-            : "text-rose-500 dark:text-rose-400"
+            ? "bg-white/90 dark:bg-neutral-900/90 text-neutral-900 dark:text-white border-neutral-200 dark:border-neutral-800" 
+            : "bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 border-transparent animate-pulse"
         }`}
+        aria-label="Audio Menu"
       >
-        {enabled ? <Volume2 className="w-3.5 h-3.5" /> : <VolumeX className="w-3.5 h-3.5" />}
-        <span>{enabled ? "Mute" : "Unmute"}</span>
-      </button>
-    </motion.div>
+        {enabled ? (
+          <Volume2 strokeWidth={1.5} className="w-6 h-6" />
+        ) : (
+          <VolumeX strokeWidth={1.5} className="w-6 h-6" />
+        )}
+      </motion.button>
+    </div>
   );
 }

@@ -102,9 +102,9 @@ export default function Footer() {
             </div>
 
             {/* Conținut Tab-uri */}
-            <div className="flex-1 w-full relative">
+            <div className="flex-1 w-full grid">
                {/* TAB: NAVIGARE */}
-               <div className={`transition-all duration-500 absolute w-full ${activeTab === "navigare" ? "opacity-100 z-10 translate-x-0" : "opacity-0 -z-10 translate-x-4 pointer-events-none"}`}>
+               <div className={`col-start-1 row-start-1 transition-all duration-500 w-full ${activeTab === "navigare" ? "opacity-100 z-10 translate-x-0" : "opacity-0 -z-10 translate-x-4 pointer-events-none"}`}>
                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
                    {nav.map(({ href, label }) => (
                      <Link 
@@ -121,7 +121,7 @@ export default function Footer() {
                </div>
 
                {/* TAB: ECOSISTEM */}
-               <div className={`transition-all duration-500 absolute w-full ${activeTab === "ecosistem" ? "opacity-100 z-10 translate-x-0" : "opacity-0 -z-10 -translate-x-4 pointer-events-none"}`}>
+               <div className={`col-start-1 row-start-1 transition-all duration-500 w-full ${activeTab === "ecosistem" ? "opacity-100 z-10 translate-x-0" : "opacity-0 -z-10 -translate-x-4 pointer-events-none"}`}>
                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-2">
                    {showcaseLinks.map(({ href, label }) => (
                      <Link 
@@ -197,7 +197,7 @@ export default function Footer() {
                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-600"></span>
                  </span>
                  <span className="font-bold text-[11px] uppercase leading-none tracking-widest transition-transform duration-500 group-hover:scale-105 origin-left flex items-center text-[#1d2731]">
-                   Google Ultra <span className="text-emerald-700 ml-1 font-extrabold" style={{ textShadow: "0 0 10px rgba(16,185,129,0.3)" }}>AI</span>
+                   Gemini 3.1 <span className="text-emerald-700 ml-1 font-extrabold" style={{ textShadow: "0 0 10px rgba(16,185,129,0.3)" }}>Pro</span>
                  </span>
               </div>
             </div>

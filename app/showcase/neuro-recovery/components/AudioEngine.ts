@@ -1,19 +1,20 @@
 "use client";
 
-type ThemeName = 'chaos' | 'withdrawal' | 'alcohol' | 'cannabis' | 'stimulants' | 'recovery' | 'joy';
-
 let audioCtx: AudioContext | null = null;
 let masterGain: GainNode | null = null;
-let activeTheme: ThemeName | null = null;
-let autoPlayEnabled = true;
+let isInitialized = false;
+type ThemeType = 'chaos' | 'withdrawal' | 'alcohol' | 'cannabis' | 'stimulants' | 'recovery' | 'joy';
+let activeTheme: ThemeType | null = null;
+let autoMode = true;
 
 // Store active oscillators and their gain nodes so we can crossfade them
 let currentNodes: { osc: OscillatorNode, gain: GainNode }[] = [];
 
-export const isAudioEnabled = () => !!audioCtx && audioCtx.state === 'running';
-export const isAutoPlayEnabled = () => autoPlayEnabled;
-export const setAutoPlay = (enabled: boolean) => {
-  autoPlayEnabled = enabled;
+export const isAudioEnabled = () => isInitialized;
+export const isAutoModeEnabled = () => autoMode;
+
+export const setAutoMode = (enabled: boolean) => {
+  autoMode = enabled;
 };
 
 export const initAudioEngine = () => {
@@ -24,6 +25,7 @@ export const initAudioEngine = () => {
     masterGain = audioCtx.createGain();
     masterGain.connect(audioCtx.destination);
     masterGain.gain.value = 1;
+    isInitialized = true;
   }
   
   if (audioCtx.state === 'suspended') {
@@ -36,11 +38,13 @@ export const initAudioEngine = () => {
 };
 
 export const stopAudioEngine = () => {
-  fadeOutCurrentNodes(audioCtx?.currentTime || 0);
+  isInitialized = false;
+  fadeOutCurrentNodes();
 };
 
-const fadeOutCurrentNodes = (now: number) => {
+const fadeOutCurrentNodes = () => {
   if (!audioCtx) return;
+  const now = audioCtx.currentTime;
   currentNodes.forEach(({ osc, gain }) => {
     try {
       // Smooth fade out over 2 seconds
@@ -51,25 +55,22 @@ const fadeOutCurrentNodes = (now: number) => {
     } catch(e) {}
   });
   currentNodes = [];
-  activeTheme = null;
 };
 
-export const setTheme = (theme: ThemeName, forceManual: boolean = false) => {
-  if (!forceManual && !autoPlayEnabled) return;
-  if (theme === activeTheme || !audioCtx) return;
-  
-  if (audioCtx.state === 'suspended') {
-    audioCtx.resume();
-  }
-
+export const setTheme = (theme: ThemeType, forceManual = false) => {
+  if (!isInitialized || !audioCtx) return;
+  if (!autoMode && !forceManual) return; // Ignore automatic triggers if Auto is off
+  if (theme === activeTheme) return;
   activeTheme = theme;
-  playTheme(theme);
+  if (isInitialized) {
+    playTheme(theme);
+  }
 };
 
 const playTheme = (theme: string) => {
-  if (!audioCtx || !masterGain || audioCtx.state !== 'running') return;
+  if (!audioCtx || !masterGain || !isAudioEnabled) return;
   
-  fadeOutCurrentNodes(audioCtx.currentTime);
+  fadeOutCurrentNodes();
   const now = audioCtx.currentTime;
 
   switch(theme) {

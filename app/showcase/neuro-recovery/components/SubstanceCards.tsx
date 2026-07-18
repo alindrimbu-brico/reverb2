@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Hammer, PaintBucket, Zap, ImageIcon, Music, Activity, PlayCircle } from "lucide-react";
+import { Hammer, PaintBucket, Zap, Volume2, Image as ImageIcon, Music, PlayCircle, BookOpen } from "lucide-react";
 import { setTheme } from "./AudioEngine";
 import Image from "next/image";
+import Link from "next/link";
 
 const substances = [
   {
@@ -88,6 +89,7 @@ export default function SubstanceCards() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.8 }}
               onViewportEnter={() => {
+                // On mobile they stack, so amount: 0.8 works.
                 if (window.innerWidth < 768) {
                   setTheme(sub.id as any);
                 }
@@ -114,21 +116,20 @@ export default function SubstanceCards() {
                         {sub.icon}
                       </div>
                       
-                      <div className="flex flex-col gap-4 mb-6">
-                        <div className="flex items-center justify-between">
-                          <h4 className="text-3xl font-bold text-neutral-900 dark:text-white transition-colors duration-1000">{sub.title}</h4>
-                          <div className="flex items-center space-x-2 text-neutral-500 font-mono text-sm tracking-widest uppercase">
-                            <Activity className="w-4 h-4" />
-                            <span>{sub.subtitle}</span>
-                          </div>
-                        </div>
-                        <button
-                          onClick={() => setTheme(sub.id as any, true)}
-                          className="flex items-center justify-center space-x-2 text-xs font-mono tracking-widest uppercase text-neutral-600 bg-neutral-200/50 hover:bg-neutral-300/50 dark:text-neutral-400 dark:bg-neutral-800/50 dark:hover:bg-neutral-700/50 px-4 py-2 rounded-full transition-colors w-max"
+                      <div className="flex items-center justify-between mb-1">
+                        <h3 className="text-2xl font-bold text-neutral-900 dark:text-white transition-colors duration-1000">{sub.title}</h3>
+                      </div>
+                      <h4 className="text-sm font-mono tracking-widest uppercase mb-4 text-neutral-500 dark:text-neutral-400">{sub.subtitle}</h4>
+                      
+                      <div className="flex flex-wrap items-center gap-3 mb-6">
+
+                        <Link 
+                          href={`/showcase/neuro-recovery/substances/${sub.id}`}
+                          className="flex items-center justify-center space-x-2 text-xs font-mono tracking-widest uppercase text-blue-500 bg-blue-100/50 hover:bg-blue-200/50 dark:text-blue-400 dark:bg-blue-900/20 dark:hover:bg-blue-900/40 px-4 py-2 rounded-full transition-colors"
                         >
-                          <PlayCircle className="w-4 h-4" />
-                          <span>Play Theme</span>
-                        </button>
+                          <BookOpen className="w-4 h-4" />
+                          <span>Află mai multe</span>
+                        </Link>
                       </div>
                       
                       <div className="space-y-6 mt-auto">

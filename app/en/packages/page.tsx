@@ -171,21 +171,22 @@ const forWhom = [
 
 export default function PackagesPage() {
   return (
-    <div className="bg-[#f5f1ea] text-[#1d2731]">
+    <div className="bg-[#030303] text-neutral-200 min-h-screen font-sans selection:bg-purple-900/50">
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-[#1d2731]/8">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(118,86,143,0.10),transparent_35%),radial-gradient(circle_at_bottom_left,rgba(49,88,79,0.08),transparent_30%)]" />
-        <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+      <section className="relative overflow-hidden border-b border-neutral-800/50">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(120,80,180,0.15),transparent_50%)] pointer-events-none" />
+        <div className="relative mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
           <Reveal>
-            <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">Pricing</div>
+            <div className="text-xs font-mono uppercase tracking-widest text-purple-400">Pricing / Structure</div>
           </Reveal>
           <Reveal delay={80}>
-            <h1 className="mt-4 max-w-4xl text-5xl font-medium leading-[0.94] tracking-[-0.04em] md:text-7xl lg:text-[80px]">
-              Fixed prices.<br />No surprises.
+            <h1 className="mt-6 max-w-4xl text-5xl font-light leading-[1.1] tracking-tight md:text-7xl lg:text-[80px] text-white">
+              Fixed prices.<br />
+              <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-neutral-300 to-neutral-500">No surprises.</span>
             </h1>
           </Reveal>
           <Reveal delay={160}>
-            <p className="mt-8 max-w-2xl text-lg leading-8 text-[#1d2731]/70 md:text-xl">
+            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-neutral-400 font-light md:text-xl">
               Every package has a clear price, a fixed set of deliverables and a defined timeline. You know from the start what you get and how much you pay.
             </p>
           </Reveal>
@@ -193,93 +194,85 @@ export default function PackagesPage() {
       </section>
 
       {/* One-time Packages */}
-      <section className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+      <section className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
         <Reveal>
-          <div className="mb-12">
-            <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">One-time packages</div>
-            <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
+          <div className="mb-16">
+            <div className="text-xs font-mono uppercase tracking-widest text-purple-400">One-time packages</div>
+            <h2 className="mt-4 text-3xl font-medium tracking-tight md:text-5xl text-white">
               Projects with defined delivery
             </h2>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-[#1d2731]/65">
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-neutral-400 font-light">
               Pay once, receive a functional system. No mandatory subscription.
             </p>
           </div>
         </Reveal>
 
-        <div className="grid gap-5 md:grid-cols-2 tab-blur-group">
+        <div className="grid gap-6 md:grid-cols-2">
           {packages.map((pkg, i) => (
             <Reveal key={pkg.id} delay={i * 80}>
-              <div className="relative group rounded-[28px] h-full">
-                <div
-                  className={`absolute inset-0 tab-blur-item rounded-[28px] border shadow-[0_10px_40px_rgba(29,39,49,0.05)] transition-all duration-300 group-hover:shadow-[0_20px_60px_rgba(29,39,49,0.10)] ${
-                    pkg.highlight
-                      ? "border-[#1d2731] bg-[#1d2731] text-white"
-                      : "border-[#1d2731]/8 bg-white/70"
-                  }`}
-                  style={{ animation: `float-${i % 2 === 0 ? 'a' : 'b'} ${7 + i}s ease-in-out infinite` }}
-                />
-                <div
-                  className={`relative z-10 flex h-full flex-col p-8 transition-all duration-500 ${pkg.highlight ? "text-white" : "text-[#1d2731]"}`}
-                  style={{ animation: `float-text-${i % 2 === 0 ? 'a' : 'b'} ${7 + i}s ease-in-out infinite` }}
-                >
-                  {pkg.badge && (
-                    <div className="absolute -top-3 left-8 inline-flex items-center rounded-full bg-[#31584f] px-4 py-1 text-xs font-semibold text-white">
-                      {pkg.badge}
-                    </div>
-                  )}
-
-                  <div className="mb-6">
-                    <div className={`text-xs uppercase tracking-[0.25em] ${pkg.highlight ? "text-white/50" : "text-[#1d2731]/45"}`}>
-                      {pkg.delivery}
-                    </div>
-                    <h3 className={`mt-2 text-2xl font-medium ${pkg.highlight ? "text-white" : "text-[#1d2731]"}`}>
-                      {pkg.name}
-                    </h3>
-                    <p className={`mt-2 text-sm leading-6 ${pkg.highlight ? "text-white/70" : "text-[#1d2731]/65"}`}>
-                      {pkg.tagline}
-                    </p>
+              <div className={`relative flex flex-col h-full rounded-[2rem] p-10 border transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl ${
+                  pkg.highlight
+                    ? "bg-gradient-to-b from-neutral-900 to-[#030303] border-purple-500/30 shadow-[0_0_40px_rgba(168,85,247,0.1)] hover:border-purple-500/60 hover:shadow-[0_0_60px_rgba(168,85,247,0.2)]"
+                    : "bg-neutral-900/30 border-neutral-800/50 hover:border-neutral-700/80 hover:bg-neutral-900/50"
+                }`}
+              >
+                {pkg.badge && (
+                  <div className="absolute -top-3 left-10 inline-flex items-center rounded-full bg-purple-500/20 border border-purple-500/30 px-4 py-1 text-xs font-mono tracking-widest text-purple-300 backdrop-blur-md">
+                    {pkg.badge}
                   </div>
+                )}
 
-                  <div className="mb-6">
-                    <span className={`text-4xl font-medium tracking-[-0.03em] ${pkg.highlight ? "text-white" : "text-[#1d2731]"}`}>
-                      {pkg.price}
-                    </span>
-                    {pkg.priceExtra && (
-                      <p className={`mt-1 text-sm ${pkg.highlight ? "text-white/60" : "text-[#1d2731]/50"}`}>
-                        {pkg.priceExtra}
-                      </p>
-                    )}
+                <div className="mb-8">
+                  <div className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-3">
+                    {pkg.delivery}
                   </div>
-
-                  <p className={`mb-6 text-sm leading-7 ${pkg.highlight ? "text-white/75" : "text-[#1d2731]/65"}`}>
-                    {pkg.description}
+                  <h3 className="text-3xl font-medium text-white mb-2">
+                    {pkg.name}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-neutral-400">
+                    {pkg.tagline}
                   </p>
-
-                  <ul className="mb-8 flex-1 space-y-3">
-                    {pkg.includes.map((item) => (
-                      <li key={item} className="flex items-start gap-3 text-sm">
-                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#31584f]" />
-                        <span className={pkg.highlight ? "text-white/80" : "text-[#1d2731]/70"}>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className={`mb-6 rounded-2xl px-4 py-3 text-sm ${pkg.highlight ? "bg-white/10" : "bg-[#f5f1ea]"}`}>
-                    <span className={`font-medium ${pkg.highlight ? "text-white/60" : "text-[#1d2731]/50"}`}>Ideal for: </span>
-                    <span className={pkg.highlight ? "text-white/80" : "text-[#1d2731]/70"}>{pkg.ideal}</span>
-                  </div>
-
-                  <Link
-                    href={pkg.href}
-                    className={`inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-medium transition hover:-translate-y-0.5 hover:shadow-md ${
-                      pkg.highlight
-                        ? "bg-white text-[#1d2731]"
-                        : "bg-[#1d2731] text-white"
-                    }`}
-                  >
-                    Discuss this package
-                  </Link>
                 </div>
+
+                <div className="mb-8 pb-8 border-b border-neutral-800">
+                  <span className="text-5xl font-light tracking-tight text-white">
+                    {pkg.price}
+                  </span>
+                  {pkg.priceExtra && (
+                    <p className="mt-3 text-sm text-neutral-500">
+                      {pkg.priceExtra}
+                    </p>
+                  )}
+                </div>
+
+                <p className="mb-8 text-sm leading-relaxed text-neutral-300 font-light">
+                  {pkg.description}
+                </p>
+
+                <ul className="mb-10 flex-1 space-y-4">
+                  {pkg.includes.map((item) => (
+                    <li key={item} className="flex items-start gap-4 text-sm font-light text-neutral-400">
+                      <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-purple-500" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mb-10 rounded-2xl bg-neutral-900/50 border border-neutral-800 p-5 text-sm font-light">
+                  <span className="font-medium text-neutral-500 uppercase tracking-wider text-xs block mb-1">Ideal for: </span>
+                  <span className="text-neutral-300">{pkg.ideal}</span>
+                </div>
+
+                <Link
+                  href={pkg.href}
+                  className={`inline-flex items-center justify-center w-full rounded-full px-6 py-4 text-sm font-semibold tracking-wide transition-all duration-300 ${
+                    pkg.highlight
+                      ? "bg-purple-600 text-white hover:bg-purple-500 shadow-lg shadow-purple-900/20"
+                      : "bg-white/5 text-white border border-white/10 hover:bg-white/10"
+                  }`}
+                >
+                  Discuss this package
+                </Link>
               </div>
             </Reveal>
           ))}
@@ -287,86 +280,84 @@ export default function PackagesPage() {
       </section>
 
       {/* Monthly Tiers */}
-      <section className="border-y border-[#1d2731]/8 bg-white/45">
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+      <section className="border-y border-neutral-800/50 bg-neutral-900/20">
+        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
           <Reveal>
-            <div className="mb-12">
-              <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">Ongoing Promotion</div>
-              <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
+            <div className="mb-16">
+              <div className="text-xs font-mono uppercase tracking-widest text-emerald-400">Ongoing Promotion</div>
+              <h2 className="mt-4 text-3xl font-medium tracking-tight md:text-5xl text-white">
                 Monthly management
               </h2>
-              <p className="mt-4 max-w-2xl text-base leading-7 text-[#1d2731]/65">
+              <p className="mt-4 max-w-2xl text-base leading-relaxed text-neutral-400 font-light">
                 We manage your campaigns monthly — optimisation, reporting, adjustments. Ads budget paid separately.
               </p>
             </div>
           </Reveal>
 
-          <div className="grid gap-5 md:grid-cols-3 tab-blur-group">
+          <div className="grid gap-6 md:grid-cols-3">
             {monthlyTiers.map((tier, i) => (
               <Reveal key={tier.name} delay={i * 80}>
-                <div className="relative group rounded-[28px] h-full">
-                  <div
-                    className={`absolute inset-0 tab-blur-item rounded-[28px] border transition-all duration-300 ${
-                      tier.recommended
-                        ? "border-[#1d2731] bg-[#1d2731] shadow-[0_10px_40px_rgba(29,39,49,0.15)] group-hover:shadow-[0_20px_60px_rgba(29,39,49,0.10)]"
-                        : "border-[#1d2731]/8 bg-white/70 shadow-[0_10px_40px_rgba(29,39,49,0.05)] group-hover:shadow-[0_20px_60px_rgba(29,39,49,0.10)]"
-                    }`}
-                    style={{ animation: `float-${i % 3 === 0 ? 'a' : i % 3 === 1 ? 'b' : 'c'} ${7 + (i % 3)}s ease-in-out infinite` }}
-                  />
-                  <div
-                    className={`relative z-10 flex h-full flex-col p-8 transition-all duration-500 ${tier.recommended ? "text-white" : "text-[#1d2731]"}`}
-                    style={{ animation: `float-text-${i % 3 === 0 ? 'a' : i % 3 === 1 ? 'b' : 'c'} ${7 + (i % 3)}s ease-in-out infinite` }}
-                  >
-                    {tier.recommended && (
-                      <div className="absolute -top-3 left-8 inline-flex items-center rounded-full bg-[#31584f] px-4 py-1 text-xs font-semibold text-white">
-                        Recommended
-                      </div>
-                    )}
-                    <h3 className={`text-xl font-medium ${tier.recommended ? "text-white" : "text-[#1d2731]"}`}>
-                      {tier.name}
-                    </h3>
-                    <p className={`mt-1 text-sm ${tier.recommended ? "text-white/60" : "text-[#1d2731]/50"}`}>
-                      {tier.desc}
-                    </p>
-                    <div className={`my-6 text-3xl font-medium tracking-[-0.03em] ${tier.recommended ? "text-white" : "text-[#1d2731]"}`}>
-                      {tier.price}
+                <div className={`relative flex flex-col h-full rounded-[2rem] p-10 border transition-all duration-500 hover:-translate-y-1 ${
+                    tier.recommended
+                      ? "bg-gradient-to-b from-neutral-900 to-[#030303] border-emerald-500/30 shadow-[0_0_40px_rgba(16,185,129,0.1)] hover:border-emerald-500/60"
+                      : "bg-neutral-900/30 border-neutral-800/50 hover:border-neutral-700/80"
+                  }`}
+                >
+                  {tier.recommended && (
+                    <div className="absolute -top-3 left-10 inline-flex items-center rounded-full bg-emerald-500/20 border border-emerald-500/30 px-4 py-1 text-xs font-mono tracking-widest text-emerald-300 backdrop-blur-md">
+                      Recommended
                     </div>
-                    <ul className="mb-8 flex-1 space-y-3">
-                      {tier.features.map((f) => (
-                        <li key={f} className="flex items-start gap-3 text-sm">
-                          <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#31584f]" />
-                          <span className={tier.recommended ? "text-white/80" : "text-[#1d2731]/70"}>{f}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <Link
-                      href="/en/contact"
-                      className={`inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-medium transition hover:-translate-y-0.5 hover:shadow-md ${
-                        tier.recommended ? "bg-white text-[#1d2731]" : "bg-[#1d2731] text-white"
-                      }`}
-                    >
-                      Choose {tier.name}
-                    </Link>
+                  )}
+                  
+                  <h3 className="text-2xl font-medium text-white mb-2">
+                    {tier.name}
+                  </h3>
+                  <p className="text-sm text-neutral-500 font-light mb-8">
+                    {tier.desc}
+                  </p>
+                  
+                  <div className="text-4xl font-light tracking-tight text-white mb-10 pb-8 border-b border-neutral-800">
+                    {tier.price}
                   </div>
+                  
+                  <ul className="mb-10 flex-1 space-y-4">
+                    {tier.features.map((f) => (
+                      <li key={f} className="flex items-start gap-4 text-sm font-light text-neutral-400">
+                        <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-emerald-500" />
+                        <span>{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  
+                  <Link
+                    href="/en/contact"
+                    className={`inline-flex items-center justify-center w-full rounded-full px-6 py-4 text-sm font-semibold tracking-wide transition-all duration-300 ${
+                      tier.recommended 
+                        ? "bg-emerald-600 text-white hover:bg-emerald-500 shadow-lg shadow-emerald-900/20" 
+                        : "bg-white/5 text-white border border-white/10 hover:bg-white/10"
+                    }`}
+                  >
+                    Choose {tier.name}
+                  </Link>
                 </div>
               </Reveal>
             ))}
           </div>
 
           <Reveal delay={320}>
-            <p className="mt-8 text-center text-sm text-[#1d2731]/50">
+            <p className="mt-12 text-center text-sm text-neutral-500 font-mono tracking-wide">
               + separate ads budget (Google / Meta). Minimum contract: 3 months.
             </p>
           </Reveal>
         </div>
       </section>
 
-      {/* Who it&apos;s for */}
-      <section className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+      {/* Who it's for */}
+      <section className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
         <Reveal>
-          <div className="mb-12">
-            <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">Fit</div>
-            <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
+          <div className="mb-16 text-center">
+            <div className="text-xs font-mono uppercase tracking-widest text-purple-400">Fit</div>
+            <h2 className="mt-4 text-3xl font-medium tracking-tight md:text-5xl text-white">
               Who are these packages for?
             </h2>
           </div>
@@ -374,12 +365,15 @@ export default function PackagesPage() {
 
         <div className="grid gap-8 md:grid-cols-2">
           <Reveal>
-            <div className="rounded-[28px] border border-[#1d2731]/8 bg-white/70 p-8">
-              <div className="text-sm font-semibold text-[#1d2731] mb-5">✔ A good fit if:</div>
-              <ul className="space-y-3">
+            <div className="rounded-[2rem] border border-neutral-800/50 bg-neutral-900/30 p-10 h-full hover:border-emerald-500/30 transition-colors duration-500">
+              <div className="text-sm font-mono tracking-widest uppercase text-emerald-400 mb-8 flex items-center gap-3">
+                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400">✓</span> 
+                A good fit if:
+              </div>
+              <ul className="space-y-5">
                 {forWhom.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-[15px] leading-7 text-[#1d2731]/70">
-                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#31584f]" />
+                  <li key={item} className="flex items-start gap-4 text-base font-light text-neutral-300">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500/50" />
                     {item}
                   </li>
                 ))}
@@ -388,12 +382,15 @@ export default function PackagesPage() {
           </Reveal>
 
           <Reveal delay={100}>
-            <div className="rounded-[28px] border border-[#1d2731]/8 bg-[#faf7f2] p-8">
-              <div className="text-sm font-semibold text-[#1d2731] mb-5">✖ Not a good fit if:</div>
-              <ul className="space-y-3">
+            <div className="rounded-[2rem] border border-neutral-800/50 bg-neutral-900/10 p-10 h-full hover:border-rose-500/30 transition-colors duration-500">
+              <div className="text-sm font-mono tracking-widest uppercase text-rose-400 mb-8 flex items-center gap-3">
+                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-rose-500/20 text-rose-400">✕</span> 
+                Not a good fit if:
+              </div>
+              <ul className="space-y-5">
                 {notFor.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-[15px] leading-7 text-[#1d2731]/70">
-                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#1d2731]/25" />
+                  <li key={item} className="flex items-start gap-4 text-base font-light text-neutral-400">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-500/30" />
                     {item}
                   </li>
                 ))}
@@ -404,18 +401,18 @@ export default function PackagesPage() {
       </section>
 
       {/* How payment works */}
-      <section className="border-y border-[#1d2731]/8 bg-[#1d2731] text-white">
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+      <section className="border-y border-neutral-800/50 bg-[#000000]">
+        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
           <Reveal>
-            <div className="mb-12 text-center">
-              <div className="text-xs uppercase tracking-[0.3em] text-white/40">Transparency</div>
-              <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
+            <div className="mb-16 text-center">
+              <div className="text-xs font-mono uppercase tracking-widest text-neutral-500">Transparency</div>
+              <h2 className="mt-4 text-3xl font-medium tracking-tight md:text-5xl text-white">
                 How payment works
               </h2>
             </div>
           </Reveal>
 
-          <div className="grid gap-5 md:grid-cols-3 tab-blur-group">
+          <div className="grid gap-6 md:grid-cols-3">
             {[
               {
                 step: "01",
@@ -434,19 +431,10 @@ export default function PackagesPage() {
               },
             ].map((item, i) => (
               <Reveal key={item.step} delay={i * 80}>
-                <div className="relative group rounded-[28px] h-full">
-                  <div
-                    className="absolute inset-0 tab-blur-item rounded-[28px] border border-white/10 bg-white/5"
-                    style={{ animation: `float-${i % 3 === 0 ? 'a' : i % 3 === 1 ? 'b' : 'c'} ${7 + (i % 3)}s ease-in-out infinite` }}
-                  />
-                  <div
-                    className="relative z-10 p-7 transition-all duration-500 h-full flex flex-col"
-                    style={{ animation: `float-text-${i % 3 === 0 ? 'a' : i % 3 === 1 ? 'b' : 'c'} ${7 + (i % 3)}s ease-in-out infinite` }}
-                  >
-                    <div className="mb-4 text-4xl font-medium tracking-[-0.04em] text-white/20">{item.step}</div>
-                    <h3 className="text-xl font-medium text-white">{item.title}</h3>
-                    <p className="mt-3 text-sm leading-7 text-white/65">{item.text}</p>
-                  </div>
+                <div className="relative p-10 h-full border-l border-neutral-800 hover:border-purple-500/50 transition-colors duration-500">
+                  <div className="mb-6 text-5xl font-light text-neutral-800">{item.step}</div>
+                  <h3 className="text-xl font-medium text-white mb-4">{item.title}</h3>
+                  <p className="text-sm font-light leading-relaxed text-neutral-400">{item.text}</p>
                 </div>
               </Reveal>
             ))}
@@ -455,31 +443,22 @@ export default function PackagesPage() {
       </section>
 
       {/* FAQ */}
-      <section className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+      <section className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
         <Reveal>
-          <div className="mb-12">
-            <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">Frequently asked questions</div>
-            <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
+          <div className="mb-16 text-center">
+            <div className="text-xs font-mono uppercase tracking-widest text-purple-400">Frequently asked questions</div>
+            <h2 className="mt-4 text-3xl font-medium tracking-tight md:text-5xl text-white">
               Before you send a message
             </h2>
           </div>
         </Reveal>
 
-        <div className="grid gap-5 md:grid-cols-2 tab-blur-group">
+        <div className="grid gap-x-12 gap-y-10 md:grid-cols-2">
           {faqs.map((faq, i) => (
             <Reveal key={faq.q} delay={i * 60}>
-              <div className="relative group rounded-[28px] h-full">
-                <div
-                  className="absolute inset-0 tab-blur-item rounded-[28px] border border-[#1d2731]/8 bg-white/70 shadow-[0_10px_40px_rgba(29,39,49,0.05)]"
-                  style={{ animation: `float-${i % 2 === 0 ? 'a' : 'b'} ${7 + i}s ease-in-out infinite` }}
-                />
-                <div
-                  className="relative z-10 p-7 transition-all duration-500 h-full flex flex-col"
-                  style={{ animation: `float-text-${i % 2 === 0 ? 'a' : 'b'} ${7 + i}s ease-in-out infinite` }}
-                >
-                  <h3 className="text-base font-semibold text-[#1d2731]">{faq.q}</h3>
-                  <p className="mt-3 text-sm leading-7 text-[#1d2731]/65">{faq.a}</p>
-                </div>
+              <div className="border-b border-neutral-800/50 pb-8 h-full">
+                <h3 className="text-lg font-medium text-white mb-4">{faq.q}</h3>
+                <p className="text-sm font-light leading-relaxed text-neutral-400">{faq.a}</p>
               </div>
             </Reveal>
           ))}
@@ -488,26 +467,27 @@ export default function PackagesPage() {
 
       {/* CTA */}
       <Reveal>
-        <section className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
-          <div className="rounded-[36px] bg-[#1d2731] p-8 text-white md:p-12 lg:flex lg:items-center lg:justify-between lg:gap-12">
-            <div className="max-w-2xl">
-              <h2 className="text-3xl font-medium tracking-[-0.03em] md:text-4xl">
-                Choose the right package for your business.
+        <section className="mx-auto max-w-7xl px-6 pb-24 lg:px-10 lg:pb-32">
+          <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-purple-900/20 to-neutral-900/20 border border-purple-500/20 p-10 md:p-16 lg:flex lg:items-center lg:justify-between lg:gap-12">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(168,85,247,0.15),transparent_50%)] pointer-events-none" />
+            <div className="relative z-10 max-w-2xl">
+              <h2 className="text-3xl font-medium tracking-tight md:text-5xl text-white">
+                Choose the right package.
               </h2>
-              <p className="mt-4 text-lg leading-8 text-white/70">
-                Initial discussion of 20–30 minutes. No obligations. We establish the objective and see if we&apos;re a good fit.
+              <p className="mt-6 text-lg font-light leading-relaxed text-neutral-400">
+                Initial discussion of 20–30 minutes. No obligations. We establish the objective and see if we're a good fit.
               </p>
             </div>
-            <div className="mt-8 flex flex-col gap-4 lg:mt-0 lg:shrink-0">
+            <div className="relative z-10 mt-10 flex flex-col gap-4 sm:flex-row lg:mt-0 lg:shrink-0">
               <Link
                 href="/en/contact"
-                className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-sm font-medium text-[#1d2731] transition hover:-translate-y-0.5 hover:shadow-lg"
+                className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-sm font-semibold tracking-wide text-black transition-all hover:bg-neutral-200 hover:scale-105"
               >
                 Schedule a discussion
               </Link>
               <Link
                 href="/en/services"
-                className="inline-flex items-center justify-center rounded-full border border-white/15 px-8 py-4 text-sm font-medium text-white transition hover:bg-white/5"
+                className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-sm font-semibold tracking-wide text-white transition-all hover:bg-white/10"
               >
                 See all services
               </Link>

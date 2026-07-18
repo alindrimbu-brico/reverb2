@@ -1,19 +1,40 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Sparkles, Sun, PlayCircle } from "lucide-react";
+import { Sparkles, Sun, PlayCircle, BookOpen } from "lucide-react";
+import Link from "next/link";
 import { setTheme } from "./AudioEngine";
 
+interface Particle {
+  id: number;
+  size: number;
+  x: number;
+  targetX: number;
+  y: number;
+  duration: number;
+  delay: number;
+}
+
 export default function JoyCelebration() {
-  // Generate random particles
-  const particles = Array.from({ length: 30 }).map((_, i) => ({
-    id: i,
-    size: Math.random() * 10 + 5,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    duration: Math.random() * 10 + 10,
-    delay: Math.random() * 5
-  }));
+  const [particles, setParticles] = useState<Particle[]>([]);
+
+  useEffect(() => {
+    setParticles(
+      Array.from({ length: 30 }).map((_, i) => {
+        const x = Math.random() * 100;
+        return {
+          id: i,
+          size: Math.random() * 10 + 5,
+          x,
+          targetX: x + (Math.random() * 10 - 5),
+          y: Math.random() * 100,
+          duration: Math.random() * 10 + 10,
+          delay: Math.random() * 5
+        };
+      })
+    );
+  }, []);
 
   return (
     <motion.section 
@@ -29,7 +50,7 @@ export default function JoyCelebration() {
           <motion.div
             key={p.id}
             initial={{ opacity: 0, y: "100vh", x: `${p.x}vw` }}
-            animate={{ opacity: [0, 0.8, 0], y: "-10vh", x: `${p.x + (Math.random() * 10 - 5)}vw` }}
+            animate={{ opacity: [0, 0.8, 0], y: "-10vh", x: `${p.targetX}vw` }}
             transition={{
               duration: p.duration,
               delay: p.delay,
@@ -70,13 +91,6 @@ export default function JoyCelebration() {
           <h2 className="text-5xl md:text-7xl font-extrabold tracking-tight text-neutral-900 mb-6 bg-clip-text text-transparent bg-gradient-to-r from-amber-500 via-orange-400 to-rose-400">
             Explozia de Bucurie
           </h2>
-          <button
-            onClick={() => setTheme("joy", true)}
-            className="flex items-center space-x-2 text-sm font-mono tracking-widest uppercase text-amber-700 bg-amber-100 hover:bg-amber-200 px-6 py-3 rounded-full transition-colors border border-amber-200 mx-auto"
-          >
-            <PlayCircle className="w-5 h-5" />
-            <span>Play Theme</span>
-          </button>
         </motion.div>
 
         <motion.div
@@ -91,9 +105,20 @@ export default function JoyCelebration() {
             Înseamnă <strong className="font-bold text-amber-600">să te poți bucura din nou de frumusețea lumii.</strong>
           </p>
 
-          <p className="text-lg text-neutral-600 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-lg text-neutral-600 leading-relaxed max-w-2xl mx-auto mb-10">
             Bucuria nu este o stimulare chimică haotică. Este o rezonanță profundă cu viața. Este actul curajos de a fi prezent, de a privi cerul, de a asculta o voce cunoscută și de a simți, pur și simplu, că este extraordinar să fii aici.
           </p>
+
+          <div className="flex flex-wrap justify-center items-center gap-4">
+
+            <Link 
+              href="/showcase/neuro-recovery/joy"
+              className="flex items-center space-x-2 text-sm font-mono tracking-widest uppercase text-white bg-amber-500 hover:bg-amber-600 px-6 py-3 rounded-full transition-colors border border-transparent shadow-md"
+            >
+              <BookOpen className="w-5 h-5" />
+              <span>Află mai multe</span>
+            </Link>
+          </div>
         </motion.div>
 
       </div>

@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Activity, PlayCircle } from "lucide-react";
+import { Activity, PlayCircle, BookOpen } from "lucide-react";
+import Link from "next/link";
 import { setTheme } from "./AudioEngine";
 
 export default function HomeostasisGraph() {
@@ -40,15 +41,18 @@ export default function HomeostasisGraph() {
             The Brain Seeking Balance
           </h2>
           <p className="text-lg text-neutral-400 max-w-2xl mx-auto font-light mb-8">
-            Every artificial peak (Process A) triggers an equal and opposite reaction to restore homeostasis (Process B). Over time, the peaks shrink, but the abyss grows deeper.
+            For every chemical action, there is a brain reaction. Experience below how your nervous system responds to an artificial "dose".
           </p>
-          <button
-            onClick={() => setTheme("withdrawal", true)}
-            className="flex items-center space-x-2 text-sm font-mono tracking-widest uppercase text-white bg-white/5 hover:bg-white/10 px-6 py-3 rounded-full transition-colors border border-white/10 mx-auto"
-          >
-            <PlayCircle className="w-5 h-5" />
-            <span>Play Theme</span>
-          </button>
+          <div className="flex flex-wrap justify-center items-center gap-4">
+
+            <Link 
+              href="/en/showcase/neuro-recovery/homeostasis"
+              className="flex items-center space-x-2 text-sm font-mono tracking-widest uppercase text-blue-400 bg-blue-900/20 hover:bg-blue-900/40 px-6 py-3 rounded-full transition-colors border border-blue-500/30"
+            >
+              <BookOpen className="w-5 h-5" />
+              <span>Read More</span>
+            </Link>
+          </div>
         </motion.div>
 
         <div className="bg-neutral-900/40 border border-neutral-800 rounded-3xl p-8 backdrop-blur-md">

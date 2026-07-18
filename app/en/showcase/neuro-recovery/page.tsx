@@ -8,7 +8,6 @@ import SubstanceCards from "./components/SubstanceCards";
 import RecoveryAlgorithm from "./components/RecoveryAlgorithm";
 
 import JoyCelebration from "./components/JoyCelebration";
-import GlobalAudioToggle from "./components/GlobalAudioToggle";
 
 export default function NeuroRecoveryPage() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -33,7 +32,6 @@ export default function NeuroRecoveryPage() {
       style={{ backgroundColor }}
       className="min-h-screen w-full transition-colors duration-1000 ease-out"
     >
-      <GlobalAudioToggle />
       <HeroSection />
       <HomeostasisGraph />
       <SubstanceCards />

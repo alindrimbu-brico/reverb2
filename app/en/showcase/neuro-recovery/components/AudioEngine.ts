@@ -6,14 +6,22 @@ let audioCtx: AudioContext | null = null;
 let masterGain: GainNode | null = null;
 let activeTheme: ThemeName | null = null;
 let autoPlayEnabled = true;
+let autoMode = true;
+let isInitialized = false;
 
 // Store active oscillators and their gain nodes so we can crossfade them
 let currentNodes: { osc: OscillatorNode, gain: GainNode }[] = [];
 
-export const isAudioEnabled = () => !!audioCtx && audioCtx.state === 'running';
+export const isAudioEnabled = () => isInitialized;
 export const isAutoPlayEnabled = () => autoPlayEnabled;
+export const isAutoModeEnabled = () => autoMode;
+
 export const setAutoPlay = (enabled: boolean) => {
   autoPlayEnabled = enabled;
+};
+
+export const setAutoMode = (enabled: boolean) => {
+  autoMode = enabled;
 };
 
 export const initAudioEngine = () => {
@@ -24,6 +32,7 @@ export const initAudioEngine = () => {
     masterGain = audioCtx.createGain();
     masterGain.connect(audioCtx.destination);
     masterGain.gain.value = 1;
+    isInitialized = true;
   }
   
   if (audioCtx.state === 'suspended') {
@@ -55,8 +64,9 @@ const fadeOutCurrentNodes = (now: number) => {
 };
 
 export const setTheme = (theme: ThemeName, forceManual: boolean = false) => {
-  if (!forceManual && !autoPlayEnabled) return;
-  if (theme === activeTheme || !audioCtx) return;
+  if (!isInitialized || !audioCtx) return;
+  if (!autoMode && !forceManual) return;
+  if (theme === activeTheme) return;
   
   if (audioCtx.state === 'suspended') {
     audioCtx.resume();

@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { BrainCircuit, Dna, History, PlayCircle } from "lucide-react";
+import { BrainCircuit, Dna, History, PlayCircle, BookOpen } from "lucide-react";
+import Link from "next/link";
 import { setTheme } from "./AudioEngine";
 
 export default function HeroSection() {
@@ -47,13 +48,16 @@ export default function HeroSection() {
             Dependența nu este o alegere greșită sau o lipsă de voință, ci o boală profundă—o tulburare a emoțiilor și a comportamentului. Este o încercare disperată a creierului de a supraviețui și de a regla un sistem nervos copleșit.
           </p>
 
-          <button
-            onClick={() => setTheme("chaos", true)}
-            className="flex items-center space-x-2 text-sm font-mono tracking-widest uppercase text-white bg-white/10 hover:bg-white/20 px-6 py-3 rounded-full transition-colors border border-white/20"
-          >
-            <PlayCircle className="w-5 h-5" />
-            <span>Play Theme</span>
-          </button>
+          <div className="flex flex-wrap items-center gap-4">
+
+            <Link 
+              href="/showcase/neuro-recovery/roots"
+              className="flex items-center space-x-2 text-sm font-mono tracking-widest uppercase text-purple-400 bg-purple-900/20 hover:bg-purple-900/40 px-6 py-3 rounded-full transition-colors border border-purple-500/30"
+            >
+              <BookOpen className="w-5 h-5" />
+              <span>Află mai multe</span>
+            </Link>
+          </div>
         </motion.div>
 
         <div className="space-y-6">

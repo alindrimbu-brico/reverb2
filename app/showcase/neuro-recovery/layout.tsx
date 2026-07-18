@@ -5,10 +5,19 @@ export const metadata: Metadata = {
   description: "O explorare interactivă a dopaminei, a dependenței și a arhitecturii bucuriei.",
 };
 
+import GlobalAudioToggle from "./components/GlobalAudioToggle";
+import ScrollToTop from "./components/ScrollToTop";
+
 export default function NeuroRecoveryLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+      <GlobalAudioToggle />
+      <ScrollToTop />
+    </>
+  );
 }

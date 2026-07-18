@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Sparkles, Sun, PlayCircle } from "lucide-react";
+import { Sparkles, Sun, PlayCircle, BookOpen } from "lucide-react";
+import Link from "next/link";
 import { setTheme } from "./AudioEngine";
 
 export default function JoyCelebration() {
@@ -70,13 +71,6 @@ export default function JoyCelebration() {
           <h2 className="text-5xl md:text-7xl font-extrabold tracking-tight text-neutral-900 mb-6 bg-clip-text text-transparent bg-gradient-to-r from-amber-500 via-orange-400 to-rose-400">
             The Explosion of Joy
           </h2>
-          <button
-            onClick={() => setTheme("joy", true)}
-            className="flex items-center space-x-2 text-sm font-mono tracking-widest uppercase text-amber-700 bg-amber-100 hover:bg-amber-200 px-6 py-3 rounded-full transition-colors border border-amber-200 mx-auto"
-          >
-            <PlayCircle className="w-5 h-5" />
-            <span>Play Theme</span>
-          </button>
         </motion.div>
 
         <motion.div
@@ -91,9 +85,20 @@ export default function JoyCelebration() {
             It means <strong className="font-bold text-amber-600">being able to enjoy the beauty of the world again.</strong>
           </p>
 
-          <p className="text-lg text-neutral-600 leading-relaxed max-w-2xl mx-auto">
-            Joy is not a chaotic chemical stimulation. It is a profound resonance with life. It is the courageous act of being present, looking at the sky, listening to a familiar voice, and simply feeling that it is extraordinary to be here.
+          <p className="text-lg text-neutral-600 leading-relaxed max-w-2xl mx-auto mb-10">
+            Joy is not a chaotic chemical stimulation. It is a profound resonance with life. It is the courageous act of being present, looking at the sky, hearing a familiar voice, and simply feeling that it is extraordinary to be here.
           </p>
+
+          <div className="flex flex-wrap justify-center items-center gap-4">
+
+            <Link 
+              href="/en/showcase/neuro-recovery/joy"
+              className="flex items-center space-x-2 text-sm font-mono tracking-widest uppercase text-white bg-amber-500 hover:bg-amber-600 px-6 py-3 rounded-full transition-colors border border-transparent shadow-md"
+            >
+              <BookOpen className="w-5 h-5" />
+              <span>Read More</span>
+            </Link>
+          </div>
         </motion.div>
 
       </div>
