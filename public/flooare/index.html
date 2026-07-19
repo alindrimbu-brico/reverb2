@@ -709,6 +709,18 @@
         let myChart = null;
         let autocomplete;
 
+                const VEDIC_DATA = {
+            1: { planet: "Soarele (Surya)", gemstone: "Rubin (Manikya)", deity: "Surya Deva", mantra: "Om Ghrini Suryaya Namah", traits: "Energie solară dominatoare, ambiție înaltă, leadership nativ, ego puternic și capacitate excelentă de ghidare socială." },
+            2: { planet: "Luna (Chandra)", gemstone: "Perlă naturală (Moti)", deity: "Shiva și Parvati", mantra: "Om Som Somaya Namah", traits: "Sensibilitate crescută, intuiție metafizică superioară, natura iubitoare și receptivă, dar cu tendință de labilitate emoțională." },
+            3: { planet: "Jupiter (Guru)", gemstone: "Safir Galben (Pukhraj)", deity: "Lord Vishnu", mantra: "Om Brim Brihaspataye Namah", traits: "Înțelepciune filosofică profundă, sete continuă de cunoaștere, abilități de mentorat de excepție și consiliere spirituală înțeleaptă." },
+            4: { planet: "Rahu (Nodul Nord al Lunii)", gemstone: "Hessonit (Gomed)", deity: "Durga Deva", mantra: "Om Raam Rahave Namah", traits: "Ambiții mari în lumea materială, gândire ascuțită și profund revoluționară, capabilă de invenții de geniu." },
+            5: { planet: "Mercur (Budha)", gemstone: "Smarald (Panna)", deity: "Lord Vishnu", mantra: "Om Bum Budhaya Namah", traits: "Agilitate mentală rapidă, comunicare ascuțită, talent comercial absolut și abilitatea de a rezolva probleme grele." },
+            6: { planet: "Venus (Shukra)", gemstone: "Diamant (Heera)", deity: "Lakshmi", mantra: "Om Shum Shukraya Namah", traits: "Attracție estetică deosebită, magnetism interpersonal, armonie profundă în viața amoroasă și apreciere pentru lux." },
+            7: { planet: "Ketu (Nodul Sud al Lunii)", gemstone: "Ochi de Pisică (Lehsuniya)", deity: "Lord Ganesha", mantra: "Om Kem Ketave Namah", traits: "Detașare mistică, intuiție la nivel spiritual maxim, abilități psihice mari și o căutare intensă a eliberării sufletului." },
+            8: { planet: "Saturn (Shani)", gemstone: "Safir Albastru (Neelam)", deity: "Shani Deva", mantra: "Om Sham Shaneshcharaya Namah", traits: "Perseverență clădită prin teste karmice grele, simțul datoriei crescut, maturitate profundă obținută prin efort asiduu." },
+            9: { planet: "Marte (Mangal)", gemstone: "Coral Roșu (Moonga)", deity: "Lord Hanuman", mantra: "Om Kram Krim Kraum Sah Bhaumaya Namah", traits: "Energie fizică explozivă, spirit războinic și competitiv, ambiție de neclintit, dar și tendințe de impulsivitate." }
+        };
+
         // Web Audio API Ambient Synthesizer
         let audioCtx = null;
         let leftOsc = null;
@@ -936,17 +948,7 @@
             const vPsychic = reduceToSingleVedic(dVal);
             const vDestiny = reduceToSingleVedic(w1);
             
-            const VEDIC_DATA = {
-                1: { planet: "Soarele (Surya)", gemstone: "Rubin (Manikya)", deity: "Surya Deva", mantra: "Om Ghrini Suryaya Namah", traits: "Energie solară dominatoare, ambiție înaltă, leadership nativ, ego puternic și capacitate excelentă de ghidare socială." },
-                2: { planet: "Luna (Chandra)", gemstone: "Perlă naturală (Moti)", deity: "Shiva și Parvati", mantra: "Om Som Somaya Namah", traits: "Sensibilitate crescută, intuiție metafizică superioară, natura iubitoare și receptivă, dar cu tendință de labilitate emoțională." },
-                3: { planet: "Jupiter (Guru)", gemstone: "Safir Galben (Pukhraj)", deity: "Lord Vishnu", mantra: "Om Brim Brihaspataye Namah", traits: "Înțelepciune filosofică profundă, sete continuă de cunoaștere, abilități de mentorat de excepție și consiliere spirituală înțeleaptă." },
-                4: { planet: "Rahu (Nodul Nord al Lunii)", gemstone: "Hessonit (Gomed)", deity: "Durga Deva", mantra: "Om Raam Rahave Namah", traits: "Ambiții mari în lumea materială, gândire ascuțită și profund revoluționară, capabilă de invenții de geniu." },
-                5: { planet: "Mercur (Budha)", gemstone: "Smarald (Panna)", deity: "Lord Vishnu", mantra: "Om Bum Budhaya Namah", traits: "Agilitate mentală rapidă, comunicare ascuțită, talent comercial absolut și abilitatea de a rezolva probleme grele." },
-                6: { planet: "Venus (Shukra)", gemstone: "Diamant (Heera)", deity: "Lakshmi", mantra: "Om Shum Shukraya Namah", traits: "Attracție estetică deosebită, magnetism interpersonal, armonie profundă în viața amoroasă și apreciere pentru lux." },
-                7: { planet: "Ketu (Nodul Sud al Lunii)", gemstone: "Ochi de Pisică (Lehsuniya)", deity: "Lord Ganesha", mantra: "Om Kem Ketave Namah", traits: "Detașare mistică, intuiție la nivel spiritual maxim, abilități psihice mari și o căutare intensă a eliberării sufletului." },
-                8: { planet: "Saturn (Shani)", gemstone: "Safir Albastru (Neelam)", deity: "Shani Deva", mantra: "Om Sham Shaneshcharaya Namah", traits: "Perseverență clădită prin teste karmice grele, simțul datoriei crescut, maturitate profundă obținută prin efort asiduu." },
-                9: { planet: "Marte (Mangal)", gemstone: "Coral Roșu (Moonga)", deity: "Lord Hanuman", mantra: "Om Kram Krim Kraum Sah Bhaumaya Namah", traits: "Energie fizică explozivă, spirit războinic și competitiv, ambiție de neclintit, dar și tendințe de impulsivitate." }
-            };
+
 
             document.getElementById('vedicPsychicVal').innerText = vPsychic;
             document.getElementById('vedicPsychicTraits').innerText = VEDIC_DATA[vPsychic].traits;
@@ -973,7 +975,7 @@
             };
 
             const kNameIndex = reduceToSingleVedic(nameVib);
-            const kPlaceIndex = place ? reduceToSingleVedic(calculateGematria(placeName)) : 10;
+            const kPlaceIndex = (placeName && placeName !== "Nespecificat") ? reduceToSingleVedic(calculateGematria(placeName)) : 10;
             
             document.getElementById('kabbalahNameVal').innerText = `${nameVib} (${KABBALAH_DATA[kNameIndex].Sephirah})`;
             document.getElementById('kabbalahNameMeaning').innerText = KABBALAH_DATA[kNameIndex].meaning;
