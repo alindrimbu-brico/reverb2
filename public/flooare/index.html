@@ -785,9 +785,20 @@
         let autocompleteService;
         let suggestionsContainer;
 
+        let isAutocompleteInitialized = false;
         function initAutocomplete() {
+            if (isAutocompleteInitialized) return;
             const input = document.getElementById('userPlace');
-            if(!input) return;
+            if (!input) {
+                // DOM not ready yet, defer it
+                document.addEventListener('DOMContentLoaded', initAutocomplete);
+                return;
+            }
+            if (typeof google === 'undefined' || !google.maps || !google.maps.places) {
+                // Google Maps API not loaded yet, wait for async callback
+                return;
+            }
+            isAutocompleteInitialized = true;
 
             // Create suggestions dropdown overlay
             suggestionsContainer = document.createElement('div');
@@ -850,6 +861,10 @@
                 }
             });
         }
+        
+        // Listeners for load state to ensure execution
+        window.addEventListener('DOMContentLoaded', initAutocomplete);
+        window.addEventListener('load', initAutocomplete);
 
         // Add backspace/delete formatting behavior to birthday input on DOM ready
         document.addEventListener("DOMContentLoaded", () => {
@@ -1403,7 +1418,7 @@
             };
 
             const kNameIndex = reduceToSingleVedic(calculateGematria(name));
-            const kPlaceIndex = place ? reduceToSingleVedic(calculateGematria(placeName)) : 10;
+            const kPlaceIndex = (placeName && placeName !== "Nespecificat") ? reduceToSingleVedic(calculateGematria(placeName)) : 10;
 
             let kabbalahHtml = `<div class="space-y-4 font-light">
                 <p class="text-xs text-slate-300 leading-relaxed">
