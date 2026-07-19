@@ -84,7 +84,29 @@
             background-color: var(--gold);
             animation: pulseBar 1.2s ease-in-out infinite;
         }
-    </style>
+    
+        /* Hide Google Translate top bar and widget elements */
+        iframe.goog-te-banner-frame {
+            display: none !important;
+        }
+        body {
+            top: 0px !important;
+        }
+        .skiptranslate {
+            display: none !important;
+        }
+        #google_translate_element {
+            display: none !important;
+        }
+        .goog-tooltip, .goog-tooltip:hover {
+            display: none !important;
+        }
+        .goog-text-highlight {
+            background-color: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+</style>
 </head>
 <body class="custom-scrollbar selection:bg-amber-500 selection:text-black">
 
@@ -108,6 +130,31 @@
             
             <!-- Ambient Audio Controller -->
             <div class="flex items-center gap-4">
+                <!-- Language Selector Dropdown -->
+                <div class="relative inline-block text-left" id="langSelectorContainer">
+                    <button onclick="toggleLangDropdown()" class="flex items-center gap-2 px-3 py-2 bg-slate-900 border border-amber-500/20 rounded hover:border-amber-500/50 transition text-[9px] font-bold uppercase tracking-widest text-slate-300">
+                        <span id="currentLangLabel">🌐 RO</span>
+                        <svg class="w-3 h-3 text-slate-400 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div id="langDropdown" class="absolute right-0 mt-2 w-44 bg-slate-950 border border-slate-800 rounded shadow-2xl hidden z-[100] max-h-60 overflow-y-auto custom-scrollbar">
+                        <a href="#" onclick="changeLanguage('ro'); return false;" class="block px-4 py-3 text-[10px] font-bold text-slate-400 hover:text-amber-500 hover:bg-slate-900 transition">Română</a>
+                        <a href="#" onclick="changeLanguage('en'); return false;" class="block px-4 py-3 text-[10px] font-bold text-slate-400 hover:text-amber-500 hover:bg-slate-900 transition">English</a>
+                        <a href="#" onclick="changeLanguage('pt'); return false;" class="block px-4 py-3 text-[10px] font-bold text-slate-400 hover:text-amber-500 hover:bg-slate-900 transition">Português</a>
+                        <a href="#" onclick="changeLanguage('es'); return false;" class="block px-4 py-3 text-[10px] font-bold text-slate-400 hover:text-amber-500 hover:bg-slate-900 transition">Español</a>
+                        <a href="#" onclick="changeLanguage('it'); return false;" class="block px-4 py-3 text-[10px] font-bold text-slate-400 hover:text-amber-500 hover:bg-slate-900 transition">Italiano</a>
+                        <a href="#" onclick="changeLanguage('cs'); return false;" class="block px-4 py-3 text-[10px] font-bold text-slate-400 hover:text-amber-500 hover:bg-slate-900 transition">Čeština</a>
+                        <a href="#" onclick="changeLanguage('pl'); return false;" class="block px-4 py-3 text-[10px] font-bold text-slate-400 hover:text-amber-500 hover:bg-slate-900 transition">Polski</a>
+                        <a href="#" onclick="changeLanguage('ru'); return false;" class="block px-4 py-3 text-[10px] font-bold text-slate-400 hover:text-amber-500 hover:bg-slate-900 transition">Русский</a>
+                        <a href="#" onclick="changeLanguage('zh-CN'); return false;" class="block px-4 py-3 text-[10px] font-bold text-slate-400 hover:text-amber-500 hover:bg-slate-900 transition">中文 (简体)</a>
+                        <a href="#" onclick="changeLanguage('hi'); return false;" class="block px-4 py-3 text-[10px] font-bold text-slate-400 hover:text-amber-500 hover:bg-slate-900 transition">हिन्दी</a>
+                        <a href="#" onclick="changeLanguage('ja'); return false;" class="block px-4 py-3 text-[10px] font-bold text-slate-400 hover:text-amber-500 hover:bg-slate-900 transition">日本語</a>
+                        <a href="#" onclick="changeLanguage('el'); return false;" class="block px-4 py-3 text-[10px] font-bold text-slate-400 hover:text-amber-500 hover:bg-slate-900 transition">Ελληνικά</a>
+                        <a href="#" onclick="changeLanguage('bg'); return false;" class="block px-4 py-3 text-[10px] font-bold text-slate-400 hover:text-amber-500 hover:bg-slate-900 transition">Български</a>
+                    </div>
+                </div>
+
                 <button onclick="toggleAmbientAudio()" class="flex items-center gap-3 px-4 py-2 bg-slate-900 border border-amber-500/20 rounded hover:border-amber-500/50 transition">
                     <div id="audioVisualizer" class="flex items-end gap-[2px] h-4 opacity-35">
                         <div class="pulse-bar" style="animation-delay: 0.1s"></div>
@@ -1594,5 +1641,73 @@
             }
         });
     </script>
+
+    <!-- Google Translate Invisible Element -->
+    <div id="google_translate_element"></div>
+    <script type="text/javascript">
+        
+        // Language Selector & Google Translate Cookie System
+        document.addEventListener('DOMContentLoaded', () => {
+            const selectedLang = localStorage.getItem('selectedLanguage') || 'ro';
+            const langLabels = {
+                'ro': '🌐 RO',
+                'en': '🌐 EN',
+                'es': '🌐 ES',
+                'pt': '🌐 PT',
+                'it': '🌐 IT',
+                'cs': '🌐 CS',
+                'pl': '🌐 PL',
+                'ru': '🌐 RU',
+                'zh-CN': '🌐 ZH',
+                'hi': '🌐 HI',
+                'ja': '🌐 JA',
+                'el': '🌐 EL',
+                'bg': '🌐 BG'
+            };
+            const labelEl = document.getElementById('currentLangLabel');
+            if (labelEl && langLabels[selectedLang]) {
+                labelEl.innerText = langLabels[selectedLang];
+            }
+        });
+
+        function toggleLangDropdown() {
+            const dropdown = document.getElementById('langDropdown');
+            if (dropdown) dropdown.classList.toggle('hidden');
+        }
+
+        function changeLanguage(langCode) {
+            const domain = window.location.hostname;
+            // Set cookie for Google Translate
+            const cookieVal = "/ro/" + langCode;
+            document.cookie = "googtrans=" + cookieVal + "; path=/;";
+            document.cookie = "googtrans=" + cookieVal + "; path=/; domain=" + domain + ";";
+            document.cookie = "googtrans=" + cookieVal + "; path=/; domain=." + domain + ";";
+            
+            // Save selection to localStorage
+            localStorage.setItem('selectedLanguage', langCode);
+            
+            // Reload page to apply changes
+            window.location.reload();
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            const container = document.getElementById('langSelectorContainer');
+            const dropdown = document.getElementById('langDropdown');
+            if (container && dropdown && !container.contains(e.target)) {
+                dropdown.classList.add('hidden');
+            }
+        });
+
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'ro',
+                includedLanguages: 'en,pt,es,it,cs,pl,ru,zh-CN,hi,ja,el,bg',
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
