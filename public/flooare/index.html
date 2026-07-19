@@ -1445,25 +1445,41 @@
             document.getElementById('karmicInterpretation').innerHTML = karmicHtml;
         }
     
-        // Immersive Single-Page Routing System
+        // Immersive Single-Page Routing System with anchor-scroll bugfix
+        let currentView = 'home';
+
         function showView(viewName) {
-            // Hide all main views
-            document.getElementById('homepage-view').classList.add('hidden');
-            document.getElementById('confidentialitate-view').classList.add('hidden');
-            document.getElementById('termeni-view').classList.add('hidden');
-            document.getElementById('contact-view').classList.add('hidden');
+            if (currentView === viewName) return; // avoid redundant switches and forced scroll-to-top
+
+            const homeView = document.getElementById('homepage-view');
+            const confView = document.getElementById('confidentialitate-view');
+            const termeniView = document.getElementById('termeni-view');
+            const contactView = document.getElementById('contact-view');
+
+            if (!homeView || !confView || !termeniView || !contactView) return;
+
+            // Hide all views
+            homeView.classList.add('hidden');
+            confView.classList.add('hidden');
+            termeniView.classList.add('hidden');
+            contactView.classList.add('hidden');
 
             // Show selected view
             if (viewName === 'home') {
-                document.getElementById('homepage-view').classList.remove('hidden');
+                homeView.classList.remove('hidden');
             } else {
-                document.getElementById(viewName + '-view').classList.remove('hidden');
+                const targetView = document.getElementById(viewName + '-view');
+                if (targetView) targetView.classList.remove('hidden');
             }
+            
+            currentView = viewName;
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        function handleRouting() {
+        function handleRouting(e) {
             const hash = window.location.hash;
+            
+            // Check for specific sub-landing pages
             if (hash === '#confidentialitate') {
                 showView('confidentialitate');
             } else if (hash === '#termeni') {
@@ -1471,11 +1487,38 @@
             } else if (hash === '#contact') {
                 showView('contact');
             } else {
-                showView('home');
+                // If it is #calculator, #curs or similar homepage anchors
+                if (currentView !== 'home') {
+                    // Switch back to homepage first
+                    showView('home');
+                    // Allow DOM to update, then scroll to element
+                    setTimeout(() => {
+                        const targetId = hash.substring(1);
+                        const el = document.getElementById(targetId);
+                        if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    }, 50);
+                } else {
+                    // We are already on homepage, let the browser scroll to the element natively,
+                    // or handle it with smooth scroll if it's a known element
+                    const targetId = hash.substring(1);
+                    if (targetId) {
+                        const el = document.getElementById(targetId);
+                        if (el) {
+                            if (e) e.preventDefault(); // prevent default jump
+                            el.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }
+                }
             }
         }
         window.addEventListener('hashchange', handleRouting);
-        window.addEventListener('load', handleRouting);
+        window.addEventListener('load', (e) => {
+            // Only route if there is an active hash, otherwise stay at home without forced scroll
+            const hash = window.location.hash;
+            if (hash === '#confidentialitate' || hash === '#termeni' || hash === '#contact') {
+                handleRouting(e);
+            }
+        });
     </script>
 </body>
 </html>
