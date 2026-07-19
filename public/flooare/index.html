@@ -91,8 +91,8 @@
     <!-- Navigație -->
     <nav class="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-xl border-b border-amber-500/10">
         <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-            <div class="header-font text-xl md:text-2xl font-bold tracking-tighter text-white flex items-center gap-3 select-none">
-                <svg viewBox="0 0 100 100" class="w-8 h-8 text-amber-500 fill-none stroke-current stroke-[1.5]">
+            <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="header-font text-xl md:text-2xl font-bold tracking-tighter text-white flex items-center gap-3 select-none group">
+                <svg viewBox="0 0 100 100" class="w-8 h-8 text-amber-500 fill-none stroke-current stroke-[1.5] transition-transform duration-700 group-hover:rotate-[60deg]">
                     <circle cx="50" cy="50" r="15" />
                     <circle cx="50" cy="35" r="15" />
                     <circle cx="63" cy="42.5" r="15" />
@@ -103,8 +103,8 @@
                     <circle cx="50" cy="50" r="30" class="stroke-[1] opacity-60" />
                     <circle cx="50" cy="50" r="31" class="stroke-[0.5] opacity-40" />
                 </svg>
-                <span>FLOOARE<span class="text-amber-500">.RO</span></span>
-            </div>
+                <span>FLOOARE<span class="text-amber-500 group-hover:text-white transition-colors duration-300">.RO</span></span>
+            </a>
             
             <!-- Ambient Audio Controller -->
             <div class="flex items-center gap-4">
