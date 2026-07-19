@@ -1232,10 +1232,10 @@
         function updateChart(counts) {
             const ctx = document.getElementById('radarChart').getContext('2d');
             const data = [
-                (counts['1']?.length || 0) + (counts['4']?.length || 0) + (counts['7']?.length || 0), // Fizic
-                (counts['2']?.length || 0) + (counts['5']?.length || 0) + (counts['8']?.length || 0), // Emoțional
-                (counts['3']?.length || 0) + (counts['6']?.length || 0) + (counts['9']?.length || 0), // Mental
-                (counts['5']?.length || 0) + (counts['9']?.length || 0) // Intuitiv
+                ((counts['1'] ? counts['1'].length : 0) || 0) + ((counts['4'] ? counts['4'].length : 0) || 0) + ((counts['7'] ? counts['7'].length : 0) || 0), // Fizic
+                ((counts['2'] ? counts['2'].length : 0) || 0) + ((counts['5'] ? counts['5'].length : 0) || 0) + ((counts['8'] ? counts['8'].length : 0) || 0), // Emoțional
+                ((counts['3'] ? counts['3'].length : 0) || 0) + ((counts['6'] ? counts['6'].length : 0) || 0) + ((counts['9'] ? counts['9'].length : 0) || 0), // Mental
+                ((counts['5'] ? counts['5'].length : 0) || 0) + ((counts['9'] ? counts['9'].length : 0) || 0) // Intuitiv
             ];
 
             if(myChart) myChart.destroy();
@@ -1294,7 +1294,7 @@
                 <div class="h-[1px] bg-slate-800/50 my-4"></div>`;
 
             // Ego & Leadership (1s)
-            const egoCount = counts['1']?.length || 0;
+            const egoCount = (counts['1'] ? counts['1'].length : 0) || 0;
             pythagoreanHtml += `<div class="space-y-2">
                 <h5 class="text-amber-500 font-bold text-xs uppercase tracking-wider">✦ Vectorul Personalității: Celula Ego-ului (${egoCount} cifre de 1)</h5>`;
             if (egoCount === 0) {
@@ -1311,7 +1311,7 @@
             pythagoreanHtml += `</div>`;
 
             // Energie Vitală (2s)
-            const energyCount = counts['2']?.length || 0;
+            const energyCount = (counts['2'] ? counts['2'].length : 0) || 0;
             pythagoreanHtml += `<div class="space-y-2 mt-4">
                 <h5 class="text-amber-500 font-bold text-xs uppercase tracking-wider">✦ Vectorul Biocâmpului: Resursa de Energie Vitală (${energyCount} cifre de 2)</h5>`;
             if (energyCount === 0) {
@@ -1326,7 +1326,7 @@
             pythagoreanHtml += `</div>`;
 
             // Canalul Logicii (5s)
-            const logicCount = counts['5']?.length || 0;
+            const logicCount = (counts['5'] ? counts['5'].length : 0) || 0;
             pythagoreanHtml += `<div class="space-y-2 mt-4">
                 <h5 class="text-amber-500 font-bold text-xs uppercase tracking-wider">✦ Canalul Central: Logica, Intuiția și Podul Mental (${logicCount} cifre de 5)</h5>`;
             if (logicCount === 0) {
