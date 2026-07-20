@@ -8,10 +8,12 @@ import SubstanceCards from "./components/SubstanceCards";
 import RecoveryAlgorithm from "./components/RecoveryAlgorithm";
 
 import JoyCelebration from "./components/JoyCelebration";
-import NeuroluminaFooter from "../../../showcase/neuro-recovery/components/NeuroluminaFooter";
+import { useNeuroluminaTheme } from "../../../showcase/neuro-recovery/components/ThemeContext";
 
 export default function NeuroRecoveryPage() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { theme } = useNeuroluminaTheme();
+  const isDark = theme === "dark";
   
   // Track scroll progress within the container
   const { scrollYProgress } = useScroll({
@@ -20,11 +22,15 @@ export default function NeuroRecoveryPage() {
   });
 
   // Map scroll progress to a background color
-  // 0% -> dark, 25% -> medium, 50% -> light, 75% -> lighter, 100% -> vibrant gold/amber
+  // Dark mode transitions from black to deep space. Light mode transitions from cream to honey gold.
+  const darkColors = ["#0a0a0a", "#121214", "#17171f", "#1b1b24", "#0a0a0c"];
+  const lightColors = ["#FFFDF9", "#FFFDF9", "#FFF8EB", "#FFF8EB", "#FFFAF0"];
+  const bgColors = isDark ? darkColors : lightColors;
+
   const backgroundColor = useTransform(
     scrollYProgress,
     [0, 0.3, 0.6, 0.8, 1],
-    ["#0a0a0a", "#171717", "#f5f5f4", "#fafaf9", "#FFFAF0"] // dark -> stone -> warm ivory/gold base
+    bgColors
   );
 
   return (
@@ -38,8 +44,9 @@ export default function NeuroRecoveryPage() {
       <SubstanceCards />
       <RecoveryAlgorithm />
       <JoyCelebration />
-      <NeuroluminaFooter />
     </motion.div>
   );
 }
+
+
 

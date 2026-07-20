@@ -7,6 +7,9 @@ export const metadata: Metadata = {
 
 import GlobalAudioToggle from "./components/GlobalAudioToggle";
 import ScrollToTop from "./components/ScrollToTop";
+import { NeuroluminaThemeProvider } from "./components/ThemeContext";
+import ThemeSwitcher from "./components/ThemeSwitcher";
+import NeuroluminaFooter from "./components/NeuroluminaFooter";
 
 export default function NeuroRecoveryLayout({
   children,
@@ -14,10 +17,16 @@ export default function NeuroRecoveryLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
-      {children}
+    <NeuroluminaThemeProvider>
+      <div className="min-h-screen flex flex-col justify-between">
+        <main className="flex-1">
+          {children}
+        </main>
+        <NeuroluminaFooter />
+      </div>
+      <ThemeSwitcher />
       <GlobalAudioToggle />
       <ScrollToTop />
-    </>
+    </NeuroluminaThemeProvider>
   );
 }
