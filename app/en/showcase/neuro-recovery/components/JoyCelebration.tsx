@@ -1,104 +1,172 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Sparkles, Sun, PlayCircle, BookOpen } from "lucide-react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Sun, PlayCircle, BookOpen, Fingerprint, Flame, Feather, Infinity as InfinityIcon } from "lucide-react";
 import Link from "next/link";
-import { setTheme } from "./AudioEngine";
+import { setTheme } from "../../../../showcase/neuro-recovery/components/AudioEngine";
 
-export default function JoyCelebration() {
-  // Generate random particles
-  const particles = Array.from({ length: 30 }).map((_, i) => ({
-    id: i,
-    size: Math.random() * 10 + 5,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    duration: Math.random() * 10 + 10,
-    delay: Math.random() * 5
-  }));
+interface Particle {
+  id: number;
+  size: number;
+  x: number;
+  targetX: number;
+  y: number;
+  duration: number;
+  delay: number;
+}
+
+const consciousnessLevels = [
+  {
+    icon: <Fingerprint className="w-6 h-6 text-neutral-400" />,
+    title: "Pleasure (Body)",
+    desc: "External dependence. Strengthens the ego through slavery to objects."
+  },
+  {
+    icon: <Flame className="w-6 h-6 text-orange-400" />,
+    title: "Happiness (Mind)",
+    desc: "Competition and cunning. The fear of loss poisons any external success."
+  },
+  {
+    icon: <Feather className="w-6 h-6 text-amber-300" />,
+    title: "Joy (Soul)",
+    desc: "Absolute independence. Begins the dissolution of the ego through silence and peace."
+  },
+  {
+    icon: <InfinityIcon className="w-8 h-8 text-white animate-pulse" />,
+    title: "Ecstasy (Divine)",
+    desc: "Nirvana. The ego disappears completely; only the Infinite remains. Absolute innocence."
+  }
+];
+
+export default function JoyCelebrationEN() {
+  const [particles, setParticles] = useState<Particle[]>([]);
+
+  useEffect(() => {
+    setParticles(
+      Array.from({ length: 40 }).map((_, i) => {
+        const x = Math.random() * 100;
+        return {
+          id: i,
+          size: Math.random() * 12 + 6,
+          x,
+          targetX: x + (Math.random() * 15 - 7.5),
+          y: Math.random() * 100,
+          duration: Math.random() * 12 + 10,
+          delay: Math.random() * 5
+        };
+      })
+    );
+  }, []);
 
   return (
     <motion.section 
       onViewportEnter={() => setTheme("joy")}
       onMouseEnter={() => setTheme("joy")}
       viewport={{ margin: "-50% 0px -50% 0px" }}
-      className="relative min-h-screen flex flex-col items-center justify-center py-32 px-6 z-10 overflow-hidden bg-gradient-to-b from-transparent to-amber-50/50"
+      className="relative min-h-screen flex flex-col items-center justify-center py-32 px-6 z-10 overflow-hidden bg-neutral-950"
     >
       
-      {/* Floating Light Particles */}
+      {/* Floating Light Particles - The Void/Neant */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {particles.map((p) => (
           <motion.div
             key={p.id}
             initial={{ opacity: 0, y: "100vh", x: `${p.x}vw` }}
-            animate={{ opacity: [0, 0.8, 0], y: "-10vh", x: `${p.x + (Math.random() * 10 - 5)}vw` }}
+            animate={{ opacity: [0, 1, 0], y: "-10vh", x: `${p.targetX}vw` }}
             transition={{
               duration: p.duration,
               delay: p.delay,
               repeat: Infinity,
               ease: "linear"
             }}
-            className="absolute rounded-full bg-amber-300 blur-[2px]"
+            className="absolute rounded-full bg-amber-500/80 blur-[3px]"
             style={{ width: p.size, height: p.size }}
           />
         ))}
       </div>
 
-      {/* Sun rays effect behind */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-30 mix-blend-overlay">
+      {/* Radiant Background */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20 mix-blend-screen">
         <motion.div 
-          animate={{ rotate: 360 }}
-          transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-          className="w-[800px] h-[800px] rounded-full"
+          animate={{ rotate: 360, scale: [1, 1.1, 1] }}
+          transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+          className="w-[800px] h-[800px] rounded-full blur-[100px]"
           style={{
-            background: "conic-gradient(from 0deg, transparent 0deg 20deg, rgba(251, 191, 36, 0.4) 20deg 40deg, transparent 40deg 60deg, rgba(251, 191, 36, 0.4) 60deg 80deg, transparent 80deg 100deg, rgba(251, 191, 36, 0.4) 100deg 120deg, transparent 120deg 140deg, rgba(251, 191, 36, 0.4) 140deg 160deg, transparent 160deg 180deg, rgba(251, 191, 36, 0.4) 180deg 200deg, transparent 200deg 220deg, rgba(251, 191, 36, 0.4) 220deg 240deg, transparent 240deg 260deg, rgba(251, 191, 36, 0.4) 260deg 280deg, transparent 280deg 300deg, rgba(251, 191, 36, 0.4) 300deg 320deg, transparent 320deg 340deg, rgba(251, 191, 36, 0.4) 340deg 360deg)"
+            background: "radial-gradient(circle, rgba(245,158,11,0.4) 0%, rgba(217,119,6,0.1) 40%, rgba(0,0,0,0) 70%)"
           }}
         />
       </div>
 
-      <div className="max-w-4xl mx-auto w-full text-center relative z-20">
+      <div className="max-w-6xl mx-auto w-full relative z-20 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1.2, type: "spring", bounce: 0.4 }}
-          className="mb-12"
-        >
-          <div className="inline-flex items-center justify-center space-x-3 mb-8">
-            <Sun className="w-12 h-12 text-amber-500 animate-pulse" />
-          </div>
-          
-          <h2 className="text-5xl md:text-7xl font-extrabold tracking-tight text-neutral-900 mb-6 bg-clip-text text-transparent bg-gradient-to-r from-amber-500 via-orange-400 to-rose-400">
-            The Explosion of Joy
-          </h2>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.3 }}
           className="space-y-8"
         >
-          <p className="text-2xl md:text-3xl font-light text-neutral-800 leading-relaxed max-w-3xl mx-auto">
-            Recovery does not mean returning to "zero". It does not mean just surviving or abstaining. <br/><br/>
-            It means <strong className="font-bold text-amber-600">being able to enjoy the beauty of the world again.</strong>
-          </p>
+          <div className="inline-flex items-center space-x-2 bg-neutral-900 border border-neutral-800 px-4 py-2 rounded-full text-xs font-mono tracking-widest text-amber-500 uppercase">
+            <Sun className="w-4 h-4 animate-spin-slow" />
+            <span>Ras Lila: Celebration of Existence</span>
+          </div>
+          
+          <h2 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white mb-6">
+            Beyond the Ego. <br/>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-orange-600">
+              Towards Ecstasy.
+            </span>
+          </h2>
 
-          <p className="text-lg text-neutral-600 leading-relaxed max-w-2xl mx-auto mb-10">
-            Joy is not a chaotic chemical stimulation. It is a profound resonance with life. It is the courageous act of being present, looking at the sky, hearing a familiar voice, and simply feeling that it is extraordinary to be here.
-          </p>
+          <div className="border-l-4 border-amber-600/50 pl-6 space-y-4">
+            <p className="text-xl text-neutral-300 font-light leading-relaxed">
+              Life doesn't need a meaning to be lived; it is a dance in which stars and humans participate together. Happiness is your inner nature; it does not need to be <em>achieved</em>, only <em>recognized</em>.
+            </p>
+            <p className="text-lg text-neutral-400 font-light leading-relaxed">
+              Do not search for the lost needle on the street just because there is light. Search for it inside, in the fertile darkness of your being (Meditation). There you will find true independence.
+            </p>
+          </div>
 
-          <div className="flex flex-wrap justify-center items-center gap-4">
-
+          <div className="pt-6">
             <Link 
               href="/en/showcase/neuro-recovery/joy"
-              className="flex items-center space-x-2 text-sm font-mono tracking-widest uppercase text-white bg-amber-500 hover:bg-amber-600 px-6 py-3 rounded-full transition-colors border border-transparent shadow-md"
+              className="inline-flex items-center space-x-2 text-sm font-mono tracking-widest uppercase text-black bg-amber-500 hover:bg-amber-400 px-8 py-4 rounded-full transition-all border border-transparent shadow-[0_0_20px_rgba(245,158,11,0.2)] hover:shadow-[0_0_40px_rgba(245,158,11,0.4)]"
             >
               <BookOpen className="w-5 h-5" />
-              <span>Read More</span>
+              <span>Compendium of Ecstasy</span>
             </Link>
           </div>
+        </motion.div>
+
+        {/* The Map of Consciousness */}
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, delay: 0.2 }}
+          className="flex flex-col space-y-4"
+        >
+          {consciousnessLevels.map((level, idx) => (
+            <motion.div 
+              key={idx}
+              whileHover={{ scale: 1.02 }}
+              className={`p-6 rounded-2xl border backdrop-blur-md transition-colors duration-300 flex items-start space-x-4
+                ${idx === 3 ? 'bg-amber-900/20 border-amber-500/50 shadow-[0_0_30px_rgba(245,158,11,0.1)]' : 'bg-neutral-900/50 border-neutral-800/50 hover:border-neutral-600'}`}
+            >
+              <div className="shrink-0 mt-1">
+                {level.icon}
+              </div>
+              <div>
+                <h4 className={`text-lg font-bold mb-1 ${idx === 3 ? 'text-amber-400' : 'text-neutral-200'}`}>
+                  {level.title}
+                </h4>
+                <p className={`text-sm leading-relaxed ${idx === 3 ? 'text-amber-200/80' : 'text-neutral-400'}`}>
+                  {level.desc}
+                </p>
+              </div>
+            </motion.div>
+          ))}
         </motion.div>
 
       </div>

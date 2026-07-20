@@ -1,24 +1,39 @@
 import ArticleLayoutEN from "../components/ArticleLayout";
 
-export default function Page() {
+export default function RootsPageEN() {
   return (
     <ArticleLayoutEN themeName="chaos" accentColor="#581c87">
       <h1>The Roots of Addiction: Epigenetics, Trauma, and the Shadow of Silent Suffering</h1>
       
-<p>Addiction is rarely about the substance itself. It is not a moral failing, a lack of willpower, or a simple pursuit of pleasure. At its absolute core, addiction is a profound, desperate attempt to solve a problem—the problem of pain. It is an echo of silent suffering, a biological and psychological response to an internal world that feels unbearable.</p>
+      <p className="lead text-2xl font-light text-neutral-300 border-l-4 border-purple-500 pl-6 mb-12">
+        "Don't ask why the addiction, ask why the pain." — Dr. Gabor Maté
+      </p>
 
-<h3>The House with a Broken Foundation</h3>
-<p>Imagine building a beautiful house on a fractured, unstable foundation. No matter how much you paint the walls or arrange the furniture, the house will always feel like it is slowly sinking. Trauma acts exactly like a broken foundation. When we experience deep emotional pain, chronic stress, or neglect, especially in early life, our brain's internal architecture fundamentally changes. We feel a continuous, low-level earthquake of anxiety or emptiness, and substances simply offer a temporary escape from the tremor.</p>
+      <p>Addiction is rarely about the substance itself. It is not a moral failure, a lack of willpower, a rational decision to do harm, nor a simple pursuit of pleasure. At its absolute core, as argued by Dr. Gabor Maté and other trauma medicine experts, addiction is a <strong>profound and desperate attempt to solve a problem</strong> — the problem of emotional and physical pain. It is an echo of silent suffering, a biological and psychological response to an inner world that has become unbearable.</p>
 
-<h3>The Neurobiology of the Shadow</h3>
-<p>When we look at the brain of someone struggling with addiction, we are often looking at a nervous system stuck in survival mode. The brain's stress response system—the HPA axis (Hypothalamic-Pituitary-Adrenal axis)—is like a fire alarm. In a healthy brain, the alarm sounds when there is danger and turns off when the danger passes. For individuals carrying trauma, the alarm never fully turns off. Their body is flooded with cortisol, the stress hormone, leaving them in a constant state of "fight or flight."</p>
+      <h2>The House with a Fractured Foundation</h2>
+      <p>Imagine building a beautiful house with modern architecture, but on a fractured and unstable foundation. No matter how much you paint the walls or arrange the furniture, the house will always feel like it is slowly sinking, and the walls will crack at the first storm. Trauma acts exactly like a broken foundation.</p>
+      
+      <p>When we experience deep emotional pain, chronic stress, neglect, or a lack of secure attachment, especially in our early years, the internal architecture of our brain fundamentally changes. The brain of a child under constant stress adapts to survive danger, not to flourish. These individuals feel a continuous, low-intensity earthquake of anxiety or emptiness. Substances simply offer a temporary escape from this constant tremor.</p>
 
-<p>Over time, this chronic stress damages the very brain circuits responsible for regulating emotions. The prefrontal cortex, the logical CEO of our brain, goes offline, while the amygdala, our primal fear center, takes over. In this state of exhaustion, any chemical that acts as a "mute button" for the fire alarm becomes intensely desirable.</p>
+      <h2>The Neurobiology of the Shadow: The HPA Axis</h2>
+      <p>When we look at the brain of someone struggling with addiction, we are often looking at a nervous system stuck in survival mode. The brain's stress response system — the <strong>HPA axis (Hypothalamic-Pituitary-Adrenal axis)</strong> — functions like a fire alarm. In a healthy brain, the alarm sounds when there is immediate danger and stops when the danger passes.</p>
 
-<h3>Epigenetics: The Bookmarks on our DNA</h3>
-<p>Perhaps the most profound discovery in modern neurobiology is <em>epigenetics</em>. Our genes are like a vast library of books, but our environment dictates which books get opened and read. Trauma leaves molecular "bookmarks" on our DNA. It can actually change the way our genes express themselves, altering the dopamine receptors (our reward system) and the stress response we are born with. This means that the shadow of silent suffering can literally be passed down through generations. A person might inherit a nervous system that is already uniquely sensitive to pain and deeply hungry for relief.</p>
+      <p>For those carrying early trauma, this alarm never completely turns off. Their bodies are constantly flooded with cortisol and adrenaline, the stress hormones, leaving them in a chronic state of "fight-or-flight". Over time, this chronic stress damages the very brain circuits responsible for regulating emotions.</p>
 
-<p>Understanding the roots of addiction means changing the question we ask. Instead of asking, "Why the addiction?" we must ask, "Why the pain?" Only by shining a light on the shadow, healing the foundational trauma, and rewiring the nervous system through compassion and safety, can true recovery begin.</p>
+      <p>The prefrontal cortex, the logical and rational "director" of our brain, gradually disconnects under the weight of stress, while the amygdala, our primal center of fear, takes control. In this state of hyper-vigilance and total exhaustion, <em>any</em> chemical or behavior that acts as an "off button" for this fire alarm becomes intensely, irresistibly desired.</p>
+
+      <h2>Epigenetics: The Bookmarks on Our DNA</h2>
+      <p>Perhaps the most profound discovery of modern neurobiology regarding heredity is <strong>epigenetics</strong>. For decades, science searched for the "addiction gene", but reality is much more complex. Our genes are like a vast library of books, but our environment dictates which books are opened, read, and applied.</p>
+
+      <p>Trauma leaves molecular "bookmarks" (DNA methylation) on our genome. It can effectively change how our genes express themselves, directly altering how dopamine receptors (our reward system) develop and setting the sensitivity of the stress response we are born with.</p>
+
+      <p>This means that collective trauma, extreme poverty, abuse, or unspoken suffering can literally be passed down through generations via the epigenome. A person might inherit a nervous system that is already uniquely sensitive to pain, with a reduced number of dopamine receptors (a condition called <em>Reward Deficiency Syndrome</em>), leaving them profoundly starved for relief and biochemically predisposed to addiction from the very first dose.</p>
+
+      <h2>Healing: Beyond Behavior</h2>
+      <p>Understanding the neurobiological roots of addiction means changing the fundamental question society asks. The punitive model focuses exclusively on stopping the behavior, ignoring the pain that drives it.</p>
+
+      <p>Only by illuminating the shadow, addressing the fundamental trauma through "compassionate inquiry," and rewiring the nervous system through safety, authentic human connection, and therapy, can true recovery begin. Healing is not just saying "no" to the drug, but being able to say "yes" to a life that has become safe enough to be lived consciously.</p>
 
     </ArticleLayoutEN>
   );

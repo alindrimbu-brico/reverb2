@@ -1,24 +1,42 @@
 import ArticleLayoutEN from "../components/ArticleLayout";
 
-export default function Page() {
+export default function RecoveryPageEN() {
   return (
-    <ArticleLayoutEN themeName="recovery" accentColor="#059669">
-      <h1>The Recovery Algorithm: Neuroplasticity and the Power of Connection</h1>
+    <ArticleLayoutEN themeName="recovery" accentColor="#10b981">
+      <h1>The Architecture of Recovery: Neuroplasticity and the Science Behind "One Day at a Time"</h1>
       
-<p>Recovery from addiction is often romanticized as a sudden spiritual awakening, but in reality, it is a biological and psychological algorithm. It is a steady, repetitive, and deeply courageous process of rewiring a damaged nervous system. The brain, wonderfully, is not set in stone; it is entirely malleable.</p>
+      <p className="lead text-2xl font-light text-neutral-300 border-l-4 border-emerald-500 pl-6 mb-12">
+        The mantra "One day at a time" is not just an inspirational slogan from recovery programs; it is a precise neurological instruction for harnessing neuroplasticity.
+      </p>
 
-<h3>Neuroplasticity: Rewiring the Machinery</h3>
-<p>The foundational rule of neuroscience is: <em>Neurons that fire together, wire together</em>. During active addiction, the pathways associated with seeking and consuming the substance become massive, high-speed highways in the brain. Meanwhile, the pathways for natural joy, emotional regulation, and impulse control wither away like unpaved dirt roads.</p>
+      <p>Addiction is, at the most fundamental biological level, a form of extreme learning. The mammalian brain evolved to recognize and repeat actions that increase the chances of survival, such as eating or reproducing, rewarding us with dopamine. Addictive substances hijack this survival system, teaching the brain a lethal lesson: <em>"This drug is the most important thing in the world, more important than food, more important than family."</em></p>
 
-<p>Recovery is the process of reversing this traffic. This is called <em>neuroplasticity</em>. Every time a person feels a craving and chooses not to use, they are literally starving the addiction highway of traffic and laying down new asphalt on the path of self-control. The famous mantra "One day at a time" is not just a catchy slogan; it is the exact neurobiological timeframe required to rebuild the myelin sheath around healthy neurons.</p>
+      <h2>Highways and Dirt Roads</h2>
+      <p>The golden rule of neuroscience, originally formulated by Donald Hebb, is: <strong>Neurons that fire together, wire together</strong>. During active addiction, the neural pathways associated with seeking, anticipating, and consuming the substance are activated thousands of times. They become massive, six-lane highways, insulated with thick layers of myelin (the white matter that accelerates electrical impulses in the brain).</p>
 
-<h3>Connection as the Antidote</h3>
-<p>Journalist Johann Hari profoundly noted, "The opposite of addiction is not sobriety; it is connection." Addiction thrives in isolation and secrecy. It tells the individual that they are broken, unlovable, and completely alone.</p>
+      <p>Meanwhile, the neural pathways responsible for finding joy in simple things, for emotional regulation, and for executive control (located in the prefrontal cortex) wither away. Unused, they become like unpaved, weed-filled dirt roads.</p>
 
-<p>Biologically, human connection releases oxytocin, a powerful hormone that directly reduces the fear responses in the amygdala and calms the nervous system. When we are deeply seen, heard, and accepted by others, our brain receives the ultimate safety signal. The internal fire alarm of trauma finally turns off.</p>
+      <h2>Neuroplasticity: The Power to Rewire the Brain</h2>
+      <p>The miraculous part of the human brain, and the only reason long-term recovery is possible, is called <strong>Neuroplasticity</strong>. This is the brain's ability to reorganize its physical structure and functions in response to repeated experiences and choices.</p>
+      
+      <p>Recovery is the physical process of reversing the traffic in the brain. This doesn't happen overnight, because physical structures don't disappear through sheer willpower.</p>
 
-<h3>Planting a Forest</h3>
-<p>Recovery is like planting a forest. You cannot force a tree to grow overnight simply by screaming at it. But if you provide the right algorithm—if you water the soil every single day, ensure it gets sunlight, and protect it from pests—the forest will inevitably return. The brain will heal. The receptors will regrow. All it takes is the courage to stay the course, one day at a time, supported by the strength of the community.</p>
+      <h2>The Biology of "One Day at a Time"</h2>
+      <p>This is where the profundity of the phrase <em>"One day at a time"</em> comes in. When a person feels an intense craving — a powerful electrical impulse sent down the addiction highway — and chooses, just for today, not to use, something remarkable happens at a microscopic level:</p>
+
+      <ol>
+        <li><strong>Starving the highway:</strong> Not receiving the expected reward, the synaptic connections on the old addiction pathway slowly begin to weaken. It is a neurobiological process called <em>Long-Term Depression (LTD)</em>.</li>
+        <li><strong>Pouring fresh asphalt:</strong> By choosing an alternative coping activity (calling a friend, going to a support meeting, meditating, resisting the urge), the person forces an electrical impulse to travel down the dirt road of self-control.</li>
+      </ol>
+
+      <p>Every day of abstinence represents a new layer of myelin deposited on healthy neural pathways. In the early days and weeks, this process is downright excruciating. The weakened prefrontal cortex must exert a colossal effort to overcome the impulses sent by the amygdala and primitive brain structures.</p>
+
+      <h2>Time as Medicine</h2>
+      <p>Brain imaging studies (fMRI and PET scans) show that recovering gray matter volume, dopamine receptor density, and prefrontal cortex function takes time. The reversibility of long-term drug-induced changes is evident, but it requires an interval of 12 to 24 months of sustained abstinence for the brain to look similar to a healthy control brain again.</p>
+
+      <p>If you were to look at this enormous amount of time all at once, the task would seem insurmountable for an already fragile nervous system. The brain would become overwhelmed and panic, triggering the exact stress that leads to relapse. That is why thinking "I will never drink again for the rest of my life" is a tactical neurological error.</p>
+
+      <p>The brain needs a manageable task for its healing prefrontal cortex: <em>"Can I just not use drugs today?"</em>. Yes, just today. Every night, when the head hits the pillow sober, a small repair has taken place at the synaptic level. The next day, it starts over, gradually and relentlessly building the new architecture of a free mind.</p>
 
     </ArticleLayoutEN>
   );

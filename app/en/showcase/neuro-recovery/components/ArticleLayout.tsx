@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { setTheme } from "./AudioEngine";
+import { setTheme } from "../../../../showcase/neuro-recovery/components/AudioEngine";
 
 interface ArticleLayoutProps {
   themeName: 'chaos' | 'withdrawal' | 'alcohol' | 'cannabis' | 'stimulants' | 'recovery' | 'joy';
@@ -16,7 +16,7 @@ export default function ArticleLayoutEN({ themeName, children, accentColor }: Ar
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // When the article loads, try to play its theme (if AutoMode is ON)
+    // When the article loads, try to play its theme
     setTheme(themeName);
   }, [themeName]);
 
