@@ -32,6 +32,12 @@ const navInfo = {
 
 export default function Footer() {
   const pathname = usePathname() || "";
+  
+  // Suppress global footer on Neurolumina (neuro-recovery) pages to render the custom light footer instead
+  if (pathname.includes("/showcase/neuro-recovery")) {
+    return null;
+  }
+
   const isEn = pathname.startsWith("/en");
   const nav = isEn ? navInfo.en : navInfo.ro;
   
@@ -105,36 +111,36 @@ export default function Footer() {
             <div className="flex-1 w-full grid">
                {/* TAB: NAVIGARE */}
                <div className={`col-start-1 row-start-1 transition-all duration-500 w-full ${activeTab === "navigare" ? "opacity-100 z-10 translate-x-0" : "opacity-0 -z-10 translate-x-4 pointer-events-none"}`}>
-                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-                   {nav.map(({ href, label }) => (
-                     <Link 
-                       key={href} 
-                       href={href} 
-                       className="group flex justify-center items-center w-full rounded-full border border-[#1d2731]/20 bg-transparent px-3 py-2 text-[#1d2731] transition-all duration-300 hover:bg-[#1d2731]/5 hover:border-[#1d2731]/50"
-                     >
-                       <span className="text-[9px] font-bold uppercase tracking-[0.2em] transition-transform duration-300 group-hover:scale-[1.02]">
-                         {label}
-                       </span>
-                     </Link>
-                   ))}
-                 </div>
+                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                    {nav.map(({ href, label }) => (
+                      <Link 
+                        key={href} 
+                        href={href} 
+                        className="group flex justify-center items-center w-full rounded-full border border-[#1d2731]/20 bg-transparent px-3 py-2 text-[#1d2731] transition-all duration-300 hover:bg-[#1d2731]/5 hover:border-[#1d2731]/50"
+                      >
+                        <span className="text-[9px] font-bold uppercase tracking-[0.2em] transition-transform duration-300 group-hover:scale-[1.02]">
+                          {label}
+                        </span>
+                      </Link>
+                    ))}
+                  </div>
                </div>
 
                {/* TAB: ECOSISTEM */}
                <div className={`col-start-1 row-start-1 transition-all duration-500 w-full ${activeTab === "ecosistem" ? "opacity-100 z-10 translate-x-0" : "opacity-0 -z-10 -translate-x-4 pointer-events-none"}`}>
-                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-2">
-                   {showcaseLinks.map(({ href, label }) => (
-                     <Link 
-                       key={href} 
-                       href={href} 
-                       className="group flex justify-center items-center w-full rounded-full border border-[#8A1C14]/30 bg-[#8A1C14]/5 px-3 py-2 text-[#8A1C14] transition-all duration-300 hover:bg-[#8A1C14] hover:text-white"
-                     >
-                       <span className="text-[9px] font-bold uppercase tracking-[0.2em] transition-transform duration-300 group-hover:scale-[1.02]">
-                         {label}
-                       </span>
-                     </Link>
-                   ))}
-                 </div>
+                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-2">
+                    {showcaseLinks.map(({ href, label }) => (
+                      <Link 
+                        key={href} 
+                        href={href} 
+                        className="group flex justify-center items-center w-full rounded-full border border-[#8A1C14]/30 bg-[#8A1C14]/5 px-3 py-2 text-[#8A1C14] transition-all duration-300 hover:bg-[#8A1C14] hover:text-white"
+                      >
+                        <span className="text-[9px] font-bold uppercase tracking-[0.2em] transition-transform duration-300 group-hover:scale-[1.02]">
+                          {label}
+                        </span>
+                      </Link>
+                    ))}
+                  </div>
                </div>
             </div>
             

@@ -8,6 +8,7 @@ import SubstanceCards from "./components/SubstanceCards";
 import RecoveryAlgorithm from "./components/RecoveryAlgorithm";
 
 import JoyCelebration from "./components/JoyCelebration";
+import NeuroluminaFooter from "./components/NeuroluminaFooter";
 
 export default function NeuroRecoveryPage() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -37,6 +38,8 @@ export default function NeuroRecoveryPage() {
       <SubstanceCards />
       <RecoveryAlgorithm />
       <JoyCelebration />
+      <NeuroluminaFooter />
     </motion.div>
   );
 }
+

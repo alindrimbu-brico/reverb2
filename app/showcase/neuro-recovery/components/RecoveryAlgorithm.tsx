@@ -1,19 +1,152 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ShieldPlus, Brain, Users, HeartHandshake, PlayCircle, BookOpen } from "lucide-react";
-import Link from "next/link";
+import { useState } from "react";
+import { motion, useMotionValue, useTransform } from "framer-motion";
+import { ShieldPlus, Brain, Users, HeartHandshake, ArrowRight, Play } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { setTheme } from "./AudioEngine";
 
+interface InteractiveCardProps {
+  href: string;
+  title: string;
+  subtitle: string;
+  desc: string;
+  icon: React.ReactNode;
+  badge: string;
+  accentClass: string;
+  glowColor: string;
+  themeName: 'recovery' | 'joy';
+}
+
+function InteractiveCard({
+  href,
+  title,
+  subtitle,
+  desc,
+  icon,
+  badge,
+  accentClass,
+  glowColor,
+  themeName
+}: InteractiveCardProps) {
+  const router = useRouter();
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  const rotateX = useTransform(y, [-150, 150], [12, -12]);
+  const rotateY = useTransform(x, [-150, 150], [-12, 12]);
+
+  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const el = event.currentTarget;
+    const rect = el.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    
+    const mouseX = event.clientX - rect.left - width / 2;
+    const mouseY = event.clientY - rect.top - height / 2;
+    x.set(mouseX);
+    y.set(mouseY);
+
+    setMousePos({
+      x: event.clientX - rect.left,
+      y: event.clientY - rect.top
+    });
+  };
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    setTheme(themeName);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    x.set(0);
+    y.set(0);
+  };
+
+  const handleCardClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    router.push(href);
+  };
+
+  return (
+    <motion.div
+      onClick={handleCardClick}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: "preserve-3d",
+        perspective: 1000
+      }}
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+      className="relative w-full p-8 rounded-3xl bg-neutral-900 border border-neutral-800 shadow-2xl hover:border-neutral-700 transition-colors duration-500 overflow-hidden cursor-pointer group flex flex-col justify-between min-h-[380px] text-left select-none"
+    >
+      {/* Flashlight Glow effect */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-20 transition-opacity duration-300"
+        style={{
+          background: `radial-gradient(circle 250px at ${mousePos.x}px ${mousePos.y}px, ${glowColor}, transparent)`
+        }}
+      />
+
+      {/* Ambient Blur effect */}
+      <div className="absolute -top-10 -right-10 w-40 h-40 bg-neutral-800 rounded-full blur-[80px] group-hover:bg-neutral-700 transition-colors duration-500 pointer-events-none" />
+
+      {/* Card Content */}
+      <div className="relative z-10 space-y-6" style={{ transform: "translateZ(30px)" }}>
+        <div className="flex items-center justify-between">
+          <div className={`p-4 bg-neutral-800 rounded-2xl border border-neutral-700 shadow-inner group-hover:border-neutral-600 transition-colors text-white ${accentClass}`}>
+            {icon}
+          </div>
+          <span className="text-xs font-mono tracking-widest text-neutral-500 uppercase border border-neutral-800 px-3 py-1 rounded-full bg-neutral-900">
+            {badge}
+          </span>
+        </div>
+
+        <div className="space-y-2">
+          <span className="text-xs font-semibold text-neutral-500 uppercase tracking-wider block">
+            {subtitle}
+          </span>
+          <h3 className="text-2xl font-bold text-white group-hover:text-neutral-100 transition-colors">
+            {title}
+          </h3>
+        </div>
+
+        <p className="text-neutral-400 text-sm leading-relaxed font-light">
+          {desc}
+        </p>
+      </div>
+
+      {/* Footer Card Navigation */}
+      <div className="relative z-10 pt-6 flex items-center justify-between border-t border-neutral-800 group-hover:border-neutral-700/50 transition-colors mt-auto" style={{ transform: "translateZ(15px)" }}>
+        <span className="text-xs font-mono uppercase tracking-widest text-neutral-500 group-hover:text-white transition-colors flex items-center gap-2">
+          Accesează Portalul <Play className="w-3 h-3 fill-neutral-500 group-hover:fill-white transition-all" />
+        </span>
+        <div className="w-10 h-10 rounded-full border border-neutral-800 group-hover:border-neutral-600 flex items-center justify-center text-neutral-400 group-hover:text-white group-hover:bg-neutral-800 transition-all duration-300">
+          <ArrowRight className="w-4 h-4 transform group-hover:translate-x-0.5 transition-transform" />
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function RecoveryAlgorithm() {
+  const router = useRouter();
   return (
     <motion.section 
+
       onViewportEnter={() => setTheme("recovery")}
       onMouseEnter={() => setTheme("recovery")}
       viewport={{ margin: "-50% 0px -50% 0px" }}
-      className="relative min-h-screen flex flex-col items-center justify-center py-32 px-6 z-10 transition-colors duration-1000"
+      className="relative min-h-screen flex flex-col items-center justify-center py-32 px-6 z-10 bg-neutral-950 transition-colors duration-1000"
     >
-      <div className="max-w-4xl mx-auto w-full space-y-24">
+      <div className="max-w-5xl mx-auto w-full space-y-24 text-center">
         
         {/* Header */}
         <motion.div
@@ -21,91 +154,72 @@ export default function RecoveryAlgorithm() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center"
+          className="space-y-4"
         >
-          <div className="flex flex-wrap justify-center gap-4 items-center mb-4">
-            <div className="inline-flex items-center justify-center space-x-2 text-neutral-500 bg-white/50 px-4 py-2 rounded-full border border-neutral-200">
-              <HeartHandshake className="w-5 h-5 text-rose-500" />
-              <span className="uppercase tracking-widest text-xs font-mono font-semibold">Algoritmul Recuperării</span>
-            </div>
+          <div className="inline-flex items-center justify-center space-x-2 text-neutral-400 bg-neutral-900 px-4 py-2 rounded-full border border-neutral-800">
+            <HeartHandshake className="w-5 h-5 text-rose-500" />
+            <span className="uppercase tracking-widest text-xs font-mono font-semibold">Arhitectura Recuperării</span>
           </div>
-          <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-neutral-900 mb-8">
+          <h2 className="text-4xl md:text-7xl font-extrabold tracking-tight text-white leading-none">
             Drumul Înapoi spre Lumină
           </h2>
-          <div className="flex flex-wrap justify-center items-center gap-4">
-
-            <Link 
-              href="/showcase/neuro-recovery/recovery"
-              className="flex items-center space-x-2 text-sm font-mono tracking-widest uppercase text-rose-500 bg-rose-100/50 hover:bg-rose-200/50 px-6 py-3 rounded-full transition-colors border border-rose-300"
-            >
-              <BookOpen className="w-5 h-5" />
-              <span>Află mai multe</span>
-            </Link>
-          </div>
+          <p className="text-neutral-400 max-w-2xl mx-auto font-light text-lg">
+            O abordare integrată, biologică și spirituală a restaurării neurochimice. Selectează un portal pentru a explora profunzimea procesului.
+          </p>
         </motion.div>
 
-        {/* Steps */}
-        <div className="space-y-12 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-neutral-300 before:to-transparent">
-          
-          {/* Step 1: Medical */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
-            className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active"
-          >
-            <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-blue-100 text-blue-600 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
-              <ShieldPlus className="w-5 h-5" />
-            </div>
-            <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-2xl bg-white border border-neutral-200 shadow-sm">
-              <h3 className="font-bold text-neutral-900 text-xl mb-2">1. Scutul Medical</h3>
-              <p className="text-neutral-600 leading-relaxed text-sm">
-                Recuperarea începe adesea cu sprijin fizic. Tratamentele de substituție (cum ar fi Naltrexona, care blochează receptorii opioizi la alcoolici, sau Suboxona) sunt scuturi vitale în prima fază. Reduc "zgomotul" chimic asurzitor pentru a permite minții să lupte.
-              </p>
-            </div>
-          </motion.div>
+        {/* 3D Playful Portals */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <InteractiveCard
+            href="/showcase/neuro-recovery/medical-shield"
+            title="Scutul Medical"
+            subtitle="Echilibrarea Biologică"
+            badge="Faza 1: Substituție"
+            desc="Cum știința utilizează Naltrexona și Suboxona pentru a reduce zgomotul chimic al sevrajului și a oferi cortexului prefrontal spațiul sacru de decizie."
+            icon={<ShieldPlus className="w-6 h-6 text-blue-400" />}
+            accentClass="shadow-[0_0_15px_rgba(59,130,246,0.2)]"
+            glowColor="rgba(59,130,246,0.35)"
+            themeName="recovery"
+          />
 
-          {/* Step 2: Mental */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
-            className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group"
-          >
-            <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-purple-100 text-purple-600 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
-              <Brain className="w-5 h-5" />
-            </div>
-            <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-2xl bg-white border border-neutral-200 shadow-sm">
-              <h3 className="font-bold text-neutral-900 text-xl mb-2">2. Neuroplasticitatea</h3>
-              <p className="text-neutral-600 leading-relaxed text-sm">
-                Fără jurăminte pe viață. Jurămintele încălcate nasc vinovăție, iar vinovăția alimentează recăderea. Metoda este <strong>„O zi pe rând”</strong>. Creierul se vindecă doar prin acțiune, antrenând zilnic <em>„mușchiul alegerii”</em>—capacitatea conștientă de a sta față în față cu impulsul și de a nu da curs acțiunii.
-              </p>
-            </div>
-          </motion.div>
-
+          <InteractiveCard
+            href="/showcase/neuro-recovery/neuroplasticity"
+            title="Neuroplasticitatea"
+            subtitle="Recablarea Conștientă"
+            badge="Faza 2: Restaurare"
+            desc="Valoarea neurobiologică a prezenței și a strategiei „O zi pe rând”. Cum ne auto-remodelăm creierul prin ritualuri sănătoase, BDNF și reducerea ruminației."
+            icon={<Brain className="w-6 h-6 text-purple-400" />}
+            accentClass="shadow-[0_0_15px_rgba(168,85,247,0.2)]"
+            glowColor="rgba(168,85,247,0.35)"
+            themeName="recovery"
+          />
         </div>
 
-        {/* Conclusion / Social */}
+        {/* Conclusion / Spiritual connection */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.98 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="mt-24 p-10 md:p-16 rounded-3xl bg-gradient-to-br from-rose-50 to-orange-50 border border-rose-100 text-center shadow-lg relative overflow-hidden"
+          onClick={() => router.push('/showcase/neuro-recovery/human-connection')}
+          whileHover={{ scale: 1.01, borderColor: "rgba(244, 63, 94, 0.3)" }}
+          className="mt-24 p-10 md:p-16 rounded-3xl bg-gradient-to-br from-neutral-900 to-neutral-950 border border-neutral-800 text-center shadow-2xl relative overflow-hidden cursor-pointer group flex flex-col items-center select-none"
         >
           <div className="absolute top-0 right-0 p-8 opacity-5">
              <Users size={200} />
           </div>
           <HeartHandshake className="w-12 h-12 text-rose-500 mx-auto mb-6" />
-          <h3 className="text-3xl md:text-5xl font-bold text-neutral-900 mb-6 leading-tight">
+          <h3 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
             Opusul dependenței nu este simpla abstinență. <br/>
-            <span className="text-rose-600">Este conexiunea umană.</span>
+            <span className="text-rose-500">Este conexiunea umană.</span>
           </h3>
-          <p className="text-lg md:text-xl text-neutral-700 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-neutral-400 max-w-3xl mx-auto leading-relaxed font-light mb-6">
             Mai mult decât atât, tema esențială a existenței noastre este că <strong>oamenii trăiesc în simboluri</strong>. Ne găsim sensul în poveștile pe care ni le spunem, în ritualurile pe care le păstrăm și în triburile din care facem parte. Dependența prosperă exact atunci când aceste structuri simbolice se prăbușesc. Când rămânem dezgoliți într-un vid de sens și o singurătate tehnologizată, căutăm artificial acea fărâmă de alinare. Calea spre vindecare este refacerea arhitecturii simbolice: de la om la om, de la inimă la inimă.
           </p>
+
+          <div className="px-6 py-3 rounded-full bg-rose-600/10 text-rose-400 border border-rose-500/20 group-hover:bg-rose-600/20 group-hover:border-rose-500/40 text-xs font-mono uppercase tracking-widest transition-all">
+            Accesează Portalul Conexiunii Umane
+          </div>
         </motion.div>
 
       </div>

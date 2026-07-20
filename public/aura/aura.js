@@ -56,7 +56,12 @@ document.addEventListener("DOMContentLoaded", () => {
             osc1.start();
             lfo.start();
             
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            
             // Fade in over 10 seconds to not startle
+            mainGain.gain.setValueAtTime(0, audioCtx.currentTime);
             mainGain.gain.linearRampToValueAtTime(0.05, audioCtx.currentTime + 10);
         } catch(e) {
             console.log('Web Audio nu a putut fi inițializat.');

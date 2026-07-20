@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { setTheme } from "./AudioEngine";
+import { setTheme, playTransitionSound } from "./AudioEngine";
 
 interface ArticleLayoutProps {
   themeName: 'chaos' | 'withdrawal' | 'alcohol' | 'cannabis' | 'stimulants' | 'recovery' | 'joy';
@@ -18,6 +18,7 @@ export default function ArticleLayout({ themeName, children, accentColor }: Arti
   useEffect(() => {
     // When the article loads, try to play its theme (if AutoMode is ON)
     setTheme(themeName);
+    playTransitionSound();
   }, [themeName]);
 
   const { scrollYProgress } = useScroll({

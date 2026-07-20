@@ -1,9 +1,102 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { BrainCircuit, Dna, History, BookOpen, Quote } from "lucide-react";
+import { useState } from "react";
+import { motion, useMotionValue, useTransform } from "framer-motion";
+import { BrainCircuit, Dna, History, BookOpen, Quote, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { setTheme } from "./AudioEngine";
+
+interface InteractiveCardProps {
+  href: string;
+  icon: React.ReactNode;
+  title: string;
+  imageSrc: string;
+  children: React.ReactNode;
+  hoverGlowColor: string;
+  hoverBorderClass: string;
+}
+
+function InteractiveCard({ href, icon, title, imageSrc, children, hoverGlowColor, hoverBorderClass }: InteractiveCardProps) {
+  const router = useRouter();
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  const rotateX = useTransform(y, [-100, 100], [5, -5]);
+  const rotateY = useTransform(x, [-100, 100], [-5, 5]);
+
+  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const el = event.currentTarget;
+    const rect = el.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    
+    const mouseX = event.clientX - rect.left - width / 2;
+    const mouseY = event.clientY - rect.top - height / 2;
+    x.set(mouseX);
+    y.set(mouseY);
+
+    setMousePos({
+      x: event.clientX - rect.left,
+      y: event.clientY - rect.top
+    });
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      onClick={() => router.push(href)}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: "preserve-3d",
+        perspective: 1000
+      }}
+      whileHover={{ scale: 1.01 }}
+      whileTap={{ scale: 0.99 }}
+      className={`p-8 rounded-3xl bg-neutral-900/40 border border-neutral-800/60 backdrop-blur-xl relative overflow-hidden group cursor-pointer transition-colors duration-500 shadow-2xl select-none ${hoverBorderClass}`}
+    >
+      {/* Flashlight Glow */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-10 transition-opacity duration-300"
+        style={{
+          background: `radial-gradient(circle 220px at ${mousePos.x}px ${mousePos.y}px, ${hoverGlowColor}, transparent)`
+        }}
+      />
+
+      <div className="z-10" style={{ transform: "translateZ(10px)" }}>
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-2xl font-semibold text-white flex items-center gap-3">
+            {icon}
+            {title}
+          </h3>
+          <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 group-hover:text-white transition-colors flex items-center gap-1 opacity-0 group-hover:opacity-100 duration-300">
+            Intră Portalul <ArrowRight className="w-3 h-3" />
+          </span>
+        </div>
+
+        {/* Cinematic Image Portlet */}
+        <div className="relative aspect-[21/9] w-full rounded-2xl overflow-hidden border border-neutral-800/80 mb-6 group-hover:border-neutral-700/80 transition-all duration-500 shadow-inner">
+          <motion.img 
+            src={imageSrc} 
+            alt={title} 
+            className="w-full h-full object-cover opacity-50 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent pointer-events-none" />
+        </div>
+        
+        {children}
+      </div>
+    </motion.div>
+  );
+}
 
 export default function HeroSection() {
   return (
@@ -12,7 +105,7 @@ export default function HeroSection() {
       onMouseEnter={() => setTheme("chaos")}
       onFocusCapture={() => setTheme("chaos")}
       viewport={{ margin: "-50% 0px -50% 0px" }}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden py-24 px-6"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden py-24 px-6 bg-neutral-950"
     >
       {/* Background abstract elements to simulate "chaos/noise" */}
       <div className="absolute inset-0 opacity-20 pointer-events-none">
@@ -65,47 +158,39 @@ export default function HeroSection() {
         </motion.div>
 
         <div className="space-y-6">
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="p-8 rounded-3xl bg-neutral-900/40 border border-neutral-800/60 backdrop-blur-xl relative overflow-hidden group hover:border-purple-900/50 transition-colors shadow-2xl"
+          {/* Card 1: Epigenetics / Gabor Mate */}
+          <InteractiveCard
+            href="/showcase/neuro-recovery/epigenetics-gabor-mate"
+            icon={<Dna className="text-purple-500" />}
+            title="Epigenetica Trage Trăgaciul"
+            imageSrc="/images/epigenetics.jpg"
+            hoverGlowColor="rgba(168, 85, 247, 0.4)"
+            hoverBorderClass="hover:border-purple-900/50"
           >
-            <div className="absolute top-0 right-0 p-6 opacity-5 transform translate-x-4 -translate-y-4 group-hover:scale-110 group-hover:opacity-10 transition-all duration-700">
-              <Dna size={160} />
-            </div>
-            <h3 className="text-2xl font-semibold text-white mb-4 flex items-center gap-3">
-              <Dna className="text-purple-500" /> Epigenetica Trage Trăgaciul
-            </h3>
             <p className="text-neutral-400 text-base leading-relaxed mb-4">
               Totul începe din rădăcinile noastre. Genetica dictează vulnerabilitățile, dar epigenetica dictează activarea. Traumele generațiilor trecute și suferințele nespuse modifică felul în care ni se activează genele, lăsând „semne de carte” moleculare pe ADN.
             </p>
-            <div className="bg-neutral-950/50 p-4 rounded-xl border border-neutral-800/50 flex gap-3 items-start">
+            <div className="bg-neutral-950/50 p-4 rounded-xl border border-neutral-800/50 flex gap-3 items-start z-10 relative">
               <Quote className="w-5 h-5 text-purple-500/50 shrink-0 mt-1" />
               <p className="text-sm text-neutral-300 font-light italic">
                 „Nu întreba de ce dependența, întreabă de ce durerea.” — Dr. Gabor Maté
               </p>
             </div>
-          </motion.div>
+          </InteractiveCard>
 
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="p-8 rounded-3xl bg-neutral-900/40 border border-neutral-800/60 backdrop-blur-xl relative overflow-hidden group hover:border-red-900/50 transition-colors shadow-2xl"
+          {/* Card 2: Collective Trauma & HPA Axis */}
+          <InteractiveCard
+            href="/showcase/neuro-recovery/collective-trauma-hpa"
+            icon={<History className="text-red-500" />}
+            title="Trauma Colectivă & Axa HPA"
+            imageSrc="/images/collective-trauma.jpg"
+            hoverGlowColor="rgba(239, 68, 68, 0.4)"
+            hoverBorderClass="hover:border-red-900/50"
           >
-             <div className="absolute top-0 right-0 p-6 opacity-5 transform translate-x-4 -translate-y-4 group-hover:scale-110 group-hover:opacity-10 transition-all duration-700">
-              <History size={160} />
-            </div>
-            <h3 className="text-2xl font-semibold text-white mb-4 flex items-center gap-3">
-              <History className="text-red-500" /> Trauma Colectivă & Axa HPA
-            </h3>
             <p className="text-neutral-400 text-base leading-relaxed">
               Stresul cronic dereglează axa HPA (Hipotalamo-Hipofizo-Suprarenală), blocând creierul într-un mod permanent de supraviețuire. Lipsa cronică de speranță, genocidul cultural sau neglijarea în copilărie schimbă însăși arhitectura neurobiologică. Când alarma de stres nu se oprește niciodată, o substanță care o poate reduce la tăcere devine irezistibilă.
             </p>
-          </motion.div>
+          </InteractiveCard>
         </div>
       </div>
     </motion.section>
