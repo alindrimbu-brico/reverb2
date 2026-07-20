@@ -191,7 +191,7 @@
     <main class="max-w-7xl mx-auto px-6 space-y-32 pb-40">
 
         <!-- Calculator Section -->
-        <section id="calculator" class="scroll-mt-32">
+        <section id="calculator" class="scroll-mt-32" onmouseenter="modulateAudio(true)" onmouseleave="modulateAudio(false)">
             <div class="bg-slate-900/40 border border-slate-800 p-8 md:p-16 rounded-lg">
                 <div class="max-w-3xl mx-auto text-center mb-16">
                     <h2 class="header-font text-3xl text-white mb-6 uppercase tracking-widest">Matricea Sincronică de Diagnostic</h2>
@@ -221,7 +221,7 @@
                 <div id="resultsArea" class="hidden mt-24 animate-in fade-in duration-700 space-y-12">
                     
                     <!-- Tab Buttons Navigation -->
-                    <div class="flex flex-wrap justify-center gap-2 border-b border-amber-500/10 pb-6">
+                    <div class="flex flex-wrap justify-center gap-2 border-b border-amber-500/10 pb-6" onmouseenter="modulateAudio(true)" onmouseleave="modulateAudio(false)">
                         <button onclick="switchTab('matrix')" id="tabBtn-matrix" class="px-6 py-3 bg-amber-600/15 border border-amber-500/40 text-amber-500 font-bold uppercase tracking-widest text-[10px] rounded transition-all">Matricea Pitagoreică</button>
                         <button onclick="switchTab('vedic')" id="tabBtn-vedic" class="px-6 py-3 bg-slate-950 border border-slate-800 text-slate-400 font-bold uppercase tracking-widest text-[10px] rounded transition-all hover:bg-slate-900">Numerologie Vedică</button>
                         <button onclick="switchTab('kabbalah')" id="tabBtn-kabbalah" class="px-6 py-3 bg-slate-950 border border-slate-800 text-slate-400 font-bold uppercase tracking-widest text-[10px] rounded transition-all hover:bg-slate-900">Kabbalah Sephiroth</button>
@@ -471,6 +471,78 @@
             </div>
         </section>
 
+        <!-- SECTION: SIMULATOR INTERACTIV DE FRECVENȚĂ -->
+        <section id="simulator" class="scroll-mt-32 relative" onmouseenter="modulateAudio(true)" onmouseleave="modulateAudio(false)">
+            <div class="text-center mb-16">
+                <div class="inline-block px-4 py-1 mb-6 border border-amber-500/30 rounded-full">
+                    <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-amber-500">Neurologie & Psihologie Transcendentă</span>
+                </div>
+                <h2 class="header-font text-4xl text-white mb-6 uppercase tracking-wider">Simulator Interactiv de Frecvență</h2>
+                <div class="h-1 w-20 bg-amber-600 mx-auto"></div>
+                <p class="text-slate-400 text-sm mt-4 italic max-w-xl mx-auto">
+                    Stimulează-ți stările cerebrale în timp real. Experimentează undele Alfa (pentru meditație profundă și starea de flux) sau undele Beta (pentru atenție sporită și focalizare cognitivă).
+                </p>
+            </div>
+
+            <div class="max-w-4xl mx-auto bg-slate-950 border border-slate-900 p-8 rounded-lg space-y-8 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-amber-500/5 rounded-full blur-3xl"></div>
+                
+                <div class="grid md:grid-cols-2 gap-8 relative z-10">
+                    <!-- Starea Alfa (8Hz - 12Hz) -->
+                    <div class="p-6 bg-slate-900/30 border border-slate-800 rounded-lg space-y-4">
+                        <div class="flex justify-between items-center">
+                            <h4 class="header-font text-xl text-amber-500 font-bold uppercase">Starea Alfa</h4>
+                            <span class="text-xs text-slate-500 tracking-wider">8 Hz - 12 Hz</span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            Undele Alfa sunt active în timpul relaxării conștiente, meditației sau stărilor de vizualizare creativă. Acestea calmează sistemul nervos central și favorizează integrarea emisferelor cerebrale.
+                        </p>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button id="simBtn-8" onclick="playSimFrequency(8, 'Deep Alpha')" class="sim-btn px-4 py-3 bg-slate-950 border border-slate-800 text-slate-400 hover:border-amber-500 hover:text-amber-500 rounded text-xs font-bold transition">8 Hz</button>
+                            <button id="simBtn-10" onclick="playSimFrequency(10, 'Mid Alpha')" class="sim-btn px-4 py-3 bg-slate-950 border border-slate-800 text-slate-400 hover:border-amber-500 hover:text-amber-500 rounded text-xs font-bold transition">10 Hz</button>
+                            <button id="simBtn-12" onclick="playSimFrequency(12, 'High Alpha')" class="sim-btn px-4 py-3 bg-slate-950 border border-slate-800 text-slate-400 hover:border-amber-500 hover:text-amber-500 rounded text-xs font-bold transition">12 Hz</button>
+                        </div>
+                    </div>
+
+                    <!-- Starea Beta (12Hz - 30Hz) -->
+                    <div class="p-6 bg-slate-900/30 border border-slate-800 rounded-lg space-y-4">
+                        <div class="flex justify-between items-center">
+                            <h4 class="header-font text-xl text-amber-500 font-bold uppercase">Starea Beta</h4>
+                            <span class="text-xs text-slate-500 tracking-wider">15 Hz - 25 Hz</span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            Undele Beta sunt asociate cu atenția activă, focalizarea analitică intensă și procesarea logică a informațiilor. Recomandate pentru studiu și activitate intelectuală sporită.
+                        </p>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button id="simBtn-15" onclick="playSimFrequency(15, 'Low Beta')" class="sim-btn px-4 py-3 bg-slate-950 border border-slate-800 text-slate-400 hover:border-amber-500 hover:text-amber-500 rounded text-xs font-bold transition">15 Hz</button>
+                            <button id="simBtn-20" onclick="playSimFrequency(20, 'Mid Beta')" class="sim-btn px-4 py-3 bg-slate-950 border border-slate-800 text-slate-400 hover:border-amber-500 hover:text-amber-500 rounded text-xs font-bold transition">20 Hz</button>
+                            <button id="simBtn-25" onclick="playSimFrequency(25, 'High Beta')" class="sim-btn px-4 py-3 bg-slate-950 border border-slate-800 text-slate-400 hover:border-amber-500 hover:text-amber-500 rounded text-xs font-bold transition">25 Hz</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Simulator Active Status & Wave Visualizer -->
+                <div class="border-t border-slate-900 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 relative z-10">
+                    <div class="flex items-center gap-3">
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Frecvență Activă:</span>
+                        <span id="activeFreqDisplay" class="text-xs font-bold text-amber-500">OFF</span>
+                        
+                        <!-- Mini visualizer waves -->
+                        <div id="simVisualizer" class="hidden flex gap-[3px] items-end h-5">
+                            <div class="w-[2px] bg-amber-500 animate-bounce h-3" style="animation-duration: 0.6s"></div>
+                            <div class="w-[2px] bg-amber-500 animate-bounce h-5" style="animation-duration: 0.4s"></div>
+                            <div class="w-[2px] bg-amber-500 animate-bounce h-4" style="animation-duration: 0.5s"></div>
+                            <div class="w-[2px] bg-amber-500 animate-bounce h-2" style="animation-duration: 0.7s"></div>
+                        </div>
+                    </div>
+
+                    <button onclick="stopSimFrequency(true)" class="px-6 py-3 bg-slate-950 border border-slate-800 text-slate-400 hover:text-red-500 hover:border-red-500/30 transition text-[9px] font-bold uppercase tracking-widest rounded">
+                        Dezactivează Simulatorul
+                    </button>
+                </div>
+            </div>
+        </section>
+
         <!-- Course Section -->
         <section id="curs" class="scroll-mt-32">
             <div class="text-center mb-20">
@@ -481,21 +553,21 @@
 
             <div class="grid lg:grid-cols-3 gap-8">
                 <!-- Curs 1 -->
-                <div class="group p-8 bg-slate-900/30 border border-slate-800 hover:border-amber-500/50 transition-all">
+                <div class="group p-8 bg-slate-900/30 border border-slate-800 hover:border-amber-500/50 transition-all" onmouseenter="modulateAudio(true)" onmouseleave="modulateAudio(false)">
                     <div class="text-5xl font-black text-slate-800 mb-6 group-hover:text-amber-500/20 transition">01</div>
                     <h5 class="header-font text-xl text-white mb-4">Mecanica Numerelor & Matricea Pitagoreică</h5>
                     <p class="text-slate-500 text-sm leading-relaxed mb-6">Un studiu profund al matricii 3x3. Înveți să interpretezi numerele de lucru, vectorii de forță, axele de echilibru și dinamica vitală a ființei.</p>
                     <a href="#modul1" onclick="showView('modul1'); return false;" class="text-[10px] font-bold text-amber-500 uppercase tracking-widest border-b border-amber-500/20 pb-1">Detalii Curs</a>
                 </div>
                 <!-- Curs 2 -->
-                <div class="group p-8 bg-slate-900/30 border border-amber-600/40 transition-all shadow-2xl shadow-amber-900/10 scale-105">
+                <div class="group p-8 bg-slate-900/30 border border-amber-600/40 transition-all shadow-2xl shadow-amber-900/10 scale-105" onmouseenter="modulateAudio(true)" onmouseleave="modulateAudio(false)">
                     <div class="text-5xl font-black text-slate-800 mb-6 group-hover:text-amber-500/20 transition">02</div>
                     <h5 class="header-font text-xl text-white mb-4">Gematrie Hermetică & Copacul Sefirotic</h5>
                     <p class="text-slate-500 text-sm leading-relaxed mb-6">Decodificarea numelui complet primit la naștere. Înveți cum rezonează literele pe Arborele Vieții din Kabbalah și calculul punctelor electromagnetice de rezonanță terestră.</p>
                     <a href="#modul2" onclick="showView('modul2'); return false;" class="text-[10px] font-bold text-amber-500 uppercase tracking-widest border-b border-amber-500/20 pb-1">Detalii Curs</a>
                 </div>
                 <!-- Curs 3 -->
-                <div class="group p-8 bg-slate-900/30 border border-slate-800 hover:border-amber-500/50 transition-all">
+                <div class="group p-8 bg-slate-900/30 border border-slate-800 hover:border-amber-500/50 transition-all" onmouseenter="modulateAudio(true)" onmouseleave="modulateAudio(false)">
                     <div class="text-5xl font-black text-slate-800 mb-6 group-hover:text-amber-500/20 transition">03</div>
                     <h5 class="header-font text-xl text-white mb-4">Numerologie Vedică & Aliniere Karmică</h5>
                     <p class="text-slate-500 text-sm leading-relaxed mb-6">Studiul frecvențelor Mulaank și Bhagyank, deblocarea datoriilor karmice (13, 14, 16, 19), depășirea provocărilor evolutive și aplicarea remediilor astrale luminate.</p>
@@ -935,6 +1007,7 @@
     <script>
         let myChart = null;
         let autocomplete;
+        let filterNode = null; // Lowpass filter for ambient drone modulation
 
                 const VEDIC_DATA = {
             1: { planet: "Soarele (Surya)", gemstone: "Rubin (Manikya)", deity: "Surya Deva", mantra: "Om Ghrini Suryaya Namah", traits: "Energie solară dominatoare, ambiție înaltă, leadership nativ, ego puternic și capacitate excelentă de ghidare socială." },
@@ -973,6 +1046,11 @@
                 const leftPanner = audioCtx.createStereoPanner ? audioCtx.createStereoPanner() : null;
                 const rightPanner = audioCtx.createStereoPanner ? audioCtx.createStereoPanner() : null;
 
+                // Create BiquadFilterNode for audio modulation on hover
+                filterNode = audioCtx.createBiquadFilter();
+                filterNode.type = 'lowpass';
+                filterNode.frequency.setValueAtTime(350, audioCtx.currentTime); // Deep warm starting point
+
                 gainNode = audioCtx.createGain();
                 gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime); // Soft background drone
 
@@ -981,15 +1059,16 @@
                     rightPanner.pan.setValueAtTime(1, audioCtx.currentTime);
 
                     leftOsc.connect(leftPanner);
-                    leftPanner.connect(gainNode);
+                    leftPanner.connect(filterNode);
 
                     rightOsc.connect(rightPanner);
-                    rightPanner.connect(gainNode);
+                    rightPanner.connect(filterNode);
                 } else {
-                    leftOsc.connect(gainNode);
-                    rightOsc.connect(gainNode);
+                    leftOsc.connect(filterNode);
+                    rightOsc.connect(filterNode);
                 }
 
+                filterNode.connect(gainNode);
                 gainNode.connect(audioCtx.destination);
                 leftOsc.start();
                 rightOsc.start();
@@ -1521,8 +1600,8 @@
             // 1. MATRICEA PITAGOREICĂ & PSIHOENERGIE (Tab 1)
             // ==========================================
             let pythagoreanHtml = `<div class="space-y-6 font-light">
-                <p class="text-sm text-slate-300">
-                    Sinteza psihoenergetică pentru <strong>${name}</strong> indică o arhitectură arhetipală condusă de Cifra Destinului <strong>${dest}</strong>. În numerologia academică, aceasta reprezintă canalul tău major de emisie-recepție vibrațională, drumul pe care te deplasezi prin lume și tipul de frecvență pe care îl atragi instinctiv.
+                <p class="text-xs md:text-sm text-slate-300 leading-relaxed">
+                    Sinteza psihoenergetică pentru <strong>${name}</strong> indică o arhitectură arhetipală condusă de Cifra Destinului <strong>${dest}</strong>. În numerologia academică, aceasta reprezintă canalul tău major de emisie-recepție vibrațională, drumul pe care te deplasezi prin lume și tipul de frecvență pe care îl atragi instinctiv. Această vibrație influențează direct modul în care transformi potențialul spiritual în fapte terestre concrete.
                 </p>
                 <div class="h-[1px] bg-slate-800/50 my-4"></div>`;
 
@@ -1531,15 +1610,15 @@
             pythagoreanHtml += `<div class="space-y-2">
                 <h5 class="text-amber-500 font-bold text-xs uppercase tracking-wider">✦ Vectorul Personalității: Celula Ego-ului (${egoCount} cifre de 1)</h5>`;
             if (egoCount === 0) {
-                pythagoreanHtml += `<p class="text-xs text-slate-400">Absența cifrei 1 este rară și indică o ființă care trebuie să își construiască simțul identității de la zero în această viață. Tindeți să vă lăsați absorbit de dorințele altora, având nevoie să vă dezvoltați granițe sănătoase și o voce proprie distinctă.</p>`;
+                pythagoreanHtml += `<p class="text-xs text-slate-400 leading-relaxed">Absența cifrei 1 este rară și indică o ființă care trebuie să își construiască simțul identității de la zero în această viață. Tindeți să vă lăsați absorbit de dorințele altora, având nevoie să vă dezvoltați granițe sănătoase și o voce proprie distinctă.</p>`;
             } else if (egoCount === 1) {
-                pythagoreanHtml += `<p class="text-xs text-slate-400">O singură cifră de 1 indică o natură extrem de sensibilă și fină. Sunteți influențat rapid de opiniile celor din jur și căutați constant validarea externă. Lecția ta academică este independența de gândire și asumarea curajului fără sprijin.</p>`;
+                pythagoreanHtml += `<p class="text-xs text-slate-400 leading-relaxed">O singură cifră de 1 indică o natură extrem de sensibilă și fină. Sunteți influențat rapid de opiniile celor din jur și căutați constant validarea externă. Lecția ta academică este independența de gândire și asumarea curajului fără sprijin.</p>`;
             } else if (egoCount === 2) {
-                pythagoreanHtml += `<p class="text-xs text-slate-400">Două cifre de 1 reprezintă starea de echilibru perfect (arhetipul comunicatorului). Aveți o stimă de sine stabilă, capacitatea de a vă exprima opiniile clar, fără agresivitate, și un simț înnăscut al diplomației în relațiile interpersonale.</p>`;
+                pythagoreanHtml += `<p class="text-xs text-slate-400 leading-relaxed">Două cifre de 1 reprezintă starea de echilibru perfect (arhetipul comunicatorului). Aveți o stimă de sine stabilă, capacitatea de a vă exprima opiniile clar, fără agresivitate, și un simț înnăscut al diplomației în relațiile interpersonale.</p>`;
             } else if (egoCount === 3) {
-                pythagoreanHtml += `<p class="text-xs text-slate-400">Trei cifre de 1 relevă o oscilație dinamică între stări de retragere retrasă și izbucniri puternice de leadership. Sunteți o fire creativă, însă puteți fi perceput ca instabil emoțional în decizii.</p>`;
+                pythagoreanHtml += `<p class="text-xs text-slate-400 leading-relaxed">Trei cifre de 1 relevă o oscilație dinamică între stări de retragere retrasă și izbucniri puternice de leadership. Sunteți o fire creativă, însă puteți fi perceput ca instabil emoțional în decizii.</p>`;
             } else {
-                pythagoreanHtml += `<p class="text-xs text-slate-400">Densitatea crescută (${egoCount} de 1) indică o voință de neclintit, un temperament ferm și tendințe de dominare directă a mediului tău social. Aveți capacități native de lider, dar trebuie să vă feriți de inflexibilitatea mentală.</p>`;
+                pythagoreanHtml += `<p class="text-xs text-slate-400 leading-relaxed">Densitatea crescută (${egoCount} de 1) indică o voință de neclintit, un temperament ferm și tendințe de dominare directă a mediului tău social. Aveți capacități native de lider, dar trebuie să vă feriți de inflexibilitatea mentală și tendințele de manifestare tiranică a ego-ului.</p>`;
             }
             pythagoreanHtml += `</div>`;
 
@@ -1548,13 +1627,13 @@
             pythagoreanHtml += `<div class="space-y-2 mt-4">
                 <h5 class="text-amber-500 font-bold text-xs uppercase tracking-wider">✦ Vectorul Biocâmpului: Resursa de Energie Vitală (${energyCount} cifre de 2)</h5>`;
             if (energyCount === 0) {
-                pythagoreanHtml += `<p class="text-xs text-slate-400">Absența cifrei 2 indică un deficit cronic de bioenergie nativă. Sunteți un „burete” energetic, vulnerabil la vampirism psihic. Aveți nevoie să învățați tehnici hermetice de regenerare și curățare a aurei pe care le predăm la Cursul de Matrice Pitagoreică.</p>`;
+                pythagoreanHtml += `<p class="text-xs text-slate-400 leading-relaxed">Absența cifrei 2 indică un deficit cronic de bioenergie nativă. Sunteți un „burete” energetic, vulnerabil la vampirism psihic. Aveți nevoie să învățați tehnici hermetice de regenerare și curățare a aurei pe care le predăm la Cursul de Matrice Pitagoreică.</p>`;
             } else if (energyCount === 1) {
-                pythagoreanHtml += `<p class="text-xs text-slate-400">O singură cifră de 2 indică un nivel energetic oscilant. Vă reîncărcați lent și vă consumați rapid în medii zgomotoase sau conflictuale. Vă este recomandat să evitați eforturile fizice sau psihice prelungite fără pauze bine calculate.</p>`;
+                pythagoreanHtml += `<p class="text-xs text-slate-400 leading-relaxed">O singură cifră de 2 indică un nivel energetic oscilant. Vă reîncărcați lent și vă consumați rapid în medii zgomotoase sau conflictuale. Vă este recomandat să evitați eforturile fizice sau psihice prelungite fără pauze bine calculate.</p>`;
             } else if (energyCount === 2) {
-                pythagoreanHtml += `<p class="text-xs text-slate-400">Două cifre de 2 indică o baterie energetică optimă. Aveți suficientă vitalitate pentru a vă îndeplini obiectivele și a menține relații armonioase fără a experimenta stări frecvente de burnout.</p>`;
+                pythagoreanHtml += `<p class="text-xs text-slate-400 leading-relaxed">Două cifre de 2 indică o baterie energetică optimă. Aveți suficientă vitalitate pentru a vă îndeplini obiectivele și a menține relații armonioase fără a experimenta stări frecvente de burnout. Acest nivel favorizează empatia naturală.</p>`;
             } else {
-                pythagoreanHtml += `<p class="text-xs text-slate-400">O densitate mare de 2 arată un câmp electromagnetic radiant și un magnetism personal puternic. Îi puteți susține energetic pe ceilalți, însă riscați să atrageți persoane dependente sau toxice care caută inconștient să se alimenteze din energia dumneavoastră.</p>`;
+                pythagoreanHtml += `<p class="text-xs text-slate-400 leading-relaxed">O densitate mare de 2 arată un câmp electromagnetic radiant și un magnetism personal puternic. Îi puteți susține energetic pe ceilalți, însă riscați să atrageți persoane dependente sau toxice care caută inconștient să se alimenteze din energia dumneavoastră.</p>`;
             }
             pythagoreanHtml += `</div>`;
 
@@ -1563,11 +1642,11 @@
             pythagoreanHtml += `<div class="space-y-2 mt-4">
                 <h5 class="text-amber-500 font-bold text-xs uppercase tracking-wider">✦ Canalul Central: Logica, Intuiția și Podul Mental (${logicCount} cifre de 5)</h5>`;
             if (logicCount === 0) {
-                pythagoreanHtml += `<p class="text-xs text-slate-400">Lipsa cifrei 5 indică un „pod” lipsă între intelect și inimă. Vă bazați mult pe presupuneri sau intuiție speculativă, având dificultăți în a structura logic pașii viitori. În cadrul Academiei noastre, Modulul 1 vă ajută să vă construiți instrumentele mentale pentru a compensa această lipsă.</p>`;
+                pythagoreanHtml += `<p class="text-xs text-slate-400 leading-relaxed">Lipsa cifrei 5 indică un „pod” lipsă între intelect și inimă. Vă bazați mult pe presupuneri sau intuiție speculativă, având dificultăți în a structura logic pașii viitori. În cadrul Academiei noastre, Modulul 1 vă ajută să vă construiți instrumentele mentale pentru a compensa această lipsă.</p>`;
             } else if (logicCount === 1) {
-                pythagoreanHtml += `<p class="text-xs text-slate-400">O cifră de 5 arată o logică sănătoasă și o intuiție practică activă. Puteți planifica eficient și anticipa pericolele sau oportunitățile din viața de zi cu zi.</p>`;
+                pythagoreanHtml += `<p class="text-xs text-slate-400 leading-relaxed">O cifră de 5 arată o logică sănătoasă și o intuiție practică activă. Puteți planifica eficient și anticipa pericolele sau oportunitățile din viața de zi cu zi, având un bun simț al realității.</p>`;
             } else {
-                pythagoreanHtml += `<p class="text-xs text-slate-400">Prezența multiplă a cifrei 5 oferă abilități strategice uluitoare, echivalente cu o intuiție vizionară. Înțelegeți imediat tiparele invizibile din spatele comportamentului uman și al afacerilor.</p>`;
+                pythagoreanHtml += `<p class="text-xs text-slate-400 leading-relaxed">Prezența multiplă a cifrei 5 oferă abilități strategice uluitoare, echivalente cu o intuiție vizionară. Înțelegeți imediat tiparele invizibile din spatele comportamentului uman și al afacerilor. Aveți un simț dezvoltat al analizei și planificării spațiale.</p>`;
             }
             pythagoreanHtml += `</div>`;
 
@@ -1577,11 +1656,11 @@
                     <h5 class="text-amber-500 font-bold text-xs uppercase tracking-wider">✦ Diagnostic Energetic de Rezonanță Geografică</h5>
                     <p class="text-xs text-slate-400 mt-1">Vibrația localității de naștere (<strong>${placeName}</strong>) este <strong>${placeVib}</strong>.</p>`;
                 if (parseInt(placeVib, 10) === parseInt(dest, 10)) {
-                    pythagoreanHtml += `<p class="text-xs text-amber-500/90 font-semibold mt-1">✦ Rezonanță Cosmică Majoră: Faptul că localitatea de naștere are aceeași vibrație cu Cifra Destinului tău (${dest}) creează o poartă de manifestare fluidă a karmei pozitive. Acest mediu natal ți-a accelerat evoluția spirituală.</p>`;
+                    pythagoreanHtml += `<p class="text-xs text-amber-500/90 font-semibold mt-1">✦ Rezonanță Cosmică Majoră: Faptul că localitatea de naștere are aceeași vibrație cu Cifra Destinului tău (${dest}) creează o poartă de manifestare fluidă a karmei pozitive. Acest mediu natal ți-a accelerat evoluția spirituală, eliminând blocajele de destin primare.</p>`;
                 } else if (parseInt(placeVib, 10) === calculateGematria(name)) {
                     pythagoreanHtml += `<p class="text-xs text-amber-500/90 font-semibold mt-1">✦ Rezonanță Socială: Vibrația localității coincide cu Vibrația Numelui tău. Acest spațiu geografic a favorizat exprimarea personalității tale exterioare și deschiderea de uși sociale.</p>`;
                 } else {
-                    pythagoreanHtml += `<p class="text-xs text-slate-400 mt-1">Vibrația locală de tip ${placeVib} adaugă o nuanță subtilă hărții tale natale, cerându-ți să integrezi calitățile specifice acestei cifre în acțiunile tale zilnice.</p>`;
+                    pythagoreanHtml += `<p class="text-xs text-slate-400 mt-1">Vibrația locală de tip ${placeVib} adaugă o nuanță subtilă hărții tale natale, cerându-ți să integrezi calitățile specifice acestei cifre în acțiunile tale zilnice pentru a armoniza electromagnetic prezența ta în acest spațiu fizic.</p>`;
                 }
                 pythagoreanHtml += `</div>`;
             }
@@ -1601,40 +1680,41 @@
             let vedicHtml = `<div class="space-y-4 font-light">
                 <h4 class="header-font text-lg text-amber-500 uppercase tracking-wider mb-2">✦ Sinteza Planetară a Psihoenergiei Vedice</h4>
                 <p class="text-xs text-slate-300 leading-relaxed">
-                    Sistemul Vedic (*Sanatan Dharma*) analizează legătura directă dintre razele planetare și energiile tale intime. Numărul tău Psihic (**Mulaank: ${vPsychic}**) este guvernat de <strong>${PLANETS[vPsychic]}</strong>, definind dorințele ascunse și structura sufletului. Numărul tău de Destin (**Bhagyank: ${vDestiny}**) este guvernat de <strong>${PLANETS[vDestiny]}</strong>, arătând calea pe care pășești în lume.
+                    Sistemul Vedic (*Sanatan Dharma*) analizează legătura directă dintre razele planetare și energiile tale intime. Numărul tău Psihic (**Mulaank: ${vPsychic}**) este guvernat de <strong>${PLANETS[vPsychic]}</strong>, definind dorințele ascunse, imaginea de sine și impulsurile subconștiente. Numărul tău de Destin (**Bhagyank: ${vDestiny}**) este guvernat de <strong>${PLANETS[vDestiny]}</strong>, arătând calea pe care pășești în lume, karma ta externă și modul în care reacționează societatea la acțiunile tale.
                 </p>
                 <div class="h-[1px] bg-slate-800/40 my-4"></div>`;
 
             if (vPsychic === vDestiny) {
-                vedicHtml += `<p class="text-xs text-slate-400">
-                    <strong>Aliniere Planetară Unică (Mulaank = Bhagyank)</strong>: Ambele fațete ale ființei tale sunt conduse de aceeași planetă. Această configurație elimină conflictele interioare majore între ceea ce își dorește sufletul tău și calea pe care te împinge soarta. Îți oferă o putere uriașă de concentrare și manifestare a intenției.
+                vedicHtml += `<p class="text-xs text-slate-400 leading-relaxed">
+                    <strong>Aliniere Planetară Unică (Mulaank = Bhagyank)</strong>: Ambele fațete ale ființei tale sunt conduse de aceeași planetă (${PLANETS[vPsychic]}). Această configurație elimină conflictele interioare majore între ceea ce își dorește sufletul tău și calea pe care te împinge soarta. Îți oferă o putere uriașă de concentrare, o direcție clară în viață și o manifestare rapidă a intenției, dar poate amplifica calitățile (și defectele) acestei planete la modul absolut.
                 </p>`;
             } else {
-                vedicHtml += `<p class="text-xs text-slate-400">
-                    Interacțiunea dintre <strong>${PLANETS[vPsychic]}</strong> și <strong>${PLANETS[vDestiny]}</strong> indică o dinamică duală:
+                vedicHtml += `<p class="text-xs text-slate-400 leading-relaxed">
+                    Interacțiunea dintre planeta ta psihică (<strong>${PLANETS[vPsychic]}</strong>) și cea de destin (<strong>${PLANETS[vDestiny]}</strong>) generează un circuit energetic dual. Pentru o manifestare fluidă, trebuie să deprindeți arta reconcilierii acestor două mari arhetipuri cosmice:
                 </p>`;
+                
                 if ((vPsychic === 1 && vDestiny === 8) || (vPsychic === 8 && vDestiny === 1)) {
-                    vedicHtml += `<p class="text-xs text-amber-500/90 font-semibold">
-                        ✦ Conflict Solar-Saturnian (Soare - Saturn): Soarele dorește expansiune, luminozitate și autoritate instantanee, în timp ce Saturn aduce întârziere, responsabilitate grea și disciplină. Această tensiune cere să dezvoltați răbdare și respect absolut pentru autoritate și timp pentru a vă debloca destinul.
+                    vedicHtml += `<p class="text-xs text-amber-500/90 font-semibold leading-relaxed">
+                        ✦ Conflict Solar-Saturnian (Soare - Saturn): Soarele dorește expansiune, luminozitate și autoritate instantanee, în timp ce Saturn aduce întârziere, responsabilitate grea și disciplină. Această tensiune cere să dezvoltați răbdare și respect absolut pentru autoritate și timp pentru a vă debloca destinul, evitând revoltele ego-ului.
                     </p>`;
                 } else if ((vPsychic === 2 && vDestiny === 7) || (vPsychic === 7 && vDestiny === 2)) {
-                    vedicHtml += `<p class="text-xs text-amber-500/90 font-semibold">
-                        ✦ Fuziune Mental-Senzorială (Lună - Ketu): Această dinamică aduce o sensibilitate de tip mistic, intuiții metafizice profunde și o memorie emoțională extinsă. Sunteți atras natural de științele oculte, dar aveți nevoie de grounding pentru a evita stările de anxietate.
+                    vedicHtml += `<p class="text-xs text-amber-500/90 font-semibold leading-relaxed">
+                        ✦ Fuziune Mental-Senzorială (Lună - Ketu): Această dinamică aduce o sensibilitate de tip mistic, intuiții metafizice profunde și o memorie emoțională extinsă. Sunteți atras natural de științele oculte, dar aveți nevoie de grounding (stabilizare terestră) pentru a evita stările de anxietate sau dezintegrarea psihică.
                     </p>`;
                 } else if ((vPsychic === 3 && vDestiny === 9) || (vPsychic === 9 && vDestiny === 3)) {
-                    vedicHtml += `<p class="text-xs text-amber-500/90 font-semibold">
-                        ✦ Alianța Înțeleptului Războinic (Jupiter - Marte): Jupiter oferă ghidare filosofică, iar Marte furnizează forța fizică și determinarea pentru a lupta pentru idealuri mari. Aveți potențialul de a deveni un mentor sau un lider spiritual puternic.
+                    vedicHtml += `<p class="text-xs text-amber-500/90 font-semibold leading-relaxed">
+                        ✦ Alianța Înțeleptului Războinic (Jupiter - Marte): Jupiter oferă ghidare filosofică, moralitate și înțelepciune, în timp ce Marte furnizează forța fizică, curajul și determinarea pentru a lupta pentru idealuri mari. Aveți potențialul de a deveni un mentor, un scriitor vizionar sau un lider spiritual puternic.
                     </p>`;
                 } else {
-                    vedicHtml += `<p class="text-xs text-slate-400">
-                        Folosirea calităților naturale ale planetei ${PLANETS[vPsychic]} vă ajută să depășiți testele și provocările impuse de guvernatorul destinului dumneavoastră, ${PLANETS[vDestiny]}.
+                    vedicHtml += `<p class="text-xs text-slate-400 leading-relaxed">
+                        Pășiți pe calea marcată de ${PLANETS[vDestiny]} folosind instrumentele native oferite de ${PLANETS[vPsychic]}. Înțelegerea relației de compatibilitate dintre cele două planete (de exemplu, relațiile de inamicie sau de prietenie neutră) este cheia atingerii păcii mentale.
                     </p>`;
                 }
             }
 
             vedicHtml += `<div class="p-4 bg-slate-900 border border-slate-800 rounded mt-4">
                 <p class="text-[10px] text-amber-500 uppercase font-bold tracking-wider mb-2">Remediu Energetic Specific</p>
-                <p class="text-xs text-slate-300">Purtarea pietrei recomandate (${VEDIC_DATA[vPsychic].gemstone}) și recitarea Mantrei Sacre (${VEDIC_DATA[vPsychic].mantra}) ajută la alinierea biocâmpului tău cu frecvențele planetare ideale.</p>
+                <p class="text-xs text-slate-300 leading-relaxed">Purtarea pietrei recomandate (<strong>${VEDIC_DATA[vPsychic].gemstone}</strong>) și recitarea Mantrei Sacre (<strong>${VEDIC_DATA[vPsychic].mantra}</strong>) în mod constant (preferabil în seturi de 108 repetări zilnice) ajută la alinierea biocâmpului tău cu frecvențele planetare ideale.</p>
             </div>
             </div>`;
             document.getElementById('vedicInterpretation').innerHTML = vedicHtml;
@@ -1655,20 +1735,20 @@
 
             let kabbalahHtml = `<div class="space-y-4 font-light">
                 <p class="text-xs text-slate-300 leading-relaxed">
-                    Numele tău complet de la naștere conține semnătura vibrațională prin care sufletul tău coboară din planul spiritual divin în cel fizic. Canalul tău principal de manifestare este conectat la sfera sefirotică <strong>${KABBALAH_SEPHIROTH_NAMES[kNameIndex]}</strong>. Aceasta reprezintă tipul de energie divină prin care înțelegi lumea și te manifești în ea.
+                    Numele tău complet de la naștere conține semnătura vibrațională prin care sufletul tău coboară din planul spiritual divin în cel fizic. Canalul tău principal de manifestare pe Arborele Sephirotic este conectat la sfera <strong>${KABBALAH_SEPHIROTH_NAMES[kNameIndex]}</strong>. Aceasta reprezintă tipul de energie divină prin care înțelegi lumea, prin care iei decizii majore și te manifești în ea. Urmărirea acestei căi este esențială pentru a-ți îndeplini promisiunea spirituală.
                 </p>`;
 
             if (placeName !== "Nespecificat" && placeVib !== "-") {
-                kabbalahHtml += `<p class="text-xs text-slate-400 mt-2">
+                kabbalahHtml += `<p class="text-xs text-slate-400 mt-2 leading-relaxed">
                     Nașterea în localitatea <strong>${placeName}</strong> (conectată la Sephirah <strong>${KABBALAH_SEPHIROTH_NAMES[kPlaceIndex]}</strong>) creează o punte electromagnetică specifică. Aceasta arată modul în care mediul fizic în care te-ai născut îți susține sau îți provoacă vibrația numelui:
                 </p>`;
                 if (kNameIndex === kPlaceIndex) {
-                    kabbalahHtml += `<p class="text-xs text-amber-500 font-semibold">
-                        ✦ Aliniere Absolută pe Copacul Vieții: Faptul că vibrația numelui și cea a localității coincid indică o rezonanță armonică totală. Manifestarea intențiilor tale în acest spațiu geografic întâmpină rezistențe minime, permițându-ți o materializare rapidă.
+                    kabbalahHtml += `<p class="text-xs text-amber-500 font-semibold leading-relaxed">
+                        ✦ Aliniere Absolută pe Copacul Vieții: Faptul că vibrația numelui și cea a localității coincid indică o rezonanță armonică totală. Manifestarea intențiilor tale în acest spațiu geografic întâmpină rezistențe minime, permițându-ți o materializare rapidă. Esti integrat perfect în arhetipul acestui teritoriu.
                     </p>`;
                 } else {
-                    kabbalahHtml += `<p class="text-xs text-slate-400">
-                        Calea de legătură pornește din sfera ta de esență divină (<strong>${KABBALAH_SEPHIROTH_NAMES[kNameIndex]}</strong>) și trebuie să coboare prin experiențe de viață în spațiul geografic guvernat de <strong>${KABBALAH_SEPHIROTH_NAMES[kPlaceIndex]}</strong>. Acesta este un antrenament spiritual intens pentru adaptare energetică.
+                    kabbalahHtml += `<p class="text-xs text-slate-400 leading-relaxed">
+                        Calea de legătură pornește din sfera ta de esență divină (<strong>${KABBALAH_SEPHIROTH_NAMES[kNameIndex]}</strong>) și trebuie să coboare prin experiențe de viață în spațiul geografic guvernat de <strong>${KABBALAH_SEPHIROTH_NAMES[kPlaceIndex]}</strong>. Acesta este un antrenament spiritual intens pentru adaptare energetică. Fiecare încercare pe care o întâmpinați în această geografie este un instrument de rafinare a sufletului.
                     </p>`;
                 }
             }
@@ -1688,13 +1768,29 @@
             const p4 = reduceToSingle(mVal + reduceToSingle(yVal));
             const endAge1 = 36 - dest;
 
+            const PERSONAL_YEAR_DESCS = {
+                1: "Anul noilor începuturi și al plantării semințelor. O perioadă de independență, autonomie, decizii curajoase și rupere totală de tiparele învechite din trecut.",
+                2: "Anul cooperării, răbdării și consolidării relațiilor. O perioadă în care succesul vine prin diplomație, tact, parteneriate și receptivitate emoțională.",
+                3: "Anul expansiunii creative, exprimării de sine și optimismului. Un sezon ideal pentru comunicare, artă, viață socială și regăsirea bucuriei de a trăi.",
+                4: "Anul muncii organizate, structurii și stabilității. O perioadă în care trebuie să pui bazele durabile ale carierei și sănătății prin efort consecvent.",
+                5: "Anul schimbărilor rapide, aventurii, flexibilității și libertății. Așteaptă-te la neprevăzut, deplasări geografice sau expansiune intelectuală.",
+                6: "Anul responsabilităților familiale, căminului, armoniei și al dragostei. O perioadă de vindecare a legăturilor de suflet și de sprijin oferit celor dragi.",
+                7: "Anul introspecției, studiului profund și trezirii spirituale. Nu este recomandat pentru goană materială, ci pentru auto-analiză și evoluție internă.",
+                8: "Anul puterii, succesului material, recoltei financiare și al karmei active. Ce ai semănat în ultimii 7 ani, acum culegi cu precizie matematică.",
+                9: "Anul încheierilor, curățeniei generale și al eliberării de atașamente. Pregătirea terenului și eliberarea spațiului pentru un nou ciclu evolutiv de 9 ani."
+            };
+
             let cyclesHtml = `<div class="space-y-4 font-light">
                 <h4 class="header-font text-lg text-amber-500 uppercase tracking-wider mb-2">✦ Harta Evoluției în Timp</h4>
                 <p class="text-xs text-slate-300 leading-relaxed">
-                    Viața ta este împărțită în 4 mari sezoane evolutive (Culmi) și este influențată anual de un An Personal. În anul current (2026), vibrația ta se află sub influența cifrei <strong>${cPersYear}</strong>.
+                    Viața ta este împărțită în 4 mari sezoane evolutive (Culmi) și este influențată anual de un An Personal. În anul current (2026), vibrația ta se află sub influența directă a cifrei <strong>${cPersYear}</strong>.
                 </p>
-                <p class="text-xs text-slate-400">
-                    <strong>Interacțiunea cu Culmea Curentă</strong>: În prezent (vârsta ta se încadrează în prima sau a doua etapă a vieții), te afli sub influența directă a Culmii de vibrație <strong>${p1}</strong> (până la vârsta de ${endAge1} ani) sau a celei de tip <strong>${p2}</strong> ulterior. Pentru a maximiza succesul, trebuie să îți aliniezi acțiunile Anului Personal ${cPersYear} cu cerințele de dezvoltare ale acestei culmi de evoluție.
+                <div class="p-4 bg-slate-900/40 border border-slate-800 rounded">
+                    <p class="text-xs text-amber-500 font-bold uppercase tracking-wider mb-1">Anul Personal ${cPersYear}</p>
+                    <p class="text-xs text-slate-300 leading-relaxed">	ext{${PERSONAL_YEAR_DESCS[cPersYear]}}</p>
+                </div>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    <strong>Interacțiunea cu Culmea Curentă</strong>: În prezent (vârsta ta se încadrează în prima sau a doua etapă a vieții), te afli sub influența directă a Culmii de vibrație <strong>${p1}</strong> (până la vârsta de ${endAge1} ani) sau a celei de tip <strong>${p2}</strong> ulterior. Pentru a maximiza succesul, trebuie să îți aliniezi acțiunile Anului Personal ${cPersYear} cu cerințele de dezvoltare ale acestei culmi de evoluție active.
                 </p>
             </div>`;
             document.getElementById('cyclesInterpretation').innerHTML = cyclesHtml;
@@ -1720,34 +1816,50 @@
                 if (!foundDigits.has(i)) missingDigits.push(i);
             }
 
+            const KARMIC_DEBT_DETAILS = {
+                13: "<strong>Datoria Karmică 13 (Muncă grea / Inerție)</strong>: Indică abuz de comoditate sau evitare a responsabilităților în viețile anterioare. În această viață, succesul este condiționat de disciplină rigidă, efort constant și interzicerea scurtăturilor leneșe. Trebuie să înveți să construiești structuri durabile prin sudoare și răbdare.",
+                14: "<strong>Datoria Karmică 14 (Abuz de Libertate)</strong>: Indică abuz de libertate fizică, instabilitate sau abandon al angajamentelor în trecut. Cere moderație extremă în fața tentațiilor fizice (dependențe, excese), flexibilitate stabilă și cultivarea unui angajament profund în relații și carieră.",
+                16: "<strong>Datoria Karmică 16 (Dizolvarea Ego-ului)</strong>: Semnalează orgoliu excesiv sau manipulare spirituală/afectivă manifestată anterior. Se manifestă prin dărâmarea bruscă a structurilor de viață rigide pentru a forța trezirea spirituală și umilința profundă a sufletului.",
+                19: "<strong>Datoria Karmică 19 (Independență vs Izolare)</strong>: Reprezintă egoism extrem, trufie sau abuz de autoritate din trecut. Sufletul învață lecția autonomiei absolute, fiind însă forțat de împrejurări să colaboreze, să asculte și să ceară ajutor cu compasiune de la cei din jur."
+            };
+
             let karmicHtml = `<div class="space-y-4 font-light">
                 <h4 class="header-font text-lg text-amber-500 uppercase tracking-wider mb-2">✦ Harta și Contractul Sufletului</h4>`;
             
             if (karmicDebts.length > 0) {
                 karmicHtml += `<p class="text-xs text-slate-300 leading-relaxed">
-                    Profilul tău identifică prezența a <strong>${karmicDebts.length} datoria(i) karmică(e) active</strong> (cifrele: ${karmicDebts.join(', ')}). Aceasta înseamnă că în această viață ai de corectat anumite tipare comportamentale de tip rigid sau abuzuri de liberate din reîncarnările anterioare. Corectarea lor prin disciplină activă este cheia eliberării tale spirituale.
+                    Profilul tău identifică prezența a <strong>${karmicDebts.length} datoria(i) karmică(e) active</strong> (cifrele: ${karmicDebts.join(', ')}). Aceasta înseamnă că în această viață ai de corectat anumite tipare comportamentale rigide sau abuzuri de libertate din reîncarnările anterioare:
                 </p>`;
+                karmicDebts.forEach(debt => {
+                    karmicHtml += `<div class="p-3 bg-red-950/20 border border-red-500/20 rounded text-xs text-slate-300 leading-relaxed mb-2">
+                        ${KARMIC_DEBT_DETAILS[debt]}
+                    </div>`;
+                });
             } else {
                 karmicHtml += `<p class="text-xs text-slate-300 leading-relaxed">
-                    Nu s-au detectat datorii karmice directe în profilul tău principal, ceea ce indică faptul că intri în această viață cu un grad ridicat de liberate de acțiune și mai puține constrângeri din trecut.
+                    Nu s-au detectat datorii karmice directe în profilul tău principal, ceea ce indică faptul că intri în această viață cu un grad ridicat de libertate de acțiune și mai puține constrângeri coercitive din trecutul tău spiritual.
                 </p>`;
             }
 
             if (missingDigits.length > 0) {
-                karmicHtml += `<p class="text-xs text-slate-400 mt-2">
-                    Lecțiile tale karmice (cifrele lipsă din structura numelui tău: <strong>${missingDigits.join(', ')}</strong>) arată calitățile pe care sufletul tău nu le-a dezvoltat în trecut și pe care ai ales să le studiezi de la zero în această viață. Evenimentele dificile care se repetă în jurul acestor teme sunt invitații la exercițiu energetic.
+                karmicHtml += `<p class="text-xs text-slate-400 mt-2 leading-relaxed">
+                    Lecțiile tale karmice (cifrele lipsă din structura numelui tău: <strong>${missingDigits.join(', ')}</strong>) arată calitățile pe care sufletul tău nu le-a dezvoltat în trecut și pe care ai ales să le studiezi de la zero în această viață. Evenimentele dificile sau testele repetitive care apar în jurul acestor teme sunt invitații de antrenament energetic destinate evoluției tale.
                 </p>`;
             } else {
-                karmicHtml += `<p class="text-xs text-slate-400 mt-2">
-                    Numele tău conține un spectru complet de litere care acoperă toate cele 9 cifre arhetipale. Aceasta este o realizare deosebită, sugerând maturitate spirituală și capacitatea de a rezolva încercările vieții prin accesarea oricărei resurse vibratorii.
+                karmicHtml += `<p class="text-xs text-slate-400 mt-2 leading-relaxed">
+                    Numele tău conține toate frecvențele arhetipale (1-9). Nu ai lecții karmice vacante în structura numelui, ceea ce indică o experiență spirituală variată în reîncarnările anterioare.
                 </p>`;
             }
             karmicHtml += `</div>`;
+            
+            // Populează DOM-ul pentru tabul 5
             document.getElementById('karmicInterpretation').innerHTML = karmicHtml;
+
+            // Open Results and Switch to Matrix Tab initially
+            document.getElementById('resultsArea').classList.remove('hidden');
+            switchTab('matrix');
+            window.scrollTo({ top: document.getElementById('resultsArea').offsetTop - 100, behavior: 'smooth' });
         }
-    
-        // Immersive Single-Page Routing System with anchor-scroll bugfix
-        let currentView = 'home';
 
         function showView(viewName) {
             if (currentView === viewName) return; // avoid redundant switches and forced scroll-to-top
