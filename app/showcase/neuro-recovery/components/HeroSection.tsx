@@ -141,8 +141,20 @@ export default function HeroSection() {
           className="space-y-8"
         >
           <div className="flex flex-wrap gap-4 items-center">
-            <div className="inline-flex items-center space-x-2 bg-neutral-900 border border-neutral-800 px-4 py-2 rounded-full text-xs font-mono tracking-widest text-neutral-400 uppercase shadow-lg">
-              <BrainCircuit className="w-4 h-4 text-purple-500" />
+            {/* Neurolumina Brand Logo & Name */}
+            <div className="inline-flex items-center space-x-3 bg-gradient-to-r from-purple-950/40 to-neutral-900/60 border border-purple-500/25 px-5 py-2.5 rounded-full shadow-[0_0_20px_rgba(168,85,247,0.1)] backdrop-blur-md">
+              {/* Sugestive Glowing Logo */}
+              <div className="relative flex items-center justify-center w-6 h-6 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400">
+                <BrainCircuit className="w-4 h-4 animate-pulse text-purple-400" />
+                <span className="absolute inset-0 rounded-full border border-purple-500/40 animate-ping opacity-60" />
+              </div>
+              <span className="font-extrabold tracking-[0.25em] bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-rose-400 font-sans uppercase text-[11px]">
+                Neurolumina
+              </span>
+            </div>
+
+            {/* Sub-Badge */}
+            <div className="inline-flex items-center space-x-2 bg-neutral-900/40 border border-neutral-800 px-4 py-2.5 rounded-full text-[10px] font-mono tracking-wider text-neutral-400 uppercase">
               <span>{ui.badge}</span>
             </div>
           </div>
