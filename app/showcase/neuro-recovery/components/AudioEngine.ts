@@ -558,3 +558,43 @@ export const playTransitionSound = () => {
     osc.stop(now + 1.8);
   });
 };
+
+export const playTabClickSound = () => {
+  if (!audioCtx || !masterGain || audioCtx.state !== 'running') return;
+  const now = audioCtx.currentTime;
+  const osc = audioCtx.createOscillator();
+  const gainNode = audioCtx.createGain();
+  
+  osc.type = 'sine';
+  osc.frequency.setValueAtTime(440, now);
+  osc.frequency.exponentialRampToValueAtTime(150, now + 0.12);
+  
+  osc.connect(gainNode);
+  gainNode.connect(masterGain!);
+  
+  gainNode.gain.setValueAtTime(0.04, now);
+  gainNode.gain.linearRampToValueAtTime(0.0001, now + 0.12);
+  
+  osc.start(now);
+  osc.stop(now + 0.15);
+};
+
+export const playGeneralClickSound = () => {
+  if (!audioCtx || !masterGain || audioCtx.state !== 'running') return;
+  const now = audioCtx.currentTime;
+  const osc = audioCtx.createOscillator();
+  const gainNode = audioCtx.createGain();
+  
+  osc.type = 'sine';
+  osc.frequency.setValueAtTime(800, now);
+  osc.frequency.exponentialRampToValueAtTime(400, now + 0.06);
+  
+  osc.connect(gainNode);
+  gainNode.connect(masterGain!);
+  
+  gainNode.gain.setValueAtTime(0.02, now);
+  gainNode.gain.linearRampToValueAtTime(0.0001, now + 0.06);
+  
+  osc.start(now);
+  osc.stop(now + 0.08);
+};

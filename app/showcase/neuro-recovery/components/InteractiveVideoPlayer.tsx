@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Play, Pause, Maximize, Volume2, Sparkles, Tv } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { playGeneralClickSound } from "./AudioEngine";
 
 interface InteractiveVideoPlayerProps {
   imageSrc: string;
@@ -72,6 +73,8 @@ export default function InteractiveVideoPlayer({ imageSrc, themeColor, title }: 
     const isEcstasy = imageSrc.includes("ecstasy");
     const isEpigenetics = imageSrc.includes("epigenetics");
     const isTrauma = imageSrc.includes("collective-trauma");
+    const isHomeostasis = imageSrc.includes("homeostasis") || imageSrc.includes("shield") || imageSrc.includes("neuroplasticity") || imageSrc.includes("balance");
+    const isConnection = imageSrc.includes("human-connection");
 
     // Initialize 25 moving visual components
     const elements: MovingElement[] = Array.from({ length: 25 }).map(() => {
@@ -79,7 +82,7 @@ export default function InteractiveVideoPlayer({ imageSrc, themeColor, title }: 
       return {
         x: Math.random() * width,
         y: Math.random() * height,
-        size: Math.random() * (isEcstasy ? 4 : 8) + (isPleasure ? 8 : 2),
+        size: Math.random() * (isEcstasy || isHomeostasis || isConnection ? 4 : 8) + (isPleasure ? 8 : 2),
         speedX: (Math.random() - 0.5) * 0.4,
         speedY: (Math.random() - 0.5) * 0.4 - (isJoy ? 0.3 : 0), // upward drift for Joy
         color: themeColor,
@@ -186,6 +189,44 @@ export default function InteractiveVideoPlayer({ imageSrc, themeColor, title }: 
             ctx.globalAlpha = 0.5;
             ctx.stroke();
           }
+        } else if (isHomeostasis) {
+          // Drawing smooth sine waves representing autonomic equilibrium
+          ctx.beginPath();
+          ctx.lineWidth = 1.2;
+          ctx.strokeStyle = themeColor;
+          ctx.globalAlpha = 0.2 * (isPlaying ? 1 : 0.25);
+          
+          ctx.moveTo(0, height / 2 + Math.sin(el.x * 0.005 + (performance.now() * 0.001 * speedMult)) * 25);
+          for (let px = 0; px < width; px += 15) {
+            const py = height / 2 + Math.sin((px + el.x) * 0.005 + (performance.now() * 0.001 * speedMult)) * 20;
+            ctx.lineTo(px, py);
+          }
+          ctx.stroke();
+
+          // Also draw drifting bio-equilibrium nodes
+          ctx.beginPath();
+          ctx.arc(el.x, el.y, el.size * 0.7, 0, Math.PI * 2);
+          ctx.fillStyle = themeColor;
+          ctx.fill();
+        } else if (isConnection) {
+          // Connecting threads that pulse with empathy
+          ctx.beginPath();
+          ctx.arc(el.x, el.y, el.size * 0.5, 0, Math.PI * 2);
+          ctx.fillStyle = themeColor;
+          ctx.fill();
+
+          elements.forEach((other) => {
+            const dist = Math.hypot(el.x - other.x, el.y - other.y);
+            if (dist < 120) {
+              ctx.beginPath();
+              ctx.moveTo(el.x, el.y);
+              ctx.lineTo(other.x, other.y);
+              ctx.strokeStyle = themeColor;
+              ctx.globalAlpha = (1 - dist / 120) * 0.15 * (0.5 + 0.5 * Math.sin(performance.now() * 0.002)) * (isPlaying ? 1 : 0.2);
+              ctx.lineWidth = 1;
+              ctx.stroke();
+            }
+          });
         }
 
         ctx.restore();
@@ -211,6 +252,11 @@ export default function InteractiveVideoPlayer({ imageSrc, themeColor, title }: 
   };
 
   const currentSeconds = (progress / 100) * duration;
+
+  const handlePlayPause = () => {
+    playGeneralClickSound();
+    setIsPlaying(!isPlaying);
+  };
 
   return (
     <div className="relative w-full rounded-2xl border border-neutral-800 bg-neutral-950 overflow-hidden shadow-2xl group my-12 select-none">
@@ -264,7 +310,7 @@ export default function InteractiveVideoPlayer({ imageSrc, themeColor, title }: 
 
         {/* Dynamic Center Play Overlay Button */}
         <button
-          onClick={() => setIsPlaying(!isPlaying)}
+          onClick={handlePlayPause}
           className="absolute z-20 p-5 rounded-full border border-neutral-700 bg-neutral-900/80 text-white backdrop-blur-md opacity-0 group-hover:opacity-100 hover:scale-110 active:scale-95 transition-all duration-300 shadow-[0_0_30px_rgba(0,0,0,0.5)]"
         >
           {isPlaying ? <Pause className="w-8 h-8" /> : <Play className="w-8 h-8 ml-1" />}
@@ -295,7 +341,7 @@ export default function InteractiveVideoPlayer({ imageSrc, themeColor, title }: 
         <div className="flex items-center justify-between text-neutral-300 text-xs font-mono">
           <div className="flex items-center space-x-4">
             <button
-              onClick={() => setIsPlaying(!isPlaying)}
+              onClick={handlePlayPause}
               className="hover:text-white transition-colors"
             >
               {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}

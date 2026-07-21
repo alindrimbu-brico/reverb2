@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { ShieldPlus, Brain, Users, HeartHandshake, ArrowRight, Play } from "lucide-react";
 import { useRouter, usePathname } from "next/navigation";
-import { setTheme } from "./AudioEngine";
+import { setTheme, playGeneralClickSound } from "./AudioEngine";
 import { getLocaleFromPath, localizePath } from "./translations";
 import { recoveryUI } from "./recoveryTranslations";
 
@@ -72,6 +72,7 @@ function InteractiveCard({
 
   const handleCardClick = (e: React.MouseEvent) => {
     e.preventDefault();
+    playGeneralClickSound();
     router.push(href);
   };
 
@@ -233,7 +234,10 @@ export default function RecoveryAlgorithm() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          onClick={() => router.push(localizePath('/showcase/neuro-recovery/human-connection', locale))}
+          onClick={() => {
+            playGeneralClickSound();
+            router.push(localizePath('/showcase/neuro-recovery/human-connection', locale));
+          }}
           whileHover={{ scale: 1.01, borderColor: "rgba(244, 63, 94, 0.3)" }}
           className="mt-24 p-10 md:p-16 rounded-3xl bg-gradient-to-br from-neutral-900 to-neutral-950 border border-neutral-800 text-center shadow-2xl relative overflow-hidden cursor-pointer group flex flex-col items-center select-none"
         >

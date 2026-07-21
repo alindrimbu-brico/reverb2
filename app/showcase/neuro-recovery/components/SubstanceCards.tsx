@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Hammer, PaintBucket, Zap, Volume2, Image as ImageIcon, Music, PlayCircle, BookOpen } from "lucide-react";
-import { setTheme } from "./AudioEngine";
+import { setTheme, playTabClickSound, playGeneralClickSound } from "./AudioEngine";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -70,14 +70,20 @@ export default function SubstanceCards() {
 
           <div className="inline-flex bg-neutral-200/50 dark:bg-neutral-800/50 p-1 rounded-full border border-neutral-300 dark:border-neutral-700">
             <button
-              onClick={() => setActiveTab("audio")}
+              onClick={() => {
+                setActiveTab("audio");
+                playTabClickSound();
+              }}
               className={`flex items-center space-x-2 px-6 py-2 rounded-full text-sm font-medium transition-all ${activeTab === "audio" ? "bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white shadow-sm" : "text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300"}`}
             >
               <Music className="w-4 h-4" />
               <span>{ui.audioMode}</span>
             </button>
             <button
-              onClick={() => setActiveTab("visual")}
+              onClick={() => {
+                setActiveTab("visual");
+                playTabClickSound();
+              }}
               className={`flex items-center space-x-2 px-6 py-2 rounded-full text-sm font-medium transition-all ${activeTab === "visual" ? "bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white shadow-sm" : "text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300"}`}
             >
               <ImageIcon className="w-4 h-4" />
@@ -134,6 +140,7 @@ export default function SubstanceCards() {
                         <div className="flex flex-wrap items-center gap-3 mb-6">
                           <Link 
                             href={localizePath(`/showcase/neuro-recovery/substances/${sub.id}`, locale)}
+                            onClick={() => playGeneralClickSound()}
                             className="flex items-center justify-center space-x-2 text-xs font-mono tracking-widest uppercase text-blue-500 bg-blue-100/50 hover:bg-blue-200/50 dark:text-blue-400 dark:bg-blue-900/20 dark:hover:bg-blue-900/40 px-4 py-2 rounded-full transition-colors"
                           >
                             <BookOpen className="w-4 h-4" />

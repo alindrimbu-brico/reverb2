@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useMotionValue, useTransform } from "framer-motion";
 import { Sun, Fingerprint, Flame, Feather, Infinity as InfinityIcon, Sparkles, ArrowRight } from "lucide-react";
 import { useRouter, usePathname } from "next/navigation";
-import { setTheme } from "./AudioEngine";
+import { setTheme, playGeneralClickSound, playTabClickSound } from "./AudioEngine";
 import { getLocaleFromPath, localizePath } from "./translations";
 import { localizedLevels, joyUI } from "./joyTranslations";
 
@@ -101,6 +101,7 @@ function LevelCard({ level, isSelected, onSelect, enterPortalText }: LevelCardPr
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
+    playGeneralClickSound();
     router.push(level.href);
   };
 
@@ -403,10 +404,16 @@ export default function JoyCelebration() {
               </svg>
 
               <motion.button
-                onMouseDown={() => setIsCharging(true)}
+                onMouseDown={() => {
+                  playTabClickSound();
+                  setIsCharging(true);
+                }}
                 onMouseUp={() => setIsCharging(false)}
                 onMouseLeave={() => setIsCharging(false)}
-                onTouchStart={() => setIsCharging(true)}
+                onTouchStart={() => {
+                  playTabClickSound();
+                  setIsCharging(true);
+                }}
                 onTouchEnd={() => setIsCharging(false)}
                 animate={{
                   scale: isCharging ? [1, 1.08, 1.02] : 1,

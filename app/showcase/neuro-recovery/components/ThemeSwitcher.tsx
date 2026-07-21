@@ -5,6 +5,7 @@ import { Sun, Moon } from "lucide-react";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { getLocaleFromPath } from "./translations";
+import { playGeneralClickSound } from "./AudioEngine";
 
 const switcherTranslations = {
   ro: { light: "Temă: Light", dark: "Temă: Dark" },
@@ -27,7 +28,10 @@ export default function ThemeSwitcher() {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 2.2, duration: 1 }}
-        onClick={toggleTheme}
+        onClick={() => {
+          playGeneralClickSound();
+          toggleTheme();
+        }}
         className={`flex items-center justify-center px-4 h-12 rounded-full transition-all duration-500 backdrop-blur-md border shadow-lg ${
           theme === "light"
             ? "bg-amber-500/10 text-amber-700 border-amber-500/20 hover:bg-amber-500/20"
