@@ -106,34 +106,22 @@ export default function InteractiveVideoPlayer({ imageSrc, themeColor, title }: 
       // Animation speed multiplier based on play state
       const speedMult = isPlaying ? 1.5 : 0.15;
 
-      // 1. Draw background image with liquid organic distortion mesh
+      // 1. Draw background image cleanly with slow cinematic zoom and pan (Ken Burns camera movement)
       if (imgLoaded) {
         ctx.save();
         
-        // Scale and center the image slightly to prevent empty black borders during ripple distortion
-        const scaleFactor = 1.1;
-        const drawWidth = width * scaleFactor;
-        const drawHeight = height * scaleFactor;
-        const offsetX = -(drawWidth - width) / 2;
-        const offsetY = -(drawHeight - height) / 2;
+        // Calculate slow camera panning & zooming based on time and play state
+        const time = performance.now() * 0.0003 * speedMult;
+        const scale = 1.06 + Math.sin(time * 0.4) * 0.03; // slow zoom factor
+        const panX = Math.sin(time * 0.6) * 18; // slow horizontal pan
+        const panY = Math.cos(time * 0.5) * 10; // slow vertical pan
         
-        const sliceCount = 35;
-        const sliceHeight = drawHeight / sliceCount;
+        const drawWidth = width * scale;
+        const drawHeight = height * scale;
+        const x = (width - drawWidth) / 2 + panX;
+        const y = (height - drawHeight) / 2 + panY;
         
-        for (let i = 0; i < sliceCount; i++) {
-          const sy = (img.height / sliceCount) * i;
-          const dy = offsetY + i * sliceHeight;
-          
-          // Organic fluid wave math for shifting columns/rows
-          const waveX = offsetX + Math.sin((i / sliceCount) * Math.PI * 4 + (performance.now() * 0.0018 * speedMult)) * 15;
-          const waveY = Math.cos((i / sliceCount) * Math.PI * 2.5 + (performance.now() * 0.0012 * speedMult)) * 6;
-          
-          ctx.drawImage(
-            img,
-            0, sy, img.width, img.height / sliceCount,
-            waveX, dy + waveY, drawWidth, sliceHeight
-          );
-        }
+        ctx.drawImage(img, x, y, drawWidth, drawHeight);
         ctx.restore();
       } else {
         // Dark background placeholder while loading
@@ -141,7 +129,34 @@ export default function InteractiveVideoPlayer({ imageSrc, themeColor, title }: 
         ctx.fillRect(0, 0, width, height);
       }
 
-      // 2. Render particle elements based on theme on top of the distorted image
+      // 2. Overlay dynamic volumetric light leaks / lens flares sweeping across the screen
+      if (isPlaying) {
+        ctx.save();
+        ctx.globalCompositeOperation = "screen";
+        const time = performance.now() * 0.0005;
+
+        // Sweeping light ray 1
+        const grad1 = ctx.createLinearGradient(0, 0, width, height);
+        const rayPos1 = 0.5 + Math.sin(time) * 0.35;
+        grad1.addColorStop(Math.max(0, rayPos1 - 0.3), "rgba(255,255,255,0)");
+        grad1.addColorStop(rayPos1, themeColor + "18"); // 9% opacity theme color
+        grad1.addColorStop(Math.min(1, rayPos1 + 0.3), "rgba(255,255,255,0)");
+        ctx.fillStyle = grad1;
+        ctx.fillRect(0, 0, width, height);
+
+        // Crossing soft light ray 2
+        const grad2 = ctx.createLinearGradient(width, 0, 0, height);
+        const rayPos2 = 0.5 + Math.cos(time * 0.6) * 0.25;
+        grad2.addColorStop(Math.max(0, rayPos2 - 0.25), "rgba(255,255,255,0)");
+        grad2.addColorStop(rayPos2, "rgba(255,255,255,0.05)"); 
+        grad2.addColorStop(Math.min(1, rayPos2 + 0.25), "rgba(255,255,255,0)");
+        ctx.fillStyle = grad2;
+        ctx.fillRect(0, 0, width, height);
+
+        ctx.restore();
+      }
+
+      // 3. Render theme-specific particle components on top
       elements.forEach((el) => {
         // Update physics
         el.x += el.speedX * speedMult;
@@ -314,7 +329,7 @@ export default function InteractiveVideoPlayer({ imageSrc, themeColor, title }: 
           className="absolute inset-0 w-full h-full object-cover opacity-10 pointer-events-none"
         />
 
-        {/* Generative Interactive Canvas Overlay (Displays the distorted background image and moving elements) */}
+        {/* Generative Interactive Canvas Overlay (Displays the clean background image and moving elements) */}
         <canvas 
           ref={canvasRef} 
           className="absolute inset-0 w-full h-full z-10 pointer-events-none"
