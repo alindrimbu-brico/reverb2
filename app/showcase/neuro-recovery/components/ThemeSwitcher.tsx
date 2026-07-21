@@ -3,9 +3,23 @@
 import { useNeuroluminaTheme } from "./ThemeContext";
 import { Sun, Moon } from "lucide-react";
 import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
+import { getLocaleFromPath } from "./translations";
+
+const switcherTranslations = {
+  ro: { light: "Temă: Light", dark: "Temă: Dark" },
+  en: { light: "Theme: Light", dark: "Theme: Dark" },
+  es: { light: "Tema: Claro", dark: "Tema: Oscuro" },
+  pt: { light: "Tema: Claro", dark: "Tema: Escuro" },
+  ru: { light: "Тема: Светлая", dark: "Тема: Темная" },
+  zh: { light: "主题：明亮", dark: "主题：暗黑" }
+};
 
 export default function ThemeSwitcher() {
   const { theme, toggleTheme } = useNeuroluminaTheme();
+  const pathname = usePathname() || "";
+  const locale = getLocaleFromPath(pathname);
+  const labels = switcherTranslations[locale];
 
   return (
     <div className="fixed bottom-20 right-6 z-50 flex items-center justify-center">
@@ -24,12 +38,12 @@ export default function ThemeSwitcher() {
         {theme === "light" ? (
           <>
             <Sun strokeWidth={1.5} className="w-5 h-5 mr-2 text-amber-600 animate-spin-slow" />
-            <span className="font-mono text-xs uppercase tracking-widest font-bold">Tema: Light</span>
+            <span className="font-mono text-xs uppercase tracking-widest font-bold">{labels.light}</span>
           </>
         ) : (
           <>
             <Moon strokeWidth={1.5} className="w-5 h-5 mr-2 text-indigo-400" />
-            <span className="font-mono text-xs uppercase tracking-widest font-bold">Tema: Dark</span>
+            <span className="font-mono text-xs uppercase tracking-widest font-bold">{labels.dark}</span>
           </>
         )}
       </motion.button>

@@ -3,8 +3,10 @@
 import { useState } from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { ShieldPlus, Brain, Users, HeartHandshake, ArrowRight, Play } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { setTheme } from "./AudioEngine";
+import { getLocaleFromPath, localizePath } from "./translations";
+import { recoveryUI } from "./recoveryTranslations";
 
 interface InteractiveCardProps {
   href: string;
@@ -16,6 +18,7 @@ interface InteractiveCardProps {
   accentClass: string;
   glowColor: string;
   themeName: 'recovery' | 'joy';
+  accessPortalText: string;
 }
 
 function InteractiveCard({
@@ -27,7 +30,8 @@ function InteractiveCard({
   badge,
   accentClass,
   glowColor,
-  themeName
+  themeName,
+  accessPortalText
 }: InteractiveCardProps) {
   const router = useRouter();
   const x = useMotionValue(0);
@@ -126,7 +130,7 @@ function InteractiveCard({
       {/* Footer Card Navigation */}
       <div className="relative z-10 pt-6 flex items-center justify-between border-t border-neutral-800 group-hover:border-neutral-700/50 transition-colors mt-auto" style={{ transform: "translateZ(15px)" }}>
         <span className="text-xs font-mono uppercase tracking-widest text-neutral-500 group-hover:text-white transition-colors flex items-center gap-2">
-          Accesează Portalul <Play className="w-3 h-3 fill-neutral-500 group-hover:fill-white transition-all" />
+          {accessPortalText} <Play className="w-3 h-3 fill-neutral-500 group-hover:fill-white transition-all" />
         </span>
         <div className="w-10 h-10 rounded-full border border-neutral-800 group-hover:border-neutral-600 flex items-center justify-center text-neutral-400 group-hover:text-white group-hover:bg-neutral-800 transition-all duration-300">
           <ArrowRight className="w-4 h-4 transform group-hover:translate-x-0.5 transition-transform" />
@@ -138,9 +142,35 @@ function InteractiveCard({
 
 export default function RecoveryAlgorithm() {
   const router = useRouter();
+  const pathname = usePathname() || "";
+  const locale = getLocaleFromPath(pathname);
+  
+  const ui = {
+    sectionBadge: recoveryUI.sectionBadge[locale],
+    sectionTitle: recoveryUI.sectionTitle[locale],
+    sectionDesc: recoveryUI.sectionDesc[locale],
+    accessPortal: recoveryUI.accessPortal[locale],
+    conclusionTitle: recoveryUI.conclusionTitle[locale],
+    conclusionDesc: recoveryUI.conclusionDesc[locale],
+    conclusionBtn: recoveryUI.conclusionBtn[locale]
+  };
+
+  const shield = {
+    title: recoveryUI.medicalShield.title[locale],
+    subtitle: recoveryUI.medicalShield.subtitle[locale],
+    badge: recoveryUI.medicalShield.badge[locale],
+    desc: recoveryUI.medicalShield.desc[locale]
+  };
+
+  const plasticity = {
+    title: recoveryUI.neuroplasticity.title[locale],
+    subtitle: recoveryUI.neuroplasticity.subtitle[locale],
+    badge: recoveryUI.neuroplasticity.badge[locale],
+    desc: recoveryUI.neuroplasticity.desc[locale]
+  };
+
   return (
     <motion.section 
-
       onViewportEnter={() => setTheme("recovery")}
       onMouseEnter={() => setTheme("recovery")}
       viewport={{ margin: "-50% 0px -50% 0px" }}
@@ -158,40 +188,42 @@ export default function RecoveryAlgorithm() {
         >
           <div className="inline-flex items-center justify-center space-x-2 text-neutral-400 bg-neutral-900 px-4 py-2 rounded-full border border-neutral-800">
             <HeartHandshake className="w-5 h-5 text-rose-500" />
-            <span className="uppercase tracking-widest text-xs font-mono font-semibold">Arhitectura Recuperării</span>
+            <span className="uppercase tracking-widest text-xs font-mono font-semibold">{ui.sectionBadge}</span>
           </div>
-          <h2 className="text-4xl md:text-7xl font-extrabold tracking-tight text-white leading-none">
-            Drumul Înapoi spre Lumină
+          <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-none">
+            {ui.sectionTitle}
           </h2>
           <p className="text-neutral-400 max-w-2xl mx-auto font-light text-lg">
-            O abordare integrată, biologică și spirituală a restaurării neurochimice. Selectează un portal pentru a explora profunzimea procesului.
+            {ui.sectionDesc}
           </p>
         </motion.div>
 
         {/* 3D Playful Portals */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           <InteractiveCard
-            href="/showcase/neuro-recovery/medical-shield"
-            title="Scutul Medical"
-            subtitle="Echilibrarea Biologică"
-            badge="Faza 1: Substituție"
-            desc="Cum știința utilizează Naltrexona și Suboxona pentru a reduce zgomotul chimic al sevrajului și a oferi cortexului prefrontal spațiul sacru de decizie."
+            href={localizePath("/showcase/neuro-recovery/medical-shield", locale)}
+            title={shield.title}
+            subtitle={shield.subtitle}
+            badge={shield.badge}
+            desc={shield.desc}
             icon={<ShieldPlus className="w-6 h-6 text-blue-400" />}
             accentClass="shadow-[0_0_15px_rgba(59,130,246,0.2)]"
             glowColor="rgba(59,130,246,0.35)"
             themeName="recovery"
+            accessPortalText={ui.accessPortal}
           />
 
           <InteractiveCard
-            href="/showcase/neuro-recovery/neuroplasticity"
-            title="Neuroplasticitatea"
-            subtitle="Recablarea Conștientă"
-            badge="Faza 2: Restaurare"
-            desc="Valoarea neurobiologică a prezenței și a strategiei „O zi pe rând”. Cum ne auto-remodelăm creierul prin ritualuri sănătoase, BDNF și reducerea ruminației."
+            href={localizePath("/showcase/neuro-recovery/neuroplasticity", locale)}
+            title={plasticity.title}
+            subtitle={plasticity.subtitle}
+            badge={plasticity.badge}
+            desc={plasticity.desc}
             icon={<Brain className="w-6 h-6 text-purple-400" />}
             accentClass="shadow-[0_0_15px_rgba(168,85,247,0.2)]"
             glowColor="rgba(168,85,247,0.35)"
             themeName="recovery"
+            accessPortalText={ui.accessPortal}
           />
         </div>
 
@@ -201,7 +233,7 @@ export default function RecoveryAlgorithm() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          onClick={() => router.push('/showcase/neuro-recovery/human-connection')}
+          onClick={() => router.push(localizePath('/showcase/neuro-recovery/human-connection', locale))}
           whileHover={{ scale: 1.01, borderColor: "rgba(244, 63, 94, 0.3)" }}
           className="mt-24 p-10 md:p-16 rounded-3xl bg-gradient-to-br from-neutral-900 to-neutral-950 border border-neutral-800 text-center shadow-2xl relative overflow-hidden cursor-pointer group flex flex-col items-center select-none"
         >
@@ -210,15 +242,14 @@ export default function RecoveryAlgorithm() {
           </div>
           <HeartHandshake className="w-12 h-12 text-rose-500 mx-auto mb-6" />
           <h3 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
-            Opusul dependenței nu este simpla abstinență. <br/>
-            <span className="text-rose-500">Este conexiunea umană.</span>
+            {ui.conclusionTitle}
           </h3>
           <p className="text-lg md:text-xl text-neutral-400 max-w-3xl mx-auto leading-relaxed font-light mb-6">
-            Mai mult decât atât, tema esențială a existenței noastre este că <strong>oamenii trăiesc în simboluri</strong>. Ne găsim sensul în poveștile pe care ni le spunem, în ritualurile pe care le păstrăm și în triburile din care facem parte. Dependența prosperă exact atunci când aceste structuri simbolice se prăbușesc. Când rămânem dezgoliți într-un vid de sens și o singurătate tehnologizată, căutăm artificial acea fărâmă de alinare. Calea spre vindecare este refacerea arhitecturii simbolice: de la om la om, de la inimă la inimă.
+            {ui.conclusionDesc}
           </p>
 
           <div className="px-6 py-3 rounded-full bg-rose-600/10 text-rose-400 border border-rose-500/20 group-hover:bg-rose-600/20 group-hover:border-rose-500/40 text-xs font-mono uppercase tracking-widest transition-all">
-            Accesează Portalul Conexiunii Umane
+            {ui.conclusionBtn}
           </div>
         </motion.div>
 

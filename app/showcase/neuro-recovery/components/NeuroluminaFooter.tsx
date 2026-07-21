@@ -4,40 +4,121 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Logo from "@/components/Logo";
 import { useNeuroluminaTheme } from "./ThemeContext";
+import { getLocaleFromPath, localizePath } from "./translations";
+
+const footerTranslations = {
+  ro: {
+    subtitle: "O explorare interactivă a dopaminei, a dependenței și a arhitecturii bucuriei.",
+    tagline1: "Homeostazie",
+    tagline2: "Conștientizare",
+    tagline3: "Eliberare",
+    socialsTitle: "Conexiuni Sinaptice",
+    socialsDesc: "Conectează-te cu Reverb Digital pentru a explora ecosisteme de human digital marketing.",
+    poweredBy: "Sustinut de",
+    engineeringBy: "Inginerie de",
+    mapIndex: "Indexul Hărții Neuromorfe",
+    copyright: "© 2026 NEUROLUMINA · DESIGN DE SISTEM DE REVERB DIGITAL SRL",
+    navHome: "Acasă Neurolumina",
+    navRoots: "Rădăcini Neurobiologice",
+    navHomeostasis: "Homeostazie Dinamică",
+    navRecovery: "Axa Conștiinței"
+  },
+  en: {
+    subtitle: "An interactive exploration of dopamine, addiction, and the architecture of joy.",
+    tagline1: "Homeostasis",
+    tagline2: "Awareness",
+    tagline3: "Liberation",
+    socialsTitle: "Synaptic Socials",
+    socialsDesc: "Connect with Reverb Digital to explore human digital marketing ecosystems.",
+    poweredBy: "Powered by",
+    engineeringBy: "Engineering by",
+    mapIndex: "Neuromorphic Map Index",
+    copyright: "© 2026 NEUROLUMINA · SYSTEM DESIGN BY REVERB DIGITAL SRL",
+    navHome: "Neurolumina Home",
+    navRoots: "Neurobiologic Roots",
+    navHomeostasis: "Dynamic Homeostasis",
+    navRecovery: "Consciousness Axis"
+  },
+  es: {
+    subtitle: "Una exploración interactiva de la dopamina, la adicción y la arquitectura de la alegría.",
+    tagline1: "Homeostasis",
+    tagline2: "Consciencia",
+    tagline3: "Liberación",
+    socialsTitle: "Redes Sinápticas",
+    socialsDesc: "Conéctese con Reverb Digital para explorar ecosistemas de marketing digital humano.",
+    poweredBy: "Desarrollado por",
+    engineeringBy: "Ingeniería por",
+    mapIndex: "Índice del Mapa Neuromórfico",
+    copyright: "© 2026 NEUROLUMINA · DISEÑO DE SISTEMAS POR REVERB DIGITAL SRL",
+    navHome: "Inicio Neurolumina",
+    navRoots: "Raíces Neurobiológicas",
+    navHomeostasis: "Homeostasis Dinámica",
+    navRecovery: "Eje de la Consciencia"
+  },
+  pt: {
+    subtitle: "Uma exploração interativa da dopamina, da adição e da arquitetura da alegria.",
+    tagline1: "Homeostase",
+    tagline2: "Consciência",
+    tagline3: "Libertação",
+    socialsTitle: "Redes Sinápticas",
+    socialsDesc: "Conecte-se com a Reverb Digital para explorar ecossistemas de marketing digital humano.",
+    poweredBy: "Desenvolvido por",
+    engineeringBy: "Engenharia por",
+    mapIndex: "Índice do Mapa Neuromórfico",
+    copyright: "© 2026 NEUROLUMINA · DESIGN DE SISTEMAS POR REVERB DIGITAL SRL",
+    navHome: "Início Neurolumina",
+    navRoots: "Raízes Neurobiológicas",
+    navHomeostasis: "Homeostase Dinâmica",
+    navRecovery: "Eixo da Consciência"
+  },
+  ru: {
+    subtitle: "Интерактивное исследование дофамина, зависимости и архитектуры радости.",
+    tagline1: "Гомеостаз",
+    tagline2: "Осознанность",
+    tagline3: "Освобождение",
+    socialsTitle: "Синаптические связи",
+    socialsDesc: "Свяжитесь с Reverb Digital, чтобы изучить экосистемы человеческого цифрового маркетинга.",
+    poweredBy: "Под управлением",
+    engineeringBy: "Разработка:",
+    mapIndex: "Индекс нейроморфной карты",
+    copyright: "© 2026 NEUROLUMINA · ПРОЕКТИРОВАНИЕ СИСТЕМЫ REVERB DIGITAL SRL",
+    navHome: "Главная Neurolumina",
+    navRoots: "Нейробиологические корни",
+    navHomeostasis: "Динамический гомеостаз",
+    navRecovery: "Ось сознания"
+  },
+  zh: {
+    subtitle: "探索多巴胺、成瘾与喜悦的神经生物学交互之旅。",
+    tagline1: "稳态应激",
+    tagline2: "意识觉醒",
+    tagline3: "解脱自我",
+    socialsTitle: "突触社交",
+    socialsDesc: "与 Reverb Digital 连接，探索人类数字营销生态系统。",
+    poweredBy: "技术支持：",
+    engineeringBy: "工程设计：",
+    mapIndex: "神经元地图索引",
+    copyright: "© 2026 NEUROLUMINA · 系统设计由 REVERB DIGITAL SRL 提供",
+    navHome: "Neurolumina 首页",
+    navRoots: "神经生物学根源",
+    navHomeostasis: "动态稳态应激",
+    navRecovery: "意识维度轴"
+  }
+};
 
 export default function NeuroluminaFooter() {
   const pathname = usePathname() || "";
-  const isEn = pathname.startsWith("/en");
+  const locale = getLocaleFromPath(pathname);
   const { theme } = useNeuroluminaTheme();
   const isDark = theme === "dark";
 
-  const translations = {
-    title: "Neurolumina",
-    subtitle: isEn 
-      ? "An interactive exploration of dopamine, addiction, and the architecture of joy." 
-      : "O explorare interactivă a dopaminei, a dependenței și a arhitecturii bucuriei.",
-    tagline1: isEn ? "Homeostasis" : "Homeostazie",
-    tagline2: isEn ? "Awareness" : "Conștientizare",
-    tagline3: isEn ? "Liberation" : "Eliberare",
-    socialsTitle: isEn ? "Synaptic Socials" : "Conexiuni Sinaptice",
-    poweredBy: isEn ? "Powered by" : "Sustinut de",
-    engineeringBy: isEn ? "Engineering by" : "Inginerie de",
-    copyright: "© 2026 NEUROLUMINA · SYSTEM DESIGN BY REVERB DIGITAL SRL",
-  };
+  const translations = footerTranslations[locale];
 
-  const navLinks = isEn 
-    ? [
-        { href: "/en/showcase/neuro-recovery", label: "Neurolumina Home" },
-        { href: "/en/showcase/neuro-recovery/roots", label: "Neurobiologic Roots" },
-        { href: "/en/showcase/neuro-recovery/homeostasis", label: "Dynamic Homeostasis" },
-        { href: "/en/showcase/neuro-recovery/recovery", label: "Consciousness Axis" }
-      ]
-    : [
-        { href: "/showcase/neuro-recovery", label: "Acasă Neurolumina" },
-        { href: "/showcase/neuro-recovery/roots", label: "Rădăcini Neurobiologice" },
-        { href: "/showcase/neuro-recovery/homeostasis", label: "Homeostazie Dinamică" },
-        { href: "/showcase/neuro-recovery/recovery", label: "Axa Conștiinței" }
-      ];
+  const navLinks = [
+    { href: localizePath("/showcase/neuro-recovery", locale), label: translations.navHome },
+    { href: localizePath("/showcase/neuro-recovery/roots", locale), label: translations.navRoots },
+    { href: localizePath("/showcase/neuro-recovery/homeostasis", locale), label: translations.navHomeostasis },
+    { href: localizePath("/showcase/neuro-recovery/recovery", locale), label: translations.navRecovery }
+  ];
 
   return (
     <footer className={`border-t transition-all duration-700 ease-in-out relative overflow-hidden py-12 ${
@@ -79,7 +160,7 @@ export default function NeuroluminaFooter() {
         }`}>
           
           {/* Column 1: Neurolumina Interactive Core Brand */}
-          <div className={`p-8 rounded-3xl border backdrop-blur-md shadow-[0_8px_30px_rgb(0,0,0,0.01)] flex flex-col justify-between space-y-6 transition-all duration-700 ${
+          <div className={`lg:col-span-5 p-8 rounded-3xl border backdrop-blur-md shadow-[0_8px_30px_rgb(0,0,0,0.01)] flex flex-col justify-between space-y-6 transition-all duration-700 ${
             isDark 
               ? "bg-neutral-900/60 border-neutral-800 text-neutral-350" 
               : "bg-white/60 border-amber-500/10 text-stone-600"
@@ -96,7 +177,7 @@ export default function NeuroluminaFooter() {
                 <div>
                   <div className={`text-base font-bold tracking-[0.35em] uppercase leading-none transition-colors ${
                     isDark ? "text-white" : "text-stone-900"
-                  }`}>{translations.title}</div>
+                  }`}>Neurolumina</div>
                   <div className={`text-[9px] font-mono tracking-widest uppercase mt-1 font-semibold ${
                     isDark ? "text-blue-400" : "text-amber-600"
                   }`}>NEURO-PORTAL</div>
@@ -119,7 +200,7 @@ export default function NeuroluminaFooter() {
           </div>
 
           {/* Column 2: Dashboard Navigation Links */}
-          <div className={`p-8 rounded-3xl border backdrop-blur-sm flex flex-col justify-between transition-all duration-700 ${
+          <div className={`lg:col-span-4 p-8 rounded-3xl border backdrop-blur-sm flex flex-col justify-between transition-all duration-700 ${
             isDark 
               ? "bg-neutral-950/40 border-neutral-900/50" 
               : "bg-white/40 border-amber-500/5"
@@ -128,7 +209,7 @@ export default function NeuroluminaFooter() {
               <div className={`text-[9px] font-mono uppercase tracking-[0.3em] border-b pb-2 mb-6 ${
                 isDark ? "text-neutral-600 border-neutral-800" : "text-stone-400 border-amber-500/10"
               }`}>
-                {isEn ? "Neuromorphic Map Index" : "Indexul Hărții Neuromorfe"}
+                {translations.mapIndex}
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {navLinks.map(({ href, label }) => (
@@ -161,7 +242,7 @@ export default function NeuroluminaFooter() {
           </div>
 
           {/* Column 3: Synaptic Social connections */}
-          <div className={`p-8 rounded-3xl border backdrop-blur-md shadow-[0_8px_30px_rgb(0,0,0,0.01)] flex flex-col justify-between transition-all duration-700 ${
+          <div className={`lg:col-span-3 p-8 rounded-3xl border backdrop-blur-md shadow-[0_8px_30px_rgb(0,0,0,0.01)] flex flex-col justify-between transition-all duration-700 ${
             isDark 
               ? "bg-neutral-900/60 border-neutral-800 text-neutral-350" 
               : "bg-white/60 border-amber-500/10 text-stone-600"
@@ -173,9 +254,7 @@ export default function NeuroluminaFooter() {
                 {translations.socialsTitle}
               </div>
               <p className="text-xs font-light leading-relaxed">
-                {isEn 
-                  ? "Connect with Reverb Digital to explore human digital marketing ecosystems."
-                  : "Conectează-te cu Reverb Digital pentru a explora ecosisteme de human digital marketing."}
+                {translations.socialsDesc}
               </p>
             </div>
             

@@ -3,8 +3,10 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useMotionValue, useTransform } from "framer-motion";
 import { Sun, Fingerprint, Flame, Feather, Infinity as InfinityIcon, Sparkles, ArrowRight } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { setTheme } from "./AudioEngine";
+import { getLocaleFromPath, localizePath } from "./translations";
+import { localizedLevels, joyUI } from "./joyTranslations";
 
 interface Particle {
   id: number;
@@ -17,68 +19,56 @@ interface Particle {
   opacity: number;
 }
 
-const consciousnessLevels = [
-  {
-    id: "pleasure",
+const levelStyles: Record<string, {
+  icon: React.ReactNode;
+  color: string;
+  accent: string;
+  border: string;
+  bg: string;
+  glowColor: string;
+}> = {
+  pleasure: {
     icon: <Fingerprint className="w-6 h-6 text-neutral-400" />,
-    title: "Plăcerea (Corpul)",
-    desc: "Dependență exterioară. Întărește ego-ul prin sclavie față de obiecte. Vibrații roșu/portocalii.",
-    color: "rgba(239, 68, 68, 0.7)", // red
+    color: "rgba(239, 68, 68, 0.7)",
     accent: "text-red-400",
     border: "border-red-950/60 hover:border-red-500/50",
     bg: "hover:bg-red-950/20",
-    vibrationFreq: "alcohol",
-    href: "/showcase/neuro-recovery/pleasure",
     glowColor: "rgba(239, 68, 68, 0.3)"
   },
-  {
-    id: "happiness",
+  happiness: {
     icon: <Flame className="w-6 h-6 text-orange-400" />,
-    title: "Fericirea (Mintea)",
-    desc: "Competiție și viclenie. Frica de pierdere otrăvește orice succes exterior. Valuri portocalii.",
-    color: "rgba(249, 115, 22, 0.7)", // orange
+    color: "rgba(249, 115, 22, 0.7)",
     accent: "text-orange-400",
     border: "border-orange-950/60 hover:border-orange-500/50",
     bg: "hover:bg-orange-950/20",
-    vibrationFreq: "stimulants",
-    href: "/showcase/neuro-recovery/happiness",
     glowColor: "rgba(249, 115, 22, 0.3)"
   },
-  {
-    id: "joy",
+  joy: {
     icon: <Feather className="w-6 h-6 text-amber-300" />,
-    title: "Bucuria (Sufletul)",
-    desc: "Independență absolută. Începe dizolvarea ego-ului prin tăcere și pace interioară. Aurit profund.",
-    color: "rgba(245, 158, 11, 0.7)", // amber
+    color: "rgba(245, 158, 11, 0.7)",
     accent: "text-amber-400",
     border: "border-amber-950/60 hover:border-amber-500/50",
     bg: "hover:bg-amber-950/20",
-    vibrationFreq: "recovery",
-    href: "/showcase/neuro-recovery/joy-soul",
     glowColor: "rgba(245, 158, 11, 0.3)"
   },
-  {
-    id: "ecstasy",
+  ecstasy: {
     icon: <InfinityIcon className="w-8 h-8 text-white animate-pulse" />,
-    title: "Extazul (Divinul)",
-    desc: "Nirvana. Ego-ul dispare complet; rămâne doar Infinitul. Inocența cosmică absolută.",
-    color: "rgba(255, 255, 255, 0.9)", // white/gold
+    color: "rgba(255, 255, 255, 0.9)",
     accent: "text-white font-bold",
     border: "border-amber-500/50 shadow-[0_0_30px_rgba(245,158,11,0.1)]",
     bg: "bg-amber-950/10",
-    vibrationFreq: "joy",
-    href: "/showcase/neuro-recovery/ecstasy",
     glowColor: "rgba(255, 255, 255, 0.3)"
   }
-];
+};
 
 interface LevelCardProps {
-  level: typeof consciousnessLevels[0];
+  level: any;
   isSelected: boolean;
   onSelect: () => void;
+  enterPortalText: string;
 }
 
-function LevelCard({ level, isSelected, onSelect }: LevelCardProps) {
+function LevelCard({ level, isSelected, onSelect, enterPortalText }: LevelCardProps) {
   const router = useRouter();
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -114,6 +104,8 @@ function LevelCard({ level, isSelected, onSelect }: LevelCardProps) {
     router.push(level.href);
   };
 
+  const styles = levelStyles[level.id];
+
   return (
     <motion.div
       onClick={handleClick}
@@ -129,27 +121,27 @@ function LevelCard({ level, isSelected, onSelect }: LevelCardProps) {
       whileHover={{ scale: 1.01 }}
       whileTap={{ scale: 0.99 }}
       className={`p-6 rounded-2xl border backdrop-blur-md cursor-pointer transition-colors duration-500 flex items-start space-x-4 relative overflow-hidden group select-none
-        ${isSelected ? level.border + " bg-neutral-900/90 text-white shadow-xl scale-[1.01]" : "bg-neutral-900/30 border-neutral-800/40 text-neutral-400 " + level.bg}`}
+        ${isSelected ? styles.border + " bg-neutral-900/90 text-white shadow-xl scale-[1.01]" : "bg-neutral-900/30 border-neutral-800/40 text-neutral-400 " + styles.bg}`}
     >
       {/* Flashlight Glow */}
       <div
         className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-10 transition-opacity duration-300"
         style={{
-          background: `radial-gradient(circle 180px at ${mousePos.x}px ${mousePos.y}px, ${level.glowColor}, transparent)`
+          background: `radial-gradient(circle 180px at ${mousePos.x}px ${mousePos.y}px, ${styles.glowColor}, transparent)`
         }}
       />
 
       <div className={`shrink-0 mt-1 p-2 rounded-xl bg-neutral-950/80 border z-10 transition-colors ${isSelected ? 'border-neutral-700' : 'border-neutral-900'}`}>
-        {level.icon}
+        {styles.icon}
       </div>
 
       <div className="z-10 flex-grow" style={{ transform: "translateZ(10px)" }}>
         <div className="flex items-center justify-between">
-          <h4 className={`text-lg font-bold mb-1 transition-colors duration-500 ${isSelected ? level.accent : 'text-neutral-300'}`}>
+          <h4 className={`text-lg font-bold mb-1 transition-colors duration-500 ${isSelected ? styles.accent : 'text-neutral-300'}`}>
             {level.title}
           </h4>
           <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 group-hover:text-white transition-colors flex items-center gap-1 opacity-0 group-hover:opacity-100 duration-300">
-            Intră Portalul <ArrowRight className="w-3 h-3" />
+            {enterPortalText} <ArrowRight className="w-3 h-3" />
           </span>
         </div>
         <p className="text-sm leading-relaxed font-light transition-colors duration-500 text-neutral-400 group-hover:text-neutral-300">
@@ -161,6 +153,34 @@ function LevelCard({ level, isSelected, onSelect }: LevelCardProps) {
 }
 
 export default function JoyCelebration() {
+  const pathname = usePathname() || "";
+  const locale = getLocaleFromPath(pathname);
+  
+  const ui = {
+    sectionBadge: joyUI.sectionBadge[locale],
+    sectionTitle: joyUI.sectionTitle[locale],
+    sectionDesc: joyUI.sectionDesc[locale],
+    tunerTitle: joyUI.tunerTitle[locale],
+    tunerDesc: joyUI.tunerDesc[locale],
+    aligned: joyUI.aligned[locale],
+    synchronizing: joyUI.synchronizing[locale],
+    holdBtn: joyUI.holdBtn[locale],
+    alignedMessage: joyUI.alignedMessage[locale],
+    enterPortal: joyUI.enterPortal[locale]
+  };
+
+  const rawLevels = localizedLevels[locale];
+  const consciousnessLevels = rawLevels.map((lvl) => ({
+    ...lvl,
+    href: localizePath(lvl.href, locale),
+    icon: levelStyles[lvl.id].icon,
+    color: levelStyles[lvl.id].color,
+    accent: levelStyles[lvl.id].accent,
+    border: levelStyles[lvl.id].border,
+    bg: levelStyles[lvl.id].bg,
+    glowColor: levelStyles[lvl.id].glowColor
+  }));
+
   const [activeLevel, setActiveLevel] = useState(consciousnessLevels[2]); // default: Bucuria (Joy)
   const [vibration, setVibration] = useState(0);
   const [isCharging, setIsCharging] = useState(false);
@@ -170,7 +190,6 @@ export default function JoyCelebration() {
 
   // Background particles animation loop
   useEffect(() => {
-    // Generate initial ambient particles
     const initialParticles: Particle[] = Array.from({ length: 40 }).map((_, i) => ({
       id: Math.random(),
       size: Math.random() * 8 + 4,
@@ -192,10 +211,9 @@ export default function JoyCelebration() {
       const delta = (time - lastTime) / 1000;
       lastTime = time;
 
-      // Handle vibration charge/decay
       setVibration((prev) => {
         if (isCharging) {
-          const next = prev + delta * 35; // charge to 100 in ~3s
+          const next = prev + delta * 35;
           if (next >= 100) {
             if (!transcended) {
               triggerTranscendenceExplosion();
@@ -204,18 +222,16 @@ export default function JoyCelebration() {
           }
           return next;
         } else {
-          return Math.max(0, prev - delta * 40); // decay slightly faster
+          return Math.max(0, prev - delta * 40);
         }
       });
 
-      // Update particle physics
       setParticles((prevParticles) => {
         const updated = prevParticles
           .map((p) => {
-            let nextY = p.y + p.vy * (1 + vibration * 0.05); // move faster when vibrating
+            let nextY = p.y + p.vy * (1 + vibration * 0.05);
             let nextX = p.x + p.vx;
 
-            // Recycle off-screen particles
             if (nextY < -10) {
               nextY = 110;
               nextX = Math.random() * 100;
@@ -240,7 +256,6 @@ export default function JoyCelebration() {
     };
   }, [isCharging, vibration, activeLevel, transcended]);
 
-  // Explode particles outward from center
   const triggerTranscendenceExplosion = () => {
     setTranscended(true);
     setTheme(activeLevel.vibrationFreq as any, true);
@@ -251,8 +266,8 @@ export default function JoyCelebration() {
       return {
         id: Math.random(),
         size: Math.random() * 12 + 6,
-        x: 50, // center
-        y: 50, // center
+        x: 50,
+        y: 50,
         vx: Math.cos(angle) * speed * 0.5,
         vy: Math.sin(angle) * speed * 0.5,
         color: activeLevel.color,
@@ -262,19 +277,17 @@ export default function JoyCelebration() {
 
     setParticles((prev) => [...prev, ...burstParticles]);
 
-    // reset transcendence message after 5 seconds
     setTimeout(() => {
       setTranscended(false);
     }, 5000);
   };
 
-  const handleLevelChange = (level: typeof consciousnessLevels[0]) => {
+  const handleLevelChange = (level: any) => {
     setActiveLevel(level);
     setVibration(0);
     setTranscended(false);
     setTheme(level.vibrationFreq as any, true);
 
-    // Color shift existing particles to match the level
     setParticles((prev) =>
       prev.map((p) => ({
         ...p,
@@ -341,33 +354,32 @@ export default function JoyCelebration() {
         >
           <div className="inline-flex items-center space-x-2 bg-neutral-900 border border-neutral-800 px-4 py-2 rounded-full text-xs font-mono tracking-widest text-amber-500 uppercase self-start">
             <Sun className="w-4 h-4 animate-spin-slow text-amber-500" />
-            <span>Ras Lila: Simfonia Interactivă a Minții</span>
+            <span>{ui.sectionBadge}</span>
           </div>
           
           <h2 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white leading-none">
-            Dincolo de Ego. <br/>
+            {ui.sectionTitle.split(". ")[0]}. <br/>
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-orange-500">
-              Către Extaz.
+              {ui.sectionTitle.split(". ")[1]}
             </span>
           </h2>
 
           <p className="text-neutral-400 text-lg font-light leading-relaxed">
-            Mintea se vindecă nu prin ridicarea de ziduri, ci prin extinderea propriilor granițe. Selectează un portal în dreapta pentru a călători sau folosește tunerul pentru aliniere.
+            {ui.sectionDesc}
           </p>
 
           {/* Interactive Playful Charger Mechanic */}
           <div className="p-8 rounded-3xl bg-neutral-900/40 border border-neutral-800 backdrop-blur-md flex flex-col items-center justify-center text-center space-y-6 relative overflow-hidden">
             <div className="space-y-2">
               <h4 className="text-sm font-mono text-neutral-500 uppercase tracking-widest">
-                Tuner Interactiv de Conștiință
+                {ui.tunerTitle}
               </h4>
               <p className="text-xs text-neutral-400 max-w-sm">
-                Apasă lung pe sfera de mai jos pentru a-ți sincroniza neurochimia și a declanșa o explozie de transcendență.
+                {ui.tunerDesc}
               </p>
             </div>
 
             <div className="relative flex items-center justify-center h-48 w-48">
-              {/* Outer ring representing progress */}
               <svg className="absolute w-full h-full transform -rotate-90">
                 <circle
                   cx="96"
@@ -390,7 +402,6 @@ export default function JoyCelebration() {
                 />
               </svg>
 
-              {/* The clickable charging Sphere */}
               <motion.button
                 onMouseDown={() => setIsCharging(true)}
                 onMouseUp={() => setIsCharging(false)}
@@ -422,7 +433,7 @@ export default function JoyCelebration() {
                       className="flex flex-col items-center text-white"
                     >
                       <Sparkles className="w-8 h-8 text-amber-300 animate-pulse mb-1" />
-                      <span className="text-[10px] font-mono uppercase tracking-widest">Aliniat</span>
+                      <span className="text-[10px] font-mono uppercase tracking-widest">{ui.aligned}</span>
                     </motion.div>
                   ) : (
                     <motion.div
@@ -434,7 +445,7 @@ export default function JoyCelebration() {
                     >
                       {activeLevel.icon}
                       <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 mt-2">
-                        {isCharging ? "Sincronizare..." : "Menține Apăsat"}
+                        {isCharging ? ui.synchronizing : ui.holdBtn}
                       </span>
                       <span className="text-xs font-bold text-neutral-200 mt-1">
                         {Math.round(vibration)}%
@@ -451,9 +462,9 @@ export default function JoyCelebration() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
-                  className="text-xs font-mono text-amber-400"
+                  className="text-xs font-mono text-amber-400 animate-pulse"
                 >
-                  Conștiința s-a aliniat cu planul {activeLevel.title.split(" ")[0]}!
+                  {ui.alignedMessage} {activeLevel.title.split(" (")[0]}!
                 </motion.p>
               )}
             </AnimatePresence>
@@ -476,6 +487,7 @@ export default function JoyCelebration() {
                 level={level}
                 isSelected={isSelected}
                 onSelect={() => handleLevelChange(level)}
+                enterPortalText={ui.enterPortal}
               />
             );
           })}

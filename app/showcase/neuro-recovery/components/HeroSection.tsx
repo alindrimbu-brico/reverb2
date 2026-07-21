@@ -4,8 +4,9 @@ import { useState } from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { BrainCircuit, Dna, History, BookOpen, Quote, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { setTheme } from "./AudioEngine";
+import { getLocaleFromPath, localizePath, translationStrings, uiStrings } from "./translations";
 
 interface InteractiveCardProps {
   href: string;
@@ -15,9 +16,10 @@ interface InteractiveCardProps {
   children: React.ReactNode;
   hoverGlowColor: string;
   hoverBorderClass: string;
+  enterText: string;
 }
 
-function InteractiveCard({ href, icon, title, imageSrc, children, hoverGlowColor, hoverBorderClass }: InteractiveCardProps) {
+function InteractiveCard({ href, icon, title, imageSrc, children, hoverGlowColor, hoverBorderClass, enterText }: InteractiveCardProps) {
   const router = useRouter();
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -78,7 +80,7 @@ function InteractiveCard({ href, icon, title, imageSrc, children, hoverGlowColor
             {title}
           </h3>
           <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 group-hover:text-white transition-colors flex items-center gap-1 opacity-0 group-hover:opacity-100 duration-300">
-            Intră Portalul <ArrowRight className="w-3 h-3" />
+            {enterText} <ArrowRight className="w-3 h-3" />
           </span>
         </div>
 
@@ -99,6 +101,21 @@ function InteractiveCard({ href, icon, title, imageSrc, children, hoverGlowColor
 }
 
 export default function HeroSection() {
+  const pathname = usePathname() || "";
+  const locale = getLocaleFromPath(pathname);
+  
+  const ui = {
+    badge: uiStrings.headerBadge[locale],
+    title: uiStrings.headerTitle[locale],
+    subtitle: uiStrings.headerSubtitle[locale],
+    subtitle2: uiStrings.headerSubtitle2[locale],
+    exploreBtn: uiStrings.exploreBtn[locale],
+    enterPortal: uiStrings.enterPortal[locale]
+  };
+
+  const epigenetics = translationStrings["epigenetics-gabor-mate"][locale];
+  const collectiveTrauma = translationStrings["collective-trauma-hpa"][locale];
+
   return (
     <motion.section 
       onViewportEnter={() => setTheme("chaos")}
@@ -126,33 +143,30 @@ export default function HeroSection() {
           <div className="flex flex-wrap gap-4 items-center">
             <div className="inline-flex items-center space-x-2 bg-neutral-900 border border-neutral-800 px-4 py-2 rounded-full text-xs font-mono tracking-widest text-neutral-400 uppercase shadow-lg">
               <BrainCircuit className="w-4 h-4 text-purple-500" />
-              <span>Rădăcinile Neurobiologice</span>
+              <span>{ui.badge}</span>
             </div>
           </div>
           
-          <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tighter text-white leading-[1.05]">
-            Umbra Proiectată a <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-300 via-neutral-500 to-neutral-700">
-              Suferinței Mute.
-            </span>
+          <h1 className="text-4xl lg:text-6xl font-extrabold tracking-tighter text-white leading-[1.05]">
+            {ui.title}
           </h1>
 
           <div className="border-l-4 border-purple-800/50 pl-6 space-y-4">
             <p className="text-xl text-neutral-300 leading-relaxed font-light">
-              Dependența nu este o slăbiciune morală, o alegere greșită sau o simplă lipsă de voință. În paradigma neuroștiinței moderne, este o <strong className="font-medium text-white">boală profundă a conectivității</strong>—o tulburare a emoțiilor și a comportamentului.
+              {ui.subtitle}
             </p>
             <p className="text-lg text-neutral-400 leading-relaxed font-light">
-              Este o încercare disperată a creierului de a supraviețui, de a regla un sistem nervos copleșit și de a rezolva problema durerii fundamentale, înrădăcinate adesea în traumele timpurii.
+              {ui.subtitle2}
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-4 pt-4">
             <Link 
-              href="/showcase/neuro-recovery/roots"
+              href={localizePath("/showcase/neuro-recovery/roots", locale)}
               className="flex items-center space-x-2 text-sm font-mono tracking-widest uppercase text-purple-400 bg-purple-900/20 hover:bg-purple-900/40 px-8 py-4 rounded-full transition-all border border-purple-500/30 hover:border-purple-500/60 shadow-[0_0_20px_rgba(168,85,247,0.1)] hover:shadow-[0_0_30px_rgba(168,85,247,0.2)]"
             >
               <BookOpen className="w-5 h-5" />
-              <span>Explorează Cercetarea</span>
+              <span>{ui.exploreBtn}</span>
             </Link>
           </div>
         </motion.div>
@@ -160,35 +174,39 @@ export default function HeroSection() {
         <div className="space-y-6">
           {/* Card 1: Epigenetics / Gabor Mate */}
           <InteractiveCard
-            href="/showcase/neuro-recovery/epigenetics-gabor-mate"
+            href={localizePath("/showcase/neuro-recovery/epigenetics-gabor-mate", locale)}
             icon={<Dna className="text-purple-500" />}
-            title="Epigenetica Trage Trăgaciul"
+            title={epigenetics.title.split(" — ")[0]}
             imageSrc="/images/epigenetics.jpg"
             hoverGlowColor="rgba(168, 85, 247, 0.4)"
             hoverBorderClass="hover:border-purple-900/50"
+            enterText={ui.enterPortal}
           >
-            <p className="text-neutral-400 text-base leading-relaxed mb-4">
-              Totul începe din rădăcinile noastre. Genetica dictează vulnerabilitățile, dar epigenetica dictează activarea. Traumele generațiilor trecute și suferințele nespuse modifică felul în care ni se activează genele, lăsând „semne de carte” moleculare pe ADN.
+            <p className="text-neutral-400 text-sm leading-relaxed mb-4">
+              {epigenetics.subtitle}
             </p>
-            <div className="bg-neutral-950/50 p-4 rounded-xl border border-neutral-800/50 flex gap-3 items-start z-10 relative">
-              <Quote className="w-5 h-5 text-purple-500/50 shrink-0 mt-1" />
-              <p className="text-sm text-neutral-300 font-light italic">
-                „Nu întreba de ce dependența, întreabă de ce durerea.” — Dr. Gabor Maté
-              </p>
-            </div>
+            {epigenetics.quote && (
+              <div className="bg-neutral-950/50 p-4 rounded-xl border border-neutral-800/50 flex gap-3 items-start z-10 relative">
+                <Quote className="w-5 h-5 text-purple-500/50 shrink-0 mt-1" />
+                <p className="text-xs text-neutral-300 font-light italic">
+                  {epigenetics.quote} — {epigenetics.quoteAuthor}
+                </p>
+              </div>
+            )}
           </InteractiveCard>
 
           {/* Card 2: Collective Trauma & HPA Axis */}
           <InteractiveCard
-            href="/showcase/neuro-recovery/collective-trauma-hpa"
+            href={localizePath("/showcase/neuro-recovery/collective-trauma-hpa", locale)}
             icon={<History className="text-red-500" />}
-            title="Trauma Colectivă & Axa HPA"
+            title={collectiveTrauma.title.split(" — ")[0]}
             imageSrc="/images/collective-trauma.jpg"
             hoverGlowColor="rgba(239, 68, 68, 0.4)"
             hoverBorderClass="hover:border-red-900/50"
+            enterText={ui.enterPortal}
           >
-            <p className="text-neutral-400 text-base leading-relaxed">
-              Stresul cronic dereglează axa HPA (Hipotalamo-Hipofizo-Suprarenală), blocând creierul într-un mod permanent de supraviețuire. Lipsa cronică de speranță, genocidul cultural sau neglijarea în copilărie schimbă însăși arhitectura neurobiologică. Când alarma de stres nu se oprește niciodată, o substanță care o poate reduce la tăcere devine irezistibilă.
+            <p className="text-neutral-400 text-sm leading-relaxed">
+              {collectiveTrauma.subtitle}
             </p>
           </InteractiveCard>
         </div>
