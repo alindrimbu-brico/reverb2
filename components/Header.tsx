@@ -143,12 +143,7 @@ export default function Header() {
               </Link>
             );
           })}
-          <Link
-            href="/portal"
-            className="ml-2 inline-flex items-center justify-center rounded-full border border-[#1d2731] bg-transparent hover:bg-[#1d2731]/5 px-5 py-2.5 text-xs font-bold uppercase tracking-widest text-[#1d2731] transition-all duration-300 hover:-translate-y-0.5"
-          >
-            {translations.client}
-          </Link>
+
           <Link
             href="/contact"
             className="ml-2 inline-flex items-center justify-center rounded-full bg-[#1d2731] px-6 py-2.5 text-xs font-bold uppercase tracking-widest text-[#f5f1ea] transition-all duration-300 hover:-translate-y-0.5 shadow-[0_5px_15px_rgba(29,39,49,0.2)] hover:shadow-[0_10px_20px_rgba(29,39,49,0.4)]"
@@ -196,13 +191,7 @@ export default function Header() {
               {label}
             </Link>
           ))}
-          <Link
-            href="/portal"
-            onClick={() => setOpen(false)}
-            className="mt-4 inline-flex w-full items-center justify-center rounded-full border border-[#1d2731] py-3 text-xs font-bold uppercase tracking-widest text-[#1d2731] hover:bg-[#1d2731]/5 transition-colors"
-          >
-            {translations.client}
-          </Link>
+
           <Link
             href="/contact"
             onClick={() => setOpen(false)}
