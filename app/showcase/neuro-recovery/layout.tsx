@@ -6,7 +6,6 @@ export const metadata: Metadata = {
 };
 
 import GlobalAudioToggle from "./components/GlobalAudioToggle";
-import ScrollToTop from "./components/ScrollToTop";
 import { NeuroluminaThemeProvider } from "./components/ThemeContext";
 import ThemeSwitcher from "./components/ThemeSwitcher";
 import NeuroluminaFooter from "./components/NeuroluminaFooter";
@@ -26,7 +25,6 @@ export default function NeuroRecoveryLayout({
       </div>
       <ThemeSwitcher />
       <GlobalAudioToggle />
-      <ScrollToTop />
     </NeuroluminaThemeProvider>
   );
 }
