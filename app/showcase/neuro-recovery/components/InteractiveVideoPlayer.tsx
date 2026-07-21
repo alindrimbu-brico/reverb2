@@ -66,6 +66,14 @@ export default function InteractiveVideoPlayer({ imageSrc, themeColor, title }: 
     };
     window.addEventListener("resize", handleResize);
 
+    // Preload background image to draw it distorted on canvas
+    const img = new Image();
+    img.src = imageSrc;
+    let imgLoaded = false;
+    img.onload = () => {
+      imgLoaded = true;
+    };
+
     // Determine visual style based on the page theme/imageSrc
     const isPleasure = imageSrc.includes("pleasure");
     const isHappiness = imageSrc.includes("happiness");
@@ -98,7 +106,42 @@ export default function InteractiveVideoPlayer({ imageSrc, themeColor, title }: 
       // Animation speed multiplier based on play state
       const speedMult = isPlaying ? 1.5 : 0.15;
 
-      // Render elements based on theme
+      // 1. Draw background image with liquid organic distortion mesh
+      if (imgLoaded) {
+        ctx.save();
+        
+        // Scale and center the image slightly to prevent empty black borders during ripple distortion
+        const scaleFactor = 1.1;
+        const drawWidth = width * scaleFactor;
+        const drawHeight = height * scaleFactor;
+        const offsetX = -(drawWidth - width) / 2;
+        const offsetY = -(drawHeight - height) / 2;
+        
+        const sliceCount = 35;
+        const sliceHeight = drawHeight / sliceCount;
+        
+        for (let i = 0; i < sliceCount; i++) {
+          const sy = (img.height / sliceCount) * i;
+          const dy = offsetY + i * sliceHeight;
+          
+          // Organic fluid wave math for shifting columns/rows
+          const waveX = offsetX + Math.sin((i / sliceCount) * Math.PI * 4 + (performance.now() * 0.0018 * speedMult)) * 15;
+          const waveY = Math.cos((i / sliceCount) * Math.PI * 2.5 + (performance.now() * 0.0012 * speedMult)) * 6;
+          
+          ctx.drawImage(
+            img,
+            0, sy, img.width, img.height / sliceCount,
+            waveX, dy + waveY, drawWidth, sliceHeight
+          );
+        }
+        ctx.restore();
+      } else {
+        // Dark background placeholder while loading
+        ctx.fillStyle = "#0a0a0c";
+        ctx.fillRect(0, 0, width, height);
+      }
+
+      // 2. Render particle elements based on theme on top of the distorted image
       elements.forEach((el) => {
         // Update physics
         el.x += el.speedX * speedMult;
@@ -264,25 +307,17 @@ export default function InteractiveVideoPlayer({ imageSrc, themeColor, title }: 
       {/* Video Content Area */}
       <div className="relative aspect-video w-full overflow-hidden flex items-center justify-center">
         
-        {/* Main Background Image (Suggestive Visual) */}
-        <motion.img
+        {/* Fallback Static Image behind Canvas (for loading and SEO) */}
+        <img
           src={imageSrc}
           alt={title}
-          animate={{
-            scale: isPlaying ? [1, 1.05, 1.01] : 1,
-            filter: isPlaying ? ["hue-rotate(0deg)", "hue-rotate(5deg)", "hue-rotate(0deg)"] : "hue-rotate(0deg)"
-          }}
-          transition={{
-            scale: { repeat: Infinity, duration: 15, ease: "easeInOut" },
-            filter: { repeat: Infinity, duration: 10, ease: "linear" }
-          }}
-          className="absolute inset-0 w-full h-full object-cover opacity-90 transition-all duration-700"
+          className="absolute inset-0 w-full h-full object-cover opacity-10 pointer-events-none"
         />
 
-        {/* Generative Interactive Canvas Overlay (Moving elements in the picture) */}
+        {/* Generative Interactive Canvas Overlay (Displays the distorted background image and moving elements) */}
         <canvas 
           ref={canvasRef} 
-          className="absolute inset-0 w-full h-full z-10 pointer-events-none mix-blend-screen"
+          className="absolute inset-0 w-full h-full z-10 pointer-events-none"
         />
 
         {/* Video Scanlines & Noise Overlay for cinematic look */}
