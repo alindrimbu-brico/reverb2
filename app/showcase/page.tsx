@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { GITHUB_SHOWCASE_PATHS } from "@/lib/githubShowcases";
 
 export const metadata: Metadata = {
   title: "Industry Showcase — Reverb.ro",
@@ -42,7 +43,16 @@ const showcases = [
   { id: "inhale-exhale", name: "Inhale Exhale", vibe: "Rhythmic Flow", color: "#2E4F4F", description: "O experiență digitală meditativă care respiră. Echilibrul perfect între absorbția de date și expresia creativă prin design pulsatil.", href: "/showcase/inhale-exhale" },
   { id: "vespa-urban", name: "Veloce Mobility", vibe: "Dolce Vita Efficiency", color: "#E0F2EC", description: "Minimalism rotunjit, curbe aerodinamice și nuanțe de pastel mint. Un concept Vespa-vibe dedicat startup-urilor de mobilitate urbană.", href: "/showcase/vespa-urban" },
   { id: "the-anchor", name: "The Anchor", vibe: "Ethereal Brutalism", color: "#8A1C14", description: "Eseu filosofic vizual despre masculinitatea matură și susținerea partenerului în haos. Estetică întunecată și typography tensionat.", href: "/showcase/the-anchor" },
-  { id: "ai-first-framework", name: "AI-First Framework", vibe: "Operating System Logic", color: "#6366f1", description: "Blog-prezentare premium pentru framework-ul de transformare AI-First. Tipografie tehnică, gradient indigo-cyan și narative pe 5 capitole despre AI ca sistem de operare al companiei.", href: "https://alindrimbu-brico.github.io/ai-first-framework/" },
+  { id: "ai-first-framework", name: "AI-First Framework", vibe: "Operating System Logic", color: "#6366f1", description: "Blog-prezentare premium pentru framework-ul de transformare AI-First. Tipografie tehnică, gradient indigo-cyan și narative pe 5 capitole despre AI ca sistem de operare al companiei.", href: "/ai-first-framework/ai-first/" },
+  { id: "silva-method", name: "Metoda Silva", vibe: "Alpha State Science", color: "#7C3AED", description: "O incursiune științifică, filosofică și psihologică în starea Alpha: mecanica mentală, protocolul creației și reprogramarea subconștientului.", href: "/silva-method/" },
+  { id: "spatiul-deschis", name: "Spațiul Deschis", vibe: "Conscious Intimacy", color: "#BE185D", description: "Blog despre dinamica dintre masculin și feminin: deschidere emoțională, siguranță în cuplu și vulnerabilitate constructivă.", href: "/spatiul-deschis/" },
+  { id: "elumia", name: "Elumia", vibe: "Guide to the Unseen Plane", color: "#A78BFA", description: "Ghid interactiv bilingv pentru planul nevăzut: cei 7 Gardieni interiori, harta minții și conversația cu Operatorul.", href: "/elumia/" },
+  { id: "flooare-ro-site", name: "Flooare.ro", vibe: "Armonia Sferelor", color: "#0EA5E9", description: "Portalul Arhetipurilor și Armonia Sferelor. Experiență vizuală despre arhetipuri, sunet și geometrie sacră.", href: "/flooare-ro-site/" },
+  { id: "flooare-portal", name: "Flooare Portal", vibe: "Portalul Arhetipurilor", color: "#14B8A6", description: "Varianta extinsă a portalului Flooare: arhetipuri, frecvențe și parcursuri interactive.", href: "/flooare-portal/" },
+  { id: "armonia", name: "ARMONIA", vibe: "Letters & Practices", color: "#B45309", description: "Douăzeci și una de scrisori scurte, fiecare cu o practică și un aforism. Soluții filozofice pentru viața de zi cu zi.", href: "https://yourfinestform.com/" },
+  { id: "immortallight", name: "The Immortal Light", vibe: "Sacred Teaching", color: "#EAB308", description: "Esența învățăturii divine prin toate religiile lumii: opt capitole, șapte piloni și The Teacher's Edition.", href: "https://immortallight.app/" },
+  { id: "oracol", name: "Oracolul celor Cinci Cercuri", vibe: "52-Card Wisdom Oracle", color: "#DC2626", description: "Un oracol de 52 de cărți de înțelepciune: trage, respiră, ascultă.", href: "https://pentora.app/" },
+  { id: "roluri-familia-alcoolicului", name: "Când cineva bea", vibe: "Recovery Map", color: "#0F766E", description: "Cele șase roluri din familia unei persoane care bea, modelul Minnesota, cei doisprezece pași și resurse de sprijin din România.", href: "https://candcinevabea.life/" },
   { id: "fish-io", name: "Abyss.io (Game Engine)", vibe: "Cyber-Ocean Collision", color: "#00E5FF", description: "Joc HTML5 Canvas 60FPS integrat în React. Detecție de coliziuni (eat & grow), AI Boids inamici și demo de monetizare (Stripe/Crypto).", href: "/showcase/fish-io" },
   { id: "neuro-recovery", name: "NeuroLumina", vibe: "Dark to Light Recovery", color: "#10B981", description: "Platformă interactivă de tip scroll-telling. O explorare empatică, bazată pe neuroștiință a adicției, trecând de la haos la homeostazie.", href: "/showcase/neuro-recovery" },
   { id: "acasa-showcase", name: "Acasă Showcase", vibe: "Premium Glassmorphism", color: "#6c5ce7", description: "Prezentare digitală pentru proiectele extrase din arhiva Acasă: NevronixAI, Florarte, inteligență artificială și ecosisteme de startup.", href: "/acasa-showcase/index.html" },
@@ -105,7 +115,7 @@ export default function ShowcaseIndex() {
       {/* Grid */}
       <section className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-24 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {showcases.map((s) => {
-          const isExternal = /^https?:\/\//.test(s.href);
+          const isExternal = /^https?:\/\//.test(s.href) || GITHUB_SHOWCASE_PATHS.some((p) => s.href.startsWith(`/${p}/`));
           const linkProps = isExternal ? { target: "_blank" as const, rel: "noopener noreferrer" } : {};
           return (
           <Link href={s.href} key={s.id} {...linkProps} className="showcase-card group relative border transition-all duration-1000 p-8 lg:p-10 flex flex-col h-full overflow-hidden rounded-xl shadow-sm hover:shadow-xl hover:-translate-y-1" style={{ borderColor: 'var(--border-color)', backgroundColor: 'var(--card-bg)' }}>

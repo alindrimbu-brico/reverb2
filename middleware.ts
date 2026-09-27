@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { GITHUB_SHOWCASE_PATHS } from './lib/githubShowcases';
 
 export const config = {
   matcher: [
@@ -50,6 +51,22 @@ export function middleware(request: NextRequest) {
       url.pathname = `/aura${url.pathname}`;
       return NextResponse.rewrite(url);
     }
+  }
+
+  // skipTrailingSlashRedirect e activ (pentru showcase-urile din GitHub), deci
+  // gestionăm aici slash-ul final. nextUrl îl normalizează, așa că citim URL-ul brut.
+  const rawPath = new URL(request.url).pathname;
+  const showcase = GITHUB_SHOWCASE_PATHS.find(
+    (p) => rawPath === `/${p}` || rawPath.startsWith(`/${p}/`)
+  );
+  if (showcase && !rawPath.endsWith('/') && !/\.[a-z0-9]+$/i.test(rawPath)) {
+    // Folderele din GitHub Pages au nevoie de slash final (altfel GitHub face 301
+    // spre github.io, iar resursele relative nu se mai rezolvă).
+    return NextResponse.redirect(new URL(`${rawPath}/${url.search}`, request.url), 308);
+  }
+  if (!showcase && rawPath.length > 1 && rawPath.endsWith('/')) {
+    // Redirect-ul standard Next.js "/pagina/" -> "/pagina" pentru restul site-ului.
+    return NextResponse.redirect(new URL(rawPath.replace(/\/+$/, '') + url.search, request.url), 308);
   }
 
   // Normal request to reverb.ro proceeds unchanged

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { GITHUB_SHOWCASE_PATHS } from "@/lib/githubShowcases";
 
 export const metadata: Metadata = {
   title: "Industry Showcase — Reverb.ro",
@@ -25,7 +26,16 @@ const showcases = [
   { id: "event-music", name: "Festival Promoters", vibe: "Kinetic Blob Marquee", color: "#EC4899", description: "Liquid shapes combined with massive infinite bands of artists.", href: "/en/showcase/event-music" },
   { id: "logistics-hub", name: "Logistics & Cargo", vibe: "Terminal Gate Cobalt", color: "#1D4ED8", description: "Dense tables simulating airport departures. Rigid grid for top-tier logistics.", href: "/en/showcase/logistics-hub" },
   { id: "ai-future", name: "AI Tech Core", vibe: "Holographic Orbital", color: "#06B6D4", description: "Vector software platforms. Fine CSS 3D representing activated neural nodes.", href: "/en/showcase/ai-future" },
-  { id: "ai-first-framework", name: "AI-First Framework", vibe: "Operating System Logic", color: "#6366f1", description: "Premium presentation blog for the AI-First business transformation framework. Technical typography, indigo-cyan gradients and a 5-chapter narrative on AI as the company's operating system.", href: "https://alindrimbu-brico.github.io/ai-first-framework/" },
+  { id: "ai-first-framework", name: "AI-First Framework", vibe: "Operating System Logic", color: "#6366f1", description: "Premium presentation blog for the AI-First business transformation framework. Technical typography, indigo-cyan gradients and a 5-chapter narrative on AI as the company's operating system.", href: "/ai-first-framework/ai-first/" },
+  { id: "silva-method", name: "The Silva Method", vibe: "Alpha State Science", color: "#7C3AED", description: "A scientific, philosophical and psychological journey into the Alpha state: mental mechanics, the creation protocol and subconscious reprogramming.", href: "/silva-method/" },
+  { id: "spatiul-deschis", name: "Open Space", vibe: "Conscious Intimacy", color: "#BE185D", description: "A blog on masculine and feminine dynamics: emotional openness, safety in a couple and constructive vulnerability.", href: "/spatiul-deschis/" },
+  { id: "elumia", name: "Elumia", vibe: "Guide to the Unseen Plane", color: "#A78BFA", description: "A bilingual interactive guide to the unseen plane: the 7 inner Guardians, a map of the mind and a talk with the Operator.", href: "/elumia/" },
+  { id: "flooare-ro-site", name: "Flooare.ro", vibe: "Harmony of the Spheres", color: "#0EA5E9", description: "The Archetype Portal and the Harmony of the Spheres. A visual experience of archetypes, sound and sacred geometry.", href: "/flooare-ro-site/" },
+  { id: "flooare-portal", name: "Flooare Portal", vibe: "Archetype Portal", color: "#14B8A6", description: "The extended Flooare portal: archetypes, frequencies and interactive journeys.", href: "/flooare-portal/" },
+  { id: "armonia", name: "ARMONIA", vibe: "Letters & Practices", color: "#B45309", description: "Twenty-one short letters, each with a practice and an aphorism. Philosophical answers for everyday life.", href: "https://yourfinestform.com/" },
+  { id: "immortallight", name: "The Immortal Light", vibe: "Sacred Teaching", color: "#EAB308", description: "The essence of the divine teaching through all the world's religions: eight chapters, seven pillars and The Teacher's Edition.", href: "https://immortallight.app/" },
+  { id: "oracol", name: "The Five Circles Oracle", vibe: "52-Card Wisdom Oracle", color: "#DC2626", description: "A 52-card wisdom oracle: draw, breathe, listen.", href: "https://pentora.app/" },
+  { id: "roluri-familia-alcoolicului", name: "When Someone Drinks", vibe: "Recovery Map", color: "#0F766E", description: "The six roles in an alcoholic's family, the Minnesota model, the twelve steps and support resources in Romania.", href: "https://candcinevabea.life/" },
   { id: "neuro-recovery", name: "NeuroLumina", vibe: "Dark to Golden Homeostasis", color: "#FBBF24", description: "Interactive scroll-telling experience exploring the biology of addiction, dopamine hijacking, and the beautiful explosion of joy in recovery. Features procedural Web Audio API sounds.", href: "/en/showcase/neuro-recovery" },
   { id: "soare", name: "Soare & Izvoare", vibe: "Ethereal Solaris", color: "#D97706", description: "Radiant, warm interface designed for businesses focused on clarity, ascension, and premium organicity.", href: "/showcase/soare" },
   { id: "cuprum-medical", name: "Cuprum Clinic", vibe: "Medical Copper", color: "#C47022", description: "Revolutionary clinical design built around steel and cut with copper patina, reflecting its natural antimicrobial heritage.", href: "/showcase/cuprum-medical" },
@@ -86,7 +96,7 @@ export default function ShowcaseIndexEN() {
       {/* Grid */}
       <section className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-24 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {showcases.map((s) => {
-          const isExternal = /^https?:\/\//.test(s.href);
+          const isExternal = /^https?:\/\//.test(s.href) || GITHUB_SHOWCASE_PATHS.some((p) => s.href.startsWith(`/${p}/`));
           const linkProps = isExternal ? { target: "_blank" as const, rel: "noopener noreferrer" } : {};
           return (
           <Link href={s.href} key={s.id} {...linkProps} className="showcase-card group relative border transition-all duration-1000 p-8 lg:p-10 flex flex-col h-full overflow-hidden rounded-xl shadow-sm hover:shadow-xl hover:-translate-y-1" style={{ borderColor: 'var(--border-color)', backgroundColor: 'var(--card-bg)' }}>
