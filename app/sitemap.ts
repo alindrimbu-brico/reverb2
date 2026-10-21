@@ -1,45 +1,34 @@
-import type { MetadataRoute } from 'next'
+import type { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/seo";
+import { publicRoutes } from "@/lib/routes";
+import { posts } from "@/lib/posts";
 
+/**
+ * Sitemapul conține toate paginile indexabile (registrul din lib/routes.ts +
+ * articolele din lib/posts.ts). Paginile noindex (portal, checkout, guru) și
+ * redirecționările nu intră. lastModified se pune doar unde avem o dată reală
+ * (articolele); Google ignoră priority și changeFrequency.
+ */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = 'https://reverb.ro'
+  const abs = (p: string) => `${SITE_URL}${p === "/" ? "" : p}`;
 
-  const routes = [
-    '',
-    '/despre',
-    '/servicii',
-    '/pachete',
-    '/magazine-online',
-    '/portofoliu',
-    '/blog',
-    '/contact',
-    '/legal',
-    '/ai-humans',
-    '/showcase',
-  ]
+  const pages: MetadataRoute.Sitemap = publicRoutes().map(({ path, languages }) => ({
+    url: abs(path),
+    ...(languages
+      ? {
+          alternates: {
+            languages: Object.fromEntries(
+              Object.entries(languages).map(([lang, p]) => [lang, abs(p)])
+            ),
+          },
+        }
+      : {}),
+  }));
 
-  const enRoutes = [
-    '/en',
-    '/en/about',
-    '/en/services',
-    '/en/packages',
-    '/en/online-store',
-    '/en/portfolio',
-    '/en/blog',
-    '/en/contact',
-    '/en/legal',
-  ]
+  const articles: MetadataRoute.Sitemap = posts.map((post) => ({
+    url: abs(`/blog/${post.slug}`),
+    lastModified: new Date(post.date),
+  }));
 
-  const allRoutes = [...routes, ...enRoutes]
-
-  return allRoutes.map((route) => ({
-    url: `${base}${route}`,
-    lastModified: new Date(),
-    changeFrequency: route === '' || route === '/en' ? 'weekly' : 'monthly',
-    priority: route === '' || route === '/en' ? 1 : 0.8,
-    ...(route.startsWith('/en')
-      ? { alternates: { languages: { ro: `${base}${route.replace('/en', '') || '/'}` } } }
-      : routes.includes(route)
-        ? { alternates: { languages: { en: `${base}/en${route === '' ? '' : route}` } } }
-        : {}),
-  }))
+  return [...pages, ...articles];
 }
