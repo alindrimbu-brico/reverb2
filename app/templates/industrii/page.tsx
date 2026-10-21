@@ -3,6 +3,7 @@ import Link from "next/link";
 import { categories, sectorOrder, type Sector } from "@/lib/templateCategories";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/templates/industrii" },
   title: "Template-uri pe Industrii — 200+ Modele",
   description: "Template-uri de site personalizate pentru fiecare tip de business: florării, cabinete medicale, primării, SaaS, e-commerce și altele.",
 };

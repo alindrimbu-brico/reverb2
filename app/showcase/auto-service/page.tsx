@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/showcase/auto-service", languages: { ro: "/showcase/auto-service", en: "/en/showcase/auto-service", "x-default": "/showcase/auto-service" } },
   title: "SYS.APEX | Auto Service Showcase",
 };
 

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/showcase/fintech", languages: { ro: "/showcase/fintech", en: "/en/showcase/fintech", "x-default": "/showcase/fintech" } },
   title: "SYS.FINANCE | FinTech Showcase",
 };
 

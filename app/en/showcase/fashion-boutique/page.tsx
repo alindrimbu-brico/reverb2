@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/en/showcase/fashion-boutique", languages: { ro: "/showcase/fashion-boutique", en: "/en/showcase/fashion-boutique", "x-default": "/showcase/fashion-boutique" } },
   title: "SYS.EDITORIAL | Fashion Boutique Showcase",
 };
 

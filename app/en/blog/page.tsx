@@ -5,6 +5,7 @@ import Reveal from "@/components/Reveal";
 import PageEnter from "@/components/PageEnter";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/en/blog", languages: { ro: "/blog", en: "/en/blog", "x-default": "/blog" } },
   title: "Blog",
   description:
     "Articles on e-commerce, digital marketing, branding and AI applied in business. No jargon. Real perspectives.",

@@ -3,6 +3,7 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/en/about", languages: { ro: "/despre", en: "/en/about", "x-default": "/despre" } },
   title: "About",
   description:
     "Structure, execution, results. Digital execution for SMBs. No jargon, no chaos.",

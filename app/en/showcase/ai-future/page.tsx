@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/en/showcase/ai-future", languages: { ro: "/showcase/ai-future", en: "/en/showcase/ai-future", "x-default": "/showcase/ai-future" } },
   title: "SYS.ORBITAL | AI Tech Showcase",
 };
 

@@ -3,6 +3,7 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/en", languages: { ro: "/", en: "/en", "x-default": "/" } },
   title: "Reverb — Structure, Clarity, Efficiency",
   description:
     "Digital ecosystems executed with robust engineering, communicated with pure human clarity. We build tools that work perfectly from day one.",

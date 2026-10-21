@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/showcase/urban-culture" },
   title: "DRIP.OS | Urban Culture & Streetwear — Showcase Reverb",
   description: "Showcase Reverb: brand de streetwear cu identitate digitală puternică. Drop system, colecții, manifesto și comunitate.",
 };

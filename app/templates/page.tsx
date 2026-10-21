@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/templates", languages: { ro: "/templates", en: "/en/templates", "x-default": "/templates" } },
   title: "Design Templates — Alege direcția vizuală",
   description: "10 variațiuni de design pentru site-ul tău. Fiecare cu o personalitate diferită — alege direcția care te reprezintă.",
 };

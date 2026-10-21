@@ -4,6 +4,7 @@ import Reveal from "@/components/Reveal";
 import PageEnter from "@/components/PageEnter";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/en/portfolio", languages: { ro: "/portofoliu", en: "/en/portfolio", "x-default": "/portofoliu" } },
   title: "Portfolio",
   description:
     "Real case studies: relaunched online stores, repositioned brands, integrated marketing systems. Proof that things work.",

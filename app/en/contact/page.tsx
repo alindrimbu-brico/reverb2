@@ -3,6 +3,7 @@ import Reveal from "@/components/Reveal";
 import ContactForm from "./ContactForm";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/en/contact", languages: { ro: "/contact", en: "/en/contact", "x-default": "/contact" } },
   title: "Contact",
   description:
     "Schedule a 20–30 minute call. We'll define the goal, structure, and implementation timeline. No obligations.",

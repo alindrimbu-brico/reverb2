@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/showcase/logistics-hub", languages: { ro: "/showcase/logistics-hub", en: "/en/showcase/logistics-hub", "x-default": "/showcase/logistics-hub" } },
   title: "SYS.CARGO | Logistics Hub Showcase",
 };
 

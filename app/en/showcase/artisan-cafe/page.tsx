@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/en/showcase/artisan-cafe", languages: { ro: "/showcase/artisan-cafe", en: "/en/showcase/artisan-cafe", "x-default": "/showcase/artisan-cafe" } },
   title: "SYS.EXTRACTION_LAB | Artisan Cafe Showcase",
 };
 

@@ -1,4 +1,7 @@
 import ArticleLayout from "../components/ArticleLayout";
+import { neuroMeta } from "@/app/showcase/neuro-recovery/components/neuroMeta";
+
+export const metadata = neuroMeta("ro", "homeostasis");
 
 export default function HomeostasisPage() {
   return (

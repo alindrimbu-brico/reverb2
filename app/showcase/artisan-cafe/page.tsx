@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/showcase/artisan-cafe", languages: { ro: "/showcase/artisan-cafe", en: "/en/showcase/artisan-cafe", "x-default": "/showcase/artisan-cafe" } },
   title: "Extraction Lab | Specialty Coffee — Showcase Reverb",
   description: "Showcase Reverb: identitate digitală completă pentru o cafenea specialty. Site cu meniu, rezervări și story de brand.",
 };

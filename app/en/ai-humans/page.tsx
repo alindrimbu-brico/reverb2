@@ -4,6 +4,7 @@ import Reveal from "@/components/Reveal";
 import AiDemoSimulator from "@/components/AiDemoSimulator";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/en/ai-humans", languages: { ro: "/ai-humans", en: "/en/ai-humans", "x-default": "/ai-humans" } },
   title: "AI Digital Human | Virtual Employee for Your Business | Reverb",
   description: "AI Avatar that talks to your clients 24/7. Setup in 5 business days. Integration on any site.",
 };

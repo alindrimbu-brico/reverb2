@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/en/showcase/legal-firm", languages: { ro: "/showcase/legal-firm", en: "/en/showcase/legal-firm", "x-default": "/showcase/legal-firm" } },
   title: "SYS.LEGAL_LOGIC | Legal Firm Showcase",
 };
 

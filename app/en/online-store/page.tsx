@@ -3,6 +3,7 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/en/online-store", languages: { ro: "/magazine-online", en: "/en/online-store", "x-default": "/magazine-online" } },
   title: "Digital Store",
   description:
     "We build online stores for selling, not just for design. Right platform, conversion structure, payments & delivery configured. From €2,490.",

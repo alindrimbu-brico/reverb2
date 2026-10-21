@@ -3,6 +3,7 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/en/services", languages: { ro: "/servicii", en: "/en/services", "x-default": "/servicii" } },
   title: "Services",
   description:
     "Clear digital services for SMBs: online presence, local clients, digital stores, ongoing promotion and AI Creative Sprint. Fixed prices, structured delivery.",

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/en/showcase/event-music", languages: { ro: "/showcase/event-music", en: "/en/showcase/event-music", "x-default": "/showcase/event-music" } },
   title: "SYS.FESTIVAL | Event Promo Showcase",
 };
 

@@ -4,6 +4,7 @@ import Reveal from "@/components/Reveal";
 import { packages, monthlyTiers } from "@/lib/packages";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/pachete", languages: { ro: "/pachete", en: "/en/packages", "x-default": "/pachete" } },
   title: "Pachete & Prețuri",
   description:
     "Prețuri fixe, fără surprize. Alege pachetul potrivit pentru afacerea ta — de la prezență online la magazin digital sau promovare continuă.",

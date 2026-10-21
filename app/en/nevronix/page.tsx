@@ -4,6 +4,7 @@ import Reveal from "@/components/Reveal";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/en/nevronix", languages: { ro: "/nevronix", en: "/en/nevronix", "x-default": "/nevronix" } },
   title: "Reverb x Nevronix — The Future of Private AI",
   description: "On-premise hybrid artificial intelligence architecture.",
 };

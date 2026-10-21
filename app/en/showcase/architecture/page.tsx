@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/en/showcase/architecture", languages: { ro: "/showcase/architecture", en: "/en/showcase/architecture", "x-default": "/showcase/architecture" } },
   title: "SYS.CONCRETE | Architecture Showcase",
 };
 

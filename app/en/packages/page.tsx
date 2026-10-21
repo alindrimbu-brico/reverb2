@@ -3,6 +3,7 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/en/packages", languages: { ro: "/pachete", en: "/en/packages", "x-default": "/pachete" } },
   title: "Packages & Pricing",
   description:
     "Fixed prices, no surprises. Choose the right package for your business — from online presence to digital store or ongoing promotion.",

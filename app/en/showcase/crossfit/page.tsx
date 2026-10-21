@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/en/showcase/crossfit", languages: { ro: "/showcase/crossfit", en: "/en/showcase/crossfit", "x-default": "/showcase/crossfit" } },
   title: "SYS.SWEAT | CrossFit Showcase",
 };
 

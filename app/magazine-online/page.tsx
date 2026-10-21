@@ -3,6 +3,7 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/magazine-online", languages: { ro: "/magazine-online", en: "/en/online-store", "x-default": "/magazine-online" } },
   title: "Magazin Digital",
   description:
     "Construim magazine online pentru vânzare, nu doar pentru design. Platformă potrivită, structură de conversie, plăți & livrare configurate. De la €2.490.",

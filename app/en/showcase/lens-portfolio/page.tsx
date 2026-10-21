@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/en/showcase/lens-portfolio", languages: { ro: "/showcase/lens-portfolio", en: "/en/showcase/lens-portfolio", "x-default": "/showcase/lens-portfolio" } },
   title: "SYS.LENS | Photo Portfolio Showcase",
 };
 

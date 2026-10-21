@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/en/showcase/medical-center", languages: { ro: "/showcase/medical-center", en: "/en/showcase/medical-center", "x-default": "/showcase/medical-center" } },
   title: "SYS.BIO_INTERFACE | Medical Center Showcase",
 };
 

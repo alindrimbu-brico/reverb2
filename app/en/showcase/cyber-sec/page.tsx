@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/en/showcase/cyber-sec", languages: { ro: "/showcase/cyber-sec", en: "/en/showcase/cyber-sec", "x-default": "/showcase/cyber-sec" } },
   title: "SYS.TERMINAL | Cyber Sec Showcase",
 };
 

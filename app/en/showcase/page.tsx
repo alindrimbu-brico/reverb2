@@ -3,6 +3,7 @@ import Link from "next/link";
 import { GITHUB_SHOWCASE_PATHS } from "@/lib/githubShowcases";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/en/showcase", languages: { ro: "/showcase", en: "/en/showcase", "x-default": "/showcase" } },
   title: "Industry Showcase — Reverb.ro",
   description: "Applied portfolio of digital environments. 18 Absolute Verticals, executed with structural precision.",
 };

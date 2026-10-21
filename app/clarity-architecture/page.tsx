@@ -3,6 +3,7 @@ import Reveal from "@/components/Reveal";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/clarity-architecture" },
   title: "Arhitectura Clarității | Sacru & Digital | Reverb",
   description: "De la Filosofia Reverb la Designul Sacru Metanoia. Claritatea este VERB - o forță activă de transformare.",
 };

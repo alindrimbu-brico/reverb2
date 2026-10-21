@@ -1,9 +1,16 @@
 import NeuroRecoveryDashboardShared from "../../../../showcase/neuro-recovery/components/NeuroRecoveryDashboardShared";
 import NeuroRecoveryArticleShared from "../../../../showcase/neuro-recovery/components/NeuroRecoveryArticleShared";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+import { neuroMeta } from "@/app/showcase/neuro-recovery/components/neuroMeta";
 
 interface PageProps {
   params: Promise<{ slug?: string[] }>;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  return neuroMeta("zh", (slug ?? []).join("/"));
 }
 
 export async function generateStaticParams() {

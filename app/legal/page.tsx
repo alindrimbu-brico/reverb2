@@ -3,6 +3,7 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/legal", languages: { ro: "/legal", en: "/en/legal", "x-default": "/legal" } },
   title: "Legal & Company Information",
   description: "Company registration, legal details, and payment information.",
 };

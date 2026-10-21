@@ -3,6 +3,7 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/despre", languages: { ro: "/despre", en: "/en/about", "x-default": "/despre" } },
   title: "Despre",
   description:
     "Structură, execuție, rezultate. Execuție digitală pentru IMM-uri. Fără jargon, fără haos.",

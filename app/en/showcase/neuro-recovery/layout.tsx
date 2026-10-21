@@ -1,9 +1,6 @@
-import type { Metadata } from "next";
+import { neuroMeta } from "@/app/showcase/neuro-recovery/components/neuroMeta";
 
-export const metadata: Metadata = {
-  title: "NeuroLumina — Reverb.ro",
-  description: "An interactive exploration of dopamine, addiction, and the architecture of joy.",
-};
+export const metadata = neuroMeta("en", "", { layout: true });
 
 import GlobalAudioToggle from "./components/GlobalAudioToggle";
 import ScrollToTop from "./components/ScrollToTop";

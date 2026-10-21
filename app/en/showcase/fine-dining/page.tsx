@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/en/showcase/fine-dining", languages: { ro: "/showcase/fine-dining", en: "/en/showcase/fine-dining", "x-default": "/showcase/fine-dining" } },
   title: "SYS.NOIR | Fine Dining Showcase",
 };
 
