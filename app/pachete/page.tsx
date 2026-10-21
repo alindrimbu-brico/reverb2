@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
-import { packages, monthlyTiers } from "@/lib/packages";
+import { packages, monthlyTiers, maintenanceTiers } from "@/lib/packages";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/pachete", languages: { ro: "/pachete", en: "/en/packages", "x-default": "/pachete" } },
@@ -259,6 +259,79 @@ export default function PachetePage() {
           <Reveal delay={320}>
             <p className="mt-12 text-center text-sm text-neutral-500 font-mono tracking-wide">
               + buget ads separat (Google / Meta). Contractul minim: 3 luni.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Maintenance Tiers */}
+      <section className="border-b border-neutral-800/50 bg-[#030303]">
+        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
+          <Reveal>
+            <div className="mb-16">
+              <div className="text-xs font-mono uppercase tracking-widest text-emerald-400">Mentenanță website</div>
+              <h2 className="mt-4 text-3xl font-medium tracking-tight md:text-5xl text-white">
+                Site mereu actualizat și protejat
+              </h2>
+              <p className="mt-4 max-w-2xl text-base leading-relaxed text-neutral-400 font-light">
+                Actualizări, backup, securitate și mici modificări, pentru o sumă fixă pe lună. Fără costuri ascunse.
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {maintenanceTiers.map((tier, i) => (
+              <Reveal key={tier.name} delay={i * 80}>
+                <div className={`relative flex flex-col h-full rounded-[2rem] p-10 border transition-all duration-500 hover:-translate-y-1 ${
+                    tier.recommended
+                      ? "bg-gradient-to-b from-neutral-900 to-[#030303] border-emerald-500/30 shadow-[0_0_40px_rgba(16,185,129,0.1)] hover:border-emerald-500/60"
+                      : "bg-neutral-900/30 border-neutral-800/50 hover:border-neutral-700/80"
+                  }`}
+                >
+                  {tier.recommended && (
+                    <div className="absolute -top-3 left-10 inline-flex items-center rounded-full bg-emerald-500/20 border border-emerald-500/30 px-4 py-1 text-xs font-mono tracking-widest text-emerald-300 backdrop-blur-md">
+                      Recomandat
+                    </div>
+                  )}
+
+                  <h3 className="text-2xl font-medium text-white mb-2">
+                    {tier.name}
+                  </h3>
+                  <p className="text-sm text-neutral-500 font-light mb-8">
+                    {tier.desc}
+                  </p>
+
+                  <div className="text-4xl font-light tracking-tight text-white mb-10 pb-8 border-b border-neutral-800">
+                    {tier.price}
+                  </div>
+
+                  <ul className="mb-10 flex-1 space-y-4">
+                    {tier.features.map((f) => (
+                      <li key={f} className="flex items-start gap-4 text-sm font-light text-neutral-400">
+                        <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-emerald-500" />
+                        <span>{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <Link
+                    href="/contact"
+                    className={`inline-flex items-center justify-center w-full rounded-full px-6 py-4 text-sm font-semibold tracking-wide transition-all duration-300 ${
+                      tier.recommended
+                        ? "bg-emerald-600 text-white hover:bg-emerald-500 shadow-lg shadow-emerald-900/20"
+                        : "bg-white/5 text-white border border-white/10 hover:bg-white/10"
+                    }`}
+                  >
+                    Alege {tier.name}
+                  </Link>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal delay={320}>
+            <p className="mt-12 text-center text-sm text-neutral-500 font-mono tracking-wide">
+              Hosting-ul și domeniul se plătesc separat, direct la furnizor.
             </p>
           </Reveal>
         </div>

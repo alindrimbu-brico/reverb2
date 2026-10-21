@@ -113,7 +113,7 @@ export default function TemplatesPage() {
           </div>
           <div className="mt-16 border-t border-white/8 pt-10 flex items-center justify-between">
             <div className="text-xs tracking-[0.25em] text-white/20 uppercase">Prețuri fixe · 50% avans · Livrare garantată</div>
-            <div className="text-2xl font-bold text-[#c9a444]">de la €790</div>
+            <div className="text-2xl font-bold text-[#c9a444]">de la €390</div>
           </div>
         </div>
       </section>
@@ -130,9 +130,9 @@ export default function TemplatesPage() {
           </h2>
           <div className="mt-16 grid gap-px bg-[#e8edf5] md:grid-cols-3">
             {[
-              { t: "Prezență Online", p: "€990", d: "Site + structură + SEO de bază. Gata în 7–14 zile." },
-              { t: "Clienți Locali", p: "€1.790", d: "SEO local + Ads + tracking complet. Telefonul sună." },
-              { t: "AI Creative Sprint", p: "€790", d: "Conținut, copy și vizuale generate și livrate în 7 zile." },
+              { t: "Prezență Online", p: "€590", d: "Site + structură + SEO de bază. Gata în 7–14 zile." },
+              { t: "Clienți Locali", p: "€790", d: "SEO local + Ads + tracking complet. Telefonul sună." },
+              { t: "AI Creative Sprint", p: "€390", d: "Conținut, copy și vizuale generate și livrate în 7 zile." },
             ].map((s) => (
               <div key={s.t} className="bg-white p-8">
                 <div className="mb-6 text-3xl font-semibold text-[#2563eb]">{s.p}</div>
@@ -198,10 +198,10 @@ export default function TemplatesPage() {
           </h2>
           <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {[
-              { t: "Website", p: "€990", d: "Prezență online completă, livrată în 2 săptămâni." },
-              { t: "Ads Local", p: "€1.790", d: "Campanii care aduc clienți locali în mod constant." },
-              { t: "E-commerce", p: "de la €2.490", d: "Magazin online optimizat pentru vânzări." },
-              { t: "AI Sprint", p: "€790", d: "Conținut complet generat și livrat în 7 zile." },
+              { t: "Website", p: "€590", d: "Prezență online completă, livrată în 2 săptămâni." },
+              { t: "Ads Local", p: "€790", d: "Campanii care aduc clienți locali în mod constant." },
+              { t: "E-commerce", p: "de la €890", d: "Magazin online optimizat pentru vânzări." },
+              { t: "AI Sprint", p: "€390", d: "Conținut complet generat și livrat în 7 zile." },
             ].map((s) => (
               <div key={s.t} className="border-t-2 border-[#c44b2b] pt-5">
                 <div className="mb-1 text-2xl font-black text-[#c44b2b]">{s.p}</div>
@@ -247,9 +247,9 @@ export default function TemplatesPage() {
             </div>
             <div className="lg:col-span-2 grid gap-3">
               {[
-                { t: "Prezență Online", p: "€990" },
-                { t: "Clienți Locali", p: "€1.790" },
-                { t: "AI Creative Sprint", p: "€790" },
+                { t: "Prezență Online", p: "€590" },
+                { t: "Clienți Locali", p: "€790" },
+                { t: "AI Creative Sprint", p: "€390" },
               ].map((s) => (
                 <div key={s.t} className="flex items-center justify-between rounded-2xl border border-white/6 bg-white/4 px-6 py-4 backdrop-blur">
                   <span className="text-sm font-medium text-white/80">{s.t}</span>
@@ -258,7 +258,7 @@ export default function TemplatesPage() {
               ))}
               <div className="rounded-2xl bg-gradient-to-br from-[#06b6d4]/20 to-[#0284c7]/10 border border-[#06b6d4]/20 px-6 py-4">
                 <div className="text-xs text-[#06b6d4]/70 mb-1">Contract minim promovare</div>
-                <div className="text-sm font-semibold text-white">3 luni · de la €390/lună</div>
+                <div className="text-sm font-semibold text-white">3 luni · de la €190/lună</div>
               </div>
             </div>
           </div>
@@ -296,7 +296,7 @@ export default function TemplatesPage() {
             <Link href="/contact" className="inline-flex items-center justify-center rounded-full bg-[#8b5cf6] px-8 py-4 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:shadow-[0_15px_40px_rgba(139,92,246,0.35)]">
               Vorbește cu echipa
             </Link>
-            <div className="text-sm text-white/30">de la €790 · prețuri fixe · 50% avans</div>
+            <div className="text-sm text-white/30">de la €390 · prețuri fixe · 50% avans</div>
           </div>
         </div>
       </section>
@@ -326,10 +326,10 @@ export default function TemplatesPage() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               {[
-                { t: "Website", p: "€990", sub: "7–14 zile" },
-                { t: "Ads Local", p: "€1.790", sub: "30 zile setup" },
-                { t: "E-commerce", p: "€2.490+", sub: "14–30 zile" },
-                { t: "AI Sprint", p: "€790", sub: "7 zile" },
+                { t: "Website", p: "€590", sub: "7–14 zile" },
+                { t: "Ads Local", p: "€790", sub: "30 zile setup" },
+                { t: "E-commerce", p: "€890+", sub: "14–30 zile" },
+                { t: "AI Sprint", p: "€390", sub: "7 zile" },
               ].map((s) => (
                 <div key={s.t} className="rounded-3xl bg-white/15 p-6 backdrop-blur-sm">
                   <div className="mb-1 text-xl font-bold text-white">{s.p}</div>
@@ -358,9 +358,9 @@ export default function TemplatesPage() {
           </div>
           <div className="grid gap-5 md:grid-cols-3">
             {[
-              { t: "Prezență Online", d: "Un site care reflectă cu acuratețe ce face afacerea ta și de ce contează.", p: "€990" },
-              { t: "Promovare Continuă", d: "Campanii lunare care se optimizează constant, cu raport transparent.", p: "de la €390/lună" },
-              { t: "Magazin Digital", d: "E-commerce curat, navigare intuitivă și checkout fără fricțiune.", p: "de la €2.490" },
+              { t: "Prezență Online", d: "Un site care reflectă cu acuratețe ce face afacerea ta și de ce contează.", p: "€590" },
+              { t: "Promovare Continuă", d: "Campanii lunare care se optimizează constant, cu raport transparent.", p: "de la €190/lună" },
+              { t: "Magazin Digital", d: "E-commerce curat, navigare intuitivă și checkout fără fricțiune.", p: "de la €890" },
             ].map((s) => (
               <div key={s.t} className="rounded-[32px] bg-white p-8 shadow-sm">
                 <div className="mb-5 inline-block rounded-full bg-[#eef3ed] px-4 py-1.5 text-sm font-semibold text-[#4a7c59]">{s.p}</div>
@@ -415,10 +415,10 @@ export default function TemplatesPage() {
             </div>
             <div className="space-y-3">
               {[
-                { t: "Prezență Online", p: "€990", d: "Website complet · 7–14 zile", highlight: false },
-                { t: "Clienți Locali", p: "€1.790 + €490/lună", d: "SEO + Ads + tracking · 30 zile setup", highlight: true },
-                { t: "Magazin Digital", p: "de la €2.490", d: "E-commerce complet · 14–30 zile", highlight: false },
-                { t: "AI Creative Sprint", p: "€790", d: "Conținut AI · 7 zile", highlight: false },
+                { t: "Prezență Online", p: "€590", d: "Website complet · 7–14 zile", highlight: false },
+                { t: "Clienți Locali", p: "€790 + €290/lună", d: "SEO + Ads + tracking · 30 zile setup", highlight: true },
+                { t: "Magazin Digital", p: "de la €890", d: "E-commerce complet · 14–30 zile", highlight: false },
+                { t: "AI Creative Sprint", p: "€390", d: "Conținut AI · 7 zile", highlight: false },
               ].map((s) => (
                 <div
                   key={s.t}
@@ -457,10 +457,10 @@ export default function TemplatesPage() {
           </p>
           <div className="mt-14 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
             {[
-              { t: "WEBSITE", p: "€990", sub: "7–14 ZILE" },
-              { t: "ADS LOCAL", p: "€1.790", sub: "30 ZILE" },
-              { t: "E-COMM", p: "€2.490+", sub: "14–30 ZILE" },
-              { t: "AI SPRINT", p: "€790", sub: "7 ZILE" },
+              { t: "WEBSITE", p: "€590", sub: "7–14 ZILE" },
+              { t: "ADS LOCAL", p: "€790", sub: "30 ZILE" },
+              { t: "E-COMM", p: "€890+", sub: "14–30 ZILE" },
+              { t: "AI SPRINT", p: "€390", sub: "7 ZILE" },
             ].map((s) => (
               <div key={s.t} className="border border-[#00ff88]/15 p-6 font-mono">
                 <div className="mb-3 text-xs text-[#00ff88]/50">{s.sub}</div>
@@ -580,7 +580,7 @@ export default function TemplatesPage() {
                 <Link href="/contact" className="inline-flex items-center gap-2 border-2 border-[#f5e642] px-7 py-3.5 text-sm font-bold uppercase tracking-widest text-[#f5e642] transition hover:bg-[#f5e642] hover:text-black">
                   Start →
                 </Link>
-                <span className="text-xs text-white/25 uppercase tracking-widest">de la €790</span>
+                <span className="text-xs text-white/25 uppercase tracking-widest">de la €390</span>
               </div>
             </div>
 
@@ -608,7 +608,7 @@ export default function TemplatesPage() {
                 </svg>
               </div>
               <div className="absolute text-center">
-                <div className="text-3xl font-black text-white">€790</div>
+                <div className="text-3xl font-black text-white">€390</div>
                 <div className="text-xs text-white/40 uppercase tracking-widest">de la</div>
               </div>
             </div>
@@ -620,11 +620,11 @@ export default function TemplatesPage() {
           <div className="flex gap-0 whitespace-nowrap" style={{ animation: "marquee-rev 22s linear infinite" }}>
             {Array(4).fill(null).map((_, i) => (
               <span key={i} className="flex shrink-0 items-center gap-8 px-8 text-xs uppercase tracking-[0.3em] text-white/20">
-                <span className="text-[#f5e642]">€990</span><span>·</span>
-                <span className="text-[#f5e642]">€1.790</span><span>·</span>
-                <span className="text-[#f5e642]">€2.490+</span><span>·</span>
+                <span className="text-[#f5e642]">€590</span><span>·</span>
                 <span className="text-[#f5e642]">€790</span><span>·</span>
-                <span className="text-[#f5e642]">€390/lună</span><span>·</span>
+                <span className="text-[#f5e642]">€890+</span><span>·</span>
+                <span className="text-[#f5e642]">€390</span><span>·</span>
+                <span className="text-[#f5e642]">€190/lună</span><span>·</span>
               </span>
             ))}
           </div>
@@ -633,10 +633,10 @@ export default function TemplatesPage() {
         {/* Cards row */}
         <div className="grid grid-cols-2 border-t border-white/8 md:grid-cols-4">
           {[
-            { t: "Website", p: "€990", d: "7–14 zile" },
-            { t: "Ads Local", p: "€1.790", d: "30 zile" },
-            { t: "E-commerce", p: "€2.490+", d: "14–30 zile" },
-            { t: "AI Sprint", p: "€790", d: "7 zile" },
+            { t: "Website", p: "€590", d: "7–14 zile" },
+            { t: "Ads Local", p: "€790", d: "30 zile" },
+            { t: "E-commerce", p: "€890+", d: "14–30 zile" },
+            { t: "AI Sprint", p: "€390", d: "7 zile" },
           ].map((s, i) => (
             <div key={s.t} className={`border-r border-white/8 p-8 last:border-r-0 ${i % 2 === 0 ? "" : "bg-white/[0.02]"}`}>
               <div className="mb-2 text-xs uppercase tracking-[0.25em] text-white/25">{s.d}</div>
@@ -694,9 +694,9 @@ export default function TemplatesPage() {
 
           <div className="grid gap-4 md:grid-cols-3">
             {[
-              { t: "> WEBSITE_INIT", p: "€990", d: "Construiește și lansează o prezență digitală funcțională." },
-              { t: "> ADS_LOCAL.EXE", p: "€1.790", d: "Activează campanii de conversie pentru clienți locali." },
-              { t: "> AI_SPRINT.RUN", p: "€790", d: "Generează conținut complet în 7 zile cu AI supervizat." },
+              { t: "> WEBSITE_INIT", p: "€590", d: "Construiește și lansează o prezență digitală funcțională." },
+              { t: "> ADS_LOCAL.EXE", p: "€790", d: "Activează campanii de conversie pentru clienți locali." },
+              { t: "> AI_SPRINT.RUN", p: "€390", d: "Generează conținut complet în 7 zile cu AI supervizat." },
             ].map((s) => (
               <div key={s.t} className="border border-[#00ffff]/15 p-6 font-mono">
                 <div className="mb-3 text-xs text-[#00ffff]/60">{s.t}</div>
@@ -738,7 +738,7 @@ export default function TemplatesPage() {
               />
             ))}
             {/* Orbit dots */}
-            {["€990", "€1.790", "€790", "€2.490+"].map((label, i) => (
+            {["€590", "€790", "€390", "€890+"].map((label, i) => (
               <div
                 key={label}
                 className="absolute flex h-12 w-12 items-center justify-center rounded-full border border-[#00c8b8]/50 bg-[#03080f] text-[9px] font-bold text-[#00c8b8]"
@@ -830,9 +830,9 @@ export default function TemplatesPage() {
           {/* Floating cards */}
           <div className="mt-14 grid gap-5 md:grid-cols-3">
             {[
-              { t: "Prezență Online", p: "€990", d: "Site modern livrat în 7–14 zile.", delay: "0s", anim: "float-a" },
-              { t: "Clienți Locali", p: "€1.790", d: "SEO + Ads + tracking complet.", delay: "0.5s", anim: "float-b" },
-              { t: "AI Creative", p: "€790", d: "Conținut AI complet în 7 zile.", delay: "1s", anim: "float-c" },
+              { t: "Prezență Online", p: "€590", d: "Site modern livrat în 7–14 zile.", delay: "0s", anim: "float-a" },
+              { t: "Clienți Locali", p: "€790", d: "SEO + Ads + tracking complet.", delay: "0.5s", anim: "float-b" },
+              { t: "AI Creative", p: "€390", d: "Conținut AI complet în 7 zile.", delay: "1s", anim: "float-c" },
             ].map((s) => (
               <div
                 key={s.t}
@@ -912,10 +912,10 @@ export default function TemplatesPage() {
             {/* Floating service cards at different depths */}
             <div className="relative" style={{ height: "380px" }}>
               {[
-                { t: "Website", p: "€990",    top: "0%",   left: "0%",   scale: 1.0, del: "0s",   anim: "float-a", z: 3 },
-                { t: "Ads",     p: "€1.790",  top: "35%",  left: "38%",  scale: 0.9, del: "0.7s", anim: "float-b", z: 2 },
-                { t: "AI",      p: "€790",    top: "55%",  left: "5%",   scale: 0.85,del: "1.4s", anim: "float-c", z: 1 },
-                { t: "Shop",    p: "€2.490+", top: "10%",  left: "52%",  scale: 0.8, del: "2s",   anim: "float-a", z: 1 },
+                { t: "Website", p: "€590",    top: "0%",   left: "0%",   scale: 1.0, del: "0s",   anim: "float-a", z: 3 },
+                { t: "Ads",     p: "€790",  top: "35%",  left: "38%",  scale: 0.9, del: "0.7s", anim: "float-b", z: 2 },
+                { t: "AI",      p: "€390",    top: "55%",  left: "5%",   scale: 0.85,del: "1.4s", anim: "float-c", z: 1 },
+                { t: "Shop",    p: "€890+", top: "10%",  left: "52%",  scale: 0.8, del: "2s",   anim: "float-a", z: 1 },
               ].map((card) => (
                 <div
                   key={card.t}
@@ -1367,9 +1367,9 @@ export default function TemplatesPage() {
           </div>
           <div className="mt-12 grid gap-4 md:grid-cols-3">
             {[
-              { t: "> website_build()",   d: "Lansăm site-ul în 7–14 zile.", p: "€990" },
-              { t: "> ads_local.start()", d: "Campanii locale care convertesc.", p: "€1.790" },
-              { t: "> ai_sprint.run()",   d: "Conținut AI livrat în 7 zile.", p: "€790" },
+              { t: "> website_build()",   d: "Lansăm site-ul în 7–14 zile.", p: "€590" },
+              { t: "> ads_local.start()", d: "Campanii locale care convertesc.", p: "€790" },
+              { t: "> ai_sprint.run()",   d: "Conținut AI livrat în 7 zile.", p: "€390" },
             ].map((s) => (
               <div key={s.t} className="rounded-xl border border-white/6 bg-white/3 p-5 font-mono">
                 <div className="mb-2 text-xs text-[#58a6ff]">{s.t}</div>
@@ -1398,7 +1398,7 @@ export default function TemplatesPage() {
             </h2>
           </div>
           <div className="mt-12 grid gap-6 md:grid-cols-3" style={{ animation: "wipe-in 1s cubic-bezier(0.77,0,0.175,1) 1.5s both" }}>
-            {["Website €990","Ads €1.790","AI Sprint €790"].map((s, i) => (
+            {["Website €590","Ads €790","AI Sprint €390"].map((s, i) => (
               <div key={s} className="border-l-2 border-[#c9a444] pl-5">
                 <div className="text-xs text-[#1a1208]/40 mb-1">{String(i+1).padStart(2,"0")}</div>
                 <div className="text-base font-semibold">{s}</div>
@@ -1425,10 +1425,10 @@ export default function TemplatesPage() {
           </h2>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {[
-              { t: "Prezență Online", p: "€990",    d: "Site complet în 7–14 zile.", emoji: "🌐", delay: "0.1s" },
-              { t: "Clienți Locali",  p: "€1.790",  d: "SEO + Ads + tracking.",       emoji: "📍", delay: "0.25s" },
-              { t: "Magazin Digital", p: "€2.490+", d: "E-commerce optimizat.",        emoji: "🛒", delay: "0.4s" },
-              { t: "AI Sprint",       p: "€790",    d: "Conținut AI în 7 zile.",       emoji: "⚡", delay: "0.55s" },
+              { t: "Prezență Online", p: "€590",    d: "Site complet în 7–14 zile.", emoji: "🌐", delay: "0.1s" },
+              { t: "Clienți Locali",  p: "€790",  d: "SEO + Ads + tracking.",       emoji: "📍", delay: "0.25s" },
+              { t: "Magazin Digital", p: "€890+", d: "E-commerce optimizat.",        emoji: "🛒", delay: "0.4s" },
+              { t: "AI Sprint",       p: "€390",    d: "Conținut AI în 7 zile.",       emoji: "⚡", delay: "0.55s" },
             ].map((s) => (
               <div key={s.t} className="rounded-2xl border border-white/8 bg-white/4 p-6"
                 style={{ animation: `slide-up 0.7s cubic-bezier(0.16,1,0.3,1) ${s.delay} both` }}>
@@ -1476,8 +1476,8 @@ export default function TemplatesPage() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               {[
-                { t: "Website", p: "€990" }, { t: "Ads Local", p: "€1.790" },
-                { t: "E-commerce", p: "€2.490+" }, { t: "AI Sprint", p: "€790" },
+                { t: "Website", p: "€590" }, { t: "Ads Local", p: "€790" },
+                { t: "E-commerce", p: "€890+" }, { t: "AI Sprint", p: "€390" },
               ].map((s) => (
                 <div key={s.t} className="rounded-3xl bg-white/15 p-6 backdrop-blur-sm">
                   <div className="text-2xl font-bold text-white">{s.p}</div>
@@ -1501,9 +1501,9 @@ export default function TemplatesPage() {
           </h2>
           <div className="grid gap-5 md:grid-cols-3">
             {[
-              { t: "Website", p: "€990", d: "7–14 zile · Site complet", delay: "0.2s" },
-              { t: "Ads Local", p: "€1.790", d: "30 zile setup · SEO + Ads", delay: "0.35s" },
-              { t: "AI Sprint", p: "€790", d: "7 zile · Conținut complet", delay: "0.5s" },
+              { t: "Website", p: "€590", d: "7–14 zile · Site complet", delay: "0.2s" },
+              { t: "Ads Local", p: "€790", d: "30 zile setup · SEO + Ads", delay: "0.35s" },
+              { t: "AI Sprint", p: "€390", d: "7 zile · Conținut complet", delay: "0.5s" },
             ].map((s) => (
               <div key={s.t} className="rounded-3xl bg-white p-7 shadow-sm"
                 style={{ animation: `elastic-pop 0.9s cubic-bezier(0.36,0.07,0.19,0.97) ${s.delay} both` }}>
@@ -1543,8 +1543,8 @@ export default function TemplatesPage() {
           </p>
           <div className="mt-12 grid gap-4 border-t border-[#d4af6a]/10 pt-10 md:grid-cols-4">
             {[
-              { t: "Website", p: "€990" }, { t: "Clienți Locali", p: "€1.790" },
-              { t: "E-commerce", p: "€2.490+" }, { t: "AI Sprint", p: "€790" },
+              { t: "Website", p: "€590" }, { t: "Clienți Locali", p: "€790" },
+              { t: "E-commerce", p: "€890+" }, { t: "AI Sprint", p: "€390" },
             ].map((s) => (
               <div key={s.t}>
                 <div className="text-lg font-bold text-[#d4af6a]">{s.p}</div>
@@ -1584,9 +1584,9 @@ export default function TemplatesPage() {
             style={{ animation: "slide-right 1s cubic-bezier(0.16,1,0.3,1) 0.2s both" }}>
             <div className="space-y-5">
               {[
-                { t: "Prezență Online", p: "€990", d: "Website + structură · 7–14 zile" },
-                { t: "Clienți Locali",  p: "€1.790", d: "SEO + Ads · 30 zile setup" },
-                { t: "AI Sprint",       p: "€790", d: "Conținut AI complet · 7 zile" },
+                { t: "Prezență Online", p: "€590", d: "Website + structură · 7–14 zile" },
+                { t: "Clienți Locali",  p: "€790", d: "SEO + Ads · 30 zile setup" },
+                { t: "AI Sprint",       p: "€390", d: "Conținut AI complet · 7 zile" },
               ].map((s, i) => (
                 <div key={s.t} className="flex items-center gap-5 rounded-2xl border border-[#1d2731]/8 bg-white/60 p-5"
                   style={{ animation: `slide-right 0.7s cubic-bezier(0.16,1,0.3,1) ${0.4 + i * 0.15}s both` }}>
@@ -1625,8 +1625,8 @@ export default function TemplatesPage() {
           </div>
           <div className="mt-14 grid gap-4 md:grid-cols-4">
             {[
-              { t: "Website", p: "€990" }, { t: "Ads", p: "€1.790" },
-              { t: "Shop", p: "€2.490+" }, { t: "AI", p: "€790" },
+              { t: "Website", p: "€590" }, { t: "Ads", p: "€790" },
+              { t: "Shop", p: "€890+" }, { t: "AI", p: "€390" },
             ].map((s) => (
               <div key={s.t} className="border border-white/5 bg-white/2 p-6 text-center backdrop-blur-sm">
                 <div className="text-xl font-bold text-white">{s.p}</div>
@@ -1672,20 +1672,20 @@ export default function TemplatesPage() {
             <div className="overflow-hidden rounded-2xl border border-[#22c55e]/10 bg-[#000a00]" style={{ height: "280px" }}>
               <div style={{ animation: "ticker2 12s linear infinite" }}>
                 {[
-                  { label: "Website Prezență Online", value: "€990",    trend: "↑" },
-                  { label: "SEO + Ads Clienți Locali",value: "€1.790",  trend: "↑" },
-                  { label: "Magazin Digital",         value: "€2.490+", trend: "↑" },
-                  { label: "AI Creative Sprint",      value: "€790",    trend: "↑" },
-                  { label: "Promovare Start",         value: "€390/mo", trend: "→" },
-                  { label: "Promovare Growth",        value: "€590/mo", trend: "↑" },
-                  { label: "Promovare Scale",         value: "€790/mo", trend: "↑" },
-                  { label: "Website Prezență Online", value: "€990",    trend: "↑" },
-                  { label: "SEO + Ads Clienți Locali",value: "€1.790",  trend: "↑" },
-                  { label: "Magazin Digital",         value: "€2.490+", trend: "↑" },
-                  { label: "AI Creative Sprint",      value: "€790",    trend: "↑" },
-                  { label: "Promovare Start",         value: "€390/mo", trend: "→" },
-                  { label: "Promovare Growth",        value: "€590/mo", trend: "↑" },
-                  { label: "Promovare Scale",         value: "€790/mo", trend: "↑" },
+                  { label: "Website Prezență Online", value: "€590",    trend: "↑" },
+                  { label: "SEO + Ads Clienți Locali",value: "€790",  trend: "↑" },
+                  { label: "Magazin Digital",         value: "€890+", trend: "↑" },
+                  { label: "AI Creative Sprint",      value: "€390",    trend: "↑" },
+                  { label: "Promovare Start",         value: "€190/mo", trend: "→" },
+                  { label: "Promovare Growth",        value: "€290/mo", trend: "↑" },
+                  { label: "Promovare Scale",         value: "€390/mo", trend: "↑" },
+                  { label: "Website Prezență Online", value: "€590",    trend: "↑" },
+                  { label: "SEO + Ads Clienți Locali",value: "€790",  trend: "↑" },
+                  { label: "Magazin Digital",         value: "€890+", trend: "↑" },
+                  { label: "AI Creative Sprint",      value: "€390",    trend: "↑" },
+                  { label: "Promovare Start",         value: "€190/mo", trend: "→" },
+                  { label: "Promovare Growth",        value: "€290/mo", trend: "↑" },
+                  { label: "Promovare Scale",         value: "€390/mo", trend: "↑" },
                 ].map((row, i) => (
                   <div key={i} className="flex items-center justify-between border-b border-[#22c55e]/6 px-5 py-3 font-mono">
                     <span className="text-xs text-white/40">{row.label}</span>
@@ -1740,7 +1740,7 @@ export default function TemplatesPage() {
               <div className="relative z-10 rounded-full border border-[#e879f9]/40 bg-[#e879f9]/10 p-8 text-center backdrop-blur-sm"
                 style={{ animation: "pulse-beat 2.4s ease-in-out infinite" }}>
                 <div className="text-2xl font-bold text-[#e879f9]">de la</div>
-                <div className="text-4xl font-bold text-white">€790</div>
+                <div className="text-4xl font-bold text-white">€390</div>
                 <div className="mt-1 text-xs text-white/35">per proiect</div>
               </div>
             </div>

@@ -35,7 +35,7 @@ export default function CheckoutPage() {
                <div className="text-[10px] uppercase tracking-widest text-white/40 mb-3 font-mono">Invoice_Ref: RVB-5509-X</div>
                <h1 className="text-4xl font-semibold mb-6">Clienți Locali</h1>
                <div className="text-5xl font-light mb-12 border-b border-white/10 pb-8 tracking-tight">
-                  €1.790<span className="text-lg text-white/40 ml-2">/ avans setare</span>
+                  €790<span className="text-lg text-white/40 ml-2">/ avans setare</span>
                </div>
 
                <ul className="space-y-4">
@@ -153,7 +153,7 @@ export default function CheckoutPage() {
 
                   {/* Pay button */}
                   <button className="w-full bg-[#ec4899] hover:bg-[#d9468c] transition text-white py-5 rounded-xl text-lg font-bold shadow-[0_15px_30px_rgba(236,72,153,0.3)] mt-8">
-                     Plătesc €1.790
+                     Plătesc €790
                   </button>
                   
                   <div className="flex items-center justify-center gap-2 text-xs text-white/40 mt-4">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
+import { maintenanceTiers } from "@/lib/packages";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/servicii", languages: { ro: "/servicii", en: "/en/services", "x-default": "/servicii" } },
@@ -15,7 +16,7 @@ const services = [
     title: "Prezență Online",
     tagline: "Un website care susține vânzările, nu doar imaginea.",
     text: "Implementare rapidă, structură orientată pe conversie și integrare Google pentru firme care vor creștere reală.",
-    price: "€990",
+    price: "€590",
     delivery: "7–14 zile",
     includes: [
       "Website 3–7 pagini, mobil-first",
@@ -33,9 +34,9 @@ const services = [
     title: "Clienți Locali",
     tagline: "Un sistem care aduce cereri locale, constant.",
     text: "SEO local + Google Ads + tracking apeluri. Fără trafic inutil. Doar clienți relevanți.",
-    price: "€1.790",
+    price: "€790",
     delivery: "Setup inițial (30 zile)",
-    extra: "Administrare lunară: €490 / lună (+ buget ads)",
+    extra: "Administrare lunară: €290 / lună (+ buget ads separat)",
     includes: [
       "Landing pagină optimizat pentru conversie",
       "SEO local (structură + optimizare)",
@@ -53,7 +54,7 @@ const services = [
     title: "Magazin Digital",
     tagline: "Un magazin online construit pentru vânzare, nu doar pentru design.",
     text: "Alegem platforma potrivită pentru modelul tău de business și construim un sistem complet: produse, plăți, livrare, conversie.",
-    price: "de la €2.490",
+    price: "de la €890",
     delivery: "14–30 zile",
     includes: [
       "Setup platformă eCommerce potrivită proiectului",
@@ -71,8 +72,9 @@ const services = [
     title: "Promovare Continuă",
     tagline: "Creștere lunară, controlată. Fără haos în campanii.",
     text: 'Administrare și optimizare lunară pentru SEO + Ads + conversie. Focus pe cereri și vânzări, nu pe „reach".',
-    price: "de la €390/lună",
+    price: "de la €190/lună",
     delivery: "Ongoing, raport lunar",
+    extra: "Trei trepte: Start, Growth, Scale (+ buget ads separat)",
     includes: [
       "Optimizare campanii (Google/Meta) sau SEO",
       "Testare mesaje & landing",
@@ -89,7 +91,7 @@ const services = [
     title: "AI Creative Sprint",
     tagline: "Poziționare și direcție vizuală, livrate în 7 zile.",
     text: "Powered by AI, ghidat de om. Concepte vizuale, moodboard, idei de campanii și direcție de conținut — rapid și aplicabil.",
-    price: "€790",
+    price: "€390",
     delivery: "7 zile",
     includes: [
       "Poziționare rapidă + direcție vizuală",
@@ -124,7 +126,7 @@ const services = [
 const monthlyPackages = [
   {
     name: "Start",
-    price: "€390 / lună",
+    price: "€190 / lună",
     desc: "Pentru business-uri locale simple.",
     features: [
       "1 canal principal (Google sau Meta)",
@@ -135,7 +137,7 @@ const monthlyPackages = [
   },
   {
     name: "Growth",
-    price: "€590 / lună",
+    price: "€290 / lună",
     desc: "Recomandat pentru cereri constante.",
     features: [
       "Google + Meta (sau SEO + Ads)",
@@ -147,7 +149,7 @@ const monthlyPackages = [
   },
   {
     name: "Scale",
-    price: "€790 / lună",
+    price: "€390 / lună",
     desc: "Pentru eCommerce / B2B cu volum.",
     features: [
       "2–3 canale + optimizare conversie",
@@ -181,7 +183,7 @@ const faq = [
   },
   {
     q: "Oferiți și suport după lansare?",
-    a: "Da. Poți continua cu Promovare Continuă pentru optimizare lunară sau rămâi doar cu sistemul livrat.",
+    a: "Da. Poți continua cu Promovare Continuă pentru optimizare lunară, cu Mentenanță website (de la €35/lună) pentru actualizări și securitate, sau rămâi doar cu sistemul livrat.",
   },
 ];
 
@@ -344,6 +346,77 @@ export default function ServiciiPage() {
                     }`}
                   >
                     {pkg.recommended ? "Alege Growth" : "Programează discuție"}
+                  </Link>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Mentenanță website */}
+      <section className="border-b border-[#1d2731]/8">
+        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+          <Reveal>
+            <div className="mb-12">
+              <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">Mentenanță website · Pachete lunare</div>
+              <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
+                Site mereu actualizat și protejat.
+              </h2>
+              <p className="mt-4 max-w-2xl text-base leading-7 text-[#1d2731]/65">
+                Actualizări, backup, securitate și mici modificări, pentru o sumă fixă pe lună. Hosting-ul și domeniul se plătesc separat.
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="grid gap-5 md:grid-cols-3 tab-blur-group">
+            {maintenanceTiers.map((pkg, i) => (
+              <Reveal key={pkg.name} delay={i * 80}>
+                <div className="relative h-full group rounded-[28px]">
+                  <div
+                    className={`absolute inset-0 rounded-[28px] border tab-blur-item transition-shadow ${
+                      pkg.recommended
+                        ? "border-[#1d2731] bg-[#1d2731] shadow-[0_20px_60px_rgba(29,39,49,0.15)] group-hover:shadow-[0_30px_70px_rgba(29,39,49,0.25)]"
+                        : "border-[#1d2731]/8 bg-white/80 group-hover:border-[#1d2731]/20"
+                    }`}
+                    style={{ animation: `float-${i % 2 === 0 ? 'a' : 'b'} ${6 + i}s ease-in-out infinite` }}
+                  />
+                  <div
+                    className={`relative z-10 p-8 h-full flex flex-col transition-all duration-500 ${pkg.recommended ? "text-white" : "text-[#1d2731]"}`}
+                    style={{ animation: `float-text-${i % 2 === 0 ? 'a' : 'b'} ${6 + i}s ease-in-out infinite` }}
+                  >
+                  {pkg.recommended && (
+                    <div className="mb-4 inline-block self-start rounded-full bg-white px-3 py-1 text-xs font-medium text-[#1d2731]">
+                      Recomandat
+                    </div>
+                  )}
+                  <div className={`text-sm font-medium ${pkg.recommended ? "text-white/60" : "text-[#1d2731]/50"}`}>
+                    {pkg.name}
+                  </div>
+                  <div className={`mt-2 text-3xl font-medium tracking-[-0.03em] ${pkg.recommended ? "text-white" : "text-[#1d2731]"}`}>
+                    {pkg.price}
+                  </div>
+                  <div className={`mt-2 text-sm ${pkg.recommended ? "text-white/55" : "text-[#1d2731]/45"}`}>
+                    {pkg.desc}
+                  </div>
+                  <ul className="mt-6 space-y-3">
+                    {pkg.features.map((f) => (
+                      <li key={f} className={`flex items-start gap-3 text-[15px] leading-6 ${pkg.recommended ? "text-white/80" : "text-[#1d2731]/70"}`}>
+                        <span className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${pkg.recommended ? "bg-white/50" : "bg-[#1d2731]/35"}`} />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <Link
+                    href="/contact"
+                    className={`mt-6 inline-flex w-full items-center justify-center rounded-full px-6 py-3 text-sm font-medium transition hover:-translate-y-0.5 ${
+                      pkg.recommended
+                        ? "bg-white text-[#1d2731] hover:shadow-lg"
+                        : "bg-[#1d2731] text-white hover:shadow-lg"
+                    }`}
+                  >
+                    Alege {pkg.name}
                   </Link>
                   </div>
                 </div>

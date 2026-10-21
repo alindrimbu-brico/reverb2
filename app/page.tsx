@@ -55,7 +55,7 @@ const packages = [
   {
     name: "Fundația Digitală",
     label: "Structura de Pornire",
-    price: "€990",
+    price: "€590",
     delivery: "Arhitectură în: 7–14 zile",
     features: [
       "Interfață matură, executată 100% corect tehnic",
@@ -71,14 +71,14 @@ const packages = [
   {
     name: "Clienți Locali Optimizat",
     label: "Ecosistemul Eficientizării",
-    price: "€1.790",
+    price: "€790",
     delivery: "Sistem operațional: 30 zile",
     features: [
       "Pagină pur de conversie + SEO focusat local",
       "Motoarele Google & Meta Ads configurate sigur",
       "Bază de date internă pentru gestiunea interacțiunilor",
     ],
-    extra: "Mentenanță & Operare: €490 / lună",
+    extra: "Mentenanță & Operare: €290 / lună",
     cta: "Alege Pace Mintală",
     href: "/checkout",
     recommended: true,
@@ -88,7 +88,7 @@ const packages = [
   {
     name: "Concept Sprint AI",
     label: "Validare rapidă",
-    price: "€790",
+    price: "€390",
     delivery: "Mapare logică: 7 zile",
     features: [
       "Integrarea inteligenței AI în procesele tale",

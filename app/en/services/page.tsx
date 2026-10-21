@@ -15,7 +15,7 @@ const services = [
     title: "Online Presence",
     tagline: "A website that supports sales, not just image.",
     text: "Fast implementation, conversion-oriented structure and Google integration for businesses that want real growth.",
-    price: "€990",
+    price: "€590",
     delivery: "7–14 days",
     includes: [
       "Website 3–7 pages, mobile-first",
@@ -33,9 +33,9 @@ const services = [
     title: "Local Clients",
     tagline: "A system that brings local inquiries, consistently.",
     text: "Local SEO + Google Ads + call tracking. No useless traffic. Only relevant clients.",
-    price: "€1,790",
+    price: "€790",
     delivery: "Initial setup (30 days)",
-    extra: "Monthly management: €490 / month (+ ads budget)",
+    extra: "Monthly management: €290 / month (+ separate ads budget)",
     includes: [
       "Conversion-optimised landing page",
       "Local SEO (structure + optimisation)",
@@ -53,7 +53,7 @@ const services = [
     title: "Digital Store",
     tagline: "An online store built to sell, not just look good.",
     text: "We choose the right platform for your business model and build a complete system: products, payments, delivery, conversion.",
-    price: "from €2,490",
+    price: "from €890",
     delivery: "14–30 days",
     includes: [
       "eCommerce platform setup suited to the project",
@@ -71,8 +71,9 @@ const services = [
     title: "Ongoing Promotion",
     tagline: "Controlled monthly growth. No campaign chaos.",
     text: "Monthly management and optimisation for SEO + Ads + conversion. Focus on inquiries and sales, not reach.",
-    price: "from €390/month",
+    price: "from €190/month",
     delivery: "Ongoing, monthly report",
+    extra: "Three tiers: Start, Growth, Scale (+ separate ads budget)",
     includes: [
       "Campaign optimisation (Google/Meta) or SEO",
       "Message & landing testing",
@@ -89,7 +90,7 @@ const services = [
     title: "AI Creative Sprint",
     tagline: "Positioning and visual direction, delivered in 7 days.",
     text: "Powered by AI, guided by humans. Visual concepts, moodboard, campaign ideas and content direction — fast and actionable.",
-    price: "€790",
+    price: "€390",
     delivery: "7 days",
     includes: [
       "Fast positioning + visual direction",
@@ -123,7 +124,7 @@ const services = [
 const monthlyPackages = [
   {
     name: "Start",
-    price: "€390 / month",
+    price: "€190 / month",
     desc: "For simple local businesses.",
     features: [
       "1 main channel (Google or Meta)",
@@ -134,7 +135,7 @@ const monthlyPackages = [
   },
   {
     name: "Growth",
-    price: "€590 / month",
+    price: "€290 / month",
     desc: "Recommended for consistent inquiries.",
     features: [
       "Google + Meta (or SEO + Ads)",
@@ -146,13 +147,54 @@ const monthlyPackages = [
   },
   {
     name: "Scale",
-    price: "€790 / month",
+    price: "€390 / month",
     desc: "For eCommerce / B2B with volume.",
     features: [
       "2–3 channels + conversion optimisation",
       "Advanced weekly iteration",
       "Extended reporting",
       "Priority support",
+    ],
+  },
+];
+
+/* ── Website maintenance plans ── */
+const maintenancePackages = [
+  {
+    name: "Essential",
+    price: "€35 / month",
+    desc: "For small sites: basic updates and protection.",
+    features: [
+      "Platform and plugin updates",
+      "Weekly automated backup",
+      "Uptime monitoring",
+      "Up to 1 hour of changes per month",
+    ],
+  },
+  {
+    name: "Professional",
+    price: "€79 / month",
+    desc: "For growing sites with frequently updated content.",
+    features: [
+      "Everything in Essential",
+      "Daily backup and fast restore",
+      "Speed and technical SEO optimisation",
+      "Content updates",
+      "Up to 3 hours of work per month",
+    ],
+    recommended: true,
+  },
+  {
+    name: "Premium",
+    price: "€159 / month",
+    desc: "Full management for established sites and stores.",
+    features: [
+      "Full website management",
+      "Active monitoring and daily backup",
+      "Priority response, same business day",
+      "Small new developments",
+      "Up to 6 hours of work per month",
+      "Monthly report",
     ],
   },
 ];
@@ -180,7 +222,7 @@ const faq = [
   },
   {
     q: "Do you offer post-launch support?",
-    a: "Yes. You can continue with Ongoing Promotion for monthly optimisation, or keep just the delivered system.",
+    a: "Yes. You can continue with Ongoing Promotion for monthly optimisation, with Website maintenance (from €35/month) for updates and security, or keep just the delivered system.",
   },
 ];
 
@@ -337,6 +379,77 @@ export default function ServicesPage() {
                       }`}
                     >
                       {pkg.recommended ? "Choose Growth" : "Schedule a discussion"}
+                    </Link>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Website maintenance */}
+      <section className="border-b border-[#1d2731]/8">
+        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+          <Reveal>
+            <div className="mb-12">
+              <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">Website maintenance · Monthly plans</div>
+              <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
+                A site that stays updated and protected.
+              </h2>
+              <p className="mt-4 max-w-2xl text-base leading-7 text-[#1d2731]/65">
+                Updates, backups, security and small changes, for a fixed monthly fee. Hosting and domain are paid separately.
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="grid gap-5 md:grid-cols-3 tab-blur-group">
+            {maintenancePackages.map((pkg, i) => (
+              <Reveal key={pkg.name} delay={i * 80}>
+                <div className="relative h-full group rounded-[28px]">
+                  <div
+                    className={`absolute inset-0 rounded-[28px] border tab-blur-item transition-shadow ${
+                      pkg.recommended
+                        ? "border-[#1d2731] bg-[#1d2731] shadow-[0_20px_60px_rgba(29,39,49,0.15)] group-hover:shadow-[0_30px_70px_rgba(29,39,49,0.25)]"
+                        : "border-[#1d2731]/8 bg-white/80 group-hover:border-[#1d2731]/20"
+                    }`}
+                    style={{ animation: `float-${i % 2 === 0 ? 'a' : 'b'} ${6 + i}s ease-in-out infinite` }}
+                  />
+                  <div
+                    className={`relative z-10 p-8 h-full flex flex-col transition-all duration-500 ${pkg.recommended ? "text-white" : "text-[#1d2731]"}`}
+                    style={{ animation: `float-text-${i % 2 === 0 ? 'a' : 'b'} ${6 + i}s ease-in-out infinite` }}
+                  >
+                    {pkg.recommended && (
+                      <div className="mb-4 inline-block self-start rounded-full bg-white px-3 py-1 text-xs font-medium text-[#1d2731]">
+                        Recommended
+                      </div>
+                    )}
+                    <div className={`text-sm font-medium ${pkg.recommended ? "text-white/60" : "text-[#1d2731]/50"}`}>
+                      {pkg.name}
+                    </div>
+                    <div className={`mt-2 text-3xl font-medium tracking-[-0.03em] ${pkg.recommended ? "text-white" : "text-[#1d2731]"}`}>
+                      {pkg.price}
+                    </div>
+                    <div className={`mt-2 text-sm ${pkg.recommended ? "text-white/55" : "text-[#1d2731]/45"}`}>
+                      {pkg.desc}
+                    </div>
+                    <ul className="mt-6 space-y-3">
+                      {pkg.features.map((f) => (
+                        <li key={f} className={`flex items-start gap-3 text-[15px] leading-6 ${pkg.recommended ? "text-white/80" : "text-[#1d2731]/70"}`}>
+                          <span className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${pkg.recommended ? "bg-white/50" : "bg-[#1d2731]/35"}`} />
+                          {f}
+                        </li>
+                      ))}
+                    </ul>
+                    <Link
+                      href="/en/contact"
+                      className={`mt-6 inline-flex w-full items-center justify-center rounded-full px-6 py-3 text-sm font-medium transition hover:-translate-y-0.5 ${
+                        pkg.recommended
+                          ? "bg-white text-[#1d2731] hover:shadow-lg"
+                          : "bg-[#1d2731] text-white hover:shadow-lg"
+                      }`}
+                    >
+                      Choose {pkg.name}
                     </Link>
                   </div>
                 </div>

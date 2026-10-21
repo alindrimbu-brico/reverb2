@@ -54,7 +54,7 @@ const packages = [
   {
     name: "Digital Foundation",
     label: "Starting Structure",
-    price: "€990",
+    price: "€590",
     delivery: "Architecture in: 7–14 days",
     features: [
       "Mature interface, 100% technically correct execution",
@@ -70,14 +70,14 @@ const packages = [
   {
     name: "Optimized Local Clients",
     label: "Efficiency Ecosystem",
-    price: "€1.790",
+    price: "€790",
     delivery: "Operational system: 30 days",
     features: [
       "Pure conversion page + local focused SEO",
       "Google & Meta Ads engines securely configured",
       "Internal database for interaction management",
     ],
-    extra: "Maintenance & Operation: €490 / month",
+    extra: "Maintenance & Operation: €290 / month",
     cta: "Choose Peace of Mind",
     href: "/checkout",
     recommended: true,
@@ -87,7 +87,7 @@ const packages = [
   {
     name: "AI Concept Sprint",
     label: "Rapid Validation",
-    price: "€790",
+    price: "€390",
     delivery: "Logical mapping: 7 days",
     features: [
       "Integration of AI intelligence into your processes",

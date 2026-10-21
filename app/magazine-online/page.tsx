@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/magazine-online", languages: { ro: "/magazine-online", en: "/en/online-store", "x-default": "/magazine-online" } },
   title: "Magazin Digital",
   description:
-    "Construim magazine online pentru vânzare, nu doar pentru design. Platformă potrivită, structură de conversie, plăți & livrare configurate. De la €2.490.",
+    "Construim magazine online pentru vânzare, nu doar pentru design. Platformă potrivită, structură de conversie, plăți & livrare configurate. De la €890.",
 };
 
 const included = [
@@ -287,7 +287,7 @@ export default function MagazineOnlinePage() {
             <div className="rounded-[28px] border border-[#1d2731]/8 bg-white/70 p-8">
               <div className="text-sm font-medium text-[#1d2731]/50">Pachet standard</div>
               <div className="mt-2 text-sm font-semibold text-[#1d2731]">Magazin Digital</div>
-              <div className="mt-4 text-4xl font-medium tracking-[-0.04em] text-[#1d2731]">de la €2.490</div>
+              <div className="mt-4 text-4xl font-medium tracking-[-0.04em] text-[#1d2731]">de la €890</div>
               <div className="mt-2 text-sm text-[#1d2731]/45">Livrare: 14–30 zile</div>
               <ul className="mt-6 space-y-3">
                 {[

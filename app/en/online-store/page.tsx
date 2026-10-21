@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/en/online-store", languages: { ro: "/magazine-online", en: "/en/online-store", "x-default": "/magazine-online" } },
   title: "Digital Store",
   description:
-    "We build online stores for selling, not just for design. Right platform, conversion structure, payments & delivery configured. From €2,490.",
+    "We build online stores for selling, not just for design. Right platform, conversion structure, payments & delivery configured. From €890.",
 };
 
 const included = [
@@ -287,7 +287,7 @@ export default function OnlineStorePage() {
             <div className="rounded-[28px] border border-[#1d2731]/8 bg-white/70 p-8">
               <div className="text-sm font-medium text-[#1d2731]/50">Standard package</div>
               <div className="mt-2 text-sm font-semibold text-[#1d2731]">Digital Store</div>
-              <div className="mt-4 text-4xl font-medium tracking-[-0.04em] text-[#1d2731]">from €2,490</div>
+              <div className="mt-4 text-4xl font-medium tracking-[-0.04em] text-[#1d2731]">from €890</div>
               <div className="mt-2 text-sm text-[#1d2731]/45">Delivery: 14–30 days</div>
               <ul className="mt-6 space-y-3">
                 {[
