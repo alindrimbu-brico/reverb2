@@ -67,7 +67,7 @@ const jsonLd = {
       },
       contactPoint: {
         "@type": "ContactPoint",
-        telephone: "+40737478238",
+        telephone: "+40767235693",
         email: "reverb@reverb.ro",
         contactType: "customer service",
         availableLanguage: ["Romanian", "English"],

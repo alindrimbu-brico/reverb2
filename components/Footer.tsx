@@ -159,8 +159,8 @@ export default function Footer() {
                     </span>
                     <span className="opacity-0 -translate-x-2 text-[10px] transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">↗</span>
                   </a>
-                  <a href="tel:0737478238" className="group flex items-center gap-2 text-[#1d2731]/70 transition-all hover:text-[#1d2731] hover:translate-x-1 text-xs">
-                    <span className="font-mono text-[11px]">+40 737 478 238</span>
+                  <a href="tel:0767235693" className="group flex items-center gap-2 text-[#1d2731]/70 transition-all hover:text-[#1d2731] hover:translate-x-1 text-xs">
+                    <span className="font-mono text-[11px]">+40 767 235 693</span>
                     <span className="opacity-0 -translate-x-2 text-[10px] transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">↗</span>
                   </a>
                 </div>

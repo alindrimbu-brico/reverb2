@@ -83,8 +83,8 @@ export default function LegalPageEN() {
                 </div>
                 <div>
                   <div className="text-xs uppercase font-bold tracking-widest text-[#1d2731]/50 mb-1">Phone</div>
-                  <a href="tel:0737478238" className="text-base font-medium text-[#31584f] hover:text-[#1d2731] transition">
-                    +40 737 478 238
+                  <a href="tel:0767235693" className="text-base font-medium text-[#31584f] hover:text-[#1d2731] transition">
+                    +40 767 235 693
                   </a>
                 </div>
               </div>
@@ -186,10 +186,10 @@ export default function LegalPageEN() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="tel:0737478238"
+                href="tel:0767235693"
                 className="inline-flex items-center justify-center rounded-full bg-[#1d2731] text-white px-8 py-4 text-sm font-medium transition hover:-translate-y-0.5 hover:shadow-lg"
               >
-                Call: +40 737 478 238
+                Call: +40 767 235 693
               </a>
               <Link
                 href="/en/contact"
