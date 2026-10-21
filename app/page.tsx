@@ -3,7 +3,9 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
-  title: "Clarity",
+  alternates: { canonical: "/", languages: { ro: "/", en: "/en", "x-default": "/" } },
+  // Titlu absolut (fără șablonul „| Reverb”): Google ia de aici numele site-ului.
+  title: { absolute: "Reverb — agenție de web design și marketing digital" },
   description:
     "Ecosisteme digitale executate cu inginerie robustă, comunicate cu claritate umană pură. Construim instrumente care funcționează perfect, din prima.",
 };
