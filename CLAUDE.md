@@ -49,7 +49,9 @@ Restul repository-ului (marketing, blog, alte showcase-uri, NeuroLumina etc.) es
 
 ## Constante importante ale jocului (în `page.tsx`)
 
-`WORLD_SIZE 3000`, `INITIAL_RADIUS 20`, `SPEED_FACTOR 4`, `ENEMY_COUNT 30`, `FOOD_COUNT 400`.
+`WORLD_SIZE 3000`, `INITIAL_RADIUS 20`, `SPEED_FACTOR 3.1` (era 4; scăzut cu ~22% la cererea lui Alin, jocul era prea rapid pe tabletă), `MIN_SPEED 0.8`, `ENEMY_COUNT 30`, `FOOD_COUNT 400`.
+
+**Viteza nu depinde de ecran:** mișcarea se înmulțește cu `dt` (timpul real scurs, exprimat în „cadre de 60 Hz”, limitat la 3). Înainte se mișca „pixeli pe cadru”, deci pe un ecran de 120 Hz jocul mergea de 2 ori mai repede, iar în test, la ~500 de cadre/s, de până la ~8 ori mai repede. Acum: ~210-240 px/s (raza de start) la 60 Hz și ~205-211 px/s chiar și la 360-650 de cadre/s. Orice mișcare nouă trebuie înmulțită cu `dt`.
 
 Atingerea unui inamic mai mare nu omoară pe loc: peștele se micșorează cu `HIT_SHRINK` (20%) din rază, este împins puțin înapoi, clipește și are `HIT_COOLDOWN_MS` (1,5 s) de protecție. Sub `MIN_RADIUS` (9) moare; de la raza de start (20) suportă 3 atingeri, a 4-a omoară (20 → 16 → 13 → 10 → moare). Mâncatul îl face să crească la loc. Victoria: masa jucătorului depășește suma razelor inamicilor rămași (neverificată în practică).
 
