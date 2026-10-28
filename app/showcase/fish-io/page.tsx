@@ -7,7 +7,10 @@ import { ArrowLeft, Play, ShieldAlert, ShoppingCart, Zap, Trophy, History, Palet
 // --- ENGINE CONSTANTS ---
 const WORLD_SIZE = 3000;
 const INITIAL_RADIUS = 20;
-const SPEED_FACTOR = 4;
+// Viteza e în pixeli pe cadru la 60 de cadre/s; mișcarea se înmulțește cu `dt` (vezi update), deci nu depinde de ecran.
+// Era 4; scăzută cu ~22% pentru tabletă și telefon.
+const SPEED_FACTOR = 3.1;
+const MIN_SPEED = 0.8;
 const ENEMY_COUNT = 30;
 const FOOD_COUNT = 400;
 // La start, niciun inamic nu apare mai aproape de atât de jucător (în unități din lume).
@@ -330,7 +333,8 @@ export default function AbyssIOGame() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const update = () => {
+    // dt = câte "cadre de 60 Hz" au trecut de la ultima actualizare (1 la 60 Hz, 0,5 la 120 Hz).
+    const update = (dt: number) => {
       const p = playerRef.current;
       const hw = window.innerWidth / 2;
       const hh = window.innerHeight / 2;
@@ -340,24 +344,25 @@ export default function AbyssIOGame() {
       const dist = Math.hypot(dx, dy);
       
       if (dist > 0) {
-        const speed = Math.max(1, SPEED_FACTOR * (30 / p.r)); 
+        const speed = Math.max(MIN_SPEED, SPEED_FACTOR * (30 / p.r));
         p.vx = (dx / dist) * speed;
         p.vy = (dy / dist) * speed;
       }
 
-      p.x += p.vx;
-      p.y += p.vy;
-      
+      p.x += p.vx * dt;
+      p.y += p.vy * dt;
+
       p.x = Math.max(p.r, Math.min(WORLD_SIZE - p.r, p.x));
       p.y = Math.max(p.r, Math.min(WORLD_SIZE - p.r, p.y));
 
-      cameraRef.current.x += (p.x - cameraRef.current.x) * 0.1;
-      cameraRef.current.y += (p.y - cameraRef.current.y) * 0.1;
+      const camLerp = 1 - Math.pow(1 - 0.1, dt);
+      cameraRef.current.x += (p.x - cameraRef.current.x) * camLerp;
+      cameraRef.current.y += (p.y - cameraRef.current.y) * camLerp;
 
       let closestEnemyDist = Infinity;
 
       enemiesRef.current.forEach(e => {
-        if (Math.random() < 0.02) {
+        if (Math.random() < 0.02 * dt) {
           e.vx += (Math.random() - 0.5) * 2;
           e.vy += (Math.random() - 0.5) * 2;
         }
@@ -372,19 +377,19 @@ export default function AbyssIOGame() {
           const forceX = pdx / pdist;
           const forceY = pdy / pdist;
           if (p.r > e.r * 1.1) {
-            e.vx -= forceX * 0.1; e.vy -= forceY * 0.1;
+            e.vx -= forceX * 0.1 * dt; e.vy -= forceY * 0.1 * dt;
           } else if (p.r < e.r * 0.9) {
-            e.vx += forceX * 0.1; e.vy += forceY * 0.1;
+            e.vx += forceX * 0.1 * dt; e.vy += forceY * 0.1 * dt;
           }
         }
 
         const speed = Math.hypot(e.vx, e.vy);
-        const maxSpeed = Math.max(1, SPEED_FACTOR * (30 / e.r));
+        const maxSpeed = Math.max(MIN_SPEED, SPEED_FACTOR * (30 / e.r));
         if (speed > maxSpeed) {
           e.vx = (e.vx / speed) * maxSpeed; e.vy = (e.vy / speed) * maxSpeed;
         }
 
-        e.x += e.vx; e.y += e.vy;
+        e.x += e.vx * dt; e.y += e.vy * dt;
 
         if (e.x < e.r || e.x > WORLD_SIZE - e.r) e.vx *= -1;
         if (e.y < e.r || e.y > WORLD_SIZE - e.r) e.vy *= -1;
@@ -550,8 +555,12 @@ export default function AbyssIOGame() {
       ctx.restore();
     };
 
-    const loop = () => {
-      update();
+    let lastFrame = performance.now();
+    const loop = (frameTime: number) => {
+      // Limitat la 3 cadre: după o pauză (tab în fundal) jocul nu "sare" înainte.
+      const dt = Math.max(0, Math.min(3, (frameTime - lastFrame) / (1000 / 60)));
+      lastFrame = frameTime;
+      update(dt);
       if (gameState === "playing") {
         draw();
         requestRef.current = requestAnimationFrame(loop);
