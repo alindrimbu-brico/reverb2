@@ -12,6 +12,11 @@ const ENEMY_COUNT = 30;
 const FOOD_COUNT = 400;
 // La start, niciun inamic nu apare mai aproape de atât de jucător (în unități din lume).
 const SAFE_SPAWN_DISTANCE = 600;
+// Atingerea unui inamic mai mare nu omoară pe loc: peștele se micșorează cu HIT_SHRINK din rază,
+// primește HIT_COOLDOWN_MS de protecție, iar sub MIN_RADIUS moare (de la raza de start: 3 atingeri suportate, a 4-a omoară).
+const HIT_SHRINK = 0.2;
+const MIN_RADIUS = 9;
+const HIT_COOLDOWN_MS = 1500;
 
 const THEMES = [
   { id: "cyan", color: "#00E5FF", name: "Cyber Cyan" },
@@ -119,6 +124,23 @@ class AudioEngine {
     eatOsc.stop(this.ctx.currentTime + 0.1);
   }
 
+  playHitSound() {
+    if (!this.ctx) return;
+    const hitOsc = this.ctx.createOscillator();
+    const hitGain = this.ctx.createGain();
+    hitOsc.type = "sawtooth";
+    hitOsc.frequency.setValueAtTime(220, this.ctx.currentTime);
+    hitOsc.frequency.exponentialRampToValueAtTime(60, this.ctx.currentTime + 0.25);
+
+    hitGain.gain.setValueAtTime(0.15, this.ctx.currentTime);
+    hitGain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.25);
+
+    hitOsc.connect(hitGain);
+    hitGain.connect(this.ctx.destination);
+    hitOsc.start();
+    hitOsc.stop(this.ctx.currentTime + 0.25);
+  }
+
   updateProximity(closestDistance: number, playerRadius: number) {
     if (!this.threatGain || !this.threatOsc || !this.ctx) return;
     const maxThreatDist = 800; 
@@ -219,6 +241,7 @@ export default function AbyssIOGame() {
   const enemiesRef = useRef<Entity[]>([]);
   const foodRef = useRef<Entity[]>([]);
   const mouseRef = useRef<Vector>({ x: 0, y: 0 });
+  const invulnerableUntilRef = useRef<number>(0);
   const cameraRef = useRef<Vector>({ x: WORLD_SIZE/2, y: WORLD_SIZE/2 });
   const avatarsRef = useRef<HTMLImageElement[]>([]);
   const enemiesAvatarsRef = useRef<HTMLImageElement[]>([]);
@@ -263,6 +286,7 @@ export default function AbyssIOGame() {
     
     // Jucătorul stă pe loc până la prima mișcare (mouse sau atingere), nu pleacă spre colțul din stânga sus.
     mouseRef.current = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    invulnerableUntilRef.current = 0;
 
     const enemies: Entity[] = [];
     for (let i=0; i<ENEMY_COUNT; i++) {
@@ -381,18 +405,38 @@ export default function AbyssIOGame() {
         return true;
       });
 
+      const now = performance.now();
+      let hitBy: Entity | null = null;
+
       enemiesRef.current = enemiesRef.current.filter(e => {
-        if (Math.hypot(p.x - e.x, p.y - e.y) < p.r + e.r - Math.min(p.r, e.r)*0.3) { 
+        if (Math.hypot(p.x - e.x, p.y - e.y) < p.r + e.r - Math.min(p.r, e.r)*0.3) {
           if (p.r > e.r * 1.1) {
-            currentMass += e.r * 0.2; currentScore += Math.floor(e.r * 10); 
+            currentMass += e.r * 0.2; currentScore += Math.floor(e.r * 10);
             audioRef.current?.playEatSound(true);
             return false;
-          } else if (e.r > p.r * 1.1) {
-            isDead = true;
+          } else if (e.r > p.r * 1.1 && now >= invulnerableUntilRef.current && !hitBy) {
+            hitBy = e;
           }
         }
         return true;
       });
+
+      if (hitBy) {
+        const attacker: Entity = hitBy;
+        const shrunk = currentMass * (1 - HIT_SHRINK);
+        if (shrunk < MIN_RADIUS) {
+          isDead = true;
+        } else {
+          currentMass = shrunk;
+          invulnerableUntilRef.current = now + HIT_COOLDOWN_MS;
+          audioRef.current?.playHitSound();
+          // Mică împingere în afară, ca peștele să iasă din inamic.
+          const away = Math.hypot(p.x - attacker.x, p.y - attacker.y) || 1;
+          const gap = attacker.r + shrunk + 15;
+          p.x = Math.max(shrunk, Math.min(WORLD_SIZE - shrunk, attacker.x + ((p.x - attacker.x) / away) * gap));
+          p.y = Math.max(shrunk, Math.min(WORLD_SIZE - shrunk, attacker.y + ((p.y - attacker.y) / away) * gap));
+        }
+      }
 
       if (isDead) {
         audioRef.current?.stop();
@@ -496,7 +540,13 @@ export default function AbyssIOGame() {
         }
       };
 
-      foodRef.current.forEach(drawEntity); enemiesRef.current.forEach(drawEntity); drawEntity(playerRef.current);
+      foodRef.current.forEach(drawEntity); enemiesRef.current.forEach(drawEntity);
+      // În timpul protecției de după atingere, peștele clipește.
+      const nowDraw = performance.now();
+      const blink = nowDraw < invulnerableUntilRef.current && Math.floor(nowDraw / 120) % 2 === 0;
+      ctx.globalAlpha = blink ? 0.3 : 1;
+      drawEntity(playerRef.current);
+      ctx.globalAlpha = 1;
       ctx.restore();
     };
 

@@ -49,7 +49,9 @@ Restul repository-ului (marketing, blog, alte showcase-uri, NeuroLumina etc.) es
 
 ## Constante importante ale jocului (în `page.tsx`)
 
-`WORLD_SIZE 3000`, `INITIAL_RADIUS 20`, `SPEED_FACTOR 4`, `ENEMY_COUNT 30`, `FOOD_COUNT 400`. Victoria: masa jucătorului depășește suma razelor inamicilor rămași (neverificată în practică).
+`WORLD_SIZE 3000`, `INITIAL_RADIUS 20`, `SPEED_FACTOR 4`, `ENEMY_COUNT 30`, `FOOD_COUNT 400`.
+
+Atingerea unui inamic mai mare nu omoară pe loc: peștele se micșorează cu `HIT_SHRINK` (20%) din rază, este împins puțin înapoi, clipește și are `HIT_COOLDOWN_MS` (1,5 s) de protecție. Sub `MIN_RADIUS` (9) moare; de la raza de start (20) suportă 3 atingeri, a 4-a omoară (20 → 16 → 13 → 10 → moare). Mâncatul îl face să crească la loc. Victoria: masa jucătorului depășește suma razelor inamicilor rămași (neverificată în practică).
 
 ## Probleme cunoscute
 
@@ -60,7 +62,7 @@ Rezolvate (pe ramura `dezvoltare`):
 - Start nesigur: inamicii nu mai apar la mai puțin de `SAFE_SPAWN_DISTANCE` (600) de jucător, iar jucătorul nu mai pleacă singur spre colțul din stânga sus înainte de prima mișcare.
 
 Rămase:
-1. **Încă greu:** în teste automate cu un robot simplu (care nu ocolește inamicii), jucătorul moare în 4-20 de secunde (înainte: 0,2-9 s). Un om care ocolește ar rezista mai mult; trebuie testat cu oameni.
+1. **Dificultatea nu e reglată de oameni:** după mecanismul cu atingeri (mai sus), un robot care merge intenționat spre inamici a murit în 6-12 secunde, cu 3-5 atingeri suportate. Valorile `HIT_SHRINK`, `MIN_RADIUS`, `HIT_COOLDOWN_MS`, `SAFE_SPAWN_DISTANCE` trebuie ajustate după ce joacă oameni.
 2. Clasamentul și „Google Login" sunt simulate; „Buy Titan Respawn" nu face nicio plată reală.
 3. În cod apare o adresă de e-mail personală (login simulat, `handleGoogleLogin`).
 4. Bucla jocului este recreată la fiecare schimbare de scor (`useEffect` cu `[gameState, score]`), ceea ce risipește performanță.
