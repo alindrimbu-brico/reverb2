@@ -10,6 +10,8 @@ const INITIAL_RADIUS = 20;
 const SPEED_FACTOR = 4;
 const ENEMY_COUNT = 30;
 const FOOD_COUNT = 400;
+// La start, niciun inamic nu apare mai aproape de atât de jucător (în unități din lume).
+const SAFE_SPAWN_DISTANCE = 600;
 
 const THEMES = [
   { id: "cyan", color: "#00E5FF", name: "Cyber Cyan" },
@@ -259,10 +261,18 @@ export default function AbyssIOGame() {
       id: "p1", x: WORLD_SIZE/2, y: WORLD_SIZE/2, r: premium ? INITIAL_RADIUS * 3 : INITIAL_RADIUS, vx: 0, vy: 0, color: theme, type: "player" 
     };
     
+    // Jucătorul stă pe loc până la prima mișcare (mouse sau atingere), nu pleacă spre colțul din stânga sus.
+    mouseRef.current = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+
     const enemies: Entity[] = [];
     for (let i=0; i<ENEMY_COUNT; i++) {
+      let ex = 0, ey = 0;
+      do {
+        ex = Math.random() * WORLD_SIZE;
+        ey = Math.random() * WORLD_SIZE;
+      } while (Math.hypot(ex - playerRef.current.x, ey - playerRef.current.y) < SAFE_SPAWN_DISTANCE);
       enemies.push({
-        id: `e${i}`, x: Math.random() * WORLD_SIZE, y: Math.random() * WORLD_SIZE, r: Math.random() * 60 + 10, vx: (Math.random() - 0.5) * 4, vy: (Math.random() - 0.5) * 4, color: "#FF0055", type: "enemy", imgIndex: Math.floor(Math.random() * 150)
+        id: `e${i}`, x: ex, y: ey, r: Math.random() * 60 + 10, vx: (Math.random() - 0.5) * 4, vy: (Math.random() - 0.5) * 4, color: "#FF0055", type: "enemy", imgIndex: Math.floor(Math.random() * 150)
       });
     }
     enemiesRef.current = enemies;
@@ -507,19 +517,32 @@ export default function AbyssIOGame() {
     const handleResize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
     handleResize(); window.addEventListener("resize", handleResize);
 
-    const handleMouseMove = (e: MouseEvent) => { mouseRef.current = { x: e.clientX, y: e.clientY }; };
-    window.addEventListener("mousemove", handleMouseMove);
+    // Pointer events acoperă și mouse-ul, și atingerea pe telefon (degetul ține locul mouse-ului).
+    const handlePointer = (e: PointerEvent) => { mouseRef.current = { x: e.clientX, y: e.clientY }; };
+    window.addEventListener("pointermove", handlePointer);
+    window.addEventListener("pointerdown", handlePointer);
 
-    return () => { window.removeEventListener("resize", handleResize); window.removeEventListener("mousemove", handleMouseMove); };
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("pointermove", handlePointer);
+      window.removeEventListener("pointerdown", handlePointer);
+    };
+  }, []);
+
+  // Jocul ocupă tot ecranul, deasupra antetului site-ului: oprim derularea paginii din spate.
+  useEffect(() => {
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = previous; };
   }, []);
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden bg-[#050B14] font-mono selection:bg-white selection:text-black">
-      
+    <div className="fixed inset-0 z-[60] overflow-hidden bg-[#050B14] font-mono selection:bg-white selection:text-black">
+
       {/* CANAVAS ENGINE */}
-      <canvas 
-        ref={canvasRef} 
-        className={`absolute inset-0 cursor-crosshair ${gameState === 'playing' ? 'opacity-100' : 'opacity-10 blur-sm'} transition-all duration-1000`} 
+      <canvas
+        ref={canvasRef}
+        className={`absolute inset-0 cursor-crosshair touch-none ${gameState === 'playing' ? 'opacity-100' : 'opacity-10 blur-sm'} transition-all duration-1000`} 
       />
 
       {/* REVERB NAV OVERLAY */}
@@ -590,7 +613,7 @@ export default function AbyssIOGame() {
                 </div>
 
                 <div className="flex flex-col gap-4">
-                   <button onClick={() => startGame(false)} className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-bold uppercase tracking-widest text-black transition-all relative group" style={{ backgroundColor: theme }}>
+                   <button onClick={() => startGame(false)} className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-bold uppercase tracking-widest text-black transition-all relative group overflow-hidden" style={{ backgroundColor: theme }}>
                       <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
                       <span className="relative z-10 flex items-center gap-2"><Play size={18} /> Play Now</span>
                    </button>

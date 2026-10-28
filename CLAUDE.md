@@ -51,15 +51,21 @@ Restul repository-ului (marketing, blog, alte showcase-uri, NeuroLumina etc.) es
 
 `WORLD_SIZE 3000`, `INITIAL_RADIUS 20`, `SPEED_FACTOR 4`, `ENEMY_COUNT 30`, `FOOD_COUNT 400`. Victoria: masa jucătorului depășește suma razelor inamicilor rămași (neverificată în practică).
 
-## Probleme cunoscute (constatate la rulare, nerezolvate)
+## Probleme cunoscute
 
-1. **Pare prea greu la început:** inamicii apar la întâmplare, chiar și lângă jucător. În teste automate cu un robot simplu (care nu ocolește inamicii), jucătorul a murit în 0-9 secunde în 13 din 15 încercări, o dată în 0,2 s chiar stând pe loc. Un om care ocolește ar rezista mai mult; trebuie testat cu oameni.
-2. **Antetul site-ului acoperă jocul:** capsula albă din antet stă peste butonul „Back to Matrix" și peste „Google Login".
-3. **Dreptunghi alb sub „Play Now":** animația butonului nu este tăiată și se vede mereu sub buton.
-4. **Nu merge pe telefon:** jocul citește doar mișcarea mouse-ului, nu atingerea ecranului.
-5. Clasamentul și „Google Login" sunt simulate; „Buy Titan Respawn" nu face nicio plată reală.
-6. În cod apare o adresă de e-mail personală (login simulat, `handleGoogleLogin`).
-7. Bucla jocului este recreată la fiecare schimbare de scor (`useEffect` cu `[gameState, score]`), ceea ce risipește performanță.
+Rezolvate (pe ramura `dezvoltare`):
+- Antetul site-ului acoperea jocul: acum jocul e un strat pe tot ecranul (`fixed inset-0 z-[60]`, deasupra antetului `z-50`) și blochează derularea paginii din spate.
+- Dreptunghiul alb sub „Play Now": butonul are acum `overflow-hidden`.
+- Telefon: jocul folosește evenimente `pointer` (mouse și atingere), canvasul are `touch-none`. Testat cu atingere simulată: deget dreapta/stânga/jos mută lumea în direcția corectă, fără deget jucătorul stă pe loc.
+- Start nesigur: inamicii nu mai apar la mai puțin de `SAFE_SPAWN_DISTANCE` (600) de jucător, iar jucătorul nu mai pleacă singur spre colțul din stânga sus înainte de prima mișcare.
+
+Rămase:
+1. **Încă greu:** în teste automate cu un robot simplu (care nu ocolește inamicii), jucătorul moare în 4-20 de secunde (înainte: 0,2-9 s). Un om care ocolește ar rezista mai mult; trebuie testat cu oameni.
+2. Clasamentul și „Google Login" sunt simulate; „Buy Titan Respawn" nu face nicio plată reală.
+3. În cod apare o adresă de e-mail personală (login simulat, `handleGoogleLogin`).
+4. Bucla jocului este recreată la fiecare schimbare de scor (`useEffect` cu `[gameState, score]`), ceea ce risipește performanță.
+5. Pe telefon nu s-a testat pe un aparat real, doar în browser cu atingere simulată. Pagina nu e gândită pentru ecran lat pe orizontală.
+6. `npm run lint` raportează 2 erori și 3 avertismente vechi în `page.tsx` (setState în efect, dependențe lipsă); nu au legătură cu modificările de mai sus.
 
 ## Reguli de lucru
 
