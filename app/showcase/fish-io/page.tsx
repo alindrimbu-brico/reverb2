@@ -3,6 +3,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, Play, ShieldAlert, ShoppingCart, Zap, Trophy, History, Palette, LogIn, LogOut, Globe, User } from "lucide-react";
+import { Kind, ENEMY_KIND } from "./animals";
+import { LEVELS, LevelRun, TaskResult, evaluateLevel, forbiddenKind, placeEnemies } from "./levels";
+import { LevelComplete, LevelHud, LevelIntro, LevelsScreen, TaskPanel } from "./LevelUI";
 
 // --- ENGINE CONSTANTS ---
 const WORLD_SIZE = 3000;
@@ -20,6 +23,9 @@ const SAFE_SPAWN_DISTANCE = 600;
 const HIT_SHRINK = 0.2;
 const MIN_RADIUS = 9;
 const HIT_COOLDOWN_MS = 1500;
+// Doar în niveluri: animalele mai mici decât jucătorul nu fug mai repede de PREY_SPEED_FACTOR din viteza lui.
+// Fără limita asta, prada mică (care avea viteza maximă peste a jucătorului) nu putea fi prinsă și nivelurile ieșeau prea lungi.
+const PREY_SPEED_FACTOR = 0.7;
 
 const THEMES = [
   { id: "cyan", color: "#00E5FF", name: "Cyber Cyan" },
@@ -55,6 +61,8 @@ interface Entity {
   color: string;
   type: "player" | "enemy" | "food";
   imgIndex?: number;
+  kind?: Kind; // felul animalului (doar la inamici)
+  role?: "target" | "forbidden" | null; // în niveluri: țintă de mâncat sau animal interzis
 }
 interface MatchHistory {
   date: string;
@@ -175,7 +183,12 @@ export default function AbyssIOGame() {
   const audioRef = useRef<AudioEngine | null>(null);
   
   // States
-  const [gameState, setGameState] = useState<"menu" | "playing" | "gameover" | "history" | "victory">("menu");
+  const [gameState, setGameState] = useState<"menu" | "levels" | "levelIntro" | "playing" | "gameover" | "history" | "victory" | "levelComplete">("menu");
+  // null = modul liber (arena veche); altfel indexul nivelului (0, 1, 2...)
+  const [currentLevel, setCurrentLevel] = useState<number | null>(null);
+  const [levelStars, setLevelStars] = useState<number[]>([]);
+  const [levelResult, setLevelResult] = useState<{ stars: number; tasks: TaskResult[]; seconds: number } | null>(null);
+  const [hud, setHud] = useState<LevelHud>({ eaten: 0, avoidBroken: false, hit: false, elapsed: 0 });
   const [theme, setTheme] = useState(THEMES[0].color);
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
@@ -199,6 +212,16 @@ export default function AbyssIOGame() {
 
     const savedUser = localStorage.getItem('abyss_user');
     if (savedUser) setUser(JSON.parse(savedUser));
+
+    // Stelele pe niveluri se păstrează doar în acest browser.
+    try {
+      const savedLevels = JSON.parse(localStorage.getItem('abyss_levels') || '[]');
+      if (Array.isArray(savedLevels)) {
+        const stars = savedLevels.map(n => Math.max(0, Math.min(3, Number(n) || 0)));
+        levelStarsRef.current = stars;
+        setLevelStars(stars);
+      }
+    } catch { /* date vechi sau stricate: pornim de la zero */ }
   }, []);
 
   const handleGoogleLogin = () => {
@@ -245,6 +268,11 @@ export default function AbyssIOGame() {
   const foodRef = useRef<Entity[]>([]);
   const mouseRef = useRef<Vector>({ x: 0, y: 0 });
   const invulnerableUntilRef = useRef<number>(0);
+  // Starea nivelului în desfășurare: în refuri, ca bucla jocului să nu depindă de randări. null = mod liber sau nivel încheiat.
+  const levelIdxRef = useRef<number | null>(null);
+  const levelRunRef = useRef<LevelRun | null>(null);
+  const levelStarsRef = useRef<number[]>([]);
+  const hudKeyRef = useRef<string>("");
   const cameraRef = useRef<Vector>({ x: WORLD_SIZE/2, y: WORLD_SIZE/2 });
   const avatarsRef = useRef<HTMLImageElement[]>([]);
   const enemiesAvatarsRef = useRef<HTMLImageElement[]>([]);
@@ -278,7 +306,7 @@ export default function AbyssIOGame() {
     playerRef.current.color = theme;
   }, [theme]);
 
-  const initWorld = (premium = false) => {
+  const initWorld = (premium = false, levelIdx: number | null = null) => {
     if (!audioRef.current) audioRef.current = new AudioEngine();
     audioRef.current.init();
     audioRef.current.resumeAmbient();
@@ -292,15 +320,25 @@ export default function AbyssIOGame() {
     invulnerableUntilRef.current = 0;
 
     const enemies: Entity[] = [];
-    for (let i=0; i<ENEMY_COUNT; i++) {
-      let ex = 0, ey = 0;
-      do {
-        ex = Math.random() * WORLD_SIZE;
-        ey = Math.random() * WORLD_SIZE;
-      } while (Math.hypot(ex - playerRef.current.x, ey - playerRef.current.y) < SAFE_SPAWN_DISTANCE);
-      enemies.push({
-        id: `e${i}`, x: ex, y: ey, r: Math.random() * 60 + 10, vx: (Math.random() - 0.5) * 4, vy: (Math.random() - 0.5) * 4, color: "#FF0055", type: "enemy", imgIndex: Math.floor(Math.random() * 150)
+    if (levelIdx !== null) {
+      // Nivel: animalele sunt alese și așezate după regulile nivelului (felul, câte, cât de mari).
+      placeEnemies(LEVELS[levelIdx], playerRef.current, WORLD_SIZE, SAFE_SPAWN_DISTANCE).forEach((pe, i) => {
+        enemies.push({
+          id: `e${i}`, x: pe.x, y: pe.y, r: pe.r, vx: (Math.random() - 0.5) * 4, vy: (Math.random() - 0.5) * 4, color: "#FF0055", type: "enemy", imgIndex: pe.photo, kind: pe.kind, role: pe.role
+        });
       });
+    } else {
+      for (let i=0; i<ENEMY_COUNT; i++) {
+        let ex = 0, ey = 0;
+        do {
+          ex = Math.random() * WORLD_SIZE;
+          ey = Math.random() * WORLD_SIZE;
+        } while (Math.hypot(ex - playerRef.current.x, ey - playerRef.current.y) < SAFE_SPAWN_DISTANCE);
+        const imgIndex = Math.floor(Math.random() * 150);
+        enemies.push({
+          id: `e${i}`, x: ex, y: ey, r: Math.random() * 60 + 10, vx: (Math.random() - 0.5) * 4, vy: (Math.random() - 0.5) * 4, color: "#FF0055", type: "enemy", imgIndex, kind: ENEMY_KIND[imgIndex]
+        });
+      }
     }
     enemiesRef.current = enemies;
 
@@ -316,9 +354,29 @@ export default function AbyssIOGame() {
     setMass(premium ? INITIAL_RADIUS * 3 : INITIAL_RADIUS);
   };
 
+  // Modul liber: arena veche, fără sarcini.
   const startGame = (premium = false) => {
+    levelIdxRef.current = null;
+    levelRunRef.current = null;
+    setCurrentLevel(null);
     initWorld(premium);
     setGameState("playing");
+  };
+
+  const startLevel = (idx: number) => {
+    levelIdxRef.current = idx;
+    levelRunRef.current = { eaten: 0, avoidBroken: false, hit: false, startedAt: performance.now() };
+    hudKeyRef.current = "";
+    setHud({ eaten: 0, avoidBroken: false, hit: false, elapsed: 0 });
+    setLevelResult(null);
+    setCurrentLevel(idx);
+    initWorld(false, idx);
+    setGameState("playing");
+  };
+
+  const openLevel = (idx: number) => {
+    setCurrentLevel(idx);
+    setGameState("levelIntro");
   };
 
   // Engine Loop
@@ -335,6 +393,8 @@ export default function AbyssIOGame() {
 
     // dt = câte "cadre de 60 Hz" au trecut de la ultima actualizare (1 la 60 Hz, 0,5 la 120 Hz).
     const update = (dt: number) => {
+      // Nivel deja încheiat (terminat sau pierdut), dar bucla mai rulează un cadru până se schimbă ecranul.
+      if (levelIdxRef.current !== null && !levelRunRef.current) return;
       const p = playerRef.current;
       const hw = window.innerWidth / 2;
       const hh = window.innerHeight / 2;
@@ -384,7 +444,10 @@ export default function AbyssIOGame() {
         }
 
         const speed = Math.hypot(e.vx, e.vy);
-        const maxSpeed = Math.max(MIN_SPEED, SPEED_FACTOR * (30 / e.r));
+        let maxSpeed = Math.max(MIN_SPEED, SPEED_FACTOR * (30 / e.r));
+        if (levelIdxRef.current !== null && p.r > e.r * 1.1) {
+          maxSpeed = Math.min(maxSpeed, PREY_SPEED_FACTOR * Math.max(MIN_SPEED, SPEED_FACTOR * (30 / p.r)));
+        }
         if (speed > maxSpeed) {
           e.vx = (e.vx / speed) * maxSpeed; e.vy = (e.vy / speed) * maxSpeed;
         }
@@ -412,12 +475,18 @@ export default function AbyssIOGame() {
 
       const now = performance.now();
       let hitBy: Entity | null = null;
+      const run = levelRunRef.current; // null în modul liber
+      const lvl = run && levelIdxRef.current !== null ? LEVELS[levelIdxRef.current] : null;
+      const forbidden = lvl ? forbiddenKind(lvl) : null;
 
       enemiesRef.current = enemiesRef.current.filter(e => {
         if (Math.hypot(p.x - e.x, p.y - e.y) < p.r + e.r - Math.min(p.r, e.r)*0.3) {
+          // Animalul interzis nu trebuie nici atins, nici mâncat: orice contact strică bonusul.
+          if (run && forbidden && e.kind === forbidden) run.avoidBroken = true;
           if (p.r > e.r * 1.1) {
             currentMass += e.r * 0.2; currentScore += Math.floor(e.r * 10);
             audioRef.current?.playEatSound(true);
+            if (run && lvl && (lvl.main.kind === "orice" || lvl.main.kind === e.kind)) run.eaten++;
             return false;
           } else if (e.r > p.r * 1.1 && now >= invulnerableUntilRef.current && !hitBy) {
             hitBy = e;
@@ -429,6 +498,7 @@ export default function AbyssIOGame() {
       if (hitBy) {
         const attacker: Entity = hitBy;
         const shrunk = currentMass * (1 - HIT_SHRINK);
+        if (run) run.hit = true;
         if (shrunk < MIN_RADIUS) {
           isDead = true;
         } else {
@@ -445,13 +515,35 @@ export default function AbyssIOGame() {
 
       if (isDead) {
         audioRef.current?.stop();
-        saveToHistory(currentScore, currentMass);
+        if (run) {
+          levelRunRef.current = null; // nivel pierdut: scorul nu intră în clasamentul din modul liber
+        } else {
+          saveToHistory(currentScore, currentMass);
+        }
         setGameState("gameover");
         return;
       }
 
+      // Sarcina principală gata: nivelul se termină și se calculează stelele.
+      if (run && lvl && run.eaten >= lvl.main.count) {
+        const elapsed = (now - run.startedAt) / 1000;
+        const result = evaluateLevel(lvl, run, elapsed);
+        const idx = levelIdxRef.current as number;
+        const stars = [...levelStarsRef.current];
+        stars[idx] = Math.max(stars[idx] || 0, result.stars);
+        levelStarsRef.current = stars;
+        localStorage.setItem('abyss_levels', JSON.stringify(stars));
+        setLevelStars(stars);
+        setLevelResult({ stars: result.stars, tasks: result.tasks, seconds: Math.round(elapsed) });
+        levelRunRef.current = null;
+        audioRef.current?.stop();
+        setGameState("levelComplete");
+        return;
+      }
+
+      // Victoria din modul liber (în niveluri, finalul vine din sarcina principală).
       const totalEnemyMass = enemiesRef.current.reduce((sum, e) => sum + e.r, 0);
-      if (currentMass > totalEnemyMass) {
+      if (!run && currentMass > totalEnemyMass) {
         audioRef.current?.stop();
         saveToHistory(currentScore, currentMass);
         setGameState("victory");
@@ -461,6 +553,16 @@ export default function AbyssIOGame() {
       p.r = currentMass;
       setMass(Math.floor(currentMass));
       setScore(currentScore);
+
+      // Panoul cu task-uri se reîmprospătează doar când se schimbă ceva (animal mâncat, atingere, o secundă).
+      if (run) {
+        const elapsedSec = Math.floor((now - run.startedAt) / 1000);
+        const key = `${run.eaten}|${run.avoidBroken}|${run.hit}|${elapsedSec}`;
+        if (key !== hudKeyRef.current) {
+          hudKeyRef.current = key;
+          setHud({ eaten: run.eaten, avoidBroken: run.avoidBroken, hit: run.hit, elapsed: elapsedSec });
+        }
+      }
 
       if (foodRef.current.length < FOOD_COUNT / 2) {
         for (let i=0; i<50; i++) {
@@ -524,14 +626,32 @@ export default function AbyssIOGame() {
             ctx.drawImage(img, e.x - e.r, e.y - e.r, e.r * 2, e.r * 2);
             ctx.restore();
             
+            // În niveluri, inelul arată rolul animalului: verde = de mâncat, galben pulsând = interzis, roz = ca de obicei.
+            let ring = e.color;
+            let ringWidth = Math.max(2, e.r * 0.05);
+            const levelNow = levelIdxRef.current !== null ? LEVELS[levelIdxRef.current] : null;
+            if (levelNow && e.type === 'enemy') {
+              if (e.role === 'forbidden') {
+                ring = "#FFD400";
+                ringWidth = Math.max(3, e.r * 0.08) * (1 + 0.35 * Math.sin(performance.now() / 150));
+              } else if (e.role === 'target' || (levelNow.main.kind === 'orice' && playerRef.current.r > e.r * 1.1)) {
+                ring = "#39FF88";
+              }
+            }
             ctx.beginPath();
             ctx.arc(e.x, e.y, e.r, 0, Math.PI * 2);
-            ctx.strokeStyle = e.color;
-            ctx.lineWidth = Math.max(2, e.r * 0.05);
+            ctx.strokeStyle = ring;
+            ctx.lineWidth = ringWidth;
             ctx.shadowBlur = 15;
-            ctx.shadowColor = e.color;
+            ctx.shadowColor = ring;
             ctx.stroke();
             ctx.shadowBlur = 0;
+            if (e.role === 'forbidden') {
+              ctx.fillStyle = "#FFD400";
+              ctx.font = "bold 20px sans-serif";
+              ctx.textAlign = "center";
+              ctx.fillText("✕", e.x, e.y - e.r - 8);
+            }
 
             // Optional: Draw player name or score over them? No, user didn't ask for it.
           } else {
@@ -553,6 +673,41 @@ export default function AbyssIOGame() {
       drawEntity(playerRef.current);
       ctx.globalAlpha = 1;
       ctx.restore();
+
+      // Săgeată spre cea mai apropiată țintă, dacă e în afara ecranului.
+      const arrowLevel = levelRunRef.current && levelIdxRef.current !== null ? LEVELS[levelIdxRef.current] : null;
+      if (arrowLevel) {
+        const pl = playerRef.current;
+        let nearest: Entity | null = null;
+        let nearestDist = Infinity;
+        for (const e of enemiesRef.current) {
+          const isTarget = e.role === 'target' || (arrowLevel.main.kind === 'orice' && pl.r > e.r * 1.1);
+          if (!isTarget) continue;
+          const d = Math.hypot(e.x - pl.x, e.y - pl.y);
+          if (d < nearestDist) { nearestDist = d; nearest = e; }
+        }
+        if (nearest) {
+          const target: Entity = nearest;
+          const sx = hw + (target.x - cx);
+          const sy = hh + (target.y - cy);
+          if (sx < 0 || sx > canvas.width || sy < 0 || sy > canvas.height) {
+            const margin = 36;
+            const ang = Math.atan2(sy - hh, sx - hw);
+            const k = Math.min((hw - margin) / (Math.abs(Math.cos(ang)) || 1e-6), (hh - margin) / (Math.abs(Math.sin(ang)) || 1e-6));
+            ctx.save();
+            ctx.translate(hw + Math.cos(ang) * k, hh + Math.sin(ang) * k);
+            ctx.rotate(ang);
+            ctx.fillStyle = "#39FF88";
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = "#39FF88";
+            ctx.beginPath();
+            ctx.moveTo(14, 0); ctx.lineTo(-10, -9); ctx.lineTo(-10, 9);
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+          }
+        }
+      }
     };
 
     let lastFrame = performance.now();
@@ -640,6 +795,9 @@ export default function AbyssIOGame() {
         </div>
       )}
 
+      {/* TASK-URILE NIVELULUI (doar în niveluri) */}
+      {gameState === "playing" && currentLevel !== null && <TaskPanel level={LEVELS[currentLevel]} hud={hud} />}
+
       {/* MENU STATE */}
       {gameState === "menu" && (
         <div className="absolute inset-0 z-50 flex items-center justify-center p-4">
@@ -672,9 +830,12 @@ export default function AbyssIOGame() {
                 </div>
 
                 <div className="flex flex-col gap-4">
-                   <button onClick={() => startGame(false)} className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-bold uppercase tracking-widest text-black transition-all relative group overflow-hidden" style={{ backgroundColor: theme }}>
+                   <button onClick={() => setGameState("levels")} className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-bold uppercase tracking-widest text-black transition-all relative group overflow-hidden" style={{ backgroundColor: theme }}>
                       <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-                      <span className="relative z-10 flex items-center gap-2"><Play size={18} /> Play Now</span>
+                      <span className="relative z-10 flex items-center gap-2"><Play size={18} /> Niveluri</span>
+                   </button>
+                   <button onClick={() => startGame(false)} className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-bold uppercase tracking-widest text-white bg-white/5 hover:bg-white/10 transition-colors border border-white/10">
+                      <Zap size={18} /> Mod liber
                    </button>
                    <button onClick={() => setGameState("history")} className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-bold uppercase tracking-widest text-white bg-white/5 hover:bg-white/10 transition-colors border border-white/10">
                       <Trophy size={18} /> Global Rankings
@@ -721,17 +882,48 @@ export default function AbyssIOGame() {
               </div>
 
               <div className="border-t border-white/10 pt-8 mt-4">
-                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button onClick={() => startGame(false)} className="flex-1 px-6 py-4 rounded-xl bg-white/5 text-white/70 hover:bg-white/10 hover:text-white border border-white/10 transition-colors uppercase tracking-widest text-xs font-bold">
-                       Respawn Free
-                    </button>
-                    <button onClick={() => startGame(true)} className="flex-1 relative overflow-hidden group px-6 py-4 rounded-xl bg-gradient-to-r from-[#FF0055] to-[#7000FF] text-white border border-transparent hover:shadow-[0_0_30px_rgba(255,0,85,0.4)] transition-all uppercase tracking-widest text-xs font-bold flex flex-col items-center justify-center">
-                       <span className="relative z-10 flex items-center gap-2"> <ShoppingCart size={14} /> Buy Titan Respawn </span>
-                    </button>
-                 </div>
+                 {currentLevel !== null ? (
+                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                      <button onClick={() => startLevel(currentLevel)} className="flex-1 px-6 py-4 rounded-xl text-black uppercase tracking-widest text-xs font-bold" style={{ backgroundColor: theme }}>
+                         Încearcă din nou nivelul
+                      </button>
+                      <button onClick={() => setGameState("levels")} className="flex-1 px-6 py-4 rounded-xl bg-white/5 text-white/70 hover:bg-white/10 hover:text-white border border-white/10 transition-colors uppercase tracking-widest text-xs font-bold">
+                         Niveluri
+                      </button>
+                   </div>
+                 ) : (
+                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                      <button onClick={() => startGame(false)} className="flex-1 px-6 py-4 rounded-xl bg-white/5 text-white/70 hover:bg-white/10 hover:text-white border border-white/10 transition-colors uppercase tracking-widest text-xs font-bold">
+                         Respawn Free
+                      </button>
+                      <button onClick={() => startGame(true)} className="flex-1 relative overflow-hidden group px-6 py-4 rounded-xl bg-gradient-to-r from-[#FF0055] to-[#7000FF] text-white border border-transparent hover:shadow-[0_0_30px_rgba(255,0,85,0.4)] transition-all uppercase tracking-widest text-xs font-bold flex flex-col items-center justify-center">
+                         <span className="relative z-10 flex items-center gap-2"> <ShoppingCart size={14} /> Buy Titan Respawn </span>
+                      </button>
+                   </div>
+                 )}
               </div>
            </div>
         </div>
+      )}
+
+      {/* NIVELURI: alegere, introducere, rezultat */}
+      {gameState === "levels" && (
+        <LevelsScreen stars={levelStars} theme={theme} onPick={openLevel} onBack={() => setGameState("menu")} />
+      )}
+      {gameState === "levelIntro" && currentLevel !== null && (
+        <LevelIntro index={currentLevel} theme={theme} onStart={() => startLevel(currentLevel)} onBack={() => setGameState("levels")} />
+      )}
+      {gameState === "levelComplete" && currentLevel !== null && levelResult && (
+        <LevelComplete
+          index={currentLevel}
+          result={levelResult}
+          theme={theme}
+          totalStars={levelStars.reduce((s, n) => s + (n || 0), 0)}
+          onNext={() => openLevel(currentLevel + 1)}
+          onRetry={() => startLevel(currentLevel)}
+          onLevels={() => setGameState("levels")}
+          onFree={() => startGame(false)}
+        />
       )}
 
       {/* VICTORY STATE */}
