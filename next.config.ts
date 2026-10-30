@@ -13,6 +13,12 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Repo-ul `flooare` are acum domeniul propriu (www.flooare.ro), deci github.io
+  // redirecționează și proxy-ul vechi nu mai merge.
+  redirects: async () => [
+    { source: "/flooare-portal", destination: "https://www.flooare.ro/", permanent: true },
+    { source: "/flooare-portal/:path*", destination: "https://www.flooare.ro/:path*", permanent: true },
+  ],
   rewrites: async () => ({
     beforeFiles: [
       {

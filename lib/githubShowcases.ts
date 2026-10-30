@@ -5,7 +5,6 @@ export const GITHUB_SHOWCASES: Record<string, string> = {
   "silva-method": "silva-method",
   "spatiul-deschis": "spatiul-deschis",
   "flooare-ro-site": "flooare-ro-site",
-  "flooare-portal": "flooare",
   "elumia": "elumia",
 };
 
