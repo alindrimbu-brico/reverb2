@@ -56,15 +56,15 @@ Fiecare nivel are o **sarcină principală** (obligatorie: „mănâncă N anima
 
 | Nivel | Principală | Bonus 1 | Bonus 2 |
 |---|---|---|---|
-| 1 Primii pași | mănâncă 8 animale | în 60 s | fără nicio atingere |
-| 2 Vânătoare de păsări | mănâncă 6 păsări | nu atinge niciun șarpe | în 45 s |
-| 3 Veverițe și pisici | mănâncă 5 veverițe | nu atinge nicio pisică | în 40 s |
+| 1 Primii pași | mănâncă 8 animale | în 120 s | fără nicio atingere |
+| 2 Vânătoare de păsări | mănâncă 6 păsări | nu atinge niciun șarpe | în 90 s |
+| 3 Veverițe și pisici | mănâncă 5 veverițe | nu atinge nicio pisică | în 80 s |
 
 - Ce animale apar și câte: câmpul `spawn` din `levels.ts`. Raza fiecărui fel e în `KIND_RADIUS` (`animals.ts`); păsările și veverițele pot fi mâncate de la început, restul cer să crești.
 - În joc: inel **verde** = țintă de mâncat (la nivelul „orice animal": ce poți mânca acum), inel **galben pulsând cu ✕** = interzis, **săgeată verde** spre cea mai apropiată țintă din afara ecranului.
 - Stelele se păstrează doar în browser (`localStorage`: `abyss_levels`, o listă cu stelele fiecărui nivel). Nivelul N+1 se deblochează când nivelul N are cel puțin o stea.
 - `PREY_SPEED_FACTOR` (0,7): în niveluri, animalele mai mici decât tine nu fug mai repede de 0,7 din viteza ta. Fără asta, prada mică (cu viteza maximă peste a jucătorului) nu putea fi prinsă: într-o simulare, un jucător care urmărește mereu ținta cea mai apropiată termina nivelul 1 în median 214 s (23% nu terminau în 5 minute); cu limita, ~49 s. Modul liber nu are limita.
-- Timpii bonus au fost stabiliți din simulări (jucător care urmărește ținta cea mai apropiată: nivelul 1 median ~49 s, nivelul 2 ~32 s, nivelul 3 ~26 s), nu din jucat de oameni.
+- Timpii bonus (120, 90, 80 s) și numărul de animale din `spawn` au fost dublate după primul test cu un om (prea puțin timp, prea puține animale și dușmani). Simulările inițiale (jucător care urmărește ținta cea mai apropiată: nivelul 1 median ~49 s, 2 ~32 s, 3 ~26 s) nu mai sunt valabile pentru numărul nou de animale.
 - Cum adaugi un nivel: o intrare nouă în `LEVELS` (`levels.ts`), nimic altceva. Dacă folosește un fel nou de animal, trebuie să existe în `animals.ts`.
 
 ## Constante importante ale jocului (în `page.tsx`)
