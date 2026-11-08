@@ -49,7 +49,6 @@ export default function Footer() {
     { href: "/showcase/jim-curtis", label: "Jim Curtis" },
     { href: "/showcase/vespa-urban", label: "Veloce Mobility" },
     { href: "/ai-humans", label: "AI Humans" },
-    { href: "/nevronix", label: "Nevronix Core" },
   ];
 
   const translations = {
@@ -180,34 +179,20 @@ export default function Footer() {
 
         {/* Bara Subsol: Tech Badge & Legal */}
         <div className="px-8 lg:px-16 py-6 flex flex-col gap-6 md:flex-row md:items-center md:justify-between bg-[#f2eee7]">
-          {/* Partner & Tech Stack Badges */}
+          {/* Strategic Partner */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8">
-            
-            {/* Nevronix Partnership */}
-            <div className="flex flex-col items-start gap-1.5 float-badge">
-              <span className="text-[8px] font-bold uppercase tracking-[0.35em] text-[#1d2731]/40">Powered by</span>
-              <a href="https://nevronix.ai" target="_blank" rel="noopener noreferrer" className="group flex items-center mt-0.5 px-3 py-1.5 transition-all duration-500 bg-white/30 hover:bg-white rounded-lg border border-[#1d2731]/5 hover:shadow-sm">
-                 <span className="font-bold text-[14px] leading-none tracking-tight transition-transform duration-500 group-hover:scale-105 origin-left flex items-center" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
-                   <span style={{ color: '#1B1464' }}>Nevronix</span>
-                   <span style={{ color: '#CE2051' }}>AI</span>
-                 </span>
+            <div className="flex flex-col items-start gap-1">
+              <span className="text-[8px] font-bold uppercase tracking-[0.35em] text-[#1d2731]/40">Partener Strategic</span>
+              <a
+                href="https://zylarisgroup.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-1.5 text-xs font-mono uppercase tracking-widest text-[#1d2731] hover:underline"
+              >
+                <span>Zylaris Group London</span>
+                <span className="text-[10px] text-[#1d2731]/40 group-hover:text-[#1d2731]">↗</span>
               </a>
             </div>
-
-            {/* Ultra AI Engineering */}
-            <div className="flex flex-col items-start gap-1.5 float-badge" style={{ animationDelay: '0.2s' }}>
-              <span className="text-[8px] font-bold uppercase tracking-[0.35em] text-[#1d2731]/40">Engineering by</span>
-              <div className="group flex items-center gap-2 mt-0.5 px-3 py-1.5 transition-all duration-500 bg-white/30 hover:bg-white rounded-lg border border-[#1d2731]/5 hover:shadow-sm cursor-default">
-                 <span className="relative flex h-1.5 w-1.5">
-                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-60"></span>
-                   <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-600"></span>
-                 </span>
-                 <span className="font-bold text-[11px] uppercase leading-none tracking-widest transition-transform duration-500 group-hover:scale-105 origin-left flex items-center text-[#1d2731]">
-                   Gemini 3.1 <span className="text-emerald-700 ml-1 font-extrabold" style={{ textShadow: "0 0 10px rgba(16,185,129,0.3)" }}>Pro</span>
-                 </span>
-              </div>
-            </div>
-
           </div>
 
           {/* Legal / Manifest Inline */}
