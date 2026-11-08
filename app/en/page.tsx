@@ -68,7 +68,7 @@ class SoundEngine {
 
 const sounds = new SoundEngine();
 
-// ── Real Live Technical Ecosystem (15 Active Production Systems) ──
+// ── Real Live Technical Ecosystem • 15 Active Production Systems ──
 const realProjects = [
   {
     name: "Bricolando.ro",
@@ -95,7 +95,7 @@ const realProjects = [
     category: "Software Systems & AI",
     tech: "Next.js / Edge Runtime",
     host: "Cloudflare Pages",
-    desc: "Enterprise platform for AI voice technologies (Kalki Voice) and advanced workflow automations.",
+    desc: "Enterprise platform for AI voice technologies Kalki Voice and advanced workflow automations.",
     href: "https://kalki.work",
     status: "LIVE PRODUCTION",
     badge: "AI Software"
@@ -192,7 +192,7 @@ const realProjects = [
   },
   {
     name: "Millo.asia",
-    category: "Multilingual Global Hub (9 Languages)",
+    category: "Multilingual Global Hub in 9 Languages",
     tech: "Next.js / Dynamic Localization",
     host: "Hostinger Cloud",
     desc: "International digital ecosystem with interactive games and educational experiences distributed across subdomains in 9 languages.",
@@ -291,7 +291,7 @@ export default function EnglishHomePage() {
             <span className="text-neutral-500">•</span>
             <span>AI VIDEO PRODUCTION</span>
             <span className="text-neutral-500">•</span>
-            <span>GENERATIVE AI SEARCH (GEO)</span>
+            <span>GENERATIVE AI SEARCH GEO</span>
           </div>
 
           <h1 className="text-5xl md:text-7xl lg:text-[84px] font-medium tracking-[-0.04em] leading-[1.02] text-white">
@@ -320,7 +320,7 @@ export default function EnglishHomePage() {
               onClick={() => sounds.playClick()}
               className="rounded-full border border-white/15 bg-white/5 backdrop-blur-md px-8 py-3.5 text-xs font-mono uppercase tracking-widest text-neutral-300 hover:bg-white/10 hover:text-white transition-all"
             >
-              The AI Search Vision (GEO) ↓
+              The AI Search Vision GEO ↓
             </a>
           </div>
 
@@ -367,7 +367,7 @@ export default function EnglishHomePage() {
         </div>
       </section>
 
-      {/* ── Strategic AI Search & GEO Section (Inspired by Profound Research) ── */}
+      {/* ── Strategic AI Search & GEO Section • Profound Research ── */}
       <section id="ai-search-geo" className="relative z-20 py-28 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
         <div className="rounded-3xl border border-white/15 bg-gradient-to-b from-neutral-900/40 via-neutral-950/70 to-neutral-900/30 p-8 md:p-14 backdrop-blur-md">
           
@@ -425,7 +425,7 @@ export default function EnglishHomePage() {
         </div>
       </section>
 
-      {/* ── Live Technical Ecosystem Showcase (15 Live Systems) ── */}
+      {/* ── Live Technical Ecosystem Showcase • 15 Live Systems ── */}
       <section className="relative z-10 py-28 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
         
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
@@ -511,7 +511,7 @@ export default function EnglishHomePage() {
 
       </section>
 
-      {/* ── Operational Framework (How We Operate) ── */}
+      {/* ── Operational Framework • How We Operate ── */}
       <section className="relative z-10 py-28 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
         <div className="max-w-3xl mb-16">
           <div className="text-xs font-mono uppercase tracking-[0.25em] text-neutral-500 mb-3">
@@ -559,7 +559,7 @@ export default function EnglishHomePage() {
           </div>
         </div>
       </section>
-      {/* ── Fixed Pricing Architecture (Zylaris Minimalist Framework) ── */}
+      {/* ── Fixed Pricing Architecture • Zylaris Framework ── */}
       <section id="packages" className="py-24 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
         
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
@@ -576,7 +576,7 @@ export default function EnglishHomePage() {
           </p>
         </div>
 
-        {/* Integrated Brutalist Grid (Zylaris Group Architecture) */}
+        {/* Integrated Brutalist Grid • Zylaris Group */}
         <div className="rounded-3xl border border-white/10 bg-[#070809] grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10 overflow-hidden">
           
           {/* Column 1: Social Growth */}
@@ -596,7 +596,7 @@ export default function EnglishHomePage() {
               <div className="space-y-3 font-mono text-xs text-neutral-300 border-t border-white/5 pt-6 mb-8">
                 <div className="flex items-start gap-2">
                   <span className="text-neutral-500">—</span>
-                  <span>12 short-form videos monthly (3 / week)</span>
+                  <span>12 short-form videos monthly, 3 weekly</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="text-neutral-500">—</span>
@@ -604,7 +604,7 @@ export default function EnglishHomePage() {
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="text-neutral-500">—</span>
-                  <span>Native 9:16 vertical delivery (Reels, TikTok, Shorts)</span>
+                  <span>Native 9:16 vertical delivery for Reels, TikTok, Shorts</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="text-neutral-500">—</span>
@@ -622,7 +622,7 @@ export default function EnglishHomePage() {
             </Link>
           </div>
 
-          {/* Column 2: Daily Impact (Recommended) */}
+          {/* Column 2: Daily Impact • RECOMMENDED */}
           <div className="p-8 lg:p-10 flex flex-col justify-between bg-neutral-900/40 relative">
             <div>
               <div className="flex items-center justify-between mb-4">
@@ -644,7 +644,7 @@ export default function EnglishHomePage() {
               <div className="space-y-3 font-mono text-xs text-neutral-200 border-t border-white/10 pt-6 mb-8">
                 <div className="flex items-start gap-2">
                   <span className="text-emerald-400">★</span>
-                  <span>30 monthly assets (1 video published daily)</span>
+                  <span>30 monthly assets, 1 video published daily</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="text-emerald-400">★</span>
@@ -695,7 +695,7 @@ export default function EnglishHomePage() {
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="text-neutral-500">—</span>
-                  <span>Native Generative Engine Optimization (JSON-LD)</span>
+                  <span>Native Generative Engine Optimization JSON-LD</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="text-neutral-500">—</span>

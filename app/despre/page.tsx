@@ -31,7 +31,7 @@ const values = [
   },
   {
     title: "Optimizare pentru Noile Motoare AI",
-    text: "Asigurăm lizibilitatea semantică a afacerii tale pentru ChatGPT, Perplexity și Gemini (Generative Engine Optimization).",
+    text: "Asigurăm lizibilitatea semantică a afacerii tale pentru ChatGPT, Perplexity și Gemini Generative Engine Optimization GEO.",
   },
 ];
 

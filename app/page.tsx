@@ -95,7 +95,7 @@ const realProjects = [
     category: "Sisteme Software & AI",
     tech: "Next.js / Edge Runtime",
     host: "Cloudflare Pages",
-    desc: "Platformă enterprise pentru tehnologii vocale AI (Kalki Voice) și automatizări avansate de fluxuri de lucru.",
+    desc: "Platformă enterprise pentru tehnologii vocale AI Kalki Voice și automatizări avansate de fluxuri de lucru.",
     href: "https://kalki.work",
     status: "PRODUCȚIE LIVE",
     badge: "Software AI"
@@ -165,7 +165,7 @@ const realProjects = [
     category: "Platformă Filosofie Stoică & Sănătate",
     tech: "React / Multi-Language",
     host: "Cloudflare Network",
-    desc: "Prezentare digitală a cărții Armonia (21 de scrisori stoice), cu design editorial fluid și elegant.",
+    desc: "Prezentare digitală a cărții Armonia , 21 de scrisori stoice, cu design editorial fluid și elegant.",
     href: "https://yourfinestform.com",
     status: "PRODUCȚIE LIVE",
     badge: "Platformă"
@@ -202,7 +202,7 @@ const realProjects = [
   },
   {
     name: "Millo.asia",
-    category: "Hub Digital Multilingv (9 Limbi)",
+    category: "Hub Digital Multilingv în 9 Limbi",
     tech: "Next.js / Localizare Dinamică",
     host: "Hostinger Cloud",
     desc: "Ecosistem digital internațional cu jocuri și experiențe interactive distribuite pe subdomenii în 9 limbi.",
@@ -215,7 +215,7 @@ const realProjects = [
     category: "Prezentare Video Cinematică",
     tech: "10k Scroll Engine / HTML5 Canvas",
     host: "Cloudflare Pages",
-    desc: "Experiență web bazată pe derulare video cadru cu cadru (scroll scrubbing) și design atmosferic de lux.",
+    desc: "Experiență web bazată pe derulare video cadru cu cadru  și design atmosferic de lux.",
     href: "https://don-barbershop.pages.dev",
     status: "DEMO LIVE",
     badge: "Showcase"
@@ -302,7 +302,7 @@ export default function HomePage() {
             <span className="text-neutral-500">•</span>
             <span>PRODUCȚIE VIDEO AI</span>
             <span className="text-neutral-500">•</span>
-            <span>CĂUTARE GENERATIVĂ (GEO)</span>
+            <span>CĂUTARE GENERATIVĂ GEO</span>
           </div>
 
           <h1 className="text-5xl md:text-7xl lg:text-[84px] font-medium tracking-[-0.04em] leading-[1.02] text-white">
@@ -331,7 +331,7 @@ export default function HomePage() {
               onClick={() => sounds.playClick()}
               className="rounded-full border border-white/15 bg-white/5 backdrop-blur-md px-8 py-3.5 text-xs font-mono uppercase tracking-widest text-neutral-300 hover:bg-white/10 hover:text-white transition-all"
             >
-              Viziunea Căutării AI (GEO) ↓
+              Viziunea Căutării AI GEO ↓
             </a>
           </div>
 
@@ -378,7 +378,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Secțiunea Strategică AI Search & GEO (Inspirată din studiul Profound) ── */}
+      {/* ── Secțiunea Strategică AI Search & GEO • Studiu Profound 2026 ── */}
       <section id="ai-search-geo" className="relative z-20 py-28 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
         
         <div className="rounded-3xl border border-white/15 bg-gradient-to-b from-neutral-900/40 via-neutral-950/70 to-neutral-900/30 p-8 md:p-14 backdrop-blur-md">
@@ -392,7 +392,7 @@ export default function HomePage() {
               <span className="text-neutral-400">Ei întreabă agenții AI.</span>
             </h2>
             <p className="mt-5 text-sm md:text-base text-neutral-300 leading-relaxed font-light">
-              Când un cumpărător întreabă ChatGPT, Perplexity, Claude sau Gemini: <em>„Care este cel mai bun furnizor de servicii sau magazin pentru nevoia mea și cât costă?”</em>, răspunsul este generat instant. Conform celor mai recente cercetări din industrie (Profound 2026), peste 57% dintre site-urile tradiționale sunt invizibile sau citate greșit de către AI, deoarece datele și prețurile lor nu sunt structurate semantic.
+              Când un cumpărător întreabă ChatGPT, Perplexity, Claude sau Gemini: <em>„Care este cel mai bun furnizor de servicii sau magazin pentru nevoia mea și cât costă?”</em>, răspunsul este generat instant. Conform celor mai recente cercetări din industrie Profound 2026, peste 57% dintre site-urile tradiționale sunt invizibile sau citate greșit de către AI, deoarece datele și prețurile lor nu sunt structurate semantic.
             </p>
           </div>
 
@@ -427,7 +427,7 @@ export default function HomePage() {
             <div className="rounded-2xl border border-white/10 bg-neutral-900/40 p-8 flex flex-col justify-between">
               <div>
                 <div className="text-xs font-mono text-neutral-500 mb-4">03 / GENERATIVE ENGINE OPTIMIZATION</div>
-                <h3 className="text-xl font-medium text-white mb-3">Generative Engine Optimization (GEO)</h3>
+                <h3 className="text-xl font-medium text-white mb-3">Generative Engine Optimization GEO</h3>
                 <p className="text-xs text-neutral-400 leading-relaxed font-light">
                   Trecem dincolo de SEO-ul clasic bazat pe cuvinte cheie statice. Optimizăm întreaga prezență a afacerii pentru a deveni sursa autoritară recomandată de noile motoare de căutare generative.
                 </p>
@@ -442,7 +442,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── How We Operate / Cum Operăm (Structura Zylaris) ── */}
+      {/* ── How We Operate • Structură Zylaris ── */}
       <section id="how-we-operate" className="relative z-20 py-28 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
         
         <div className="grid lg:grid-cols-12 gap-12 items-start mb-20">
@@ -515,7 +515,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Ecosistemul Tehnic Reverb (Toate cele 15 Proiecte Reale Active) ── */}
+      {/* ── Ecosistemul Tehnic Reverb • 15 Proiecte Reale Active ── */}
       <section id="proiecte" className="py-28 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
         
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
@@ -582,7 +582,7 @@ export default function HomePage() {
           ))}
         </div>
       </section>
-      {/* ── Pachete & Prețuri Structurate (Filozofie Minimalistă Zylaris) ── */}
+      {/* ── Pachete & Prețuri Structurate • Filozofie Zylaris ── */}
       <section id="pachete" className="py-24 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
         
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
@@ -599,7 +599,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        {/* Cadru Arhitectural Brutalist Integrat (Stil Zylaris Group) */}
+        {/* Cadru Arhitectural Brutalist • Zylaris Group */}
         <div className="rounded-3xl border border-white/10 bg-[#070809] grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10 overflow-hidden">
           
           {/* Coloana 1: Social Growth */}
@@ -619,7 +619,7 @@ export default function HomePage() {
               <div className="space-y-3 font-mono text-xs text-neutral-300 border-t border-white/5 pt-6 mb-8">
                 <div className="flex items-start gap-2">
                   <span className="text-neutral-500">—</span>
-                  <span>12 clipuri video scurte / lună (3/săpt.)</span>
+                  <span>12 clipuri video scurte lunar, ritm de 3 pe săptămână</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="text-neutral-500">—</span>
@@ -627,7 +627,7 @@ export default function HomePage() {
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="text-neutral-500">—</span>
-                  <span>Optimizare verticală 9:16 (TikTok, Reels, Shorts)</span>
+                  <span>Optimizare verticală 9:16 pentru TikTok, Reels, Shorts</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="text-neutral-500">—</span>
@@ -645,7 +645,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          {/* Coloana 2: Daily Impact (Recomandat) */}
+          {/* Coloana 2: Daily Impact • RECOMANDAT */}
           <div className="p-8 lg:p-10 flex flex-col justify-between bg-neutral-900/40 relative">
             <div>
               <div className="flex items-center justify-between mb-4">
@@ -667,7 +667,7 @@ export default function HomePage() {
               <div className="space-y-3 font-mono text-xs text-neutral-200 border-t border-white/10 pt-6 mb-8">
                 <div className="flex items-start gap-2">
                   <span className="text-emerald-400">★</span>
-                  <span>30 de clipuri video lunare (1 clip publicat zilnic)</span>
+                  <span>30 de clipuri video lunare, 1 clip publicat zilnic</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="text-emerald-400">★</span>
@@ -718,11 +718,11 @@ export default function HomePage() {
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="text-neutral-500">—</span>
-                  <span>Optimizare semantică pentru căutare AI (GEO JSON-LD)</span>
+                  <span>Optimizare semantică pentru căutare AI GEO JSON-LD</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="text-neutral-500">—</span>
-                  <span>Facturare automată instantanee (FGO / SmartBill)</span>
+                  <span>Facturare automată instantanee FGO sau SmartBill</span>
                 </div>
               </div>
             </div>

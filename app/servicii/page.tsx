@@ -5,7 +5,7 @@ import Reveal from "@/components/Reveal";
 export const metadata: Metadata = {
   title: "Servicii — Reverb Digital",
   description:
-    "Arhitectură digitală completă: platforme web de mare viteză, conținut video zilnic AI, optimizare pentru căutare generativă (GEO) și infrastructură enterprise.",
+    "Arhitectură digitală completă: platforme web de mare viteză, conținut video zilnic AI, optimizare pentru căutare generativă GEO și infrastructură enterprise.",
 };
 
 const mainServices = [
@@ -19,8 +19,8 @@ const mainServices = [
     deliverables: [
       "Arhitectură Next.js / Edge Runtime cu viteză sub 1.2s",
       "Opțiune Panou Control Enterprise cu Payload CMS",
-      "Proces de vânzare fără fricțiune (checkout 1-step)",
-      "Facturare automată (FGO / SmartBill) + AWB curieri",
+      "Proces de vânzare fără fricțiune cu checkout 1-step",
+      "Facturare automată FGO sau SmartBill + AWB curieri",
       "Optimizare completă pentru dispozitive mobile",
     ],
     href: "/contact?pachet=site-magazin",
@@ -46,13 +46,13 @@ const mainServices = [
     id: "03",
     tag: "NOUA CĂUTARE ONLINE",
     price: "de la €690 / lună",
-    title: "Optimizare Pentru Agenți AI (GEO)",
+    title: "Optimizare Pentru Agenți AI GEO",
     tagline: "Fii prima recomandare în ChatGPT, Perplexity, Claude și Gemini.",
     text: "În 2026, clienții nu mai caută doar cuvinte cheie pe Google, ci adresează întrebări directe asistenților AI. Structurăm semantic întregul tău site prin date JSON-LD avansate, index de prețuri transparent și entități de autoritate, astfel încât LLM-urile să recomande afacerea ta ca sursă de încredere.",
     deliverables: [
-      "AI-Readable Answer Stack (date structurate semantic)",
+      "AI-Readable Answer Stack cu date structurate semantic",
       "Indexare transparentă și clară a pachetelor de prețuri",
-      "Generative Engine Optimization (GEO) pentru Perplexity și ChatGPT",
+      "Generative Engine Optimization GEO pentru Perplexity și ChatGPT",
       "Validare entitate de brand și autoritate digitală",
       "Monitorizare a citărilor în răspunsurile generate de AI",
     ],
@@ -107,7 +107,7 @@ export default function ServiciiPage() {
           </Reveal>
           <Reveal delay={160}>
             <p className="mt-8 max-w-2xl mx-auto text-base md:text-lg text-neutral-400 font-light leading-relaxed">
-              De la fundația tehnică de mare viteză a magazinului tău online, până la motoare de conținut video zilnic și optimizare pentru căutare generativă (GEO). Fără improvizații.
+              De la fundația tehnică de mare viteză a magazinului tău online, până la motoare de conținut video zilnic și optimizare pentru căutare generativă GEO. Fără improvizații.
             </p>
           </Reveal>
         </div>
@@ -144,7 +144,7 @@ export default function ServiciiPage() {
                       href={srv.href}
                       className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-xs font-mono uppercase tracking-widest text-black hover:bg-neutral-200 transition-all font-bold"
                     >
-                      Alege Serviciul ({srv.price}) →
+                      Alege Serviciul • {srv.price} →
                     </Link>
                   </div>
 

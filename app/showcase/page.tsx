@@ -5,7 +5,7 @@ import { GITHUB_SHOWCASE_PATHS } from "@/lib/githubShowcases";
 export const metadata: Metadata = {
   alternates: { canonical: "/showcase", languages: { ro: "/showcase", en: "/en/showcase", "x-default": "/showcase" } },
   title: "Industry Showcase — Reverb.ro",
-  description: "Portofoliu aplicat de prezențe digitale. 21 Verticale Absolute, executate cu precizie structurală.",
+  description: "Portofoliu aplicat de prezențe digitale. 52 de Verticale Absolute, executate cu precizie structurală.",
 };
 
 const showcases = [
@@ -103,13 +103,13 @@ export default function ShowcaseIndex() {
           <Link href="/templates" className="inline-flex items-center text-xs font-mono transition-all duration-1000 mb-12 border rounded-full px-4 py-1.5" style={{ color: 'var(--text-muted)', borderColor: 'var(--border-color)', backgroundColor: 'var(--card-bg)' }}>
             ← Înapoi la direcții de bază
           </Link>
-          <div className="mb-4 text-[10px] font-mono uppercase tracking-[0.4em] transition-colors duration-1000" style={{ color: 'var(--text-faint)' }}>SYS.SHOWCASE_MATRIX_V2</div>
+          <div className="mb-4 text-[10px] font-mono uppercase tracking-[0.4em] transition-colors duration-1000" style={{ color: "var(--text-faint)" }}>[ CLARITATE ÎN STRUCTURĂ • 52 VERTICALE ABSOLUTE ]</div>
           <h1 className="text-5xl font-medium leading-[1.0] tracking-[-0.03em] md:text-7xl transition-colors duration-1000">
-            21 Verticale<br />
+            52 de Verticale<br />
             <span style={{ color: 'var(--text-muted)' }} className="transition-colors duration-1000">Absolute.</span>
           </h1>
           <p className="mt-8 max-w-xl text-lg leading-8 font-sans transition-colors duration-1000" style={{ color: 'var(--text-secondary)' }}>
-            Am depășit stadiul de "teme predefinite". 21 interfețe front-end unice, cu identități tăioase dictate de psihologia fiecărei nișe — de la rigiditatea medicală, până la arhitectura industrială B2B.
+            Am depășit stadiul de "teme predefinite". 52 de interfețe front-end unice, cu identități tăioase dictate de psihologia fiecărei nișe — de la rigiditatea medicală, până la arhitectura industrială B2B.
           </p>
         </div>
       </section>

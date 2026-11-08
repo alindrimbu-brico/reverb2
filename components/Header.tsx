@@ -28,10 +28,37 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [isEn, setIsEn] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
 
   useEffect(() => {
     setIsEn(pathname.startsWith("/en"));
   }, [pathname]);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("reverb_theme") as "dark" | "light" | null;
+    if (savedTheme === "light") {
+      setTheme("light");
+      document.documentElement.classList.add("light");
+      document.documentElement.classList.remove("dark");
+    } else {
+      setTheme("dark");
+      document.documentElement.classList.add("dark");
+      document.documentElement.classList.remove("light");
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    setTheme(nextTheme);
+    localStorage.setItem("reverb_theme", nextTheme);
+    if (nextTheme === "light") {
+      document.documentElement.classList.add("light");
+      document.documentElement.classList.remove("dark");
+    } else {
+      document.documentElement.classList.add("dark");
+      document.documentElement.classList.remove("light");
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -124,29 +151,29 @@ export default function Header() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex flex-col items-center px-4 pt-4 pointer-events-none">
+    <header className="fixed top-0 left-0 right-0 z-50 flex flex-col items-center px-3 sm:px-4 pt-3 sm:pt-4 pointer-events-none">
       <div 
-        className={`w-full max-w-6xl rounded-full border bg-[#f5f1ea]/85 dark:bg-[#0a0a0c]/80 backdrop-blur-md px-6 py-3 flex items-center justify-between pointer-events-auto transition-all duration-500 shadow-sm ${
+        className={`w-full max-w-6xl rounded-full border bg-[#f5f1ea]/90 dark:bg-[#0a0a0c]/85 backdrop-blur-md px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between pointer-events-auto transition-all duration-500 shadow-sm ${
           scrolled 
-            ? "border-[#1d2731]/15 dark:border-neutral-850 shadow-[0_12px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] py-2.5 max-w-5xl" 
-            : "border-[#1d2731]/8 dark:border-neutral-800/30 py-3.5"
+            ? "border-[#1d2731]/15 dark:border-neutral-800 shadow-[0_12px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] py-2 sm:py-2.5 max-w-5xl" 
+            : "border-[#1d2731]/8 dark:border-neutral-800/40 py-2.5 sm:py-3.5"
         }`}
       >
         {/* Left: Logo and Brand Name */}
-        <div className="flex-1 flex justify-start">
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[#1d2731]/12 bg-white/70 shadow-sm transition-all duration-500 group-hover:shadow-[0_8px_20px_rgba(29,39,49,0.15)] group-hover:-translate-y-0.5 text-[#1d2731]">
-              <Logo size={28} />
+        <div className="flex-1 flex justify-start items-center min-w-0">
+          <Link href={isEn ? "/en" : "/"} className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
+            <div className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-[#1d2731]/12 dark:border-white/10 bg-white/70 dark:bg-white/5 shadow-sm transition-all duration-500 group-hover:shadow-[0_8px_20px_rgba(29,39,49,0.15)] group-hover:-translate-y-0.5 text-[#1d2731] dark:text-white">
+              <Logo size={26} />
             </div>
-            <div className="hidden sm:block text-left">
+            <div className="hidden xs:block sm:block text-left">
               <div className="text-xs font-bold tracking-[0.3em] uppercase text-[#1d2731] dark:text-neutral-100 transition-colors duration-300">reverb.ro</div>
-              <div className="text-[8px] uppercase tracking-widest font-semibold text-[#1d2731]/40 dark:text-neutral-500">{translations.clarity}</div>
+              <div className="text-[8px] uppercase tracking-widest font-semibold text-[#1d2731]/50 dark:text-neutral-400">{translations.clarity}</div>
             </div>
           </Link>
         </div>
 
-        {/* Center: centered navigation menu */}
-        <nav className="hidden md:flex items-center gap-6 text-sm">
+        {/* Center: centered navigation menu (visible on desktop >= 1024px to prevent tablet clipping) */}
+        <nav className="hidden lg:flex items-center gap-5 xl:gap-6 text-sm shrink-0">
           {nav.map(({ href, label }) => {
             const isActive = pathname === href;
             return (
@@ -156,7 +183,7 @@ export default function Header() {
                 className={`transition-all duration-300 text-[10px] uppercase tracking-widest font-bold relative py-1 px-2 ${
                   isActive 
                     ? "text-[#1d2731] dark:text-white" 
-                    : "text-[#1d2731]/45 dark:text-neutral-400 hover:text-[#1d2731] dark:hover:text-white"
+                    : "text-[#1d2731]/50 dark:text-neutral-400 hover:text-[#1d2731] dark:hover:text-white"
                 }`}
               >
                 {label}
@@ -168,24 +195,46 @@ export default function Header() {
           })}
         </nav>
 
-        {/* Right: CTA button and language switcher */}
-        <div className="flex-1 flex justify-end items-center gap-3">
+        {/* Right: CTA button, Theme Toggle, Language Switcher, Hamburger */}
+        <div className="flex-1 flex justify-end items-center gap-2 sm:gap-3 shrink-0">
           <Link
-            href="/contact"
-            className="hidden md:inline-flex items-center justify-center rounded-full bg-[#1d2731] dark:bg-white px-5 py-2 text-[10px] font-bold uppercase tracking-widest text-[#f5f1ea] dark:text-neutral-900 transition-all duration-300 hover:-translate-y-0.5 shadow-[0_4px_12px_rgba(29,39,49,0.15)] hover:shadow-[0_8px_20px_rgba(29,39,49,0.3)] dark:shadow-none"
+            href={isEn ? "/en/contact" : "/contact"}
+            className="hidden xl:inline-flex items-center justify-center rounded-full bg-[#1d2731] dark:bg-white px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-[#f5f1ea] dark:text-neutral-900 transition-all duration-300 hover:-translate-y-0.5 shadow-[0_4px_12px_rgba(29,39,49,0.15)] hover:shadow-[0_8px_20px_rgba(29,39,49,0.3)] dark:shadow-none shrink-0"
           >
             {translations.start}
           </Link>
 
-          {/* Discreet Language Selector */}
-          <div className="flex bg-[#1d2731]/5 dark:bg-neutral-800/40 rounded-full p-[2px] border border-[#1d2731]/10 dark:border-neutral-800/30 items-center">
-             <button onClick={() => handleLangChange("ro")} className={`px-2 py-0.5 text-[8px] uppercase tracking-widest font-extrabold rounded-full transition-all duration-300 ${!isEn ? 'bg-white dark:bg-neutral-700 text-[#1d2731] dark:text-white shadow-sm' : 'text-[#1d2731]/30 dark:text-neutral-500 hover:text-[#1d2731]/60'}`}>RO</button>
-             <button onClick={() => handleLangChange("en")} className={`px-2 py-0.5 text-[8px] uppercase tracking-widest font-extrabold rounded-full transition-all duration-300 ${isEn ? 'bg-white dark:bg-neutral-700 text-[#1d2731] dark:text-white shadow-sm' : 'text-[#1d2731]/30 dark:text-neutral-500 hover:text-[#1d2731]/60'}`}>EN</button>
+          {/* Minimalist Theme Toggle (Dark / Light) */}
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle visual theme"
+            className="flex items-center justify-center h-8 w-8 rounded-full border border-[#1d2731]/10 dark:border-white/10 bg-white/60 dark:bg-neutral-850/80 text-[#1d2731] dark:text-neutral-200 transition-all duration-300 hover:scale-105 shrink-0"
+            title={theme === "dark" ? "Comută pe tema Light" : "Comută pe tema Dark"}
+          >
+            <span className="text-xs">{theme === "dark" ? "☾" : "☼"}</span>
+          </button>
+
+          {/* Discreet Language Selector with shrink-0 so it never clips off-screen */}
+          <div className="flex bg-[#1d2731]/5 dark:bg-neutral-850/80 rounded-full p-[2px] border border-[#1d2731]/10 dark:border-white/10 items-center shrink-0">
+             <button 
+               onClick={() => handleLangChange("ro")} 
+               aria-label="Limba Română"
+               className={`px-2 py-0.5 text-[8px] uppercase tracking-widest font-extrabold rounded-full transition-all duration-300 ${!isEn ? 'bg-white dark:bg-neutral-700 text-[#1d2731] dark:text-white shadow-sm' : 'text-[#1d2731]/40 dark:text-neutral-400 hover:text-[#1d2731]/70'}`}
+             >
+               RO
+             </button>
+             <button 
+               onClick={() => handleLangChange("en")} 
+               aria-label="English Language"
+               className={`px-2 py-0.5 text-[8px] uppercase tracking-widest font-extrabold rounded-full transition-all duration-300 ${isEn ? 'bg-white dark:bg-neutral-700 text-[#1d2731] dark:text-white shadow-sm' : 'text-[#1d2731]/40 dark:text-neutral-400 hover:text-[#1d2731]/70'}`}
+             >
+               EN
+             </button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile & Tablet Menu Button (< 1024px) */}
           <button
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-[#1d2731]/10 dark:border-neutral-800/40 bg-white/60 dark:bg-neutral-900/60 md:hidden transition-transform duration-300 hover:scale-105 pointer-events-auto"
+            className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-[#1d2731]/10 dark:border-white/10 bg-white/60 dark:bg-neutral-850/80 lg:hidden transition-transform duration-300 hover:scale-105 pointer-events-auto shrink-0"
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
           >
@@ -196,26 +245,26 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile Drawer Dropdown from the floating capsule */}
+      {/* Mobile & Tablet Drawer Dropdown from the floating capsule */}
       {open && (
-        <div className="w-full max-w-6xl mt-2 px-4 pointer-events-auto md:hidden">
-          <div className="rounded-3xl border border-[#1d2731]/10 dark:border-neutral-800/50 bg-[#f5f1ea]/95 dark:bg-[#0a0a0c]/95 backdrop-blur-lg p-6 shadow-2xl space-y-4">
+        <div className="w-full max-w-6xl mt-2 px-3 sm:px-4 pointer-events-auto lg:hidden">
+          <div className="rounded-3xl border border-[#1d2731]/10 dark:border-neutral-800/80 bg-[#f5f1ea]/95 dark:bg-[#0a0a0c]/95 backdrop-blur-lg p-6 shadow-2xl space-y-4">
             {nav.map(({ href, label }) => (
               <Link
                 key={label}
                 href={href}
                 onClick={() => setOpen(false)}
                 className={`block py-2 text-xs uppercase tracking-widest font-bold transition-colors ${
-                  pathname === href ? "text-[#1d2731] dark:text-white" : "text-[#1d2731]/50 dark:text-neutral-400"
+                  pathname === href ? "text-[#1d2731] dark:text-white" : "text-[#1d2731]/60 dark:text-neutral-400"
                 }`}
               >
                 {label}
               </Link>
             ))}
             <Link
-              href="/contact"
+              href={isEn ? "/en/contact" : "/contact"}
               onClick={() => setOpen(false)}
-              className="mt-3 inline-flex w-full items-center justify-center rounded-full bg-[#1d2731] dark:bg-white py-3 text-xs font-bold uppercase tracking-widest text-white dark:text-neutral-900 hover:opacity-90 transition-opacity"
+              className="mt-3 inline-flex w-full items-center justify-center rounded-full bg-[#1d2731] dark:bg-white py-3 text-xs font-bold uppercase tracking-widest text-[#f5f1ea] dark:text-neutral-900 hover:opacity-90 transition-opacity"
             >
               {translations.start}
             </Link>

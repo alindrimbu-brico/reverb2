@@ -4,454 +4,161 @@ import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/en/services", languages: { ro: "/servicii", en: "/en/services", "x-default": "/servicii" } },
-  title: "Services",
+  title: "Services — Reverb Digital",
   description:
-    "Clear digital services for SMBs: online presence, local clients, digital stores, ongoing promotion and AI Creative Sprint. Fixed prices, structured delivery.",
+    "Complete digital architecture: high-speed web platforms, daily AI video content, Generative Engine Optimization GEO, and enterprise infrastructure.",
 };
 
-const services = [
+const mainServices = [
   {
     id: "01",
-    title: "Online Presence",
-    tagline: "A website that supports sales, not just image.",
-    text: "Fast implementation, conversion-oriented structure and Google integration for businesses that want real growth.",
-    price: "€590",
-    delivery: "7–14 days",
-    includes: [
-      "Website 3–7 pages, mobile-first",
-      "Contact form + WhatsApp + Maps",
-      "Basic SEO + Google Business setup",
-      "Conversion-oriented structure",
-      "Fixed price, no hidden costs",
-      "Complete implementation, not just design",
+    tag: "TECHNICAL FOUNDATION",
+    price: "from €1,500",
+    title: "Web Platforms & Digital Stores",
+    tagline: "High-speed architecture built directly for conversion.",
+    text: "We develop presentation websites and robust online stores from scratch on Next.js and WooCommerce. Guaranteed loading under 1.2 seconds, cognitive checkout flow, secure card integrations, automated invoicing, and instant courier dispatch.",
+    deliverables: [
+      "Next.js and Edge Runtime architecture under 1.2s",
+      "Enterprise Control Panel with Payload CMS option",
+      "Frictionless 1-step checkout sales process",
+      "Automated invoicing plus instant courier AWB",
+      "Complete optimization for all mobile devices",
     ],
-    ideal: "SMBs wanting a solid digital foundation: service companies, construction, clinics, consulting.",
-    href: "/en/contact",
+    href: "/en/contact?package=web-store",
   },
   {
     id: "02",
-    title: "Local Clients",
-    tagline: "A system that brings local inquiries, consistently.",
-    text: "Local SEO + Google Ads + call tracking. No useless traffic. Only relevant clients.",
-    price: "€790",
-    delivery: "Initial setup (30 days)",
-    extra: "Monthly management: €290 / month (+ separate ads budget)",
-    includes: [
-      "Conversion-optimised landing page",
-      "Local SEO (structure + optimisation)",
-      "Google Ads + local Meta Ads setup",
-      "Call & form tracking",
-      "Google Business optimisation",
-      "Clear monthly report",
+    tag: "SOCIAL MEDIA SCALING",
+    price: "from €390 / month",
+    title: "AI Social Media Video Engine",
+    tagline: "Daily volume of product video content generated with AI.",
+    text: "We eliminate the barrier of traditional video production costs. We generate 1 to 3 high-fidelity video assets daily for TikTok, Instagram Reels, YouTube Shorts, and Facebook using Google Imagen and Veo technologies. Product demonstrations, sales hooks, and dynamic subtitles.",
+    deliverables: [
+      "30 to 90 short-form video assets monthly",
+      "Graphic posts and product carousels for each network",
+      "Ultra-realistic synthetic voiceover and dynamic editing",
+      "Direct traffic routing to store or contact flow",
+      "Zero hours wasted with manual filming by client",
     ],
-    ideal: "Local service companies: construction, clinics, auto service, installers — anyone needing constant calls and inquiries.",
-    href: "/en/contact",
-    recommended: true,
+    href: "/en/contact?package=daily-impact",
+    featured: true,
   },
   {
     id: "03",
-    title: "Digital Store",
-    tagline: "An online store built to sell, not just look good.",
-    text: "We choose the right platform for your business model and build a complete system: products, payments, delivery, conversion.",
-    price: "from €890",
-    delivery: "14–30 days",
-    includes: [
-      "eCommerce platform setup suited to the project",
-      "Category structure + demo products",
-      "Conversion-optimised checkout",
-      "Payments & delivery configured",
-      "Essential tracking (sales, add-to-cart, checkout)",
-      "Complete implementation, not just design",
+    tag: "NEW SEARCH PARADIGM",
+    price: "from €690 / month",
+    title: "Generative Engine Optimization GEO",
+    tagline: "Become the primary recommendation in ChatGPT, Perplexity, Claude, and Gemini.",
+    text: "In 2026, buyers ask direct questions to AI models instead of simple keyword queries. We structure your digital assets using advanced JSON-LD data, transparent pricing indices, and entity authority so LLMs recommend your business as the verified source.",
+    deliverables: [
+      "AI-Readable Answer Stack with structured semantic data",
+      "Transparent and unambiguous pricing package index",
+      "Generative Engine Optimization GEO for Perplexity and ChatGPT",
+      "Brand entity validation and digital authority",
+      "Live citation tracking across AI model responses",
     ],
-    ideal: "Retail, manufacturers, growing brands and B2B businesses that want to sell online seriously.",
-    href: "/en/online-store",
-  },
-  {
-    id: "04",
-    title: "Ongoing Promotion",
-    tagline: "Controlled monthly growth. No campaign chaos.",
-    text: "Monthly management and optimisation for SEO + Ads + conversion. Focus on inquiries and sales, not reach.",
-    price: "from €190/month",
-    delivery: "Ongoing, monthly report",
-    extra: "Three tiers: Start, Growth, Scale (+ separate ads budget)",
-    includes: [
-      "Campaign optimisation (Google/Meta) or SEO",
-      "Message & landing testing",
-      "Conversion tracking & measurement",
-      "Clear report (what worked / what we change)",
-      "We work on real objectives",
-      "No hidden costs",
-    ],
-    ideal: "Companies wanting predictable results: local services, online stores, B2B with leads.",
-    href: "/en/contact",
-  },
-  {
-    id: "05",
-    title: "AI Creative Sprint",
-    tagline: "Positioning and visual direction, delivered in 7 days.",
-    text: "Powered by AI, guided by humans. Visual concepts, moodboard, campaign ideas and content direction — fast and actionable.",
-    price: "€390",
-    delivery: "7 days",
-    includes: [
-      "Fast positioning + visual direction",
-      "Visual concepts + brand moodboard",
-      "10 campaign ideas (ads) + message angles",
-      "Social content direction (simple, actionable)",
-    ],
-    ideal: "Brands needing direction before a launch or relaunch.",
-    href: "/en/contact",
-  },
-  {
-    id: "06",
-    title: "AI Digital Human",
-    tagline: "A virtual employee integrated onto your site, active 24/7.",
-    text: "Conversational avatar capable of sales and customer support, integrated with your systems and permanently trained.",
-    price: "from €290/month",
-    delivery: "Initial setup: 5 days",
-    includes: [
-      "Visually personalized AI avatar",
-      "Training based on your knowledge base (URL/PDF)",
-      "24/7 natural interaction with users",
-      "Contact collection (Lead Gen) and FAQ support",
-      "Non-stop operation, without human errors",
-      "Premium technological structure (Nevronix)"
-    ],
-    ideal: "Clinics, real estate, e-commerce, B2B services and any business with constant support volume.",
-    href: "/en/ai-humans",
+    href: "/en/contact?package=geo-search",
   },
 ];
 
-const monthlyPackages = [
-  {
-    name: "Start",
-    price: "€190 / month",
-    desc: "For simple local businesses.",
-    features: [
-      "1 main channel (Google or Meta)",
-      "Weekly optimisation",
-      "Monthly report",
-      "Email support",
-    ],
-  },
-  {
-    name: "Growth",
-    price: "€290 / month",
-    desc: "Recommended for consistent inquiries.",
-    features: [
-      "Google + Meta (or SEO + Ads)",
-      "Message & landing testing",
-      "Conversion tracking",
-      "Monthly report + plan",
-    ],
-    recommended: true,
-  },
-  {
-    name: "Scale",
-    price: "€390 / month",
-    desc: "For eCommerce / B2B with volume.",
-    features: [
-      "2–3 channels + conversion optimisation",
-      "Advanced weekly iteration",
-      "Extended reporting",
-      "Priority support",
-    ],
-  },
-];
-
-/* ── Website maintenance plans ── */
-const maintenancePackages = [
-  {
-    name: "Essential",
-    price: "€35 / month",
-    desc: "For small sites: basic updates and protection.",
-    features: [
-      "Platform and plugin updates",
-      "Weekly automated backup",
-      "Uptime monitoring",
-      "Up to 1 hour of changes per month",
-    ],
-  },
-  {
-    name: "Professional",
-    price: "€79 / month",
-    desc: "For growing sites with frequently updated content.",
-    features: [
-      "Everything in Essential",
-      "Daily backup and fast restore",
-      "Speed and technical SEO optimisation",
-      "Content updates",
-      "Up to 3 hours of work per month",
-    ],
-    recommended: true,
-  },
-  {
-    name: "Premium",
-    price: "€159 / month",
-    desc: "Full management for established sites and stores.",
-    features: [
-      "Full website management",
-      "Active monitoring and daily backup",
-      "Priority response, same business day",
-      "Small new developments",
-      "Up to 6 hours of work per month",
-      "Monthly report",
-    ],
-  },
-];
-
-const faq = [
-  {
-    q: "How do I choose the right service?",
-    a: "We schedule a 20–30 minute discussion. We clarify the objective and tell you exactly what makes sense for your business.",
-  },
-  {
-    q: "How long does a typical project take?",
-    a: "Between 7 and 30 days, depending on the package. A presentation website: 7–14 days. An online store: 14–30 days. Marketing: ongoing.",
-  },
-  {
-    q: "Are there any hidden costs?",
-    a: "No. Prices are fixed for standard packages. Any extra functionality is discussed separately, before confirmation.",
-  },
-  {
-    q: "Is the ads budget included?",
-    a: "No. The ads budget (Google/Meta) is paid separately, directly to the platforms. We manage and optimise the campaigns.",
-  },
-  {
-    q: "How do you use AI in projects?",
-    a: "Humans think. AI executes. Reverb delivers. We use AI for research, efficiency and execution speed. Strategic direction remains human.",
-  },
-  {
-    q: "Do you offer post-launch support?",
-    a: "Yes. You can continue with Ongoing Promotion for monthly optimisation, with Website maintenance (from €35/month) for updates and security, or keep just the delivered system.",
-  },
-];
-
-export default function ServicesPage() {
+export default function ServicesPageEN() {
   return (
-    <div className="bg-[#f5f1ea] text-[#1d2731]">
+    <div className="bg-[#070809] text-neutral-100 min-h-screen font-sans selection:bg-neutral-700 selection:text-white antialiased">
+      
+      {/* Background Architectural Grid Pattern */}
+      <div 
+        className="fixed inset-0 pointer-events-none z-0 opacity-[0.035]"
+        style={{
+          backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
+          backgroundSize: '48px 48px'
+        }}
+      />
+      <div className="fixed inset-0 pointer-events-none z-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.03)_0%,transparent_70%)]" />
+
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-[#1d2731]/8">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(124,140,170,0.15),transparent_35%)]" />
-        <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+      <section className="relative z-10 pt-32 pb-20 md:pt-40 md:pb-28 border-b border-white/10">
+        <div className="relative mx-auto max-w-5xl px-6 text-center">
           <Reveal>
-            <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">Services</div>
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-300 mb-6 backdrop-blur-md">
+              <span className="h-1.5 w-1.5 rounded-full bg-white" />
+              <span>[ CLARITY IN ARCHITECTURE • SERVICES ]</span>
+            </div>
           </Reveal>
-          <Reveal delay={80}>
-            <h1 className="mt-4 max-w-4xl text-5xl font-medium leading-[0.94] tracking-[-0.04em] md:text-7xl lg:text-[80px]">
-              Clear services. Structured delivery.
+
+          <Reveal delay={0.1}>
+            <h1 className="text-4xl font-extralight tracking-tight sm:text-6xl md:text-7xl uppercase text-white font-mono">
+              Systems & Execution
             </h1>
           </Reveal>
-          <Reveal delay={160}>
-            <p className="mt-8 max-w-2xl text-lg leading-8 text-[#1d2731]/70 md:text-xl">
-              Choose the right package and know exactly what follows. Fixed prices, real timelines, complete implementation.
+
+          <Reveal delay={0.2}>
+            <p className="mx-auto mt-6 max-w-2xl text-base sm:text-lg text-neutral-400 font-light leading-relaxed">
+              From the high-speed technical foundation of your digital store to automated daily AI video engines and verified positioning in AI search assistants.
             </p>
           </Reveal>
         </div>
       </section>
 
-      {/* Services */}
-      <section className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
-        <div className="space-y-12 tab-blur-group">
-          {services.map((s, idx) => (
-            <Reveal key={s.id} delay={idx * 60}>
-              <div className="relative group rounded-[32px] overflow-hidden">
-                <div
-                  className={`absolute inset-0 tab-blur-item rounded-[32px] border ${
-                    s.recommended
-                      ? "border-[#1d2731]/20 bg-white/90 shadow-[0_10px_40px_rgba(29,39,49,0.08)]"
-                      : idx % 2 === 0 ? "border-[#1d2731]/8 bg-white/80" : "border-[#1d2731]/8 bg-[#faf7f2]"
+      {/* Main 3 Pillars Grid */}
+      <section className="relative z-10 py-20 md:py-32">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {mainServices.map((srv, idx) => (
+              <Reveal key={srv.id} delay={0.1 * idx}>
+                <div 
+                  className={`relative flex flex-col justify-between p-8 sm:p-10 rounded-2xl border transition-all duration-300 h-full ${
+                    srv.featured 
+                      ? "bg-gradient-to-b from-neutral-900/60 to-neutral-950/80 border-white/30 shadow-[0_0_40px_rgba(255,255,255,0.05)]" 
+                      : "bg-[#0c0d0e]/80 border-white/10 hover:border-white/20"
                   }`}
-                  style={{ animation: `float-${idx % 3 === 0 ? 'a' : idx % 3 === 1 ? 'b' : 'c'} ${7 + (idx % 3)}s ease-in-out infinite` }}
-                />
-                <div
-                  className="relative z-10 p-8 md:p-10 transition-all duration-500"
-                  style={{ animation: `float-text-${idx % 3 === 0 ? 'a' : idx % 3 === 1 ? 'b' : 'c'} ${7 + (idx % 3)}s ease-in-out infinite` }}
                 >
-                  <div className="grid gap-10 lg:grid-cols-[1fr_1fr]">
-                    <div>
-                      <div className="mb-4 flex items-center gap-3">
-                        <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/40">Service {s.id}</div>
-                        {s.recommended && (
-                          <span className="rounded-full bg-[#1d2731] px-3 py-1 text-xs font-medium text-white">Recommended</span>
-                        )}
-                      </div>
-                      <h2 className="text-3xl font-medium tracking-[-0.03em] md:text-4xl">{s.title}</h2>
-                      <p className="mt-2 text-base font-medium text-[#1d2731]/60">{s.tagline}</p>
-                      <p className="mt-4 text-[15px] leading-7 text-[#1d2731]/70">{s.text}</p>
+                  <div>
+                    <div className="flex items-center justify-between font-mono text-xs text-neutral-400 mb-6 pb-4 border-b border-white/10">
+                      <span className="tracking-[0.2em]">{srv.id} / 03</span>
+                      <span className="text-[10px] uppercase tracking-widest text-neutral-300 bg-white/5 px-2.5 py-1 rounded-full border border-white/10">
+                        {srv.tag}
+                      </span>
+                    </div>
 
-                      <div className="mt-6 flex items-baseline gap-4">
-                        <span className="text-3xl font-medium tracking-[-0.03em] text-[#1d2731]">{s.price}</span>
-                        <span className="text-sm text-[#1d2731]/45">{s.delivery}</span>
-                      </div>
-                      {s.extra && (
-                        <div className="mt-2 text-sm text-[#1d2731]/55">{s.extra}</div>
-                      )}
+                    <div className="text-2xl font-mono text-white mb-2 font-light">
+                      {srv.price}
+                    </div>
 
-                      <div className="mt-4 rounded-2xl border border-[#1d2731]/8 bg-white/60 px-5 py-3 text-sm text-[#1d2731]/60">
-                        <span className="font-medium text-[#1d2731]">Ideal for: </span>{s.ideal}
-                      </div>
-                      <Link
-                        href={s.href}
-                        className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1d2731] px-6 py-3 text-sm font-medium text-white transition hover:-translate-y-0.5 hover:shadow-lg"
-                      >
-                        {s.id === "03" ? "See full details" : "Request a quote"} →
-                      </Link>
-                      <div className="mt-3 text-xs text-[#1d2731]/35">Terms: 50% upfront / 50% on delivery.</div>
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold text-[#1d2731]">What&apos;s included</div>
-                      <ul className="mt-4 space-y-3">
-                        {s.includes.map((item) => (
-                          <li key={item} className="flex items-start gap-3 text-[15px] leading-7 text-[#1d2731]/70">
-                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#1d2731]/40" />
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
+                    <h2 className="text-xl sm:text-2xl font-medium text-white mb-3">
+                      {srv.title}
+                    </h2>
 
-      {/* Monthly packages for Ongoing Promotion */}
-      <section className="border-y border-[#1d2731]/8 bg-white/45">
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
-          <Reveal>
-            <div className="mb-12">
-              <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">Ongoing Promotion — Monthly packages</div>
-              <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
-                Monthly growth, no surprises.
-              </h2>
-              <p className="mt-4 max-w-2xl text-base leading-7 text-[#1d2731]/65">
-                Ads budget NOT included. It stays in the client&apos;s account (Google/Meta).
-              </p>
-            </div>
-          </Reveal>
+                    <p className="text-xs font-mono text-neutral-400 uppercase tracking-wider mb-6">
+                      {srv.tagline}
+                    </p>
 
-          <div className="grid gap-5 md:grid-cols-3 tab-blur-group">
-            {monthlyPackages.map((pkg, i) => (
-              <Reveal key={pkg.name} delay={i * 80}>
-                <div className="relative h-full group rounded-[28px]">
-                  <div
-                    className={`absolute inset-0 rounded-[28px] border tab-blur-item transition-shadow ${
-                      pkg.recommended
-                        ? "border-[#1d2731] bg-[#1d2731] shadow-[0_20px_60px_rgba(29,39,49,0.15)] group-hover:shadow-[0_30px_70px_rgba(29,39,49,0.25)]"
-                        : "border-[#1d2731]/8 bg-white/80 group-hover:border-[#1d2731]/20"
-                    }`}
-                    style={{ animation: `float-${i % 2 === 0 ? 'a' : 'b'} ${6 + i}s ease-in-out infinite` }}
-                  />
-                  <div
-                    className={`relative z-10 p-8 h-full flex flex-col transition-all duration-500 ${pkg.recommended ? "text-white" : "text-[#1d2731]"}`}
-                    style={{ animation: `float-text-${i % 2 === 0 ? 'a' : 'b'} ${6 + i}s ease-in-out infinite` }}
-                  >
-                    {pkg.recommended && (
-                      <div className="mb-4 inline-block rounded-full bg-white px-3 py-1 text-xs font-medium text-[#1d2731]">
-                        Recommended
+                    <p className="text-sm text-neutral-300 font-light leading-relaxed mb-8">
+                      {srv.text}
+                    </p>
+
+                    <div className="space-y-2.5 pt-6 border-t border-white/10 font-mono text-xs text-neutral-400 mb-8">
+                      <div className="text-[10px] uppercase tracking-[0.2em] text-neutral-400 font-bold mb-3">
+                        Included Deliverables:
                       </div>
-                    )}
-                    <div className={`text-sm font-medium ${pkg.recommended ? "text-white/60" : "text-[#1d2731]/50"}`}>
-                      {pkg.name}
-                    </div>
-                    <div className={`mt-2 text-3xl font-medium tracking-[-0.03em] ${pkg.recommended ? "text-white" : "text-[#1d2731]"}`}>
-                      {pkg.price}
-                    </div>
-                    <div className={`mt-2 text-sm ${pkg.recommended ? "text-white/55" : "text-[#1d2731]/45"}`}>
-                      {pkg.desc}
-                    </div>
-                    <ul className="mt-6 space-y-3">
-                      {pkg.features.map((f) => (
-                        <li key={f} className={`flex items-start gap-3 text-[15px] leading-6 ${pkg.recommended ? "text-white/80" : "text-[#1d2731]/70"}`}>
-                          <span className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${pkg.recommended ? "bg-white/50" : "bg-[#1d2731]/35"}`} />
-                          {f}
-                        </li>
+                      {srv.deliverables.map((item, i) => (
+                        <div key={i} className="flex items-start gap-2.5">
+                          <span className="text-white text-xs mt-0.5">▪</span>
+                          <span className="text-neutral-300 font-sans text-xs leading-relaxed">{item}</span>
+                        </div>
                       ))}
-                    </ul>
-                    <Link
-                      href="/en/contact"
-                      className={`mt-6 inline-flex w-full items-center justify-center rounded-full px-6 py-3 text-sm font-medium transition hover:-translate-y-0.5 ${
-                        pkg.recommended
-                          ? "bg-white text-[#1d2731] hover:shadow-lg"
-                          : "bg-[#1d2731] text-white hover:shadow-lg"
-                      }`}
-                    >
-                      {pkg.recommended ? "Choose Growth" : "Schedule a discussion"}
-                    </Link>
+                    </div>
                   </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Website maintenance */}
-      <section className="border-b border-[#1d2731]/8">
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
-          <Reveal>
-            <div className="mb-12">
-              <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">Website maintenance · Monthly plans</div>
-              <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
-                A site that stays updated and protected.
-              </h2>
-              <p className="mt-4 max-w-2xl text-base leading-7 text-[#1d2731]/65">
-                Updates, backups, security and small changes, for a fixed monthly fee. Hosting and domain are paid separately.
-              </p>
-            </div>
-          </Reveal>
-
-          <div className="grid gap-5 md:grid-cols-3 tab-blur-group">
-            {maintenancePackages.map((pkg, i) => (
-              <Reveal key={pkg.name} delay={i * 80}>
-                <div className="relative h-full group rounded-[28px]">
-                  <div
-                    className={`absolute inset-0 rounded-[28px] border tab-blur-item transition-shadow ${
-                      pkg.recommended
-                        ? "border-[#1d2731] bg-[#1d2731] shadow-[0_20px_60px_rgba(29,39,49,0.15)] group-hover:shadow-[0_30px_70px_rgba(29,39,49,0.25)]"
-                        : "border-[#1d2731]/8 bg-white/80 group-hover:border-[#1d2731]/20"
+                  <Link
+                    href={srv.href}
+                    className={`inline-flex items-center justify-center rounded-full py-3.5 px-6 text-xs font-mono uppercase tracking-widest transition-all text-center ${
+                      srv.featured 
+                        ? "bg-white text-black hover:bg-neutral-200 shadow-md font-bold" 
+                        : "border border-white/20 bg-white/5 text-white hover:bg-white/10"
                     }`}
-                    style={{ animation: `float-${i % 2 === 0 ? 'a' : 'b'} ${6 + i}s ease-in-out infinite` }}
-                  />
-                  <div
-                    className={`relative z-10 p-8 h-full flex flex-col transition-all duration-500 ${pkg.recommended ? "text-white" : "text-[#1d2731]"}`}
-                    style={{ animation: `float-text-${i % 2 === 0 ? 'a' : 'b'} ${6 + i}s ease-in-out infinite` }}
                   >
-                    {pkg.recommended && (
-                      <div className="mb-4 inline-block self-start rounded-full bg-white px-3 py-1 text-xs font-medium text-[#1d2731]">
-                        Recommended
-                      </div>
-                    )}
-                    <div className={`text-sm font-medium ${pkg.recommended ? "text-white/60" : "text-[#1d2731]/50"}`}>
-                      {pkg.name}
-                    </div>
-                    <div className={`mt-2 text-3xl font-medium tracking-[-0.03em] ${pkg.recommended ? "text-white" : "text-[#1d2731]"}`}>
-                      {pkg.price}
-                    </div>
-                    <div className={`mt-2 text-sm ${pkg.recommended ? "text-white/55" : "text-[#1d2731]/45"}`}>
-                      {pkg.desc}
-                    </div>
-                    <ul className="mt-6 space-y-3">
-                      {pkg.features.map((f) => (
-                        <li key={f} className={`flex items-start gap-3 text-[15px] leading-6 ${pkg.recommended ? "text-white/80" : "text-[#1d2731]/70"}`}>
-                          <span className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${pkg.recommended ? "bg-white/50" : "bg-[#1d2731]/35"}`} />
-                          {f}
-                        </li>
-                      ))}
-                    </ul>
-                    <Link
-                      href="/en/contact"
-                      className={`mt-6 inline-flex w-full items-center justify-center rounded-full px-6 py-3 text-sm font-medium transition hover:-translate-y-0.5 ${
-                        pkg.recommended
-                          ? "bg-white text-[#1d2731] hover:shadow-lg"
-                          : "bg-[#1d2731] text-white hover:shadow-lg"
-                      }`}
-                    >
-                      Choose {pkg.name}
-                    </Link>
-                  </div>
+                    Select Service • {srv.price} →
+                  </Link>
                 </div>
               </Reveal>
             ))}
@@ -459,71 +166,28 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="bg-white/45">
-        <div className="mx-auto max-w-5xl px-6 py-20 lg:px-10 lg:py-28">
+      {/* Bottom CTA */}
+      <section className="relative z-10 py-20 border-t border-white/10 bg-[#050607]">
+        <div className="mx-auto max-w-4xl px-6 text-center">
           <Reveal>
-            <div className="text-center">
-              <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">FAQ</div>
-              <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
-                Frequently asked questions
-              </h2>
+            <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-neutral-400 mb-4">
+              [ TECHNICAL AUDIT & ARCHITECTURE ]
             </div>
+            <h2 className="text-3xl font-extralight uppercase text-white font-mono mb-6">
+              Need a Tailored System?
+            </h2>
+            <p className="text-neutral-400 text-sm leading-relaxed max-w-xl mx-auto mb-8 font-light">
+              We analyze your current digital presence, traffic flows, and operational systems. Delivery plan and fixed quote within 24 hours.
+            </p>
+            <Link
+              href="/en/contact"
+              className="inline-flex items-center justify-center rounded-full bg-white px-8 py-3.5 text-xs font-mono uppercase tracking-widest text-black hover:bg-neutral-200 transition-colors font-bold shadow-lg"
+            >
+              Request Technical Discussion →
+            </Link>
           </Reveal>
-
-          <div className="mt-12 space-y-4 tab-blur-group">
-            {faq.map((item, i) => (
-              <Reveal key={item.q} delay={i * 60}>
-                <div className="relative group rounded-[24px]">
-                  <div
-                    className="absolute inset-0 tab-blur-item rounded-[24px] border border-[#1d2731]/8 bg-white"
-                    style={{ animation: `float-c ${8 + (i%2)}s ease-in-out infinite` }}
-                  />
-                  <div
-                    className="relative z-10 p-6 md:p-8 transition-all duration-500"
-                    style={{ animation: `float-text-c ${8 + (i%2)}s ease-in-out infinite` }}
-                  >
-                    <div className="text-lg font-medium text-[#1d2731]">{item.q}</div>
-                    <p className="mt-3 text-[15px] leading-7 text-[#1d2731]/68">{item.a}</p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
         </div>
       </section>
-
-      {/* CTA */}
-      <Reveal>
-        <section className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
-          <div className="rounded-[36px] bg-[#1d2731] p-8 text-white md:p-12">
-            <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
-              <div>
-                <h2 className="text-3xl font-medium leading-tight tracking-[-0.03em] md:text-5xl">
-                  Not sure where to start? Let&apos;s figure it out together.
-                </h2>
-                <p className="mt-5 text-lg leading-8 text-white/70">
-                  A 20–30 minute discussion is enough to understand your situation and propose what makes sense. No pitch. No pressure.
-                </p>
-              </div>
-              <div className="flex flex-col gap-4 lg:items-end">
-                <Link
-                  href="/en/contact"
-                  className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-sm font-medium text-[#1d2731] transition hover:-translate-y-0.5 hover:shadow-lg"
-                >
-                  Schedule a discussion
-                </Link>
-                <Link
-                  href="/en/online-store"
-                  className="inline-flex items-center justify-center rounded-full border border-white/15 px-8 py-4 text-sm font-medium text-white transition hover:bg-white/5"
-                >
-                  Explore Digital Store
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
-      </Reveal>
     </div>
   );
 }

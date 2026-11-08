@@ -19,16 +19,16 @@ const faqs = [
     a: "Pentru pachetele de promovare video, plata se face lunar în avans. Pentru proiectele de construcție web/magazin: 50% avans la începere și 50% la predare și verificare completă.",
   },
   {
-    q: "Ce înseamnă optimizarea pentru Agenți AI (GEO)?",
-    a: "Structurăm datele, cataloagele de produse și prețurile în format semantic JSON-LD avansat, astfel încât motoarele de căutare AI (ChatGPT, Perplexity, Gemini) să înțeleagă exact oferta ta și să o recomande ca primă opțiune utilizatorilor.",
+    q: "Ce înseamnă optimizarea pentru Agenți AI GEO?",
+    a: "Structurăm datele, cataloagele de produse și prețurile în format semantic JSON-LD avansat, astfel încât motoarele de căutare AI ChatGPT, Perplexity și Gemini să înțeleagă exact oferta ta și să o recomande ca primă opțiune utilizatorilor.",
   },
   {
     q: "Pot adăuga un panou Payload CMS pe magazinul meu?",
-    a: "Da. Pentru clienții care vor viteză maximă și independență de WordPress, construim panoul de administrare direct pe Payload CMS (TypeScript nativ în Next.js), cu editare vizuală live și securitate enterprise.",
+    a: "Da. Pentru clienții care vor viteză maximă și independență de WordPress, construim panoul de administrare direct pe Payload CMS pe TypeScript nativ în Next.js, cu editare vizuală live și securitate enterprise.",
   },
   {
-    q: "Bugetul de promovare plătită (Ads) este inclus?",
-    a: "Prețurile pachetelor noastre acoperă integral producția video AI, copywritingul, montajul și publicarea pe rețele. Bugetul de reclame plătite (dacă dorești să rulezi Ads pe Meta/TikTok/Google) se plătește separat, direct către platforme, în contul tău de publicitate.",
+    q: "Bugetul de promovare plătită Ads este inclus?",
+    a: "Prețurile pachetelor noastre acoperă integral producția video AI, copywritingul, montajul și publicarea pe rețele. Bugetul de reclame plătite pentru reclame Meta, TikTok sau Google Ads se plătește separat, direct către platforme, în contul tău de publicitate.",
   },
 ];
 
@@ -55,7 +55,7 @@ export default function PachetePage() {
           <Reveal>
             <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-300 mb-6 backdrop-blur-md">
               <span className="h-1.5 w-1.5 rounded-full bg-white" />
-              <span>Transparență Totală & Cadrul Financiar</span>
+              <span>[ CLARITATE FINANCIARĂ • PREȚURI FIXE ]</span>
             </div>
           </Reveal>
           <Reveal delay={80}>
@@ -82,7 +82,7 @@ export default function PachetePage() {
           <div className="max-w-3xl mb-16">
             <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-3">01 / PRODUCȚIE VIDEO ZILNICĂ AI</div>
             <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
-              Pachete Social Media (Video Scurt & Imagini)
+              Pachete Social Media • Video Scurt și Imagini
             </h2>
             <p className="mt-4 text-sm text-neutral-400 font-light leading-relaxed">
               Generăm conținut video de înaltă fidelitate cu Google Imagen & Veo pentru TikTok, Reels, Shorts și Facebook. Demonstrații de produse, scenarii de vânzare și subtitrări dinamice fără bătăi de cap.
