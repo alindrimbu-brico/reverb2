@@ -401,7 +401,7 @@ export default function HomePage() {
 
           <div className="grid gap-6 md:grid-cols-3">
             
-            <div className="rounded-2xl border border-white/10 bg-neutral-900/40 p-8 flex flex-col justify-between">
+            <div className="mech-card rounded-2xl border border-white/10 bg-neutral-900/40 p-8 flex flex-col justify-between">
               <div>
                 <div className="text-xs font-mono text-neutral-500 mb-4">01 / LIZIBILITATE PENTRU AGENȚI AI</div>
                 <h3 className="text-xl font-medium text-white mb-3">AI-Readable Answer Stack</h3>
@@ -414,7 +414,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-neutral-900/40 p-8 flex flex-col justify-between">
+            <div className="mech-card rounded-2xl border border-white/10 bg-neutral-900/40 p-8 flex flex-col justify-between">
               <div>
                 <div className="text-xs font-mono text-neutral-500 mb-4">02 / STRUCTURĂ TRANSPARENTĂ</div>
                 <h3 className="text-xl font-medium text-white mb-3">Indexare Prețuri & Servicii</h3>
@@ -427,7 +427,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-neutral-900/40 p-8 flex flex-col justify-between">
+            <div className="mech-card rounded-2xl border border-white/10 bg-neutral-900/40 p-8 flex flex-col justify-between">
               <div>
                 <div className="text-xs font-mono text-neutral-500 mb-4">03 / GENERATIVE ENGINE OPTIMIZATION</div>
                 <h3 className="text-xl font-medium text-white mb-3">Generative Engine Optimization GEO</h3>
@@ -463,7 +463,7 @@ export default function HomePage() {
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           
-          <div className="rounded-2xl border border-white/10 bg-neutral-900/30 p-8 flex flex-col justify-between">
+          <div className="mech-card rounded-2xl border border-white/10 bg-neutral-900/30 p-8 flex flex-col justify-between">
             <div>
               <div className="font-mono text-xs text-neutral-500 mb-6">/ 01 — PROIECTĂM</div>
               <h3 className="text-xl font-medium text-white mb-3">Fundație Inginerească</h3>
@@ -476,7 +476,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-neutral-900/30 p-8 flex flex-col justify-between">
+          <div className="mech-card rounded-2xl border border-white/10 bg-neutral-900/30 p-8 flex flex-col justify-between">
             <div>
               <div className="font-mono text-xs text-neutral-500 mb-6">/ 02 — CONECTĂM</div>
               <h3 className="text-xl font-medium text-white mb-3">Fluxuri de Vânzare</h3>
@@ -489,7 +489,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-neutral-900/30 p-8 flex flex-col justify-between">
+          <div className="mech-card rounded-2xl border border-white/10 bg-neutral-900/30 p-8 flex flex-col justify-between">
             <div>
               <div className="font-mono text-xs text-neutral-500 mb-6">/ 03 — AUTOMATIZĂM</div>
               <h3 className="text-xl font-medium text-white mb-3">Capabilități AI</h3>
@@ -502,7 +502,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-neutral-900/30 p-8 flex flex-col justify-between">
+          <div className="mech-card rounded-2xl border border-white/10 bg-neutral-900/30 p-8 flex flex-col justify-between">
             <div>
               <div className="font-mono text-xs text-neutral-500 mb-6">/ 04 — SCALĂM</div>
               <h3 className="text-xl font-medium text-white mb-3">Creștere Măsurabilă</h3>
@@ -539,7 +539,7 @@ export default function HomePage() {
             <button
               key={tab}
               onClick={() => { setActiveFilter(tab); sounds.playClick(); }}
-              className={`rounded-full px-4 py-1.5 text-[10px] font-mono uppercase tracking-widest transition-all ${
+              className={`mech-magnetic rounded-full px-4 py-1.5 text-[10px] font-mono uppercase tracking-widest transition-all ${
                 activeFilter === tab
                   ? "bg-white text-black font-bold shadow-sm"
                   : "bg-white/5 text-neutral-400 border border-white/10 hover:border-white/20 hover:text-white"
@@ -556,18 +556,18 @@ export default function HomePage() {
               key={p.name}
               onMouseEnter={() => sounds.playHover()}
               onClick={() => { setSelectedPreview(p); sounds.playClick(); }}
-              className="group cursor-pointer rounded-2xl border border-white/10 bg-neutral-900/20 p-8 flex flex-col justify-between hover:border-white/30 hover:bg-neutral-900/40 transition-all duration-300 shadow-sm hover:shadow-xl"
+              className="mech-card mech-float-card group cursor-pointer rounded-2xl border border-white/10 bg-neutral-900/20 p-8 flex flex-col justify-between hover:border-white/30 hover:bg-neutral-900/40 transition-all duration-300 shadow-sm hover:shadow-xl"
             >
               <div>
                 <div className="flex justify-between items-center text-[10px] font-mono text-neutral-500 mb-6">
                   <span>{p.category}</span>
-                  <span className="border border-white/10 rounded-full px-2 py-0.5 text-neutral-400 group-hover:text-white transition-colors">
+                  <span className="mech-badge border border-white/10 rounded-full px-2 py-0.5 text-neutral-400 group-hover:text-white transition-colors">
                     {p.status}
                   </span>
                 </div>
                 <h3 className="text-2xl font-medium text-white mb-2 flex items-center justify-between">
                   <span>{p.name}</span>
-                  <span className="text-xs font-mono uppercase tracking-wider text-neutral-400 group-hover:text-emerald-400 transition-colors flex items-center gap-1">
+                  <span className="mech-telemetry text-xs font-mono uppercase tracking-wider text-neutral-400 group-hover:text-emerald-400 transition-colors flex items-center gap-1">
                     <span>PREVIZUALIZARE</span>
                     <span className="text-sm">👁️</span>
                   </span>
@@ -619,7 +619,7 @@ export default function HomePage() {
         <div className="rounded-3xl border border-white/10 bg-[#070809] grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10 overflow-hidden">
           
           {/* Coloana 1: Social Growth */}
-          <div className="p-8 lg:p-10 flex flex-col justify-between bg-white/[0.01] hover:bg-white/[0.02] transition-colors">
+          <div className="mech-card mech-scanline p-8 lg:p-10 flex flex-col justify-between bg-white/[0.01] hover:bg-white/[0.02] transition-colors">
             <div>
               <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500 mb-4">
                 01 / Tracțiune Vizuală
@@ -655,20 +655,20 @@ export default function HomePage() {
             <Link
               href="/contact?pachet=social-growth"
               onClick={() => sounds.playClick()}
-              className="block w-full text-center rounded-full border border-white/20 py-3 text-xs font-mono uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all"
+              className="mech-magnetic mech-btn block w-full text-center rounded-full border border-white/20 py-3 text-xs font-mono uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all"
             >
               Selectează Pachetul →
             </Link>
           </div>
 
           {/* Coloana 2: Daily Impact • RECOMANDAT */}
-          <div className="p-8 lg:p-10 flex flex-col justify-between bg-neutral-900/40 relative">
+          <div className="mech-card mech-scanline p-8 lg:p-10 flex flex-col justify-between bg-neutral-900/40 relative">
             <div>
               <div className="flex items-center justify-between mb-4">
                 <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-400">
                   02 / Dominație Zilnică
                 </span>
-                <span className="text-[9px] font-mono font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-white text-black">
+                <span className="mech-badge text-[9px] font-mono font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-white text-black">
                   Recomandat
                 </span>
               </div>
@@ -703,14 +703,14 @@ export default function HomePage() {
             <Link
               href="/contact?pachet=daily-impact"
               onClick={() => sounds.playClick()}
-              className="block w-full text-center rounded-full bg-white py-3 text-xs font-mono font-bold uppercase tracking-widest text-black hover:bg-neutral-200 transition-all shadow-md"
+              className="mech-magnetic mech-btn block w-full text-center rounded-full bg-white py-3 text-xs font-mono font-bold uppercase tracking-widest text-black hover:bg-neutral-200 transition-all shadow-md"
             >
               Activează Daily Impact →
             </Link>
           </div>
 
           {/* Coloana 3: Magazin Online Complet */}
-          <div className="p-8 lg:p-10 flex flex-col justify-between bg-white/[0.01] hover:bg-white/[0.02] transition-colors">
+          <div className="mech-card mech-scanline p-8 lg:p-10 flex flex-col justify-between bg-white/[0.01] hover:bg-white/[0.02] transition-colors">
             <div>
               <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500 mb-4">
                 03 / Infrastructură E-Commerce
@@ -746,7 +746,7 @@ export default function HomePage() {
             <Link
               href="/contact?pachet=magazin-complet"
               onClick={() => sounds.playClick()}
-              className="block w-full text-center rounded-full border border-white/20 py-3 text-xs font-mono uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all"
+              className="mech-magnetic mech-btn block w-full text-center rounded-full border border-white/20 py-3 text-xs font-mono uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all"
             >
               Construiește Magazinul →
             </Link>

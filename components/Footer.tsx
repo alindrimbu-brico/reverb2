@@ -134,7 +134,7 @@ export default function Footer() {
                       <Link 
                         key={href} 
                         href={href} 
-                        className="group flex justify-center items-center w-full rounded-full border border-black/10 dark:border-white/10 bg-white dark:bg-white/[0.02] px-3.5 py-2.5 text-neutral-900 dark:text-neutral-300 font-bold transition-all duration-300 hover:bg-neutral-900 hover:text-white dark:hover:bg-white/10 dark:hover:border-white/30 dark:hover:text-white shadow-sm text-center"
+                        className="mech-magnetic mech-btn group flex justify-center items-center w-full rounded-full border border-black/10 dark:border-white/10 bg-white dark:bg-white/[0.02] px-3.5 py-2.5 text-neutral-900 dark:text-neutral-300 font-bold transition-all duration-300 hover:bg-neutral-900 hover:text-white dark:hover:bg-white/10 dark:hover:border-white/30 dark:hover:text-white shadow-sm text-center"
                       >
                         <span className="text-[10px] uppercase tracking-wider">
                           {label}
@@ -154,7 +154,7 @@ export default function Footer() {
                           href={item.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="group flex justify-center items-center gap-1 w-full rounded-full border border-black/10 dark:border-white/10 bg-white dark:bg-white/[0.02] px-3.5 py-2.5 text-neutral-900 dark:text-neutral-300 font-bold transition-all duration-300 hover:bg-neutral-900 hover:text-white dark:hover:bg-white/10 dark:hover:border-white/30 dark:hover:text-white shadow-sm text-center"
+                          className="mech-magnetic mech-btn group flex justify-center items-center gap-1 w-full rounded-full border border-black/10 dark:border-white/10 bg-white dark:bg-white/[0.02] px-3.5 py-2.5 text-neutral-900 dark:text-neutral-300 font-bold transition-all duration-300 hover:bg-neutral-900 hover:text-white dark:hover:bg-white/10 dark:hover:border-white/30 dark:hover:text-white shadow-sm text-center"
                         >
                           <span className="text-[10px] uppercase tracking-wider">
                             {item.label}
@@ -165,7 +165,7 @@ export default function Footer() {
                         <Link 
                           key={item.label}
                           href={item.href}
-                          className="group flex justify-center items-center w-full rounded-full border border-black/10 dark:border-white/10 bg-white dark:bg-white/[0.02] px-3.5 py-2.5 text-neutral-900 dark:text-neutral-300 font-bold transition-all duration-300 hover:bg-neutral-900 hover:text-white dark:hover:bg-white/10 dark:hover:border-white/30 dark:hover:text-white shadow-sm text-center"
+                          className="mech-magnetic mech-btn group flex justify-center items-center w-full rounded-full border border-black/10 dark:border-white/10 bg-white dark:bg-white/[0.02] px-3.5 py-2.5 text-neutral-900 dark:text-neutral-300 font-bold transition-all duration-300 hover:bg-neutral-900 hover:text-white dark:hover:bg-white/10 dark:hover:border-white/30 dark:hover:text-white shadow-sm text-center"
                         >
                           <span className="text-[10px] uppercase tracking-wider">
                             {item.label}

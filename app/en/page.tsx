@@ -388,7 +388,7 @@ export default function EnglishHomePage() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
-            <div className="rounded-2xl border border-white/10 bg-black/40 p-6">
+            <div className="mech-card rounded-2xl border border-white/10 bg-black/40 p-6">
               <div className="text-xs font-mono uppercase text-emerald-400 mb-3 tracking-wider">01 / Answer Stack Architecture</div>
               <h3 className="text-lg font-medium text-white mb-2">Machine-Readable Semantic Data</h3>
               <p className="text-xs text-neutral-400 font-light leading-relaxed">
@@ -396,7 +396,7 @@ export default function EnglishHomePage() {
               </p>
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-black/40 p-6">
+            <div className="mech-card rounded-2xl border border-white/10 bg-black/40 p-6">
               <div className="text-xs font-mono uppercase text-emerald-400 mb-3 tracking-wider">02 / Pricing Transparency for LLMs</div>
               <h3 className="text-lg font-medium text-white mb-2">Eliminating Price Hallucinations</h3>
               <p className="text-xs text-neutral-400 font-light leading-relaxed">
@@ -404,7 +404,7 @@ export default function EnglishHomePage() {
               </p>
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-black/40 p-6">
+            <div className="mech-card rounded-2xl border border-white/10 bg-black/40 p-6">
               <div className="text-xs font-mono uppercase text-emerald-400 mb-3 tracking-wider">03 / Generative Engine Optimization</div>
               <h3 className="text-lg font-medium text-white mb-2">Becoming the Recommended Source</h3>
               <p className="text-xs text-neutral-400 font-light leading-relaxed">
@@ -471,7 +471,7 @@ export default function EnglishHomePage() {
             <div
               key={p.name}
               onMouseEnter={() => sounds.playHover()}
-              className="group relative rounded-2xl border border-white/10 bg-neutral-900/30 p-7 transition-all duration-300 hover:border-white/30 hover:bg-neutral-900/60 flex flex-col justify-between"
+              className="mech-card mech-float-card group relative rounded-2xl border border-white/10 bg-neutral-900/30 p-7 transition-all duration-300 hover:border-white/30 hover:bg-neutral-900/60 flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-between font-mono text-[11px] mb-4">
@@ -503,7 +503,7 @@ export default function EnglishHomePage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => sounds.playClick()}
-                  className="inline-flex w-full items-center justify-center rounded-xl border border-white/10 bg-white/5 py-2.5 text-xs font-mono uppercase tracking-widest text-neutral-300 transition-all group-hover:bg-white group-hover:text-black group-hover:font-semibold"
+                  className="mech-magnetic mech-btn inline-flex w-full items-center justify-center rounded-xl border border-white/10 bg-white/5 py-2.5 text-xs font-mono uppercase tracking-widest text-neutral-300 transition-all group-hover:bg-white group-hover:text-black group-hover:font-semibold"
                 >
                   Visit Live System ↗
                 </a>
@@ -586,7 +586,7 @@ export default function EnglishHomePage() {
         <div className="rounded-3xl border border-white/10 bg-[#070809] grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10 overflow-hidden">
           
           {/* Column 1: Social Growth */}
-          <div className="p-8 lg:p-10 flex flex-col justify-between bg-white/[0.01] hover:bg-white/[0.02] transition-colors">
+          <div className="mech-card mech-scanline p-8 lg:p-10 flex flex-col justify-between bg-white/[0.01] hover:bg-white/[0.02] transition-colors">
             <div>
               <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500 mb-4">
                 01 / Visual Traction
@@ -622,20 +622,20 @@ export default function EnglishHomePage() {
             <Link
               href="/en/contact?pachet=social-growth"
               onClick={() => sounds.playClick()}
-              className="block w-full text-center rounded-full border border-white/20 py-3 text-xs font-mono uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all"
+              className="mech-magnetic mech-btn block w-full text-center rounded-full border border-white/20 py-3 text-xs font-mono uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all"
             >
               Select Package →
             </Link>
           </div>
 
           {/* Column 2: Daily Impact • RECOMMENDED */}
-          <div className="p-8 lg:p-10 flex flex-col justify-between bg-neutral-900/40 relative">
+          <div className="mech-card mech-scanline p-8 lg:p-10 flex flex-col justify-between bg-neutral-900/40 relative">
             <div>
               <div className="flex items-center justify-between mb-4">
                 <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-400">
                   02 / Daily Domination
                 </span>
-                <span className="text-[9px] font-mono font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-white text-black">
+                <span className="mech-badge text-[9px] font-mono font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-white text-black">
                   Recommended
                 </span>
               </div>
@@ -670,14 +670,14 @@ export default function EnglishHomePage() {
             <Link
               href="/en/contact?pachet=daily-impact"
               onClick={() => sounds.playClick()}
-              className="block w-full text-center rounded-full bg-white py-3 text-xs font-mono font-bold uppercase tracking-widest text-black hover:bg-neutral-200 transition-all shadow-md"
+              className="mech-magnetic mech-btn block w-full text-center rounded-full bg-white py-3 text-xs font-mono font-bold uppercase tracking-widest text-black hover:bg-neutral-200 transition-all shadow-md"
             >
               Activate Daily Impact →
             </Link>
           </div>
 
           {/* Column 3: Turnkey E-Commerce Store */}
-          <div className="p-8 lg:p-10 flex flex-col justify-between bg-white/[0.01] hover:bg-white/[0.02] transition-colors">
+          <div className="mech-card mech-scanline p-8 lg:p-10 flex flex-col justify-between bg-white/[0.01] hover:bg-white/[0.02] transition-colors">
             <div>
               <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500 mb-4">
                 03 / Commerce Architecture
@@ -713,7 +713,7 @@ export default function EnglishHomePage() {
             <Link
               href="/en/contact?pachet=magazin-complet"
               onClick={() => sounds.playClick()}
-              className="block w-full text-center rounded-full border border-white/20 py-3 text-xs font-mono uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all"
+              className="mech-magnetic mech-btn block w-full text-center rounded-full border border-white/20 py-3 text-xs font-mono uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all"
             >
               Build Your Store →
             </Link>

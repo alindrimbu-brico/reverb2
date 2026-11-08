@@ -180,7 +180,7 @@ export default function Header() {
               <Link
                 key={label}
                 href={href}
-                className={`transition-all duration-300 text-[10px] uppercase tracking-widest font-bold relative py-1 px-2 ${
+                className={`mech-nav-link transition-all duration-300 text-[10px] uppercase tracking-widest font-bold relative py-1 px-2 ${
                   isActive 
                     ? "text-[#1d2731] dark:text-white" 
                     : "text-[#1d2731]/50 dark:text-neutral-400 hover:text-[#1d2731] dark:hover:text-white"
@@ -199,7 +199,7 @@ export default function Header() {
         <div className="flex-1 flex justify-end items-center gap-2 sm:gap-3 shrink-0">
           <Link
             href={isEn ? "/en/contact" : "/contact"}
-            className="hidden xl:inline-flex items-center justify-center rounded-full bg-[#1d2731] dark:bg-white px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-[#f5f1ea] dark:text-neutral-900 transition-all duration-300 hover:-translate-y-0.5 shadow-[0_4px_12px_rgba(29,39,49,0.15)] hover:shadow-[0_8px_20px_rgba(29,39,49,0.3)] dark:shadow-none shrink-0"
+            className="mech-magnetic mech-btn hidden xl:inline-flex items-center justify-center rounded-full bg-[#1d2731] dark:bg-white px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-[#f5f1ea] dark:text-neutral-900 transition-all duration-300 shadow-[0_4px_12px_rgba(29,39,49,0.15)] hover:shadow-[0_8px_20px_rgba(29,39,49,0.3)] dark:shadow-none shrink-0"
           >
             {translations.start}
           </Link>
@@ -208,7 +208,7 @@ export default function Header() {
           <button
             onClick={toggleTheme}
             aria-label="Toggle visual theme"
-            className="flex items-center justify-center h-8 w-8 rounded-full border border-[#1d2731]/10 dark:border-white/10 bg-white/60 dark:bg-neutral-850/80 text-[#1d2731] dark:text-neutral-200 transition-all duration-300 hover:scale-105 shrink-0"
+            className="mech-magnetic flex items-center justify-center h-8 w-8 rounded-full border border-[#1d2731]/10 dark:border-white/10 bg-white/60 dark:bg-neutral-850/80 text-[#1d2731] dark:text-neutral-200 transition-all duration-300 hover:scale-105 shrink-0"
             title={theme === "dark" ? "Comută pe tema Light" : "Comută pe tema Dark"}
           >
             <span className="text-xs">{theme === "dark" ? "☾" : "☼"}</span>

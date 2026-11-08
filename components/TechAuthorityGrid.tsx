@@ -128,18 +128,18 @@ export default function TechAuthorityGrid({ lang = "ro" }: TechAuthorityGridProp
       <div className="relative">
         
         {/* Top-left Crosshair */}
-        <span className="absolute -top-3 -left-3 text-neutral-500 font-mono text-sm select-none z-20">+</span>
+        <span className="cad-crosshair absolute -top-3 -left-3 text-neutral-500 font-mono text-sm select-none z-20">+</span>
         {/* Top-right Crosshair */}
-        <span className="absolute -top-3 -right-3 text-neutral-500 font-mono text-sm select-none z-20">+</span>
+        <span className="cad-crosshair absolute -top-3 -right-3 text-neutral-500 font-mono text-sm select-none z-20">+</span>
         {/* Bottom-left Crosshair */}
-        <span className="absolute -bottom-3 -left-3 text-neutral-500 font-mono text-sm select-none z-20">+</span>
+        <span className="cad-crosshair absolute -bottom-3 -left-3 text-neutral-500 font-mono text-sm select-none z-20">+</span>
         {/* Bottom-right Crosshair */}
-        <span className="absolute -bottom-3 -right-3 text-neutral-500 font-mono text-sm select-none z-20">+</span>
+        <span className="cad-crosshair absolute -bottom-3 -right-3 text-neutral-500 font-mono text-sm select-none z-20">+</span>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border border-white/15 dark:border-white/15 light:border-black/15 divide-y md:divide-y-0 md:divide-x divide-white/15 dark:divide-white/15 light:divide-black/15 bg-black/40 dark:bg-black/40 light:bg-white/80 backdrop-blur-sm rounded-none">
           {stack.map((item, idx) => (
             <Reveal key={item.name} delay={idx * 80}>
-              <div className="relative p-8 sm:p-10 flex flex-col justify-between min-h-[200px] group transition-all duration-300 hover:bg-white/[0.02] dark:hover:bg-white/[0.02] light:hover:bg-black/[0.02]">
+              <div className="mech-card mech-cad relative p-8 sm:p-10 flex flex-col justify-between min-h-[200px] group transition-all duration-300 hover:bg-white/[0.03] dark:hover:bg-white/[0.03] light:hover:bg-black/[0.02]">
                 
                 {/* Subtle Cell Crosshair Indicator */}
                 <span className="absolute top-2 right-2 text-[10px] font-mono text-neutral-600 dark:text-neutral-600 light:text-neutral-400 opacity-60">
@@ -161,7 +161,7 @@ export default function TechAuthorityGrid({ lang = "ro" }: TechAuthorityGridProp
 
                 {/* Metrics & Authority Callout */}
                 <div className="pt-4 border-t border-white/10 dark:border-white/10 light:border-black/10 font-mono text-[11px] space-y-1">
-                  <div className="text-emerald-400 dark:text-emerald-400 light:text-emerald-600 font-bold tracking-wider">
+                  <div className="mech-telemetry text-emerald-400 dark:text-emerald-400 light:text-emerald-600 font-bold tracking-wider">
                     {item.metric}
                   </div>
                   <div className="text-neutral-400 text-[10px] leading-relaxed">

@@ -105,7 +105,7 @@ export default function ProjectPreviewModal({
               <button
                 onClick={() => setDevice("desktop")}
                 title={isEn ? "Desktop View (100%)" : "Vedere Desktop (100%)"}
-                className={`px-2.5 py-1 text-[9px] font-bold uppercase rounded-full transition-all ${
+                className={`mech-magnetic px-2.5 py-1 text-[9px] font-bold uppercase rounded-full transition-all ${
                   device === "desktop"
                     ? "bg-white text-black shadow-sm font-extrabold"
                     : "text-neutral-400 hover:text-white"
@@ -116,7 +116,7 @@ export default function ProjectPreviewModal({
               <button
                 onClick={() => setDevice("tablet")}
                 title={isEn ? "Tablet View (768px)" : "Vedere Tabletă (768px)"}
-                className={`px-2.5 py-1 text-[9px] font-bold uppercase rounded-full transition-all ${
+                className={`mech-magnetic px-2.5 py-1 text-[9px] font-bold uppercase rounded-full transition-all ${
                   device === "tablet"
                     ? "bg-white text-black shadow-sm font-extrabold"
                     : "text-neutral-400 hover:text-white"
@@ -127,7 +127,7 @@ export default function ProjectPreviewModal({
               <button
                 onClick={() => setDevice("mobile")}
                 title={isEn ? "Mobile View (390px)" : "Vedere Mobil (390px)"}
-                className={`px-2.5 py-1 text-[9px] font-bold uppercase rounded-full transition-all ${
+                className={`mech-magnetic px-2.5 py-1 text-[9px] font-bold uppercase rounded-full transition-all ${
                   device === "mobile"
                     ? "bg-white text-black shadow-sm font-extrabold"
                     : "text-neutral-400 hover:text-white"
@@ -144,7 +144,7 @@ export default function ProjectPreviewModal({
               href={project.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white dark:bg-white light:bg-neutral-900 text-black dark:text-black light:text-white font-bold text-[10px] uppercase tracking-wider hover:opacity-90 transition-all shadow-sm"
+              className="mech-magnetic mech-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white dark:bg-white light:bg-neutral-900 text-black dark:text-black light:text-white font-bold text-[10px] uppercase tracking-wider hover:opacity-90 transition-all shadow-sm"
             >
               <span>{isEn ? "Open Site" : "Deschide Site"}</span>
               <span>↗</span>
@@ -153,7 +153,7 @@ export default function ProjectPreviewModal({
             <button
               onClick={onClose}
               aria-label="Close"
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 dark:border-white/10 light:border-black/10 bg-white/5 hover:bg-white/10 text-white dark:text-white light:text-neutral-900 transition-colors"
+              className="mech-magnetic flex h-8 w-8 items-center justify-center rounded-full border border-white/10 dark:border-white/10 light:border-black/10 bg-white/5 hover:bg-white/10 text-white dark:text-white light:text-neutral-900 transition-colors"
             >
               ✕
             </button>
