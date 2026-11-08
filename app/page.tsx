@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import TechAuthorityGrid from "@/components/TechAuthorityGrid";
+import ProjectPreviewModal, { PreviewProject } from "@/components/ProjectPreviewModal";
 
 // ── Web Audio API Procedural Sound Engine ──
 class SoundEngine {
@@ -227,6 +228,7 @@ export default function HomePage() {
   const [soundActive, setSoundActive] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [activeFilter, setActiveFilter] = useState("TOATE");
+  const [selectedPreview, setSelectedPreview] = useState<PreviewProject | null>(null);
 
   const toggleSound = () => {
     sounds.enabled = !soundActive;
@@ -550,14 +552,11 @@ export default function HomePage() {
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filteredProjects.map((p) => (
-            <a
+            <div
               key={p.name}
-              href={p.href}
-              target="_blank"
-              rel="noopener noreferrer"
               onMouseEnter={() => sounds.playHover()}
-              onClick={() => sounds.playClick()}
-              className="group rounded-2xl border border-white/10 bg-neutral-900/20 p-8 flex flex-col justify-between hover:border-white/30 hover:bg-neutral-900/40 transition-all duration-300"
+              onClick={() => { setSelectedPreview(p); sounds.playClick(); }}
+              className="group cursor-pointer rounded-2xl border border-white/10 bg-neutral-900/20 p-8 flex flex-col justify-between hover:border-white/30 hover:bg-neutral-900/40 transition-all duration-300 shadow-sm hover:shadow-xl"
             >
               <div>
                 <div className="flex justify-between items-center text-[10px] font-mono text-neutral-500 mb-6">
@@ -568,7 +567,10 @@ export default function HomePage() {
                 </div>
                 <h3 className="text-2xl font-medium text-white mb-2 flex items-center justify-between">
                   <span>{p.name}</span>
-                  <span className="text-sm text-neutral-500 group-hover:text-white group-hover:translate-x-1 transition-all">↗</span>
+                  <span className="text-xs font-mono uppercase tracking-wider text-neutral-400 group-hover:text-emerald-400 transition-colors flex items-center gap-1">
+                    <span>PREVIZUALIZARE</span>
+                    <span className="text-sm">👁️</span>
+                  </span>
                 </h3>
                 <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6">
                   {p.desc}
@@ -577,9 +579,19 @@ export default function HomePage() {
 
               <div className="pt-4 border-t border-white/5 flex justify-between items-center text-[10px] font-mono text-neutral-500">
                 <span>{p.tech}</span>
-                <span className="text-neutral-400">{p.host}</span>
+                <a
+                  href={p.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  title="Deschide direct în tab nou"
+                  className="text-neutral-400 hover:text-white transition-colors flex items-center gap-1"
+                >
+                  <span>{p.host}</span>
+                  <span className="text-[9px]">↗</span>
+                </a>
               </div>
-            </a>
+            </div>
           ))}
         </div>
       </section>
@@ -744,6 +756,8 @@ export default function HomePage() {
 
       </section>
 
+      {/* Live System Inspection Pop-up Modal */}
+      <ProjectPreviewModal project={selectedPreview} onClose={() => setSelectedPreview(null)} lang="ro" />
     </div>
   );
 }

@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import TechAuthorityGrid from "@/components/TechAuthorityGrid";
+import ProjectPreviewModal, { PreviewProject } from "@/components/ProjectPreviewModal";
 
 // ── Web Audio API Procedural Sound Engine ──
 class SoundEngine {
@@ -217,6 +218,7 @@ export default function EnglishHomePage() {
   const [soundActive, setSoundActive] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [activeFilter, setActiveFilter] = useState("ALL");
+  const [selectedPreview, setSelectedPreview] = useState<PreviewProject | null>(null);
 
   const toggleSound = () => {
     sounds.enabled = !soundActive;
@@ -740,6 +742,8 @@ export default function EnglishHomePage() {
         </Link>
       </section>
 
+      {/* Live System Inspection Pop-up Modal */}
+      <ProjectPreviewModal project={selectedPreview} onClose={() => setSelectedPreview(null)} lang="en" />
     </div>
   );
 }
