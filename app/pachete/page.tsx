@@ -79,9 +79,9 @@ export default function PachetePage() {
       {/* Promovare Video Social Media AI */}
       <section className="relative z-10 py-24 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
         <Reveal>
-          <div className="max-w-3xl mb-16">
+          <div className="max-w-5xl mb-16">
             <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-3">01 / PRODUCȚIE VIDEO ZILNICĂ AI</div>
-            <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-tight leading-tight">
               Pachete Social Media • Video Scurt și Imagini
             </h2>
             <p className="mt-4 text-sm text-neutral-400 font-light leading-relaxed">
@@ -151,9 +151,9 @@ export default function PachetePage() {
       {/* Platforme Web & E-Commerce & B2B */}
       <section className="relative z-10 py-24 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
         <Reveal>
-          <div className="max-w-3xl mb-16">
+          <div className="max-w-5xl mb-16">
             <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-3">02 / SISTEME COMPLETE & CONSTRUCȚIE</div>
-            <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-tight leading-tight">
               Platforme Web, Magazine & Arhitectură B2B
             </h2>
             <p className="mt-4 text-sm text-neutral-400 font-light leading-relaxed">

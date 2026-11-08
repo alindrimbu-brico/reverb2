@@ -185,7 +185,7 @@ export default function PackagesPageEN() {
       <section className="relative z-10 py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-6">
           <Reveal>
-            <div className="mb-12 border-b border-white/10 pb-6">
+            <div className="mb-12 border-b border-white/10 pb-6 max-w-5xl">
               <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-neutral-500 mb-2">
                 01 / CONTINUOUS VISIBILITY
               </div>
@@ -271,7 +271,7 @@ export default function PackagesPageEN() {
       <section className="relative z-10 py-20 md:py-28 bg-[#050607] border-t border-white/10">
         <div className="mx-auto max-w-7xl px-6">
           <Reveal>
-            <div className="mb-12 border-b border-white/10 pb-6">
+            <div className="mb-12 border-b border-white/10 pb-6 max-w-5xl">
               <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-neutral-500 mb-2">
                 02 / TECHNICAL FOUNDATION
               </div>

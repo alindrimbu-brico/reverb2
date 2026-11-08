@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import TechAuthorityGrid from "@/components/TechAuthorityGrid";
 
 // ── Web Audio API Procedural Sound Engine ──
 class SoundEngine {
@@ -582,6 +583,9 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+      {/* ── Enterprise Technology Stack & Authority (Payload CMS Style) ── */}
+      <TechAuthorityGrid lang="ro" />
+
       {/* ── Pachete & Prețuri Structurate • Filozofie Zylaris ── */}
       <section id="pachete" className="py-24 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
         
