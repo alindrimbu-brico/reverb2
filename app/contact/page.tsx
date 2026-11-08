@@ -128,37 +128,6 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="relative z-10 border-t border-white/10 bg-[#050607] py-16 px-6 lg:px-10">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-          <div>
-            <div className="text-sm font-bold tracking-[0.25em] uppercase text-white mb-2">REVERB DIGITAL</div>
-            <p className="text-xs text-neutral-500 font-mono">
-              Infrastructură digitală, sisteme web și căutare generativă. Ecosistem al Grupului Surya.
-            </p>
-          </div>
-          
-          <div className="flex flex-col md:flex-row items-center gap-6 text-xs font-mono text-neutral-400">
-            <Link href="/" className="hover:text-white transition-colors">Site Principal</Link>
-            <Link href="/showcase" className="hover:text-white transition-colors">Showcase</Link>
-            <Link href="/despre" className="hover:text-white transition-colors">Despre Noi</Link>
-            <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
-            <span className="text-neutral-600 hidden md:inline">|</span>
-            <div className="text-neutral-500">
-              Partener strategic:{" "}
-              <a
-                href="https://zylarisgroup.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-neutral-300 hover:text-white transition-colors underline underline-offset-4"
-              >
-                Zylaris Group London
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
-
     </div>
   );
 }

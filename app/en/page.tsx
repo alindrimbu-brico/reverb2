@@ -267,7 +267,7 @@ export default function EnglishHomePage() {
             <span className="uppercase text-neutral-300">Reverb Digital — Web Architecture & AI Systems</span>
           </div>
           <div className="hidden sm:block text-neutral-500">
-            FOUNDED BY SURYA GROUP • STRATEGIC PARTNER ZYLARIS GROUP LONDON
+            FOUNDED BY SURYA GROUP • HIGH-VELOCITY DIGITAL PLATFORMS
           </div>
           <button
             onClick={toggleSound}
@@ -632,35 +632,6 @@ export default function EnglishHomePage() {
             >
               Select Package →
             </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Strategic Partner Section ── */}
-      <section className="relative z-10 py-20 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
-        <div className="rounded-3xl border border-white/15 bg-gradient-to-b from-neutral-900/40 via-neutral-950/60 to-neutral-900/40 p-8 md:p-14 backdrop-blur-md">
-          <div className="grid lg:grid-cols-12 gap-10 items-center">
-            <div className="lg:col-span-8">
-              <div className="text-xs font-mono uppercase tracking-[0.25em] text-neutral-400 mb-3">
-                International Alignment
-              </div>
-              <h3 className="text-2xl md:text-4xl font-light text-white tracking-tight mb-4">
-                Strategic AI & Systems Partner to Zylaris Group London
-              </h3>
-              <p className="text-sm md:text-base text-neutral-300 font-light leading-relaxed">
-                Reverb Digital serves as the dedicated AI systems development and digital production partner for international holding Zylaris Group (London). We connect high-velocity engineering, generative media pipelines, and e-commerce infrastructure with corporate governance and cloud scalability managed from the UK.
-              </p>
-            </div>
-            <div className="lg:col-span-4 flex lg:justify-end">
-              <a
-                href="https://zylarisgroup.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-full bg-white px-8 py-3.5 text-xs font-mono uppercase tracking-widest text-black hover:bg-neutral-200 transition-all font-bold"
-              >
-                Zylaris Group London ↗
-              </a>
-            </div>
           </div>
         </div>
       </section>

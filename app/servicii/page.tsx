@@ -176,81 +176,6 @@ export default function ServiciiPage() {
         </div>
       </section>
 
-      {/* ── Secțiune Comparativă: Tradițional vs. Reverb Digital AI Studio ── */}
-      <section className="relative z-10 py-24 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
-        <Reveal>
-          <div className="max-w-3xl mb-14">
-            <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-3">05 / COMPARAȚIE DE EFICIENȚĂ</div>
-            <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
-              Agenție Tradițională vs. Reverb Digital Studio
-            </h2>
-            <p className="mt-4 text-sm text-neutral-400 font-light leading-relaxed">
-              Cum comprimă inteligența artificială și arhitectura modernă timpii și costurile pentru afacerea ta.
-            </p>
-          </div>
-        </Reveal>
-
-        <Reveal delay={100}>
-          <div className="overflow-hidden rounded-3xl border border-white/15 bg-neutral-900/40 backdrop-blur-md">
-            <div className="grid grid-cols-1 md:grid-cols-3 border-b border-white/10 text-xs font-mono uppercase tracking-widest p-6 bg-white/[0.02]">
-              <div className="text-neutral-500 font-semibold">DIMENSIUNE</div>
-              <div className="text-neutral-400 hidden md:block">AGENȚIE CLASICĂ</div>
-              <div className="text-emerald-400 font-bold hidden md:block">REVERB DIGITAL (AI + NEXT.JS)</div>
-            </div>
-
-            <div className="divide-y divide-white/5 font-mono text-xs">
-              <div className="grid grid-cols-1 md:grid-cols-3 p-6 gap-3 md:gap-0 items-center">
-                <div className="text-white font-medium">Volum & Viteză Video</div>
-                <div className="text-neutral-500 text-xs md:pr-4">
-                  <span className="md:hidden text-neutral-600 block text-[10px] uppercase">Agenție Clasică:</span>
-                  2–4 clipuri/lună • Filmări manuale de 8 ore • Livrare în 3–4 săptămâni
-                </div>
-                <div className="text-emerald-300 md:pl-4 font-semibold">
-                  <span className="md:hidden text-neutral-600 block text-[10px] uppercase">Reverb Digital:</span>
-                  30–90 clipuri/lună • Generare AI Google Veo & Imagen • Livrare zilnică în 24-48h
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 p-6 gap-3 md:gap-0 items-center bg-white/[0.01]">
-                <div className="text-white font-medium">Cost Lunar Producție Video</div>
-                <div className="text-neutral-500 text-xs md:pr-4">
-                  <span className="md:hidden text-neutral-600 block text-[10px] uppercase">Agenție Clasică:</span>
-                  €2.000 – €5.000+ / lună + costuri separate de studio & montaj
-                </div>
-                <div className="text-emerald-300 md:pl-4 font-semibold">
-                  <span className="md:hidden text-neutral-600 block text-[10px] uppercase">Reverb Digital:</span>
-                  de la €390 – €690 / lună preț fix all-inclusive
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 p-6 gap-3 md:gap-0 items-center">
-                <div className="text-white font-medium">Arhitectură Tehnică & Viteză</div>
-                <div className="text-neutral-500 text-xs md:pr-4">
-                  <span className="md:hidden text-neutral-600 block text-[10px] uppercase">Agenție Clasică:</span>
-                  Teme WordPress pre-fabricate greoaie, încărcare în 3.5–6 secunde, bug-uri de plugin-uri
-                </div>
-                <div className="text-emerald-300 md:pl-4 font-semibold">
-                  <span className="md:hidden text-neutral-600 block text-[10px] uppercase">Reverb Digital:</span>
-                  Next.js Edge & Payload CMS nativ, încărcare sub 1.2s garantat, securitate enterprise
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 p-6 gap-3 md:gap-0 items-center bg-white/[0.01]">
-                <div className="text-white font-medium">Pregătire Căutare AI (GEO)</div>
-                <div className="text-neutral-500 text-xs md:pr-4">
-                  <span className="md:hidden text-neutral-600 block text-[10px] uppercase">Agenție Clasică:</span>
-                  Meta tags din 2012, ignorat complet de ChatGPT, Perplexity și Gemini
-                </div>
-                <div className="text-emerald-300 md:pl-4 font-semibold">
-                  <span className="md:hidden text-neutral-600 block text-[10px] uppercase">Reverb Digital:</span>
-                  Answer Stack JSON-LD nativ, catalog structurat semantic, citat de LLM-uri
-                </div>
-              </div>
-            </div>
-          </div>
-        </Reveal>
-      </section>
-
       {/* Banner CTA */}
       <section className="relative z-10 py-24 px-6 text-center max-w-4xl mx-auto">
         <Reveal>
@@ -277,37 +202,6 @@ export default function ServiciiPage() {
           </div>
         </Reveal>
       </section>
-
-      {/* Footer */}
-      <footer className="relative z-10 border-t border-white/10 bg-[#050607] py-16 px-6 lg:px-10">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-          <div>
-            <div className="text-sm font-bold tracking-[0.25em] uppercase text-white mb-2">REVERB DIGITAL</div>
-            <p className="text-xs text-neutral-500 font-mono">
-              Infrastructură digitală, sisteme web și căutare generativă. Ecosistem al Grupului Surya.
-            </p>
-          </div>
-          
-          <div className="flex flex-col md:flex-row items-center gap-6 text-xs font-mono text-neutral-400">
-            <Link href="/" className="hover:text-white transition-colors">Site Principal</Link>
-            <Link href="/showcase" className="hover:text-white transition-colors">Showcase</Link>
-            <Link href="/despre" className="hover:text-white transition-colors">Despre Noi</Link>
-            <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
-            <span className="text-neutral-600 hidden md:inline">|</span>
-            <div className="text-neutral-500">
-              Partener strategic:{" "}
-              <a
-                href="https://zylarisgroup.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-neutral-300 hover:text-white transition-colors underline underline-offset-4"
-              >
-                Zylaris Group London
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
 
     </div>
   );

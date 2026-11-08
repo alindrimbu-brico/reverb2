@@ -151,7 +151,7 @@ function ContactFormInner() {
               value={form.name}
               onChange={handleChange}
               onBlur={handleBlur}
-              placeholder="Ex: Alin Drîmbu"
+              placeholder="Ex: Radu Ionescu"
               className={`${inputBase} ${errors.name && touched.name ? inputErr : inputOk}`}
             />
             {errors.name && touched.name && (

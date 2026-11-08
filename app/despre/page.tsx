@@ -122,37 +122,6 @@ export default function DesprePage() {
         </div>
       </section>
 
-      {/* Parteneriatul Strategic Zylaris Group London */}
-      <section className="relative z-10 py-20 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
-        <Reveal>
-          <div className="rounded-3xl border border-white/15 bg-gradient-to-b from-neutral-900/50 via-neutral-950/70 to-neutral-900/40 p-8 md:p-14 backdrop-blur-md">
-            <div className="grid lg:grid-cols-12 gap-10 items-center">
-              <div className="lg:col-span-8">
-                <div className="text-xs font-mono uppercase tracking-[0.25em] text-neutral-400 mb-3">
-                  Parteneriat Internațional
-                </div>
-                <h3 className="text-2xl md:text-4xl font-light text-white tracking-tight mb-4">
-                  Parteneri de Tehnologie & AI ai Zylaris Group London
-                </h3>
-                <p className="text-sm md:text-base text-neutral-300 font-light leading-relaxed">
-                  Reverb Digital operează ca partener dedicat de inteligență artificială și dezvoltare de sisteme al grupului internațional Zylaris Group (Londra). Conectăm capacitatea noastră de producție media AI, magazine online de mare viteză și aplicații native cu guvernanța corporativă, hostingul enterprise și arhitectura scalabilă dezvoltată din Marea Britanie.
-                </p>
-              </div>
-              <div className="lg:col-span-4 flex lg:justify-end">
-                <a
-                  href="https://zylarisgroup.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center rounded-full bg-white px-8 py-3.5 text-xs font-mono uppercase tracking-widest text-black hover:bg-neutral-200 transition-all font-bold"
-                >
-                  Zylaris Group London ↗
-                </a>
-              </div>
-            </div>
-          </div>
-        </Reveal>
-      </section>
-
       {/* Principii & Valori */}
       <section className="relative z-10 py-24 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
         <Reveal>
@@ -201,44 +170,6 @@ export default function DesprePage() {
         </div>
       </section>
 
-      {/* ── Fondator & Autoritate Practică ── */}
-      <section className="relative z-10 py-24 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
-        <Reveal>
-          <div className="rounded-3xl border border-white/15 bg-neutral-900/40 p-8 md:p-14 backdrop-blur-md">
-            <div className="grid lg:grid-cols-12 gap-10 items-center">
-              <div className="lg:col-span-8">
-                <div className="text-xs font-mono uppercase tracking-[0.25em] text-neutral-400 mb-3">
-                  Conducere & Viziune
-                </div>
-                <h3 className="text-3xl md:text-4xl font-medium text-white tracking-tight mb-4">
-                  Fondat de Alin Drîmbu
-                </h3>
-                <p className="text-sm md:text-base text-neutral-300 font-light leading-relaxed mb-4">
-                  Antreprenor în retail și comerț electronic, fondator al Grupului Surya (Bricolando.ro, RaftPlin.ro, Kalki.work, Kalki.nexus).
-                </p>
-                <p className="text-xs md:text-sm text-neutral-400 font-light leading-relaxed">
-                  Reverb Digital nu s-a născut dintr-o agenție teoretică de marketing, ci din tranșeele operațiunilor comerciale reale: gestiune de zeci de mii de produse, integrare eMAG Marketplace, curieri, facturare automată și optimizare matematică a fluxurilor de vânzare. Fiecare sistem pe care îl propunem clienților noștri a fost mai întâi testat, verificat și rentabilizat în propriile noastre magazine.
-                </p>
-              </div>
-              <div className="lg:col-span-4 flex flex-col gap-3 font-mono text-xs">
-                <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10">
-                  <div className="text-neutral-500 uppercase text-[10px] mb-1">Grupul Surya</div>
-                  <div className="text-white font-semibold">Bricolando • Raft Plin • Kalki</div>
-                </div>
-                <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10">
-                  <div className="text-neutral-500 uppercase text-[10px] mb-1">Parteneriat Strategic</div>
-                  <div className="text-white font-semibold">Zylaris Group London</div>
-                </div>
-                <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10">
-                  <div className="text-neutral-500 uppercase text-[10px] mb-1">Filozofie</div>
-                  <div className="text-emerald-400 font-semibold">Sisteme care produc valoare</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Reveal>
-      </section>
-
       {/* ── Final CTA ── */}
       <section className="relative z-10 py-24 px-6 text-center max-w-4xl mx-auto">
         <Reveal>
@@ -257,37 +188,6 @@ export default function DesprePage() {
           </Link>
         </Reveal>
       </section>
-
-      {/* Footer */}
-      <footer className="relative z-10 border-t border-white/10 bg-[#050607] py-16 px-6 lg:px-10">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-          <div>
-            <div className="text-sm font-bold tracking-[0.25em] uppercase text-white mb-2">REVERB DIGITAL</div>
-            <p className="text-xs text-neutral-500 font-mono">
-              Infrastructură digitală, sisteme web și căutare generativă. Ecosistem al Grupului Surya.
-            </p>
-          </div>
-          
-          <div className="flex flex-col md:flex-row items-center gap-6 text-xs font-mono text-neutral-400">
-            <Link href="/" className="hover:text-white transition-colors">Site Principal</Link>
-            <Link href="/showcase" className="hover:text-white transition-colors">Showcase</Link>
-            <Link href="/pachete" className="hover:text-white transition-colors">Pachete & Prețuri</Link>
-            <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
-            <span className="text-neutral-600 hidden md:inline">|</span>
-            <div className="text-neutral-500">
-              Partener strategic:{" "}
-              <a
-                href="https://zylarisgroup.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-neutral-300 hover:text-white transition-colors underline underline-offset-4"
-              >
-                Zylaris Group London
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
 
     </div>
   );
