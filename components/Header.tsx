@@ -4,13 +4,11 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import Logo from "@/components/Logo";
-import InstallPWA from "@/components/InstallPWA";
 
 const navInfo = {
   ro: [
     { href: "/servicii", label: "Servicii" },
     { href: "/pachete", label: "Pachete" },
-    { href: "/studio", label: "Studio AI" },
     { href: "/showcase", label: "Portofoliu" },
     { href: "/despre", label: "Despre" },
     { href: "/contact", label: "Contact" },
@@ -18,7 +16,6 @@ const navInfo = {
   en: [
     { href: "/en/services", label: "Services" },
     { href: "/en/packages", label: "Packages" },
-    { href: "/studio", label: "AI Studio" },
     { href: "/en/showcase", label: "Portfolio" },
     { href: "/en/about", label: "About" },
     { href: "/en/contact", label: "Contact" },
@@ -173,7 +170,6 @@ export default function Header() {
 
         {/* Right: CTA button and language switcher */}
         <div className="flex-1 flex justify-end items-center gap-3">
-          <InstallPWA className="hidden lg:inline-flex" />
           <Link
             href="/contact"
             className="hidden md:inline-flex items-center justify-center rounded-full bg-[#1d2731] dark:bg-white px-5 py-2 text-[10px] font-bold uppercase tracking-widest text-[#f5f1ea] dark:text-neutral-900 transition-all duration-300 hover:-translate-y-0.5 shadow-[0_4px_12px_rgba(29,39,49,0.15)] hover:shadow-[0_8px_20px_rgba(29,39,49,0.3)] dark:shadow-none"

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import InstallPWA from "@/components/InstallPWA";
@@ -51,6 +51,30 @@ const presetTemplates = [
 ];
 
 export default function StudioPage() {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const [pin, setPin] = useState("");
+  const [pinError, setPinError] = useState(false);
+
+  useEffect(() => {
+    const auth = localStorage.getItem("reverb_studio_auth");
+    if (auth === "true") {
+      setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
+    }
+  }, []);
+
+  const handlePinSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (pin.trim() === "8888") {
+      localStorage.setItem("reverb_studio_auth", "true");
+      setIsAuthenticated(true);
+      setPinError(false);
+    } else {
+      setPinError(true);
+      setPin("");
+    }
+  };
   const [activeTab, setActiveTab] = useState<"intake" | "script" | "audio" | "video" | "approval" | "briefing">("intake");
   const [selectedBrand, setSelectedBrand] = useState("Bricolando.ro");
   const [voiceInput, setVoiceInput] = useState(presetTemplates[0].prompt);
@@ -143,6 +167,51 @@ export default function StudioPage() {
   const toggleAudio = () => {
     setIsPlayingAudio(!isPlayingAudio);
   };
+
+  if (isAuthenticated === false) {
+    return (
+      <div className="bg-[#070809] min-h-screen text-white flex flex-col items-center justify-center p-6 antialiased font-mono">
+        <div className="w-full max-w-sm rounded-3xl border border-white/10 bg-neutral-900/60 p-8 backdrop-blur-md shadow-2xl text-center">
+          <div className="h-12 w-12 mx-auto rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-lg mb-4">
+            🔒
+          </div>
+          <h2 className="text-xl font-medium text-white mb-1">Reverb Studio AI</h2>
+          <p className="text-xs text-neutral-400 mb-6 font-sans">
+            Panou intern de producție & distribuire automată. Acces rezervat administratorului.
+          </p>
+          <form onSubmit={handlePinSubmit} className="space-y-4">
+            <input
+              type="password"
+              maxLength={6}
+              value={pin}
+              onChange={(e) => { setPin(e.target.value); setPinError(false); }}
+              placeholder="••••"
+              autoFocus
+              className="w-full text-center tracking-[0.5em] text-2xl font-bold rounded-2xl border border-white/15 bg-black/40 py-3 text-white outline-none focus:border-white"
+            />
+            {pinError && (
+              <p className="text-xs text-red-400 font-sans">Cod incorect. Te rugăm să reîncerci.</p>
+            )}
+            <button
+              type="submit"
+              className="w-full rounded-full bg-white py-3 text-xs uppercase tracking-widest text-black font-bold hover:bg-neutral-200 transition-all"
+            >
+              Deblochează Panoul →
+            </button>
+          </form>
+          <div className="mt-6 pt-4 border-t border-white/5">
+            <Link href="/" className="text-[10px] text-neutral-500 hover:text-white uppercase tracking-wider">
+              ← Înapoi la site
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (isAuthenticated === null) {
+    return <div className="bg-[#070809] min-h-screen" />;
+  }
 
   return (
     <div className="bg-[#070809] text-neutral-100 min-h-screen font-sans selection:bg-neutral-700 selection:text-white antialiased">
