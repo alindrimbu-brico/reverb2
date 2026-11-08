@@ -1,145 +1,136 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { GITHUB_SHOWCASE_PATHS } from "@/lib/githubShowcases";
+import { Grid, Sparkles, ArrowRight, Layers } from "lucide-react";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/showcase", languages: { ro: "/showcase", en: "/en/showcase", "x-default": "/showcase" } },
-  title: "Industry Showcase — Reverb.ro",
-  description: "Portofoliu aplicat de prezențe digitale. 21 Verticale Absolute, executate cu precizie structurală.",
+  title: "Matrice Industriala & Showcase — Reverb Digital",
+  description: "Portofoliu aplicat de prezențe digitale. 21 Verticale Absolute și sisteme reale de producție, executate cu precizie structurală.",
 };
 
 const showcases = [
-  { id: "surya", name: "Surya Group", vibe: "Brutalism Desyres", color: "#111111", description: "Design webflow robust, bazat pe typography imens și delimitări tăioase B2B.", href: "/showcase/surya" },
-  { id: "florarte", name: "Florarte Textile", vibe: "Pastel Sage & Rose", color: "#4E6E59", description: "Atelier floral B2C axat pe estetica textila matura și claritatea prezenței.", href: "/showcase/florarte" },
-  { id: "xiaolong", name: "Xiaolong Packaging", vibe: "Industrial B2B", color: "#208b53", description: "Design corporativ matur B2B pentru un producător asiatic global, cu modul dinamic de markup +25%.", href: "/showcase/xiaolong" },
-  { id: "artisan-cafe", name: "Artisan Café", vibe: "Cassette Futurism", color: "#D64933", description: "Minimalism tehnic și date termice extrase vizual pentru loturile de cafea.", href: "/showcase/artisan-cafe" },
-  { id: "don-barbershop", name: "DON Barbershop & Coffee", vibe: "Gentleman's Evening", color: "#B08D57", description: "Site complet pentru o frizerie cu cafenea din Mera, Vrancea: atmosferă de seară, film de prezentare, servicii și rezervări. Model gata de adaptat pentru orice frizerie.", href: "https://don-barbershop.pages.dev/" },
-  { id: "medical-center", name: "Medical Clinic", vibe: "Bio-Interface", color: "#0057FF", description: "Rigoare absolută. Sterilitate albă dublată de ticker live pentru starea sălilor.", href: "/showcase/medical-center" },
-  { id: "legal-firm", name: "Legal Firm", vibe: "Legal Logic Brutal", color: "#8B2520", description: "Titluri masive tăiate orizontal de linii infinite. Autoritatea legii redată digital.", href: "/showcase/legal-firm" },
-  { id: "architecture", name: "Architecture Studio", vibe: "Monolithic Grid", color: "#7A7A7A", description: "Gri de piatră brută expusă și arhitectură web ghidată de proporția 1.618.", href: "/showcase/architecture" },
-  { id: "cyber-sec", name: "Cyber Security B2B", vibe: "Terminal Logic", color: "#00FF41", description: "Interfață de linie de comandă cu scanlines agresive și verde neon tech.", href: "/showcase/cyber-sec" },
-  { id: "real-estate", name: "Real Estate Luxury", vibe: "Obsidian & Gold", color: "#C9A444", description: "Eleganță supremă, detalii aurii pe fundal adânc și accent imens pe fotografie.", href: "/showcase/real-estate" },
-  { id: "fashion-boutique", name: "Fashion Editorial", vibe: "High Contrast Vogue", color: "#FFFFFF", description: "Estetica alb-negru. Tipografie serifată, asimetrie elegantă și minimalism extrem.", href: "/showcase/fashion-boutique" },
-  { id: "fintech", name: "FinTech Startup", vibe: "Glassmorphism & Data", color: "#8B5CF6", description: "Date financiare care se schimbă aleator via text rumble, iluminări bio-violet.", href: "/showcase/fintech" },
-  { id: "auto-service", name: "Auto Dealership", vibe: "Carbon & Racing Yellow", color: "#FBBF24", description: "Elemente grafice precum turometre vectoriale și forme unghiulare decise.", href: "/showcase/auto-service" },
-  { id: "fine-dining", name: "Fine Dining", vibe: "Burgundy Mute Canvas", color: "#831843", description: "Meniu funcțional abstractizat, atmosfere rafinate cu texturi puriste.", href: "/showcase/fine-dining" },
-  { id: "crossfit", name: "Gym & CrossFit", vibe: "Safety Orange & Sweat", color: "#EA580C", description: "Italic brutal. Cuvinte masive asimetrice și un vibe pur industrial de sală.", href: "/showcase/crossfit" },
-  { id: "lens-portfolio", name: "Photo/Video Studio", vibe: "Film Strip Limits", color: "#C0C0C0", description: "Margini marcate ca frame-urile peliculei de 35mm, focalizat total pe cursor.", href: "/showcase/lens-portfolio" },
-  { id: "event-music", name: "Festival Promoters", vibe: "Kinetic Blob Marquee", color: "#EC4899", description: "Liquid shapes combinat cu benzi uriașe infinite de artiști.", href: "/showcase/event-music" },
-  { id: "logistics-hub", name: "Logistics & Cargo", vibe: "Terminal Gate Cobalt", color: "#1D4ED8", description: "Tabele dense simulând plecări din aeroport. Grid rigid pentru logistica de top.", href: "/showcase/logistics-hub" },
-  { id: "ai-future", name: "AI Tech Core", vibe: "Holographic Orbital", color: "#06B6D4", description: "Platforme software vectoriale. 3D CSS de finețe reprezentând noduri activate.", href: "/showcase/ai-future" },
-  { id: "aura", name: "AURA Retreat", vibe: "Ethereal Glass", color: "#c09054", description: "Aplicație digitală terapeutică (SPA). Meniuri de conștientizare și design fluid ancorat în cognitive ease.", href: "/aura/index.html" },
-  { id: "noapte", name: "Creativ Noaptea", vibe: "Nocturnal Sacred", color: "#1e3a8a", description: "Platformă curată Midnight-Blue dedicată analizei „bufnițelor de noapte”. Arhitectura somnului, cronotipuri și tradiții antice.", href: "/noapte/index.html" },
-  { id: "spiritual-app", name: "Inteligență Spirituală (APP)", vibe: "Cognitive Reprogramming", color: "#9333ea", description: "Aplicație web complexă (React State). Motor interactiv pentru dizolvarea auto-sabotajului pe baza psihologiei Brianna Wiest.", href: "/showcase/spiritual-blog" },
-  { id: "metanoia", name: "Metanoia Studio", vibe: "Ethereal Sacred", color: "#D4AF37", description: "Arhitectura Clarității. Eliminarea zgomotului vizual și metoda flip cards aplicată pentru conținut filozofic profund.", href: "/showcase/metanoia" },
-  { id: "reverb-ecosystem", name: "Reverb Master System", vibe: "Canvas Scrollytelling", color: "#111111", description: "O interfață complet asimetrică și scroll-driven, integrând magazinele Bricolando și Kalki într-un ecosistem uman+AI.", href: "/showcase/reverb-hybrid" },
-  { id: "bricolando", name: "Bricolando DIY", vibe: "Industrial Construction", color: "#E34A27", description: "Infrastructură digitală B2B robustă, dedicată mediului industrial și fluxului en-gros de mii de produse utilitare.", href: "/showcase/bricolando" },
-  { id: "kalki", name: "Kalki Fashion", vibe: "High-End Vogue", color: "#F0F0F0", description: "Platformă luxury dominată de imagini. Spațiu negativ generos și paralaxă asimetrică specifică designului editorial.", href: "/showcase/kalki" },
-  { id: "virtus", name: "Virtus Protocol", vibe: "Primal Masculine", color: "#8A1C14", description: "Forță absolută. Design brutalist dominat de contrast extrem, typography all-caps masiv și focus pe spiritul masculin: disciplină, corp, frăție.", href: "/showcase/virtus" },
-  { id: "canapuff", name: "Canapuff Premium", vibe: "Neon Glassmorphism", color: "#E2FF00", description: "Replică 1:1 a brandului Canapuff CBD. Layout gradient asimetric e-commerce, marquee infinit și experiență de modă ultra-saturată.", href: "/showcase/canapuff" },
-  { id: "jim-curtis", name: "Jim Curtis Neuroscience", vibe: "Cognitive Reprogramming", color: "#06B6D4", description: "O experiență digitală profundă axată pe neuroștiință, vindecare somatică și Hypno-Coaching℠. Estetică clinical-indigo.", href: "/showcase/jim-curtis" },
-  { id: "clarity-architecture", name: "Arhitectura Clarității", vibe: "Sacred Infographic", color: "#C9A444", description: "Un tratat vizual. De la infrastructură tehnică (GitHub/Vercel) și structuri educaționale flashcard, până la estetica spațiului sacru.", href: "/clarity-architecture" },
-  { id: "soare", name: "Soare & Izvoare", vibe: "Ethereal Solaris", color: "#D97706", description: "„Până sus în soare, la marile izboare”. Interfață luminoasă, radiind căldură, creată pentru afaceri axate pe claritate, ascensiune și organicitate premium.", href: "/showcase/soare" },
-  { id: "cuprum-medical", name: "Cuprum Clinic", vibe: "Medical Copper", color: "#C47022", description: "Design clinic revoluționar construit în jurul oțelului și tăiat cu patina cuprului, reflectând moștenirea proprietăților sale antimicrobiene naturale.", href: "/showcase/cuprum-medical" },
-  { id: "origini", name: "Origini & Măsură", vibe: "Ancestral Minimalism", color: "#A0402C", description: "Un manifesto vizual dedicat artelor populare, tradiției și bunului simț pământesc. Echilibru nealterat pe un fundal pur de cânepă și lemn.", href: "/showcase/origini" },
-  { id: "inhale-exhale", name: "Inhale Exhale", vibe: "Rhythmic Flow", color: "#2E4F4F", description: "O experiență digitală meditativă care respiră. Echilibrul perfect între absorbția de date și expresia creativă prin design pulsatil.", href: "/showcase/inhale-exhale" },
-  { id: "vespa-urban", name: "Veloce Mobility", vibe: "Dolce Vita Efficiency", color: "#E0F2EC", description: "Minimalism rotunjit, curbe aerodinamice și nuanțe de pastel mint. Un concept Vespa-vibe dedicat startup-urilor de mobilitate urbană.", href: "/showcase/vespa-urban" },
-  { id: "the-anchor", name: "The Anchor", vibe: "Ethereal Brutalism", color: "#8A1C14", description: "Eseu filosofic vizual despre masculinitatea matură și susținerea partenerului în haos. Estetică întunecată și typography tensionat.", href: "/showcase/the-anchor" },
-  { id: "ai-first-framework", name: "AI-First Framework", vibe: "Operating System Logic", color: "#6366f1", description: "Blog-prezentare premium pentru framework-ul de transformare AI-First. Tipografie tehnică, gradient indigo-cyan și narative pe 5 capitole despre AI ca sistem de operare al companiei.", href: "/ai-first-framework/ai-first/" },
-  { id: "silva-method", name: "Metoda Silva", vibe: "Alpha State Science", color: "#7C3AED", description: "O incursiune științifică, filosofică și psihologică în starea Alpha: mecanica mentală, protocolul creației și reprogramarea subconștientului.", href: "/silva-method/" },
-  { id: "spatiul-deschis", name: "Spațiul Deschis", vibe: "Conscious Intimacy", color: "#BE185D", description: "Blog despre dinamica dintre masculin și feminin: deschidere emoțională, siguranță în cuplu și vulnerabilitate constructivă.", href: "/spatiul-deschis/" },
-  { id: "elumia", name: "Elumia", vibe: "Guide to the Unseen Plane", color: "#A78BFA", description: "Ghid interactiv bilingv pentru planul nevăzut: cei 7 Gardieni interiori, harta minții și conversația cu Operatorul.", href: "/elumia/" },
-  { id: "flooare-ro-site", name: "Flooare.ro", vibe: "Armonia Sferelor", color: "#0EA5E9", description: "Portalul Arhetipurilor și Armonia Sferelor. Experiență vizuală despre arhetipuri, sunet și geometrie sacră.", href: "/flooare-ro-site/" },
-  { id: "flooare-portal", name: "Flooare Portal", vibe: "Portalul Arhetipurilor", color: "#14B8A6", description: "Varianta extinsă a portalului Flooare: arhetipuri, frecvențe și parcursuri interactive.", href: "https://www.flooare.ro/" },
-  { id: "armonia", name: "ARMONIA", vibe: "Letters & Practices", color: "#B45309", description: "Douăzeci și una de scrisori scurte, fiecare cu o practică și un aforism. Soluții filozofice pentru viața de zi cu zi.", href: "https://yourfinestform.com/" },
-  { id: "immortallight", name: "The Immortal Light", vibe: "Sacred Teaching", color: "#EAB308", description: "Esența învățăturii divine prin toate religiile lumii: opt capitole, șapte piloni și The Teacher's Edition.", href: "https://immortallight.app/" },
-  { id: "oracol", name: "Oracolul celor Cinci Cercuri", vibe: "52-Card Wisdom Oracle", color: "#DC2626", description: "Un oracol de 52 de cărți de înțelepciune: trage, respiră, ascultă.", href: "https://pentora.app/" },
-  { id: "roluri-familia-alcoolicului", name: "Când cineva bea", vibe: "Recovery Map", color: "#0F766E", description: "Cele șase roluri din familia unei persoane care bea, modelul Minnesota, cei doisprezece pași și resurse de sprijin din România.", href: "https://candcinevabea.life/" },
-  { id: "fish-io", name: "Abyss.io (Game Engine)", vibe: "Cyber-Ocean Collision", color: "#00E5FF", description: "Joc HTML5 Canvas 60FPS integrat în React. Detecție de coliziuni (eat & grow), AI Boids inamici și demo de monetizare (Stripe/Crypto).", href: "/showcase/fish-io" },
-  { id: "neuro-recovery", name: "NeuroLumina", vibe: "Dark to Light Recovery", color: "#10B981", description: "Platformă interactivă de tip scroll-telling. O explorare empatică, bazată pe neuroștiință a adicției, trecând de la haos la homeostazie.", href: "/showcase/neuro-recovery" },
-  { id: "acasa-showcase", name: "Acasă Showcase", vibe: "Premium Glassmorphism", color: "#6c5ce7", description: "Prezentare digitală pentru proiectele extrase din arhiva Acasă: NevronixAI, Florarte, inteligență artificială și ecosisteme de startup.", href: "/acasa-showcase/index.html" },
-  { id: "guru-store", name: "Guru Store", vibe: "E-Commerce Fluid", color: "#f59e0b", description: "Prezentare interactivă de produse. Un magazin online fluid și rapid, cu animații elegante.", href: "/guru-store/index.html" },
-  { id: "spiritual-site", name: "Spiritual Reading", vibe: "Ethereal Text", color: "#8b5cf6", description: "Platformă amplă de lectură conținând peste 140 de capitole, axată pe simplitate și claritatea textului pentru inteligență spirituală.", href: "/spiritual-site/index.html" },
-  { id: "humanoid-reality-2026", name: "Realitatea Umanoidă 2026", vibe: "Deep Space Cyberpunk", color: "#00E5FF", description: "Website premium de prezentare despre revoluția robotică. Piața de 750 Mld $, liderii AI, VLA models și ghidul de supraviețuire pentru era post-umanoide.", href: "/humanoid-reality-2026" }
+  { id: "vespa-urban", name: "Veloce Mobility", vibe: "Dolce Vita Efficiency", color: "#10B981", description: "Minimalism rotunjit, curbe aerodinamice și mecanică de card flotant (micro-badge bounce). Un concept dedicat mobilității urbane electrice.", href: "/showcase/vespa-urban", category: "Mobilitate & Tehnologie" },
+  { id: "jim-curtis", name: "Jim Curtis Neuroscience", vibe: "Cognitive Reprogramming", color: "#06B6D4", description: "O experiență digitală profundă axată pe neuroștiință, vindecare somatică și Hypno-Coaching℠. Estetică clinical-indigo.", href: "/showcase/jim-curtis", category: "Sănătate & Psihologie" },
+  { id: "surya", name: "Surya Group", vibe: "Brutalism Desyres", color: "#C9A444", description: "Design webflow robust, bazat pe typography imens și delimitări tăioase B2B pentru holdingul Surya.", href: "/showcase/surya", category: "B2B & Corporativ" },
+  { id: "xiaolong", name: "Xiaolong Packaging", vibe: "Industrial B2B", color: "#208b53", description: "Design corporativ matur B2B pentru un producător asiatic global, cu modul dinamic de markup +25%.", href: "/showcase/xiaolong", category: "B2B & Corporativ" },
+  { id: "florarte", name: "Florarte Textile", vibe: "Pastel Sage & Rose", color: "#4E6E59", description: "Atelier floral B2C axat pe estetica textilă matură și claritatea prezenței e-commerce.", href: "/showcase/florarte", category: "Retail & Artizanat" },
+  { id: "artisan-cafe", name: "Artisan Café", vibe: "Cassette Futurism", color: "#D64933", description: "Minimalism tehnic și date termice extrase vizual pentru loturile de cafea de specialitate.", href: "/showcase/artisan-cafe", category: "Retail & Artizanat" },
+  { id: "don-barbershop", name: "DON Barbershop & Coffee", vibe: "Gentleman's Evening", color: "#B08D57", description: "Site complet pentru o frizerie cu cafenea din Mera, Vrancea: atmosferă de seară, film de prezentare, servicii și rezervări.", href: "https://don-barbershop.pages.dev/", category: "Servicii Locale" },
+  { id: "medical-center", name: "Medical Clinic", vibe: "Bio-Interface", color: "#0057FF", description: "Rigoare clinică absolută. Sterilitate albastră dublată de ticker live pentru starea sălilor de tratament.", href: "/showcase/medical-center", category: "Sănătate & Psihologie" },
+  { id: "legal-firm", name: "Legal Firm", vibe: "Legal Logic Brutal", color: "#8B2520", description: "Titluri masive tăiate orizontal de linii infinite. Autoritatea legii redată digital.", href: "/showcase/legal-firm", category: "B2B & Corporativ" },
+  { id: "architecture", name: "Architecture Studio", vibe: "Monolithic Grid", color: "#7A7A7A", description: "Gri de piatră brută expusă și arhitectură web ghidată de proporția de aur 1.618.", href: "/showcase/architecture", category: "Design & Arhitectură" },
+  { id: "cyber-sec", name: "Cyber Security B2B", vibe: "Terminal Logic", color: "#00FF41", description: "Interfață de linie de comandă cu scanlines agresive și verde neon tech pentru securitate cibernetică.", href: "/showcase/cyber-sec", category: "Tehnologie & AI" },
+  { id: "real-estate", name: "Real Estate Luxury", vibe: "Obsidian & Gold", color: "#C9A444", description: "Eleganță supremă, detalii aurii pe fundal adânc și accent imens pe fotografie imobiliară.", href: "/showcase/real-estate", category: "Design & Arhitectură" },
+  { id: "fashion-boutique", name: "Fashion Editorial", vibe: "High Contrast Vogue", color: "#FFFFFF", description: "Estetica alb-negru. Tipografie serifată, asimetrie elegantă și minimalism editorial extrem.", href: "/showcase/fashion-boutique", category: "Design & Arhitectură" },
+  { id: "fintech", name: "FinTech Startup", vibe: "Glassmorphism & Data", color: "#8B5CF6", description: "Date financiare în timp real via text rumble, iluminări bio-violet și securitate tranzacțională.", href: "/showcase/fintech", category: "Tehnologie & AI" },
+  { id: "auto-service", name: "Auto Dealership", vibe: "Carbon & Racing Yellow", color: "#FBBF24", description: "Elemente grafice precum turometre vectoriale și forme unghiulare decise pentru dealership auto.", href: "/showcase/auto-service", category: "Mobilitate & Tehnologie" },
+  { id: "fine-dining", name: "Fine Dining", vibe: "Burgundy Mute Canvas", color: "#831843", description: "Meniu funcțional abstractizat, atmosfere rafinate cu texturi puriste pentru restaurante de top.", href: "/showcase/fine-dining", category: "Retail & Artizanat" },
+  { id: "crossfit", name: "Gym & CrossFit", vibe: "Safety Orange & Sweat", color: "#EA580C", description: "Italic brutal. Cuvinte masive asimetrice și un vibe pur industrial de sală de performanță.", href: "/showcase/crossfit", category: "Sănătate & Psihologie" },
+  { id: "lens-portfolio", name: "Photo/Video Studio", vibe: "Film Strip Limits", color: "#C0C0C0", description: "Margini marcate ca frame-urile peliculei de 35mm, focalizat total pe expunerea media.", href: "/showcase/lens-portfolio", category: "Design & Arhitectură" },
+  { id: "event-music", name: "Festival Promoters", vibe: "Kinetic Blob Marquee", color: "#EC4899", description: "Liquid shapes combinat cu benzi uriașe infinite de artiști și bilete integrate.", href: "/showcase/event-music", category: "Mobilitate & Tehnologie" },
+  { id: "logistics-hub", name: "Logistics & Cargo", vibe: "Terminal Gate Cobalt", color: "#1D4ED8", description: "Tabele dense simulând plecări din aeroport. Grid rigid pentru logistica de top.", href: "/showcase/logistics-hub", category: "B2B & Corporativ" },
+  { id: "ai-future", name: "AI Tech Core", vibe: "Holographic Orbital", color: "#06B6D4", description: "Platforme software vectoriale. 3D CSS de finețe reprezentând noduri activate de rețea neuronală.", href: "/showcase/ai-future", category: "Tehnologie & AI" },
+  { id: "neuro-recovery", name: "NeuroLumina", vibe: "Dark to Light Recovery", color: "#10B981", description: "Platformă interactivă de tip scroll-telling. O explorare empatică bazată pe neuroștiință a adicției.", href: "/showcase/neuro-recovery", category: "Sănătate & Psihologie" },
+  { id: "fish-io", name: "Abyss.io (Game Engine)", vibe: "Cyber-Ocean Collision", color: "#00E5FF", description: "Joc HTML5 Canvas 60FPS integrat în React. Detecție de coliziuni (eat & grow) și AI Boids inamici.", href: "/showcase/fish-io", category: "Tehnologie & AI" },
+  { id: "humanoid-reality-2026", name: "Realitatea Umanoidă 2026", vibe: "Deep Space Cyberpunk", color: "#00E5FF", description: "Website premium de prezentare despre revoluția robotică, modele VLA și era post-umanoide.", href: "/humanoid-reality-2026", category: "Tehnologie & AI" }
 ];
 
 export default function ShowcaseIndex() {
   return (
-    <>
-      <style dangerouslySetInnerHTML={{__html: `
-        .showcase-wrapper {
-          --bg-color: #050505;
-          --text-primary: #ffffff;
-          --text-secondary: rgba(255, 255, 255, 0.6);
-          --text-muted: rgba(255, 255, 255, 0.4);
-          --text-faint: rgba(255, 255, 255, 0.3);
-          --border-color: rgba(255, 255, 255, 0.1);
-          --card-bg: rgba(255, 255, 255, 0.02);
-          --card-hover-bg: rgba(255, 255, 255, 0.05);
-          background-color: var(--bg-color);
-          color: var(--text-primary);
-          transition: background-color 0.8s cubic-bezier(0.16, 1, 0.3, 1), color 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .showcase-wrapper:has(.showcase-card:hover) {
-          --bg-color: #EEF2EB; /* Verde Salvie Pal */
-          --text-primary: #1d2731;
-          --text-secondary: rgba(29, 39, 49, 0.7);
-          --text-muted: rgba(29, 39, 49, 0.5);
-          --text-faint: rgba(29, 39, 49, 0.4);
-          --border-color: rgba(29, 39, 49, 0.12);
-          --card-bg: rgba(255, 255, 255, 0.5);
-          --card-hover-bg: rgba(255, 255, 255, 0.9);
-        }
-      `}} />
-    <div className="showcase-wrapper min-h-screen">
+    <div className="bg-[#070809] text-neutral-100 min-h-screen font-sans selection:bg-neutral-700 selection:text-white antialiased">
+      
+      {/* Background Architectural Grid Pattern */}
+      <div 
+        className="fixed inset-0 pointer-events-none z-0 opacity-[0.035]"
+        style={{
+          backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
+          backgroundSize: '48px 48px'
+        }}
+      />
+      <div className="fixed inset-0 pointer-events-none z-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.03)_0%,transparent_70%)]" />
+
       {/* Intro */}
-      <section className="px-6 py-20 lg:px-10 lg:py-32 border-b transition-colors duration-1000 relative" style={{
-        borderColor: 'var(--border-color)',
-        backgroundImage: 'linear-gradient(var(--border-color) 1px, transparent 1px), linear-gradient(90deg, var(--border-color) 1px, transparent 1px)',
-        backgroundSize: '64px 64px',
-        backgroundPosition: 'center top'
-      }}>
-        <div className="mx-auto max-w-7xl relative z-10 transition-colors duration-1000">
-          <Link href="/templates" className="inline-flex items-center text-xs font-mono transition-all duration-1000 mb-12 border rounded-full px-4 py-1.5" style={{ color: 'var(--text-muted)', borderColor: 'var(--border-color)', backgroundColor: 'var(--card-bg)' }}>
-            ← Înapoi la direcții de bază
-          </Link>
-          <div className="mb-4 text-[10px] font-mono uppercase tracking-[0.4em] transition-colors duration-1000" style={{ color: 'var(--text-faint)' }}>SYS.SHOWCASE_MATRIX_V2</div>
-          <h1 className="text-5xl font-medium leading-[1.0] tracking-[-0.03em] md:text-7xl transition-colors duration-1000">
-            21 Verticale<br />
-            <span style={{ color: 'var(--text-muted)' }} className="transition-colors duration-1000">Absolute.</span>
+      <section className="relative z-10 pt-32 pb-16 md:pt-40 md:pb-24 border-b border-white/10">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-300 mb-6 backdrop-blur-md">
+            <Grid size={12} className="text-white" />
+            <span>Catalog Sisteme & Prototipuri Industriale</span>
+          </div>
+          
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-white leading-tight">
+            21 Verticale Absolute. <br />
+            <span className="text-neutral-400 font-light">Arhitectură structurală aplicată.</span>
           </h1>
-          <p className="mt-8 max-w-xl text-lg leading-8 font-sans transition-colors duration-1000" style={{ color: 'var(--text-secondary)' }}>
-            Am depășit stadiul de "teme predefinite". 21 interfețe front-end unice, cu identități tăioase dictate de psihologia fiecărei nișe — de la rigiditatea medicală, până la arhitectura industrială B2B.
+
+          <p className="mt-6 max-w-2xl text-sm md:text-base text-neutral-400 font-light leading-relaxed">
+            Am depășit stadiul de „teme predefinite”. Interfețe front-end distincte, cu identități tăioase dictate de psihologia fiecărei nișe — de la rigiditatea medicală la mobilitatea aerodinamică și fluxuri industriale B2B.
           </p>
         </div>
       </section>
 
       {/* Grid */}
-      <section className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-24 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <section className="relative z-10 mx-auto max-w-7xl px-6 py-20 lg:px-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {showcases.map((s) => {
           const isExternal = /^https?:\/\//.test(s.href) || GITHUB_SHOWCASE_PATHS.some((p) => s.href.startsWith(`/${p}/`));
           const linkProps = isExternal ? { target: "_blank" as const, rel: "noopener noreferrer" } : {};
           return (
-          <Link href={s.href} key={s.id} {...linkProps} className="showcase-card group relative border transition-all duration-1000 p-8 lg:p-10 flex flex-col h-full overflow-hidden rounded-xl shadow-sm hover:shadow-xl hover:-translate-y-1" style={{ borderColor: 'var(--border-color)', backgroundColor: 'var(--card-bg)' }}>
-            
-            <div className="mb-8 z-20">
-              <span className="inline-block px-3 py-1 font-mono text-[9px] uppercase tracking-widest text-white shadow-md rounded-full" style={{ backgroundColor: s.color }}>
-                {s.vibe}
-              </span>
-            </div>
-            
-            <h2 className="text-3xl font-bold tracking-tight mb-4 z-20 transition-colors duration-1000">{s.name}</h2>
-            <p className="text-sm leading-6 mb-12 flex-grow z-20 transition-colors duration-1000" style={{ color: 'var(--text-secondary)' }}>{s.description}</p>
-            
-            <div className="flex items-center justify-between font-mono text-[10px] uppercase border-t pt-6 mt-auto z-20 transition-colors duration-1000" style={{ color: 'var(--text-faint)', borderColor: 'var(--border-color)' }}>
-              <span>EXPLORE({s.id})</span>
-              <span className="transition-all duration-500 group-hover:translate-x-1 text-sm font-sans" style={{ color: s.color }}>→</span>
-            </div>
-          </Link>
+            <Link 
+              href={s.href} 
+              key={s.id} 
+              {...linkProps} 
+              className="group relative rounded-3xl border border-white/10 bg-neutral-900/40 p-8 flex flex-col justify-between hover:border-white/30 hover:bg-neutral-900/70 hover:-translate-y-1.5 transition-all duration-300 shadow-sm hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <span 
+                    className="inline-block px-3 py-1 font-mono text-[9px] uppercase tracking-widest text-black font-bold rounded-full shadow-sm"
+                    style={{ backgroundColor: s.color }}
+                  >
+                    {s.vibe}
+                  </span>
+                  <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest">
+                    {s.category}
+                  </span>
+                </div>
+
+                <h2 className="text-2xl font-light text-white tracking-tight mb-3 group-hover:text-emerald-300 transition-colors">
+                  {s.name}
+                </h2>
+                
+                <p className="text-xs text-neutral-400 font-light leading-relaxed mb-8">
+                  {s.description}
+                </p>
+              </div>
+
+              <div className="pt-4 border-t border-white/5 flex items-center justify-between font-mono text-[10px] uppercase text-neutral-500">
+                <span>SYS://{s.id.toUpperCase()}</span>
+                <span className="flex items-center gap-1 text-neutral-300 group-hover:text-white group-hover:translate-x-1 transition-all">
+                  Lansează <ArrowRight size={12} />
+                </span>
+              </div>
+            </Link>
           );
         })}
       </section>
+
+      {/* Bottom CTA */}
+      <section className="relative z-10 mx-auto max-w-4xl px-6 py-24 text-center border-t border-white/10">
+        <h2 className="text-2xl md:text-4xl font-light text-white tracking-tight mb-4">
+          Vrei o verticală personalizată pentru industria ta?
+        </h2>
+        <p className="text-xs md:text-sm text-neutral-400 mb-8 max-w-md mx-auto font-light leading-relaxed">
+          Proiectăm platforme dedicate cu timp de încărcare sub 1.2 secunde și optimizare directă pentru conversie.
+        </p>
+        <Link
+          href="/contact"
+          className="inline-flex items-center justify-center gap-2 rounded-full bg-white text-black px-8 py-3.5 text-xs font-mono font-bold uppercase tracking-widest hover:bg-neutral-200 transition-all shadow-md"
+        >
+          <span>Discută Proiectul Tău</span>
+          <ArrowRight size={14} />
+        </Link>
+      </section>
+
     </div>
-    </>
   );
 }

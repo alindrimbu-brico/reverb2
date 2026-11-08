@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import PackagesShowcaseInteractive from "@/components/PackagesShowcaseInteractive";
 
 // ── Web Audio API Procedural Sound Engine ──
 class SoundEngine {
@@ -560,81 +561,10 @@ export default function EnglishHomePage() {
         </div>
       </section>
 
-      {/* ── Fixed Pricing Architecture Preview ── */}
-      <section className="relative z-10 py-28 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div>
-            <div className="text-xs font-mono uppercase tracking-[0.25em] text-neutral-500 mb-3">
-              Investment Framework
-            </div>
-            <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
-              Fixed Pricing. Full Transparency.
-            </h2>
-          </div>
-          <Link
-            href="/en/packages"
-            className="text-xs font-mono uppercase tracking-widest text-neutral-300 hover:text-white underline underline-offset-4"
-          >
-            View All Detailed Packages →
-          </Link>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-3">
-          <div className="rounded-3xl border border-white/10 bg-neutral-900/30 p-8 flex flex-col justify-between">
-            <div>
-              <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-2">Social Media</div>
-              <h3 className="text-2xl font-medium text-white mb-2">Social Growth</h3>
-              <div className="text-4xl font-light text-white mb-4">€390 <span className="text-xs text-neutral-500 font-mono">/ month</span></div>
-              <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6">
-                12 high-fidelity AI-generated videos per month for TikTok, Reels, and Shorts.
-              </p>
-            </div>
-            <Link
-              href="/en/contact?pachet=social-growth"
-              className="block w-full text-center rounded-full border border-white/20 py-3 text-xs font-mono uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all"
-            >
-              Select Package →
-            </Link>
-          </div>
-
-          <div className="rounded-3xl border border-white/30 bg-gradient-to-b from-neutral-900 to-[#121316] p-8 flex flex-col justify-between shadow-[0_0_40px_rgba(255,255,255,0.06)] scale-100 lg:scale-[1.02]">
-            <div>
-              <div className="inline-block rounded-full bg-white px-3 py-0.5 text-[9px] font-mono font-bold uppercase tracking-widest text-black mb-3">
-                Recommended
-              </div>
-              <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 mb-2">Daily Momentum</div>
-              <h3 className="text-2xl font-medium text-white mb-2">Daily Impact</h3>
-              <div className="text-4xl font-light text-white mb-4">€690 <span className="text-xs text-neutral-400 font-mono">/ month</span></div>
-              <p className="text-xs text-neutral-300 font-light leading-relaxed mb-6">
-                30 videos / month (1 video daily) + custom voice cloning and kinetic captioning.
-              </p>
-            </div>
-            <Link
-              href="/en/contact?pachet=daily-impact"
-              className="block w-full text-center rounded-full bg-white text-black py-3 text-xs font-mono uppercase tracking-widest font-bold hover:bg-neutral-200 transition-all shadow-md"
-            >
-              Select Package →
-            </Link>
-          </div>
-
-          <div className="rounded-3xl border border-white/10 bg-neutral-900/30 p-8 flex flex-col justify-between">
-            <div>
-              <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-2">Web Platform</div>
-              <h3 className="text-2xl font-medium text-white mb-2">Online Store Complete</h3>
-              <div className="text-4xl font-light text-white mb-4">€1,500 <span className="text-xs text-neutral-500 font-mono">fixed price</span></div>
-              <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6">
-                Turnkey Next.js e-commerce architecture with payment gateways, automated invoicing, and GEO indexation.
-              </p>
-            </div>
-            <Link
-              href="/en/contact?pachet=magazin-complet"
-              className="block w-full text-center rounded-full border border-white/20 py-3 text-xs font-mono uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all"
-            >
-              Select Package →
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* ── Interactive Packages with Vespa Urban Mechanics (Tilted Frame + Floating Pill) ── */}
+      <div id="packages">
+        <PackagesShowcaseInteractive isEn={true} />
+      </div>
 
       {/* ── Strategic Partner Section ── */}
       <section className="relative z-10 py-20 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">

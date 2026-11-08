@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import PackagesShowcaseInteractive from "@/components/PackagesShowcaseInteractive";
 
 // ── Web Audio API Procedural Sound Engine ──
 class SoundEngine {
@@ -583,102 +584,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Pachete & Prețuri Structurate (Transparență Totală) ── */}
-      <section id="pachete" className="py-28 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
-        
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-3">Investiție Clară</div>
-          <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight mb-4">
-            Structură de prețuri fixe. Fără surprize.
-          </h2>
-          <p className="text-neutral-400 text-sm">
-            Fiecare pachet include un set ferm de livrabile, fără costuri ascunse sau estimări vagi.
-          </p>
-        </div>
-
-        <div className="grid gap-8 lg:grid-cols-3 items-stretch">
-          
-          {/* Pachet 1: Social Growth */}
-          <div className="rounded-3xl border border-white/10 bg-neutral-900/30 p-8 flex flex-col justify-between">
-            <div>
-              <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-2">Prezență Constantă</div>
-              <h3 className="text-2xl font-medium text-white mb-2">Social Growth</h3>
-              <div className="text-4xl font-light text-white mb-4">€390 <span className="text-xs font-mono text-neutral-400">/ lună</span></div>
-              <p className="text-xs text-neutral-400 leading-relaxed mb-6">
-                Pentru companii și servicii locale care vor vizibilitate continuă și credibilitate vizuală pe rețele.
-              </p>
-              <ul className="space-y-3 text-xs text-neutral-300 font-mono mb-8 border-t border-white/5 pt-6">
-                <li>• 12 clipuri video scurte / lună (3/săpt.)</li>
-                <li>• 12 postări grafice adaptate</li>
-                <li>• Publicare TikTok, Reels, Shorts, Facebook</li>
-                <li>• Scenarii de vânzare și subtitrări dinamice</li>
-              </ul>
-            </div>
-            <Link
-              href="/contact"
-              onClick={() => sounds.playClick()}
-              className="block text-center rounded-full border border-white/20 py-3 text-xs font-mono uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all"
-            >
-              Alege Pachetul →
-            </Link>
-          </div>
-
-          {/* Pachet 2: Daily Impact */}
-          <div className="relative rounded-3xl border border-white/30 bg-gradient-to-b from-neutral-900 to-[#121315] p-8 flex flex-col justify-between shadow-[0_0_40px_rgba(255,255,255,0.05)] scale-100 lg:scale-[1.02]">
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-white px-4 py-1 text-[9px] font-mono font-bold uppercase tracking-widest text-black">
-              CEL MAI SOLICITAT
-            </div>
-            <div>
-              <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 mb-2 mt-2">1 Clip În Fiecare Zi</div>
-              <h3 className="text-2xl font-medium text-white mb-2">Daily Impact</h3>
-              <div className="text-4xl font-light text-white mb-4">€690 <span className="text-xs font-mono text-neutral-400">/ lună</span></div>
-              <p className="text-xs text-neutral-300 leading-relaxed mb-6">
-                Pentru magazine online și companii care vor creștere susținută prin volum zilnic de demonstrații video de produse.
-              </p>
-              <ul className="space-y-3 text-xs text-neutral-200 font-mono mb-8 border-t border-white/10 pt-6">
-                <li>★ 30 de clipuri video scurte / lună (1/zi)</li>
-                <li>★ 30 de postări grafice adaptate fiecărei platforme</li>
-                <li>★ Demonstrații de produse și utilaje în acțiune</li>
-                <li>★ Voiceover sintetic de înaltă fidelitate</li>
-                <li>★ Monitorizare săptămânală a impactului</li>
-              </ul>
-            </div>
-            <Link
-              href="/contact"
-              onClick={() => sounds.playClick()}
-              className="block text-center rounded-full bg-white py-3 text-xs font-mono font-bold uppercase tracking-widest text-black hover:bg-neutral-200 transition-all shadow-md"
-            >
-              Activează Daily Impact →
-            </Link>
-          </div>
-
-          {/* Pachet 3: Magazin Digital Activ */}
-          <div className="rounded-3xl border border-white/10 bg-neutral-900/30 p-8 flex flex-col justify-between">
-            <div>
-              <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-2">Construcție + Conținut + GEO</div>
-              <h3 className="text-2xl font-medium text-white mb-2">Magazin Digital Activ</h3>
-              <div className="text-4xl font-light text-white mb-4">€2.940 <span className="text-xs font-mono text-neutral-400">setup complet</span></div>
-              <p className="text-xs text-neutral-400 leading-relaxed mb-6">
-                Magazin online construit de la zero, integrat complet cu procese de vânzare, optimizare pentru căutare AI și 30 de clipuri video de lansare.
-              </p>
-              <ul className="space-y-3 text-xs text-neutral-300 font-mono mb-8 border-t border-white/5 pt-6">
-                <li>• Arhitectură eCommerce de mare viteză</li>
-                <li>• Opțiune Panou Control Enterprise (Payload CMS / Woo)</li>
-                <li>• Plăți securizate cu cardul, facturare, AWB curier</li>
-                <li>• Optimizare Answer Engine (GEO) & 30 clipuri video</li>
-              </ul>
-            </div>
-            <Link
-              href="/contact"
-              onClick={() => sounds.playClick()}
-              className="block text-center rounded-full border border-white/20 py-3 text-xs font-mono uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all"
-            >
-              Construiește Magazinul →
-            </Link>
-          </div>
-
-        </div>
-      </section>
+      {/* ── Pachete Interactive cu Mecanica Vespa Urban (Fereastra Înclinată + Căsuța Flotantă) ── */}
+      <div id="pachete">
+        <PackagesShowcaseInteractive isEn={false} />
+      </div>
 
       {/* ── Footer Structurat cu Link Direct către Zylaris Group ── */}
       <footer className="border-t border-white/10 bg-[#050607] py-16 px-6 lg:px-10">
