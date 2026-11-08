@@ -1,496 +1,314 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
-import { maintenanceTiers } from "@/lib/packages";
 
 export const metadata: Metadata = {
-  alternates: { canonical: "/servicii", languages: { ro: "/servicii", en: "/en/services", "x-default": "/servicii" } },
-  title: "Servicii",
+  title: "Servicii — Reverb Digital",
   description:
-    "Servicii digitale clare pentru IMM-uri: prezență online, clienți locali, magazine digitale, promovare continuă și AI Creative Sprint. Prețuri fixe, livrare structurată.",
+    "Arhitectură digitală completă: platforme web de mare viteză, conținut video zilnic AI, optimizare pentru căutare generativă (GEO) și infrastructură enterprise.",
 };
 
-const services = [
+const mainServices = [
   {
     id: "01",
-    title: "Prezență Online",
-    tagline: "Un website care susține vânzările, nu doar imaginea.",
-    text: "Implementare rapidă, structură orientată pe conversie și integrare Google pentru firme care vor creștere reală.",
-    price: "€590",
-    delivery: "7–14 zile",
-    includes: [
-      "Website 3–7 pagini, mobil-first",
-      "Formular contact + WhatsApp + Maps",
-      "SEO de bază + setare Google Business",
-      "Structură orientată pe conversie",
-      "Preț fix, fără costuri ascunse",
-      "Implementare completă, nu doar design",
+    tag: "FUNDAȚIE TEHNICĂ",
+    price: "de la €1.500",
+    title: "Platforme Web & Magazine Online",
+    tagline: "Arhitectură de mare viteză construită direct pentru conversie.",
+    text: "Dezvoltăm de la zero website-uri de prezentare și magazine online robuste pe Next.js și WooCommerce. Timp de încărcare garantat sub 1.2 secunde, flux de checkout optimizat cognitiv, integrări de plăți securizate cu cardul, facturare automată și emitere instantanee de AWB-uri curieri.",
+    deliverables: [
+      "Arhitectură Next.js / Edge Runtime cu viteză sub 1.2s",
+      "Opțiune Panou Control Enterprise cu Payload CMS",
+      "Proces de vânzare fără fricțiune (checkout 1-step)",
+      "Facturare automată (FGO / SmartBill) + AWB curieri",
+      "Optimizare completă pentru dispozitive mobile",
     ],
-    ideal: "IMM-uri care vor o fundație digitală corectă: firme de servicii, construcții, clinici, consultanță.",
-    href: "/contact",
+    href: "/contact?pachet=site-magazin",
   },
   {
     id: "02",
-    title: "Clienți Locali",
-    tagline: "Un sistem care aduce cereri locale, constant.",
-    text: "SEO local + Google Ads + tracking apeluri. Fără trafic inutil. Doar clienți relevanți.",
-    price: "€790",
-    delivery: "Setup inițial (30 zile)",
-    extra: "Administrare lunară: €290 / lună (+ buget ads separat)",
-    includes: [
-      "Landing pagină optimizat pentru conversie",
-      "SEO local (structură + optimizare)",
-      "Setup Google Ads + Meta Ads local",
-      "Tracking apeluri & formulare",
-      "Optimizare Google Business",
-      "Raport lunar clar",
+    tag: "SCALARE SOCIAL MEDIA",
+    price: "de la €390 / lună",
+    title: "Motorul Video Social Media AI",
+    tagline: "Volum zilnic de conținut video generat cu inteligență artificială.",
+    text: "Eliminăm bariera costurilor caselor de producție clasice. Producem zilnic 1 până la 3 clipuri video de înaltă fidelitate pentru TikTok, Instagram Reels, YouTube Shorts și Facebook folosind tehnologiile Google Imagen & Veo. Demonstrații de produse și utilaje în acțiune, scenarii de vânzare și subtitrări dinamice.",
+    deliverables: [
+      "30 până la 90 de clipuri video scurte / lună",
+      "Postări grafice și caruseluri de produs adaptate fiecărei rețele",
+      "Voiceover sintetic ultra-realist și montaj dinamic",
+      "Direcționare directă a traficului către magazin sau contact",
+      "Fără timp pierdut cu filmări manuale de către client",
     ],
-    ideal: "Firme locale de servicii: construcții, clinici, service auto, instalatori — oricine are nevoie de apeluri și cereri constante.",
-    href: "/contact",
-    recommended: true,
+    href: "/contact?pachet=daily-impact",
+    featured: true,
   },
   {
     id: "03",
-    title: "Magazin Digital",
-    tagline: "Un magazin online construit pentru vânzare, nu doar pentru design.",
-    text: "Alegem platforma potrivită pentru modelul tău de business și construim un sistem complet: produse, plăți, livrare, conversie.",
-    price: "de la €890",
-    delivery: "14–30 zile",
-    includes: [
-      "Setup platformă eCommerce potrivită proiectului",
-      "Structură categorii + produse demo",
-      "Checkout optimizat pentru conversie",
-      "Plăți & livrare configurate",
-      "Tracking esențial (vânzări, add-to-cart, checkout)",
-      "Implementare completă, nu doar design",
+    tag: "NOUA CĂUTARE ONLINE",
+    price: "de la €690 / lună",
+    title: "Optimizare Pentru Agenți AI (GEO)",
+    tagline: "Fii prima recomandare în ChatGPT, Perplexity, Claude și Gemini.",
+    text: "În 2026, clienții nu mai caută doar cuvinte cheie pe Google, ci adresează întrebări directe asistenților AI. Structurăm semantic întregul tău site prin date JSON-LD avansate, index de prețuri transparent și entități de autoritate, astfel încât LLM-urile să recomande afacerea ta ca sursă de încredere.",
+    deliverables: [
+      "AI-Readable Answer Stack (date structurate semantic)",
+      "Indexare transparentă și clară a pachetelor de prețuri",
+      "Generative Engine Optimization (GEO) pentru Perplexity și ChatGPT",
+      "Validare entitate de brand și autoritate digitală",
+      "Monitorizare a citărilor în răspunsurile generate de AI",
     ],
-    ideal: "Retail, producători, branduri în creștere și business-uri B2B care vor să vândă online serios.",
-    href: "/magazine-online",
+    href: "/contact?pachet=geo-search",
   },
   {
     id: "04",
-    title: "Promovare Continuă",
-    tagline: "Creștere lunară, controlată. Fără haos în campanii.",
-    text: 'Administrare și optimizare lunară pentru SEO + Ads + conversie. Focus pe cereri și vânzări, nu pe „reach".',
-    price: "de la €190/lună",
-    delivery: "Ongoing, raport lunar",
-    extra: "Trei trepte: Start, Growth, Scale (+ buget ads separat)",
-    includes: [
-      "Optimizare campanii (Google/Meta) sau SEO",
-      "Testare mesaje & landing",
-      "Tracking & măsurare conversii",
-      "Raport clar (ce a mers / ce schimbăm)",
-      "Lucrăm pe obiective reale",
-      "Fără costuri ascunse",
+    tag: "ENTERPRISE & SCALABILITATE",
+    price: "Enterprise / SLA",
+    title: "Infrastructură Digitală & Sisteme B2B",
+    tagline: "Arhitectură scalabilă și consultanță internațională.",
+    text: "Pentru companii mari și proiecte cu cerințe complexe, colaborăm direct cu Zylaris Group London. Proiectăm portaluri dedicate pentru clienți și parteneri B2B, automatizări de procese operaționale interne, securitate de nivel bancar și integrarea agenților autonomi AI.",
+    deliverables: [
+      "Arhitectură cloud scalabilă dedicată",
+      "Portaluri securizate pentru fluxuri comenzi & contracte B2B",
+      "Audit operațional și implementare agenți AI interni",
+      "Mentenanță proactivă 24/7 și SLA garantat",
+      "Guvernanță și securitate gestionată internațional",
     ],
-    ideal: "Firme care vor rezultate predictibile: servicii locale, magazine online, B2B cu lead-uri.",
-    href: "/contact",
-  },
-  {
-    id: "05",
-    title: "AI Creative Sprint",
-    tagline: "Poziționare și direcție vizuală, livrate în 7 zile.",
-    text: "Powered by AI, ghidat de om. Concepte vizuale, moodboard, idei de campanii și direcție de conținut — rapid și aplicabil.",
-    price: "€390",
-    delivery: "7 zile",
-    includes: [
-      "Poziționare rapidă + direcție vizuală",
-      "Concepte vizuale + moodboard brand",
-      "10 idei campanii (ads) + unghiuri mesaj",
-      "Direcție conținut social (simplu, aplicabil)",
-    ],
-    ideal: "Branduri care au nevoie de direcție înainte de lansare sau relansare.",
-    href: "/contact",
-  },
-  {
-    id: "06",
-    title: "AI Digital Human",
-    tagline: "Un angajat virtual integrat pe site-ul tău, activ 24/7.",
-    text: "Avatar conversațional capabil de vânzări și suport clienți, integrat cu sistemele tale și antrenat permanent.",
-    price: "de la €290/lună",
-    delivery: "Setup inițial: 5 zile",
-    includes: [
-      "Avatar AI vizual personalizat",
-      "Antrenare pe baza ta de cunoștințe (URL/PDF)",
-      "Interacțiune naturală 24/7 cu utilizatorii",
-      "Preluare contacte (Lead Gen) și suport FAQ",
-      "Funcționare non-stop, fără erori umane",
-      "Structură tehnologică premium (Nevronix)"
-    ],
-    ideal: "Clinici, imobiliare, e-commerce, servicii B2B și orice afacere cu volum constant de suport.",
-    href: "/ai-humans",
-  },
-];
-
-/* ── Promovare Continuă packages ── */
-const monthlyPackages = [
-  {
-    name: "Start",
-    price: "€190 / lună",
-    desc: "Pentru business-uri locale simple.",
-    features: [
-      "1 canal principal (Google sau Meta)",
-      "Optimizare săptămânală",
-      "Raport lunar",
-      "Suport email",
-    ],
-  },
-  {
-    name: "Growth",
-    price: "€290 / lună",
-    desc: "Recomandat pentru cereri constante.",
-    features: [
-      "Google + Meta (sau SEO + Ads)",
-      "Testare mesaje & landing",
-      "Tracking conversii",
-      "Raport lunar + plan",
-    ],
-    recommended: true,
-  },
-  {
-    name: "Scale",
-    price: "€390 / lună",
-    desc: "Pentru eCommerce / B2B cu volum.",
-    features: [
-      "2–3 canale + optimizare conversie",
-      "Iterație săptămânală avansată",
-      "Raportare extinsă",
-      "Suport prioritar",
-    ],
-  },
-];
-
-const faq = [
-  {
-    q: "Cum aleg ce serviciu mi se potrivește?",
-    a: "Programăm o discuție de 20–30 minute. Clarificăm obiectivul și îți spunem exact ce are sens pentru business-ul tău.",
-  },
-  {
-    q: "Cât durează un proiect tipic?",
-    a: "Între 7 și 30 zile, în funcție de pachet. Un site de prezentare: 7–14 zile. Un magazin online: 14–30 zile. Marketing: ongoing.",
-  },
-  {
-    q: "Există costuri ascunse?",
-    a: "Nu. Prețurile sunt fixe pentru pachetele standard. Orice funcționalitate extra este discutată separat, înainte de confirmare.",
-  },
-  {
-    q: "Bugetul de reclame este inclus?",
-    a: "Nu. Bugetul de reclame (Google/Meta) este separat și rămâne în contul tău. Noi administrăm și optimizăm.",
-  },
-  {
-    q: "Cum folosiți AI în proiecte?",
-    a: "Omul gândește. AI-ul execută. Reverb livrează. Folosim AI pentru cercetare, eficiență și viteză de execuție. Direcția strategică rămâne umană.",
-  },
-  {
-    q: "Oferiți și suport după lansare?",
-    a: "Da. Poți continua cu Promovare Continuă pentru optimizare lunară, cu Mentenanță website (de la €35/lună) pentru actualizări și securitate, sau rămâi doar cu sistemul livrat.",
+    href: "/contact?pachet=enterprise",
   },
 ];
 
 export default function ServiciiPage() {
   return (
-    <div className="bg-[#f5f1ea] text-[#1d2731]">
+    <div className="bg-[#070809] text-neutral-100 min-h-screen font-sans selection:bg-neutral-700 selection:text-white antialiased">
+      
+      {/* Background Architectural Grid Pattern */}
+      <div 
+        className="fixed inset-0 pointer-events-none z-0 opacity-[0.035]"
+        style={{
+          backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
+          backgroundSize: '48px 48px'
+        }}
+      />
+      <div className="fixed inset-0 pointer-events-none z-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.03)_0%,transparent_70%)]" />
+
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-[#1d2731]/8">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(124,140,170,0.15),transparent_35%)]" />
-        <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+      <section className="relative z-10 pt-32 pb-20 md:pt-40 md:pb-28 border-b border-white/10">
+        <div className="relative mx-auto max-w-5xl px-6 text-center">
           <Reveal>
-            <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">Servicii</div>
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-300 mb-6 backdrop-blur-md">
+              <span className="h-1.5 w-1.5 rounded-full bg-white" />
+              <span>Capabilități Digitale & Arhitectură</span>
+            </div>
           </Reveal>
           <Reveal delay={80}>
-            <h1 className="mt-4 max-w-4xl text-5xl font-medium leading-[0.94] tracking-[-0.04em] md:text-7xl lg:text-[80px]">
-              Servicii clare. Livrare structurată.
+            <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-white leading-tight">
+              Sisteme inginerești.<br />
+              <span className="text-neutral-400 font-light">Rezultate măsurabile.</span>
             </h1>
           </Reveal>
           <Reveal delay={160}>
-            <p className="mt-8 max-w-2xl text-lg leading-8 text-[#1d2731]/70 md:text-xl">
-              Alegi pachetul potrivit și știi exact ce urmează. Prețuri fixe, termene reale, implementare completă.
+            <p className="mt-8 max-w-2xl mx-auto text-base md:text-lg text-neutral-400 font-light leading-relaxed">
+              De la fundația tehnică de mare viteză a magazinului tău online, până la motoare de conținut video zilnic și optimizare pentru căutare generativă (GEO). Fără improvizații.
             </p>
           </Reveal>
         </div>
       </section>
 
-      {/* Services */}
-      <section className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
-        <div className="space-y-12 tab-blur-group">
-          {services.map((s, idx) => (
-            <Reveal key={s.id} delay={idx * 60}>
-              <div className="relative group rounded-[32px] overflow-hidden">
-                {/* STRAT FUNDAL (Viteza 100%) */}
-                <div
-                  className={`absolute inset-0 tab-blur-item rounded-[32px] border ${
-                    s.recommended
-                      ? "border-[#1d2731]/20 bg-white/90 shadow-[0_10px_40px_rgba(29,39,49,0.08)]"
-                      : idx % 2 === 0 ? "border-[#1d2731]/8 bg-white/80" : "border-[#1d2731]/8 bg-[#faf7f2]"
-                  }`}
-                  style={{ animation: `float-${idx % 3 === 0 ? 'a' : idx % 3 === 1 ? 'b' : 'c'} ${7 + (idx % 3)}s ease-in-out infinite` }}
-                />
-                
-                {/* STRAT TEXT (Viteza 70% Paralaxă) */}
-                <div 
-                  className="relative z-10 p-8 md:p-10 transition-all duration-500"
-                  style={{ animation: `float-text-${idx % 3 === 0 ? 'a' : idx % 3 === 1 ? 'b' : 'c'} ${7 + (idx % 3)}s ease-in-out infinite` }}
-                >
-                  <div className="grid gap-10 lg:grid-cols-[1fr_1fr]">
-                  <div>
-                    <div className="mb-4 flex items-center gap-3">
-                      <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/40">Serviciu {s.id}</div>
-                      {s.recommended && (
-                        <span className="rounded-full bg-[#1d2731] px-3 py-1 text-xs font-medium text-white">Recomandat</span>
-                      )}
+      {/* Lista de Servicii Detaliate */}
+      <section className="relative z-10 py-24 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
+        <div className="space-y-12">
+          {mainServices.map((srv, idx) => (
+            <Reveal key={srv.id} delay={idx * 80}>
+              <div className={`rounded-3xl border p-8 md:p-12 lg:p-14 transition-all duration-300 ${
+                srv.featured 
+                  ? "bg-gradient-to-b from-neutral-900/60 to-neutral-950/80 border-white/30 shadow-[0_0_40px_rgba(255,255,255,0.05)]" 
+                  : "bg-neutral-900/30 border-white/10"
+              }`}>
+                <div className="grid lg:grid-cols-12 gap-10 items-start">
+                  
+                  <div className="lg:col-span-5">
+                    <div className="flex flex-wrap items-center gap-3 font-mono text-xs text-neutral-500 mb-4">
+                      <span>/ {srv.id}</span>
+                      <span>•</span>
+                      <span className="text-neutral-300 uppercase tracking-wider">{srv.tag}</span>
+                      <span className="ml-auto inline-block rounded-full bg-white/10 px-3 py-0.5 text-[10px] text-white font-bold border border-white/20">
+                        {srv.price}
+                      </span>
                     </div>
-                    <h2 className="text-3xl font-medium tracking-[-0.03em] md:text-4xl">{s.title}</h2>
-                    <p className="mt-2 text-base font-medium text-[#1d2731]/60">{s.tagline}</p>
-                    <p className="mt-4 text-[15px] leading-7 text-[#1d2731]/70">{s.text}</p>
-
-                    <div className="mt-6 flex items-baseline gap-4">
-                      <span className="text-3xl font-medium tracking-[-0.03em] text-[#1d2731]">{s.price}</span>
-                      <span className="text-sm text-[#1d2731]/45">{s.delivery}</span>
-                    </div>
-                    {s.extra && (
-                      <div className="mt-2 text-sm text-[#1d2731]/55">{s.extra}</div>
-                    )}
-
-                    <div className="mt-4 rounded-2xl border border-[#1d2731]/8 bg-white/60 px-5 py-3 text-sm text-[#1d2731]/60">
-                      <span className="font-medium text-[#1d2731]">Ideal pentru: </span>{s.ideal}
-                    </div>
+                    <h2 className="text-3xl md:text-4xl font-medium text-white mb-4">
+                      {srv.title}
+                    </h2>
+                    <p className="text-sm font-mono text-neutral-400 mb-6 leading-relaxed">
+                      {srv.tagline}
+                    </p>
                     <Link
-                      href={s.href}
-                      className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#1d2731] px-6 py-3 text-sm font-medium text-white transition hover:-translate-y-0.5 hover:shadow-lg"
+                      href={srv.href}
+                      className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-xs font-mono uppercase tracking-widest text-black hover:bg-neutral-200 transition-all font-bold"
                     >
-                      {s.id === "03" ? "Vezi detalii complete" : "Solicită ofertă"} →
+                      Alege Serviciul ({srv.price}) →
                     </Link>
-                    <div className="mt-3 text-xs text-[#1d2731]/35">Termeni: 50% avans / 50% la livrare.</div>
                   </div>
-                  <div>
-                    <div className="text-sm font-semibold text-[#1d2731]">Ce este inclus</div>
-                    <ul className="mt-4 space-y-3">
-                      {s.includes.map((item) => (
-                        <li key={item} className="flex items-start gap-3 text-[15px] leading-7 text-[#1d2731]/70">
-                          <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#1d2731]/40" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
+
+                  <div className="lg:col-span-7 space-y-6">
+                    <p className="text-sm md:text-base text-neutral-300 font-light leading-relaxed">
+                      {srv.text}
+                    </p>
+                    
+                    <div className="border-t border-white/10 pt-6">
+                      <div className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-4">
+                        Livrabile & Standarde Tehnice:
+                      </div>
+                      <div className="grid sm:grid-cols-1 gap-3">
+                        {srv.deliverables.map((item) => (
+                          <div key={item} className="flex items-center gap-3 text-xs font-mono text-neutral-300">
+                            <span className="h-1.5 w-1.5 rounded-full bg-white" />
+                            <span>{item}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
                   </div>
+
                 </div>
               </div>
-            </div>
-          </Reveal>
+            </Reveal>
           ))}
         </div>
       </section>
 
-      {/* Monthly packages for Promovare Continuă */}
-      <section className="border-y border-[#1d2731]/8 bg-white/45">
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
-          <Reveal>
-            <div className="mb-12">
-              <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">Promovare Continuă — Pachete lunare</div>
-              <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
-                Creștere lunară, fără surprize.
-              </h2>
-              <p className="mt-4 max-w-2xl text-base leading-7 text-[#1d2731]/65">
-                Bugetul de reclame NU este inclus. Rămâne în contul clientului (Google/Meta).
-              </p>
-            </div>
-          </Reveal>
-
-          <div className="grid gap-5 md:grid-cols-3 tab-blur-group">
-            {monthlyPackages.map((pkg, i) => (
-              <Reveal key={pkg.name} delay={i * 80}>
-                <div className="relative h-full group rounded-[28px]">
-                  {/* STRAT FUNDAL (Viteza 100%) */}
-                  <div
-                    className={`absolute inset-0 rounded-[28px] border tab-blur-item transition-shadow ${
-                      pkg.recommended
-                        ? "border-[#1d2731] bg-[#1d2731] shadow-[0_20px_60px_rgba(29,39,49,0.15)] group-hover:shadow-[0_30px_70px_rgba(29,39,49,0.25)]"
-                        : "border-[#1d2731]/8 bg-white/80 group-hover:border-[#1d2731]/20"
-                    }`}
-                    style={{ animation: `float-${i % 2 === 0 ? 'a' : 'b'} ${6 + i}s ease-in-out infinite` }}
-                  />
-                  
-                  {/* STRAT TEXT (Viteza 70% Paralaxă) */}
-                  <div 
-                    className={`relative z-10 p-8 h-full flex flex-col transition-all duration-500 ${pkg.recommended ? "text-white" : "text-[#1d2731]"}`}
-                    style={{ animation: `float-text-${i % 2 === 0 ? 'a' : 'b'} ${6 + i}s ease-in-out infinite` }}
-                  >
-                  {pkg.recommended && (
-                    <div className="mb-4 inline-block rounded-full bg-white px-3 py-1 text-xs font-medium text-[#1d2731]">
-                      Recomandat
-                    </div>
-                  )}
-                  <div className={`text-sm font-medium ${pkg.recommended ? "text-white/60" : "text-[#1d2731]/50"}`}>
-                    {pkg.name}
-                  </div>
-                  <div className={`mt-2 text-3xl font-medium tracking-[-0.03em] ${pkg.recommended ? "text-white" : "text-[#1d2731]"}`}>
-                    {pkg.price}
-                  </div>
-                  <div className={`mt-2 text-sm ${pkg.recommended ? "text-white/55" : "text-[#1d2731]/45"}`}>
-                    {pkg.desc}
-                  </div>
-                  <ul className="mt-6 space-y-3">
-                    {pkg.features.map((f) => (
-                      <li key={f} className={`flex items-start gap-3 text-[15px] leading-6 ${pkg.recommended ? "text-white/80" : "text-[#1d2731]/70"}`}>
-                        <span className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${pkg.recommended ? "bg-white/50" : "bg-[#1d2731]/35"}`} />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                  <Link
-                    href="/contact"
-                    className={`mt-6 inline-flex w-full items-center justify-center rounded-full px-6 py-3 text-sm font-medium transition hover:-translate-y-0.5 ${
-                      pkg.recommended
-                        ? "bg-white text-[#1d2731] hover:shadow-lg"
-                        : "bg-[#1d2731] text-white hover:shadow-lg"
-                    }`}
-                  >
-                    {pkg.recommended ? "Alege Growth" : "Programează discuție"}
-                  </Link>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
+      {/* ── Secțiune Comparativă: Tradițional vs. Reverb Digital AI Studio ── */}
+      <section className="relative z-10 py-24 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
+        <Reveal>
+          <div className="max-w-3xl mb-14">
+            <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-3">05 / COMPARAȚIE DE EFICIENȚĂ</div>
+            <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
+              Agenție Tradițională vs. Reverb Digital Studio
+            </h2>
+            <p className="mt-4 text-sm text-neutral-400 font-light leading-relaxed">
+              Cum comprimă inteligența artificială și arhitectura modernă timpii și costurile pentru afacerea ta.
+            </p>
           </div>
-        </div>
-      </section>
+        </Reveal>
 
-      {/* Mentenanță website */}
-      <section className="border-b border-[#1d2731]/8">
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
-          <Reveal>
-            <div className="mb-12">
-              <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">Mentenanță website · Pachete lunare</div>
-              <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
-                Site mereu actualizat și protejat.
-              </h2>
-              <p className="mt-4 max-w-2xl text-base leading-7 text-[#1d2731]/65">
-                Actualizări, backup, securitate și mici modificări, pentru o sumă fixă pe lună. Hosting-ul și domeniul se plătesc separat.
-              </p>
+        <Reveal delay={100}>
+          <div className="overflow-hidden rounded-3xl border border-white/15 bg-neutral-900/40 backdrop-blur-md">
+            <div className="grid grid-cols-1 md:grid-cols-3 border-b border-white/10 text-xs font-mono uppercase tracking-widest p-6 bg-white/[0.02]">
+              <div className="text-neutral-500 font-semibold">DIMENSIUNE</div>
+              <div className="text-neutral-400 hidden md:block">AGENȚIE CLASICĂ</div>
+              <div className="text-emerald-400 font-bold hidden md:block">REVERB DIGITAL (AI + NEXT.JS)</div>
             </div>
-          </Reveal>
 
-          <div className="grid gap-5 md:grid-cols-3 tab-blur-group">
-            {maintenanceTiers.map((pkg, i) => (
-              <Reveal key={pkg.name} delay={i * 80}>
-                <div className="relative h-full group rounded-[28px]">
-                  <div
-                    className={`absolute inset-0 rounded-[28px] border tab-blur-item transition-shadow ${
-                      pkg.recommended
-                        ? "border-[#1d2731] bg-[#1d2731] shadow-[0_20px_60px_rgba(29,39,49,0.15)] group-hover:shadow-[0_30px_70px_rgba(29,39,49,0.25)]"
-                        : "border-[#1d2731]/8 bg-white/80 group-hover:border-[#1d2731]/20"
-                    }`}
-                    style={{ animation: `float-${i % 2 === 0 ? 'a' : 'b'} ${6 + i}s ease-in-out infinite` }}
-                  />
-                  <div
-                    className={`relative z-10 p-8 h-full flex flex-col transition-all duration-500 ${pkg.recommended ? "text-white" : "text-[#1d2731]"}`}
-                    style={{ animation: `float-text-${i % 2 === 0 ? 'a' : 'b'} ${6 + i}s ease-in-out infinite` }}
-                  >
-                  {pkg.recommended && (
-                    <div className="mb-4 inline-block self-start rounded-full bg-white px-3 py-1 text-xs font-medium text-[#1d2731]">
-                      Recomandat
-                    </div>
-                  )}
-                  <div className={`text-sm font-medium ${pkg.recommended ? "text-white/60" : "text-[#1d2731]/50"}`}>
-                    {pkg.name}
-                  </div>
-                  <div className={`mt-2 text-3xl font-medium tracking-[-0.03em] ${pkg.recommended ? "text-white" : "text-[#1d2731]"}`}>
-                    {pkg.price}
-                  </div>
-                  <div className={`mt-2 text-sm ${pkg.recommended ? "text-white/55" : "text-[#1d2731]/45"}`}>
-                    {pkg.desc}
-                  </div>
-                  <ul className="mt-6 space-y-3">
-                    {pkg.features.map((f) => (
-                      <li key={f} className={`flex items-start gap-3 text-[15px] leading-6 ${pkg.recommended ? "text-white/80" : "text-[#1d2731]/70"}`}>
-                        <span className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${pkg.recommended ? "bg-white/50" : "bg-[#1d2731]/35"}`} />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                  <Link
-                    href="/contact"
-                    className={`mt-6 inline-flex w-full items-center justify-center rounded-full px-6 py-3 text-sm font-medium transition hover:-translate-y-0.5 ${
-                      pkg.recommended
-                        ? "bg-white text-[#1d2731] hover:shadow-lg"
-                        : "bg-[#1d2731] text-white hover:shadow-lg"
-                    }`}
-                  >
-                    Alege {pkg.name}
-                  </Link>
-                  </div>
+            <div className="divide-y divide-white/5 font-mono text-xs">
+              <div className="grid grid-cols-1 md:grid-cols-3 p-6 gap-3 md:gap-0 items-center">
+                <div className="text-white font-medium">Volum & Viteză Video</div>
+                <div className="text-neutral-500 text-xs md:pr-4">
+                  <span className="md:hidden text-neutral-600 block text-[10px] uppercase">Agenție Clasică:</span>
+                  2–4 clipuri/lună • Filmări manuale de 8 ore • Livrare în 3–4 săptămâni
                 </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="bg-white/45">
-        <div className="mx-auto max-w-5xl px-6 py-20 lg:px-10 lg:py-28">
-          <Reveal>
-            <div className="text-center">
-              <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">FAQ</div>
-              <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
-                Întrebări frecvente
-              </h2>
-            </div>
-          </Reveal>
-
-          <div className="mt-12 space-y-4 tab-blur-group">
-            {faq.map((item, i) => (
-              <Reveal key={item.q} delay={i * 60}>
-                <div className="relative group rounded-[24px]">
-                  <div
-                    className="absolute inset-0 tab-blur-item rounded-[24px] border border-[#1d2731]/8 bg-white"
-                    style={{ animation: `float-c ${8 + (i%2)}s ease-in-out infinite` }}
-                  />
-                  <div 
-                    className="relative z-10 p-6 md:p-8 transition-all duration-500"
-                    style={{ animation: `float-text-c ${8 + (i%2)}s ease-in-out infinite` }}
-                  >
-                    <div className="text-lg font-medium text-[#1d2731]">{item.q}</div>
-                    <p className="mt-3 text-[15px] leading-7 text-[#1d2731]/68">{item.a}</p>
-                  </div>
+                <div className="text-emerald-300 md:pl-4 font-semibold">
+                  <span className="md:hidden text-neutral-600 block text-[10px] uppercase">Reverb Digital:</span>
+                  30–90 clipuri/lună • Generare AI Google Veo & Imagen • Livrare zilnică în 24-48h
                 </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <Reveal>
-        <section className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
-          <div className="rounded-[36px] bg-[#1d2731] p-8 text-white md:p-12">
-            <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
-              <div>
-                <h2 className="text-3xl font-medium leading-tight tracking-[-0.03em] md:text-5xl">
-                  Nu știi de unde să începi? Hai să stabilim împreună.
-                </h2>
-                <p className="mt-5 text-lg leading-8 text-white/70">
-                  O discuție de 20–30 minute e suficientă ca să înțelegem situația ta și să-ți propunem ce are sens. Fără pitch. Fără presiune.
-                </p>
               </div>
-              <div className="flex flex-col gap-4 lg:items-end">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-sm font-medium text-[#1d2731] transition hover:-translate-y-0.5 hover:shadow-lg"
-                >
-                  Programează o discuție
-                </Link>
-                <Link
-                  href="/magazine-online"
-                  className="inline-flex items-center justify-center rounded-full border border-white/15 px-8 py-4 text-sm font-medium text-white transition hover:bg-white/5"
-                >
-                  Descoperă Magazin Digital
-                </Link>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 p-6 gap-3 md:gap-0 items-center bg-white/[0.01]">
+                <div className="text-white font-medium">Cost Lunar Producție Video</div>
+                <div className="text-neutral-500 text-xs md:pr-4">
+                  <span className="md:hidden text-neutral-600 block text-[10px] uppercase">Agenție Clasică:</span>
+                  €2.000 – €5.000+ / lună + costuri separate de studio & montaj
+                </div>
+                <div className="text-emerald-300 md:pl-4 font-semibold">
+                  <span className="md:hidden text-neutral-600 block text-[10px] uppercase">Reverb Digital:</span>
+                  de la €390 – €690 / lună preț fix all-inclusive
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 p-6 gap-3 md:gap-0 items-center">
+                <div className="text-white font-medium">Arhitectură Tehnică & Viteză</div>
+                <div className="text-neutral-500 text-xs md:pr-4">
+                  <span className="md:hidden text-neutral-600 block text-[10px] uppercase">Agenție Clasică:</span>
+                  Teme WordPress pre-fabricate greoaie, încărcare în 3.5–6 secunde, bug-uri de plugin-uri
+                </div>
+                <div className="text-emerald-300 md:pl-4 font-semibold">
+                  <span className="md:hidden text-neutral-600 block text-[10px] uppercase">Reverb Digital:</span>
+                  Next.js Edge & Payload CMS nativ, încărcare sub 1.2s garantat, securitate enterprise
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 p-6 gap-3 md:gap-0 items-center bg-white/[0.01]">
+                <div className="text-white font-medium">Pregătire Căutare AI (GEO)</div>
+                <div className="text-neutral-500 text-xs md:pr-4">
+                  <span className="md:hidden text-neutral-600 block text-[10px] uppercase">Agenție Clasică:</span>
+                  Meta tags din 2012, ignorat complet de ChatGPT, Perplexity și Gemini
+                </div>
+                <div className="text-emerald-300 md:pl-4 font-semibold">
+                  <span className="md:hidden text-neutral-600 block text-[10px] uppercase">Reverb Digital:</span>
+                  Answer Stack JSON-LD nativ, catalog structurat semantic, citat de LLM-uri
+                </div>
               </div>
             </div>
           </div>
-        </section>
-      </Reveal>
+        </Reveal>
+      </section>
+
+      {/* Banner CTA */}
+      <section className="relative z-10 py-24 px-6 text-center max-w-4xl mx-auto">
+        <Reveal>
+          <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-4">Pasul Următor</div>
+          <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight mb-6">
+            Construiește pe o fundație solidă.
+          </h2>
+          <p className="text-neutral-400 text-sm md:text-base leading-relaxed mb-10 max-w-2xl mx-auto">
+            Oferim audit inițial gratuit pentru a evalua infrastructura ta digitală și compatibilitatea cu căutarea AI.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center rounded-full bg-white px-8 py-3.5 text-xs font-mono uppercase tracking-widest text-black hover:bg-neutral-200 transition-all font-bold"
+            >
+              Contactează Reverb Digital →
+            </Link>
+            <Link
+              href="/pachete"
+              className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-3.5 text-xs font-mono uppercase tracking-widest text-neutral-300 hover:bg-white/5 transition-all"
+            >
+              Vezi Toate Pachetele
+            </Link>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* Footer */}
+      <footer className="relative z-10 border-t border-white/10 bg-[#050607] py-16 px-6 lg:px-10">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+          <div>
+            <div className="text-sm font-bold tracking-[0.25em] uppercase text-white mb-2">REVERB DIGITAL</div>
+            <p className="text-xs text-neutral-500 font-mono">
+              Infrastructură digitală, sisteme web și căutare generativă. Ecosistem al Grupului Surya.
+            </p>
+          </div>
+          
+          <div className="flex flex-col md:flex-row items-center gap-6 text-xs font-mono text-neutral-400">
+            <Link href="/" className="hover:text-white transition-colors">Site Principal</Link>
+            <Link href="/showcase" className="hover:text-white transition-colors">Showcase</Link>
+            <Link href="/despre" className="hover:text-white transition-colors">Despre Noi</Link>
+            <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
+            <span className="text-neutral-600 hidden md:inline">|</span>
+            <div className="text-neutral-500">
+              Partener strategic:{" "}
+              <a
+                href="https://zylarisgroup.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-neutral-300 hover:text-white transition-colors underline underline-offset-4"
+              >
+                Zylaris Group London
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
+
     </div>
   );
 }

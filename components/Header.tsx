@@ -4,19 +4,24 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import Logo from "@/components/Logo";
+import InstallPWA from "@/components/InstallPWA";
 
 const navInfo = {
   ro: [
-    { href: "/despre", label: "Despre" },
     { href: "/servicii", label: "Servicii" },
-    { href: "/showcase", label: "Showcase" },
-    { href: "/clarity-architecture", label: "Claritate" },
+    { href: "/pachete", label: "Pachete" },
+    { href: "/studio", label: "Studio AI" },
+    { href: "/showcase", label: "Portofoliu" },
+    { href: "/despre", label: "Despre" },
+    { href: "/contact", label: "Contact" },
   ],
   en: [
-    { href: "/en/about", label: "About" },
     { href: "/en/services", label: "Services" },
-    { href: "/en/showcase", label: "Showcase" },
-    { href: "/clarity-architecture", label: "Clarity" },
+    { href: "/en/packages", label: "Packages" },
+    { href: "/studio", label: "AI Studio" },
+    { href: "/en/showcase", label: "Portfolio" },
+    { href: "/en/about", label: "About" },
+    { href: "/en/contact", label: "Contact" },
   ]
 };
 
@@ -167,7 +172,8 @@ export default function Header() {
         </nav>
 
         {/* Right: CTA button and language switcher */}
-        <div className="flex-1 flex justify-end items-center gap-4">
+        <div className="flex-1 flex justify-end items-center gap-3">
+          <InstallPWA className="hidden lg:inline-flex" />
           <Link
             href="/contact"
             className="hidden md:inline-flex items-center justify-center rounded-full bg-[#1d2731] dark:bg-white px-5 py-2 text-[10px] font-bold uppercase tracking-widest text-[#f5f1ea] dark:text-neutral-900 transition-all duration-300 hover:-translate-y-0.5 shadow-[0_4px_12px_rgba(29,39,49,0.15)] hover:shadow-[0_8px_20px_rgba(29,39,49,0.3)] dark:shadow-none"

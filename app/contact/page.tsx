@@ -1,115 +1,164 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import ContactForm from "./ContactForm";
 
 export const metadata: Metadata = {
-  alternates: { canonical: "/contact", languages: { ro: "/contact", en: "/en/contact", "x-default": "/contact" } },
-  title: "Contact",
+  title: "Contact — Reverb Digital",
   description:
-    "Programează o discuție de 20–30 minute. Stabilim obiectivul, structura și termenul de implementare. Fără obligații.",
+    "Discută proiectul tău cu echipa Reverb Digital. Audit tehnic, ofertă fermă și termen precis de livrare.",
 };
 
 export default function ContactPage() {
   return (
-    <div className="bg-[#f5f1ea] text-[#1d2731]">
+    <div className="bg-[#070809] text-neutral-100 min-h-screen font-sans selection:bg-neutral-700 selection:text-white antialiased">
+      
+      {/* Background Architectural Grid Pattern */}
+      <div 
+        className="fixed inset-0 pointer-events-none z-0 opacity-[0.035]"
+        style={{
+          backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
+          backgroundSize: '48px 48px'
+        }}
+      />
+      <div className="fixed inset-0 pointer-events-none z-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.03)_0%,transparent_70%)]" />
+
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-[#1d2731]/8">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(124,140,170,0.15),transparent_35%)]" />
-        <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+      <section className="relative z-10 pt-32 pb-20 md:pt-40 md:pb-28 border-b border-white/10">
+        <div className="relative mx-auto max-w-5xl px-6 text-center">
           <Reveal>
-            <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">Contact</div>
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-300 mb-6 backdrop-blur-md">
+              <span className="h-1.5 w-1.5 rounded-full bg-white" />
+              <span>Inițiere Proiect & Audit Tehnic</span>
+            </div>
           </Reveal>
           <Reveal delay={80}>
-            <h1 className="mt-4 max-w-3xl text-5xl font-medium leading-[0.94] tracking-[-0.04em] md:text-7xl lg:text-[80px]">
+            <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-white leading-tight">
               Hai să vorbim despre afacerea ta.
             </h1>
           </Reveal>
           <Reveal delay={160}>
-            <p className="mt-8 max-w-2xl text-lg leading-8 text-[#1d2731]/70 md:text-xl">
-              Stabilim obiectivul, structura și termenul de implementare din prima discuție. Fără obligații. Fără presiune.
+            <p className="mt-8 max-w-2xl mx-auto text-base md:text-lg text-neutral-400 font-light leading-relaxed">
+              Stabilim obiectivul, arhitectura optimă și termenul de implementare din prima discuție. Fără obligații sau presiune.
             </p>
           </Reveal>
         </div>
       </section>
 
       {/* Main content */}
-      <section className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
-        <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
-          {/* Left: info */}
+      <section className="relative z-10 mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28 border-b border-white/10">
+        <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr] items-start">
+          
+          {/* Left Column: Direct Info */}
           <div className="space-y-8">
             <Reveal>
-              <div className="card-hover rounded-[28px] border border-[#1d2731]/8 bg-white/70 p-8">
-                <h2 className="text-2xl font-medium tracking-[-0.03em]">Programează o discuție</h2>
-                <p className="mt-4 text-[15px] leading-7 text-[#1d2731]/70">
-                  20–30 de minute sunt suficiente ca să înțelegem situația ta și să-ți propunem un plan concret. Dacă nu avem o potrivire bună, ți-o spunem direct.
+              <div className="rounded-3xl border border-white/10 bg-neutral-900/30 p-8 md:p-10">
+                <div className="text-xs font-mono uppercase tracking-[0.25em] text-neutral-500 mb-3">Contact Direct</div>
+                <h2 className="text-2xl md:text-3xl font-medium text-white mb-4">Discuție la Obiect</h2>
+                <p className="text-sm text-neutral-400 font-light leading-relaxed mb-8">
+                  Dacă ai nevoie de o estimare rapidă sau vrei să afli cum putem implementa conținut video AI sau un magazin nou, ne poți contacta direct:
                 </p>
-                <div className="mt-6 space-y-3 text-sm text-[#1d2731]/65">
-                  <div className="flex items-center gap-3">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#1d2731]/10 bg-white text-xs">1</span>
-                    Completezi formularul de mai jos
+
+                <div className="space-y-4 text-xs font-mono">
+                  <div className="flex items-center justify-between p-4 rounded-xl border border-white/5 bg-white/[0.02]">
+                    <span className="text-neutral-500">TELEFON:</span>
+                    <a href="tel:0771389846" className="text-white hover:underline font-bold">
+                      0771 389 846
+                    </a>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#1d2731]/10 bg-white text-xs">2</span>
-                    Îți confirmăm un slot în 24h
+                  <div className="flex items-center justify-between p-4 rounded-xl border border-white/5 bg-white/[0.02]">
+                    <span className="text-neutral-500">WHATSAPP:</span>
+                    <a
+                      href="https://wa.me/40771389846"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-emerald-400 hover:underline font-bold"
+                    >
+                      Mesaj Rapid WhatsApp ↗
+                    </a>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#1d2731]/10 bg-white text-xs">3</span>
-                    Vorbim, clarificăm, propunem
+                  <div className="flex items-center justify-between p-4 rounded-xl border border-white/5 bg-white/[0.02]">
+                    <span className="text-neutral-500">EMAIL:</span>
+                    <span className="text-neutral-300">contact@reverb.ro</span>
                   </div>
                 </div>
               </div>
             </Reveal>
 
             <Reveal delay={100}>
-              <div className="rounded-[28px] bg-[#1d2731] p-8 text-white">
-                <div className="text-xs uppercase tracking-[0.3em] text-white/50">Pachete disponibile</div>
-                <div className="mt-5 space-y-4">
-                  {[
-                    { name: "Prezență Online", price: "€590" },
-                    { name: "Clienți Locali", price: "€790 + €290/lună" },
-                    { name: "Magazin Digital", price: "de la €890" },
-                    { name: "Promovare Continuă", price: "de la €190/lună" },
-                    { name: "AI Creative Sprint", price: "€390" },
-                    { name: "Mentenanță website", price: "de la €35/lună" },
-                  ].map((pkg) => (
-                    <div key={pkg.name} className="flex items-center justify-between text-sm">
-                      <span className="text-white/75">{pkg.name}</span>
-                      <span className="font-medium text-white/90">{pkg.price}</span>
-                    </div>
-                  ))}
+              <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8">
+                <div className="text-xs font-mono uppercase tracking-[0.25em] text-neutral-500 mb-4">Repere Bugetare</div>
+                <div className="space-y-3.5 text-xs font-mono">
+                  <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
+                    <span className="text-neutral-300">Social Growth (12 video/l)</span>
+                    <span className="text-white font-bold">€390 / lună</span>
+                  </div>
+                  <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
+                    <span className="text-neutral-300">Daily Impact (30 video/l)</span>
+                    <span className="text-white font-bold">€690 / lună</span>
+                  </div>
+                  <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
+                    <span className="text-neutral-300">Start Digital (Web + Video)</span>
+                    <span className="text-white font-bold">€1.500</span>
+                  </div>
+                  <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
+                    <span className="text-neutral-300">Magazin Digital Activ</span>
+                    <span className="text-white font-bold">€2.940</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-neutral-300">Infrastructură Enterprise</span>
+                    <span className="text-white font-bold">de la €3.900</span>
+                  </div>
                 </div>
-                <div className="mt-5 text-xs text-white/40">Termeni: 50% avans / 50% la livrare.</div>
-              </div>
-            </Reveal>
-
-            <Reveal delay={200}>
-              <div className="card-hover rounded-[28px] border border-[#1d2731]/8 bg-[#faf7f2] p-8">
-                <div className="text-sm font-semibold text-[#1d2731]">Ce poți discuta cu noi</div>
-                <ul className="mt-5 space-y-3">
-                  {[
-                    "Website nou sau reproiectat",
-                    "Magazin online complet",
-                    "Clienți locali — SEO + Ads",
-                    "Promovare lunară continuă",
-                    "Poziționare și direcție vizuală (AI Creative Sprint)",
-                    "Orice combinație din cele de mai sus",
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-[14px] leading-6 text-[#1d2731]/70">
-                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#1d2731]/35" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
               </div>
             </Reveal>
           </div>
 
-          {/* Right: form */}
-          <Reveal delay={120}>
-            <ContactForm />
-          </Reveal>
+          {/* Right Column: Formular */}
+          <div>
+            <Reveal delay={150}>
+              <div className="rounded-3xl border border-white/10 bg-neutral-900/30 p-8 md:p-12">
+                <div className="text-xs font-mono uppercase tracking-[0.25em] text-neutral-500 mb-3">Formular Securizat</div>
+                <h3 className="text-2xl font-medium text-white mb-6">Trimite Detaliile Proiectului</h3>
+                <ContactForm />
+              </div>
+            </Reveal>
+          </div>
+
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="relative z-10 border-t border-white/10 bg-[#050607] py-16 px-6 lg:px-10">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+          <div>
+            <div className="text-sm font-bold tracking-[0.25em] uppercase text-white mb-2">REVERB DIGITAL</div>
+            <p className="text-xs text-neutral-500 font-mono">
+              Infrastructură digitală, sisteme web și căutare generativă. Ecosistem al Grupului Surya.
+            </p>
+          </div>
+          
+          <div className="flex flex-col md:flex-row items-center gap-6 text-xs font-mono text-neutral-400">
+            <Link href="/" className="hover:text-white transition-colors">Site Principal</Link>
+            <Link href="/showcase" className="hover:text-white transition-colors">Showcase</Link>
+            <Link href="/despre" className="hover:text-white transition-colors">Despre Noi</Link>
+            <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
+            <span className="text-neutral-600 hidden md:inline">|</span>
+            <div className="text-neutral-500">
+              Partener strategic:{" "}
+              <a
+                href="https://zylarisgroup.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-neutral-300 hover:text-white transition-colors underline underline-offset-4"
+              >
+                Zylaris Group London
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
+
     </div>
   );
 }

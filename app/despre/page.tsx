@@ -3,327 +3,292 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
-  alternates: { canonical: "/despre", languages: { ro: "/despre", en: "/en/about", "x-default": "/despre" } },
-  title: "Despre",
+  title: "Despre Noi — Reverb Digital",
   description:
-    "Structură, execuție, rezultate. Execuție digitală pentru IMM-uri. Fără jargon, fără haos.",
+    "Arhitectură digitală, execuție disciplinată și parteneriat strategic. Parteneri de tehnologie AI ai Zylaris Group London.",
 };
 
 const values = [
   {
-    title: "Prețuri fixe & transparente",
-    text: "Știi de la început cât plătești și ce primești. Fără estimări vagi, fără costuri ascunse.",
+    title: "Prețuri Fixe & Transparente",
+    text: "Fiecare proiect are de la bun început un preț ferm și livrabile clare. Fără estimări vagi, fără costuri ascunse.",
   },
   {
-    title: "Proces clar în 4 pași",
-    text: "Fără improvizații. Fără schimbări haotice. Fiecare etapă are un scop definit și un rezultat concret.",
+    title: "Model Operațional în 4 Pași",
+    text: "Proiectăm, Conectăm, Automatizăm și Scalăm. Fără improvizații sau schimbări haotice de direcție.",
   },
   {
-    title: "Focus pe rezultate",
-    text: "Nu trafic. Nu vizualizări. Ci cereri, conversii și vânzări. Măsurăm ce contează cu adevărat.",
+    title: "Sisteme Orientate pe Valoare",
+    text: "Măsurăm ce contează: comenzi, conversii și cereri concrete. Construim active care produc rezultate continue.",
   },
   {
-    title: "Implementare, nu doar strategie",
-    text: "Construim și configurăm. Nu livrăm doar prezentări și recomandări. Fiecare proiect se predă gata de utilizare.",
+    title: "Execuție Inginerească",
+    text: "Nu livrăm doar strategii teoretice. Construim codul, configurăm integrările și predăm sisteme 100% funcționale.",
   },
   {
-    title: "Human + AI",
-    text: "Omul dă direcția strategică. AI-ul comprimă timpul de execuție. Reverb integrează ambele într-un sistem care livrează.",
+    title: "Viziune Umană + Viteză AI",
+    text: "Omul stabilește direcția și gustul. Modelele AI comprimă timpul de producție video și analiză de date.",
   },
   {
-    title: "Selectăm proiectele",
-    text: "Lucrăm cu firme care vor creștere reală. Nu acceptăm proiecte fără obiectiv concret sau buget definit.",
+    title: "Optimizare pentru Noile Motoare AI",
+    text: "Asigurăm lizibilitatea semantică a afacerii tale pentru ChatGPT, Perplexity și Gemini (Generative Engine Optimization).",
   },
 ];
 
 const approach = [
   {
     step: "01",
-    title: "Discuție & Obiectiv",
-    text: "Clarificăm ce vrei să obții: apeluri, leaduri sau vânzări. Modelul de venituri, publicul, oferta, concurența.",
+    title: "Audit & Obiectiv",
+    text: "Analizăm arhitectura actuală, publicul țintă, oferta și stabilim indicatorii concreți de succes.",
   },
   {
     step: "02",
-    title: "Structură & Implementare",
-    text: "Construim sistemul pe baza obiectivului stabilit. Arhitectură, mesaje, design, configurări.",
+    title: "Proiectare & Implementare",
+    text: "Construim platforma web sau magazinul online, integrăm plățile și configurăm fluxurile de date.",
   },
   {
     step: "03",
-    title: "Lansare & Configurare",
-    text: "Activăm, testăm și verificăm conversiile. Totul funcțional la predare.",
+    title: "Activare Conținut & GEO",
+    text: "Lansăm motorul de conținut video zilnic și structurăm datele pentru indexarea optimă de către agenții AI.",
   },
   {
     step: "04",
-    title: "Optimizare & Ajustare",
-    text: "Monitorizăm și ajustăm pentru performanță stabilă. Un sistem digital sănătos se îmbunătățește cu fiecare lună.",
+    title: "Scalare & Mentenanță",
+    text: "Monitorizăm stabilitatea, protecția serverelor și optimizăm continuu rata de conversie.",
   },
-];
-
-const certifications = [
-  { name: "Google Partner", category: "Digital Advertising" },
-  { name: "HubSpot Partner", category: "CRM & Marketing" },
-  { name: "Shopify Expert", category: "E-commerce" },
-  { name: "Meta Partners", category: "Social Commerce" },
-  { name: "SEO Specialist", category: "Search & Content" },
-  { name: "Google Analytics Certified", category: "Data & Analytics" },
 ];
 
 export default function DesprePage() {
   return (
-    <div className="bg-[#f5f1ea] text-[#1d2731]">
+    <div className="bg-[#070809] text-neutral-100 min-h-screen font-sans selection:bg-neutral-700 selection:text-white antialiased">
+      
+      {/* Background Architectural Grid Pattern */}
+      <div 
+        className="fixed inset-0 pointer-events-none z-0 opacity-[0.035]"
+        style={{
+          backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
+          backgroundSize: '48px 48px'
+        }}
+      />
+      <div className="fixed inset-0 pointer-events-none z-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.03)_0%,transparent_70%)]" />
+
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-[#1d2731]/8">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(118,86,143,0.10),transparent_35%),radial-gradient(circle_at_bottom_left,rgba(49,88,79,0.08),transparent_30%)]" />
-        <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+      <section className="relative z-10 pt-32 pb-20 md:pt-40 md:pb-28 border-b border-white/10">
+        <div className="relative mx-auto max-w-5xl px-6 text-center">
           <Reveal>
-            <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">Despre noi</div>
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-300 mb-6 backdrop-blur-md">
+              <span className="h-1.5 w-1.5 rounded-full bg-white" />
+              <span>Filozofie Operațională & Identitate</span>
+            </div>
           </Reveal>
           <Reveal delay={80}>
-            <h1 className="mt-4 max-w-4xl text-5xl font-medium leading-[0.94] tracking-[-0.04em] md:text-7xl lg:text-[80px]">
+            <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-white leading-tight">
               Structură, execuție, rezultate.
             </h1>
           </Reveal>
           <Reveal delay={160}>
-            <p className="mt-8 max-w-2xl text-lg leading-8 text-[#1d2731]/70 md:text-xl">
-              Reverb vine din reverberation — semnalul se întoarce mai curat decât a plecat. Website, magazine online, marketing digital. Execuție digitală care livrează.
+            <p className="mt-8 max-w-2xl mx-auto text-base md:text-lg text-neutral-400 font-light leading-relaxed">
+              Reverb provine din <em>reverberation</em> — semnalul se întoarce mai puternic și mai curat decât a plecat. Proiectăm infrastructură digitală și sisteme de conținut care produc valoare reală.
             </p>
           </Reveal>
         </div>
       </section>
 
       {/* Manifest */}
-      <section className="bg-[#1d2731] text-white">
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
-          <div className="grid gap-12 lg:grid-cols-2">
-            <Reveal>
+      <section className="relative z-10 py-24 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
+        <div className="grid gap-12 lg:grid-cols-2 items-start">
+          <Reveal>
+            <div>
+              <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-4">Manifestul Reverb</div>
+              <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight leading-tight">
+                Nu amplificăm zgomotul.<br />
+                <span className="text-neutral-400">Îl eliminăm.</span>
+              </h2>
+            </div>
+          </Reveal>
+          <Reveal delay={120}>
+            <div className="space-y-6 text-sm md:text-base leading-relaxed text-neutral-300 font-light">
+              <p>
+                Reverb Digital aduce afacerile online înapoi la esență. Nu adăugăm straturi inutile sau jargon pompos. Construim sisteme clare, inginerești, care funcționează fără fricțiune.
+              </p>
+              <p>
+                Folosim inteligența artificială pentru a comprima timpii de producție și de analiză a datelor, nu pentru a înlocui judecata strategică. Omul trasează direcția de brand, AI-ul accelerează execuția, iar sistemul livrează conversii.
+              </p>
+              <p>
+                Platformele noastre web încarcă instant, cataloagele de produse sunt structurate cognitiv, iar datele afacerii tale sunt formate nativ pentru a fi recomandate de noile motoare de căutare generative.
+              </p>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Parteneriatul Strategic Zylaris Group London */}
+      <section className="relative z-10 py-20 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
+        <Reveal>
+          <div className="rounded-3xl border border-white/15 bg-gradient-to-b from-neutral-900/50 via-neutral-950/70 to-neutral-900/40 p-8 md:p-14 backdrop-blur-md">
+            <div className="grid lg:grid-cols-12 gap-10 items-center">
+              <div className="lg:col-span-8">
+                <div className="text-xs font-mono uppercase tracking-[0.25em] text-neutral-400 mb-3">
+                  Parteneriat Internațional
+                </div>
+                <h3 className="text-2xl md:text-4xl font-light text-white tracking-tight mb-4">
+                  Parteneri de Tehnologie & AI ai Zylaris Group London
+                </h3>
+                <p className="text-sm md:text-base text-neutral-300 font-light leading-relaxed">
+                  Reverb Digital operează ca partener dedicat de inteligență artificială și dezvoltare de sisteme al grupului internațional Zylaris Group (Londra). Conectăm capacitatea noastră de producție media AI, magazine online de mare viteză și aplicații native cu guvernanța corporativă, hostingul enterprise și arhitectura scalabilă dezvoltată din Marea Britanie.
+                </p>
+              </div>
+              <div className="lg:col-span-4 flex lg:justify-end">
+                <a
+                  href="https://zylarisgroup.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center rounded-full bg-white px-8 py-3.5 text-xs font-mono uppercase tracking-widest text-black hover:bg-neutral-200 transition-all font-bold"
+                >
+                  Zylaris Group London ↗
+                </a>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* Principii & Valori */}
+      <section className="relative z-10 py-24 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
+        <Reveal>
+          <div className="max-w-3xl mb-16">
+            <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-3">Principiile Noastre</div>
+            <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
+              Cum asigurăm predictibilitatea.
+            </h2>
+          </div>
+        </Reveal>
+
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {values.map((v) => (
+            <div
+              key={v.title}
+              className="rounded-2xl border border-white/10 bg-neutral-900/30 p-8 flex flex-col justify-between"
+            >
               <div>
-                <div className="text-xs uppercase tracking-[0.3em] text-white/40">Manifest</div>
-                <h2 className="mt-4 text-3xl font-medium leading-tight tracking-[-0.03em] md:text-5xl">
-                  Nu amplifică zgomotul. Îl elimină.
-                </h2>
+                <h3 className="text-xl font-medium text-white mb-3">{v.title}</h3>
+                <p className="text-xs text-neutral-400 font-light leading-relaxed">{v.text}</p>
               </div>
-            </Reveal>
-            <Reveal delay={120}>
-              <div className="space-y-6 text-base leading-8 text-white/80">
-                <p>
-                  Reverb este agenția care aduce afacerile digitale înapoi la esență. Nu adăugăm straturi inutile. Nu complicăm ce poate fi simplu. Construim sisteme care funcționează — cu structură, disciplină și rezultate măsurabile.
-                </p>
-                <p>
-                  Folosim AI pentru a comprima timpul de execuție, nu pentru a înlocui gândirea. Omul dă direcția. AI-ul accelerează. Sistemul livrează. Asta e Reverb.
-                </p>
-                <p>
-                  Lucrăm cu IMM-uri care vor prezență online reală — nu decorativă. Site-uri care generează cereri, magazine care vând, campanii care aduc clienți. Fără jargon. Fără haos.
-                </p>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* De ce Reverb — Values */}
-      <section className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
-        <Reveal>
-          <div className="mb-12">
-            <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">De ce Reverb</div>
-            <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
-              Nu suntem cea mai ieftină opțiune. Suntem opțiunea structurată.
-            </h2>
-          </div>
-        </Reveal>
-
-        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3 tab-blur-group">
-          {values.map((v, i) => (
-            <Reveal key={v.title} delay={i * 70}>
-              <div className="relative group rounded-[28px] h-full">
-                <div
-                  className="absolute inset-0 tab-blur-item rounded-[28px] border border-[#1d2731]/8 bg-white/70 shadow-[0_10px_40px_rgba(29,39,49,0.05)]"
-                  style={{ animation: `float-${i % 3 === 0 ? 'a' : i % 3 === 1 ? 'b' : 'c'} ${7 + (i % 3)}s ease-in-out infinite` }}
-                />
-                <div 
-                  className="relative z-10 p-8 transition-all duration-500 h-full flex flex-col"
-                  style={{ animation: `float-text-${i % 3 === 0 ? 'a' : i % 3 === 1 ? 'b' : 'c'} ${7 + (i % 3)}s ease-in-out infinite` }}
-                >
-                  <h3 className="text-xl font-medium text-[#1d2731]">{v.title}</h3>
-                  <p className="mt-4 text-[15px] leading-7 text-[#1d2731]/70">{v.text}</p>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* Pentru cine */}
-      <section className="border-y border-[#1d2731]/8 bg-white/45">
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
-          <Reveal>
-            <div className="mb-12">
-              <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">Pentru cine lucrăm</div>
-              <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
-                Lucrăm cu firme care vor structură și rezultate.
-              </h2>
             </div>
-          </Reveal>
-
-          <div className="grid gap-8 md:grid-cols-2">
-            <Reveal>
-              <div className="rounded-[28px] border border-[#1d2731]/8 bg-white/70 p-8">
-                <div className="text-sm font-semibold text-[#1d2731] mb-5">✔ Este potrivit pentru:</div>
-                <ul className="space-y-3">
-                  {[
-                    "IMM-uri locale care vor mai multe cereri și apeluri",
-                    "Firme tradiționale care intră în digital",
-                    "Businessuri care au buget real și vor rezultate",
-                    "Antreprenori care caută structură, nu experimente",
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-[15px] leading-7 text-[#1d2731]/70">
-                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#31584f]" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
-
-            <Reveal delay={100}>
-              <div className="rounded-[28px] border border-[#1d2731]/8 bg-[#faf7f2] p-8">
-                <div className="text-sm font-semibold text-[#1d2731] mb-5">✖ Nu este potrivit pentru:</div>
-                <ul className="space-y-3">
-                  {[
-                    "Start-up fără buget definit",
-                    "Antreprenori care schimbă direcția constant",
-                    'Clienți care caută „cel mai ieftin preț"',
-                    "Proiecte fără obiectiv concret",
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-[15px] leading-7 text-[#1d2731]/70">
-                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#1d2731]/25" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
-          </div>
+          ))}
         </div>
       </section>
 
-      {/* Approach */}
-      <section className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+      {/* Procesul de lucru */}
+      <section className="relative z-10 py-24 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
         <Reveal>
-          <div className="mb-12">
-            <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">Cum lucrăm</div>
-            <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
-              Proces clar. Fără improvizații.
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-3">Metodologie</div>
+            <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight mb-4">
+              Proces ferm. Fără improvizații.
             </h2>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-[#1d2731]/65">
-              Fiecare proiect urmează aceeași structură simplă, astfel încât știi exact ce urmează.
-            </p>
           </div>
         </Reveal>
 
-        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4 tab-blur-group">
-          {approach.map((a, i) => (
-            <Reveal key={a.step} delay={i * 80}>
-              <div className="relative group rounded-[28px] h-full">
-                <div
-                  className="absolute inset-0 tab-blur-item rounded-[28px] border border-[#1d2731]/8 bg-[#faf7f2]"
-                  style={{ animation: `float-${i % 3 === 0 ? 'a' : i % 3 === 1 ? 'b' : 'c'} ${7 + (i % 3)}s ease-in-out infinite` }}
-                />
-                <div 
-                  className="relative z-10 p-7 transition-all duration-500 h-full flex flex-col"
-                  style={{ animation: `float-text-${i % 3 === 0 ? 'a' : i % 3 === 1 ? 'b' : 'c'} ${7 + (i % 3)}s ease-in-out infinite` }}
-                >
-                  <div className="mb-6 text-4xl font-medium tracking-[-0.04em] text-[#1d2731]/20">{a.step}</div>
-                  <h3 className="text-xl font-medium text-[#1d2731]">{a.title}</h3>
-                  <p className="mt-4 text-[15px] leading-7 text-[#1d2731]/70">{a.text}</p>
-                </div>
-              </div>
-            </Reveal>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {approach.map((a) => (
+            <div key={a.step} className="rounded-2xl border border-white/10 bg-neutral-900/30 p-8">
+              <div className="font-mono text-2xl font-light text-neutral-600 mb-4">{a.step}</div>
+              <h3 className="text-lg font-medium text-white mb-2">{a.title}</h3>
+              <p className="text-xs text-neutral-400 font-light leading-relaxed">{a.text}</p>
+            </div>
           ))}
         </div>
+      </section>
 
-        <Reveal delay={400}>
-          <p className="mt-8 text-center text-sm text-[#1d2731]/50">
-            Durată medie implementare: 7–30 zile, în funcție de pachet și complexitate.
+      {/* ── Fondator & Autoritate Practică ── */}
+      <section className="relative z-10 py-24 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
+        <Reveal>
+          <div className="rounded-3xl border border-white/15 bg-neutral-900/40 p-8 md:p-14 backdrop-blur-md">
+            <div className="grid lg:grid-cols-12 gap-10 items-center">
+              <div className="lg:col-span-8">
+                <div className="text-xs font-mono uppercase tracking-[0.25em] text-neutral-400 mb-3">
+                  Conducere & Viziune
+                </div>
+                <h3 className="text-3xl md:text-4xl font-medium text-white tracking-tight mb-4">
+                  Fondat de Alin Drîmbu
+                </h3>
+                <p className="text-sm md:text-base text-neutral-300 font-light leading-relaxed mb-4">
+                  Antreprenor în retail și comerț electronic, fondator al Grupului Surya (Bricolando.ro, RaftPlin.ro, Kalki.work, Kalki.nexus).
+                </p>
+                <p className="text-xs md:text-sm text-neutral-400 font-light leading-relaxed">
+                  Reverb Digital nu s-a născut dintr-o agenție teoretică de marketing, ci din tranșeele operațiunilor comerciale reale: gestiune de zeci de mii de produse, integrare eMAG Marketplace, curieri, facturare automată și optimizare matematică a fluxurilor de vânzare. Fiecare sistem pe care îl propunem clienților noștri a fost mai întâi testat, verificat și rentabilizat în propriile noastre magazine.
+                </p>
+              </div>
+              <div className="lg:col-span-4 flex flex-col gap-3 font-mono text-xs">
+                <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10">
+                  <div className="text-neutral-500 uppercase text-[10px] mb-1">Grupul Surya</div>
+                  <div className="text-white font-semibold">Bricolando • Raft Plin • Kalki</div>
+                </div>
+                <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10">
+                  <div className="text-neutral-500 uppercase text-[10px] mb-1">Parteneriat Strategic</div>
+                  <div className="text-white font-semibold">Zylaris Group London</div>
+                </div>
+                <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10">
+                  <div className="text-neutral-500 uppercase text-[10px] mb-1">Filozofie</div>
+                  <div className="text-emerald-400 font-semibold">Sisteme care produc valoare</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* ── Final CTA ── */}
+      <section className="relative z-10 py-24 px-6 text-center max-w-4xl mx-auto">
+        <Reveal>
+          <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-4">Pregătit pentru Următorul Pas?</div>
+          <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight mb-6">
+            Hai să construim arhitectura afacerii tale.
+          </h2>
+          <p className="text-neutral-400 text-sm md:text-base leading-relaxed mb-10 max-w-2xl mx-auto">
+            Discutăm concret pe cifrele și obiectivele afacerii tale. Primești un plan tehnic ferm și un termen precis de livrare.
           </p>
+          <Link
+            href="/contact"
+            className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-xs font-mono uppercase tracking-widest text-black hover:bg-neutral-200 transition-all font-bold shadow-[0_0_30px_rgba(255,255,255,0.15)]"
+          >
+            Programează o Discuție Directă →
+          </Link>
         </Reveal>
       </section>
 
-      {/* Certifications */}
-      <section className="bg-white/50 border-y border-[#1d2731]/8">
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
-          <Reveal>
-            <div className="mb-12">
-              <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">Certificări & Parteneriate</div>
-              <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
-                Recunoscut de liderii industriei.
-              </h2>
-              <p className="mt-4 max-w-2xl text-base leading-7 text-[#1d2731]/65">
-                Suntem certificați și parteneri cu platformele și serviciile pe care le folosim pentru a construi și scala afacerile digitale.
-              </p>
-            </div>
-          </Reveal>
-
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {certifications.map((cert, i) => (
-              <Reveal key={cert.name} delay={i * 60}>
-                <div className="group relative rounded-[24px] border border-[#1d2731]/8 bg-[#faf7f2] p-6 transition hover:border-[#1d2731]/15 hover:shadow-md">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <div className="text-[11px] uppercase tracking-widest font-semibold text-[#1d2731]/40 mb-2">
-                        {cert.category}
-                      </div>
-                      <h3 className="text-lg font-medium text-[#1d2731]">
-                        {cert.name}
-                      </h3>
-                    </div>
-                    <div className="h-10 w-10 rounded-full bg-[#31584f]/10 flex items-center justify-center text-[#31584f] group-hover:bg-[#31584f]/15 transition">
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"></path>
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal delay={400}>
-            <p className="mt-12 text-center text-sm text-[#1d2731]/50">
-              Educație continuă și certificări actualizate pentru a rămâne în fruntea industriei.
+      {/* Footer */}
+      <footer className="relative z-10 border-t border-white/10 bg-[#050607] py-16 px-6 lg:px-10">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+          <div>
+            <div className="text-sm font-bold tracking-[0.25em] uppercase text-white mb-2">REVERB DIGITAL</div>
+            <p className="text-xs text-neutral-500 font-mono">
+              Infrastructură digitală, sisteme web și căutare generativă. Ecosistem al Grupului Surya.
             </p>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <Reveal>
-        <section className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
-          <div className="rounded-[36px] bg-[#1d2731] p-8 text-white md:p-12 lg:flex lg:items-center lg:justify-between lg:gap-12">
-            <div className="max-w-2xl">
-              <h2 className="text-3xl font-medium tracking-[-0.03em] md:text-4xl">
-                Gata să construim ceva solid pentru afacerea ta?
-              </h2>
-              <p className="mt-4 text-lg leading-8 text-white/70">
-                Discuție inițială de 20–30 minute. Fără obligații. Stabilim obiectivul și vedem dacă suntem potriviți.
-              </p>
-            </div>
-            <div className="mt-8 flex flex-col gap-4 lg:mt-0 lg:shrink-0">
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-sm font-medium text-[#1d2731] transition hover:-translate-y-0.5 hover:shadow-lg"
+          </div>
+          
+          <div className="flex flex-col md:flex-row items-center gap-6 text-xs font-mono text-neutral-400">
+            <Link href="/" className="hover:text-white transition-colors">Site Principal</Link>
+            <Link href="/showcase" className="hover:text-white transition-colors">Showcase</Link>
+            <Link href="/pachete" className="hover:text-white transition-colors">Pachete & Prețuri</Link>
+            <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
+            <span className="text-neutral-600 hidden md:inline">|</span>
+            <div className="text-neutral-500">
+              Partener strategic:{" "}
+              <a
+                href="https://zylarisgroup.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-neutral-300 hover:text-white transition-colors underline underline-offset-4"
               >
-                Programează o discuție
-              </Link>
-              <Link
-                href="/servicii"
-                className="inline-flex items-center justify-center rounded-full border border-white/15 px-8 py-4 text-sm font-medium text-white transition hover:bg-white/5"
-              >
-                Vezi serviciile și prețurile
-              </Link>
+                Zylaris Group London
+              </a>
             </div>
           </div>
-        </section>
-      </Reveal>
+        </div>
+      </footer>
+
     </div>
   );
 }

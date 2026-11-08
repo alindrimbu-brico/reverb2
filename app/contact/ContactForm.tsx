@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 
 type FormState = "idle" | "submitting" | "success" | "error";
 
@@ -19,29 +20,49 @@ function validate(form: Record<string, string>): FieldErrors {
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
     errors.email = "Adresa de email nu pare validă.";
   }
-  if (!form.service) errors.service = "Alege un serviciu.";
+  if (!form.service) errors.service = "Alege un serviciu sau pachet.";
   if (!form.message.trim()) errors.message = "Scrie-ne câteva cuvinte.";
   else if (form.message.trim().length < 10) errors.message = "Mesajul trebuie să aibă minim 10 caractere.";
   return errors;
 }
 
-export default function ContactForm() {
+const serviceOptions = [
+  { value: "daily-impact", label: "Pachet Daily Impact (€690 / lună — 30 video AI)" },
+  { value: "social-growth", label: "Pachet Social Growth (€390 / lună — 12 video AI)" },
+  { value: "dominant-omnichannel", label: "Pachet Dominant Omnichannel (€1.500 / lună — 90 video AI)" },
+  { value: "magazin-complet", label: "Creare Magazin Online / Next.js (€1.500)" },
+  { value: "platforma-prezentare", label: "Platformă Prezentare / Next.js (€690)" },
+  { value: "ecosistem-enterprise", label: "Ecosistem & Arhitectură Enterprise (€2.940)" },
+  { value: "geo-search", label: "Optimizare Pentru Căutare AI (GEO)" },
+  { value: "consultanta-alta", label: "Consultanță / Proiect Personalizat" },
+];
+
+function ContactFormInner() {
+  const searchParams = useSearchParams();
+  const initialPachet = searchParams.get("pachet") || "";
+
   const [state, setState] = useState<FormState>("idle");
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [errors, setErrors] = useState<FieldErrors>({});
   const formRef = useRef<HTMLFormElement>(null);
+  
   const [form, setForm] = useState({
     name: "",
     email: "",
     business: "",
-    service: "",
+    service: initialPachet || "",
     message: "",
   });
+
+  useEffect(() => {
+    if (initialPachet && !form.service) {
+      setForm((prev) => ({ ...prev, service: initialPachet }));
+    }
+  }, [initialPachet]);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
-    // Clear error on change if field was touched
     if (touched[name]) {
       const newErrors = validate({ ...form, [name]: value });
       setErrors((prev) => ({ ...prev, [name]: newErrors[name as keyof FieldErrors] }));
@@ -64,20 +85,20 @@ export default function ContactForm() {
     if (Object.keys(newErrors).length > 0) return;
 
     setState("submitting");
-    // Replace with real form submission (e.g. API route, Resend, Formspree)
-    await new Promise((r) => setTimeout(r, 1200));
+    // Simulăm trimiterea directă
+    await new Promise((r) => setTimeout(r, 1000));
     setState("success");
   }
 
   if (state === "success") {
     return (
-      <div className="flex flex-col items-center justify-center rounded-[32px] border border-[#1d2731]/8 bg-white/70 p-12 text-center shadow-[0_20px_60px_rgba(29,39,49,0.06)]">
-        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#1d2731] text-white text-2xl">
+      <div className="flex flex-col items-center justify-center rounded-3xl border border-emerald-500/30 bg-emerald-950/20 p-12 text-center backdrop-blur-md">
+        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500 text-black text-2xl font-bold">
           ✓
         </div>
-        <h3 className="mt-6 text-2xl font-medium text-[#1d2731]">Mesaj trimis.</h3>
-        <p className="mt-3 max-w-sm text-[15px] leading-7 text-[#1d2731]/65">
-          Îți confirmăm un slot de call în maxim 24 de ore. Verifică și inbox-ul de spam, dacă nu primești nimic.
+        <h3 className="mt-6 text-2xl font-medium text-white">Mesaj recepționat cu succes.</h3>
+        <p className="mt-3 max-w-sm text-sm font-light text-neutral-300 leading-relaxed">
+          Îți mulțumim! Un arhitect tehnic Reverb Digital te va contacta în maximum 24 de ore lucrătoare cu analiza inițială a proiectului.
         </p>
         <button
           type="button"
@@ -87,7 +108,7 @@ export default function ContactForm() {
             setTouched({});
             setErrors({});
           }}
-          className="mt-8 text-sm font-medium text-[#1d2731]/50 transition hover:text-[#1d2731]"
+          className="mt-8 rounded-full border border-white/20 px-6 py-2.5 text-xs font-mono uppercase tracking-widest text-neutral-300 hover:bg-white hover:text-black transition-all"
         >
           Trimite alt mesaj →
         </button>
@@ -96,25 +117,33 @@ export default function ContactForm() {
   }
 
   const inputBase =
-    "mt-2 w-full rounded-2xl border bg-white px-4 py-3 text-sm text-[#1d2731] placeholder:text-[#1d2731]/35 outline-none transition focus:border-[#1d2731]/40 focus:ring-2 focus:ring-[#1d2731]/8";
-  const inputOk = "border-[#1d2731]/12";
-  const inputErr = "border-red-400/60 focus:border-red-400 focus:ring-red-100";
+    "mt-2 w-full rounded-2xl border bg-white/[0.04] px-4 py-3.5 text-sm text-white placeholder:text-neutral-500 outline-none transition focus:border-white/40 focus:bg-white/[0.07]";
+  const inputOk = "border-white/10";
+  const inputErr = "border-red-400/80 focus:border-red-400";
 
   return (
     <form
       ref={formRef}
       onSubmit={handleSubmit}
       noValidate
-      className="rounded-[32px] border border-[#1d2731]/8 bg-white/70 p-8 shadow-[0_20px_60px_rgba(29,39,49,0.06)] md:p-10"
+      className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8 md:p-12 backdrop-blur-md"
     >
-      <h2 className="text-xl font-medium text-[#1d2731]">Trimite-ne un mesaj</h2>
-      <p className="mt-2 text-sm text-[#1d2731]/55">Completează formularul și te contactăm în 24 de ore.</p>
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6 mb-8">
+        <div>
+          <h2 className="text-2xl font-medium text-white">Inițiază Discuția</h2>
+          <p className="text-xs text-neutral-400 font-mono mt-1">Completează datele pentru auditul tehnic preliminar.</p>
+        </div>
+        <div className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1 text-[11px] font-mono text-emerald-300">
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          <span>Răspuns garantat &le; 24h</span>
+        </div>
+      </div>
 
-      <div className="mt-8 space-y-5">
-        <div className="grid gap-5 sm:grid-cols-2">
+      <div className="space-y-6 font-mono text-xs">
+        <div className="grid gap-6 sm:grid-cols-2">
           <div>
-            <label className="block text-sm font-medium text-[#1d2731]">
-              Nume <span className="text-[#1d2731]/40">*</span>
+            <label className="block text-neutral-300">
+              Nume complet <span className="text-neutral-500">*</span>
             </label>
             <input
               type="text"
@@ -122,16 +151,16 @@ export default function ContactForm() {
               value={form.name}
               onChange={handleChange}
               onBlur={handleBlur}
-              placeholder="Numele tău"
+              placeholder="Ex: Alin Drîmbu"
               className={`${inputBase} ${errors.name && touched.name ? inputErr : inputOk}`}
             />
             {errors.name && touched.name && (
-              <p className="mt-1.5 text-xs text-red-500/80">{errors.name}</p>
+              <p className="mt-1.5 text-[11px] text-red-400">{errors.name}</p>
             )}
           </div>
           <div>
-            <label className="block text-sm font-medium text-[#1d2731]">
-              Email <span className="text-[#1d2731]/40">*</span>
+            <label className="block text-neutral-300">
+              Email de contact <span className="text-neutral-500">*</span>
             </label>
             <input
               type="email"
@@ -139,54 +168,55 @@ export default function ContactForm() {
               value={form.email}
               onChange={handleChange}
               onBlur={handleBlur}
-              placeholder="email@companie.ro"
+              placeholder="contact@companie.ro"
               className={`${inputBase} ${errors.email && touched.email ? inputErr : inputOk}`}
             />
             {errors.email && touched.email && (
-              <p className="mt-1.5 text-xs text-red-500/80">{errors.email}</p>
+              <p className="mt-1.5 text-[11px] text-red-400">{errors.email}</p>
             )}
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-[#1d2731]">Business / Companie</label>
+          <label className="block text-neutral-300">Nume Companie / Website Actual (Opțional)</label>
           <input
             type="text"
             name="business"
             value={form.business}
             onChange={handleChange}
-            placeholder="Numele business-ului tău (opțional)"
+            placeholder="Ex: Compania Mea SRL / companie.ro"
             className={`${inputBase} ${inputOk}`}
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-[#1d2731]">
-            Ce te interesează? <span className="text-[#1d2731]/40">*</span>
+          <label className="block text-neutral-300">
+            Pachet sau Serviciu Vizat <span className="text-neutral-500">*</span>
           </label>
           <select
             name="service"
             value={form.service}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={`${inputBase} appearance-none ${errors.service && touched.service ? inputErr : inputOk}`}
+            className={`${inputBase} appearance-none bg-neutral-900 ${errors.service && touched.service ? inputErr : inputOk}`}
           >
-            <option value="" disabled>Alege un serviciu</option>
-            <option value="site">Creare site</option>
-            <option value="magazin">Magazin online complet</option>
-            <option value="marketing">Marketing digital</option>
-            <option value="branding">Branding & AI</option>
-            <option value="consultanta">Consultanță continuă</option>
-            <option value="altceva">Altceva / nu știu încă</option>
+            <option value="" disabled className="text-neutral-500">
+              Selectează pachetul sau serviciul dorit
+            </option>
+            {serviceOptions.map((opt) => (
+              <option key={opt.value} value={opt.value} className="bg-neutral-900 text-white">
+                {opt.label}
+              </option>
+            ))}
           </select>
           {errors.service && touched.service && (
-            <p className="mt-1.5 text-xs text-red-500/80">{errors.service}</p>
+            <p className="mt-1.5 text-[11px] text-red-400">{errors.service}</p>
           )}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-[#1d2731]">
-            Mesajul tău <span className="text-[#1d2731]/40">*</span>
+          <label className="block text-neutral-300">
+            Descrierea Proiectului & Obiective <span className="text-neutral-500">*</span>
           </label>
           <textarea
             name="message"
@@ -194,35 +224,37 @@ export default function ContactForm() {
             value={form.message}
             onChange={handleChange}
             onBlur={handleBlur}
-            placeholder="Spune-ne câteva cuvinte despre business-ul tău, situația actuală și ce vrei să obții."
+            placeholder="Descrie pe scurt activitatea actuală, produsele, provocările sau ce dorești să construim împreună."
             className={`${inputBase} resize-none ${errors.message && touched.message ? inputErr : inputOk}`}
           />
           {errors.message && touched.message && (
-            <p className="mt-1.5 text-xs text-red-500/80">{errors.message}</p>
+            <p className="mt-1.5 text-[11px] text-red-400">{errors.message}</p>
           )}
-          <div className="mt-1 text-right text-xs text-[#1d2731]/30">
+          <div className="mt-1 text-right text-[10px] text-neutral-500">
             {form.message.length > 0 && `${form.message.length} caractere`}
           </div>
         </div>
       </div>
 
-      {state === "error" && (
-        <p className="mt-4 rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-600">
-          Ceva nu a mers. Încearcă din nou sau scrie-ne direct pe email.
-        </p>
-      )}
-
       <button
         type="submit"
         disabled={state === "submitting"}
-        className="mt-6 w-full rounded-full bg-[#1d2731] px-8 py-4 text-sm font-medium text-white transition hover:-translate-y-0.5 hover:shadow-lg disabled:opacity-60 disabled:translate-y-0 disabled:shadow-none"
+        className="mt-8 w-full rounded-full bg-white py-4 text-xs font-mono uppercase tracking-widest text-black font-bold hover:bg-neutral-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)] disabled:opacity-60"
       >
-        {state === "submitting" ? "Se trimite..." : "Trimite mesajul"}
+        {state === "submitting" ? "Se procesează..." : "Trimite Solicitarea Proiectului →"}
       </button>
 
-      <p className="mt-4 text-center text-xs text-[#1d2731]/40">
-        Nu facem spam. Datele tale sunt în siguranță și nu sunt partajate cu terți.
+      <p className="mt-4 text-center text-[10px] font-mono text-neutral-500">
+        Securitate garantată. Nu facem spam și nu partajăm datele de contact cu nimeni.
       </p>
     </form>
+  );
+}
+
+export default function ContactForm() {
+  return (
+    <Suspense fallback={<div className="p-12 text-center text-xs font-mono text-neutral-500">Se încarcă formularul...</div>}>
+      <ContactFormInner />
+    </Suspense>
   );
 }

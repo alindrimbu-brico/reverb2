@@ -1,486 +1,279 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
-import { packages, monthlyTiers, maintenanceTiers } from "@/lib/packages";
+import { packages } from "@/lib/packages";
 
 export const metadata: Metadata = {
-  alternates: { canonical: "/pachete", languages: { ro: "/pachete", en: "/en/packages", "x-default": "/pachete" } },
-  title: "Pachete & Prețuri",
+  title: "Pachete & Prețuri — Reverb Digital",
   description:
-    "Prețuri fixe, fără surprize. Alege pachetul potrivit pentru afacerea ta — de la prezență online la magazin digital sau promovare continuă.",
+    "Prețuri fixe, fără surprize. Pachete de promovare video zilnică AI, magazine online la cheie și infrastructură digitală enterprise.",
 };
 
 const faqs = [
   {
     q: "Cât durează un proiect?",
-    a: "Depinde de pachet: 7–14 zile pentru Prezență Online, 30 zile pentru Clienți Locali, 14–30 zile pentru Magazin Digital și 7 zile pentru AI Creative Sprint.",
+    a: "Pentru promovare video AI, primele livrabile încep în 48 de ore de la semnare. Un website de prezentare durează 7–14 zile, iar un magazin online complet între 14 și 30 de zile.",
   },
   {
     q: "Cum funcționează plata?",
-    a: "50% avans la începerea proiectului, 50% la predare. Fără costuri ascunse față de oferta agreată.",
+    a: "Pentru pachetele de promovare video, plata se face lunar în avans. Pentru proiectele de construcție web/magazin: 50% avans la începere și 50% la predare și verificare completă.",
   },
   {
-    q: "Includ pachetele și hosting / domeniu?",
-    a: "Costurile de hosting și domeniu sunt separate și le plătești direct la furnizor. Te ajutăm cu selectarea și configurarea lor.",
+    q: "Ce înseamnă optimizarea pentru Agenți AI (GEO)?",
+    a: "Structurăm datele, cataloagele de produse și prețurile în format semantic JSON-LD avansat, astfel încât motoarele de căutare AI (ChatGPT, Perplexity, Gemini) să înțeleagă exact oferta ta și să o recomande ca primă opțiune utilizatorilor.",
   },
   {
-    q: "Pot schimba pachetul după start?",
-    a: "Da, dar upgradarea se face la începutul unui ciclu nou. Downgrade-ul nu este posibil după ce munca a început.",
+    q: "Pot adăuga un panou Payload CMS pe magazinul meu?",
+    a: "Da. Pentru clienții care vor viteză maximă și independență de WordPress, construim panoul de administrare direct pe Payload CMS (TypeScript nativ în Next.js), cu editare vizuală live și securitate enterprise.",
   },
   {
-    q: "Bugetul de ads este inclus?",
-    a: "Nu. Bugetul de ads (Google, Meta) se plătește separat, direct platformelor. Noi gestionăm campaniile, tu controlezi bugetul.",
+    q: "Bugetul de promovare plătită (Ads) este inclus?",
+    a: "Prețurile pachetelor noastre acoperă integral producția video AI, copywritingul, montajul și publicarea pe rețele. Bugetul de reclame plătite (dacă dorești să rulezi Ads pe Meta/TikTok/Google) se plătește separat, direct către platforme, în contul tău de publicitate.",
   },
-  {
-    q: "Lucrați cu orice tip de business?",
-    a: "Selectăm proiectele. Lucrăm cu IMM-uri care au obiectiv concret, buget real și vor rezultate măsurabile — nu experimente.",
-  },
-];
-
-const notFor = [
-  "Start-up fără buget definit",
-  "Antreprenori care schimbă direcția constant",
-  'Clienți care caută „cel mai ieftin preț"',
-  "Proiecte fără obiectiv concret",
-];
-
-const forWhom = [
-  "IMM-uri locale care vor mai multe cereri și apeluri",
-  "Firme tradiționale care intră în digital",
-  "Businessuri care au buget real și vor rezultate",
-  "Antreprenori care caută structură, nu experimente",
 ];
 
 export default function PachetePage() {
+  const socialPackages = packages.filter((p) => p.category === "social");
+  const webPackages = packages.filter((p) => p.category === "web" || p.category === "b2b");
+
   return (
-    <div className="bg-[#030303] text-neutral-200 min-h-screen font-sans selection:bg-purple-900/50">
+    <div className="bg-[#070809] text-neutral-100 min-h-screen font-sans selection:bg-neutral-700 selection:text-white antialiased">
+      
+      {/* Background Architectural Grid Pattern */}
+      <div 
+        className="fixed inset-0 pointer-events-none z-0 opacity-[0.035]"
+        style={{
+          backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
+          backgroundSize: '48px 48px'
+        }}
+      />
+      <div className="fixed inset-0 pointer-events-none z-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.03)_0%,transparent_70%)]" />
+
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-neutral-800/50">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(120,80,180,0.15),transparent_50%)] pointer-events-none" />
-        <div className="relative mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
+      <section className="relative z-10 pt-32 pb-20 md:pt-40 md:pb-28 border-b border-white/10">
+        <div className="relative mx-auto max-w-5xl px-6 text-center">
           <Reveal>
-            <div className="text-xs font-mono uppercase tracking-widest text-purple-400">Prețuri / Structură</div>
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-300 mb-6 backdrop-blur-md">
+              <span className="h-1.5 w-1.5 rounded-full bg-white" />
+              <span>Transparență Totală & Cadrul Financiar</span>
+            </div>
           </Reveal>
           <Reveal delay={80}>
-            <h1 className="mt-6 max-w-4xl text-5xl font-light leading-[1.1] tracking-tight md:text-7xl lg:text-[80px] text-white">
+            <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-white leading-tight">
               Prețuri fixe.<br />
-              <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-neutral-300 to-neutral-500">Fără surprize.</span>
+              <span className="text-neutral-400 font-light">Fără costuri ascunse.</span>
             </h1>
           </Reveal>
           <Reveal delay={160}>
-            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-neutral-400 font-light md:text-xl">
-              Fiecare pachet are un preț clar, un set fix de livrabile și un termen definit. Știi de la început ce primești și cât plătești.
+            <p className="mt-8 max-w-2xl mx-auto text-base md:text-lg text-neutral-400 font-light leading-relaxed">
+              Fiecare pachet Reverb Digital include un set fix de livrabile, un termen ferm de predare și o arhitectură pregătită pentru noile motoare de căutare AI.
             </p>
+            <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-5 py-2 text-xs font-mono text-emerald-300">
+              <span className="h-2 w-2 rounded-full bg-emerald-400" />
+              <span>Fără contract obligatoriu pe 12 luni: testezi o lună, măsori rezultatele și decizi dacă dorești continuarea.</span>
+            </div>
           </Reveal>
         </div>
       </section>
 
-      {/* Guru Store Promo */}
-      <section className="mx-auto max-w-7xl px-6 pt-24 lg:px-10">
+      {/* Promovare Video Social Media AI */}
+      <section className="relative z-10 py-24 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
         <Reveal>
-          <div className="relative overflow-hidden rounded-[2rem] bg-neutral-900/30 border border-amber-500/20 p-10 md:p-14 mb-8 backdrop-blur-sm group hover:border-amber-500/40 transition-colors duration-700">
-            <div className="absolute top-0 right-0 h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle,rgba(245,166,35,0.08)_0%,transparent_70%)] blur-3xl pointer-events-none group-hover:bg-[radial-gradient(circle,rgba(245,166,35,0.12)_0%,transparent_70%)] transition-colors duration-700" />
-            <div className="relative z-10 md:flex md:items-center md:justify-between md:gap-12">
-              <div className="max-w-2xl">
-                <div className="mb-6 inline-flex items-center rounded-full bg-amber-500/10 border border-amber-500/20 px-4 py-1.5 text-xs font-mono uppercase tracking-widest text-amber-400">
-                  Noutate Exclusivă
-                </div>
-                <h2 className="text-3xl font-medium tracking-tight text-white md:text-5xl">
-                  GURU. <span className="text-amber-400">Magazin de Idei.</span>
-                </h2>
-                <p className="mt-6 text-lg leading-relaxed text-neutral-400 font-light">
-                  Am transformat consultanța premium într-un magazin digital. Descoperă hint-uri educaționale și strategii scalabile care răspund exact nevoilor tale. Plătești pentru claritate.
-                </p>
-              </div>
-              <div className="mt-8 shrink-0 md:mt-0">
-                <Link
-                  href="/guru"
-                  className="inline-flex items-center justify-center rounded-full bg-amber-500/10 border border-amber-500/30 px-8 py-4 text-sm font-semibold tracking-wide text-amber-400 transition hover:bg-amber-500 hover:text-black hover:shadow-[0_0_30px_rgba(245,166,35,0.4)]"
-                >
-                  Descoperă Lumina →
-                </Link>
-              </div>
-            </div>
-          </div>
-        </Reveal>
-      </section>
-
-      {/* One-time Packages */}
-      <section className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
-        <Reveal>
-          <div className="mb-16">
-            <div className="text-xs font-mono uppercase tracking-widest text-purple-400">Pachete one-time</div>
-            <h2 className="mt-4 text-3xl font-medium tracking-tight md:text-5xl text-white">
-              Proiecte cu livrare definită
+          <div className="max-w-3xl mb-16">
+            <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-3">01 / PRODUCȚIE VIDEO ZILNICĂ AI</div>
+            <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
+              Pachete Social Media (Video Scurt & Imagini)
             </h2>
-            <p className="mt-4 max-w-2xl text-base leading-relaxed text-neutral-400 font-light">
-              Plătești o dată, primești un sistem funcțional. Fără abonament obligatoriu.
+            <p className="mt-4 text-sm text-neutral-400 font-light leading-relaxed">
+              Generăm conținut video de înaltă fidelitate cu Google Imagen & Veo pentru TikTok, Reels, Shorts și Facebook. Demonstrații de produse, scenarii de vânzare și subtitrări dinamice fără bătăi de cap.
             </p>
           </div>
         </Reveal>
 
-        <div className="grid gap-6 md:grid-cols-2">
-          {packages.map((pkg, i) => (
-            <Reveal key={pkg.id} delay={i * 80}>
-              <div className={`relative flex flex-col h-full rounded-[2rem] p-10 border transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl ${
+        <div className="grid gap-8 lg:grid-cols-3 items-stretch">
+          {socialPackages.map((pkg, idx) => (
+            <Reveal key={pkg.id} delay={idx * 100}>
+              <div
+                className={`relative h-full rounded-3xl p-8 md:p-10 flex flex-col justify-between border transition-all duration-300 ${
                   pkg.highlight
-                    ? "bg-gradient-to-b from-neutral-900 to-[#030303] border-purple-500/30 shadow-[0_0_40px_rgba(168,85,247,0.1)] hover:border-purple-500/60 hover:shadow-[0_0_60px_rgba(168,85,247,0.2)]"
-                    : "bg-neutral-900/30 border-neutral-800/50 hover:border-neutral-700/80 hover:bg-neutral-900/50"
+                    ? "bg-gradient-to-b from-neutral-900 to-[#121316] border-white/30 shadow-[0_0_40px_rgba(255,255,255,0.06)] scale-100 lg:scale-[1.02]"
+                    : "bg-neutral-900/30 border-white/10"
                 }`}
               >
                 {pkg.badge && (
-                  <div className="absolute -top-3 left-10 inline-flex items-center rounded-full bg-purple-500/20 border border-purple-500/30 px-4 py-1 text-xs font-mono tracking-widest text-purple-300 backdrop-blur-md">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-white px-4 py-1 text-[9px] font-mono font-bold uppercase tracking-widest text-black shadow-md">
                     {pkg.badge}
                   </div>
                 )}
 
-                <div className="mb-8">
-                  <div className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-3">
+                <div>
+                  <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-2">
                     {pkg.delivery}
                   </div>
-                  <h3 className="text-3xl font-medium text-white mb-2">
-                    {pkg.name}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-neutral-400">
-                    {pkg.tagline}
+                  <h3 className="text-2xl font-medium text-white mb-2">{pkg.name}</h3>
+                  <div className="text-4xl font-light text-white mb-4">{pkg.price}</div>
+                  <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6 border-b border-white/10 pb-6">
+                    {pkg.description}
                   </p>
+
+                  <ul className="space-y-3 text-xs text-neutral-300 font-mono mb-8">
+                    {pkg.includes.map((inc) => (
+                      <li key={inc} className="flex items-start gap-2.5">
+                        <span className="text-neutral-400 mt-0.5">•</span>
+                        <span>{inc}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
 
-                <div className="mb-8 pb-8 border-b border-neutral-800">
-                  <span className="text-5xl font-light tracking-tight text-white">
-                    {pkg.price}
-                  </span>
-                  {pkg.priceExtra && (
-                    <p className="mt-3 text-sm text-neutral-500">
-                      {pkg.priceExtra}
-                    </p>
-                  )}
+                <div>
+                  <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5 text-[11px] text-neutral-400 font-light mb-6">
+                    <strong className="text-neutral-300 block mb-1">Ideal pentru:</strong>
+                    {pkg.ideal}
+                  </div>
+                  <Link
+                    href={`/contact?pachet=${pkg.id}`}
+                    className={`block w-full text-center rounded-full py-3.5 text-xs font-mono uppercase tracking-widest transition-all ${
+                      pkg.highlight
+                        ? "bg-white text-black font-bold hover:bg-neutral-200 shadow-md"
+                        : "border border-white/20 text-white hover:bg-white hover:text-black"
+                    }`}
+                  >
+                    Alege Pachetul →
+                  </Link>
                 </div>
-
-                <p className="mb-8 text-sm leading-relaxed text-neutral-300 font-light">
-                  {pkg.description}
-                </p>
-
-                <ul className="mb-10 flex-1 space-y-4">
-                  {pkg.includes.map((item) => (
-                    <li key={item} className="flex items-start gap-4 text-sm font-light text-neutral-400">
-                      <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-purple-500" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="mb-10 rounded-2xl bg-neutral-900/50 border border-neutral-800 p-5 text-sm font-light">
-                  <span className="font-medium text-neutral-500 uppercase tracking-wider text-xs block mb-1">Ideal pentru: </span>
-                  <span className="text-neutral-300">{pkg.ideal}</span>
-                </div>
-
-                <Link
-                  href={pkg.href}
-                  className={`inline-flex items-center justify-center w-full rounded-full px-6 py-4 text-sm font-semibold tracking-wide transition-all duration-300 ${
-                    pkg.highlight
-                      ? "bg-purple-600 text-white hover:bg-purple-500 shadow-lg shadow-purple-900/20"
-                      : "bg-white/5 text-white border border-white/10 hover:bg-white/10"
-                  }`}
-                >
-                  Discută acest pachet
-                </Link>
               </div>
             </Reveal>
           ))}
         </div>
       </section>
 
-      {/* Monthly Tiers */}
-      <section className="border-y border-neutral-800/50 bg-neutral-900/20">
-        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
-          <Reveal>
-            <div className="mb-16">
-              <div className="text-xs font-mono uppercase tracking-widest text-emerald-400">Promovare Continuă</div>
-              <h2 className="mt-4 text-3xl font-medium tracking-tight md:text-5xl text-white">
-                Administrare lunară
-              </h2>
-              <p className="mt-4 max-w-2xl text-base leading-relaxed text-neutral-400 font-light">
-                Gestionăm campaniile tale lunar — optimizare, raportare, ajustări. Bugetul de ads se plătește separat.
-              </p>
-            </div>
-          </Reveal>
-
-          <div className="grid gap-6 md:grid-cols-3">
-            {monthlyTiers.map((tier, i) => (
-              <Reveal key={tier.name} delay={i * 80}>
-                <div className={`relative flex flex-col h-full rounded-[2rem] p-10 border transition-all duration-500 hover:-translate-y-1 ${
-                    tier.recommended
-                      ? "bg-gradient-to-b from-neutral-900 to-[#030303] border-emerald-500/30 shadow-[0_0_40px_rgba(16,185,129,0.1)] hover:border-emerald-500/60"
-                      : "bg-neutral-900/30 border-neutral-800/50 hover:border-neutral-700/80"
-                  }`}
-                >
-                  {tier.recommended && (
-                    <div className="absolute -top-3 left-10 inline-flex items-center rounded-full bg-emerald-500/20 border border-emerald-500/30 px-4 py-1 text-xs font-mono tracking-widest text-emerald-300 backdrop-blur-md">
-                      Recomandat
-                    </div>
-                  )}
-                  
-                  <h3 className="text-2xl font-medium text-white mb-2">
-                    {tier.name}
-                  </h3>
-                  <p className="text-sm text-neutral-500 font-light mb-8">
-                    {tier.desc}
-                  </p>
-                  
-                  <div className="text-4xl font-light tracking-tight text-white mb-10 pb-8 border-b border-neutral-800">
-                    {tier.price}
-                  </div>
-                  
-                  <ul className="mb-10 flex-1 space-y-4">
-                    {tier.features.map((f) => (
-                      <li key={f} className="flex items-start gap-4 text-sm font-light text-neutral-400">
-                        <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-emerald-500" />
-                        <span>{f}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  
-                  <Link
-                    href="/contact"
-                    className={`inline-flex items-center justify-center w-full rounded-full px-6 py-4 text-sm font-semibold tracking-wide transition-all duration-300 ${
-                      tier.recommended 
-                        ? "bg-emerald-600 text-white hover:bg-emerald-500 shadow-lg shadow-emerald-900/20" 
-                        : "bg-white/5 text-white border border-white/10 hover:bg-white/10"
-                    }`}
-                  >
-                    Alege {tier.name}
-                  </Link>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal delay={320}>
-            <p className="mt-12 text-center text-sm text-neutral-500 font-mono tracking-wide">
-              + buget ads separat (Google / Meta). Contractul minim: 3 luni.
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Maintenance Tiers */}
-      <section className="border-b border-neutral-800/50 bg-[#030303]">
-        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
-          <Reveal>
-            <div className="mb-16">
-              <div className="text-xs font-mono uppercase tracking-widest text-emerald-400">Mentenanță website</div>
-              <h2 className="mt-4 text-3xl font-medium tracking-tight md:text-5xl text-white">
-                Site mereu actualizat și protejat
-              </h2>
-              <p className="mt-4 max-w-2xl text-base leading-relaxed text-neutral-400 font-light">
-                Actualizări, backup, securitate și mici modificări, pentru o sumă fixă pe lună. Fără costuri ascunse.
-              </p>
-            </div>
-          </Reveal>
-
-          <div className="grid gap-6 md:grid-cols-3">
-            {maintenanceTiers.map((tier, i) => (
-              <Reveal key={tier.name} delay={i * 80}>
-                <div className={`relative flex flex-col h-full rounded-[2rem] p-10 border transition-all duration-500 hover:-translate-y-1 ${
-                    tier.recommended
-                      ? "bg-gradient-to-b from-neutral-900 to-[#030303] border-emerald-500/30 shadow-[0_0_40px_rgba(16,185,129,0.1)] hover:border-emerald-500/60"
-                      : "bg-neutral-900/30 border-neutral-800/50 hover:border-neutral-700/80"
-                  }`}
-                >
-                  {tier.recommended && (
-                    <div className="absolute -top-3 left-10 inline-flex items-center rounded-full bg-emerald-500/20 border border-emerald-500/30 px-4 py-1 text-xs font-mono tracking-widest text-emerald-300 backdrop-blur-md">
-                      Recomandat
-                    </div>
-                  )}
-
-                  <h3 className="text-2xl font-medium text-white mb-2">
-                    {tier.name}
-                  </h3>
-                  <p className="text-sm text-neutral-500 font-light mb-8">
-                    {tier.desc}
-                  </p>
-
-                  <div className="text-4xl font-light tracking-tight text-white mb-10 pb-8 border-b border-neutral-800">
-                    {tier.price}
-                  </div>
-
-                  <ul className="mb-10 flex-1 space-y-4">
-                    {tier.features.map((f) => (
-                      <li key={f} className="flex items-start gap-4 text-sm font-light text-neutral-400">
-                        <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-emerald-500" />
-                        <span>{f}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <Link
-                    href="/contact"
-                    className={`inline-flex items-center justify-center w-full rounded-full px-6 py-4 text-sm font-semibold tracking-wide transition-all duration-300 ${
-                      tier.recommended
-                        ? "bg-emerald-600 text-white hover:bg-emerald-500 shadow-lg shadow-emerald-900/20"
-                        : "bg-white/5 text-white border border-white/10 hover:bg-white/10"
-                    }`}
-                  >
-                    Alege {tier.name}
-                  </Link>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal delay={320}>
-            <p className="mt-12 text-center text-sm text-neutral-500 font-mono tracking-wide">
-              Hosting-ul și domeniul se plătesc separat, direct la furnizor.
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Pentru cine */}
-      <section className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
+      {/* Platforme Web & E-Commerce & B2B */}
+      <section className="relative z-10 py-24 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
         <Reveal>
-          <div className="mb-16 text-center">
-            <div className="text-xs font-mono uppercase tracking-widest text-purple-400">Potrivire</div>
-            <h2 className="mt-4 text-3xl font-medium tracking-tight md:text-5xl text-white">
-              Pentru cine sunt aceste pachete?
+          <div className="max-w-3xl mb-16">
+            <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-3">02 / SISTEME COMPLETE & CONSTRUCȚIE</div>
+            <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
+              Platforme Web, Magazine & Arhitectură B2B
             </h2>
+            <p className="mt-4 text-sm text-neutral-400 font-light leading-relaxed">
+              Arhitecturi Next.js de mare viteză, magazine online la cheie și soluții enterprise proiectate pentru reziliență și conversie.
+            </p>
           </div>
         </Reveal>
 
-        <div className="grid gap-8 md:grid-cols-2">
-          <Reveal>
-            <div className="rounded-[2rem] border border-neutral-800/50 bg-neutral-900/30 p-10 h-full hover:border-emerald-500/30 transition-colors duration-500">
-              <div className="text-sm font-mono tracking-widest uppercase text-emerald-400 mb-8 flex items-center gap-3">
-                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400">✓</span> 
-                Este potrivit pentru:
-              </div>
-              <ul className="space-y-5">
-                {forWhom.map((item) => (
-                  <li key={item} className="flex items-start gap-4 text-base font-light text-neutral-300">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500/50" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Reveal>
+        <div className="grid gap-8 lg:grid-cols-3 items-stretch">
+          {webPackages.map((pkg, idx) => (
+            <Reveal key={pkg.id} delay={idx * 100}>
+              <div
+                className={`relative h-full rounded-3xl p-8 md:p-10 flex flex-col justify-between border transition-all duration-300 ${
+                  pkg.highlight
+                    ? "bg-gradient-to-b from-neutral-900 to-[#121316] border-white/30 shadow-[0_0_40px_rgba(255,255,255,0.06)] scale-100 lg:scale-[1.02]"
+                    : "bg-neutral-900/30 border-white/10"
+                }`}
+              >
+                {pkg.badge && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-white px-4 py-1 text-[9px] font-mono font-bold uppercase tracking-widest text-black shadow-md">
+                    {pkg.badge}
+                  </div>
+                )}
 
-          <Reveal delay={100}>
-            <div className="rounded-[2rem] border border-neutral-800/50 bg-neutral-900/10 p-10 h-full hover:border-rose-500/30 transition-colors duration-500">
-              <div className="text-sm font-mono tracking-widest uppercase text-rose-400 mb-8 flex items-center gap-3">
-                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-rose-500/20 text-rose-400">✕</span> 
-                Nu este potrivit pentru:
-              </div>
-              <ul className="space-y-5">
-                {notFor.map((item) => (
-                  <li key={item} className="flex items-start gap-4 text-base font-light text-neutral-400">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-500/30" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+                <div>
+                  <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-2">
+                    {pkg.delivery}
+                  </div>
+                  <h3 className="text-2xl font-medium text-white mb-2">{pkg.name}</h3>
+                  <div className="text-4xl font-light text-white mb-4">{pkg.price}</div>
+                  <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6 border-b border-white/10 pb-6">
+                    {pkg.description}
+                  </p>
 
-      {/* How payment works */}
-      <section className="border-y border-neutral-800/50 bg-[#000000]">
-        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
-          <Reveal>
-            <div className="mb-16 text-center">
-              <div className="text-xs font-mono uppercase tracking-widest text-neutral-500">Transparență</div>
-              <h2 className="mt-4 text-3xl font-medium tracking-tight md:text-5xl text-white">
-                Cum funcționează plata
-              </h2>
-            </div>
-          </Reveal>
-
-          <div className="grid gap-6 md:grid-cols-3">
-            {[
-              {
-                step: "01",
-                title: "50% avans",
-                text: "La semnarea contractului și înainte de a începe lucrul. Acoperă strategia, structura și implementarea inițială.",
-              },
-              {
-                step: "02",
-                title: "Implementare",
-                text: "Lucrăm conform planului agreat. Actualizări regulate de progres. Fără surprize la final.",
-              },
-              {
-                step: "03",
-                title: "50% la predare",
-                text: "Plătești restul doar când proiectul este gata și funcțional. Predare completă cu acces total.",
-              },
-            ].map((item, i) => (
-              <Reveal key={item.step} delay={i * 80}>
-                <div className="relative p-10 h-full border-l border-neutral-800 hover:border-purple-500/50 transition-colors duration-500">
-                  <div className="mb-6 text-5xl font-light text-neutral-800">{item.step}</div>
-                  <h3 className="text-xl font-medium text-white mb-4">{item.title}</h3>
-                  <p className="text-sm font-light leading-relaxed text-neutral-400">{item.text}</p>
+                  <ul className="space-y-3 text-xs text-neutral-300 font-mono mb-8">
+                    {pkg.includes.map((inc) => (
+                      <li key={inc} className="flex items-start gap-2.5">
+                        <span className="text-neutral-400 mt-0.5">•</span>
+                        <span>{inc}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* FAQ */}
-      <section className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
-        <Reveal>
-          <div className="mb-16 text-center">
-            <div className="text-xs font-mono uppercase tracking-widest text-purple-400">Întrebări frecvente</div>
-            <h2 className="mt-4 text-3xl font-medium tracking-tight md:text-5xl text-white">
-              Înainte să trimiți mesajul
-            </h2>
-          </div>
-        </Reveal>
-
-        <div className="grid gap-x-12 gap-y-10 md:grid-cols-2">
-          {faqs.map((faq, i) => (
-            <Reveal key={faq.q} delay={i * 60}>
-              <div className="border-b border-neutral-800/50 pb-8 h-full">
-                <h3 className="text-lg font-medium text-white mb-4">{faq.q}</h3>
-                <p className="text-sm font-light leading-relaxed text-neutral-400">{faq.a}</p>
+                <div>
+                  <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5 text-[11px] text-neutral-400 font-light mb-6">
+                    <strong className="text-neutral-300 block mb-1">Ideal pentru:</strong>
+                    {pkg.ideal}
+                  </div>
+                  <Link
+                    href={`/contact?pachet=${pkg.id}`}
+                    className={`block w-full text-center rounded-full py-3.5 text-xs font-mono uppercase tracking-widest transition-all ${
+                      pkg.highlight
+                        ? "bg-white text-black font-bold hover:bg-neutral-200 shadow-md"
+                        : "border border-white/20 text-white hover:bg-white hover:text-black"
+                    }`}
+                  >
+                    Configurează Proiectul →
+                  </Link>
+                </div>
               </div>
             </Reveal>
           ))}
         </div>
       </section>
 
-      {/* CTA */}
-      <Reveal>
-        <section className="mx-auto max-w-7xl px-6 pb-24 lg:px-10 lg:pb-32">
-          <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-purple-900/20 to-neutral-900/20 border border-purple-500/20 p-10 md:p-16 lg:flex lg:items-center lg:justify-between lg:gap-12">
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(168,85,247,0.15),transparent_50%)] pointer-events-none" />
-            <div className="relative z-10 max-w-2xl">
-              <h2 className="text-3xl font-medium tracking-tight md:text-5xl text-white">
-                Alege pachetul potrivit.
-              </h2>
-              <p className="mt-6 text-lg font-light leading-relaxed text-neutral-400">
-                Discuție inițială de 20–30 minute. Fără obligații. Stabilim obiectivul și vedem dacă suntem potriviți.
-              </p>
-            </div>
-            <div className="relative z-10 mt-10 flex flex-col gap-4 sm:flex-row lg:mt-0 lg:shrink-0">
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-sm font-semibold tracking-wide text-black transition-all hover:bg-neutral-200 hover:scale-105"
+      {/* Întrebări Frecvente */}
+      <section className="relative z-10 py-24 px-6 lg:px-10 max-w-5xl mx-auto border-b border-white/10">
+        <Reveal>
+          <div className="text-center mb-16">
+            <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-3">Claritate Operațională</div>
+            <h2 className="text-3xl md:text-4xl font-light text-white tracking-tight">
+              Întrebări frecvente despre colaborare.
+            </h2>
+          </div>
+        </Reveal>
+
+        <div className="space-y-6">
+          {faqs.map((faq) => (
+            <Reveal key={faq.q}>
+              <div className="rounded-2xl border border-white/10 bg-neutral-900/30 p-8">
+                <h3 className="text-lg font-medium text-white mb-3">{faq.q}</h3>
+                <p className="text-sm text-neutral-400 font-light leading-relaxed">{faq.a}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="relative z-10 border-t border-white/10 bg-[#050607] py-16 px-6 lg:px-10">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+          <div>
+            <div className="text-sm font-bold tracking-[0.25em] uppercase text-white mb-2">REVERB DIGITAL</div>
+            <p className="text-xs text-neutral-500 font-mono">
+              Infrastructură digitală, sisteme web și căutare generativă. Ecosistem al Grupului Surya.
+            </p>
+          </div>
+          
+          <div className="flex flex-col md:flex-row items-center gap-6 text-xs font-mono text-neutral-400">
+            <Link href="/" className="hover:text-white transition-colors">Site Principal</Link>
+            <Link href="/showcase" className="hover:text-white transition-colors">Showcase</Link>
+            <Link href="/despre" className="hover:text-white transition-colors">Despre Noi</Link>
+            <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
+            <span className="text-neutral-600 hidden md:inline">|</span>
+            <div className="text-neutral-500">
+              Partener strategic:{" "}
+              <a
+                href="https://zylarisgroup.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-neutral-300 hover:text-white transition-colors underline underline-offset-4"
               >
-                Programează discuția
-              </Link>
-              <Link
-                href="/servicii"
-                className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-sm font-semibold tracking-wide text-white transition-all hover:bg-white/10"
-              >
-                Vezi serviciile
-              </Link>
+                Zylaris Group London
+              </a>
             </div>
           </div>
-        </section>
-      </Reveal>
+        </div>
+      </footer>
+
     </div>
   );
 }
-
