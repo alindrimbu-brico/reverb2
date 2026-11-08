@@ -56,6 +56,18 @@ export default function ProjectPreviewModal({
       className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-black/85 backdrop-blur-md transition-all duration-300"
       onClick={onClose}
     >
+      {/* Prominent Floating Top-Right Close Pill (Instant Visibility) */}
+      <div className="absolute top-3 right-4 sm:top-4 sm:right-6 md:top-5 md:right-8 z-[60]">
+        <button
+          onClick={onClose}
+          aria-label={isEn ? "Close preview window" : "Închide fereastra de previzualizare"}
+          className="mech-magnetic mech-btn flex items-center gap-2 px-4 py-2 rounded-full bg-black/90 dark:bg-black/90 light:bg-white/95 border border-white/20 dark:border-white/20 light:border-black/20 text-white dark:text-white light:text-neutral-900 font-mono text-xs font-bold uppercase tracking-widest shadow-2xl backdrop-blur-md hover:bg-rose-600 hover:border-rose-600 hover:text-white dark:hover:bg-rose-600 dark:hover:text-white transition-all"
+        >
+          <span>{isEn ? "Close Window" : "Închide Fereastra"}</span>
+          <span className="text-sm font-bold">✕</span>
+        </button>
+      </div>
+
       <div
         className="relative w-full max-w-6xl h-[92vh] max-h-[920px] flex flex-col rounded-2xl border border-white/20 dark:border-white/20 light:border-black/20 bg-[#090a0d] dark:bg-[#090a0d] light:bg-[#FAF8F5] shadow-2xl overflow-hidden transition-all"
         onClick={(e) => e.stopPropagation()}
@@ -69,9 +81,10 @@ export default function ProjectPreviewModal({
               <button
                 onClick={onClose}
                 aria-label="Close window"
-                className="h-3 w-3 rounded-full bg-rose-500/80 hover:bg-rose-500 transition-colors flex items-center justify-center text-[8px] text-black font-bold group"
+                className="h-3.5 w-3.5 rounded-full bg-rose-500 hover:bg-rose-600 transition-colors flex items-center justify-center text-[8px] text-white font-bold group cursor-pointer"
+                title={isEn ? "Close Window" : "Închide Fereastra"}
               >
-                <span className="opacity-0 group-hover:opacity-100">✕</span>
+                <span>✕</span>
               </button>
               <span className="h-3 w-3 rounded-full bg-amber-500/80" />
               <span className="h-3 w-3 rounded-full bg-emerald-500/80" />
@@ -138,7 +151,7 @@ export default function ProjectPreviewModal({
             </div>
           </div>
 
-          {/* Right: Direct External Link & Close */}
+          {/* Right: Direct External Link & Explicit Close Button */}
           <div className="flex items-center gap-2 shrink-0">
             <a
               href={project.href}
@@ -152,10 +165,11 @@ export default function ProjectPreviewModal({
 
             <button
               onClick={onClose}
-              aria-label="Close"
-              className="mech-magnetic flex h-8 w-8 items-center justify-center rounded-full border border-white/10 dark:border-white/10 light:border-black/10 bg-white/5 hover:bg-white/10 text-white dark:text-white light:text-neutral-900 transition-colors"
+              aria-label={isEn ? "Close preview" : "Închide previzualizarea"}
+              className="mech-magnetic mech-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-rose-500/20 hover:bg-rose-500 border border-rose-500/40 hover:border-rose-500 text-rose-300 hover:text-white dark:text-rose-300 dark:hover:text-white light:text-rose-700 light:hover:text-white font-bold text-[10px] uppercase tracking-wider transition-all"
             >
-              ✕
+              <span>{isEn ? "Close" : "Închide"}</span>
+              <span className="text-xs">✕</span>
             </button>
           </div>
         </div>
@@ -205,27 +219,28 @@ export default function ProjectPreviewModal({
         </div>
 
         {/* Bottom Technical Spec Bar */}
-        <div className="h-10 px-6 border-t border-white/10 dark:border-white/10 light:border-black/10 flex items-center justify-between bg-[#08090b] dark:bg-[#08090b] light:bg-[#F3EFEA] font-mono text-[10px] text-neutral-400 shrink-0">
-          <div className="flex items-center gap-4">
-            <span className="text-white dark:text-white light:text-neutral-900 font-semibold">
+        <div className="h-11 px-4 sm:px-6 border-t border-white/10 dark:border-white/10 light:border-black/10 flex items-center justify-between bg-[#08090b] dark:bg-[#08090b] light:bg-[#F3EFEA] font-mono text-[10px] text-neutral-400 shrink-0">
+          <div className="flex items-center gap-3 sm:gap-4 truncate">
+            <span className="text-white dark:text-white light:text-neutral-900 font-semibold truncate">
               SYS: {project.name}
             </span>
             <span className="hidden sm:inline text-neutral-500">•</span>
-            <span className="hidden sm:inline">{project.tech}</span>
-            {project.host && (
-              <>
-                <span className="hidden md:inline text-neutral-500">•</span>
-                <span className="hidden md:inline text-neutral-400">{project.host}</span>
-              </>
-            )}
+            <span className="hidden sm:inline truncate">{project.tech}</span>
           </div>
 
-          <div className="flex items-center gap-3">
-            <span className="text-emerald-400 font-bold uppercase tracking-wider">
+          <div className="flex items-center gap-3 shrink-0">
+            <span className="text-emerald-400 font-bold uppercase tracking-wider hidden sm:inline">
               {project.status || "PRODUCȚIE LIVE"}
             </span>
-            <span className="text-neutral-600">|</span>
-            <span className="text-neutral-500 hidden sm:inline">ESC to close</span>
+
+            {/* Prominent Footer Close Button */}
+            <button
+              onClick={onClose}
+              className="mech-magnetic mech-btn flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 hover:bg-rose-500 hover:text-white dark:bg-white/10 dark:hover:bg-rose-500 dark:hover:text-white light:bg-black/10 light:hover:bg-rose-600 light:hover:text-white text-white dark:text-white light:text-neutral-900 font-bold uppercase tracking-wider transition-all"
+            >
+              <span>{isEn ? "Close Preview" : "Închide Previzualizarea"}</span>
+              <span>✕</span>
+            </button>
           </div>
         </div>
       </div>

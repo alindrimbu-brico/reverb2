@@ -1,8 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #f5f1ea;
-  --ink: #1d2731;
+  --bg: #070809;
+  --ink: #ffffff;
+}
+
+html.dark {
+  --bg: #070809;
+  --ink: #ffffff;
+}
+
+html.light {
+  --bg: #FAF8F5;
+  --ink: #111215;
 }
 
 @theme inline {
@@ -283,13 +293,21 @@ input, textarea, select {
 
 
 
-/* ── Reverb Global Light Theme ── */
+/* ── Transparency to let Fixed Watermark Logo & Beams shine through ── */
+main,
+main > div.relative,
+main > div.min-h-screen {
+  background-color: transparent !important;
+}
+
+/* ── Reverb Global Light Theme Contrast Calibration (WCAG AAA) ── */
 html.light,
 html.light body {
   background-color: #FAF8F5 !important;
   color: #111215 !important;
 }
 
+/* Base surface overrides in Light Mode */
 html.light .bg-\[\#070809\],
 html.light .bg-\[\#0a0a0c\],
 html.light .bg-\[\#050607\],
@@ -298,10 +316,11 @@ html.light .bg-\[\#080810\],
 html.light .bg-\[\#0c0d0e\],
 html.light .bg-\[\#121316\],
 html.light .bg-black {
-  background-color: #FAF8F5 !important;
+  background-color: transparent !important;
   color: #111215 !important;
 }
 
+/* Card surfaces: warm alabaster with crisp contrast (WCAG AAA) */
 html.light .bg-\[\#090a0c\]\/60,
 html.light .bg-\[\#070809\]\/60,
 html.light .bg-\[\#0a0a0c\]\/80,
@@ -313,6 +332,7 @@ html.light .bg-neutral-900\/20,
 html.light .bg-neutral-900\/30,
 html.light .bg-neutral-900\/40 {
   background-color: #F3EFEA !important;
+  border-color: rgba(29, 39, 49, 0.18) !important;
 }
 
 html.light .bg-neutral-950,
@@ -326,27 +346,58 @@ html.light .bg-white\/\[0\.02\],
 html.light .bg-white\/\[0\.03\],
 html.light .bg-white\/5 {
   background-color: #FFFFFF !important;
-  border-color: rgba(29, 39, 49, 0.12) !important;
+  border-color: rgba(29, 39, 49, 0.18) !important;
 }
 
+/* ── Precise Typography Contrast Ratios (WCAG AAA) ── */
+/* Primary text: #111215 (Contrast: 17.67:1 - PASS AAA) */
 html.light .text-neutral-100,
 html.light .text-white {
   color: #111215 !important;
 }
 
+/* Secondary headings: #1D2731 (Contrast: 14.28:1 - PASS AAA) */
+html.light .text-neutral-200,
 html.light .text-neutral-300 {
   color: #1D2731 !important;
 }
 
+/* Body copy & descriptions: #344054 (Contrast: 9.87:1 - PASS AAA) */
 html.light .text-neutral-400 {
+  color: #344054 !important;
+}
+
+/* Captions, labels & telemetry: #475467 (Contrast: 7.25:1 - PASS AAA) */
+html.light .text-neutral-500,
+html.light .text-neutral-600 {
   color: #475467 !important;
 }
 
-html.light .text-neutral-500,
-html.light .text-neutral-600 {
-  color: #667085 !important;
+/* Status, Links & Accents (High-Contrast WCAG AA) */
+html.light .text-emerald-400,
+html.light .text-emerald-500,
+html.light .text-emerald-600 {
+  color: #047857 !important; /* Contrast: 5.17:1 - PASS AA */
 }
 
+html.light .text-cyan-400,
+html.light .text-sky-400,
+html.light .text-blue-400,
+html.light .text-electric-blue {
+  color: #0369A1 !important; /* Contrast: 5.60:1 - PASS AA */
+}
+
+html.light .text-amber-400,
+html.light .text-amber-500 {
+  color: #B45309 !important; /* Contrast: 4.74:1 - PASS AA */
+}
+
+html.light .text-rose-400,
+html.light .text-rose-500 {
+  color: #BE123C !important; /* Contrast: 5.82:1 - PASS AA */
+}
+
+/* High-contrast architectural borders in Light Mode */
 html.light .border-white\/10,
 html.light .border-white\/15,
 html.light .border-white\/20,
@@ -356,7 +407,7 @@ html.light .border-neutral-800,
 html.light .border-neutral-700,
 html.light .divide-white\/10,
 html.light .divide-white\/15 {
-  border-color: rgba(29, 39, 49, 0.12) !important;
+  border-color: rgba(29, 39, 49, 0.18) !important;
 }
 
 /* ── REVERB MECHANICAL MICRO-INTERACTIONS ENGINE ── */
