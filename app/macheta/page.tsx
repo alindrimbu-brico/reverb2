@@ -571,9 +571,8 @@ export default function LuxuryMachetaPage() {
                     {p.status}
                   </span>
                 </div>
-                <h3 className="text-2xl font-medium text-white mb-2 flex items-center justify-between">
-                  <span>{p.name}</span>
-                  <span className="text-sm text-neutral-500 group-hover:text-white group-hover:translate-x-1 transition-all">↗</span>
+                <h3 className="text-xl font-medium text-white mb-2 tracking-tight">
+                  {p.name}
                 </h3>
                 <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6">
                   {p.desc}

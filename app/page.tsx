@@ -565,31 +565,33 @@ export default function HomePage() {
                     {p.status}
                   </span>
                 </div>
-                <h3 className="text-2xl font-medium text-white mb-2 flex items-center justify-between">
-                  <span>{p.name}</span>
-                  <span className="mech-telemetry text-xs font-mono uppercase tracking-wider text-neutral-400 group-hover:text-emerald-400 transition-colors flex items-center gap-1">
-                    <span>PREVIZUALIZARE</span>
-                    <span className="text-sm">👁️</span>
-                  </span>
+                <h3 className="text-xl font-medium text-white mb-2 tracking-tight group-hover:text-emerald-300 transition-colors">
+                  {p.name}
                 </h3>
                 <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6">
                   {p.desc}
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-white/5 flex justify-between items-center text-[10px] font-mono text-neutral-500">
-                <span>{p.tech}</span>
-                <a
-                  href={p.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                  title="Deschide direct în tab nou"
-                  className="text-neutral-400 hover:text-white transition-colors flex items-center gap-1"
-                >
-                  <span>{p.host}</span>
-                  <span className="text-[9px]">↗</span>
-                </a>
+              <div className="pt-4 border-t border-white/5 flex items-center justify-between text-[10px] font-mono gap-2">
+                <span className="text-neutral-500 truncate">{p.tech}</span>
+                <div className="flex items-center gap-2.5 shrink-0">
+                  <span className="mech-telemetry inline-flex items-center gap-1 text-[10px] uppercase tracking-wider font-semibold text-neutral-400 group-hover:text-emerald-400 transition-colors">
+                    <span>PREVIZUALIZARE</span>
+                    <span className="text-xs">👁️</span>
+                  </span>
+                  <a
+                    href={p.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    title="Deschide direct în tab nou"
+                    className="text-neutral-400 hover:text-white transition-colors flex items-center gap-0.5"
+                  >
+                    <span>{p.host}</span>
+                    <span className="text-[9px]">↗</span>
+                  </a>
+                </div>
               </div>
             </div>
           ))}
