@@ -302,6 +302,19 @@ html.light .bg-black {
   color: #111215 !important;
 }
 
+html.light .bg-\[\#090a0c\]\/60,
+html.light .bg-\[\#070809\]\/60,
+html.light .bg-\[\#0a0a0c\]\/80,
+html.light .bg-\[\#0c0d0e\]\/80,
+html.light .bg-\[\#0c0d0e\]\/60,
+html.light .bg-\[\#0c0d11\],
+html.light .bg-black\/40,
+html.light .bg-neutral-900\/20,
+html.light .bg-neutral-900\/30,
+html.light .bg-neutral-900\/40 {
+  background-color: #F3EFEA !important;
+}
+
 html.light .bg-neutral-950,
 html.light .bg-neutral-900,
 html.light .bg-neutral-900\/60,
@@ -313,7 +326,7 @@ html.light .bg-white\/\[0\.02\],
 html.light .bg-white\/\[0\.03\],
 html.light .bg-white\/5 {
   background-color: #FFFFFF !important;
-  border-color: rgba(29, 39, 49, 0.1) !important;
+  border-color: rgba(29, 39, 49, 0.12) !important;
 }
 
 html.light .text-neutral-100,
@@ -321,7 +334,10 @@ html.light .text-white {
   color: #111215 !important;
 }
 
-html.light .text-neutral-300,
+html.light .text-neutral-300 {
+  color: #1D2731 !important;
+}
+
 html.light .text-neutral-400 {
   color: #475467 !important;
 }
@@ -337,6 +353,8 @@ html.light .border-white\/20,
 html.light .border-white\/30,
 html.light .border-white\/5,
 html.light .border-neutral-800,
-html.light .border-neutral-700 {
+html.light .border-neutral-700,
+html.light .divide-white\/10,
+html.light .divide-white\/15 {
   border-color: rgba(29, 39, 49, 0.12) !important;
 }
