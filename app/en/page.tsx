@@ -593,7 +593,7 @@ export default function EnglishHomePage() {
               </div>
               <h3 className="text-2xl font-light text-white mb-2">Social Growth</h3>
               <div className="text-4xl font-light text-white tracking-tight mb-4">
-                €390 <span className="text-xs font-mono text-neutral-500">/ month</span>
+                €330 <span className="text-xs font-mono text-neutral-500">/ month</span>
               </div>
               <p className="text-xs text-neutral-400 font-light leading-relaxed mb-8">
                 Designed for businesses requiring continuous social credibility and brand authority without physical studio overhead.
@@ -641,7 +641,7 @@ export default function EnglishHomePage() {
               </div>
               <h3 className="text-2xl font-light text-white mb-2">Daily Impact</h3>
               <div className="text-4xl font-light text-white tracking-tight mb-4">
-                €690 <span className="text-xs font-mono text-neutral-400">/ month</span>
+                €588 <span className="text-xs font-mono text-neutral-400">/ month</span>
               </div>
               <p className="text-xs text-neutral-300 font-light leading-relaxed mb-8">
                 Continuous daily high-fidelity video saturation for organic channel dominance and compounding awareness.
@@ -684,7 +684,7 @@ export default function EnglishHomePage() {
               </div>
               <h3 className="text-2xl font-light text-white mb-2">Complete Digital Store</h3>
               <div className="text-4xl font-light text-white tracking-tight mb-4">
-                €1,500 <span className="text-xs font-mono text-neutral-500">fixed price</span>
+                €1,275 <span className="text-xs font-mono text-neutral-500">fixed price</span>
               </div>
               <p className="text-xs text-neutral-400 font-light leading-relaxed mb-8">
                 Turnkey e-commerce infrastructure built on Next.js and WooCommerce, optimized for speed, conversion, and AI search.

@@ -65,12 +65,12 @@ export default function ContactPageEN() {
                 <div className="text-xs uppercase tracking-[0.3em] text-white/50">Available Packages</div>
                 <div className="mt-5 space-y-4">
                   {[
-                    { name: "Online Presence", price: "€590" },
-                    { name: "Local Clients", price: "€790 + €290/mo" },
-                    { name: "Digital Store", price: "from €890" },
-                    { name: "Continuous Promotion", price: "from €190/mo" },
-                    { name: "AI Creative Sprint", price: "€390" },
-                    { name: "Website maintenance", price: "from €35/mo" },
+                    { name: "Social Growth (12 video/mo)", price: "€330 / month" },
+                    { name: "Daily Impact (30 video/mo)", price: "€588 / month" },
+                    { name: "Start Digital (Web + Video)", price: "€1,275" },
+                    { name: "Dominance 3X (90 video/mo)", price: "€1,275 / month" },
+                    { name: "Digital Store Active", price: "€2,499" },
+                    { name: "Enterprise Infrastructure", price: "from €3,315" },
                   ].map((pkg) => (
                     <div key={pkg.name} className="flex items-center justify-between text-sm">
                       <span className="text-white/75">{pkg.name}</span>

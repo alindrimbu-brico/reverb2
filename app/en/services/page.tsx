@@ -13,7 +13,7 @@ const mainServices = [
   {
     id: "01",
     tag: "TECHNICAL FOUNDATION",
-    price: "from €1,500",
+    price: "from €1,275",
     title: "Web Platforms & Digital Stores",
     tagline: "High-speed architecture built directly for conversion.",
     text: "We develop presentation websites and robust online stores from scratch on Next.js and WooCommerce. Guaranteed loading under 1.2 seconds, cognitive checkout flow, secure card integrations, automated invoicing, and instant courier dispatch.",
@@ -29,7 +29,7 @@ const mainServices = [
   {
     id: "02",
     tag: "SOCIAL MEDIA SCALING",
-    price: "from €390 / month",
+    price: "from €330 / month",
     title: "AI Social Media Video Engine",
     tagline: "Daily volume of product video content generated with AI.",
     text: "We eliminate the barrier of traditional video production costs. We generate 1 to 3 high-fidelity video assets daily for TikTok, Instagram Reels, YouTube Shorts, and Facebook using Google Imagen and Veo technologies. Product demonstrations, sales hooks, and dynamic subtitles.",
@@ -46,7 +46,7 @@ const mainServices = [
   {
     id: "03",
     tag: "NEW SEARCH PARADIGM",
-    price: "from €690 / month",
+    price: "from €588 / month",
     title: "Generative Engine Optimization GEO",
     tagline: "Become the primary recommendation in ChatGPT, Perplexity, Claude, and Gemini.",
     text: "In 2026, buyers ask direct questions to AI models instead of simple keyword queries. We structure your digital assets using advanced JSON-LD data, transparent pricing indices, and entity authority so LLMs recommend your business as the verified source.",

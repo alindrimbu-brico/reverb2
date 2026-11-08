@@ -27,7 +27,7 @@ export const packages: Package[] = [
     id: "social-growth",
     name: "Social Growth AI Video",
     tagline: "Prezență video constantă și credibilitate vizuală pe rețele.",
-    price: "€390 / lună",
+    price: "€330 / lună",
     delivery: "Livrabil săptămânal",
     category: "social",
     description:
@@ -46,7 +46,7 @@ export const packages: Package[] = [
     id: "daily-impact",
     name: "Daily Impact 1 Video Zilnic",
     tagline: "Dominare vizuală prin conținut video zilnic de produs.",
-    price: "€690 / lună",
+    price: "€588 / lună",
     delivery: "Livrare zilnică",
     category: "social",
     description:
@@ -68,7 +68,7 @@ export const packages: Package[] = [
     id: "dominance-3x",
     name: "Dominance 3X 3 Video Zilnic",
     tagline: "Scalare agresivă pentru acoperire maximă pe algoritmi.",
-    price: "€1.500 / lună",
+    price: "€1.275 / lună",
     delivery: "3 livrări zilnice",
     category: "social",
     description:
@@ -87,7 +87,7 @@ export const packages: Package[] = [
     id: "start-digital",
     name: "Start Digital Web și Video",
     tagline: "Un website rapid și modern, susținut de conținut video din prima zi.",
-    price: "€1.500",
+    price: "€1.275",
     delivery: "7–14 zile",
     category: "web",
     description:
@@ -107,7 +107,7 @@ export const packages: Package[] = [
     id: "magazin-digital-activ",
     name: "Magazin Digital Activ eCommerce și AI",
     tagline: "Un magazin online complet construit pentru vânzare și optimizat pentru căutare AI.",
-    price: "€2.940",
+    price: "€2.499",
     delivery: "14–30 zile",
     category: "web",
     description:
@@ -129,7 +129,7 @@ export const packages: Package[] = [
     id: "infrastructura-enterprise",
     name: "Infrastructură Enterprise & B2B",
     tagline: "Arhitectură digitală dedicată și transformare operațională.",
-    price: "de la €3.900",
+    price: "de la €3.315",
     delivery: "Proiect dedicat",
     category: "b2b",
     description:
@@ -149,7 +149,7 @@ export const packages: Package[] = [
 export const monthlyTiers: MonthlyTier[] = [
   {
     name: "Social Growth",
-    price: "€390 / lună",
+    price: "€330 / lună",
     desc: "Pentru prezență video constantă.",
     features: [
       "12 clipuri video scurte lunar, 3 pe săptămână",
@@ -160,7 +160,7 @@ export const monthlyTiers: MonthlyTier[] = [
   },
   {
     name: "Daily Impact",
-    price: "€690 / lună",
+    price: "€588 / lună",
     desc: "1 clip video în fiecare zi.",
     features: [
       "30 de clipuri video lunar, 1 în fiecare zi",
@@ -173,7 +173,7 @@ export const monthlyTiers: MonthlyTier[] = [
   },
   {
     name: "Dominance 3X",
-    price: "€1.500 / lună",
+    price: "€1.275 / lună",
     desc: "Volum maxim pentru dominare feed.",
     features: [
       "90 de clipuri video lunar, 3 în fiecare zi",

@@ -91,23 +91,23 @@ export default function ContactPage() {
                 <div className="space-y-3.5 text-xs font-mono">
                   <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
                     <span className="text-neutral-300">Social Growth (12 video/l)</span>
-                    <span className="text-white font-bold">€390 / lună</span>
+                    <span className="text-white font-bold">€330 / lună</span>
                   </div>
                   <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
                     <span className="text-neutral-300">Daily Impact (30 video/l)</span>
-                    <span className="text-white font-bold">€690 / lună</span>
+                    <span className="text-white font-bold">€588 / lună</span>
                   </div>
                   <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
                     <span className="text-neutral-300">Start Digital (Web + Video)</span>
-                    <span className="text-white font-bold">€1.500</span>
+                    <span className="text-white font-bold">€1.275</span>
                   </div>
                   <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
                     <span className="text-neutral-300">Magazin Digital Activ</span>
-                    <span className="text-white font-bold">€2.940</span>
+                    <span className="text-white font-bold">€2.499</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-neutral-300">Infrastructură Enterprise</span>
-                    <span className="text-white font-bold">de la €3.900</span>
+                    <span className="text-white font-bold">de la €3.315</span>
                   </div>
                 </div>
               </div>

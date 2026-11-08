@@ -12,7 +12,7 @@ const mainServices = [
   {
     id: "01",
     tag: "FUNDAȚIE TEHNICĂ",
-    price: "de la €1.500",
+    price: "de la €1.275",
     title: "Platforme Web & Magazine Online",
     tagline: "Arhitectură de mare viteză construită direct pentru conversie.",
     text: "Dezvoltăm de la zero website-uri de prezentare și magazine online robuste pe Next.js și WooCommerce. Timp de încărcare garantat sub 1.2 secunde, flux de checkout optimizat cognitiv, integrări de plăți securizate cu cardul, facturare automată și emitere instantanee de AWB-uri curieri.",
@@ -28,7 +28,7 @@ const mainServices = [
   {
     id: "02",
     tag: "SCALARE SOCIAL MEDIA",
-    price: "de la €390 / lună",
+    price: "de la €330 / lună",
     title: "Motorul Video Social Media AI",
     tagline: "Volum zilnic de conținut video generat cu inteligență artificială.",
     text: "Eliminăm bariera costurilor caselor de producție clasice. Producem zilnic 1 până la 3 clipuri video de înaltă fidelitate pentru TikTok, Instagram Reels, YouTube Shorts și Facebook folosind tehnologiile Google Imagen & Veo. Demonstrații de produse și utilaje în acțiune, scenarii de vânzare și subtitrări dinamice.",
@@ -45,7 +45,7 @@ const mainServices = [
   {
     id: "03",
     tag: "NOUA CĂUTARE ONLINE",
-    price: "de la €690 / lună",
+    price: "de la €588 / lună",
     title: "Optimizare Pentru Agenți AI GEO",
     tagline: "Fii prima recomandare în ChatGPT, Perplexity, Claude și Gemini.",
     text: "În 2026, clienții nu mai caută doar cuvinte cheie pe Google, ci adresează întrebări directe asistenților AI. Structurăm semantic întregul tău site prin date JSON-LD avansate, index de prețuri transparent și entități de autoritate, astfel încât LLM-urile să recomande afacerea ta ca sursă de încredere.",

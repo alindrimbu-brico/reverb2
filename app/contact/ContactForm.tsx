@@ -27,12 +27,12 @@ function validate(form: Record<string, string>): FieldErrors {
 }
 
 const serviceOptions = [
-  { value: "daily-impact", label: "Pachet Daily Impact (€690 / lună — 30 video AI)" },
-  { value: "social-growth", label: "Pachet Social Growth (€390 / lună — 12 video AI)" },
-  { value: "dominant-omnichannel", label: "Pachet Dominant Omnichannel (€1.500 / lună — 90 video AI)" },
-  { value: "magazin-complet", label: "Creare Magazin Online / Next.js (€1.500)" },
-  { value: "platforma-prezentare", label: "Platformă Prezentare / Next.js (€690)" },
-  { value: "ecosistem-enterprise", label: "Ecosistem & Arhitectură Enterprise (€2.940)" },
+  { value: "daily-impact", label: "Pachet Daily Impact (€588 / lună — 30 video AI)" },
+  { value: "social-growth", label: "Pachet Social Growth (€330 / lună — 12 video AI)" },
+  { value: "dominant-omnichannel", label: "Pachet Dominant Omnichannel (€1.275 / lună — 90 video AI)" },
+  { value: "magazin-complet", label: "Start Digital Web și Video (€1.275)" },
+  { value: "platforma-prezentare", label: "Magazin Digital Activ eCommerce și AI (€2.499)" },
+  { value: "ecosistem-enterprise", label: "Infrastructură Enterprise & B2B (de la €3.315)" },
   { value: "geo-search", label: "Optimizare Pentru Căutare AI (GEO)" },
   { value: "consultanta-alta", label: "Consultanță / Proiect Personalizat" },
 ];

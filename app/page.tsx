@@ -626,7 +626,7 @@ export default function HomePage() {
               </div>
               <h3 className="text-2xl font-light text-white mb-2">Social Growth</h3>
               <div className="text-4xl font-light text-white tracking-tight mb-4">
-                €390 <span className="text-xs font-mono text-neutral-500">/ lună</span>
+                €330 <span className="text-xs font-mono text-neutral-500">/ lună</span>
               </div>
               <p className="text-xs text-neutral-400 font-light leading-relaxed mb-8">
                 Pentru companii și branduri care au nevoie de prezență constantă și credibilitate vizuală fără cheltuieli de studio.
@@ -674,7 +674,7 @@ export default function HomePage() {
               </div>
               <h3 className="text-2xl font-light text-white mb-2">Daily Impact</h3>
               <div className="text-4xl font-light text-white tracking-tight mb-4">
-                €690 <span className="text-xs font-mono text-neutral-400">/ lună</span>
+                €588 <span className="text-xs font-mono text-neutral-400">/ lună</span>
               </div>
               <p className="text-xs text-neutral-300 font-light leading-relaxed mb-8">
                 Volum zilnic neîntrerupt de conținut de înaltă fidelitate pentru saturarea canalelor sociale și creștere organică.
@@ -717,7 +717,7 @@ export default function HomePage() {
               </div>
               <h3 className="text-2xl font-light text-white mb-2">Magazin Online Complet</h3>
               <div className="text-4xl font-light text-white tracking-tight mb-4">
-                €1.500 <span className="text-xs font-mono text-neutral-500">preț fix</span>
+                €1.275 <span className="text-xs font-mono text-neutral-500">preț fix</span>
               </div>
               <p className="text-xs text-neutral-400 font-light leading-relaxed mb-8">
                 Construcție completă la cheie pe Next.js și WooCommerce, configurată direct pentru viteză, plăți cu cardul și conversie.

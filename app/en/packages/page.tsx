@@ -23,7 +23,7 @@ const enPackageDetails: Record<string, {
   "social-growth": {
     name: "Social Growth AI Video",
     tagline: "Constant video presence and visual credibility across channels.",
-    price: "€390 / month",
+    price: "€330 / month",
     delivery: "Weekly delivery",
     description: "12 short-form videos and 12 product carousels generated with modern AI models, optimized for TikTok, Reels, and YouTube Shorts algorithms.",
     includes: [
@@ -38,7 +38,7 @@ const enPackageDetails: Record<string, {
   "daily-impact": {
     name: "Daily Impact 1 Video Daily",
     tagline: "Visual dominance through daily product video content.",
-    price: "€690 / month",
+    price: "€588 / month",
     delivery: "Daily delivery",
     description: "30 short-form video assets monthly, 1 published every day, plus 30 graphic posts. Real equipment and product demonstrations with synthetic voiceover.",
     includes: [
@@ -55,7 +55,7 @@ const enPackageDetails: Record<string, {
   "dominance-3x": {
     name: "Dominance 3X 3 Videos Daily",
     tagline: "Aggressive scaling for maximum algorithm coverage.",
-    price: "€1,500 / month",
+    price: "€1,275 / month",
     delivery: "3 daily deliveries",
     description: "90 short-form video assets monthly, 3 per day, for brands and retail companies wanting full saturation across feed algorithms.",
     includes: [
@@ -70,7 +70,7 @@ const enPackageDetails: Record<string, {
   "start-digital": {
     name: "Start Digital Web & Video",
     tagline: "High-speed modern website powered by video from day one.",
-    price: "€1,500",
+    price: "€1,275",
     delivery: "7–14 days",
     description: "High-speed 3–5 page presentation platform built on Next.js, integrated with contact forms, Google Maps, WhatsApp, and 15 launch videos.",
     includes: [
@@ -86,7 +86,7 @@ const enPackageDetails: Record<string, {
   "magazin-digital-activ": {
     name: "Active Digital Store eCommerce & AI",
     tagline: "Complete eCommerce platform engineered for conversion and AI search.",
-    price: "€2,940",
+    price: "€2,499",
     delivery: "14–30 days",
     description: "Full eCommerce infrastructure on WooCommerce or Next.js with Payload CMS, cognitive checkout, card payments, automated billing, and 30 launch videos.",
     includes: [
@@ -103,7 +103,7 @@ const enPackageDetails: Record<string, {
   "infrastructura-enterprise": {
     name: "Enterprise Infrastructure & B2B",
     tagline: "Dedicated digital systems and operational transformation.",
-    price: "from €3,900",
+    price: "from €3,315",
     delivery: "Dedicated scope",
     description: "Enterprise systems executed in strategic partnership with Zylaris Group London: B2B client portals, workflow automation, autonomous AI agents, and secure cloud hosting.",
     includes: [
