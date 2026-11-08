@@ -2,136 +2,213 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import PageEnter from "@/components/PageEnter";
-import { TrendingUp, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/en/portfolio", languages: { ro: "/portofoliu", en: "/en/portfolio", "x-default": "/portofoliu" } },
-  title: "Portfolio & Case Studies — Reverb Digital",
+  title: "Portfolio",
   description:
-    "Real case studies: relaunched online stores, conversion rate optimization, and generative engine optimization (GEO).",
+    "Real case studies: relaunched online stores, repositioned brands, integrated marketing systems. Proof that things work.",
 };
 
 const caseStudies = [
   {
     slug: "ecommerce-relaunched",
-    title: "E-Commerce Architecture Relaunched for Pure Conversion",
-    client: "Home & Décor Retailer",
+    title: "E-commerce relaunched with structure and clear messaging",
     category: "Online Stores",
-    summary:
-      "Full digital commerce overhaul replacing legacy sluggish interfaces with an ultra-fast Next.js architecture, sub-second checkout, and structured GEO data.",
+    tags: ["WooCommerce", "Branding", "Conversion", "Commercial copy"],
     challenge:
-      "A store with traffic but 0.4% conversion and 68% cart abandonment due to friction and multi-step checkouts.",
-    results: [
-      { metric: "1.8%", label: "Conversion Rate (from 0.4%)" },
-      { metric: "-41%", label: "Cart Abandonment Drop" },
-      { metric: "+23%", label: "Average Order Value" },
-      { metric: "<1.0s", label: "Page Load Speed" },
+      "A furniture and décor online store with existing traffic but poor conversions (0.4%). The messaging was vague, categories were confusing, and product pages were overloaded with technical info but no clear benefits. Checkout abandonment was at 68%.",
+    approach: [
+      "Full audit: analytics, heatmaps, real usage sessions with 5 clients",
+      "Category restructure based on purchase intent, not product type",
+      "Full commercial copy rewrite — titles, product descriptions, About page",
+      "Product page redesign focusing on benefits, contextual images and visible reviews",
+      "Checkout simplification: from 6 steps to 3, removing mandatory account creation",
+      "Post-purchase email setup + abandoned cart reactivation campaign",
     ],
+    results: [
+      "Conversion rate: from 0.4% to 1.8% in the first 60 days",
+      "Checkout abandonment: from 68% to 41%",
+      "Average order value +23%",
+      "Bounce rate on product page down 35%",
+    ],
+    quote: {
+      text: "Reverb brought order to our offer, our messaging and our sales process. Finally, our website clearly says what we do and for whom.",
+      author: "Client testimonial slot 01",
+      role: "Founder, online décor store",
+    },
   },
   {
-    slug: "b2b-digital-systems",
-    title: "Industrial B2B Portal & Catalog Digitization",
-    client: "European Equipment Distributor",
-    category: "B2B & Systems",
-    summary:
-      "Turnkey multi-vendor portal with automated proforma invoicing, real-time stock sync, and courier API dispatch integration.",
+    slug: "brand-repositioned",
+    title: "Brand repositioned with AI support and coherent funnels",
+    category: "Branding & Marketing",
+    tags: ["Branding", "AI", "Meta Ads", "Email marketing"],
     challenge:
-      "Manual phone orders, slow paper invoices, and zero indexation in generative search engines.",
-    results: [
-      { metric: "100%", label: "Automated Invoicing" },
-      { metric: "3,400+", label: "Products Indexed in GEO" },
-      { metric: "48h", label: "Deployment Turnaround" },
-      { metric: "99.99%", label: "Verified System Uptime" },
+      "A B2B consulting company with good services but a generic digital presentation. Messages were identical to all competitors, the website didn't differentiate, and ad campaigns brought low-quality leads.",
+    approach: [
+      "Strategy session: identifying real differentiators through interviews with current clients",
+      "Repositioning: from 'business consulting' to a specific niche with a unique message",
+      "Brand guide creation: voice, tone, key messages, what to say and never say",
+      "Full website rewrite with the new message — home, services, about, case studies",
+      "Meta Ads campaigns with creatives aligned to the new brand — testing 8 variants",
+      "Onboarding email sequence for new leads (5 emails, 3 weeks)",
     ],
+    results: [
+      "Cost per qualified lead down 44%",
+      "Lead qualification rate: from 18% to 52%",
+      "3 new contracts in the first 45 days after relaunch",
+      "Email sequence open rate: 68% (vs. 22% previously)",
+    ],
+    quote: {
+      text: "They used AI intelligently, without losing the human voice of the brand. The result was clearer, faster and more stable.",
+      author: "Client testimonial slot 02",
+      role: "CEO, B2B consulting company",
+    },
+  },
+  {
+    slug: "integrated-marketing-system",
+    title: "Integrated marketing system for a SaaS product",
+    category: "Digital Marketing",
+    tags: ["SaaS", "Content", "SEO", "Automations", "Retention"],
+    challenge:
+      "A SaaS product with high churn (8% monthly) and stagnant organic growth. The internal team was producing content without strategy, without a calendar and with no connection to the acquisition funnel. No onboarding or retention sequence existed.",
+    approach: [
+      "Audit: identifying customer journey stages where churn was highest",
+      "Content strategy creation based on search intent and funnel stages",
+      "Monthly editorial calendar with 12 articles/month + channel distribution",
+      "Onboarding sequence (7 emails, 14 days): key feature activation",
+      "Reactivation campaign for inactive users: 3 emails + personalised offer",
+      "Monthly reporting dashboard: organic traffic, activation rate, churn, MRR",
+    ],
+    results: [
+      "Monthly churn: from 8% to 4.2% in 90 days",
+      "Organic traffic: +180% in 6 months",
+      "Activation rate (users activating ≥3 features in the first week): from 31% to 67%",
+      "MRR growth: +34% in the first 6 months of partnership",
+    ],
+    quote: {
+      text: "They didn't come with cheap magic. They came with structure, calm and execution. Exactly what the previous agency lacked.",
+      author: "Client testimonial slot 03",
+      role: "Co-founder, SaaS product",
+    },
   },
 ];
 
-export default function PortfolioPageEn() {
+const categoryColors: Record<string, string> = {
+  "Online Stores": "bg-[#eef1f0] text-[#31584f]",
+  "Branding & Marketing": "bg-[#f0ecf4] text-[#6d5c87]",
+  "Digital Marketing": "bg-[#edf0f5] text-[#4a5d7c]",
+};
+
+export default function PortfolioPage() {
   return (
     <PageEnter>
-      <div className="bg-[#070809] text-neutral-100 min-h-screen font-sans selection:bg-neutral-700 selection:text-white antialiased">
-        
-        {/* Background Architectural Grid Pattern */}
-        <div 
-          className="fixed inset-0 pointer-events-none z-0 opacity-[0.035]"
-          style={{
-            backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
-            backgroundSize: '48px 48px'
-          }}
-        />
-        <div className="fixed inset-0 pointer-events-none z-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.03)_0%,transparent_70%)]" />
-
+      <div className="bg-[#f5f1ea] text-[#1d2731]">
         {/* Hero */}
-        <section className="relative z-10 pt-32 pb-16 md:pt-40 md:pb-24 border-b border-white/10">
-          <div className="mx-auto max-w-7xl px-6 lg:px-10">
+        <section className="border-b border-[#1d2731]/8">
+          <div className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-24">
             <Reveal>
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-300 mb-6 backdrop-blur-md">
-                <TrendingUp size={12} className="text-emerald-400" />
-                <span>Operational Validation & Outcomes</span>
-              </div>
+              <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">Portfolio</div>
             </Reveal>
             <Reveal delay={80}>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-white leading-tight">
-                Measurable impact. <br />
-                <span className="text-neutral-400 font-light">Infrastructure over empty promises.</span>
+              <h1 className="mt-4 max-w-3xl text-4xl font-medium leading-tight tracking-[-0.03em] md:text-6xl">
+                Real results. Not polished words.
               </h1>
             </Reveal>
             <Reveal delay={160}>
-              <p className="mt-6 max-w-2xl text-sm md:text-base text-neutral-400 font-light leading-relaxed">
-                Every project in our ecosystem is benchmarked against real criteria: sub-second load times, friction-free checkout, and daily organic video saturation.
+              <p className="mt-5 max-w-xl text-lg leading-8 text-[#1d2731]/65">
+                Each case study documents a real problem, our intervention and the measurable impact. No exaggerations and no invented data.
               </p>
             </Reveal>
           </div>
         </section>
 
-        {/* Case Studies List */}
-        <section className="relative z-10 mx-auto max-w-7xl px-6 py-20 lg:px-10 border-b border-white/10">
-          <div className="space-y-10">
+        {/* Case studies */}
+        <section className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-24">
+          <div className="space-y-6">
             {caseStudies.map((cs, idx) => (
               <Reveal key={cs.slug} delay={idx * 80}>
-                <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8 md:p-12 hover:border-white/25 transition-all">
-                  <div className="grid gap-10 lg:grid-cols-12 items-center">
-                    
-                    <div className="lg:col-span-7">
-                      <div className="flex flex-wrap items-center gap-3 mb-6">
-                        <span className="rounded-full px-3 py-1 text-[10px] font-mono uppercase tracking-wider border bg-emerald-500/10 text-emerald-400 border-emerald-500/20">
+                <div
+                  className={`rounded-[32px] border border-[#1d2731]/8 p-8 md:p-10 ${
+                    idx % 2 === 0 ? "bg-white/70" : "bg-[#faf7f2]"
+                  }`}
+                >
+                  <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+                    <div>
+                      <div className="flex flex-wrap items-center gap-3">
+                        <span
+                          className={`rounded-full px-3 py-1 text-xs font-medium ${
+                            categoryColors[cs.category] ?? "bg-white text-[#1d2731]/60"
+                          }`}
+                        >
                           {cs.category}
                         </span>
-                        <span className="text-xs font-mono text-neutral-500">• {cs.client}</span>
+                        {cs.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="rounded-full border border-[#1d2731]/10 bg-white/60 px-3 py-1 text-xs text-[#1d2731]/60"
+                          >
+                            {tag}
+                          </span>
+                        ))}
                       </div>
 
-                      <h2 className="text-2xl md:text-3xl font-light text-white tracking-tight mb-4">
+                      <h2 className="mt-5 text-2xl font-medium tracking-[-0.02em] md:text-3xl">
                         {cs.title}
                       </h2>
 
-                      <p className="text-xs md:text-sm text-neutral-400 font-light leading-relaxed mb-6">
-                        {cs.summary}
-                      </p>
+                      <div className="mt-6">
+                        <div className="text-xs uppercase tracking-[0.25em] text-[#1d2731]/40">
+                          The Challenge
+                        </div>
+                        <p className="mt-2 text-[15px] leading-7 text-[#1d2731]/70">{cs.challenge}</p>
+                      </div>
 
-                      <div className="space-y-2 text-xs font-mono text-neutral-300 mb-6">
-                        <div className="text-neutral-500 uppercase text-[9px]">Technical Intervention:</div>
-                        <p className="font-sans text-neutral-300 text-xs leading-relaxed">{cs.challenge}</p>
+                      <div className="mt-6">
+                        <div className="text-xs uppercase tracking-[0.25em] text-[#1d2731]/40">
+                          The Intervention
+                        </div>
+                        <ul className="mt-3 space-y-2">
+                          {cs.approach.map((step) => (
+                            <li
+                              key={step}
+                              className="flex items-start gap-3 text-[14px] leading-6 text-[#1d2731]/70"
+                            >
+                              <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#1d2731]/35" />
+                              {step}
+                            </li>
+                          ))}
+                        </ul>
                       </div>
                     </div>
 
-                    <div className="lg:col-span-5 bg-black/40 border border-white/10 rounded-2xl p-6 md:p-8 font-mono">
-                      <div className="text-[10px] uppercase tracking-widest text-neutral-500 mb-4 border-b border-white/10 pb-2">
-                        Measured Key Metrics
+                    <div className="space-y-5">
+                      <div className="rounded-[24px] bg-[#1d2731] p-6 text-white">
+                        <div className="text-xs uppercase tracking-[0.25em] text-white/45">
+                          Results
+                        </div>
+                        <ul className="mt-4 space-y-3">
+                          {cs.results.map((r) => (
+                            <li key={r} className="flex items-start gap-3 text-[15px] leading-6 text-white/80">
+                              <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-white/40" />
+                              {r}
+                            </li>
+                          ))}
+                        </ul>
                       </div>
-                      <div className="grid grid-cols-2 gap-4">
-                        {cs.results.map((res, rIdx) => (
-                          <div key={rIdx} className="p-3 rounded-xl bg-white/[0.02] border border-white/5">
-                            <div className="text-xl md:text-2xl font-bold text-white mb-1">
-                              {res.metric}
-                            </div>
-                            <div className="text-[10px] text-neutral-400 leading-tight">
-                              {res.label}
-                            </div>
+
+                      {cs.quote && (
+                        <div className="rounded-[24px] border border-[#1d2731]/8 bg-white/60 p-6">
+                          <p className="text-[15px] leading-7 text-[#1d2731]/72 italic">
+                            &ldquo;{cs.quote.text}&rdquo;
+                          </p>
+                          <div className="mt-4">
+                            <div className="text-sm font-medium text-[#1d2731]">{cs.quote.author}</div>
+                            <div className="text-xs text-[#1d2731]/45">{cs.quote.role}</div>
                           </div>
-                        ))}
-                      </div>
+                        </div>
+                      )}
                     </div>
-
                   </div>
                 </div>
               </Reveal>
@@ -139,23 +216,55 @@ export default function PortfolioPageEn() {
           </div>
         </section>
 
-        {/* Bottom CTA */}
-        <section className="relative z-10 mx-auto max-w-4xl px-6 py-24 text-center">
-          <h2 className="text-2xl md:text-4xl font-light text-white tracking-tight mb-4">
-            Ready for similar outcomes on your digital platforms?
-          </h2>
-          <p className="text-xs md:text-sm text-neutral-400 mb-8 max-w-md mx-auto font-light leading-relaxed">
-            We provide a complimentary technical audit of your current conversion funnel and AI search readiness.
-          </p>
-          <Link
-            href="/en/contact"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-white text-black px-8 py-3.5 text-xs font-mono font-bold uppercase tracking-widest hover:bg-neutral-200 transition-all shadow-md"
-          >
-            <span>Request Free Technical Audit</span>
-            <ArrowRight size={14} />
-          </Link>
+        {/* Stats */}
+        <section className="border-y border-[#1d2731]/8 bg-white/45">
+          <div className="mx-auto max-w-7xl px-6 py-14 lg:px-10">
+            <Reveal>
+              <div className="grid gap-8 text-center sm:grid-cols-3">
+                {[
+                  { value: "3.2×", label: "Average conversion growth after restructuring" },
+                  { value: "44%", label: "Reduction in cost per qualified lead" },
+                  { value: "90 days", label: "Average time to first measurable results" },
+                ].map((stat) => (
+                  <div key={stat.label} className="rounded-[24px] border border-[#1d2731]/8 bg-white p-8">
+                    <div className="text-4xl font-medium tracking-[-0.04em] text-[#1d2731]">{stat.value}</div>
+                    <div className="mt-3 text-sm leading-6 text-[#1d2731]/60">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+          </div>
         </section>
 
+        {/* CTA */}
+        <Reveal>
+          <section className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-24">
+            <div className="rounded-[36px] bg-[#1d2731] p-8 text-white md:p-12 lg:p-16">
+              <div className="mx-auto max-w-3xl text-center">
+                <h2 className="text-3xl font-medium leading-tight tracking-[-0.03em] md:text-4xl">
+                  Want the same level of precision for your business?
+                </h2>
+                <p className="mt-5 text-lg leading-8 text-white/70">
+                  We don&apos;t promise identical results — every business is different. But we promise honesty, structure and disciplined execution.
+                </p>
+                <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+                  <Link
+                    href="/en/contact"
+                    className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-sm font-medium text-[#1d2731] transition hover:-translate-y-0.5 hover:shadow-lg"
+                  >
+                    Let&apos;s talk about your project
+                  </Link>
+                  <Link
+                    href="/en/services"
+                    className="inline-flex items-center justify-center rounded-full border border-white/15 px-8 py-4 text-sm font-medium text-white transition hover:bg-white/5"
+                  >
+                    See all services
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </section>
+        </Reveal>
       </div>
     </PageEnter>
   );

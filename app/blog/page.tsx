@@ -3,96 +3,79 @@ import Link from "next/link";
 import { posts } from "@/lib/posts";
 import Reveal from "@/components/Reveal";
 import PageEnter from "@/components/PageEnter";
-import { Sparkles, ArrowRight, BookOpen } from "lucide-react";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/blog", languages: { ro: "/blog", en: "/en/blog", "x-default": "/blog" } },
-  title: "Blog & Cercetare AI — Reverb Digital",
+  title: "Blog",
   description:
-    "Articole tehnice și strategice despre e-commerce, conținut video generativ, căutare AI (GEO) și scalare digitală. Fără clișee.",
+    "Articole despre e-commerce, marketing digital, branding și AI aplicate în business. Fără jargon. Cu perspective reale.",
 };
 
-const categoryPills: Record<string, string> = {
-  "E-commerce": "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
-  AI: "bg-purple-500/10 text-purple-400 border-purple-500/20",
-  Marketing: "bg-blue-500/10 text-blue-400 border-blue-500/20",
-  Business: "bg-amber-500/10 text-amber-400 border-amber-500/20",
+const categoryColors: Record<string, string> = {
+  "E-commerce": "bg-[#eef1f0] text-[#31584f]",
+  AI: "bg-[#f0ecf4] text-[#6d5c87]",
+  Marketing: "bg-[#edf0f5] text-[#4a5d7c]",
+  Business: "bg-[#faf7f2] text-[#8a6f3a]",
 };
 
 export default function BlogPage() {
   return (
     <PageEnter>
-      <div className="bg-[#070809] text-neutral-100 min-h-screen font-sans selection:bg-neutral-700 selection:text-white antialiased">
-        
-        {/* Background Architectural Grid Pattern */}
-        <div 
-          className="fixed inset-0 pointer-events-none z-0 opacity-[0.035]"
-          style={{
-            backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
-            backgroundSize: '48px 48px'
-          }}
-        />
-        <div className="fixed inset-0 pointer-events-none z-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.03)_0%,transparent_70%)]" />
-
+      <div className="bg-[#f5f1ea] text-[#1d2731]">
         {/* Hero */}
-        <section className="relative z-10 pt-32 pb-16 md:pt-40 md:pb-24 border-b border-white/10">
-          <div className="mx-auto max-w-7xl px-6 lg:px-10">
+        <section className="border-b border-[#1d2731]/8">
+          <div className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-24">
             <Reveal>
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-300 mb-6 backdrop-blur-md">
-                <BookOpen size={12} className="text-white" />
-                <span>Cercetare & Perspective Reale</span>
-              </div>
+              <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/45">Blog</div>
             </Reveal>
             <Reveal delay={80}>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-white leading-tight">
-                Perspective aplicate despre <br />
-                <span className="text-neutral-400 font-light">E-Commerce, Sisteme & AI.</span>
+              <h1 className="mt-4 max-w-3xl text-4xl font-medium leading-tight tracking-[-0.03em] md:text-6xl">
+                Perspective reale despre digital, marketing și AI.
               </h1>
             </Reveal>
             <Reveal delay={160}>
-              <p className="mt-6 max-w-2xl text-sm md:text-base text-neutral-400 font-light leading-relaxed">
-                Articole fără jargon de agenție. Doar ceea ce contează cu adevărat pentru fondatorii care construiesc infrastructuri durabile.
+              <p className="mt-5 max-w-xl text-lg leading-8 text-[#1d2731]/65">
+                Articole fără jargon. Fără tendințe goale. Doar ce contează concret pentru antreprenorii care construiesc serios.
               </p>
             </Reveal>
           </div>
         </section>
 
-        {/* Posts Grid */}
-        <section className="relative z-10 mx-auto max-w-7xl px-6 py-20 lg:px-10 border-b border-white/10">
-          <div className="grid gap-8 md:grid-cols-2">
+        {/* Posts */}
+        <section className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-24">
+          <div className="grid gap-5 md:grid-cols-2">
             {posts.map((post, i) => (
               <Reveal key={post.slug} delay={i * 80}>
                 <Link
                   href={`/blog/${post.slug}`}
-                  className="group flex h-full flex-col justify-between rounded-3xl border border-white/10 bg-neutral-900/40 p-8 md:p-10 hover:border-white/30 hover:bg-neutral-900/60 transition-all duration-300 shadow-sm hover:shadow-2xl"
+                  className="group flex h-full flex-col rounded-[28px] border border-[#1d2731]/8 bg-white/70 p-8 shadow-[0_8px_32px_rgba(29,39,49,0.04)] transition hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(29,39,49,0.09)]"
                 >
-                  <div>
-                    <div className="mb-6 flex items-center justify-between">
-                      <span className={`rounded-full px-3 py-1 text-[10px] font-mono uppercase tracking-wider border ${categoryPills[post.category] ?? "bg-white/10 text-neutral-300 border-white/10"}`}>
-                        {post.category}
-                      </span>
-                      <span className="text-xs font-mono text-neutral-500">{post.readTime} lectură</span>
-                    </div>
-
-                    <h2 className="text-2xl font-light text-white tracking-tight mb-4 group-hover:text-emerald-300 transition-colors">
-                      {post.title}
-                    </h2>
-                    
-                    <p className="text-xs md:text-sm text-neutral-400 font-light leading-relaxed mb-8">
-                      {post.excerpt}
-                    </p>
+                  <div className="mb-5 flex items-center gap-3">
+                    <span
+                      className={`rounded-full px-3 py-1 text-xs font-medium ${
+                        categoryColors[post.category] ?? "bg-[#faf7f2] text-[#1d2731]/60"
+                      }`}
+                    >
+                      {post.category}
+                    </span>
+                    <span className="text-xs text-[#1d2731]/40">{post.readTime} citire</span>
                   </div>
 
-                  <div className="pt-6 border-t border-white/5 flex items-center justify-between font-mono text-xs text-neutral-500">
-                    <time>
+                  <h2 className="text-xl font-medium leading-snug tracking-[-0.02em] text-[#1d2731] transition group-hover:text-[#1d2731]">
+                    {post.title}
+                  </h2>
+                  <p className="mt-3 flex-1 text-[15px] leading-7 text-[#1d2731]/65">{post.excerpt}</p>
+
+                  <div className="mt-6 flex items-center justify-between border-t border-[#1d2731]/6 pt-5">
+                    <time className="text-xs text-[#1d2731]/40">
                       {new Date(post.date).toLocaleDateString("ro-RO", {
                         day: "numeric",
                         month: "long",
                         year: "numeric",
                       })}
                     </time>
-                    <span className="flex items-center gap-1 text-neutral-300 group-hover:text-white group-hover:translate-x-1 transition-all">
-                      Citește Articolul <ArrowRight size={12} />
+                    <span className="text-xs font-medium text-[#1d2731]/50 transition group-hover:text-[#1d2731]">
+                      Citește →
                     </span>
                   </div>
                 </Link>
@@ -101,27 +84,29 @@ export default function BlogPage() {
           </div>
         </section>
 
-        {/* Bottom CTA */}
-        <section className="relative z-10 mx-auto max-w-5xl px-6 py-24 text-center">
-          <Reveal>
-            <div className="rounded-3xl border border-white/15 bg-gradient-to-b from-neutral-900/80 to-neutral-950 p-10 md:p-14 backdrop-blur-md">
-              <h2 className="text-2xl md:text-4xl font-light text-white tracking-tight mb-4">
-                Vrei să implementăm aceste sisteme în afacerea ta?
-              </h2>
-              <p className="text-xs md:text-sm text-neutral-400 max-w-lg mx-auto font-light leading-relaxed mb-8">
-                Stabilim o discuție tehnică directă. Fără propuneri generice, direct pe cifrele și nevoile tale.
-              </p>
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-white text-black px-8 py-3.5 text-xs font-mono font-bold uppercase tracking-widest hover:bg-neutral-200 transition-all shadow-md"
-              >
-                <span>Inițiază Dialogul Tehnic</span>
-                <ArrowRight size={14} />
-              </Link>
+        {/* CTA */}
+        <Reveal>
+          <section className="mx-auto max-w-7xl px-6 pb-16 lg:px-10 lg:pb-24">
+            <div className="rounded-[32px] bg-[#1d2731] p-8 text-white md:p-10">
+              <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+                <div>
+                  <h2 className="text-2xl font-medium tracking-[-0.02em]">
+                    Vrei să aplicăm asta pentru business-ul tău?
+                  </h2>
+                  <p className="mt-2 text-base text-white/65">
+                    Hai la un call. Discutăm concret ce se poate face.
+                  </p>
+                </div>
+                <Link
+                  href="/contact"
+                  className="shrink-0 inline-flex items-center justify-center rounded-full bg-white px-7 py-3.5 text-sm font-medium text-[#1d2731] transition hover:-translate-y-0.5 hover:shadow-lg"
+                >
+                  Programează un call →
+                </Link>
+              </div>
             </div>
-          </Reveal>
-        </section>
-
+          </section>
+        </Reveal>
       </div>
     </PageEnter>
   );
