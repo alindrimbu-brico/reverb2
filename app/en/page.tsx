@@ -559,81 +559,162 @@ export default function EnglishHomePage() {
           </div>
         </div>
       </section>
-
-      {/* ── Fixed Pricing Architecture Preview ── */}
-      <section className="relative z-10 py-28 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
+      {/* ── Fixed Pricing Architecture (Zylaris Minimalist Framework) ── */}
+      <section id="packages" className="py-24 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
+        
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div>
-            <div className="text-xs font-mono uppercase tracking-[0.25em] text-neutral-500 mb-3">
-              Investment Framework
+            <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500 mb-3">
+              Predictable Investment
             </div>
             <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
               Fixed Pricing. Full Transparency.
             </h2>
           </div>
-          <Link
-            href="/en/packages"
-            className="text-xs font-mono uppercase tracking-widest text-neutral-300 hover:text-white underline underline-offset-4"
-          >
-            View All Detailed Packages →
-          </Link>
+          <p className="max-w-md text-xs md:text-sm text-neutral-400 font-light leading-relaxed">
+            Every engagement delivers a defined set of milestones. No hidden fees, no mandatory 12-month lock-in.
+          </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-3">
-          <div className="rounded-3xl border border-white/10 bg-neutral-900/30 p-8 flex flex-col justify-between">
+        {/* Integrated Brutalist Grid (Zylaris Group Architecture) */}
+        <div className="rounded-3xl border border-white/10 bg-[#070809] grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10 overflow-hidden">
+          
+          {/* Column 1: Social Growth */}
+          <div className="p-8 lg:p-10 flex flex-col justify-between bg-white/[0.01] hover:bg-white/[0.02] transition-colors">
             <div>
-              <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-2">Social Media</div>
-              <h3 className="text-2xl font-medium text-white mb-2">Social Growth</h3>
-              <div className="text-4xl font-light text-white mb-4">€390 <span className="text-xs text-neutral-500 font-mono">/ month</span></div>
-              <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6">
-                12 high-fidelity AI-generated videos per month for TikTok, Reels, and Shorts.
+              <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500 mb-4">
+                01 / Visual Traction
+              </div>
+              <h3 className="text-2xl font-light text-white mb-2">Social Growth</h3>
+              <div className="text-4xl font-light text-white tracking-tight mb-4">
+                €390 <span className="text-xs font-mono text-neutral-500">/ month</span>
+              </div>
+              <p className="text-xs text-neutral-400 font-light leading-relaxed mb-8">
+                Designed for businesses requiring continuous social credibility and brand authority without physical studio overhead.
               </p>
+              
+              <div className="space-y-3 font-mono text-xs text-neutral-300 border-t border-white/5 pt-6 mb-8">
+                <div className="flex items-start gap-2">
+                  <span className="text-neutral-500">—</span>
+                  <span>12 short-form videos monthly (3 / week)</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-neutral-500">—</span>
+                  <span>Conversion retention hooks & dynamic kinetic captions</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-neutral-500">—</span>
+                  <span>Native 9:16 vertical delivery (Reels, TikTok, Shorts)</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-neutral-500">—</span>
+                  <span>Zero filming hours required from your team</span>
+                </div>
+              </div>
             </div>
+
             <Link
               href="/en/contact?pachet=social-growth"
+              onClick={() => sounds.playClick()}
               className="block w-full text-center rounded-full border border-white/20 py-3 text-xs font-mono uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all"
             >
               Select Package →
             </Link>
           </div>
 
-          <div className="rounded-3xl border border-white/30 bg-gradient-to-b from-neutral-900 to-[#121316] p-8 flex flex-col justify-between shadow-[0_0_40px_rgba(255,255,255,0.06)] scale-100 lg:scale-[1.02]">
+          {/* Column 2: Daily Impact (Recommended) */}
+          <div className="p-8 lg:p-10 flex flex-col justify-between bg-neutral-900/40 relative">
             <div>
-              <div className="inline-block rounded-full bg-white px-3 py-0.5 text-[9px] font-mono font-bold uppercase tracking-widest text-black mb-3">
-                Recommended
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-400">
+                  02 / Daily Domination
+                </span>
+                <span className="text-[9px] font-mono font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-white text-black">
+                  Recommended
+                </span>
               </div>
-              <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 mb-2">Daily Momentum</div>
-              <h3 className="text-2xl font-medium text-white mb-2">Daily Impact</h3>
-              <div className="text-4xl font-light text-white mb-4">€690 <span className="text-xs text-neutral-400 font-mono">/ month</span></div>
-              <p className="text-xs text-neutral-300 font-light leading-relaxed mb-6">
-                30 videos / month (1 video daily) + custom voice cloning and kinetic captioning.
+              <h3 className="text-2xl font-light text-white mb-2">Daily Impact</h3>
+              <div className="text-4xl font-light text-white tracking-tight mb-4">
+                €690 <span className="text-xs font-mono text-neutral-400">/ month</span>
+              </div>
+              <p className="text-xs text-neutral-300 font-light leading-relaxed mb-8">
+                Continuous daily high-fidelity video saturation for organic channel dominance and compounding awareness.
               </p>
+              
+              <div className="space-y-3 font-mono text-xs text-neutral-200 border-t border-white/10 pt-6 mb-8">
+                <div className="flex items-start gap-2">
+                  <span className="text-emerald-400">★</span>
+                  <span>30 monthly assets (1 video published daily)</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-emerald-400">★</span>
+                  <span>Hyper-realistic custom brand voice cloning</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-emerald-400">★</span>
+                  <span>AI visual generation with Google Veo & Imagen</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-emerald-400">★</span>
+                  <span>Weekly retention metrics and iterative improvements</span>
+                </div>
+              </div>
             </div>
+
             <Link
               href="/en/contact?pachet=daily-impact"
-              className="block w-full text-center rounded-full bg-white text-black py-3 text-xs font-mono uppercase tracking-widest font-bold hover:bg-neutral-200 transition-all shadow-md"
+              onClick={() => sounds.playClick()}
+              className="block w-full text-center rounded-full bg-white py-3 text-xs font-mono font-bold uppercase tracking-widest text-black hover:bg-neutral-200 transition-all shadow-md"
             >
-              Select Package →
+              Activate Daily Impact →
             </Link>
           </div>
 
-          <div className="rounded-3xl border border-white/10 bg-neutral-900/30 p-8 flex flex-col justify-between">
+          {/* Column 3: Turnkey E-Commerce Store */}
+          <div className="p-8 lg:p-10 flex flex-col justify-between bg-white/[0.01] hover:bg-white/[0.02] transition-colors">
             <div>
-              <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-2">Web Platform</div>
-              <h3 className="text-2xl font-medium text-white mb-2">Online Store Complete</h3>
-              <div className="text-4xl font-light text-white mb-4">€1,500 <span className="text-xs text-neutral-500 font-mono">fixed price</span></div>
-              <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6">
-                Turnkey Next.js e-commerce architecture with payment gateways, automated invoicing, and GEO indexation.
+              <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500 mb-4">
+                03 / Commerce Architecture
+              </div>
+              <h3 className="text-2xl font-light text-white mb-2">Complete Digital Store</h3>
+              <div className="text-4xl font-light text-white tracking-tight mb-4">
+                €1,500 <span className="text-xs font-mono text-neutral-500">fixed price</span>
+              </div>
+              <p className="text-xs text-neutral-400 font-light leading-relaxed mb-8">
+                Turnkey e-commerce infrastructure built on Next.js and WooCommerce, optimized for speed, conversion, and AI search.
               </p>
+              
+              <div className="space-y-3 font-mono text-xs text-neutral-300 border-t border-white/5 pt-6 mb-8">
+                <div className="flex items-start gap-2">
+                  <span className="text-neutral-500">—</span>
+                  <span>Verified sub-1.2s load time across mobile & desktop</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-neutral-500">—</span>
+                  <span>1-step checkout, card processing & automated AWB</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-neutral-500">—</span>
+                  <span>Native Generative Engine Optimization (JSON-LD)</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-neutral-500">—</span>
+                  <span>Instant fiscal invoice automation</span>
+                </div>
+              </div>
             </div>
+
             <Link
               href="/en/contact?pachet=magazin-complet"
+              onClick={() => sounds.playClick()}
               className="block w-full text-center rounded-full border border-white/20 py-3 text-xs font-mono uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all"
             >
-              Select Package →
+              Build Your Store →
             </Link>
           </div>
+
         </div>
+
       </section>
 
       {/* ── Final Call to Action ── */}
