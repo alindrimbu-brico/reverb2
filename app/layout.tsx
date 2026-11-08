@@ -6,6 +6,8 @@ import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgress";
 import AmbientBeams from "@/components/AmbientBeams";
 import MechanicalInteractions from "@/components/MechanicalInteractions";
+import BackgroundWatermarkLogo from "@/components/BackgroundWatermarkLogo";
+import CookieConsent from "@/components/CookieConsent";
 import { SITE_URL, TITLE_TEMPLATE } from "@/lib/seo";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist-sans" });
@@ -97,11 +99,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <AmbientBeams />
+        <BackgroundWatermarkLogo />
         <MechanicalInteractions />
         <ScrollProgress />
         <Header />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 relative z-10">{children}</main>
         <Footer />
+        <CookieConsent />
       </body>
     </html>
   );
