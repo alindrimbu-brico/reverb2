@@ -514,7 +514,7 @@ export default function AbyssIOGame() {
   }, []);
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden bg-[#050B14] font-mono selection:bg-white selection:text-black">
+    <div data-showcase="fish-io" className="showcase-root relative w-screen h-screen overflow-hidden bg-[#050B14] font-mono selection:bg-white selection:text-black">
       
       {/* CANAVAS ENGINE */}
       <canvas 

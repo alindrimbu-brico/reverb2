@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function LensPortfolioShowcase() {
   return (
-    <div className="min-h-screen bg-[#E5E5E5] text-black font-sans selection:bg-black selection:text-[#E5E5E5] flex p-4 md:p-8">
+    <div data-showcase="lens-portfolio" className="showcase-root min-h-screen bg-[#E5E5E5] text-black font-sans selection:bg-black selection:text-[#E5E5E5] flex p-4 md:p-8">
       
       {/* 35mm Film border limits mimicking camera viewfinder */}
       <div className="flex-1 border-[1px] border-black/20 relative flex flex-col justify-between p-6 md:p-12 overflow-hidden bg-white/50">

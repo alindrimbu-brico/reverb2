@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 /**
  * AmbientBeams — Abstract, minimalist animated background inspired by Payload CMS / Linear.
@@ -8,7 +9,11 @@ import React, { useEffect, useRef } from "react";
  * Extremely lightweight, 60fps GPU-accelerated, zero video asset overhead.
  */
 export default function AmbientBeams() {
+  const pathname = usePathname();
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
+  const isShowcaseDemo = (pathname.startsWith("/showcase/") && pathname !== "/showcase") || (pathname.startsWith("/en/showcase/") && pathname !== "/en/showcase");
+  if (isShowcaseDemo) return null;
 
   useEffect(() => {
     const canvas = canvasRef.current;

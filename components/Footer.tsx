@@ -33,7 +33,9 @@ export default function Footer() {
 
   const nav = isEn ? navInfo.en : navInfo.ro;
 
-  if (pathname.includes("/showcase/neuro-recovery")) {
+  // Hide global Reverb footer on individual showcase prototypes (they have their own tailored footers)
+  const isShowcaseDemo = (pathname.startsWith("/showcase/") && pathname !== "/showcase") || (pathname.startsWith("/en/showcase/") && pathname !== "/en/showcase");
+  if (isShowcaseDemo) {
     return null;
   }
 

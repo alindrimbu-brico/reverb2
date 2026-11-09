@@ -12,7 +12,7 @@ export default function SoareShowcase() {
   ];
 
   return (
-    <div className="bg-[#FFFCF5] font-sans selection:bg-[#EAB308] selection:text-white min-h-screen overflow-hidden">
+    <div data-showcase="soare" className="showcase-root bg-[#FFFCF5] font-sans selection:bg-[#EAB308] selection:text-white min-h-screen overflow-hidden">
       
       <style dangerouslySetInnerHTML={{__html: `
         .sun-shaft {

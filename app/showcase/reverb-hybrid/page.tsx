@@ -21,7 +21,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-[#FFFFFF] text-[#111111] font-sans overflow-x-hidden">
+    <div data-showcase="reverb-hybrid" className="showcase-root bg-[#FFFFFF] text-[#111111] font-sans overflow-x-hidden">
       <Head>
         <title>Reverb | Human Digital Marketing AI</title>
       </Head>

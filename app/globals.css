@@ -608,3 +608,63 @@ html.light .from-neutral-900.to-\[\#121316\] {
   border-color: rgba(29, 39, 49, 0.22) !important;
   box-shadow: 0 10px 30px rgba(29, 39, 49, 0.08) !important;
 }
+
+
+/* ── Showcase Theme Isolation (Preserve custom showcase brand palettes) ── */
+html.light [data-showcase],
+html.light .showcase-root,
+html.light main:has([data-showcase]) {
+  color: inherit;
+}
+html.light [data-showcase] .text-white,
+html.light .showcase-root .text-white {
+  color: #FFFFFF !important;
+}
+html.light [data-showcase] .text-white\/80,
+html.light .showcase-root .text-white\/80 {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+html.light [data-showcase] .text-white\/60,
+html.light .showcase-root .text-white\/60 {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+html.light [data-showcase] .text-white\/50,
+html.light .showcase-root .text-white\/50 {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+html.light [data-showcase] .text-white\/40,
+html.light .showcase-root .text-white\/40 {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+html.light [data-showcase] .text-white\/20,
+html.light .showcase-root .text-white\/20 {
+  color: rgba(255, 255, 255, 0.2) !important;
+}
+html.light [data-showcase] .bg-black,
+html.light .showcase-root .bg-black {
+  background-color: #000000 !important;
+}
+html.light [data-showcase] .bg-\[\#111111\],
+html.light .showcase-root .bg-\[\#111111\] {
+  background-color: #111111 !important;
+}
+html.light [data-showcase] .bg-\[\#0E0E10\],
+html.light .showcase-root .bg-\[\#0E0E10\] {
+  background-color: #0E0E10 !important;
+}
+html.light [data-showcase] .bg-\[\#0A0A0C\],
+html.light .showcase-root .bg-\[\#0A0A0C\] {
+  background-color: #0A0A0C !important;
+}
+html.light [data-showcase] .bg-\[\#050505\],
+html.light .showcase-root .bg-\[\#050505\] {
+  background-color: #050505 !important;
+}
+html.light [data-showcase] .border-white\/10,
+html.light .showcase-root .border-white\/10 {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+html.light [data-showcase] .border-white\/20,
+html.light .showcase-root .border-white\/20 {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}

@@ -32,7 +32,7 @@ export default function MedicalCenterShowcase() {
   }
 
   return (
-    <div className="min-h-screen bg-white text-[#0A0A0B] selection:bg-[#0057FF] selection:text-white"
+    <div data-showcase="medical-center" className="showcase-root min-h-screen bg-white text-[#0A0A0B] selection:bg-[#0057FF] selection:text-white"
          style={{
            backgroundImage: 'linear-gradient(rgba(0,87,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,87,255,0.04) 1px, transparent 1px)',
            backgroundSize: '4rem 4rem',

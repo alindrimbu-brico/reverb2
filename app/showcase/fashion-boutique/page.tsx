@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function FashionBoutiqueShowcase() {
   return (
-    <div className="min-h-screen bg-white text-black selection:bg-black selection:text-white">
+    <div data-showcase="fashion-boutique" className="showcase-root min-h-screen bg-white text-black selection:bg-black selection:text-white">
       
       {/* Ultra Minimal Header */}
       <header className="flex justify-between items-center p-8 lg:p-12 absolute w-full top-0 z-50 mix-blend-difference text-white">

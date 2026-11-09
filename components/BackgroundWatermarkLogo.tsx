@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { usePathname } from "next/navigation";
 
 /**
  * BackgroundWatermarkLogo
@@ -15,6 +16,10 @@ import React from "react";
  * - Pure pointer-events-none, never blocks any clicks
  */
 export default function BackgroundWatermarkLogo() {
+  const pathname = usePathname();
+  const isShowcaseDemo = (pathname.startsWith("/showcase/") && pathname !== "/showcase") || (pathname.startsWith("/en/showcase/") && pathname !== "/en/showcase");
+  if (isShowcaseDemo) return null;
+
   return (
     <div
       aria-hidden="true"

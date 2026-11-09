@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function AutoServiceShowcase() {
   return (
-    <div className="min-h-screen bg-[#111] text-white font-sans selection:bg-[#FBBF24] selection:text-[#111]">
+    <div data-showcase="auto-service" className="showcase-root min-h-screen bg-[#111] text-white font-sans selection:bg-[#FBBF24] selection:text-[#111]">
       
       {/* Carbon fiber texture background */}
       <div className="fixed inset-0 pointer-events-none opacity-20" style={{

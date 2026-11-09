@@ -14,7 +14,7 @@ export default function VespaUrbanShowcase() {
   }, []);
 
   return (
-    <div className="bg-[#FDFBF7] min-h-screen text-[#1D1E18] font-sans selection:bg-[#E32636] selection:text-white overflow-x-hidden">
+    <div data-showcase="vespa-urban" className="showcase-root bg-[#FDFBF7] min-h-screen text-[#1D1E18] font-sans selection:bg-[#E32636] selection:text-white overflow-x-hidden">
       
       {/* ── HEADER BREEZY ── */}
       <nav className="fixed w-full z-50 bg-[#FDFBF7]/80 backdrop-blur-xl border-b border-[#1D1E18]/5">
@@ -66,7 +66,7 @@ export default function VespaUrbanShowcase() {
             {/* Imputing a breezy scooter image */}
             <div className="w-full md:w-1/2 relative h-[400px] md:h-[600px] mt-12 md:mt-0 z-10 flex justify-center items-center">
                <img 
-                 src="https://images.unsplash.com/photo-1620021600862-5f69de796a57?auto=format&fit=crop&q=80" 
+                 src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&q=80&w=1000" 
                  alt="Retro Scooter" 
                  className="w-full h-full object-cover rounded-[40px] shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-700"
                  style={{ transform: `translateY(${scrollY * -0.1}px)` }}
@@ -110,7 +110,7 @@ export default function VespaUrbanShowcase() {
 
                {/* Card 2 (Image Focus) */}
                <div className="bg-[#1D1E18] rounded-[40px] p-2 min-h-[400px] relative overflow-hidden group cursor-pointer">
-                  <img src="https://images.unsplash.com/photo-1511993226957-c1c4ee67bd86?auto=format&fit=crop&q=80" alt="Dolce Vita" className="w-full h-full object-cover rounded-[32px] opacity-80 group-hover:scale-105 transition-transform duration-700" />
+                  <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&q=80&w=1000" alt="Dolce Vita" className="w-full h-full object-cover rounded-[32px] opacity-80 group-hover:scale-105 transition-transform duration-700" />
                   <div className="absolute bottom-8 left-8 right-8 text-white">
                      <h3 className="font-serif italic text-3xl mb-2">Pasiune Italiană</h3>
                      <div className="flex items-center gap-2 font-bold uppercase text-[10px] tracking-widest hover:text-[#E0F2EC] transition-colors">

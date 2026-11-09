@@ -34,7 +34,7 @@ const community = [
 
 export default function UrbanCulture() {
   return (
-    <div className="bg-[#0A0A0A] text-white font-sans antialiased overflow-x-hidden">
+    <div data-showcase="urban-culture" className="showcase-root bg-[#0A0A0A] text-white font-sans antialiased overflow-x-hidden">
 
       {/* Ticker tape */}
       <div className="bg-[#E2FF00] text-[#0A0A0A] py-1.5 overflow-hidden whitespace-nowrap">

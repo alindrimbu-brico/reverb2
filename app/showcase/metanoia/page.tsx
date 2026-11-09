@@ -43,7 +43,7 @@ export default function MetanoiaShowcase() {
   };
 
   return (
-    <div className="min-h-screen font-sans selection:bg-[#D4AF37] selection:text-white" style={{ backgroundColor: "#FDFDF9", color: "#0F0F0F" }}>
+    <div data-showcase="metanoia" className="showcase-root min-h-screen font-sans selection:bg-[#D4AF37] selection:text-white" style={{ backgroundColor: "#FDFDF9", color: "#0F0F0F" }}>
       
       {/* Dynamic CSS for 3D Flip effect & sacred animations */}
       <style>{`

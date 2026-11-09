@@ -13,7 +13,7 @@ export default function MelGibsonPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-hidden">
+    <div data-showcase="mel-gibson" className="showcase-root min-h-screen bg-black text-white overflow-hidden">
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center px-8 py-20">
         {/* Background Gradient */}

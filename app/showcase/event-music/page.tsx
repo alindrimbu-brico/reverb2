@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function EventPromoShowcase() {
   return (
-    <div className="min-h-screen bg-[#070707] text-white font-sans overflow-hidden selection:bg-[#EC4899] selection:text-white">
+    <div data-showcase="event-music" className="showcase-root min-h-screen bg-[#070707] text-white font-sans overflow-hidden selection:bg-[#EC4899] selection:text-white">
       
       <style>{`
         @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }

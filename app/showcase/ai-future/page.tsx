@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function AIFutureShowcase() {
   return (
-    <div className="min-h-screen bg-[#030712] text-white font-sans overflow-hidden selection:bg-[#06B6D4] selection:text-[#030712]">
+    <div data-showcase="ai-future" className="showcase-root min-h-screen bg-[#030712] text-white font-sans overflow-hidden selection:bg-[#06B6D4] selection:text-[#030712]">
       
       {/* 3D Orb Effect via CSS */}
       <style>{`

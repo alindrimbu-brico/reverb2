@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function FineDiningShowcase() {
   return (
-    <div className="min-h-screen bg-[#FDFBF7] text-[#2C181A] font-serif selection:bg-[#2C181A] selection:text-[#FDFBF7]">
+    <div data-showcase="fine-dining" className="showcase-root min-h-screen bg-[#FDFBF7] text-[#2C181A] font-serif selection:bg-[#2C181A] selection:text-[#FDFBF7]">
       
       {/* Texture wrapper */}
       <div className="fixed inset-0 pointer-events-none opacity-40 mix-blend-multiply" style={{

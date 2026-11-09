@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function RealEstateShowcase() {
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-[#EFEFEF] font-sans selection:bg-[#C9A444] selection:text-[#0A0A0A] overflow-hidden">
+    <div data-showcase="real-estate" className="showcase-root min-h-screen bg-[#0A0A0A] text-[#EFEFEF] font-sans selection:bg-[#C9A444] selection:text-[#0A0A0A] overflow-hidden">
       
       {/* Minimal Header */}
       <header className="absolute top-0 w-full z-50 flex justify-between items-center p-8 md:p-12">

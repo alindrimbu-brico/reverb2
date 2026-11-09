@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function FinTechShowcase() {
   return (
-    <div className="min-h-screen bg-[#06060A] text-white font-sans overflow-hidden selection:bg-[#8B5CF6] selection:text-white">
+    <div data-showcase="fintech" className="showcase-root min-h-screen bg-[#06060A] text-white font-sans overflow-hidden selection:bg-[#8B5CF6] selection:text-white">
       
       {/* Background glowing orbs */}
       <div className="absolute top-[-20%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-[#8B5CF6]/10 blur-[120px] pointer-events-none mix-blend-screen"></div>

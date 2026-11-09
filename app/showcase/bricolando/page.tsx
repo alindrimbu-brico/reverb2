@@ -9,12 +9,12 @@ export default function BricolandoShowcase() {
 
   const categories = [
     { id: 1, title: "Unelte & Scule Ergonomice", items: "12,400+ SKU", img: "https://images.unsplash.com/photo-1540324155974-7523202daa3f?auto=format&fit=crop&q=80&w=800" },
-    { id: 2, title: "Materiale Echipamente Grele", items: "8,900+ SKU", img: "https://images.unsplash.com/photo-1504917595217-d414ba202450?auto=format&fit=crop&q=80&w=800" },
+    { id: 2, title: "Materiale Echipamente Grele", items: "8,900+ SKU", img: "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?auto=format&fit=crop&q=80&w=800" },
     { id: 3, title: "Finisaje Casă & Grădină", items: "15,200+ SKU", img: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=800" },
   ];
 
   return (
-    <div className="bg-[#FAF9F6] min-h-screen text-[#1A1A1A] font-sans selection:bg-[#E34A27] selection:text-white pb-20">
+    <div data-showcase="bricolando" className="showcase-root bg-[#FAF9F6] min-h-screen text-[#1A1A1A] font-sans selection:bg-[#E34A27] selection:text-white pb-20">
       
       {/* ── TECHNICAL NAVBAR ── */}
       <nav className="border-b-4 border-[#1A1A1A] bg-white sticky top-0 z-50">
@@ -49,7 +49,7 @@ export default function BricolandoShowcase() {
            
            <div className="lg:col-span-8 bg-[#1A1A1A] text-white rounded-[4px] p-10 lg:p-16 flex flex-col justify-between relative overflow-hidden group">
               <div className="absolute inset-0 opacity-40 mix-blend-overlay transition-transform duration-1000 group-hover:scale-105">
-                 <img src="https://images.unsplash.com/photo-1534398079543-de46985cb992?auto=format&fit=crop&q=80" alt="Constructii" className="w-full h-full object-cover" />
+                 <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&q=80&w=1200" alt="Constructii" className="w-full h-full object-cover" />
               </div>
               
               <div className="relative z-10 mb-20">

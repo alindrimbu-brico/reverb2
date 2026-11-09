@@ -33,7 +33,7 @@ export default function LegalFirmShowcase() {
   };
 
   return (
-    <div className="min-h-screen bg-[#E5E5E5] text-[#121212] font-sans selection:bg-[#8B2520] selection:text-[#E5E5E5]">
+    <div data-showcase="legal-firm" className="showcase-root min-h-screen bg-[#E5E5E5] text-[#121212] font-sans selection:bg-[#8B2520] selection:text-[#E5E5E5]">
       
       <ShowcaseAIAgent industryContext="legal" />
 

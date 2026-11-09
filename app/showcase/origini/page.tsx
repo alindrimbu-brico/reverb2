@@ -6,7 +6,7 @@ import Reveal from "@/components/Reveal";
 
 export default function OriginiShowcase() {
   return (
-    <div className="bg-[#FBF9F6] text-[#2C2A26] font-sans selection:bg-[#A0402C] selection:text-[#FBF9F6] min-h-screen">
+    <div data-showcase="origini" className="showcase-root bg-[#FBF9F6] text-[#2C2A26] font-sans selection:bg-[#A0402C] selection:text-[#FBF9F6] min-h-screen">
       
       {/* Dynamic CSS styles replacing styled-jsx to avoid hydration issues */}
       <style dangerouslySetInnerHTML={{__html: `

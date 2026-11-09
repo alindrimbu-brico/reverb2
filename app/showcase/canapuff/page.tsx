@@ -6,13 +6,13 @@ import { Search, ShoppingBag, User, Globe, ChevronDown, CheckCircle2, Play, Star
 
 // Mock Database for dynamic rendering
 const allProducts = [
-  { id: 1, category: "Vapes", title: "T9HC Vape Extreemly", status: "Stróng", image: "https://images.unsplash.com/photo-1572081172828-5690b2069b2d?auto=format&fit=crop&q=80", price: "129,00 L", rating: "4.9", bg: "bg-fuchsia-900" },
-  { id: 2, category: "Flori", title: "CBD Premium Flowers", status: "Dreamy", image: "https://images.unsplash.com/photo-1596727362302-b8d8000494bb?auto=format&fit=crop&q=80", price: "45,00 L", rating: "4.8", bg: "bg-emerald-900" },
+  { id: 1, category: "Vapes", title: "T9HC Vape Extreemly", status: "Stróng", image: "https://images.unsplash.com/photo-1527661591475-527312dd65f5?auto=format&fit=crop&q=80&w=800", price: "129,00 L", rating: "4.9", bg: "bg-fuchsia-900" },
+  { id: 2, category: "Flori", title: "CBD Premium Flowers", status: "Dreamy", image: "https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?auto=format&fit=crop&q=80&w=800", price: "45,00 L", rating: "4.8", bg: "bg-emerald-900" },
   { id: 3, category: "Drops", title: "CBG High Extract 99%", status: "Pure", image: "https://images.unsplash.com/photo-1628102491629-778571d893a3?auto=format&fit=crop&q=80", price: "210,00 L", rating: "5.0", bg: "bg-amber-900" },
-  { id: 4, category: "Jeleuri", title: "HHC Gummies Mix", status: "Sweet", image: "https://images.unsplash.com/photo-1628608849740-1284d7a17cf1?auto=format&fit=crop&q=80", price: "69,00 L", rating: "4.7", bg: "bg-blue-900" },
-  { id: 5, category: "Vapes", title: "CBD Vape Pen Smooth", status: "Relax", image: "https://images.unsplash.com/photo-1533036495819-bf9dffeb3a6a?auto=format&fit=crop&q=80", price: "99,00 L", rating: "4.5", bg: "bg-purple-900" },
-  { id: 6, category: "Flori", title: "White Widow Bud", status: "Classic", image: "https://images.unsplash.com/photo-1629815523908-1cc6b6c16709?auto=format&fit=crop&q=80", price: "55,00 L", rating: "4.9", bg: "bg-green-800" },
-  { id: 7, category: "Drops", title: "Broad Spectrum CBD Oil", status: "Heal", image: "https://images.unsplash.com/photo-1606132470659-4dffcbf12ca8?auto=format&fit=crop&q=80", price: "180,00 L", rating: "4.6", bg: "bg-orange-800" },
+  { id: 4, category: "Jeleuri", title: "HHC Gummies Mix", status: "Sweet", image: "https://images.unsplash.com/photo-1582058091505-f87a2e55a40f?auto=format&fit=crop&q=80&w=800", price: "69,00 L", rating: "4.7", bg: "bg-blue-900" },
+  { id: 5, category: "Vapes", title: "CBD Vape Pen Smooth", status: "Relax", image: "https://images.unsplash.com/photo-1536924940846-227afb31e2a5?auto=format&fit=crop&q=80&w=800", price: "99,00 L", rating: "4.5", bg: "bg-purple-900" },
+  { id: 6, category: "Flori", title: "White Widow Bud", status: "Classic", image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&q=80&w=800", price: "55,00 L", rating: "4.9", bg: "bg-green-800" },
+  { id: 7, category: "Drops", title: "Broad Spectrum CBD Oil", status: "Heal", image: "https://images.unsplash.com/photo-1608571424266-edeb9bbefdec?auto=format&fit=crop&q=80&w=800", price: "180,00 L", rating: "4.6", bg: "bg-orange-800" },
   { id: 8, category: "Jeleuri", title: "CBD Sour Bears", status: "Tasty", image: "https://images.unsplash.com/photo-1582058091505-f87a2e55a40f?auto=format&fit=crop&q=80", price: "89,00 L", rating: "4.8", bg: "bg-cyan-900" },
 ];
 
@@ -34,7 +34,7 @@ export default function CanapuffClone() {
     : allProducts.filter(p => p.category === activeTab);
 
   return (
-    <div className="bg-[#111111] min-h-screen text-white font-sans overflow-x-hidden selection:bg-[#E2FF00] selection:text-black">
+    <div data-showcase="canapuff" className="showcase-root bg-[#111111] min-h-screen text-white font-sans overflow-x-hidden selection:bg-[#E2FF00] selection:text-black">
       
       {/* ── NOTIFICARE COȘ ── */}
       <div className={`fixed top-24 right-6 bg-[#E2FF00] text-black px-6 py-4 rounded-xl z-[100] font-black uppercase tracking-widest text-xs shadow-2xl transition-all duration-300 transform ${isAlertVisible ? "translate-y-0 opacity-100" : "-translate-y-10 opacity-0 pointer-events-none"}`}>
@@ -111,7 +111,7 @@ export default function CanapuffClone() {
          <div className="max-w-[1400px] mx-auto rounded-[32px] overflow-hidden relative min-h-[500px] md:min-h-[600px] flex items-center justify-center bg-gradient-to-br from-[#E2FF00] via-[#52FF00] to-[#00FFF0]">
             
             <div className="absolute inset-0 bg-black/10 mix-blend-multiply" />
-            <div className="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1542455855-081c7414bc69?auto=format&fit=crop&q=80')] bg-cover bg-center mix-blend-overlay" />
+            <div className="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=1200')] bg-cover bg-center mix-blend-overlay" />
 
             <div className="relative z-10 text-center flex flex-col items-center px-4 w-full">
                <div className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full border border-white/30 text-black text-xs font-bold uppercase tracking-widest mb-6 inline-flex items-center gap-2">
@@ -144,7 +144,7 @@ export default function CanapuffClone() {
                     Filtrează Vapes
                  </button>
                </div>
-               <img src="https://images.unsplash.com/photo-1599304918228-dd6afbb30b80?auto=format&fit=crop&q=80" alt="Vape" className="absolute -bottom-10 -right-10 w-1/2 object-cover opacity-60 mix-blend-screen group-hover:scale-110 transition-transform duration-700 blur-[2px] group-hover:blur-0" />
+               <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&q=80&w=800" alt="Vape" className="absolute -bottom-10 -right-10 w-1/2 object-cover opacity-60 mix-blend-screen group-hover:scale-110 transition-transform duration-700 blur-[2px] group-hover:blur-0" />
             </div>
 
             <div className="bg-gradient-to-br from-emerald-400 to-teal-700 rounded-[32px] p-10 relative overflow-hidden group min-h-[350px]">
@@ -156,7 +156,7 @@ export default function CanapuffClone() {
                     Filtrează Flori
                  </button>
                </div>
-               <img src="https://images.unsplash.com/photo-1596727362302-b8d8000494bb?auto=format&fit=crop&q=80" alt="Flowers" className="absolute -bottom-10 -right-10 w-[60%] object-cover opacity-60 mix-blend-screen group-hover:scale-110 transition-transform duration-700 blur-[2px] group-hover:blur-0" />
+               <img src="https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?auto=format&fit=crop&q=80&w=800" alt="Flowers" className="absolute -bottom-10 -right-10 w-[60%] object-cover opacity-60 mix-blend-screen group-hover:scale-110 transition-transform duration-700 blur-[2px] group-hover:blur-0" />
             </div>
 
          </div>

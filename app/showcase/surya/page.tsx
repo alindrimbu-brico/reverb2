@@ -41,7 +41,7 @@ export default function SuryaShowcase() {
   ];
 
   return (
-    <div className="bg-[#f0f0f0] text-[#111] font-sans selection:bg-[#111] selection:text-white min-h-screen lowercase tracking-wide overflow-x-hidden">
+    <div data-showcase="surya" className="showcase-root bg-[#f0f0f0] text-[#111] font-sans selection:bg-[#111] selection:text-white min-h-screen lowercase tracking-wide overflow-x-hidden">
       
       {/* ── Navbar Brutalist ── */}
       <nav className="fixed top-0 w-full z-50 mix-blend-difference text-[#f0f0f0] mix-blend-exclusion px-6 lg:px-12 py-6 flex justify-between items-start pointer-events-none">

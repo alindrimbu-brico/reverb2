@@ -21,7 +21,7 @@ export default function FlorarteShowcase() {
   ];
 
   return (
-    <div className="bg-[#FAF9F5] text-[#2C3831] font-sans selection:bg-[#4E6E59] selection:text-white min-h-screen">
+    <div data-showcase="florarte" className="showcase-root bg-[#FAF9F5] text-[#2C3831] font-sans selection:bg-[#4E6E59] selection:text-white min-h-screen">
       
       {/* ── Navbar Premium ── */}
       <nav className="sticky top-0 z-50 w-full border-b border-[#2C3831]/5 bg-[#FAF9F5]/90 backdrop-blur-md transition-all">

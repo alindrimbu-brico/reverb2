@@ -14,7 +14,7 @@ export default function JimCurtisShowcase() {
   }, []);
 
   return (
-    <div className="bg-[#0A0B10] min-h-screen text-[#F8FAFC] font-sans selection:bg-[#06B6D4] selection:text-white overflow-x-hidden">
+    <div data-showcase="jim-curtis" className="showcase-root bg-[#0A0B10] min-h-screen text-[#F8FAFC] font-sans selection:bg-[#06B6D4] selection:text-white overflow-x-hidden">
       
       {/* ── HEADER NEURO-MINIMALIST ── */}
       <nav className="fixed w-full z-50 mix-blend-difference top-0 left-0 border-b border-white/5">

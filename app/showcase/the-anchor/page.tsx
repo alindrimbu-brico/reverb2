@@ -14,7 +14,7 @@ export default function TheAnchorShowcase() {
   }, []);
 
   return (
-    <div className="bg-[#050505] min-h-screen text-[#E5E5E5] font-sans overflow-x-hidden selection:bg-[#8A1C14] selection:text-white">
+    <div data-showcase="the-anchor" className="showcase-root bg-[#050505] min-h-screen text-[#E5E5E5] font-sans overflow-x-hidden selection:bg-[#8A1C14] selection:text-white">
       
       {/* ── HEADER MINIMAL ── */}
       <nav className="fixed w-full z-50 top-0 left-0 mix-blend-difference">

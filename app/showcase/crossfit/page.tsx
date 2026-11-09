@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function GymShowcase() {
   return (
-    <div className="min-h-screen bg-[#1A1A1A] text-white font-sans overflow-hidden selection:bg-[#EA580C] selection:text-white">
+    <div data-showcase="crossfit" className="showcase-root min-h-screen bg-[#1A1A1A] text-white font-sans overflow-hidden selection:bg-[#EA580C] selection:text-white">
       
       {/* Giant Background Type */}
       <div className="fixed -left-10 top-20 text-[20vw] font-black italic tracking-tighter text-white/[0.02] leading-none pointer-events-none whitespace-nowrap">

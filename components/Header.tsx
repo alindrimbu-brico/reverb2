@@ -25,6 +25,12 @@ const navInfo = {
 export default function Header() {
   const pathname = usePathname();
   const router = useRouter();
+
+  // Hide global Reverb header on individual showcase prototypes so they render their own standalone identity
+  const isShowcaseDemo = (pathname.startsWith("/showcase/") && pathname !== "/showcase") || (pathname.startsWith("/en/showcase/") && pathname !== "/en/showcase");
+  if (isShowcaseDemo) {
+    return null;
+  }
   const [open, setOpen] = useState(false);
   const [isEn, setIsEn] = useState(false);
   const [scrolled, setScrolled] = useState(false);

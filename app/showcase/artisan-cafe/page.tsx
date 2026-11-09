@@ -50,7 +50,7 @@ const events = [
 
 export default function ArtisanCafe() {
   return (
-    <div className="bg-[#0E0A08] text-[#F2EDE6] font-sans antialiased overflow-x-hidden">
+    <div data-showcase="artisan-cafe" className="showcase-root bg-[#0E0A08] text-[#F2EDE6] font-sans antialiased overflow-x-hidden">
 
       {/* Announcement bar */}
       <div className="bg-[#D64933] text-[#0E0A08] text-center py-2 px-4 text-[11px] font-bold tracking-[0.2em] uppercase">

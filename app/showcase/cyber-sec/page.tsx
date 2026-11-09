@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function CyberSecShowcase() {
   return (
-    <div className="min-h-screen bg-[#000500] text-[#00FF41] font-mono selection:bg-[#00FF41] selection:text-[#000500]">
+    <div data-showcase="cyber-sec" className="showcase-root min-h-screen bg-[#000500] text-[#00FF41] font-mono selection:bg-[#00FF41] selection:text-[#000500]">
       <style>{`
         @keyframes scanline { 0% { transform: translateY(-100%); } 100% { transform: translateY(100vh); } }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }

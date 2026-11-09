@@ -16,7 +16,7 @@ export default function VirtusShowcase() {
   }, []);
 
   return (
-    <div className="bg-[#050505] min-h-screen text-[#F5F5F5] font-sans selection:bg-[#8A1C14] selection:text-white overflow-x-hidden">
+    <div data-showcase="virtus" className="showcase-root bg-[#050505] min-h-screen text-[#F5F5F5] font-sans selection:bg-[#8A1C14] selection:text-white overflow-x-hidden">
       
       {/* ── RAW NAVBAR ── */}
       <nav className="fixed w-full z-50 mix-blend-difference top-0 left-0">
@@ -110,7 +110,7 @@ export default function VirtusShowcase() {
                <img src="https://images.unsplash.com/photo-1470434151738-dc5f4474c239?auto=format&fit=crop&q=80" alt="Nature" className="w-full h-full object-cover grayscale contrast-125 opacity-70 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700"/>
             </div>
             <div className="relative group overflow-hidden bg-black">
-               <img src="https://images.unsplash.com/photo-1549570652-97324981a6fb?auto=format&fit=crop&q=80" alt="Brotherhood" className="w-full h-full object-cover grayscale contrast-125 opacity-70 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700"/>
+               <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&q=80&w=800" alt="Brotherhood" className="w-full h-full object-cover grayscale contrast-125 opacity-70 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700"/>
                <div className="absolute inset-0 bg-[#8A1C14] mix-blend-multiply opacity-0 group-hover:opacity-60 transition-opacity duration-700"></div>
             </div>
          </div>

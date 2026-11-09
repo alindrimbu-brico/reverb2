@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function ArchitectureShowcase() {
   return (
-    <div className="min-h-screen bg-[#EAEAEA] text-[#111111] overflow-hidden selection:bg-[#7A7A7A] selection:text-white">
+    <div data-showcase="architecture" className="showcase-root min-h-screen bg-[#EAEAEA] text-[#111111] overflow-hidden selection:bg-[#7A7A7A] selection:text-white">
          
       <style>{`
         @keyframes scaleIn { from { transform: scale(1.1); opacity: 0; } to { transform: scale(1); opacity: 1; } }

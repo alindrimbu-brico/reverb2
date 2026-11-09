@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function LogisticsHubShowcase() {
   return (
-    <div className="min-h-screen bg-[#0A0D14] text-[#E2E8F0] font-mono selection:bg-[#1D4ED8] selection:text-white pb-20">
+    <div data-showcase="logistics-hub" className="showcase-root min-h-screen bg-[#0A0D14] text-[#E2E8F0] font-mono selection:bg-[#1D4ED8] selection:text-white pb-20">
       
       {/* Deep grid background */}
       <div className="fixed inset-0 pointer-events-none opacity-20" style={{

@@ -12,7 +12,7 @@ export default function CuprumMedicalShowcase() {
   ];
 
   return (
-    <div className="bg-[#FAF9F6] text-[#2A2B2A] font-sans selection:bg-[#B87333] selection:text-white min-h-screen overflow-hidden">
+    <div data-showcase="cuprum-medical" className="showcase-root bg-[#FAF9F6] text-[#2A2B2A] font-sans selection:bg-[#B87333] selection:text-white min-h-screen overflow-hidden">
       
       {/* Dynamic CSS for Copper effects */}
       <style dangerouslySetInnerHTML={{__html: `
