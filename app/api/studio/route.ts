@@ -222,6 +222,56 @@ export async function POST(req: Request) {
         success: true,
         engine: "Reverb Music Autopilot • Juriu Acustic EBU R128 + Gemini 4 Argon Audio",
         audit: auditData,
+        autoStoryboards: {
+          "Magia Crăciunului (RO)": [
+            { time: "00:00 - 00:12", title: "Introducere: Fereastra Înghețată & Lumina Caldă", visual: "Fulgii de nea cad liniștit în lumina aurie a unei ferestre din lemn masiv; înăuntru arde focul în vatră.", image: "/media/scena_colind_1.png" },
+            { time: "00:12 - 00:25", title: "Strofa 1: Satul Românesc sub Zăpadă în Ajun", visual: "Uliță liniștită la ceas de seară, cu felinare calde și fum ridicându-se din coșurile caselor acoperite de nea.", image: "/media/scena_colind_2.png" },
+            { time: "00:25 - 00:45", title: "Refren: Masa de Sărbătoare & Crenguța de Brad", visual: "Lumânări din ceară curată, crenguțe de brad și lumină aurie caldă pe masa de lemn, sincronizată cu refrenul colindului.", image: "/media/scena_colind_3.png" },
+            { time: "00:45 - Final", title: "Încheiere: Vatra Caldă & Pace în Casă", visual: "Jarul mocnind în vatră cu scântei fine aurii și stingere lină pe ultimul acord.", image: "/media/scena_colind_4.png" }
+          ],
+          "Together for Christmas (EN)": [
+            { time: "00:00 - 00:12", title: "Intro: Golden Hearth & Falling Snow", visual: "Warm candlelight reflecting on a frosted wooden window while soft snow falls outside.", image: "/media/scena_colind_1.png" },
+            { time: "00:12 - 00:25", title: "Verse: Twilight Winter Village", visual: "Peaceful snow-covered village lane at dusk with warm glowing windows.", image: "/media/scena_colind_2.png" },
+            { time: "00:25 - 00:45", title: "Chorus: Candles & Pine Garland", visual: "Close-up of glowing beeswax candles and evergreen pine on an artisan table.", image: "/media/scena_colind_3.png" },
+            { time: "00:45 - End", title: "Outro: By the Warm Fire", visual: "Slow cinematic pull-back from the glowing fireplace embers.", image: "/media/scena_colind_4.png" }
+          ]
+        },
+        viralGrowthEngine: {
+          status: "ACTIV • Rulare Continuă Automată",
+          strategy: "Analizează zilnic clipurile cu 1M–10M+ vizualizări, extrage formula din primele 1,5 secunde (Hook vizual + ritm + buclă de rejucare) și generează automat variante originale pe 3 canale pentru a aduna zeci de mii de urmăritori.",
+          channels: [
+            {
+              id: "viral-mesteri",
+              name: "1. Canal Viral: Teste Extreme & Satisfacție Mecanică",
+              targetAudience: "Bărbați, meșteri, gospodari (Aduce clienți în Bricolando.ro & RaftPlin.ro)",
+              viralFormula: "Primele 1.5s: Test de forță / Curățare extremă Before-After → 10s demonstrație vizuală satisfăcătoare → Întrebare în comentarii care dublează afișările.",
+              examplesReady: [
+                { title: "Cheie de 15 lei vs. Oțel Crom-Vanadiu la 450 Nm — Ce cedează prima dată?", estViews: "250K – 1.2M vizualizări", destination: "bricolando.ro" },
+                { title: "Piatră înnegrită de 20 de ani curățată în 8 secunde cu jet rotativ", estViews: "500K – 2.5M vizualizări", destination: "bricolando.ro" }
+              ]
+            },
+            {
+              id: "viral-suflet",
+              name: "2. Canal Viral: Adevăruri de Noapte, Psihologie & Muzică",
+              targetAudience: "Oameni care caută liniște, sens, spiritualitate (Vinde cărțile de pe Kalki.nexus, aplicațiile & crește canalul de Muzică Suno)",
+              viralFormula: "Primele 1.5s: Întrebare directă în suflet + Melodia ta din Suno pe fundal → 15s parabolă scurtă din cărțile tale → Trimite la cartea PDF (6 €) și melodia întreagă pe YouTube.",
+              examplesReady: [
+                { title: "De ce te trezești între 03:00 și 04:00 dimineața când mintea tace (pe muzica ta)", estViews: "400K – 1.8M vizualizări", destination: "kalki.nexus + Canal Muzică" },
+                { title: "Cele 3 tăceri care îți arată cine îți este cu adevărat aproape", estViews: "300K – 1.5M vizualizări", destination: "kalki.nexus (Armonia / Lumina Nemuritoare)" }
+              ]
+            },
+            {
+              id: "viral-casa",
+              name: "3. Canal Viral: Transformări Casă & Jocuri Inteligente Copii",
+              targetAudience: "Părinți, familii, gospodine (Aduce clienți în RaftPlin.ro — Casă & Jucării Kidstory)",
+              viralFormula: "Primele 1.5s: Haos vs. Ordine / Copil captivat fără ecran → 12s demonstrație rapidă → Link direct în profil.",
+              examplesReady: [
+                { title: "Cum am scăpat de telefon timp de 3 ore cu un singur set de creație", estViews: "180K – 900K vizualizări", destination: "raftplin.ro (Jucării Educative)" },
+                { title: "Trucul de 10 secunde care dublează locul în bucătărie", estViews: "350K – 1.4M vizualizări", destination: "raftplin.ro" }
+              ]
+            }
+          ]
+        },
         distributionChannels: {
           videoChannels: [
             { name: "YouTube Long-Form (16:9 4K/HD)", status: "Pregătit (YouTube Data API v3)", monetization: "AdSense + YouTube Music Premium" },

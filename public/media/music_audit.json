@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-09T21:23:40.113782",
+  "generated_at": "2026-11-09T21:54:22.474880",
   "total_files_scanned": 20,
   "exact_duplicates_eliminated": 11,
   "unique_variations_scored": 9,
@@ -32,7 +32,7 @@
           "Încheiere naturală cu stingere caldă (fără tăiere bruscă)"
         ],
         "is_winner": true,
-        "preview_video_url": "/media/colind_castigator_ro.mp4"
+        "preview_video_url": "/media/colind_castigator_ro.mp4?v=2"
       },
       "alternatives": [
         {
@@ -187,7 +187,7 @@
           "Final complet"
         ],
         "is_winner": true,
-        "preview_video_url": "/media/colind_castigator_en.mp4"
+        "preview_video_url": "/media/colind_castigator_en.mp4?v=2"
       },
       "alternatives": [
         {

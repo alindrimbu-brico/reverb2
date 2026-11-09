@@ -255,25 +255,41 @@ def scan_and_audit_colinde() -> dict:
     }
 
 
-def render_colind_preview_video(audio_path: str, title: str, subtitle: str, out_mp4: Path, duration_limit: int = 45) -> bool:
+def render_colind_preview_video(audio_path: str, title: str, subtitle: str, out_mp4: Path, duration_limit: int = 44) -> bool:
     """
-    Genereaza un videoclip de prezentare (1280x720 HD, 30fps) cu estetica calda aurie & vatra de sarbatoare,
-    unda audio (showwaves) aurie in partea de jos, gata de redat in Reverb Studio.
+    Genereaza un videoclip muzical cinematic complet (1280x720 HD, 30fps) combinand cele 4 cadre vizuale
+    fotorealiste de Craciun (scena_colind_1..4.jpg) cu miscare lina de camera (Ken Burns zoom),
+    unda audio aurie discreta in partea de jos si coloana sonora integrala.
     """
+    s1 = str(PUBLIC_MEDIA / "scena_colind_1.jpg")
+    s2 = str(PUBLIC_MEDIA / "scena_colind_2.jpg")
+    s3 = str(PUBLIC_MEDIA / "scena_colind_3.jpg")
+    s4 = str(PUBLIC_MEDIA / "scena_colind_4.jpg")
+
+    # Fiecare cadru dureaza 11 secunde (330 frame-uri la 30fps) -> total 44 secunde
+    frames_per_scene = 330
     filter_complex = (
-        f"color=c=0x0d0907:s=1280x720:r=30:d={duration_limit}[bg];"
+        f"[1:v]scale=1600:900,zoompan=z='min(zoom+0.0004,1.15)':d={frames_per_scene}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=1280x720:fps=30,fade=t=in:st=0:d=1,fade=t=out:st=10:d=1[v0];"
+        f"[2:v]scale=1600:900,zoompan=z='min(zoom+0.0004,1.15)':d={frames_per_scene}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=1280x720:fps=30,fade=t=in:st=0:d=1,fade=t=out:st=10:d=1[v1];"
+        f"[3:v]scale=1600:900,zoompan=z='min(zoom+0.0004,1.15)':d={frames_per_scene}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=1280x720:fps=30,fade=t=in:st=0:d=1,fade=t=out:st=10:d=1[v2];"
+        f"[4:v]scale=1600:900,zoompan=z='min(zoom+0.0004,1.15)':d={frames_per_scene}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=1280x720:fps=30,fade=t=in:st=0:d=1,fade=t=out:st=10:d=1[v3];"
+        f"[v0][v1][v2][v3]concat=n=4:v=1:a=0[bg];"
         f"[0:a]atrim=0:{duration_limit},asetpts=PTS-STARTPTS,asplit=2[aud_w][aud_out];"
-        f"[aud_w]showwaves=s=1280x220:mode=cline:rate=30:colors=0xf59e0b|0xfbbf24:scale=sqrt[waves];"
-        f"[bg][waves]overlay=0:H-250[v1];"
-        f"[v1]drawbox=x=48:y=48:w=1184:h=624:color=0xf59e0b@0.22:t=2[vout]"
+        f"[aud_w]showwaves=s=1280x110:mode=cline:rate=30:colors=0xf59e0b@0.75|0xfbbf24@0.75:scale=sqrt[waves];"
+        f"[bg][waves]overlay=0:H-130[v_wave];"
+        f"[v_wave]drawbox=x=24:y=24:w=1232:h=672:color=0xf59e0b@0.30:t=2[vout]"
     )
     cmd = [
         "ffmpeg", "-y", "-hide_banner", "-loglevel", "error",
         "-i", audio_path,
+        "-i", s1,
+        "-i", s2,
+        "-i", s3,
+        "-i", s4,
         "-filter_complex", filter_complex,
         "-map", "[vout]", "-map", "[aud_out]",
         "-t", str(duration_limit),
-        "-c:v", "libx264", "-preset", "veryfast", "-pix_fmt", "yuv420p", "-b:v", "2500k",
+        "-c:v", "libx264", "-preset", "veryfast", "-pix_fmt", "yuv420p", "-b:v", "3200k",
         "-c:a", "aac", "-b:a", "192k",
         str(out_mp4)
     ]
@@ -299,9 +315,9 @@ def main():
             fam["family"],
             f"Varianta Castigatoare: {w['file']} ({w['duration_fmt']})",
             out_path,
-            duration_limit=45
+            duration_limit=44
         )
-        w["preview_video_url"] = f"/media/{out_name}" if ok else None
+        w["preview_video_url"] = f"/media/{out_name}?v=2" if ok else None
 
     audit_path = PUBLIC_MEDIA / "music_audit.json"
     with open(audit_path, "w", encoding="utf-8") as f:
