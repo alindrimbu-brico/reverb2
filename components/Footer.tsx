@@ -226,7 +226,7 @@ export default function Footer() {
 
                   {/* Birou Londra - Zylaris Group London */}
                   <div className="pt-2 border-t border-black/5 dark:border-white/5">
-                    <div className="text-[10px] uppercase font-bold text-neutral-900 dark:text-neutral-200 tracking-wider flex items-center justify-between">
+                    <div className="text-[10px] uppercase font-bold text-neutral-900 dark:text-neutral-200 tracking-wider flex flex-wrap items-center justify-between gap-1">
                       <span>Zylaris Group London</span>
                       <a href="https://zylarisgroup.com" target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-neutral-900 dark:hover:text-white text-[9px]">zylarisgroup.com ↗</a>
                     </div>
