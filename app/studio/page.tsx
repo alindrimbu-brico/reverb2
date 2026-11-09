@@ -1557,7 +1557,7 @@ export default function StudioPage() {
                                 )}
 
                                 {/* Automatic Visual Storyboard (4 Scenes) */}
-                                {storyboard && (
+                                {storyboard && Array.isArray(storyboard.scenes) && (
                                   <div className="mb-5 p-4 rounded-2xl bg-white/[0.03] border border-white/10">
                                     <div className="text-[11px] font-bold text-amber-300 uppercase tracking-wider mb-1">
                                       Scenariu Generat Automat ({storyboard.concept}):
@@ -1751,7 +1751,9 @@ export default function StudioPage() {
                   </div>
 
                   <div className="grid lg:grid-cols-3 gap-6">
-                    {(musicAutopilotData?.viralGrowthEngine || [
+                    {(Array.isArray(musicAutopilotData?.viralGrowthEngine)
+                      ? musicAutopilotData.viralGrowthEngine
+                      : [
                       {
                         id: "viral-diy-Satisfying",
                         niche: "Bricolando & Raft Plin • Viral Mecanică & Satisfying",

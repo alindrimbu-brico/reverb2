@@ -223,18 +223,26 @@ export async function POST(req: Request) {
         engine: "Reverb Music Autopilot • Juriu Acustic EBU R128 + Gemini 4 Argon Audio",
         audit: auditData,
         autoStoryboards: {
-          "Magia Crăciunului (RO)": [
-            { time: "00:00 - 00:12", title: "Introducere: Fereastra Înghețată & Lumina Caldă", visual: "Fulgii de nea cad liniștit în lumina aurie a unei ferestre din lemn masiv; înăuntru arde focul în vatră.", image: "/media/scena_colind_1.png" },
-            { time: "00:12 - 00:25", title: "Strofa 1: Satul Românesc sub Zăpadă în Ajun", visual: "Uliță liniștită la ceas de seară, cu felinare calde și fum ridicându-se din coșurile caselor acoperite de nea.", image: "/media/scena_colind_2.png" },
-            { time: "00:25 - 00:45", title: "Refren: Masa de Sărbătoare & Crenguța de Brad", visual: "Lumânări din ceară curată, crenguțe de brad și lumină aurie caldă pe masa de lemn, sincronizată cu refrenul colindului.", image: "/media/scena_colind_3.png" },
-            { time: "00:45 - Final", title: "Încheiere: Vatra Caldă & Pace în Casă", visual: "Jarul mocnind în vatră cu scântei fine aurii și stingere lină pe ultimul acord.", image: "/media/scena_colind_4.png" }
-          ],
-          "Together for Christmas (EN)": [
-            { time: "00:00 - 00:12", title: "Intro: Golden Hearth & Falling Snow", visual: "Warm candlelight reflecting on a frosted wooden window while soft snow falls outside.", image: "/media/scena_colind_1.png" },
-            { time: "00:12 - 00:25", title: "Verse: Twilight Winter Village", visual: "Peaceful snow-covered village lane at dusk with warm glowing windows.", image: "/media/scena_colind_2.png" },
-            { time: "00:25 - 00:45", title: "Chorus: Candles & Pine Garland", visual: "Close-up of glowing beeswax candles and evergreen pine on an artisan table.", image: "/media/scena_colind_3.png" },
-            { time: "00:45 - End", title: "Outro: By the Warm Fire", visual: "Slow cinematic pull-back from the glowing fireplace embers.", image: "/media/scena_colind_4.png" }
-          ]
+          "Magia Crăciunului (RO)": {
+            concept: "Satul Românesc sub Zăpadă & Vatra Caldă de Crăciun",
+            targetChannel: "YouTube (16:9 HD) + TikTok/Reels (9:16) + Spotify/DistroKid",
+            scenes: [
+              { time: "00:00 - 00:11", title: "1. Seara de Ajun în Sat", desc: "Fulgii de nea cad liniștit peste ulița satului românesc și ferestrele luminate cald.", img: "/media/scena_colind_1.jpg" },
+              { time: "00:11 - 00:22", title: "2. Focul în Vatră & Bradul", desc: "Lumina aurie a șemineului, bradul împodobit și masa cu cozonac.", img: "/media/scena_colind_2.jpg" },
+              { time: "00:22 - 00:33", title: "3. Familia în Jurul Mesei", desc: "Părinți, copii și bunici reuniți în lumina caldă a lumânărilor pe refren.", img: "/media/scena_colind_3.jpg" },
+              { time: "00:33 - 00:44", title: "4. Steaua Crăciunului", desc: "Cerul înstelat de iarnă deasupra bisericii satului și munților acoperiți de nea.", img: "/media/scena_colind_4.jpg" }
+            ]
+          },
+          "Together for Christmas (EN)": {
+            concept: "Golden Hearth & Peaceful Winter Village",
+            targetChannel: "Global Christmas YouTube Channel + Spotify / Apple Music",
+            scenes: [
+              { time: "00:00 - 00:11", title: "1. Twilight Winter Village", desc: "Soft snow falling over a peaceful village lane with glowing windows at dusk.", img: "/media/scena_colind_1.jpg" },
+              { time: "00:11 - 00:22", title: "2. Golden Hearth & Christmas Tree", desc: "Warm fireplace embers, golden ornaments, and traditional holiday table.", img: "/media/scena_colind_2.jpg" },
+              { time: "00:22 - 00:33", title: "3. Family Together at Christmas", desc: "Multi-generational family sharing Christmas dinner in warm candlelight.", img: "/media/scena_colind_3.jpg" },
+              { time: "00:33 - 00:44", title: "4. Starlight Over the Mountains", desc: "Cinematic aerial view of the Christmas star shining above the snowy valley.", img: "/media/scena_colind_4.jpg" }
+            ]
+          }
         },
         viralGrowthEngine: {
           status: "ACTIV • Rulare Continuă Automată",
