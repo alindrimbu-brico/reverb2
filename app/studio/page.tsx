@@ -558,7 +558,7 @@ export default function StudioPage() {
                 <div>
                   <label className="block text-neutral-400 uppercase tracking-wider mb-2">Model de Voce:</label>
                   <select className="w-full rounded-2xl border border-white/10 bg-white/5 p-4 text-white outline-none">
-                    <option className="bg-neutral-900">ElevenLabs — Alin Signature Voice Clone (Română Caldă, Fermă)</option>
+                    <option className="bg-neutral-900">ElevenLabs — Reverb Signature Voice Clone (Română Caldă, Fermă)</option>
                     <option className="bg-neutral-900">ElevenLabs — Studio Narrator Pro (Română Editorială)</option>
                     <option className="bg-neutral-900">ElevenLabs — Adam Deep Authority (Engleză Internațională)</option>
                   </select>

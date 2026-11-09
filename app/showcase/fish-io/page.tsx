@@ -177,8 +177,8 @@ export default function AbyssIOGame() {
   const handleGoogleLogin = () => {
     // Simulare sistem real de logare Google OAuth (Showcase mode)
     const mockUser = {
-      name: "Alin Dragoș",
-      email: "bricolando@gmail.com"
+      name: "Jucător Anonim",
+      email: "player@reverb.ro"
     };
     setUser(mockUser);
     localStorage.setItem('abyss_user', JSON.stringify(mockUser));
