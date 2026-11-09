@@ -68,41 +68,67 @@ export default function ShowcaseIndex() {
     <>
       <style dangerouslySetInnerHTML={{__html: `
         .showcase-wrapper {
-          --bg-color: #050505;
+          --bg-color: #070809;
           --text-primary: #ffffff;
-          --text-secondary: rgba(255, 255, 255, 0.6);
-          --text-muted: rgba(255, 255, 255, 0.4);
-          --text-faint: rgba(255, 255, 255, 0.3);
+          --text-secondary: rgba(255, 255, 255, 0.7);
+          --text-muted: rgba(255, 255, 255, 0.45);
+          --text-faint: rgba(255, 255, 255, 0.35);
           --border-color: rgba(255, 255, 255, 0.1);
           --card-bg: rgba(255, 255, 255, 0.02);
           --card-hover-bg: rgba(255, 255, 255, 0.05);
           background-color: var(--bg-color);
           color: var(--text-primary);
-          transition: background-color 0.8s cubic-bezier(0.16, 1, 0.3, 1), color 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+          transition: background-color 0.4s ease, color 0.4s ease;
         }
         .showcase-wrapper:has(.showcase-card:hover) {
-          /* Keep dark theme consistent without flashing background */
-          --border-color: rgba(255, 255, 255, 0.18);
+          --border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* ── LIGHT THEME CALIBRATION (WCAG AAA HIGHEST CONTRAST) ── */
+        html.light .showcase-wrapper {
+          --bg-color: #FAF8F5;
+          --text-primary: #111215;
+          --text-secondary: #344054;
+          --text-muted: #475467;
+          --text-faint: #667085;
+          --border-color: rgba(29, 39, 49, 0.15);
+          --card-bg: #FFFFFF;
+          --card-hover-bg: #F8F6F1;
+          color: #111215;
+        }
+        html.light .showcase-wrapper:has(.showcase-card:hover) {
+          --border-color: rgba(29, 39, 49, 0.25);
+        }
+        html.light .showcase-card {
+          box-shadow: 0 4px 20px -2px rgba(29, 39, 49, 0.06);
+          border-color: rgba(29, 39, 49, 0.14) !important;
+          background-color: #FFFFFF !important;
+        }
+        html.light .showcase-card:hover {
+          box-shadow: 0 16px 36px -4px rgba(29, 39, 49, 0.12);
+          border-color: rgba(29, 39, 49, 0.28) !important;
         }
       `}} />
     <div className="showcase-wrapper min-h-screen">
       {/* Intro */}
-      <section className="px-6 py-20 lg:px-10 lg:py-32 border-b transition-colors duration-1000 relative" style={{
+      <section className="px-6 py-20 lg:px-10 lg:py-32 border-b transition-colors duration-500 relative" style={{
         borderColor: 'var(--border-color)',
         backgroundImage: 'linear-gradient(var(--border-color) 1px, transparent 1px), linear-gradient(90deg, var(--border-color) 1px, transparent 1px)',
         backgroundSize: '64px 64px',
         backgroundPosition: 'center top'
       }}>
-        <div className="mx-auto max-w-7xl relative z-10 transition-colors duration-1000">
-          <Link href="/templates" className="inline-flex items-center text-xs font-mono transition-all duration-1000 mb-12 border rounded-full px-4 py-1.5" style={{ color: 'var(--text-muted)', borderColor: 'var(--border-color)', backgroundColor: 'var(--card-bg)' }}>
+        <div className="mx-auto max-w-7xl relative z-10 transition-colors duration-500">
+          <Link href="/templates" className="inline-flex items-center text-xs font-mono transition-all duration-300 mb-12 border rounded-full px-4 py-1.5 shadow-sm" style={{ color: 'var(--text-muted)', borderColor: 'var(--border-color)', backgroundColor: 'var(--card-bg)' }}>
             ← Înapoi la direcții de bază
           </Link>
-          <div className="mb-4 text-[10px] font-mono uppercase tracking-[0.4em] transition-colors duration-1000" style={{ color: "var(--text-faint)" }}>[ CLARITATE ÎN STRUCTURĂ • 52 VERTICALE ABSOLUTE ]</div>
-          <h1 className="text-5xl font-medium leading-[1.0] tracking-[-0.03em] md:text-7xl transition-colors duration-1000">
+          <div className="mb-4 text-[10px] font-mono uppercase tracking-[0.4em] transition-colors duration-500 font-semibold" style={{ color: "var(--text-faint)" }}>
+            [ CLARITATE ÎN STRUCTURĂ • 52 VERTICALE ABSOLUTE ]
+          </div>
+          <h1 className="text-5xl font-medium leading-[1.0] tracking-[-0.03em] md:text-7xl transition-colors duration-500" style={{ color: 'var(--text-primary)' }}>
             52 de Verticale<br />
-            <span style={{ color: 'var(--text-muted)' }} className="transition-colors duration-1000">Absolute.</span>
+            <span style={{ color: 'var(--text-muted)' }} className="transition-colors duration-500">Absolute.</span>
           </h1>
-          <p className="mt-8 max-w-xl text-lg leading-8 font-sans transition-colors duration-1000" style={{ color: 'var(--text-secondary)' }}>
+          <p className="mt-8 max-w-xl text-lg leading-8 font-sans transition-colors duration-500 font-normal" style={{ color: 'var(--text-secondary)' }}>
             Am depășit stadiul de "teme predefinite". 52 de interfețe front-end unice, cu identități tăioase dictate de psihologia fiecărei nișe — de la rigiditatea medicală, până la arhitectura industrială B2B.
           </p>
         </div>
@@ -114,20 +140,24 @@ export default function ShowcaseIndex() {
           const isExternal = /^https?:\/\//.test(s.href) || GITHUB_SHOWCASE_PATHS.some((p) => s.href.startsWith(`/${p}/`));
           const linkProps = isExternal ? { target: "_blank" as const, rel: "noopener noreferrer" } : {};
           return (
-          <Link href={s.href} key={s.id} {...linkProps} className="showcase-card group relative border transition-all duration-1000 p-8 lg:p-10 flex flex-col h-full overflow-hidden rounded-xl shadow-sm hover:shadow-xl hover:-translate-y-1" style={{ borderColor: 'var(--border-color)', backgroundColor: 'var(--card-bg)' }}>
+          <Link href={s.href} key={s.id} {...linkProps} className="showcase-card group relative border transition-all duration-300 p-8 lg:p-10 flex flex-col h-full overflow-hidden rounded-xl shadow-sm hover:shadow-xl hover:-translate-y-1" style={{ borderColor: 'var(--border-color)', backgroundColor: 'var(--card-bg)' }}>
             
             <div className="mb-8 z-20">
-              <span className="inline-block px-3 py-1 font-mono text-[9px] uppercase tracking-widest text-white shadow-md rounded-full" style={{ backgroundColor: s.color }}>
+              <span className="inline-block px-3 py-1 font-mono text-[9px] uppercase tracking-widest text-white shadow-md rounded-full font-bold" style={{ backgroundColor: s.color }}>
                 {s.vibe}
               </span>
             </div>
             
-            <h2 className="text-3xl font-bold tracking-tight mb-4 z-20 transition-colors duration-1000">{s.name}</h2>
-            <p className="text-sm leading-6 mb-12 flex-grow z-20 transition-colors duration-1000" style={{ color: 'var(--text-secondary)' }}>{s.description}</p>
+            <h2 className="text-3xl font-bold tracking-tight mb-4 z-20 transition-colors duration-300" style={{ color: 'var(--text-primary)' }}>
+              {s.name}
+            </h2>
+            <p className="text-sm leading-6 mb-12 flex-grow z-20 transition-colors duration-300" style={{ color: 'var(--text-secondary)' }}>
+              {s.description}
+            </p>
             
-            <div className="flex items-center justify-between font-mono text-[10px] uppercase border-t pt-6 mt-auto z-20 transition-colors duration-1000" style={{ color: 'var(--text-faint)', borderColor: 'var(--border-color)' }}>
+            <div className="flex items-center justify-between font-mono text-[10px] uppercase border-t pt-6 mt-auto z-20 transition-colors duration-300 font-medium" style={{ color: 'var(--text-faint)', borderColor: 'var(--border-color)' }}>
               <span>EXPLORE({s.id})</span>
-              <span className="transition-all duration-500 group-hover:translate-x-1 text-sm font-sans" style={{ color: s.color }}>→</span>
+              <span className="transition-all duration-300 group-hover:translate-x-1 text-sm font-sans font-bold" style={{ color: s.color }}>→</span>
             </div>
           </Link>
           );

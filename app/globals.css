@@ -668,3 +668,26 @@ html.light [data-showcase] .border-white\/20,
 html.light .showcase-root .border-white\/20 {
   border-color: rgba(255, 255, 255, 0.2) !important;
 }
+
+
+/* ── Showcase Catalog Page Light Theme Contrast Guarantee (WCAG AAA) ── */
+html.light .showcase-wrapper {
+  color: #111215 !important;
+}
+html.light .showcase-wrapper h1 {
+  color: #111215 !important;
+}
+html.light .showcase-wrapper h2 {
+  color: #111215 !important;
+}
+html.light .showcase-wrapper p {
+  color: #344054 !important;
+}
+html.light .showcase-wrapper .showcase-card {
+  background-color: #FFFFFF !important;
+  border-color: rgba(29, 39, 49, 0.14) !important;
+}
+html.light .showcase-wrapper .showcase-card:hover {
+  background-color: #FFFFFF !important;
+  border-color: rgba(29, 39, 49, 0.28) !important;
+}
