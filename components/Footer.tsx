@@ -6,7 +6,7 @@ import { useState } from "react";
 import Logo from "@/components/Logo";
 
 export default function Footer() {
-  const pathname = usePathname();
+  const pathname = usePathname() || "";
   const isEn = pathname.startsWith("/en");
   const [activeTab, setActiveTab] = useState<"navigare" | "ecosistem">("navigare");
 
@@ -34,10 +34,10 @@ export default function Footer() {
   const nav = isEn ? navInfo.en : navInfo.ro;
 
   // Hide global Reverb footer on individual showcase prototypes (they have their own tailored footers)
-  const isShowcaseDemo = (pathname.startsWith("/showcase/") && pathname !== "/showcase") || (pathname.startsWith("/en/showcase/") && pathname !== "/en/showcase");
-  if (isShowcaseDemo) {
-    return null;
-  }
+  const isShowcaseDemo = Boolean(
+    (pathname.startsWith("/showcase/") && pathname !== "/showcase") ||
+    (pathname.startsWith("/en/showcase/") && pathname !== "/en/showcase")
+  );
 
   const showcaseLinks = [
     { href: "https://reverb.ro", label: "Reverb.ro", external: true },
@@ -67,6 +67,8 @@ export default function Footer() {
     clarity: isEn ? "Clarity & Structure" : "Claritate & Structură",
     rights: isEn ? "ALL RIGHTS RESERVED" : "TOATE DREPTURILE REZERVATE",
   };
+
+  if (isShowcaseDemo) return null;
 
   return (
     <footer className="border-t border-black/10 dark:border-white/10 bg-[#FAF8F5] dark:bg-[#070809] text-neutral-900 dark:text-neutral-100 font-sans antialiased transition-colors duration-300">

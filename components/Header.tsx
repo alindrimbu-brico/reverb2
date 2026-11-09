@@ -23,14 +23,8 @@ const navInfo = {
 };
 
 export default function Header() {
-  const pathname = usePathname();
+  const pathname = usePathname() || "";
   const router = useRouter();
-
-  // Hide global Reverb header on individual showcase prototypes so they render their own standalone identity
-  const isShowcaseDemo = (pathname.startsWith("/showcase/") && pathname !== "/showcase") || (pathname.startsWith("/en/showcase/") && pathname !== "/en/showcase");
-  if (isShowcaseDemo) {
-    return null;
-  }
   const [open, setOpen] = useState(false);
   const [isEn, setIsEn] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -155,6 +149,15 @@ export default function Header() {
     clarity: isEn ? "Clarity & Structure" : "Claritate & Structură",
     start: isEn ? "Start Project" : "Start Proiect"
   };
+
+  // Hide global Reverb header on individual showcase prototypes (after all hooks)
+  const isShowcaseDemo = Boolean(
+    (pathname.startsWith("/showcase/") && pathname !== "/showcase") ||
+    (pathname.startsWith("/en/showcase/") && pathname !== "/en/showcase")
+  );
+  if (isShowcaseDemo) {
+    return null;
+  }
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex flex-col items-center px-3 sm:px-4 pt-3 sm:pt-4 pointer-events-none">

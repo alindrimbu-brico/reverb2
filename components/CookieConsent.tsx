@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export default function CookieConsent() {
-  const pathname = usePathname();
+  const pathname = usePathname() || "";
   const isEn = pathname.startsWith("/en");
 
   const [visible, setVisible] = useState(false);

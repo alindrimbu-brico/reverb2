@@ -16,8 +16,11 @@ import { usePathname } from "next/navigation";
  * - Pure pointer-events-none, never blocks any clicks
  */
 export default function BackgroundWatermarkLogo() {
-  const pathname = usePathname();
-  const isShowcaseDemo = (pathname.startsWith("/showcase/") && pathname !== "/showcase") || (pathname.startsWith("/en/showcase/") && pathname !== "/en/showcase");
+  const pathname = usePathname() || "";
+  const isShowcaseDemo = Boolean(
+    (pathname.startsWith("/showcase/") && pathname !== "/showcase") ||
+    (pathname.startsWith("/en/showcase/") && pathname !== "/en/showcase")
+  );
   if (isShowcaseDemo) return null;
 
   return (

@@ -9,13 +9,16 @@ import { usePathname } from "next/navigation";
  * Extremely lightweight, 60fps GPU-accelerated, zero video asset overhead.
  */
 export default function AmbientBeams() {
-  const pathname = usePathname();
+  const pathname = usePathname() || "";
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-  const isShowcaseDemo = (pathname.startsWith("/showcase/") && pathname !== "/showcase") || (pathname.startsWith("/en/showcase/") && pathname !== "/en/showcase");
-  if (isShowcaseDemo) return null;
+  const isShowcaseDemo = Boolean(
+    (pathname.startsWith("/showcase/") && pathname !== "/showcase") ||
+    (pathname.startsWith("/en/showcase/") && pathname !== "/en/showcase")
+  );
 
   useEffect(() => {
+    if (isShowcaseDemo) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -201,6 +204,8 @@ export default function AmbientBeams() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  if (isShowcaseDemo) return null;
 
   return (
     <canvas
