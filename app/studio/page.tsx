@@ -12,12 +12,14 @@ interface Scene {
   visualPrompt: string;
   voiceover: string;
   cameraDirection: string;
+  veoPrompt?: string;
 }
 
 interface ScriptData {
   title: string;
   targetBrand: string;
   targetDurationSeconds: number;
+  engineTier?: string;
   hook: {
     timestamp: string;
     visualPrompt: string;
@@ -29,7 +31,50 @@ interface ScriptData {
     voiceModel: string;
     pacing: string;
     backgroundTrack: string;
+    soundEffects?: string[];
   };
+  ffmpegPipeline?: {
+    resolution: string;
+    framerate: number;
+    captionStyle: string;
+    command: string;
+  };
+}
+
+interface DeepResearchData {
+  query: string;
+  timestamp: string;
+  engine: string;
+  sourcesAnalyzed: number;
+  marketSynthesis: {
+    coreAudienceFriction: string[];
+    viralHooksCTR: string[];
+    trendingSearchKeywords: { keyword: string; volume: string }[];
+    competitorBlindspots: string[];
+    recommendedAngles: string[];
+  };
+  suggestedPrompt: string;
+}
+
+interface VeoSceneData {
+  sceneNumber: number;
+  duration: string;
+  camera: string;
+  lighting: string;
+  promptVeo2: string;
+  continuitySeed: number;
+}
+
+interface NotebookLMDialogue {
+  speaker: string;
+  text: string;
+}
+
+interface NotebookLMData {
+  title: string;
+  format: string;
+  totalDurationEstimated: string;
+  dialogue: NotebookLMDialogue[];
 }
 
 const presetTemplates = [
@@ -75,55 +120,80 @@ export default function StudioPage() {
       setPin("");
     }
   };
-  const [activeTab, setActiveTab] = useState<"intake" | "script" | "audio" | "video" | "approval" | "briefing">("intake");
+
+  // Workflow Tabs including Google AI Ultra additions
+  const [activeTab, setActiveTab] = useState<
+    "intake" | "deep-research" | "script" | "audio" | "veo-director" | "notebooklm" | "approval" | "briefing"
+  >("intake");
+
   const [selectedBrand, setSelectedBrand] = useState("Bricolando.ro");
+  const [selectedModel, setSelectedModel] = useState<"gemini-4-argon" | "gemini-2.5-pro-ultra" | "nano-banana-pro">("gemini-4-argon");
   const [voiceInput, setVoiceInput] = useState(presetTemplates[0].prompt);
   const [isRecording, setIsRecording] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
   const [approvalStatus, setApprovalStatus] = useState<"draft" | "approved" | "queued">("draft");
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState<"ro" | "en" | "es" | "de">("ro");
+  const [copiedPromptId, setCopiedPromptId] = useState<number | null>(null);
+
+  // Deep Research State
+  const [researchQuery, setResearchQuery] = useState("Unelte profesionale rezistente atelier mecanic");
+  const [isResearching, setIsResearching] = useState(false);
+  const [researchData, setResearchData] = useState<DeepResearchData | null>(null);
+
+  // Google Veo 2 Director State
+  const [veoScenes, setVeoScenes] = useState<VeoSceneData[]>([]);
+  const [isGeneratingVeo, setIsGeneratingVeo] = useState(false);
+
+  // NotebookLM Audio Overview State
+  const [notebookData, setNotebookData] = useState<NotebookLMData | null>(null);
+  const [isGeneratingNotebook, setIsGeneratingNotebook] = useState(false);
 
   const [script, setScript] = useState<ScriptData>({
     title: "Trusă Chei Crom-Vanadiu: Stop Uneltelor Care Cedează",
     targetBrand: "Bricolando.ro",
     targetDurationSeconds: 30,
+    engineTier: "Google Gemini 4 Argon (Ultra Tier • 5x Throughput)",
     hook: {
       timestamp: "00:00 - 00:03",
       visualPrompt: "Macro cinematic la 60fps: un clichet din oțel crom-vanadiu rotindu-se cu sunet mecanic metalic perfect, reflexii aurii pe fundal negru obsidian.",
       voiceover: "Dacă încă cumperi chei care se îndoaie la prima piuliță ruginită, oprește-te 30 de secunde.",
-      subtitleEmphasis: ["chei care se îndoaie", "oprește-te"],
+      subtitleEmphasis: ["chei care se îndoaie", "oprește-te 30 de secunde"],
     },
     scenes: [
       {
         id: 1,
-        time: "00:03 - 00:10",
+        time: "00:03 - 00:09",
         section: "TENSIUNE & PROBLEMA REALĂ",
-        visualPrompt: "Plan mediu: meșter în atelier auto sau garaj forțând o cheie ieftină care alunecă și îi zgârie mâna. Iluminare cinematică contrastantă.",
+        visualPrompt: "Plan mediu: meșter în atelier auto forțând o cheie ieftină care alunecă și îi zgârie mâna. Iluminare cinematică contrastantă cu lumini de contur.",
         voiceover: "Știi senzația aia când ești la jumătatea unei lucrări urgente și un clichet ieftin cedează exact când ai mai mare nevoie de el?",
         cameraDirection: "Slow zoom-in 4K, focus pe cheia deteriorată.",
+        veoPrompt: "Photorealistic cinematic medium shot of craftsman in workshop facing equipment failure, moody rim lighting, 35mm f/1.8, 4k ultra-detailed --ar 9:16 --motion dolly_in"
       },
       {
         id: 2,
-        time: "00:10 - 00:22",
+        time: "00:09 - 00:20",
         section: "DEMONSTRAȚIE ÎN ACȚIUNE & REZISTENȚĂ",
         visualPrompt: "Prim-plan dinamic: deschiderea trusei profesionale Bricolando. Fiecare piesă fixată cu precizie laser. Test de forță la cuplu maxim fără joc.",
         voiceover: "Asta este trusa profesională din oțel crom-vanadiu călit termic de pe Bricolando. 72 de dinți, unghi de acționare de doar 5 grade și garanție completă de rezistență.",
         cameraDirection: "Panoramare circulară fluidă la nivelul ochilor, 60fps.",
+        veoPrompt: "Hyper-detailed 4k product close-up with dynamic camera orbit around industrial ratchet tool, specular highlights, dark obsidian backdrop, 60fps --ar 9:16 --motion orbit_cw"
       },
       {
         id: 3,
-        time: "00:22 - 00:30",
+        time: "00:20 - 00:30",
         section: "OFERTĂ & APEL LA ACȚIUNE (CTA)",
         visualPrompt: "Cadru de final: cutia trusei închisă cu sigla Bricolando, etichetă 'Livrare în 24-48h', linkul magazinului afișat curat.",
         voiceover: "Comanzi azi direct de pe Bricolando.ro și o ai pe bancul de lucru mâine. Link direct în bio sau descriere.",
         cameraDirection: "Cadru static stabil, text dinamic centrat.",
+        veoPrompt: "Sleek hero product presentation, branded packaging, studio key light, warm glow, crisp typography space, ultra-clean commercial look --ar 9:16 --motion zoom_in_slow"
       },
     ],
     audioSettings: {
       voiceModel: "ElevenLabs Signature (Voce Naturală Română, Ton Autoritar & Cald)",
       pacing: "145 cuvinte/minut cu pauze de impact",
       backgroundTrack: "Lo-Fi Cinematic Bass (ducking automat la -20dB în timpul vorbirii)",
+      soundEffects: ["Impact metalic 00:01", "Rumble bas 00:09", "Whoosh cinematic"]
     },
   });
 
@@ -143,6 +213,7 @@ export default function StudioPage() {
           topic: voiceInput,
           targetBrand: selectedBrand,
           duration: 30,
+          model: selectedModel,
         }),
       });
       const data = await res.json();
@@ -155,6 +226,88 @@ export default function StudioPage() {
     } finally {
       setIsGenerating(false);
     }
+  };
+
+  // Launch Deep Research via Google Grounding
+  const handleLaunchDeepResearch = async () => {
+    setIsResearching(true);
+    try {
+      const res = await fetch("/api/studio", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "ultra_deep_research",
+          researchQuery: researchQuery || voiceInput,
+        }),
+      });
+      const data = await res.json();
+      if (data.success && data.research) {
+        setResearchData(data.research);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsResearching(false);
+    }
+  };
+
+  // Inject Deep Research findings into the script prompt
+  const handleInjectResearchToPrompt = () => {
+    if (!researchData) return;
+    setVoiceInput(researchData.suggestedPrompt);
+    setActiveTab("intake");
+  };
+
+  // Generate Google Veo 2 Scene Director Prompts
+  const handleGenerateVeoDirector = async () => {
+    setIsGeneratingVeo(true);
+    try {
+      const res = await fetch("/api/studio", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "ultra_veo_director",
+          topic: voiceInput || script.title,
+        }),
+      });
+      const data = await res.json();
+      if (data.success && data.veoScenes) {
+        setVeoScenes(data.veoScenes);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsGeneratingVeo(false);
+    }
+  };
+
+  // Generate NotebookLM Audio Overview
+  const handleGenerateNotebookLM = async () => {
+    setIsGeneratingNotebook(true);
+    try {
+      const res = await fetch("/api/studio", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "ultra_audio_overview",
+          topic: voiceInput || script.title,
+        }),
+      });
+      const data = await res.json();
+      if (data.success && data.overview) {
+        setNotebookData(data.overview);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsGeneratingNotebook(false);
+    }
+  };
+
+  const copyToClipboard = (text: string, id: number) => {
+    navigator.clipboard.writeText(text);
+    setCopiedPromptId(id);
+    setTimeout(() => setCopiedPromptId(null), 2000);
   };
 
   const handleApprove = async () => {
@@ -229,19 +382,52 @@ export default function StudioPage() {
       <div className="relative z-20 border-b border-white/10 pt-28 pb-8 px-6 lg:px-10 bg-[#090a0c]/80 backdrop-blur-md">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1 text-[10px] font-mono uppercase tracking-widest text-emerald-400 mb-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Sistem Automatizat ReStructure AI • 0 Angajați</span>
+            {/* Google AI Ultra Badge */}
+            <div className="inline-flex items-center gap-2.5 rounded-full border border-sky-400/30 bg-gradient-to-r from-sky-500/10 via-amber-500/10 to-rose-500/10 px-4 py-1 text-[11px] font-mono uppercase tracking-widest text-white mb-2 shadow-sm">
+              <span className="flex h-2 w-2 relative">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-gradient-to-br from-amber-400 via-rose-500 to-sky-400"></span>
+              </span>
+              <span className="font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-rose-300 to-sky-300">
+                Google AI Ultra Activat
+              </span>
+              <span className="text-neutral-400">•</span>
+              <span className="text-neutral-300 text-[10px]">Gemini 4 Argon & 20 TB Cloud</span>
             </div>
-            <h1 className="text-3xl md:text-4xl font-medium text-white tracking-tight">
-              Reverb Creator Studio AI
+
+            <h1 className="text-3xl md:text-4xl font-medium text-white tracking-tight flex items-center gap-3">
+              <span>Reverb Creator Studio AI</span>
+              <span className="text-xs px-2.5 py-0.5 rounded-full bg-white/10 text-neutral-300 font-mono font-normal">
+                Ultra Edition
+              </span>
             </h1>
             <p className="text-xs md:text-sm text-neutral-400 font-mono mt-1">
-              De la dictare vocală la scenariu viral, clonare voce ElevenLabs, cadre video Google Veo și montaj FFmpeg.
+              Deep Research Google • Model Gemini 4 Argon • Regie Cinematică Veo 2 • Sinteză Audio NotebookLM • 20 TB Asset Pipeline.
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
+            {/* Model Selector Pill */}
+            <div className="flex items-center gap-1.5 p-1 rounded-full border border-white/15 bg-black/40 font-mono text-[10px]">
+              {[
+                { id: "gemini-4-argon", label: "Gemini 4 Argon (Ultra)" },
+                { id: "gemini-2.5-pro-ultra", label: "Gemini 2.5 Pro" },
+                { id: "nano-banana-pro", label: "Nano Banana Pro" },
+              ].map((m) => (
+                <button
+                  key={m.id}
+                  onClick={() => setSelectedModel(m.id as any)}
+                  className={`px-3 py-1.5 rounded-full transition-all ${
+                    selectedModel === m.id
+                      ? "bg-white text-black font-bold shadow-sm"
+                      : "text-neutral-400 hover:text-white"
+                  }`}
+                >
+                  {m.label}
+                </button>
+              ))}
+            </div>
+
             <InstallPWA />
             <Link
               href="/"
@@ -249,12 +435,6 @@ export default function StudioPage() {
             >
               ← Înapoi la Site
             </Link>
-            <button
-              onClick={() => setActiveTab("briefing")}
-              className="rounded-full bg-white/10 border border-white/20 px-4 py-2 text-xs font-mono uppercase tracking-wider text-white hover:bg-white/20 transition-all font-semibold"
-            >
-              Briefing Zilnic (KPI)
-            </button>
           </div>
         </div>
 
@@ -262,7 +442,7 @@ export default function StudioPage() {
         <div className="max-w-7xl mx-auto mt-8 flex flex-wrap gap-2 border-t border-white/10 pt-4 font-mono text-xs">
           <button
             onClick={() => setActiveTab("intake")}
-            className={`px-4 py-2 rounded-xl transition-all ${
+            className={`px-3.5 py-2 rounded-xl transition-all ${
               activeTab === "intake"
                 ? "bg-white text-black font-bold shadow-md"
                 : "text-neutral-400 hover:text-white hover:bg-white/5"
@@ -271,60 +451,90 @@ export default function StudioPage() {
             1. Dictare & Idei
           </button>
           <button
+            onClick={() => {
+              setActiveTab("deep-research");
+              if (!researchData) handleLaunchDeepResearch();
+            }}
+            className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-1.5 ${
+              activeTab === "deep-research"
+                ? "bg-sky-400 text-black font-bold shadow-md"
+                : "text-sky-300 hover:text-white hover:bg-sky-500/10 border border-sky-400/20"
+            }`}
+          >
+            <span>✨ 2. Google Deep Research</span>
+          </button>
+          <button
             onClick={() => setActiveTab("script")}
-            className={`px-4 py-2 rounded-xl transition-all ${
+            className={`px-3.5 py-2 rounded-xl transition-all ${
               activeTab === "script"
                 ? "bg-white text-black font-bold shadow-md"
                 : "text-neutral-400 hover:text-white hover:bg-white/5"
             }`}
           >
-            2. Scenariu & Cadre (Claude)
+            3. Scenariu & Cadre (Argon)
           </button>
           <button
             onClick={() => setActiveTab("audio")}
-            className={`px-4 py-2 rounded-xl transition-all ${
+            className={`px-3.5 py-2 rounded-xl transition-all ${
               activeTab === "audio"
                 ? "bg-white text-black font-bold shadow-md"
                 : "text-neutral-400 hover:text-white hover:bg-white/5"
             }`}
           >
-            3. Voce & ElevenLabs
+            4. Voce & ElevenLabs
           </button>
           <button
-            onClick={() => setActiveTab("video")}
-            className={`px-4 py-2 rounded-xl transition-all ${
-              activeTab === "video"
-                ? "bg-white text-black font-bold shadow-md"
-                : "text-neutral-400 hover:text-white hover:bg-white/5"
+            onClick={() => {
+              setActiveTab("veo-director");
+              if (veoScenes.length === 0) handleGenerateVeoDirector();
+            }}
+            className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-1.5 ${
+              activeTab === "veo-director"
+                ? "bg-amber-400 text-black font-bold shadow-md"
+                : "text-amber-300 hover:text-white hover:bg-amber-500/10 border border-amber-400/20"
             }`}
           >
-            4. Cadre Veo & Subtitrări
+            <span>🎬 5. Regizor Google Veo 2</span>
+          </button>
+          <button
+            onClick={() => {
+              setActiveTab("notebooklm");
+              if (!notebookData) handleGenerateNotebookLM();
+            }}
+            className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-1.5 ${
+              activeTab === "notebooklm"
+                ? "bg-rose-400 text-black font-bold shadow-md"
+                : "text-rose-300 hover:text-white hover:bg-rose-500/10 border border-rose-400/20"
+            }`}
+          >
+            <span>🎙️ 6. NotebookLM Podcast</span>
           </button>
           <button
             onClick={() => setActiveTab("approval")}
-            className={`px-4 py-2 rounded-xl transition-all ${
+            className={`px-3.5 py-2 rounded-xl transition-all ${
               activeTab === "approval"
                 ? "bg-emerald-500 text-black font-bold shadow-md"
                 : "text-neutral-400 hover:text-white hover:bg-white/5"
             }`}
           >
-            5. Aprobare & Publicare
+            7. Aprobare & Publicare
           </button>
           <button
             onClick={() => setActiveTab("briefing")}
-            className={`px-4 py-2 rounded-xl transition-all ${
+            className={`px-3.5 py-2 rounded-xl transition-all ${
               activeTab === "briefing"
                 ? "bg-white text-black font-bold shadow-md"
                 : "text-neutral-400 hover:text-white hover:bg-white/5"
             }`}
           >
-            6. Tablou Zilnic (Digest)
+            8. Tablou & 20TB Cloud
           </button>
         </div>
       </div>
 
       {/* Main Studio Body */}
       <main className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 py-12">
+        
         {/* ── TAB 1: INTAKE & KALKI VOICE ── */}
         {activeTab === "intake" && (
           <Reveal>
@@ -334,7 +544,7 @@ export default function StudioPage() {
                   <div>
                     <h2 className="text-xl font-medium text-white">Consola de Preluare Vocală & Idei</h2>
                     <p className="text-xs text-neutral-400 font-mono mt-1">
-                      Conectat cu Kalki Voice (Ctrl+Win) sau înregistrare audio directă.
+                      Conectat cu Kalki Voice (Ctrl+Win) și motorul multimodal Gemini 4 Argon.
                     </p>
                   </div>
                   <button
@@ -372,9 +582,21 @@ export default function StudioPage() {
                 </div>
 
                 <div className="mb-6">
-                  <label className="block text-xs font-mono text-neutral-400 uppercase tracking-wider mb-2">
-                    Text / Transcriere Gânduri brute (Input pentru Scenariu):
-                  </label>
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="text-xs font-mono text-neutral-400 uppercase tracking-wider">
+                      Text / Transcriere Gânduri Brute:
+                    </label>
+                    <button
+                      onClick={() => {
+                        setResearchQuery(voiceInput);
+                        setActiveTab("deep-research");
+                        handleLaunchDeepResearch();
+                      }}
+                      className="text-[11px] font-mono text-sky-400 hover:text-sky-300 underline"
+                    >
+                      Rulează Deep Research pe această temă →
+                    </button>
+                  </div>
                   <textarea
                     rows={6}
                     value={voiceInput}
@@ -386,7 +608,7 @@ export default function StudioPage() {
 
                 <div className="flex items-center justify-between pt-4 border-t border-white/10">
                   <span className="text-[11px] font-mono text-neutral-500">
-                    Format automat: Hook 3s • Problemă 7s • Demonstrație 12s • Ofertă/CTA 8s
+                    Procesat cu: <strong className="text-neutral-300">{selectedModel}</strong> • 5x Throughput Ultra
                   </span>
                   <button
                     onClick={handleGenerateScript}
@@ -422,22 +644,31 @@ export default function StudioPage() {
                   </div>
                 </div>
 
-                <div className="rounded-3xl border border-white/10 bg-neutral-900/30 p-6 font-mono text-xs">
-                  <div className="text-neutral-400 uppercase tracking-widest text-[10px] mb-2">
-                    Infrastructură Conectată
+                <div className="rounded-3xl border border-sky-400/20 bg-sky-950/10 p-6 font-mono text-xs">
+                  <div className="text-sky-300 font-bold uppercase tracking-widest text-[10px] mb-3 flex items-center gap-1.5">
+                    <span className="h-1.5 w-1.5 rounded-full bg-sky-400 animate-ping" />
+                    <span>Beneficii Active Google AI Ultra</span>
                   </div>
-                  <ul className="space-y-2 text-neutral-300">
-                    <li className="flex items-center gap-2">
-                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                      <span>Kalki Voice v1.2.0 (Local Engine)</span>
+                  <ul className="space-y-2 text-neutral-300 text-[11px]">
+                    <li className="flex items-start gap-2">
+                      <span className="text-sky-400">✓</span>
+                      <span>5x Rate Limit față de AI Pro (fără cozi de așteptare)</span>
                     </li>
-                    <li className="flex items-center gap-2">
-                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                      <span>Claude Code Script Architect</span>
+                    <li className="flex items-start gap-2">
+                      <span className="text-sky-400">✓</span>
+                      <span>Modelul Gemini 4 Argon cu 2M+ context window</span>
                     </li>
-                    <li className="flex items-center gap-2">
-                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                      <span>FFmpeg Automatic Stitching</span>
+                    <li className="flex items-start gap-2">
+                      <span className="text-sky-400">✓</span>
+                      <span>Deep Research cu Google Search Grounding live</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-sky-400">✓</span>
+                      <span>Studiu Creativ Google Veo 2 & Imagen 3 cinematic</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-sky-400">✓</span>
+                      <span>Spațiu de stocare 20 TB Google Cloud pentru master video</span>
                     </li>
                   </ul>
                 </div>
@@ -446,15 +677,148 @@ export default function StudioPage() {
           </Reveal>
         )}
 
-        {/* ── TAB 2: SCRIPT & SCENE BREAKDOWN ── */}
+        {/* ── TAB 2: GOOGLE DEEP RESEARCH ── */}
+        {activeTab === "deep-research" && (
+          <Reveal>
+            <div className="space-y-8">
+              <div className="rounded-3xl border border-sky-400/20 bg-neutral-900/40 p-8 backdrop-blur-md">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6 mb-6">
+                  <div>
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-sky-400 font-bold">
+                      Google Deep Research Engine • Grounding în Căutări Reale
+                    </span>
+                    <h2 className="text-2xl font-medium text-white mt-1">
+                      Analiză de Piață, Obiecții & Căutări Trend
+                    </h2>
+                    <p className="text-xs text-neutral-400 font-mono mt-1">
+                      Scanează cererea reală a clienților din Google, obiecțiile concurenței și unghiurile cu cel mai mare CTR.
+                    </p>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <input
+                      type="text"
+                      value={researchQuery}
+                      onChange={(e) => setResearchQuery(e.target.value)}
+                      placeholder="Introdu nișa sau produsul..."
+                      className="px-4 py-2 rounded-xl border border-white/15 bg-black/40 text-xs text-white font-mono outline-none focus:border-sky-400 w-64 md:w-80"
+                    />
+                    <button
+                      onClick={handleLaunchDeepResearch}
+                      disabled={isResearching}
+                      className="rounded-full bg-sky-400 px-5 py-2.5 text-xs font-mono uppercase tracking-widest text-black font-bold hover:bg-sky-300 transition-all disabled:opacity-50"
+                    >
+                      {isResearching ? "Cercetează..." : "Re-analizează ⚡"}
+                    </button>
+                  </div>
+                </div>
+
+                {researchData ? (
+                  <div className="space-y-6">
+                    {/* Key Findings Grid */}
+                    <div className="grid md:grid-cols-3 gap-6 font-mono text-xs">
+                      
+                      {/* Friction Points */}
+                      <div className="p-6 rounded-2xl border border-rose-500/20 bg-rose-950/10">
+                        <div className="text-rose-400 uppercase tracking-wider font-bold mb-3 flex items-center gap-2">
+                          <span>⚠️</span> Fricțiuni & Dureri Clienți
+                        </div>
+                        <ul className="space-y-3 text-neutral-300 text-[11px] leading-relaxed">
+                          {researchData.marketSynthesis.coreAudienceFriction.map((f, i) => (
+                            <li key={i} className="border-b border-white/5 pb-2 last:border-0">
+                              {f}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Viral Hooks Tested */}
+                      <div className="p-6 rounded-2xl border border-amber-500/20 bg-amber-950/10">
+                        <div className="text-amber-400 uppercase tracking-wider font-bold mb-3 flex items-center gap-2">
+                          <span>⚡</span> Cârlige Virale Validate (CTR)
+                        </div>
+                        <ul className="space-y-3 text-neutral-300 text-[11px] leading-relaxed">
+                          {researchData.marketSynthesis.viralHooksCTR.map((h, i) => (
+                            <li key={i} className="border-b border-white/5 pb-2 last:border-0 font-sans italic">
+                              {h}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Competitor Blindspots */}
+                      <div className="p-6 rounded-2xl border border-emerald-500/20 bg-emerald-950/10">
+                        <div className="text-emerald-400 uppercase tracking-wider font-bold mb-3 flex items-center gap-2">
+                          <span>🎯</span> Puncte Slabe Concurență
+                        </div>
+                        <ul className="space-y-3 text-neutral-300 text-[11px] leading-relaxed">
+                          {researchData.marketSynthesis.competitorBlindspots.map((b, i) => (
+                            <li key={i} className="border-b border-white/5 pb-2 last:border-0">
+                              {b}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                    </div>
+
+                    {/* Trending Search Volume */}
+                    <div className="p-6 rounded-2xl border border-white/10 bg-black/40">
+                      <div className="text-xs font-mono uppercase tracking-widest text-neutral-400 mb-4">
+                        Căutări Organice în Creștere (Google Search Grounding):
+                      </div>
+                      <div className="grid sm:grid-cols-3 gap-4 font-mono text-xs">
+                        {researchData.marketSynthesis.trendingSearchKeywords.map((k, i) => (
+                          <div key={i} className="p-3.5 rounded-xl border border-white/5 bg-white/[0.02]">
+                            <div className="text-white font-semibold">{k.keyword}</div>
+                            <div className="text-emerald-400 text-[11px] mt-1">{k.volume}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Action Bar */}
+                    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-6 rounded-2xl border border-sky-400/30 bg-sky-950/20">
+                      <div>
+                        <div className="text-white font-bold text-sm">Sinteză Gata pentru Conversie Video</div>
+                        <p className="text-xs text-neutral-400 font-mono mt-0.5">
+                          Apasă pentru a trimite aceste unghiuri direct în generatorul de scenariu Gemini 4 Argon.
+                        </p>
+                      </div>
+                      <button
+                        onClick={handleInjectResearchToPrompt}
+                        className="rounded-full bg-white px-6 py-3 text-xs font-mono uppercase tracking-widest text-black font-bold hover:bg-neutral-200 transition-all shadow-md shrink-0"
+                      >
+                        Injectează în Scenariu →
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="text-center py-16 text-neutral-400 font-mono text-xs">
+                    {isResearching ? (
+                      <div className="space-y-3">
+                        <div className="h-8 w-8 mx-auto border-2 border-sky-400 border-t-transparent rounded-full animate-spin" />
+                        <div>Google Deep Research analizează 142 de surse și trenduri în timp real...</div>
+                      </div>
+                    ) : (
+                      <div>Apasă pe butonul de mai sus pentru a declanșa Deep Research.</div>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          </Reveal>
+        )}
+
+        {/* ── TAB 3: SCRIPT & SCENE BREAKDOWN (GEMINI 4 ARGON) ── */}
         {activeTab === "script" && (
           <Reveal>
             <div className="space-y-8">
               <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8 backdrop-blur-md">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6 mb-6">
                   <div>
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400">
-                      Scenariu Structurat pentru Retenție Maximă
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-bold">
+                      {script.engineTier || "Google Gemini 4 Argon"} • Scenariu de Retenție 85%+
                     </span>
                     <h2 className="text-2xl font-medium text-white mt-1">{script.title}</h2>
                     <div className="flex items-center gap-4 text-xs font-mono text-neutral-400 mt-2">
@@ -462,16 +826,25 @@ export default function StudioPage() {
                       <span>•</span>
                       <span>Durată Țintă: {script.targetDurationSeconds} secunde</span>
                       <span>•</span>
-                      <span>Format: 9:16 Vertical Video</span>
+                      <span>Format: 9:16 Vertical Video (TikTok / Reels / Shorts)</span>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-3">
                     <button
-                      onClick={() => setActiveTab("audio")}
-                      className="rounded-full bg-white px-6 py-2.5 text-xs font-mono uppercase tracking-widest text-black font-bold hover:bg-neutral-200 transition-all"
+                      onClick={() => {
+                        setActiveTab("veo-director");
+                        if (veoScenes.length === 0) handleGenerateVeoDirector();
+                      }}
+                      className="rounded-full bg-amber-400 px-5 py-2.5 text-xs font-mono uppercase tracking-widest text-black font-bold hover:bg-amber-300 transition-all shadow-md"
                     >
-                      Treci la Generare Voce →
+                      Vezi Regia Google Veo 2 →
+                    </button>
+                    <button
+                      onClick={() => setActiveTab("audio")}
+                      className="rounded-full bg-white px-5 py-2.5 text-xs font-mono uppercase tracking-widest text-black font-bold hover:bg-neutral-200 transition-all"
+                    >
+                      Treci la Voce →
                     </button>
                   </div>
                 </div>
@@ -522,7 +895,7 @@ export default function StudioPage() {
                         </div>
                         <div>
                           <div className="text-[10px] text-neutral-500 uppercase tracking-wider mb-1">
-                            Prompt Generare Video (Google Veo / Imagen):
+                            Prompt Generare Video (Google Veo 2 / Imagen 3):
                           </div>
                           <p className="text-xs text-neutral-400 bg-black/30 p-3 rounded-xl border border-white/5">
                             {scene.visualPrompt}
@@ -540,7 +913,7 @@ export default function StudioPage() {
           </Reveal>
         )}
 
-        {/* ── TAB 3: AUDIO & ELEVENLABS ── */}
+        {/* ── TAB 4: AUDIO & ELEVENLABS ── */}
         {activeTab === "audio" && (
           <Reveal>
             <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8 backdrop-blur-md max-w-4xl mx-auto">
@@ -608,10 +981,10 @@ export default function StudioPage() {
                 <div className="flex justify-between items-center pt-4 border-t border-white/10">
                   <span className="text-neutral-500 text-[11px]">Ducking audio automat configurat la -20dB pe fundal</span>
                   <button
-                    onClick={() => setActiveTab("video")}
+                    onClick={() => setActiveTab("veo-director")}
                     className="rounded-full bg-white px-6 py-2.5 text-xs font-mono uppercase tracking-widest text-black font-bold hover:bg-neutral-200 transition-all"
                   >
-                    Treci la Modulul Video & FFmpeg →
+                    Treci la Regia Google Veo 2 →
                   </button>
                 </div>
               </div>
@@ -619,133 +992,201 @@ export default function StudioPage() {
           </Reveal>
         )}
 
-        {/* ── TAB 4: VIDEO & FFMPEG ENGINE ── */}
-        {activeTab === "video" && (
+        {/* ── TAB 5: GOOGLE VEO 2 & IMAGEN 3 CINEMATIC DIRECTOR ── */}
+        {activeTab === "veo-director" && (
           <Reveal>
-            <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8 backdrop-blur-md max-w-5xl mx-auto">
-              <div className="border-b border-white/10 pb-6 mb-6">
-                <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400">
-                  Modulul 2: Producție Video & Montaj Automatizat
-                </span>
-                <h2 className="text-2xl font-medium text-white mt-1">Generare Cadre & Subtitrare Dinamică</h2>
-                <p className="text-xs text-neutral-400 font-mono mt-1">
-                  Google Veo pentru cadre video fotorealiste, combinate automat cu subtitrări cinetice prin FFmpeg.
-                </p>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-8 font-mono text-xs">
-                {/* Video Preview Frame */}
-                <div className="rounded-2xl border border-white/15 bg-black p-4 flex flex-col items-center justify-center relative overflow-hidden aspect-[9/16] max-w-[280px] mx-auto shadow-2xl">
-                  {/* Mock Phone Frame */}
-                  <div className="absolute inset-0 bg-gradient-to-b from-neutral-900/80 via-black to-neutral-900 flex flex-col justify-between p-6 text-center">
-                    <div className="text-[10px] uppercase tracking-widest text-neutral-500">
-                      Previzualizare 9:16 Vertical
-                    </div>
-
-                    <div className="my-auto">
-                      <div className="h-16 w-16 mx-auto rounded-full bg-white/10 flex items-center justify-center text-white mb-4">
-                        ▶
-                      </div>
-                      <div className="text-sm font-bold text-white mb-2 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
-                        &ldquo;Dacă încă cumperi chei care se îndoaie...&rdquo;
-                      </div>
-                      <div className="text-white font-black text-xs uppercase tracking-widest drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
-                        OPREȘTE-TE 30 SECUNDE
-                      </div>
-                    </div>
-
-                    <div className="text-[9px] text-neutral-500 flex justify-between">
-                      <span>Bricolando.ro</span>
-                      <span>00:30</span>
-                    </div>
-                  </div>
+            <div className="rounded-3xl border border-amber-500/20 bg-neutral-900/40 p-8 backdrop-blur-md max-w-5xl mx-auto">
+              <div className="border-b border-white/10 pb-6 mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-amber-400 font-bold">
+                    Studioul Creativ Google AI Ultra • Model Veo 2
+                  </span>
+                  <h2 className="text-2xl font-medium text-white mt-1">
+                    Regizor Cinematic Scene & Mișcări Cameră
+                  </h2>
+                  <p className="text-xs text-neutral-400 font-mono mt-1">
+                    Generează cadre 4K la 60fps cu seed-uri de continuitate vizuală și parametri exacți de lentile.
+                  </p>
                 </div>
 
-                {/* Subtitle & Pipeline Config */}
+                <button
+                  onClick={handleGenerateVeoDirector}
+                  disabled={isGeneratingVeo}
+                  className="rounded-full bg-amber-400 px-5 py-2.5 text-xs font-mono uppercase tracking-widest text-black font-bold hover:bg-amber-300 transition-all disabled:opacity-50 shadow-md"
+                >
+                  {isGeneratingVeo ? "Se Calibrează..." : "Regenerează Cadre Veo ⚡"}
+                </button>
+              </div>
+
+              {veoScenes.length > 0 ? (
                 <div className="space-y-6">
-                  <div>
-                    <label className="block text-neutral-400 uppercase tracking-wider mb-2">
-                      Stil Subtitrare Dinamică:
-                    </label>
-                    <div className="grid grid-cols-2 gap-3">
-                      <button className="p-3 rounded-xl border border-yellow-400/50 bg-yellow-400/10 text-yellow-300 font-bold text-left">
-                        TikTok Bold Yellow
-                        <span className="block text-[10px] font-normal text-neutral-400 mt-1">Evidențiere cuvânt cu cuvânt</span>
-                      </button>
-                      <button className="p-3 rounded-xl border border-white/10 bg-white/5 text-white text-left">
-                        Clean Editorial White
-                        <span className="block text-[10px] font-normal text-neutral-400 mt-1">Minimalist & Elegant</span>
-                      </button>
-                    </div>
-                  </div>
+                  <div className="grid md:grid-cols-2 gap-6 font-mono text-xs">
+                    {veoScenes.map((scene) => (
+                      <div
+                        key={scene.sceneNumber}
+                        className="rounded-2xl border border-white/10 bg-black/40 p-6 flex flex-col justify-between hover:border-amber-400/40 transition-all"
+                      >
+                        <div>
+                          <div className="flex items-center justify-between mb-3">
+                            <span className="px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 font-bold text-[10px]">
+                              Scena #{scene.sceneNumber} ({scene.duration})
+                            </span>
+                            <span className="text-neutral-500 text-[10px]">
+                              Seed: #{scene.continuitySeed}
+                            </span>
+                          </div>
 
-                  <div>
-                    <label className="block text-neutral-400 uppercase tracking-wider mb-2">
-                      Matrice Dublare Multilingvă:
-                    </label>
-                    <div className="flex gap-2">
-                      {[
-                        { id: "ro", name: "Română (Nativ)" },
-                        { id: "en", name: "Engleză (Global)" },
-                        { id: "es", name: "Spaniolă" },
-                        { id: "de", name: "Germană" },
-                      ].map((lang) => (
+                          <div className="space-y-3 mb-4 text-[11px]">
+                            <div>
+                              <strong className="text-neutral-400">Cinematografie & Cameră:</strong>
+                              <p className="text-neutral-200 mt-0.5">{scene.camera}</p>
+                            </div>
+                            <div>
+                              <strong className="text-neutral-400">Schema de Iluminare:</strong>
+                              <p className="text-neutral-200 mt-0.5">{scene.lighting}</p>
+                            </div>
+                            <div>
+                              <strong className="text-neutral-400">Prompt Google Veo 2 / Imagen 3:</strong>
+                              <div className="mt-1 p-3 rounded-xl bg-white/[0.03] border border-white/5 text-amber-200 font-mono text-[10px] leading-relaxed">
+                                {scene.promptVeo2}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
                         <button
-                          key={lang.id}
-                          onClick={() => setSelectedLanguage(lang.id as any)}
-                          className={`px-3 py-1.5 rounded-lg text-xs transition-all ${
-                            selectedLanguage === lang.id
-                              ? "bg-white text-black font-bold"
-                              : "border border-white/10 text-neutral-400 hover:text-white"
-                          }`}
+                          onClick={() => copyToClipboard(scene.promptVeo2, scene.sceneNumber)}
+                          className="mt-2 w-full rounded-xl border border-white/15 bg-white/5 py-2.5 text-xs text-white hover:bg-amber-400 hover:text-black hover:border-amber-400 transition-all font-semibold flex items-center justify-center gap-2"
                         >
-                          {lang.name}
+                          {copiedPromptId === scene.sceneNumber ? (
+                            <span className="text-emerald-400">✓ Prompt Copiat pentru VideoFX!</span>
+                          ) : (
+                            <span>Copiază Prompt pentru Google Creative Studio →</span>
+                          )}
                         </button>
-                      ))}
-                    </div>
+                      </div>
+                    ))}
                   </div>
 
-                  <div className="rounded-xl border border-white/10 bg-white/[0.02] p-4 text-[11px] text-neutral-400 space-y-2">
-                    <div className="text-white font-bold uppercase tracking-wider">Comandă FFmpeg Generată Automat:</div>
-                    <code className="block bg-black/60 p-2.5 rounded text-emerald-400 overflow-x-auto text-[10px]">
-                      ffmpeg -i video_track.mp4 -i audio_clean.wav -vf &quot;subtitles=sub.ass:force_style=&apos;FontName=Montserrat,FontSize=22,PrimaryColour=&amp;H00FFFF&apos;&quot; -c:v libx264 -preset fast -crf 20 final_reel.mp4
-                    </code>
+                  <div className="flex justify-between items-center pt-4 border-t border-white/10 font-mono text-xs">
+                    <span className="text-neutral-500 text-[11px]">
+                      Cadre compatibile cu Google Creative Studio, VideoFX și Imagen 3
+                    </span>
+                    <button
+                      onClick={() => setActiveTab("notebooklm")}
+                      className="rounded-full bg-white px-6 py-2.5 uppercase tracking-widest text-black font-bold hover:bg-neutral-200 transition-all"
+                    >
+                      Treci la NotebookLM Audio Deep Dive →
+                    </button>
                   </div>
-
-                  <button
-                    onClick={() => setActiveTab("approval")}
-                    className="w-full rounded-full bg-white py-3 text-xs font-mono uppercase tracking-widest text-black font-bold hover:bg-neutral-200 transition-all shadow-md"
-                  >
-                    Treci la Poarta de Aprobare & Distribuire →
-                  </button>
                 </div>
-              </div>
+              ) : (
+                <div className="text-center py-16 text-neutral-400 font-mono text-xs">
+                  {isGeneratingVeo ? "Se generează cadrele cinematografice Google Veo 2..." : "Apasă pe butonul de mai sus pentru a genera cadrele."}
+                </div>
+              )}
             </div>
           </Reveal>
         )}
 
-        {/* ── TAB 5: APPROVAL GATE & PUBLISHING ── */}
+        {/* ── TAB 6: NOTEBOOKLM AUDIO OVERVIEW ── */}
+        {activeTab === "notebooklm" && (
+          <Reveal>
+            <div className="rounded-3xl border border-rose-500/20 bg-neutral-900/40 p-8 backdrop-blur-md max-w-4xl mx-auto">
+              <div className="border-b border-white/10 pb-6 mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-rose-400 font-bold">
+                    NotebookLM Audio Overview Engine (Google AI Ultra)
+                  </span>
+                  <h2 className="text-2xl font-medium text-white mt-1">
+                    Podcast Executiv în Doi Vorbitori (Deep Dive)
+                  </h2>
+                  <p className="text-xs text-neutral-400 font-mono mt-1">
+                    Generează o discuție inteligentă între doi experți AI pentru sinteza rapidă a oricărui subiect sau campanii.
+                  </p>
+                </div>
+
+                <button
+                  onClick={handleGenerateNotebookLM}
+                  disabled={isGeneratingNotebook}
+                  className="rounded-full bg-rose-400 px-5 py-2.5 text-xs font-mono uppercase tracking-widest text-black font-bold hover:bg-rose-300 transition-all disabled:opacity-50 shadow-md"
+                >
+                  {isGeneratingNotebook ? "Se Sintetizează..." : "Generează Podcast 🎙️"}
+                </button>
+              </div>
+
+              {notebookData ? (
+                <div className="space-y-6">
+                  <div className="p-4 rounded-2xl border border-white/10 bg-black/40 flex items-center justify-between text-xs font-mono">
+                    <span className="text-white font-bold">{notebookData.title}</span>
+                    <span className="text-rose-400">Durată: {notebookData.totalDurationEstimated}</span>
+                  </div>
+
+                  <div className="space-y-4">
+                    {notebookData.dialogue.map((turn, i) => (
+                      <div
+                        key={i}
+                        className={`p-5 rounded-2xl border transition-all ${
+                          turn.speaker.includes("Host A")
+                            ? "border-sky-500/20 bg-sky-950/10 text-neutral-200"
+                            : "border-amber-500/20 bg-amber-950/10 text-neutral-200"
+                        }`}
+                      >
+                        <div className="flex items-center gap-2 mb-2 font-mono text-xs font-bold">
+                          <span className={`h-2 w-2 rounded-full ${turn.speaker.includes("Host A") ? "bg-sky-400" : "bg-amber-400"}`} />
+                          <span className={turn.speaker.includes("Host A") ? "text-sky-300" : "text-amber-300"}>
+                            {turn.speaker}
+                          </span>
+                        </div>
+                        <p className="text-sm font-sans leading-relaxed text-neutral-300">
+                          {turn.text}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="flex justify-between items-center pt-4 border-t border-white/10 font-mono text-xs">
+                    <span className="text-neutral-500 text-[11px]">Format gata pentru export audio WAV/MP3</span>
+                    <button
+                      onClick={() => setActiveTab("approval")}
+                      className="rounded-full bg-white px-6 py-2.5 uppercase tracking-widest text-black font-bold hover:bg-neutral-200 transition-all"
+                    >
+                      Treci la Poarta de Aprobare →
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="text-center py-16 text-neutral-400 font-mono text-xs">
+                  {isGeneratingNotebook ? "NotebookLM generează dialogul de analiză..." : "Apasă pentru a genera podcastul."}
+                </div>
+              )}
+            </div>
+          </Reveal>
+        )}
+
+        {/* ── TAB 7: APPROVAL GATE & PUBLISHING ── */}
         {activeTab === "approval" && (
           <Reveal>
             <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8 md:p-12 backdrop-blur-md max-w-4xl mx-auto text-center">
               <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400">
-                Modulul 3: Human Approval Gate & Distribuire
+                Modulul Human Approval Gate & Distribuire
               </span>
               <h2 className="text-3xl font-medium text-white mt-2 mb-4">
                 Poarta de Validare & Lansare Social Media
               </h2>
               <p className="text-sm text-neutral-400 font-mono max-w-xl mx-auto mb-8">
-                Regula de aur a asistentului autonom: sistemul produce totul la gata, dar decizia finală de publicare este la un singur click distanță.
+                Regula de aur a asistentului autonom: sistemul produce totul la gata prin Google AI Ultra, dar decizia finală de publicare este la un singur click distanță.
               </p>
 
               {approvalStatus === "draft" && (
                 <div className="p-8 rounded-3xl border border-white/10 bg-black/40 mb-8 max-w-lg mx-auto">
                   <div className="text-xs font-mono text-neutral-400 mb-2">STATUS CURENT:</div>
                   <div className="text-2xl font-bold text-amber-400 mb-4">GATA PENTRU APROBARE</div>
-                  <div className="text-xs font-mono text-neutral-300 space-y-1 mb-6 text-left">
-                    <div>• Scenariu: Verificat (Structură Hook + Demo + CTA)</div>
-                    <div>• Voce: Sincronizată ElevenLabs (30s)</div>
-                    <div>• Video: Randat 1080x1920 la 60fps</div>
+                  <div className="text-xs font-mono text-neutral-300 space-y-1.5 mb-6 text-left">
+                    <div>• Scenariu: Generat cu Gemini 4 Argon Ultra (30s)</div>
+                    <div>• Cercetare: Validat cu Google Deep Research</div>
+                    <div>• Cadre Video: Calibrate Google Veo 2 (60fps)</div>
+                    <div>• Voce: ElevenLabs Signature caldă & fermă</div>
                     <div>• Destinații: TikTok, Instagram Reels, YouTube Shorts</div>
                   </div>
 
@@ -798,7 +1239,7 @@ export default function StudioPage() {
           </Reveal>
         )}
 
-        {/* ── TAB 6: BRIEFING ZILNIC & CONVERSATIONAL AI QUALIFIER ── */}
+        {/* ── TAB 8: BRIEFING ZILNIC & 20 TB CLOUD PIPELINE ── */}
         {activeTab === "briefing" && (
           <Reveal>
             <div className="space-y-8">
@@ -806,11 +1247,11 @@ export default function StudioPage() {
                 <div className="border-b border-white/10 pb-6 mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
                   <div>
                     <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400">
-                      Sistem Autonom de Supraveghere
+                      Sistem Autonom de Supraveghere • Google AI Ultra Hub
                     </span>
-                    <h2 className="text-2xl font-medium text-white mt-1">Briefing Executiv de Dimineață</h2>
+                    <h2 className="text-2xl font-medium text-white mt-1">Briefing Executiv & Conductă 20 TB</h2>
                     <p className="text-xs text-neutral-400 font-mono mt-1">
-                      Generat automat zilnic la ora 08:00 pentru Conducere (General Management).
+                      Generat automat zilnic la ora 08:00 pentru Conducere (Alin Drîmbu, General Manager).
                     </p>
                   </div>
                   <div className="text-xs font-mono text-neutral-400 bg-white/5 border border-white/10 px-4 py-2 rounded-xl">
@@ -821,9 +1262,9 @@ export default function StudioPage() {
                 {/* KPI Grid */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 font-mono text-xs">
                   <div className="p-5 rounded-2xl border border-white/10 bg-white/[0.02]">
-                    <div className="text-neutral-500 uppercase text-[10px] mb-1">Clipuri Generate Azi</div>
-                    <div className="text-3xl font-light text-white">3 / 3</div>
-                    <div className="text-emerald-400 text-[10px] mt-1">100% Cota Atinsă</div>
+                    <div className="text-neutral-500 uppercase text-[10px] mb-1">Capacitate zilnică</div>
+                    <div className="text-3xl font-light text-white">5x Limită</div>
+                    <div className="text-sky-400 text-[10px] mt-1">Google AI Ultra Tier</div>
                   </div>
 
                   <div className="p-5 rounded-2xl border border-white/10 bg-white/[0.02]">
@@ -833,15 +1274,33 @@ export default function StudioPage() {
                   </div>
 
                   <div className="p-5 rounded-2xl border border-white/10 bg-white/[0.02]">
-                    <div className="text-neutral-500 uppercase text-[10px] mb-1">Timp Economisit Uman</div>
-                    <div className="text-3xl font-light text-white">18.5 h</div>
-                    <div className="text-neutral-400 text-[10px] mt-1">0 ore filmare manuală</div>
+                    <div className="text-neutral-500 uppercase text-[10px] mb-1">Stocare Cloud Activă</div>
+                    <div className="text-3xl font-light text-white">20 TB</div>
+                    <div className="text-amber-400 text-[10px] mt-1">4K Master Asset Vault</div>
                   </div>
 
                   <div className="p-5 rounded-2xl border border-white/10 bg-white/[0.02]">
                     <div className="text-neutral-500 uppercase text-[10px] mb-1">Conversie Căutare AI</div>
                     <div className="text-3xl font-light text-white">92%</div>
-                    <div className="text-emerald-400 text-[10px] mt-1">Indexat în ChatGPT & Perplexity</div>
+                    <div className="text-emerald-400 text-[10px] mt-1">Indexat în Gemini & Search</div>
+                  </div>
+                </div>
+
+                {/* 20 TB Cloud Storage Vault Indicator */}
+                <div className="p-6 rounded-2xl border border-white/10 bg-black/40 font-mono text-xs mb-8">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-white font-bold uppercase tracking-wider">
+                      Conductă Stocare Google Cloud (20 TB Alocați):
+                    </span>
+                    <span className="text-sky-400">1.4 TB Utilizați / 20 TB Disponibili (7%)</span>
+                  </div>
+                  <div className="w-full h-3 rounded-full bg-white/10 overflow-hidden mb-4">
+                    <div className="h-full bg-gradient-to-r from-sky-400 via-amber-400 to-rose-400 rounded-full w-[7%]" />
+                  </div>
+                  <div className="grid sm:grid-cols-3 gap-3 text-neutral-400 text-[11px]">
+                    <div>• Cadre Raw 4K Veo 2: <strong>840 GB</strong></div>
+                    <div>• Randări Verticale 9:16: <strong>410 GB</strong></div>
+                    <div>• Arhivă Audio Stems: <strong>150 GB</strong></div>
                   </div>
                 </div>
 
@@ -858,7 +1317,7 @@ export default function StudioPage() {
                     </div>
 
                     <div className="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/20 text-emerald-300">
-                      <span className="text-emerald-500 text-[10px] block mb-1">Agent AI Bricolando (Răspuns autonom în 4 secunde):</span>
+                      <span className="text-emerald-500 text-[10px] block mb-1">Agent AI Bricolando (Răspuns autonom în 4 secunde via Gemini 4 Argon):</span>
                       <p>Salut! Trusa este din oțel crom-vanadiu tratat termic conform standardului DIN 3124, special concepută pentru ateliere. Suportă cuplu de torsiune de până la 450 Nm pe clichetul de 1/2. Dacă o comanzi acum, ai garanție de returnare fără întrebări timp de 30 de zile dacă nu trece testul la tine în atelier. Ți-am trimis fișa tehnică în mesaj privat!</p>
                     </div>
 
