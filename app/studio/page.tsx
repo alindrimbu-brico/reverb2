@@ -1988,16 +1988,24 @@ export default function StudioPage() {
                             <span className="text-neutral-500 text-[10px] block">NUME ARTIST DISTROKID (Spotify / Apple Music):</span>
                             <p className="text-white select-all">Artist: <strong>Alin Dragoș</strong> • Textier/Compozitor: <strong>Alin-Dragoș Drîmbu</strong></p>
                           </div>
+                          <div className="pt-2 border-t border-white/10 flex flex-wrap gap-3 text-[11px]">
+                            <a href="/media/vatraluminii_profil_1080.png" download className="text-amber-400 hover:underline font-bold">
+                              ⬇ Descarcă Poza de Profil (1080×1080)
+                            </a>
+                            <a href="/media/vatraluminii_coperta_yt_2560x1440.jpg" download className="text-emerald-400 hover:underline font-bold">
+                              ⬇ Descarcă Coperta YouTube (2560×1440)
+                            </a>
+                          </div>
                         </div>
                       </div>
 
                       <a
-                        href="https://www.youtube.com/account"
+                        href="https://www.youtube.com/channel_switcher"
                         target="_blank"
                         rel="noreferrer"
                         className="w-full text-center rounded-full bg-amber-400 py-3 text-xs uppercase tracking-widest text-black font-bold hover:bg-amber-300 transition-all block"
                       >
-                        ↗ Deschide YouTube Channels (Creează „Vatra Luminii” în 1 Click)
+                        ↗ Deschide YouTube Channel Switcher („Creează un canal”)
                       </a>
                     </div>
 
