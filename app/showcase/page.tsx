@@ -81,14 +81,8 @@ export default function ShowcaseIndex() {
           transition: background-color 0.8s cubic-bezier(0.16, 1, 0.3, 1), color 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .showcase-wrapper:has(.showcase-card:hover) {
-          --bg-color: #EEF2EB; /* Verde Salvie Pal */
-          --text-primary: #1d2731;
-          --text-secondary: rgba(29, 39, 49, 0.7);
-          --text-muted: rgba(29, 39, 49, 0.5);
-          --text-faint: rgba(29, 39, 49, 0.4);
-          --border-color: rgba(29, 39, 49, 0.12);
-          --card-bg: rgba(255, 255, 255, 0.5);
-          --card-hover-bg: rgba(255, 255, 255, 0.9);
+          /* Keep dark theme consistent without flashing background */
+          --border-color: rgba(255, 255, 255, 0.18);
         }
       `}} />
     <div className="showcase-wrapper min-h-screen">

@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant light (&:where(.light, .light *));
+
 :root {
   --bg: #070809;
   --ink: #ffffff;
@@ -572,4 +574,37 @@ html.light .mech-cad:hover .cad-crosshair {
 }
 .mech-float-badge {
   transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+}
+
+
+/* ── Modal Dialog Dark Protection (Preserve clean OS simulator in both themes) ── */
+html.light [role="dialog"] .bg-\[\#090a0d\],
+html.light [role="dialog"] .bg-\[\#0c0d11\],
+html.light [role="dialog"] .bg-\[\#08090b\],
+html.light [role="dialog"] .bg-\[\#050608\] {
+  background-color: #090a0d !important;
+}
+html.light [role="dialog"] .text-white {
+  color: #FFFFFF !important;
+}
+html.light [role="dialog"] .text-neutral-400 {
+  color: #A3A3A3 !important;
+}
+html.light [role="dialog"] .text-neutral-500 {
+  color: #737373 !important;
+}
+html.light [role="dialog"] .text-neutral-300 {
+  color: #D4D4D4 !important;
+}
+html.light [role="dialog"] .border-white\/10,
+html.light [role="dialog"] .border-white\/15,
+html.light [role="dialog"] .border-white\/20 {
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* ── Highlight / Recommended Cards in Light Mode ── */
+html.light .from-neutral-900.to-\[\#121316\] {
+  background-image: linear-gradient(to bottom, #FFFFFF, #F3EFEA) !important;
+  border-color: rgba(29, 39, 49, 0.22) !important;
+  box-shadow: 0 10px 30px rgba(29, 39, 49, 0.08) !important;
 }
