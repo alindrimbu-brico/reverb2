@@ -1,0 +1,362 @@
+{
+  "generated_at": "2026-11-09T21:23:40.113782",
+  "total_files_scanned": 20,
+  "exact_duplicates_eliminated": 11,
+  "unique_variations_scored": 9,
+  "song_families": [
+    {
+      "family": "Magia Crăciunului (RO)",
+      "language": "RO",
+      "total_variations_analyzed": 6,
+      "winner": {
+        "file": "Magia Crăciunului .o5.wav",
+        "path": "Suno - melodiile lui Alin\\01 Colinde si Craciun\\Magia Crăciunului .o5.wav",
+        "abs_path": "C:\\Users\\alind\\Music\\Suno - melodiile lui Alin\\01 Colinde si Craciun\\Magia Crăciunului .o5.wav",
+        "family": "Magia Crăciunului (RO)",
+        "language": "RO",
+        "sha256_short": "25642dd82bab",
+        "duration_sec": 165.0,
+        "duration_fmt": "2:44",
+        "size_mb": 30.21,
+        "sample_rate": 48000,
+        "lufs": -14.0,
+        "lra": 10.1,
+        "peak_db": -2.7,
+        "tail_rms_db": -24.4,
+        "abrupt_ending": false,
+        "score": 99.5,
+        "notes": [
+          "Durată ideală de single (2:44)",
+          "Dinamică vocală și orchestrală bogată (10.1 LU)",
+          "Fără distorsiuni de vârf (clipping 0)",
+          "Încheiere naturală cu stingere caldă (fără tăiere bruscă)"
+        ],
+        "is_winner": true,
+        "preview_video_url": "/media/colind_castigator_ro.mp4"
+      },
+      "alternatives": [
+        {
+          "file": "Magia Crăciunului o.3.wav",
+          "path": "Suno - melodiile lui Alin\\01 Colinde si Craciun\\Magia Crăciunului o.3.wav",
+          "abs_path": "C:\\Users\\alind\\Music\\Suno - melodiile lui Alin\\01 Colinde si Craciun\\Magia Crăciunului o.3.wav",
+          "family": "Magia Crăciunului (RO)",
+          "language": "RO",
+          "sha256_short": "05c50f105636",
+          "duration_sec": 167.1,
+          "duration_fmt": "2:47",
+          "size_mb": 30.6,
+          "sample_rate": 48000,
+          "lufs": -13.4,
+          "lra": 7.0,
+          "peak_db": -3.6,
+          "tail_rms_db": -34.4,
+          "abrupt_ending": false,
+          "score": 99.5,
+          "notes": [
+            "Durată ideală de single (2:47)",
+            "Dinamică vocală și orchestrală bogată (7.0 LU)",
+            "Fără distorsiuni de vârf (clipping 0)",
+            "Încheiere naturală cu stingere caldă (fără tăiere bruscă)"
+          ],
+          "is_winner": false
+        },
+        {
+          "file": "Magia Crăciunului .o1.wav",
+          "path": "Suno - melodiile lui Alin\\01 Colinde si Craciun\\Magia Crăciunului .o1.wav",
+          "abs_path": "C:\\Users\\alind\\Music\\Suno - melodiile lui Alin\\01 Colinde si Craciun\\Magia Crăciunului .o1.wav",
+          "family": "Magia Crăciunului (RO)",
+          "language": "RO",
+          "sha256_short": "d9265fba6316",
+          "duration_sec": 159.9,
+          "duration_fmt": "2:39",
+          "size_mb": 29.27,
+          "sample_rate": 48000,
+          "lufs": -15.0,
+          "lra": 6.9,
+          "peak_db": -3.7,
+          "tail_rms_db": -36.0,
+          "abrupt_ending": false,
+          "score": 99.5,
+          "notes": [
+            "Durată ideală de single (2:39)",
+            "Dinamică vocală și orchestrală bogată (6.9 LU)",
+            "Fără distorsiuni de vârf (clipping 0)",
+            "Încheiere naturală cu stingere caldă (fără tăiere bruscă)"
+          ],
+          "is_winner": false
+        },
+        {
+          "file": "Magia Crăciunului .o4.wav",
+          "path": "Suno - melodiile lui Alin\\01 Colinde si Craciun\\Magia Crăciunului .o4.wav",
+          "abs_path": "C:\\Users\\alind\\Music\\Suno - melodiile lui Alin\\01 Colinde si Craciun\\Magia Crăciunului .o4.wav",
+          "family": "Magia Crăciunului (RO)",
+          "language": "RO",
+          "sha256_short": "1c71e348e116",
+          "duration_sec": 132.4,
+          "duration_fmt": "2:12",
+          "size_mb": 24.24,
+          "sample_rate": 48000,
+          "lufs": -15.0,
+          "lra": 6.0,
+          "peak_db": -4.2,
+          "tail_rms_db": -24.1,
+          "abrupt_ending": false,
+          "score": 99.0,
+          "notes": [
+            "Dinamică vocală și orchestrală bogată (6.0 LU)",
+            "Fără distorsiuni de vârf (clipping 0)",
+            "Încheiere naturală cu stingere caldă (fără tăiere bruscă)"
+          ],
+          "is_winner": false
+        },
+        {
+          "file": "Magia Crăciunului .o2.wav",
+          "path": "Suno - melodiile lui Alin\\01 Colinde si Craciun\\Magia Crăciunului .o2.wav",
+          "abs_path": "C:\\Users\\alind\\Music\\Suno - melodiile lui Alin\\01 Colinde si Craciun\\Magia Crăciunului .o2.wav",
+          "family": "Magia Crăciunului (RO)",
+          "language": "RO",
+          "sha256_short": "73c3367f2c39",
+          "duration_sec": 165.0,
+          "duration_fmt": "2:44",
+          "size_mb": 30.21,
+          "sample_rate": 48000,
+          "lufs": -15.2,
+          "lra": 4.7,
+          "peak_db": -4.1,
+          "tail_rms_db": -20.9,
+          "abrupt_ending": false,
+          "score": 98.0,
+          "notes": [
+            "Durată ideală de single (2:44)",
+            "Fără distorsiuni de vârf (clipping 0)",
+            "Încheiere naturală cu stingere caldă (fără tăiere bruscă)"
+          ],
+          "is_winner": false
+        },
+        {
+          "file": "Magia Crăciunului .o6.wav",
+          "path": "Suno - melodiile lui Alin\\01 Colinde si Craciun\\Magia Crăciunului .o6.wav",
+          "abs_path": "C:\\Users\\alind\\Music\\Suno - melodiile lui Alin\\01 Colinde si Craciun\\Magia Crăciunului .o6.wav",
+          "family": "Magia Crăciunului (RO)",
+          "language": "RO",
+          "sha256_short": "a95bcb694891",
+          "duration_sec": 149.8,
+          "duration_fmt": "2:29",
+          "size_mb": 27.44,
+          "sample_rate": 48000,
+          "lufs": -14.3,
+          "lra": 4.1,
+          "peak_db": -4.3,
+          "tail_rms_db": -51.1,
+          "abrupt_ending": false,
+          "score": 98.0,
+          "notes": [
+            "Durată ideală de single (2:29)",
+            "Fără distorsiuni de vârf (clipping 0)",
+            "Încheiere naturală cu stingere caldă (fără tăiere bruscă)"
+          ],
+          "is_winner": false
+        }
+      ]
+    },
+    {
+      "family": "Together for Christmas (EN)",
+      "language": "EN",
+      "total_variations_analyzed": 3,
+      "winner": {
+        "file": "Together at Christmas.wav",
+        "path": "Suno - melodiile lui Alin\\01 Colinde si Craciun\\Together at Christmas.wav",
+        "abs_path": "C:\\Users\\alind\\Music\\Suno - melodiile lui Alin\\01 Colinde si Craciun\\Together at Christmas.wav",
+        "family": "Together for Christmas (EN)",
+        "language": "EN",
+        "sha256_short": "87ce0d81de01",
+        "duration_sec": 179.9,
+        "duration_fmt": "2:59",
+        "size_mb": 32.94,
+        "sample_rate": 48000,
+        "lufs": -14.2,
+        "lra": 9.6,
+        "peak_db": -3.5,
+        "tail_rms_db": -17.9,
+        "abrupt_ending": false,
+        "score": 99.5,
+        "notes": [
+          "Durată ideală de single (2:59)",
+          "Dinamică vocală și orchestrală bogată (9.6 LU)",
+          "Fără distorsiuni de vârf (clipping 0)",
+          "Final complet"
+        ],
+        "is_winner": true,
+        "preview_video_url": "/media/colind_castigator_en.mp4"
+      },
+      "alternatives": [
+        {
+          "file": "Together for Christmas.wav",
+          "path": "Suno - melodiile lui Alin\\01 Colinde si Craciun\\Together for Christmas.wav",
+          "abs_path": "C:\\Users\\alind\\Music\\Suno - melodiile lui Alin\\01 Colinde si Craciun\\Together for Christmas.wav",
+          "family": "Together for Christmas (EN)",
+          "language": "EN",
+          "sha256_short": "84c788ca8ca5",
+          "duration_sec": 157.4,
+          "duration_fmt": "2:37",
+          "size_mb": 28.83,
+          "sample_rate": 48000,
+          "lufs": -14.4,
+          "lra": 8.3,
+          "peak_db": -3.3,
+          "tail_rms_db": -64.6,
+          "abrupt_ending": false,
+          "score": 99.5,
+          "notes": [
+            "Durată ideală de single (2:37)",
+            "Dinamică vocală și orchestrală bogată (8.3 LU)",
+            "Fără distorsiuni de vârf (clipping 0)",
+            "Încheiere naturală cu stingere caldă (fără tăiere bruscă)"
+          ],
+          "is_winner": false
+        },
+        {
+          "file": "Together for Christmas (you).wav",
+          "path": "Suno - melodiile lui Alin\\01 Colinde si Craciun\\Together for Christmas (you).wav",
+          "abs_path": "C:\\Users\\alind\\Music\\Suno - melodiile lui Alin\\01 Colinde si Craciun\\Together for Christmas (you).wav",
+          "family": "Together for Christmas (EN)",
+          "language": "EN",
+          "sha256_short": "bac4b0b8c1e3",
+          "duration_sec": 132.6,
+          "duration_fmt": "2:12",
+          "size_mb": 24.28,
+          "sample_rate": 48000,
+          "lufs": -14.5,
+          "lra": 5.5,
+          "peak_db": -4.0,
+          "tail_rms_db": -21.2,
+          "abrupt_ending": false,
+          "score": 99.0,
+          "notes": [
+            "Dinamică vocală și orchestrală bogată (5.5 LU)",
+            "Fără distorsiuni de vârf (clipping 0)",
+            "Încheiere naturală cu stingere caldă (fără tăiere bruscă)"
+          ],
+          "is_winner": false
+        }
+      ]
+    }
+  ],
+  "exact_duplicates": [
+    {
+      "file": "Magia Crăciunului .o1.wav",
+      "path": "Magia Crăcoinului\\Magia Crăciunului .o1.wav",
+      "duplicate_of": "Magia Crăciunului .o1.wav",
+      "duplicate_of_path": "Suno - melodiile lui Alin\\01 Colinde si Craciun\\Magia Crăciunului .o1.wav",
+      "sha256_short": "d9265fba6316"
+    },
+    {
+      "file": "Magia Crăciunului .o2.wav",
+      "path": "Magia Crăcoinului\\Magia Crăciunului .o2.wav",
+      "duplicate_of": "Magia Crăciunului .o2.wav",
+      "duplicate_of_path": "Suno - melodiile lui Alin\\01 Colinde si Craciun\\Magia Crăciunului .o2.wav",
+      "sha256_short": "73c3367f2c39"
+    },
+    {
+      "file": "Magia Crăciunului .o4.wav",
+      "path": "Magia Crăcoinului\\Magia Crăciunului .o4.wav",
+      "duplicate_of": "Magia Crăciunului .o4.wav",
+      "duplicate_of_path": "Suno - melodiile lui Alin\\01 Colinde si Craciun\\Magia Crăciunului .o4.wav",
+      "sha256_short": "1c71e348e116"
+    },
+    {
+      "file": "Magia Crăciunului .o5.wav",
+      "path": "Magia Crăcoinului\\Magia Crăciunului .o5.wav",
+      "duplicate_of": "Magia Crăciunului .o5.wav",
+      "duplicate_of_path": "Suno - melodiile lui Alin\\01 Colinde si Craciun\\Magia Crăciunului .o5.wav",
+      "sha256_short": "25642dd82bab"
+    },
+    {
+      "file": "Magia Crăciunului .o6.wav",
+      "path": "Magia Crăcoinului\\Magia Crăciunului .o6.wav",
+      "duplicate_of": "Magia Crăciunului .o6.wav",
+      "duplicate_of_path": "Suno - melodiile lui Alin\\01 Colinde si Craciun\\Magia Crăciunului .o6.wav",
+      "sha256_short": "a95bcb694891"
+    },
+    {
+      "file": "Magia Crăciunului .o7.wav",
+      "path": "Magia Crăcoinului\\Magia Crăciunului .o7.wav",
+      "duplicate_of": "Magia Crăciunului .o4.wav",
+      "duplicate_of_path": "Suno - melodiile lui Alin\\01 Colinde si Craciun\\Magia Crăciunului .o4.wav",
+      "sha256_short": "1c71e348e116"
+    },
+    {
+      "file": "Magia Crăciunului .o8.wav",
+      "path": "Magia Crăcoinului\\Magia Crăciunului .o8.wav",
+      "duplicate_of": "Magia Crăciunului .o6.wav",
+      "duplicate_of_path": "Suno - melodiile lui Alin\\01 Colinde si Craciun\\Magia Crăciunului .o6.wav",
+      "sha256_short": "a95bcb694891"
+    },
+    {
+      "file": "Magia Crăciunului o.3.wav",
+      "path": "Magia Crăcoinului\\Magia Crăciunului o.3.wav",
+      "duplicate_of": "Magia Crăciunului o.3.wav",
+      "duplicate_of_path": "Suno - melodiile lui Alin\\01 Colinde si Craciun\\Magia Crăciunului o.3.wav",
+      "sha256_short": "05c50f105636"
+    },
+    {
+      "file": "Together at Christmas.wav",
+      "path": "Colinde en\\Together at Christmas.wav",
+      "duplicate_of": "Together at Christmas.wav",
+      "duplicate_of_path": "Suno - melodiile lui Alin\\01 Colinde si Craciun\\Together at Christmas.wav",
+      "sha256_short": "87ce0d81de01"
+    },
+    {
+      "file": "Together for Christmas (you).wav",
+      "path": "Colinde en\\Together for Christmas (you).wav",
+      "duplicate_of": "Together for Christmas (you).wav",
+      "duplicate_of_path": "Suno - melodiile lui Alin\\01 Colinde si Craciun\\Together for Christmas (you).wav",
+      "sha256_short": "bac4b0b8c1e3"
+    },
+    {
+      "file": "Together for Christmas.wav",
+      "path": "Colinde en\\Together for Christmas.wav",
+      "duplicate_of": "Together for Christmas.wav",
+      "duplicate_of_path": "Suno - melodiile lui Alin\\01 Colinde si Craciun\\Together for Christmas.wav",
+      "sha256_short": "84c788ca8ca5"
+    }
+  ],
+  "catalog_categories": [
+    {
+      "folder": "01 Colinde si Craciun",
+      "count": 9
+    },
+    {
+      "folder": "02 Poezie si versuri in romana",
+      "count": 26
+    },
+    {
+      "folder": "03 Balade si poezie in engleza",
+      "count": 60
+    },
+    {
+      "folder": "04 Cosmic si meditativ",
+      "count": 25
+    },
+    {
+      "folder": "05 Reuniuni",
+      "count": 6
+    },
+    {
+      "folder": "06 Underground si electronic",
+      "count": 4
+    },
+    {
+      "folder": "07 Instrumental orchestral",
+      "count": 2
+    },
+    {
+      "folder": "99 De verificat",
+      "count": 3
+    },
+    {
+      "folder": "Pentru prietena lui Alin",
+      "count": 21
+    }
+  ]
+}

@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import fs from "fs";
+import path from "path";
 
 export async function POST(req: Request) {
   try {
@@ -206,6 +208,36 @@ export async function POST(req: Request) {
         message: approved 
           ? "Videoclipul a fost aprobat și adăugat în coada de postare automată (TikTok, Reels, Shorts)."
           : "Videoclipul a fost trimis înapoi în atelier pentru regenerarea cadrelor."
+      });
+    }
+
+    // ── 6. SUNO & COLINDE AUTOPILOT (JURIU ACUSTIC + AI, DEDUPLICARE, VIDEO & MONETIZARE) ──
+    if (action === "music_autopilot") {
+      const auditPath = path.join(process.cwd(), "public", "media", "music_audit.json");
+      let auditData = null;
+      if (fs.existsSync(auditPath)) {
+        auditData = JSON.parse(fs.readFileSync(auditPath, "utf-8"));
+      }
+      return NextResponse.json({
+        success: true,
+        engine: "Reverb Music Autopilot • Juriu Acustic EBU R128 + Gemini 4 Argon Audio",
+        audit: auditData,
+        distributionChannels: {
+          videoChannels: [
+            { name: "YouTube Long-Form (16:9 4K/HD)", status: "Pregătit (YouTube Data API v3)", monetization: "AdSense + YouTube Music Premium" },
+            { name: "YouTube Shorts & TikTok (9:16)", status: "Pregătit (Extras refren 45s)", monetization: "Creator Rewards + Trafic Canal" }
+          ],
+          audioStreaming: [
+            { name: "Spotify & Apple Music", via: "DistroKid / Master -14 LUFS", status: "WAV 48kHz verificat fără clipping" },
+            { name: "TikTok Sound & Instagram Audio", via: "Content ID & Audio Library", status: "Redevențe automate la fiecare utilizare în Reels/TikTok" },
+            { name: "YouTube Content ID", via: "Amprentă Audio Oficială", status: "Colectare automată drepturi de autor" }
+          ],
+          sunoSync: {
+            account: "suno.com (Catalog ~1.900 piese Alin Dragoș)",
+            localCatalog: "C:\\Users\\alind\\Music\\Suno - melodiile lui Alin (148 piese indexate pe 7 categorii)",
+            mode: "Preluare automată perechi noi → Eliminare dubluri SHA-256 → Selecție Câștigătoare #1 → Randare FFmpeg"
+          }
+        }
       });
     }
 
