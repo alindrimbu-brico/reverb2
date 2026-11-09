@@ -126,9 +126,9 @@ export default function StudioPage() {
     }
   };
 
-  // Cele 3 Ramuri Automate Principale + Uneltele Tehnice
+  // Cele 3 Ramuri Automate Principale + Conturi & Canale + Uneltele Tehnice
   const [activeTab, setActiveTab] = useState<
-    "music-autopilot" | "viral-factory" | "intake" | "deep-research" | "script" | "audio" | "veo-director" | "notebooklm" | "approval" | "briefing"
+    "music-autopilot" | "viral-factory" | "intake" | "channels-hub" | "deep-research" | "script" | "audio" | "veo-director" | "notebooklm" | "approval" | "briefing"
   >("music-autopilot");
   const [showTechTools, setShowTechTools] = useState(false);
   const [viralChannelStates, setViralChannelStates] = useState<Record<string, string>>({});
@@ -474,12 +474,12 @@ export default function StudioPage() {
           </div>
         </div>
 
-        {/* PANOU DE COMANDĂ MANAGER: CELE 3 RAMURI AUTOMATE */}
+        {/* PANOU DE COMANDĂ MANAGER: CELE 3 RAMURI AUTOMATE + CONTURI */}
         <div className="max-w-7xl mx-auto mt-8 border-t border-white/10 pt-5 font-mono text-xs">
           <div className="text-[10px] uppercase tracking-widest text-neutral-400 mb-3">
-            Panou Central de Comandă (Cele 3 Ramuri care lucrează singure • Tu doar vezi sau dai o idee):
+            Panou Central de Comandă (Cele 3 Ramuri care lucrează singure + Conturile unde se urcă totul):
           </div>
-          <div className="grid md:grid-cols-3 gap-3">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
             <button
               onClick={() => setActiveTab("music-autopilot")}
               className={`p-4 rounded-2xl text-left transition-all border ${
@@ -489,11 +489,11 @@ export default function StudioPage() {
               }`}
             >
               <div className="font-bold text-sm flex items-center justify-between">
-                <span>🎵 Ramura 1: Muzică & Colinde</span>
+                <span>🎵 1. Muzică & Colinde</span>
                 <span className="text-[10px] px-2 py-0.5 rounded-full bg-black/20">AUTOPILOT</span>
               </div>
               <div className={`text-[11px] mt-1 font-sans ${activeTab === "music-autopilot" ? "text-black/80" : "text-neutral-400"}`}>
-                Ia melodiile din Suno/PC → alege câștigătoarea → face scenariul și videoclipul → urcă pe YouTube & Spotify.
+                Ia melodiile din Suno → alege câștigătoarea → face videoclipul integral (16:9 + 9:16) → YouTube & Spotify.
               </div>
             </button>
 
@@ -506,11 +506,11 @@ export default function StudioPage() {
               }`}
             >
               <div className="font-bold text-sm flex items-center justify-between">
-                <span>🔥 Ramura 2: Clipuri Virale (1M+)</span>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-black/20">CREȘTERE CANAL</span>
+                <span>🔥 2. Clipuri Virale (1M+)</span>
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-black/20">URMĂRITORI</span>
               </div>
               <div className={`text-[11px] mt-1 font-sans ${activeTab === "viral-factory" ? "text-white/90" : "text-neutral-400"}`}>
-                Copiază tiparul clipurilor cu milioane de vizualizări ca să adune urmăritori pe canalele noastre.
+                Copiază rețeta clipurilor cu milioane de vizualizări ca să crească rapid canalele noastre.
               </div>
             </button>
 
@@ -523,11 +523,28 @@ export default function StudioPage() {
               }`}
             >
               <div className="font-bold text-sm flex items-center justify-between">
-                <span>🛒 Ramura 3: Reclame & Vânzări</span>
+                <span>🛒 3. Reclame & Vânzări</span>
                 <span className="text-[10px] px-2 py-0.5 rounded-full bg-black/20">CONVERSIE</span>
               </div>
               <div className={`text-[11px] mt-1 font-sans ${activeTab === "intake" ? "text-black/80" : "text-neutral-400"}`}>
-                Transformă urmăritorii în clienți pe Bricolando.ro, RaftPlin.ro și cărțile Kalki Nexus (sau dictezi o idee nouă).
+                Transformă urmăritorii în clienți pe Bricolando.ro, RaftPlin.ro și Kalki Nexus (sau dictezi o idee).
+              </div>
+            </button>
+
+            <button
+              onClick={() => setActiveTab("channels-hub")}
+              className={`p-4 rounded-2xl text-left transition-all border ${
+                activeTab === "channels-hub"
+                  ? "bg-sky-400 text-black border-sky-300 shadow-[0_0_25px_rgba(56,189,248,0.3)]"
+                  : "bg-sky-500/10 text-sky-200 border-sky-400/30 hover:bg-sky-500/20"
+              }`}
+            >
+              <div className="font-bold text-sm flex items-center justify-between">
+                <span>📡 4. Conturi & Canale</span>
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-black/20">KITURI & API</span>
+              </div>
+              <div className={`text-[11px] mt-1 font-sans ${activeTab === "channels-hub" ? "text-black/80" : "text-neutral-400"}`}>
+                Toate conturile existente + kiturile gata făcute (nume, bio, linkuri) pentru canalele noi.
               </div>
             </button>
           </div>
@@ -1537,8 +1554,8 @@ export default function StudioPage() {
                                 {w.preview_video_url && (
                                   <div className="mb-5 rounded-2xl overflow-hidden border border-amber-400/30 bg-black shadow-lg">
                                     <div className="bg-amber-400/10 px-3 py-1.5 text-[10px] text-amber-300 font-bold flex justify-between items-center border-b border-amber-400/20">
-                                      <span>🎬 VIDEOCLIP CINEMATIC RANDAT AUTOMAT (4 SCENE VIZUALE + AUDIO)</span>
-                                      <span className="text-emerald-400">● HD 720p</span>
+                                      <span>🎬 VIDEOCLIP INTEGRAL ({w.duration_fmt} • 4 SCENE + AUDIO MASTER)</span>
+                                      <span className="text-emerald-400">● HD 16:9 + 9:16</span>
                                     </div>
                                     <video
                                       controls
@@ -1547,11 +1564,20 @@ export default function StudioPage() {
                                       className="w-full aspect-video"
                                       src={w.preview_video_url}
                                     />
-                                    <div className="px-3 py-2 text-[10px] text-neutral-400 flex justify-between border-t border-white/5">
-                                      <span>Apasă ▶ Play pentru a vedea videoclipul cu cele 4 scene de Crăciun</span>
+                                    <div className="px-3 py-2 text-[10px] text-neutral-400 flex flex-wrap gap-3 justify-between border-t border-white/5">
                                       <a href={w.preview_video_url} download className="text-amber-400 hover:underline font-bold">
-                                        Descarcă Videoclipul MP4 →
+                                        ⬇ Video Integral 16:9 ({w.duration_fmt})
                                       </a>
+                                      {w.short_video_url && (
+                                        <a href={w.short_video_url} download className="text-rose-400 hover:underline font-bold">
+                                          ⬇ Video Vertical 9:16 TikTok/Shorts (40s Refren)
+                                        </a>
+                                      )}
+                                      {w.cover_3000_url && (
+                                        <a href={w.cover_3000_url} download className="text-emerald-400 hover:underline font-bold">
+                                          ⬇ Copertă Spotify 3000×3000px
+                                        </a>
+                                      )}
                                     </div>
                                   </div>
                                 )}
@@ -1670,9 +1696,15 @@ export default function StudioPage() {
                             </p>
                           </div>
                           <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5">
-                            <div className="text-emerald-300 font-bold">3. Platforme Doar Audio (Spotify, Apple Music, TikTok Sound, Content ID)</div>
+                            <div className="text-emerald-300 font-bold">3. Platforme Doar Audio (Spotify, Apple Music, TikTok Sound Library)</div>
                             <p className="text-neutral-400 mt-1">
-                              Export automat pachet Master WAV (-14 LUFS) + Copertă 3000×3000px + metadate pentru distribuire globală prin DistroKid (100% redevențe).
+                              Export automat pachet Master WAV (-14 LUFS) + Copertă 3000×3000px + metadate autor versuri „Alin-Dragoș Drîmbu” prin DistroKid (fără bifa Content ID, conform regulii AI 2026).
+                            </p>
+                          </div>
+                          <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-400/30">
+                            <div className="text-amber-300 font-bold">4. Multiplicator 10x Venituri: Colaj Album 1 Oră (Mid-Roll Ads)</div>
+                            <p className="text-neutral-300 mt-1">
+                              Pe lângă clipurile individuale, sistemul unește automat colindele și cântările de suflet într-un Album Video de 50–60 minute (peste pragul de 8 minute YouTube), activând reclamele Mid-Roll (8–18 € / 1.000 vizualizări în decembrie).
                             </p>
                           </div>
                         </div>
@@ -1874,6 +1906,203 @@ export default function StudioPage() {
                         </div>
                       );
                     })}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        )}
+
+        {/* ── RAMURA 4: CONTURI & CANALE CONECTATE (INVENTAR EXISTENT + KITURI GATA DE CREARE) ── */}
+        {activeTab === "channels-hub" && (
+          <Reveal>
+            <div className="space-y-8">
+              <div className="rounded-3xl border border-sky-400/30 bg-neutral-900/40 p-8 backdrop-blur-md">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6 mb-8">
+                  <div>
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-sky-400 font-bold">
+                      Ramura 4 • Arhitectura Conturilor & Separarea Audiențelor (Fără Amestecare de Algoritm)
+                    </span>
+                    <h2 className="text-2xl font-medium text-white mt-1">
+                      📡 Conturi & Canale Conectate: Unde se urcă automat fiecare producție
+                    </h2>
+                    <p className="text-xs text-neutral-400 font-mono mt-1">
+                      Toate canalele YouTube stau sub contul tău unic Google (alindrimbu@gmail.com — comutare fără parolă), dar sunt 100% separate pentru public ca să nu amestecăm niciodată colindele și rugăciunile cu sculele de șantier.
+                    </p>
+                  </div>
+                  <div className="px-4 py-2 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 font-mono text-xs font-bold shrink-0">
+                    ● 5 Ecosisteme Active • 2 Canale Noi Gata de Deschis
+                  </div>
+                </div>
+
+                {/* REGULA DE AUR A PEȘTIȘORILOR: DE CE NU AMESTECĂM CANALELE */}
+                <div className="mb-8 rounded-2xl border border-amber-400/25 bg-amber-400/[0.04] p-5 text-xs">
+                  <div className="font-mono uppercase tracking-widest text-amber-300 font-bold mb-2">
+                    ⚠️ Regula de Aur descoperită la Audit (De ce separăm canalele pe piloni):
+                  </div>
+                  <p className="text-neutral-300 leading-relaxed">
+                    Dacă pe același canal de YouTube sau TikTok pui dimineața o <strong>Colindă / Rugăciune Ortodoxă</strong> și seara o <strong>reclamă la chei tubulare</strong>, algoritmul le arată cheia tubulară oamenilor care au intrat pentru rugăciune — aceștia dau swipe în prima secundă, iar clipul rămâne blocat la 250 de vizualizări. De aceea, <strong>Reverb Studio</strong> trimite automat fiecare clip strict pe canalul nișei lui!
+                  </p>
+                </div>
+
+                {/* SECȚIUNEA A: CELE 2 CANALE NOI DE CREAT ACUM (KITURI COPY-PASTE 60 SECUNDE) */}
+                <div className="mb-10 space-y-4">
+                  <div className="text-xs font-mono uppercase tracking-widest text-sky-300 font-bold">
+                    ★ Pasul 1: Cele 2 Canale Noi de Deschis Acum (Totul pregătit gata de Copy-Paste • Fără numele firmei):
+                  </div>
+
+                  <div className="grid lg:grid-cols-2 gap-6 font-mono text-xs">
+                    {/* KIT 1: VATRA LUMINII (COLINDE & CÂNTĂRI) */}
+                    <div className="rounded-3xl border border-amber-400/40 bg-black/60 p-6 flex flex-col justify-between">
+                      <div>
+                        <div className="flex items-center justify-between gap-2 mb-3">
+                          <span className="px-3 py-1 rounded-full bg-amber-400/20 border border-amber-400/40 text-amber-300 font-bold text-[10px]">
+                            PRIORITATE #1 DECEMBRIE • CANAL NOU YOUTUBE + TIKTOK + DISTROKID
+                          </span>
+                        </div>
+                        <h3 className="text-lg font-bold text-white font-sans">
+                          1. Canalul de Colinde, Cântări & Poezie Românească
+                        </h3>
+                        <p className="text-neutral-400 text-[11px] font-sans mt-1 mb-4">
+                          Se creează în 30 secunde ca Brand Channel pe <strong>alindrimbu@gmail.com</strong> (la fel cum ai creat Bricolando și Raft Plin). Aici urcăm toate colindele, cântările ortodoxe și poeziile în română + Albumul de 1 Oră.
+                        </p>
+
+                        <div className="space-y-2.5 bg-white/[0.03] border border-white/10 rounded-2xl p-4 mb-4">
+                          <div>
+                            <span className="text-neutral-500 text-[10px] block">NUME CANAL YOUTUBE / TIKTOK (fără puncte):</span>
+                            <strong className="text-amber-300 text-sm select-all">Vatra Luminii — Colinde și Cântări</strong>
+                          </div>
+                          <div>
+                            <span className="text-neutral-500 text-[10px] block">HANDLE (@):</span>
+                            <strong className="text-white select-all">@vatraluminii</strong> <span className="text-neutral-500">(sau @colindesilumina)</span>
+                          </div>
+                          <div>
+                            <span className="text-neutral-500 text-[10px] block">DESCRIERE SCURTĂ BIO TIKTOK (77/80 caractere):</span>
+                            <p className="text-emerald-300 select-all">Colinde românești, cântări de suflet și poezie pusă pe muzică · Alin Dragoș</p>
+                          </div>
+                          <div>
+                            <span className="text-neutral-500 text-[10px] block">DESCRIERE YOUTUBE (primele 95 car. vizibile pe mobil):</span>
+                            <p className="text-neutral-200 select-all">kalki.nexus — colinde românești, cântări de liniște și versuri originale de Alin Dragoș. Muzică pentru suflet, familie și sărbători cu pace.</p>
+                          </div>
+                          <div>
+                            <span className="text-neutral-500 text-[10px] block">NUME ARTIST DISTROKID (Spotify / Apple Music):</span>
+                            <p className="text-white select-all">Artist: <strong>Alin Dragoș</strong> • Textier/Compozitor: <strong>Alin-Dragoș Drîmbu</strong></p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <a
+                        href="https://www.youtube.com/account"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="w-full text-center rounded-full bg-amber-400 py-3 text-xs uppercase tracking-widest text-black font-bold hover:bg-amber-300 transition-all block"
+                      >
+                        ↗ Deschide YouTube Channels (Creează „Vatra Luminii” în 1 Click)
+                      </a>
+                    </div>
+
+                    {/* KIT 2: KALKI NEXUS / BY THE FIRE + RAFT PLIN TIKTOK */}
+                    <div className="rounded-3xl border border-sky-400/40 bg-black/60 p-6 flex flex-col justify-between">
+                      <div>
+                        <div className="flex items-center justify-between gap-2 mb-3">
+                          <span className="px-3 py-1 rounded-full bg-sky-400/20 border border-sky-400/40 text-sky-300 font-bold text-[10px]">
+                            PRIORITATE #2 • CANAL YOUTUBE KALKI NEXUS + TIKTOK RAFT PLIN
+                          </span>
+                        </div>
+                        <h3 className="text-lg font-bold text-white font-sans">
+                          2. Canalul Kalki Nexus (Pilde & Cărți) + TikTok Raft Plin
+                        </h3>
+                        <p className="text-neutral-400 text-[11px] font-sans mt-1 mb-4">
+                          Pagina de Facebook <strong>Kalki Nexus</strong> este deja activă. Adăugăm canalul YouTube sub același cont Google + contul TikTok pentru <strong>Raft Plin</strong>.
+                        </p>
+
+                        <div className="space-y-2.5 bg-white/[0.03] border border-white/10 rounded-2xl p-4 mb-4">
+                          <div>
+                            <span className="text-neutral-500 text-[10px] block">CANAL YOUTUBE #2 (Sub alindrimbu@gmail.com):</span>
+                            <strong className="text-sky-300 text-sm select-all">Kalki Nexus</strong> • Handle: <strong className="text-white select-all">@kalkinexus</strong>
+                          </div>
+                          <div>
+                            <span className="text-neutral-500 text-[10px] block">DESCRIERE YOUTUBE KALKI NEXUS:</span>
+                            <p className="text-neutral-200 select-all">kalki.nexus & bythefire.app — parabole stoico-creștine, pilde și aforisme zilnice la gura sobei (RO & EN). Cărțile lui Alin Dragoș.</p>
+                          </div>
+                          <div className="border-t border-white/10 pt-2">
+                            <span className="text-neutral-500 text-[10px] block">CONT TIKTOK RAFT PLIN (Singurul care lipsea la Raft Plin):</span>
+                            <strong className="text-emerald-300 select-all">@raftplin.ro</strong> <span className="text-neutral-500">(sau @raftplin_ro)</span>
+                          </div>
+                          <div>
+                            <span className="text-neutral-500 text-[10px] block">BIO TIKTOK RAFT PLIN (73/80 caractere • Fără numele firmei):</span>
+                            <p className="text-neutral-200 select-all">Cadouri și lucruri frumoase pentru casă · plata la livrare · retur 14 zile</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-2">
+                        <a
+                          href="https://www.youtube.com/account"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-center rounded-full bg-sky-400 py-3 text-[11px] uppercase tracking-wider text-black font-bold hover:bg-sky-300 transition-all block"
+                        >
+                          ↗ YouTube @kalkinexus
+                        </a>
+                        <a
+                          href="https://www.tiktok.com/signup"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-center rounded-full bg-emerald-400 py-3 text-[11px] uppercase tracking-wider text-black font-bold hover:bg-emerald-300 transition-all block"
+                        >
+                          ↗ TikTok @raftplin.ro
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* SECȚIUNEA B: TABELUL COMPLET AL CONTURILOR DEJA EXISTENTE */}
+                <div className="space-y-4 font-mono text-xs">
+                  <div className="text-xs uppercase tracking-widest text-emerald-400 font-bold">
+                    ✓ Conturile Noastre Deja Create și Active (Inventar Verificat):
+                  </div>
+
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div className="p-5 rounded-2xl border border-emerald-500/30 bg-black/50">
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-white font-bold text-sm">1. Bricolando.ro</span>
+                        <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">6/6 ACTIVE</span>
+                      </div>
+                      <ul className="space-y-1 text-[11px] text-neutral-300">
+                        <li>• YouTube: <strong>@bricolando</strong> (UCLqovxjEWDrM64S6vtXHhvQ)</li>
+                        <li>• TikTok: <strong>@bricolando.ro</strong> (Activ + Ads)</li>
+                        <li>• Facebook & IG: <strong>Bricolando.ro / @bricolando.ro</strong></li>
+                        <li>• Pinterest & X: <strong>bricolandoro / @bricolando_ro</strong></li>
+                      </ul>
+                    </div>
+
+                    <div className="p-5 rounded-2xl border border-emerald-500/30 bg-black/50">
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-white font-bold text-sm">2. RaftPlin.ro</span>
+                        <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">4/5 ACTIVE</span>
+                      </div>
+                      <ul className="space-y-1 text-[11px] text-neutral-300">
+                        <li>• YouTube: <strong>@raftplin</strong> (UC9ZYb9WoYDLEy_P90HNM0mA)</li>
+                        <li>• Facebook & IG: <strong>Raft Plin / @raftplin.ro</strong></li>
+                        <li>• Pinterest: <strong>raftplin</strong> (Business)</li>
+                        <li className="text-amber-300">• TikTok: kit pregătit mai sus (@raftplin.ro)</li>
+                      </ul>
+                    </div>
+
+                    <div className="p-5 rounded-2xl border border-emerald-500/30 bg-black/50">
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-white font-bold text-sm">3. Numerarium & Muzică Modernă</span>
+                        <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">ACTIVE</span>
+                      </div>
+                      <ul className="space-y-1 text-[11px] text-neutral-300">
+                        <li>• YouTube Numerarium: <strong>@numerariumapp</strong></li>
+                        <li>• FB Numerarium: <strong>ID 1446937995162521</strong></li>
+                        <li>• YouTube Muzică Modernă/EN: <strong>Brasil&apos;s Room (@brasilroom)</strong> (~20 piese Suno deja urcate)</li>
+                        <li>• FB Kalki Nexus: <strong>Activ (postare zilnică 21:00)</strong></li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>

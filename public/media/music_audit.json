@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-09T21:54:22.474880",
+  "generated_at": "2026-11-09T22:14:02.403567",
   "total_files_scanned": 20,
   "exact_duplicates_eliminated": 11,
   "unique_variations_scored": 9,
@@ -32,7 +32,9 @@
           "Încheiere naturală cu stingere caldă (fără tăiere bruscă)"
         ],
         "is_winner": true,
-        "preview_video_url": "/media/colind_castigator_ro.mp4?v=2"
+        "preview_video_url": "/media/colind_castigator_ro.mp4?v=3",
+        "short_video_url": "/media/colind_short_ro.mp4?v=3",
+        "cover_3000_url": "/media/cover_colind_ro_3000.jpg"
       },
       "alternatives": [
         {
@@ -187,7 +189,9 @@
           "Final complet"
         ],
         "is_winner": true,
-        "preview_video_url": "/media/colind_castigator_en.mp4?v=2"
+        "preview_video_url": "/media/colind_castigator_en.mp4?v=3",
+        "short_video_url": "/media/colind_short_en.mp4?v=3",
+        "cover_3000_url": "/media/cover_colind_en_3000.jpg"
       },
       "alternatives": [
         {
@@ -324,39 +328,332 @@
   "catalog_categories": [
     {
       "folder": "01 Colinde si Craciun",
-      "count": 9
+      "count": 9,
+      "sample_tracks": [
+        {
+          "name": "Magia Crăciunului .o1.wav",
+          "ext": "wav",
+          "size_mb": 29.3
+        },
+        {
+          "name": "Magia Crăciunului .o2.wav",
+          "ext": "wav",
+          "size_mb": 30.2
+        },
+        {
+          "name": "Magia Crăciunului .o4.wav",
+          "ext": "wav",
+          "size_mb": 24.2
+        },
+        {
+          "name": "Magia Crăciunului .o5.wav",
+          "ext": "wav",
+          "size_mb": 30.2
+        },
+        {
+          "name": "Magia Crăciunului .o6.wav",
+          "ext": "wav",
+          "size_mb": 27.4
+        },
+        {
+          "name": "Magia Crăciunului o.3.wav",
+          "ext": "wav",
+          "size_mb": 30.6
+        },
+        {
+          "name": "Together at Christmas.wav",
+          "ext": "wav",
+          "size_mb": 32.9
+        },
+        {
+          "name": "Together for Christmas (you).wav",
+          "ext": "wav",
+          "size_mb": 24.3
+        }
+      ]
     },
     {
       "folder": "02 Poezie si versuri in romana",
-      "count": 26
+      "count": 26,
+      "sample_tracks": [
+        {
+          "name": "All Inclusive în Univers.wav",
+          "ext": "wav",
+          "size_mb": 38.5
+        },
+        {
+          "name": "Apa și malul.wav",
+          "ext": "wav",
+          "size_mb": 44.8
+        },
+        {
+          "name": "Aseară m-am certat cu Dumnezeu din nou.wav",
+          "ext": "wav",
+          "size_mb": 39.9
+        },
+        {
+          "name": "Aseară m-am certat cu Dumnezeu.wav",
+          "ext": "wav",
+          "size_mb": 44.3
+        },
+        {
+          "name": "Cascada de Grație Dumnezeiască.wav",
+          "ext": "wav",
+          "size_mb": 72.2
+        },
+        {
+          "name": "Coboară Zidul.wav",
+          "ext": "wav",
+          "size_mb": 49.0
+        },
+        {
+          "name": "Câmpul Magnetic.wav",
+          "ext": "wav",
+          "size_mb": 34.5
+        },
+        {
+          "name": "Doar un Val (I).wav",
+          "ext": "wav",
+          "size_mb": 35.9
+        }
+      ]
     },
     {
       "folder": "03 Balade si poezie in engleza",
-      "count": 60
+      "count": 60,
+      "sample_tracks": [
+        {
+          "name": "A dreadful despair burns inside me…  .wav",
+          "ext": "wav",
+          "size_mb": 37.7
+        },
+        {
+          "name": "beloved.wav",
+          "ext": "wav",
+          "size_mb": 57.2
+        },
+        {
+          "name": "brake.wav",
+          "ext": "wav",
+          "size_mb": 51.3
+        },
+        {
+          "name": "Bridge of Light.wav",
+          "ext": "wav",
+          "size_mb": 49.2
+        },
+        {
+          "name": "CAN'T SEE DREAMS.wav",
+          "ext": "wav",
+          "size_mb": 76.0
+        },
+        {
+          "name": "CAN'T SEE world.wav",
+          "ext": "wav",
+          "size_mb": 79.5
+        },
+        {
+          "name": "CAN'T SEE you.wav",
+          "ext": "wav",
+          "size_mb": 71.8
+        },
+        {
+          "name": "CAN'T SEE your side.wav",
+          "ext": "wav",
+          "size_mb": 77.8
+        }
+      ]
     },
     {
       "folder": "04 Cosmic si meditativ",
-      "count": 25
+      "count": 25,
+      "sample_tracks": [
+        {
+          "name": "Beautifull guru.wav",
+          "ext": "wav",
+          "size_mb": 43.3
+        },
+        {
+          "name": "Beautifull univers.wav",
+          "ext": "wav",
+          "size_mb": 58.3
+        },
+        {
+          "name": "Beautifull view.wav",
+          "ext": "wav",
+          "size_mb": 40.2
+        },
+        {
+          "name": "Cosmic arch.wav",
+          "ext": "wav",
+          "size_mb": 45.5
+        },
+        {
+          "name": "Cosmic beauty.wav",
+          "ext": "wav",
+          "size_mb": 40.2
+        },
+        {
+          "name": "Cosmic bells.wav",
+          "ext": "wav",
+          "size_mb": 58.5
+        },
+        {
+          "name": "Cosmic bliss.wav",
+          "ext": "wav",
+          "size_mb": 38.8
+        },
+        {
+          "name": "Cosmic colour.wav",
+          "ext": "wav",
+          "size_mb": 52.8
+        }
+      ]
     },
     {
       "folder": "05 Reuniuni",
-      "count": 6
+      "count": 6,
+      "sample_tracks": [
+        {
+          "name": "Reuniune cu ea.wav",
+          "ext": "wav",
+          "size_mb": 33.8
+        },
+        {
+          "name": "Reuniune de primăvară.wav",
+          "ext": "wav",
+          "size_mb": 54.2
+        },
+        {
+          "name": "Reuniune de seară.wav",
+          "ext": "wav",
+          "size_mb": 39.6
+        },
+        {
+          "name": "Reuniune in stele.wav",
+          "ext": "wav",
+          "size_mb": 38.1
+        },
+        {
+          "name": "Reuniune în clasă.wav",
+          "ext": "wav",
+          "size_mb": 45.4
+        },
+        {
+          "name": "Reuniune în curte.wav",
+          "ext": "wav",
+          "size_mb": 49.4
+        }
+      ]
     },
     {
       "folder": "06 Underground si electronic",
-      "count": 4
+      "count": 4,
+      "sample_tracks": [
+        {
+          "name": "minimall yrialy.wav",
+          "ext": "wav",
+          "size_mb": 87.8
+        },
+        {
+          "name": "umderground, minimal soul fly, soul, hook.wav",
+          "ext": "wav",
+          "size_mb": 87.8
+        },
+        {
+          "name": "umderground, minimal, beat bass 3.wav",
+          "ext": "wav",
+          "size_mb": 37.4
+        },
+        {
+          "name": "umderground, minimal, beat bass 4.wav",
+          "ext": "wav",
+          "size_mb": 43.5
+        }
+      ]
     },
     {
       "folder": "07 Instrumental orchestral",
-      "count": 2
+      "count": 2,
+      "sample_tracks": [
+        {
+          "name": "The Last Light.mp3",
+          "ext": "mp3",
+          "size_mb": 3.8
+        },
+        {
+          "name": "The Last Light.wav",
+          "ext": "wav",
+          "size_mb": 30.8
+        }
+      ]
     },
     {
       "folder": "99 De verificat",
-      "count": 3
+      "count": 3,
+      "sample_tracks": [
+        {
+          "name": "John Wick.wav",
+          "ext": "wav",
+          "size_mb": 29.8
+        },
+        {
+          "name": "moon 34.wav",
+          "ext": "wav",
+          "size_mb": 25.8
+        },
+        {
+          "name": "tema 80 un barbat.mp3",
+          "ext": "mp3",
+          "size_mb": 4.1
+        }
+      ]
     },
     {
       "folder": "Pentru prietena lui Alin",
-      "count": 21
+      "count": 21,
+      "sample_tracks": [
+        {
+          "name": "All Inclusive în Univers.wav",
+          "ext": "wav",
+          "size_mb": 38.5
+        },
+        {
+          "name": "Bridge of Light.wav",
+          "ext": "wav",
+          "size_mb": 49.2
+        },
+        {
+          "name": "Doar un Val (1).wav",
+          "ext": "wav",
+          "size_mb": 38.1
+        },
+        {
+          "name": "Doar un Val 21.wav",
+          "ext": "wav",
+          "size_mb": 35.6
+        },
+        {
+          "name": "Doar un Val 22.wav",
+          "ext": "wav",
+          "size_mb": 45.1
+        },
+        {
+          "name": "Doar un Val 23.wav",
+          "ext": "wav",
+          "size_mb": 39.0
+        },
+        {
+          "name": "Doar un Val.wav",
+          "ext": "wav",
+          "size_mb": 35.9
+        },
+        {
+          "name": "Flight Without Wings 2.wav",
+          "ext": "wav",
+          "size_mb": 43.4
+        }
+      ]
     }
   ]
 }

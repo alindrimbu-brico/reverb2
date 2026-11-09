@@ -233,15 +233,24 @@ def scan_and_audit_colinde() -> dict:
             "alternatives": tracks_sorted[1:],
         })
 
-    # Inventar general pe toate cele 7 categorii din Suno - melodiile lui Alin
+    # Inventar general pe toate categoriile din Suno - melodiile lui Alin
     catalog_summary = []
     if SUNO_ROOT.exists():
         for sub in sorted(SUNO_ROOT.iterdir()):
             if sub.is_dir():
-                wavs = list(sub.glob("*.wav")) + list(sub.glob("*.mp3"))
+                wavs = sorted(list(sub.glob("*.wav")) + list(sub.glob("*.mp3")))
+                sample_tracks = [
+                    {
+                        "name": t.name,
+                        "ext": t.suffix.lower().lstrip("."),
+                        "size_mb": round(t.stat().st_size / (1024 * 1024), 1),
+                    }
+                    for t in wavs[:8]
+                ]
                 catalog_summary.append({
                     "folder": sub.name,
                     "count": len(wavs),
+                    "sample_tracks": sample_tracks,
                 })
 
     return {
@@ -255,26 +264,30 @@ def scan_and_audit_colinde() -> dict:
     }
 
 
-def render_colind_preview_video(audio_path: str, title: str, subtitle: str, out_mp4: Path, duration_limit: int = 44) -> bool:
+def render_colind_preview_video(audio_path: str, title: str, subtitle: str, out_mp4: Path, total_duration: float = 164.0) -> bool:
     """
-    Genereaza un videoclip muzical cinematic complet (1280x720 HD, 30fps) combinand cele 4 cadre vizuale
-    fotorealiste de Craciun (scena_colind_1..4.jpg) cu miscare lina de camera (Ken Burns zoom),
-    unda audio aurie discreta in partea de jos si coloana sonora integrala.
+    Genereaza videoclipul muzical cinematic INTEGRAL (1280x720 HD, 30fps, pe toata durata melodiei)
+    combinand cele 4 cadre vizuale fotorealiste de Craciun (scena_colind_1..4.jpg) cu miscare lina
+    de camera (Ken Burns zoom), unda audio aurie discreta in partea de jos si fade-out lin la final.
     """
     s1 = str(PUBLIC_MEDIA / "scena_colind_1.jpg")
     s2 = str(PUBLIC_MEDIA / "scena_colind_2.jpg")
     s3 = str(PUBLIC_MEDIA / "scena_colind_3.jpg")
     s4 = str(PUBLIC_MEDIA / "scena_colind_4.jpg")
 
-    # Fiecare cadru dureaza 11 secunde (330 frame-uri la 30fps) -> total 44 secunde
-    frames_per_scene = 330
+    dur_int = max(40, int(total_duration))
+    scene_sec = dur_int // 4
+    frames_per_scene = scene_sec * 30
+    fade_out_st = max(1, scene_sec - 1)
+    audio_fade_st = max(1, dur_int - 3)
+
     filter_complex = (
-        f"[1:v]scale=1600:900,zoompan=z='min(zoom+0.0004,1.15)':d={frames_per_scene}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=1280x720:fps=30,fade=t=in:st=0:d=1,fade=t=out:st=10:d=1[v0];"
-        f"[2:v]scale=1600:900,zoompan=z='min(zoom+0.0004,1.15)':d={frames_per_scene}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=1280x720:fps=30,fade=t=in:st=0:d=1,fade=t=out:st=10:d=1[v1];"
-        f"[3:v]scale=1600:900,zoompan=z='min(zoom+0.0004,1.15)':d={frames_per_scene}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=1280x720:fps=30,fade=t=in:st=0:d=1,fade=t=out:st=10:d=1[v2];"
-        f"[4:v]scale=1600:900,zoompan=z='min(zoom+0.0004,1.15)':d={frames_per_scene}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=1280x720:fps=30,fade=t=in:st=0:d=1,fade=t=out:st=10:d=1[v3];"
+        f"[1:v]scale=1600:900,zoompan=z='min(zoom+0.00015,1.15)':d={frames_per_scene}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=1280x720:fps=30,fade=t=in:st=0:d=1,fade=t=out:st={fade_out_st}:d=1[v0];"
+        f"[2:v]scale=1600:900,zoompan=z='min(zoom+0.00015,1.15)':d={frames_per_scene}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=1280x720:fps=30,fade=t=in:st=0:d=1,fade=t=out:st={fade_out_st}:d=1[v1];"
+        f"[3:v]scale=1600:900,zoompan=z='min(zoom+0.00015,1.15)':d={frames_per_scene}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=1280x720:fps=30,fade=t=in:st=0:d=1,fade=t=out:st={fade_out_st}:d=1[v2];"
+        f"[4:v]scale=1600:900,zoompan=z='min(zoom+0.00015,1.15)':d={frames_per_scene}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=1280x720:fps=30,fade=t=in:st=0:d=1,fade=t=out:st={fade_out_st}:d=1[v3];"
         f"[v0][v1][v2][v3]concat=n=4:v=1:a=0[bg];"
-        f"[0:a]atrim=0:{duration_limit},asetpts=PTS-STARTPTS,asplit=2[aud_w][aud_out];"
+        f"[0:a]atrim=0:{dur_int},asetpts=PTS-STARTPTS,afade=t=out:st={audio_fade_st}:d=3,asplit=2[aud_w][aud_out];"
         f"[aud_w]showwaves=s=1280x110:mode=cline:rate=30:colors=0xf59e0b@0.75|0xfbbf24@0.75:scale=sqrt[waves];"
         f"[bg][waves]overlay=0:H-130[v_wave];"
         f"[v_wave]drawbox=x=24:y=24:w=1232:h=672:color=0xf59e0b@0.30:t=2[vout]"
@@ -288,8 +301,8 @@ def render_colind_preview_video(audio_path: str, title: str, subtitle: str, out_
         "-i", s4,
         "-filter_complex", filter_complex,
         "-map", "[vout]", "-map", "[aud_out]",
-        "-t", str(duration_limit),
-        "-c:v", "libx264", "-preset", "veryfast", "-pix_fmt", "yuv420p", "-b:v", "3200k",
+        "-t", str(dur_int),
+        "-c:v", "libx264", "-preset", "veryfast", "-pix_fmt", "yuv420p", "-b:v", "2800k",
         "-c:a", "aac", "-b:a", "192k",
         str(out_mp4)
     ]
@@ -299,25 +312,81 @@ def render_colind_preview_video(audio_path: str, title: str, subtitle: str, out_
     return res.returncode == 0 and out_mp4.exists()
 
 
+def render_colind_short_vertical(audio_path: str, out_mp4: Path) -> bool:
+    """
+    Genereaza varianta VERTICALA 9:16 (720x1280, 40 secunde pe refren, de la secunda 25 la 65)
+    pentru TikTok, Instagram Reels si YouTube Shorts.
+    """
+    s2 = str(PUBLIC_MEDIA / "scena_colind_2.jpg")
+    s3 = str(PUBLIC_MEDIA / "scena_colind_3.jpg")
+    filter_complex = (
+        "[1:v]scale=1600:1600,crop=720:1280,zoompan=z='min(zoom+0.0004,1.15)':d=600:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=720x1280:fps=30,fade=t=in:st=0:d=1,fade=t=out:st=19:d=1[v0];"
+        "[2:v]scale=1600:1600,crop=720:1280,zoompan=z='min(zoom+0.0004,1.15)':d=600:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=720x1280:fps=30,fade=t=in:st=0:d=1,fade=t=out:st=19:d=1[v1];"
+        "[v0][v1]concat=n=2:v=1:a=0[bg];"
+        "[0:a]atrim=25:65,asetpts=PTS-STARTPTS,afade=t=in:st=0:d=1,afade=t=out:st=38:d=2,asplit=2[aud_w][aud_out];"
+        "[aud_w]showwaves=s=720x120:mode=cline:rate=30:colors=0xf59e0b@0.8|0xfbbf24@0.8:scale=sqrt[waves];"
+        "[bg][waves]overlay=0:H-180[v_wave];"
+        "[v_wave]drawbox=x=20:y=20:w=680:h=1240:color=0xf59e0b@0.30:t=2[vout]"
+    )
+    cmd = [
+        "ffmpeg", "-y", "-hide_banner", "-loglevel", "error",
+        "-i", audio_path,
+        "-i", s2,
+        "-i", s3,
+        "-filter_complex", filter_complex,
+        "-map", "[vout]", "-map", "[aud_out]",
+        "-t", "40",
+        "-c:v", "libx264", "-preset", "veryfast", "-pix_fmt", "yuv420p", "-b:v", "2500k",
+        "-c:a", "aac", "-b:a", "192k",
+        str(out_mp4)
+    ]
+    res = subprocess.run(cmd, capture_output=True, text=True)
+    return res.returncode == 0 and out_mp4.exists()
+
+
+def render_cover_3000(src_img: Path, out_jpg: Path) -> bool:
+    """Genereaza coperta 3000x3000 px JPG ceruta de Spotify / DistroKid / Apple Music."""
+    cmd = [
+        "ffmpeg", "-y", "-hide_banner", "-loglevel", "error",
+        "-i", str(src_img),
+        "-vf", "crop=min(iw\\,ih):min(iw\\,ih),scale=3000:3000:flags=lanczos",
+        "-q:v", "2",
+        str(out_jpg)
+    ]
+    res = subprocess.run(cmd, capture_output=True, text=True)
+    return res.returncode == 0 and out_jpg.exists()
+
+
 def main():
     print("=== PORNIRE JURIU AI & AUTOPILOT COLINDE (REVERB STUDIO) ===")
     audit = scan_and_audit_colinde()
 
-    # Randam videoclipurile de previzualizare pentru castigatoarele RO si EN
-    for fam in audit["song_families"]:
+    # Randam videoclipurile integrale (16:9), Shorts (9:16) si Coperta 3000x3000 pentru castigatoarele RO si EN
+    for idx, fam in enumerate(audit["song_families"]):
         w = fam["winner"]
         lang = fam["language"].lower()
         out_name = f"colind_castigator_{lang}.mp4"
         out_path = PUBLIC_MEDIA / out_name
-        print(f"-> Randare video pentru castigatoarea [{fam['family']}]: {w['file']} (Scor: {w['score']}/100)...")
+        short_name = f"colind_short_{lang}.mp4"
+        short_path = PUBLIC_MEDIA / short_name
+        cover_name = f"cover_colind_{lang}_3000.jpg"
+        cover_path = PUBLIC_MEDIA / cover_name
+
+        print(f"-> Randare video INTEGRAL ({w['duration_fmt']}) pentru [{fam['family']}]: {w['file']}...")
         ok = render_colind_preview_video(
             w["abs_path"],
             fam["family"],
             f"Varianta Castigatoare: {w['file']} ({w['duration_fmt']})",
             out_path,
-            duration_limit=44
+            total_duration=w["duration_sec"]
         )
-        w["preview_video_url"] = f"/media/{out_name}?v=2" if ok else None
+        ok_short = render_colind_short_vertical(w["abs_path"], short_path)
+        src_cover = PUBLIC_MEDIA / f"scena_colind_{2 if lang == 'ro' else 1}.jpg"
+        ok_cover = render_cover_3000(src_cover, cover_path)
+
+        w["preview_video_url"] = f"/media/{out_name}?v=3" if ok else None
+        w["short_video_url"] = f"/media/{short_name}?v=3" if ok_short else None
+        w["cover_3000_url"] = f"/media/{cover_name}" if ok_cover else None
 
     audit_path = PUBLIC_MEDIA / "music_audit.json"
     with open(audit_path, "w", encoding="utf-8") as f:
