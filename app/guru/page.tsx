@@ -183,11 +183,11 @@ export default function GuruStore() {
                     <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); alert("Plată simulată cu succes! Vei primi ideile pe email."); setIsCheckoutOpen(false); setCart([]); }}>
                         <div>
                             <label className="mb-2 block text-sm font-medium text-white/70">Nume Complet</label>
-                            <input type="text" required className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-white/30 focus:border-[#f5a623] focus:outline-none focus:ring-1 focus:ring-[#f5a623]" placeholder="Ex: Alin Dragoș" />
+                            <input type="text" required className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-white/30 focus:border-[#f5a623] focus:outline-none focus:ring-1 focus:ring-[#f5a623]" placeholder="Ex: Daniel Popa" />
                         </div>
                         <div>
                             <label className="mb-2 block text-sm font-medium text-white/70">Adresa de Email (unde primești accesul)</label>
-                            <input type="email" required className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-white/30 focus:border-[#f5a623] focus:outline-none focus:ring-1 focus:ring-[#f5a623]" placeholder="alin@reverb.ro" />
+                            <input type="email" required className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-white/30 focus:border-[#f5a623] focus:outline-none focus:ring-1 focus:ring-[#f5a623]" placeholder="contact@reverb.ro" />
                         </div>
                         <div className="rounded-xl border border-white/10 bg-white/5 p-4">
                             <div className="mb-4 flex items-center justify-between text-white/70">

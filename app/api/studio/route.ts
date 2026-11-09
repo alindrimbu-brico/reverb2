@@ -48,7 +48,7 @@ export async function POST(req: Request) {
           }
         ],
         audioSettings: {
-          voiceModel: "ElevenLabs - Alin Signature Clone (sau Studio Romanian Pro)",
+          voiceModel: "ElevenLabs - Reverb Signature Clone (sau Studio Romanian Pro)",
           pacing: "Rapid, autoritar, cald, 145 cuvinte/minut",
           backgroundTrack: "Subtle Lo-Fi Electronic Bass (ducking automat la -18dB în timpul vorbirii)"
         },

@@ -38,13 +38,14 @@ export default function Footer() {
   }
 
   const showcaseLinks = [
+    { href: "https://reverb.ro", label: "Reverb.ro", external: true },
+    { href: "https://bythefire.app", label: "ByTheFire.app", external: true },
     { href: isEn ? "/en/showcase" : "/showcase", label: isEn ? "Matrix Index" : "Index Matrice" },
     { href: "https://bricolando.ro", label: "Bricolando.ro", external: true },
     { href: "https://raftplin.ro", label: "RaftPlin.ro", external: true },
     { href: "https://kalki.work", label: "Kalki.work", external: true },
     { href: "https://kalki.nexus", label: "Kalki.nexus", external: true },
     { href: "https://numerarium.app", label: "Numerarium", external: true },
-    { href: "https://bythefire.app", label: "ByTheFire", external: true },
     { href: "https://elumia.app", label: "Elumia", external: true },
     { href: "https://don-barbershop.pages.dev", label: "DON Barbershop", external: true },
   ];
@@ -207,14 +208,44 @@ export default function Footer() {
                 </div>
               </div>
               
-              <div className="space-y-2">
+              <div className="space-y-3">
                 <div className="text-[9px] font-bold tracking-[0.3em] uppercase text-neutral-600 dark:text-neutral-500 border-b border-black/10 dark:border-white/10 pb-2">
                   {t.hq}
                 </div>
-                <p className="text-neutral-700 dark:text-neutral-400 text-[11px] leading-relaxed">
-                  Focșani, Vrancea, România<br />
-                  <span className="text-neutral-500 dark:text-neutral-600 block mt-0.5 font-medium">SC Kalki Drim Magazin SRL</span>
-                </p>
+                <div className="space-y-3">
+                  {/* Birou România */}
+                  <div>
+                    <div className="text-[10px] uppercase font-bold text-neutral-900 dark:text-neutral-200 tracking-wider">
+                      {isEn ? "Romania Office" : "Birou România"}
+                    </div>
+                    <p className="text-neutral-700 dark:text-neutral-400 text-[11px] leading-relaxed mt-0.5">
+                      Focșani, Vrancea, România<br />
+                      <span className="text-neutral-500 dark:text-neutral-600 block font-medium">SC Kalki Drim Magazin SRL</span>
+                    </p>
+                  </div>
+
+                  {/* Birou Londra - Zylaris Group London */}
+                  <div className="pt-2 border-t border-black/5 dark:border-white/5">
+                    <div className="text-[10px] uppercase font-bold text-neutral-900 dark:text-neutral-200 tracking-wider flex items-center justify-between">
+                      <span>Zylaris Group London</span>
+                      <a href="https://zylarisgroup.com" target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-neutral-900 dark:hover:text-white text-[9px]">zylarisgroup.com ↗</a>
+                    </div>
+                    <p className="text-neutral-700 dark:text-neutral-400 text-[11px] leading-relaxed mt-0.5">
+                      167–169 Great Portland Street<br />
+                      London, W1W 5PF, United Kingdom
+                    </p>
+                    <div className="mt-1.5 space-y-1 text-[10px] text-neutral-600 dark:text-neutral-400">
+                      <a href="mailto:office@zylarisgroup.com" className="flex items-center justify-between hover:text-neutral-900 dark:hover:text-white transition-colors">
+                        <span>office@zylarisgroup.com</span>
+                        <span className="text-neutral-500">↗</span>
+                      </a>
+                      <a href="tel:+442071838739" className="flex items-center justify-between hover:text-neutral-900 dark:hover:text-white transition-colors">
+                        <span>+44 20 7183 8739</span>
+                        <span className="text-neutral-500">↗</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

@@ -330,7 +330,7 @@ export default function EnglishHomePage() {
           {/* Quick Contact Line for Mobile & Direct Communication */}
           <div className="mt-6 flex items-center justify-center gap-6 text-[11px] font-mono text-neutral-400">
             <a
-              href="https://wa.me/40767235693?text=Hello%20Alin,%20I%20would%20like%20to%20discuss%20a%20project%20with%20Reverb%20Digital"
+              href="https://wa.me/40767235693?text=Hello,%20I%20would%20like%20to%20discuss%20a%20project%20with%20Reverb%20Digital"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 transition-colors"

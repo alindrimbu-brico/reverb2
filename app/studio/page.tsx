@@ -646,10 +646,10 @@ export default function StudioPage() {
                       <div className="h-16 w-16 mx-auto rounded-full bg-white/10 flex items-center justify-center text-white mb-4">
                         ▶
                       </div>
-                      <div className="text-sm font-bold text-white mb-1">
+                      <div className="text-sm font-bold text-white mb-2 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
                         &ldquo;Dacă încă cumperi chei care se îndoaie...&rdquo;
                       </div>
-                      <div className="inline-block bg-yellow-400 text-black font-black text-xs px-2 py-0.5 rounded shadow">
+                      <div className="text-white font-black text-xs uppercase tracking-widest drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
                         OPREȘTE-TE 30 SECUNDE
                       </div>
                     </div>
@@ -810,7 +810,7 @@ export default function StudioPage() {
                     </span>
                     <h2 className="text-2xl font-medium text-white mt-1">Briefing Executiv de Dimineață</h2>
                     <p className="text-xs text-neutral-400 font-mono mt-1">
-                      Generat automat zilnic la ora 08:00 pentru Alin Drîmbu (General Manager).
+                      Generat automat zilnic la ora 08:00 pentru Conducere (General Management).
                     </p>
                   </div>
                   <div className="text-xs font-mono text-neutral-400 bg-white/5 border border-white/10 px-4 py-2 rounded-xl">
