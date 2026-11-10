@@ -31,24 +31,24 @@ export default function BackgroundWatermarkLogo() {
       {/* Centered Fixed Architectural Watermark */}
       <div className="relative w-[85vw] max-w-[850px] aspect-square flex items-center justify-center">
         
-        {/* Cardinal CAD Coordinate Reticles */}
-        <span className="absolute top-2 text-[10px] font-mono tracking-widest text-white/30 dark:text-white/30 light:text-neutral-900/30">
-          + 00°N • REVERB ARCHITECTURE
+        {/* Cardinal CAD Coordinate Reticles - subtle technical ticks that never collide with content */}
+        <span className="absolute top-2 text-[9px] font-mono tracking-[0.25em] text-white/10 dark:text-white/10 light:text-neutral-900/10">
+          + 00°N
         </span>
-        <span className="absolute bottom-2 text-[10px] font-mono tracking-widest text-white/30 dark:text-white/30 light:text-neutral-900/30">
-          + 00°S • CLARITY & STRUCTURE
+        <span className="absolute bottom-2 text-[9px] font-mono tracking-[0.25em] text-white/10 dark:text-white/10 light:text-neutral-900/10">
+          + 00°S
         </span>
-        <span className="absolute left-2 text-[10px] font-mono tracking-widest text-white/30 dark:text-white/30 light:text-neutral-900/30 [writing-mode:vertical-lr] rotate-180">
-          + 90°W • ENGINE 2026
+        <span className="absolute left-2 text-[9px] font-mono tracking-[0.25em] text-white/10 dark:text-white/10 light:text-neutral-900/10 [writing-mode:vertical-lr] rotate-180">
+          + 90°W
         </span>
-        <span className="absolute right-2 text-[10px] font-mono tracking-widest text-white/30 dark:text-white/30 light:text-neutral-900/30 [writing-mode:vertical-lr]">
-          + 90°E • ZYLARIS CORE
+        <span className="absolute right-2 text-[9px] font-mono tracking-[0.25em] text-white/10 dark:text-white/10 light:text-neutral-900/10 [writing-mode:vertical-lr]">
+          + 90°E
         </span>
 
         {/* Large Geometric Watermark SVG */}
         <svg
           viewBox="0 0 100 100"
-          className="w-full h-full text-white dark:text-white light:text-neutral-900 opacity-[0.08] dark:opacity-[0.09] light:opacity-[0.06] transition-opacity duration-700"
+          className="w-full h-full text-white dark:text-white light:text-neutral-900 opacity-[0.045] dark:opacity-[0.05] light:opacity-[0.035] transition-opacity duration-700"
           fill="none"
         >
           {/* Outer Calibration Ring */}

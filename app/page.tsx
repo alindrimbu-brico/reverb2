@@ -225,16 +225,9 @@ const realProjects = [
 ];
 
 export default function HomePage() {
-  const [soundActive, setSoundActive] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [activeFilter, setActiveFilter] = useState("TOATE");
   const [selectedPreview, setSelectedPreview] = useState<PreviewProject | null>(null);
-
-  const toggleSound = () => {
-    sounds.enabled = !soundActive;
-    setSoundActive(!soundActive);
-    if (!soundActive) sounds.playClick();
-  };
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -272,28 +265,8 @@ export default function HomePage() {
       {/* Ambient Radial Vignette */}
       <div className="fixed inset-0 pointer-events-none z-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.03)_0%,transparent_70%)]" />
 
-      {/* ── Top Status Banner ── */}
-      <div className="relative z-40 border-b border-white/5 bg-[#090a0c] px-6 py-2 text-center">
-        <div className="max-w-7xl mx-auto flex items-center justify-between text-[11px] font-mono tracking-widest text-neutral-400">
-          <div className="flex items-center gap-2">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="uppercase text-neutral-300">Reverb Digital — Arhitectură Web & Sisteme AI</span>
-          </div>
-          <div className="hidden sm:block text-neutral-500">
-            FONDAT DE GRUPUL SURYA • SISTEME DIGITALE DE MARE VITEZĂ
-          </div>
-          <button
-            onClick={toggleSound}
-            onMouseEnter={() => sounds.playHover()}
-            className="text-neutral-400 hover:text-white transition-colors"
-          >
-            {soundActive ? "● AUDIO ACTIV" : "○ AUDIO"}
-          </button>
-        </div>
-      </div>
-
       {/* ── Hero Architectural ── */}
-      <section className="relative z-10 pt-32 pb-24 md:pt-44 md:pb-32 border-b border-white/10">
+      <section className="relative z-10 pt-32 pb-24 md:pt-40 md:pb-32 border-b border-white/10">
         
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[350px] bg-white/[0.025] blur-[140px] pointer-events-none rounded-full" />
 
@@ -308,7 +281,7 @@ export default function HomePage() {
             <span>CĂUTARE GENERATIVĂ GEO</span>
           </div>
 
-          <h1 className="text-5xl md:text-7xl lg:text-[84px] font-medium tracking-[-0.04em] leading-[1.02] text-white">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[80px] font-medium tracking-[-0.04em] leading-[1.04] text-white break-words">
             Infrastructură digitală.<br />
             <span className="text-neutral-400 font-light">
               Sisteme care produc valoare.
