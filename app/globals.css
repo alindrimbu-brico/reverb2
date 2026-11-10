@@ -691,3 +691,120 @@ html.light .showcase-wrapper .showcase-card:hover {
   background-color: #FFFFFF !important;
   border-color: rgba(29, 39, 49, 0.28) !important;
 }
+
+/* ── Reverb Creator Studio AI (/studio) Light Theme Contrast Guarantee (WCAG AAA) ── */
+html.light .studio-light-root {
+  background-color: #FAF8F5 !important;
+  color: #111215 !important;
+}
+
+html.light .studio-light-root .bg-\[\#090a0c\]\/80 {
+  background-color: rgba(250, 248, 245, 0.96) !important;
+  border-color: rgba(17, 18, 21, 0.14) !important;
+}
+
+html.light .studio-light-root [class*="bg-neutral-900"],
+html.light .studio-light-root [class*="bg-black/"] {
+  background-color: #FFFFFF !important;
+  border-color: rgba(17, 18, 21, 0.16) !important;
+  box-shadow: 0 2px 12px rgba(17, 18, 21, 0.04) !important;
+}
+
+html.light .studio-light-root [class*="bg-emerald-950"],
+html.light .studio-light-root [class*="bg-emerald-500/1"],
+html.light .studio-light-root [class*="bg-emerald-500/2"],
+html.light .studio-light-root [class*="bg-emerald-400/"] {
+  background-color: #ECFDF5 !important;
+  border-color: rgba(5, 150, 105, 0.38) !important;
+}
+
+html.light .studio-light-root [class*="bg-amber-950"],
+html.light .studio-light-root [class*="bg-amber-500/1"],
+html.light .studio-light-root [class*="bg-amber-400/"] {
+  background-color: #FFFBEB !important;
+  border-color: rgba(217, 119, 6, 0.38) !important;
+}
+
+html.light .studio-light-root [class*="bg-rose-950"],
+html.light .studio-light-root [class*="bg-rose-500/1"],
+html.light .studio-light-root [class*="bg-rose-500/["] {
+  background-color: #FFF1F2 !important;
+  border-color: rgba(225, 29, 72, 0.38) !important;
+}
+
+html.light .studio-light-root [class*="bg-sky-950"],
+html.light .studio-light-root [class*="bg-sky-500/1"],
+html.light .studio-light-root [class*="bg-sky-400/"] {
+  background-color: #F0F9FF !important;
+  border-color: rgba(2, 132, 199, 0.38) !important;
+}
+
+html.light .studio-light-root [class*="bg-white/"] {
+  background-color: #F3EFEA !important;
+  border-color: rgba(17, 18, 21, 0.15) !important;
+}
+
+html.light .studio-light-root .text-emerald-200,
+html.light .studio-light-root .text-emerald-300,
+html.light .studio-light-root .text-emerald-400 {
+  color: #065F46 !important;
+}
+
+html.light .studio-light-root .text-amber-200,
+html.light .studio-light-root .text-amber-300,
+html.light .studio-light-root .text-amber-400 {
+  color: #92400E !important;
+}
+
+html.light .studio-light-root .text-rose-200,
+html.light .studio-light-root .text-rose-300,
+html.light .studio-light-root .text-rose-400 {
+  color: #9F1239 !important;
+}
+
+html.light .studio-light-root .text-sky-200,
+html.light .studio-light-root .text-sky-300,
+html.light .studio-light-root .text-sky-400 {
+  color: #075985 !important;
+}
+
+html.light .studio-light-root .text-purple-400 {
+  color: #5B21B6 !important;
+}
+
+html.light .studio-light-root .text-transparent.bg-clip-text {
+  color: #B45309 !important;
+  -webkit-text-fill-color: #B45309 !important;
+  background: none !important;
+}
+
+html.light .studio-light-root .bg-rose-500.text-white {
+  background-color: #E11D48 !important;
+  color: #FFFFFF !important;
+}
+
+html.light .studio-light-root button.bg-white,
+html.light .studio-light-root a.bg-white {
+  background-color: #111215 !important;
+  color: #FFFFFF !important;
+}
+
+html.light .studio-light-root .bg-emerald-400,
+html.light .studio-light-root .bg-emerald-500 {
+  background-color: #10B981 !important;
+  color: #052E16 !important;
+}
+
+html.light .studio-light-root .bg-amber-400 {
+  background-color: #F59E0B !important;
+  color: #111215 !important;
+}
+
+html.light .studio-light-root .bg-sky-400 {
+  background-color: #38BDF8 !important;
+  color: #082F49 !important;
+}
+
+html.light .studio-light-root video {
+  background-color: #000000 !important;
+}

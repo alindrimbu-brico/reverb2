@@ -684,5 +684,53 @@
       ],
       "needed_for_60min": 18
     }
+  },
+  "extended_albums_built": {
+    "EN": {
+      "tracks_count": 14,
+      "total_seconds": 3291.7,
+      "duration_fmt": "54:51",
+      "video_url": "/media/album_extins_en.mp4",
+      "export_path": "C:\\Users\\alind\\Pictures\\Surya Music\\5_ALBUM_EXTINS_Engleza_Surya_Music_54m51s.mp4",
+      "chapters": [
+        "00:00 01. Together at Christmas (Carol) (2:59)",
+        "02:59 02. Together for Christmas (Carol) (2:37)",
+        "05:37 03. Together for Christmas — Acoustic Version (2:12)",
+        "07:49 04. Bridge of Light (4:28)",
+        "12:18 05. Flight Without Wings (3:56)",
+        "16:15 06. Keep the Good (3:33)",
+        "19:49 07. The Good for Good (3:27)",
+        "23:17 08. Sacred Roots (4:46)",
+        "28:03 09. For the Sake of You (4:47)",
+        "32:50 10. For the Divine of You (4:04)",
+        "36:55 11. In the Silence Before the Storm (4:59)",
+        "41:54 12. It's Our Game! (4:32)",
+        "46:26 13. Listen to Me When I'm Silent (3:22)",
+        "49:49 14. You and My Divine (5:02)"
+      ]
+    },
+    "RO": {
+      "tracks_count": 14,
+      "total_seconds": 3160.6,
+      "duration_fmt": "52:40",
+      "video_url": "/media/album_extins_ro.mp4",
+      "export_path": "C:\\Users\\alind\\Pictures\\Surya Music\\6_ALBUM_EXTINS_Romana_Surya_Music_52m40s.mp4",
+      "chapters": [
+        "00:00 01. Magia Crăciunului (Colind I) (2:39)",
+        "02:39 02. Magia Crăciunului (Colind II — Coral) (2:44)",
+        "05:24 03. Magia Crăciunului (Colind III — Acustic) (2:47)",
+        "08:11 04. Lumina Prin Tine (3:19)",
+        "11:31 05. Cascada de Grație Dumnezeiască (6:34)",
+        "18:05 06. Recunoștința (4:04)",
+        "22:10 07. All Inclusive în Univers (3:30)",
+        "25:40 08. Câmpul Magnetic (3:08)",
+        "28:48 09. Trei Pagini Pe Zi (5:04)",
+        "33:53 10. Coboară Zidul (4:27)",
+        "38:21 11. Neîmpotrivire (4:15)",
+        "42:37 12. Doar un Val (3:16)",
+        "45:53 13. Apa și Malul (4:04)",
+        "49:57 14. Vijelios de Frumoasă (2:42)"
+      ]
+    }
   }
 }

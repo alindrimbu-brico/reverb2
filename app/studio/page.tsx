@@ -360,7 +360,7 @@ export default function StudioPage() {
 
   if (isAuthenticated === false) {
     return (
-      <div className="bg-[#070809] min-h-screen text-white flex flex-col items-center justify-center p-6 antialiased font-mono">
+      <div className="studio-light-root bg-[#070809] min-h-screen text-white flex flex-col items-center justify-center p-6 antialiased font-mono">
         <div className="w-full max-w-sm rounded-3xl border border-white/10 bg-neutral-900/60 p-8 backdrop-blur-md shadow-2xl text-center">
           <div className="h-12 w-12 mx-auto rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-lg mb-4">
             🔒
@@ -404,7 +404,7 @@ export default function StudioPage() {
   }
 
   return (
-    <div className="bg-[#070809] text-neutral-100 min-h-screen font-sans selection:bg-neutral-700 selection:text-white antialiased">
+    <div className="studio-light-root bg-[#070809] text-neutral-100 min-h-screen font-sans selection:bg-neutral-700 selection:text-white antialiased">
       {/* Background Architectural Grid Pattern */}
       <div 
         className="fixed inset-0 pointer-events-none z-0 opacity-[0.035]"
@@ -1764,6 +1764,51 @@ export default function StudioPage() {
                             </div>
                           ))}
                         </div>
+
+                        {musicAutopilotData.audit.extended_albums_built && (
+                          <div className="pt-6 border-t border-white/10 space-y-4">
+                            <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
+                              <div>
+                                <span className="text-[10px] uppercase tracking-widest text-amber-300 font-bold block">
+                                  🌟 Albume Extinse de ~1 Oră (Colinde + Cele mai bune balade și poezii RO & EN de pe calculator)
+                                </span>
+                                <h4 className="text-base font-bold text-white font-sans mt-0.5">
+                                  Colaje Lungi (54:51 min Engleză • 52:40 min Română) — Gata de urcat pe cele 2 Playlisturi de pe Surya Music
+                                </h4>
+                              </div>
+                            </div>
+
+                            <div className="grid lg:grid-cols-2 gap-6">
+                              {Object.entries(musicAutopilotData.audit.extended_albums_built).map(([langKey, ext]: [string, any]) => (
+                                <div key={langKey} className="rounded-2xl border border-amber-400/30 bg-black/60 p-5 space-y-4">
+                                  <div className="flex items-center justify-between">
+                                    <span className="px-3 py-1 rounded-full bg-amber-400/20 text-amber-300 font-bold text-[11px]">
+                                      ALBUM EXTINS #{langKey} ({ext.tracks_count} piese unice)
+                                    </span>
+                                    <span className="text-emerald-400 font-bold text-sm">
+                                      Durată: {ext.duration_fmt} min
+                                    </span>
+                                  </div>
+
+                                  <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 text-[11px] space-y-1 max-h-48 overflow-y-auto">
+                                    <div className="text-amber-300 font-bold mb-1">Lista celor {ext.tracks_count} piese & Capitole YouTube:</div>
+                                    {ext.chapters?.map((ch: string, cIdx: number) => (
+                                      <div key={cIdx} className="text-neutral-300">{ch}</div>
+                                    ))}
+                                  </div>
+
+                                  <a
+                                    href={ext.video_url}
+                                    download
+                                    className="block w-full text-center rounded-full bg-amber-400 py-2.5 text-xs uppercase tracking-widest text-black font-bold hover:bg-amber-300 transition-all"
+                                  >
+                                    ⬇ Descarcă Albumul Extins {langKey} ({ext.duration_fmt} min) MP4
+                                  </a>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
                       </div>
                     )}
 
