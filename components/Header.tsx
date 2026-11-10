@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import Logo from "@/components/Logo";
-import InstallPWA from "@/components/InstallPWA";
 
 const navInfo = {
   ro: [
@@ -205,11 +204,8 @@ export default function Header() {
           })}
         </nav>
 
-        {/* Right: CTA button, One-time App Install, Theme Toggle, Language Switcher, Hamburger */}
+        {/* Right: CTA button, Theme Toggle, Language Switcher, Hamburger */}
         <div className="flex-1 flex justify-end items-center gap-2 sm:gap-3 shrink-0">
-          {!pathname.startsWith("/studio") && (
-            <InstallPWA mode="site" compact className="hidden sm:inline-flex" />
-          )}
           <Link
             href={isEn ? "/en/contact" : "/contact"}
             className="mech-magnetic mech-btn hidden xl:inline-flex items-center justify-center rounded-full bg-[#1d2731] dark:bg-white px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-[#f5f1ea] dark:text-neutral-900 transition-all duration-300 shadow-[0_4px_12px_rgba(29,39,49,0.15)] hover:shadow-[0_8px_20px_rgba(29,39,49,0.3)] dark:shadow-none shrink-0"
@@ -281,9 +277,6 @@ export default function Header() {
             >
               {translations.start}
             </Link>
-            <div className="pt-2 flex justify-center">
-              <InstallPWA mode="site" className="w-full" />
-            </div>
           </div>
         </div>
       )}

@@ -465,7 +465,14 @@ export default function StudioPage() {
               ))}
             </div>
 
-            <InstallPWA />
+            <InstallPWA mode="studio" />
+            <Link
+              href="/instaleaza"
+              className="rounded-full border border-cyan-400/40 bg-cyan-950/30 px-3.5 py-1.5 text-[11px] font-mono uppercase tracking-wider text-cyan-300 hover:bg-cyan-500/20 transition-all"
+              title="Pagină privată pentru instalarea aplicației Reverb.ro (fără buton pe site-ul public)"
+            >
+              📲 App Reverb.ro
+            </Link>
             <Link
               href="/"
               className="rounded-full border border-white/15 px-4 py-2 text-xs font-mono uppercase tracking-wider text-neutral-300 hover:bg-white/10 transition-all"
