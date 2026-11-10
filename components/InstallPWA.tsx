@@ -217,7 +217,9 @@ export default function InstallPWA({
         : "inline-flex items-center justify-center gap-2 rounded-full bg-cyan-400 text-slate-950 px-4 py-2.5 text-xs font-mono font-extrabold uppercase tracking-wider hover:bg-cyan-300 transition-all shadow-[0_0_20px_rgba(0,229,255,0.35)]"
       : "inline-flex items-center gap-2 rounded-full bg-rose-500 text-white px-4 py-1.5 text-[11px] font-mono font-bold uppercase tracking-wider hover:bg-rose-400 transition-all shadow-[0_0_20px_rgba(244,63,94,0.4)] hover:scale-105 active:scale-95";
 
-  const readyNow = Boolean(window.__reverbDeferredPrompt || deferredPrompt);
+  const readyNow = Boolean(
+    (typeof window !== "undefined" && window.__reverbDeferredPrompt) || deferredPrompt
+  );
 
   return (
     <>
