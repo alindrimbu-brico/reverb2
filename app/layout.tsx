@@ -40,13 +40,14 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  manifest: "/site-manifest.json",
   icons: {
     icon: [
-      { url: "/icon-192.png?v=2", sizes: "192x192", type: "image/png" },
-      { url: "/icon-512.png?v=2", sizes: "512x512", type: "image/png" },
+      { url: "/icon-192.png?v=3", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png?v=3", sizes: "512x512", type: "image/png" },
     ],
     apple: [
-      { url: "/apple-touch-icon.png?v=2", sizes: "180x180", type: "image/png" },
+      { url: "/apple-touch-icon.png?v=3", sizes: "180x180", type: "image/png" },
     ],
   },
   // Canonicalul NU se pune aici: fiecare pagină își declară canonicalul ei
@@ -103,6 +104,40 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ro" className={geist.variable} suppressHydrationWarning>
       <body suppressHydrationWarning>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){
+  window.__reverbDeferredPrompt = null;
+  window.addEventListener('beforeinstallprompt', function(e) {
+    e.preventDefault();
+    window.__reverbDeferredPrompt = e;
+    try {
+      var isStudio = location.pathname.indexOf('/studio') === 0;
+      localStorage.removeItem(isStudio ? 'reverb_pwa_installed_studio_v3' : 'reverb_pwa_installed_site_v3');
+    } catch(err) {}
+    window.dispatchEvent(new CustomEvent('reverb-pwa-ready'));
+  });
+  window.addEventListener('appinstalled', function() {
+    window.__reverbDeferredPrompt = null;
+    try {
+      var isStudio = location.pathname.indexOf('/studio') === 0;
+      localStorage.setItem(isStudio ? 'reverb_pwa_installed_studio_v3' : 'reverb_pwa_installed_site_v3', '1');
+    } catch(err) {}
+    window.dispatchEvent(new CustomEvent('reverb-pwa-installed'));
+  });
+  if ('serviceWorker' in navigator) {
+    var regSw = function() {
+      var isStudio = location.pathname.indexOf('/studio') === 0;
+      var swUrl = isStudio ? '/studio/sw.js' : '/sw.js';
+      var swScope = isStudio ? '/studio' : '/';
+      navigator.serviceWorker.register(swUrl, { scope: swScope }).catch(function(){});
+    };
+    if (document.readyState === 'complete') { regSw(); }
+    else { window.addEventListener('load', regSw); }
+  }
+})();`,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

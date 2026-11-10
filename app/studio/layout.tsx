@@ -6,11 +6,11 @@ export const metadata: Metadata = {
   manifest: "/studio-manifest.json",
   icons: {
     icon: [
-      { url: "/icon-studio-192.png?v=2", sizes: "192x192", type: "image/png" },
-      { url: "/icon-studio-512.png?v=2", sizes: "512x512", type: "image/png" },
+      { url: "/icon-studio-192.png?v=3", sizes: "192x192", type: "image/png" },
+      { url: "/icon-studio-512.png?v=3", sizes: "512x512", type: "image/png" },
     ],
     apple: [
-      { url: "/apple-touch-icon-studio.png?v=2", sizes: "180x180", type: "image/png" },
+      { url: "/apple-touch-icon-studio.png?v=3", sizes: "180x180", type: "image/png" },
     ],
   },
 };

@@ -249,6 +249,7 @@ def main():
     for nume, dim, m in [
         ("icon-192.png", 192, False),
         ("icon-512.png", 512, False),
+        ("icon-maskable-512.png", 512, True),
         ("apple-touch-icon.png", 180, False),
     ]:
         cale = os.path.join(PUBLIC, nume)
@@ -259,6 +260,7 @@ def main():
     for nume, dim, m in [
         ("icon-studio-192.png", 192, False),
         ("icon-studio-512.png", 512, False),
+        ("icon-studio-maskable-512.png", 512, True),
         ("apple-touch-icon-studio.png", 180, False),
     ]:
         cale = os.path.join(PUBLIC, nume)
