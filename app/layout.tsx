@@ -40,6 +40,15 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  icons: {
+    icon: [
+      { url: "/icon-192.png?v=2", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png?v=2", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png?v=2", sizes: "180x180", type: "image/png" },
+    ],
+  },
   // Canonicalul NU se pune aici: fiecare pagină își declară canonicalul ei
   // (altfel toate paginile ar moșteni adresa primei pagini).
   // Codul de verificare Google Search Console se pune în Vercel ca variabilă
