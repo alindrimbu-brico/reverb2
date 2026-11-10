@@ -131,6 +131,7 @@ export default function StudioPage() {
     "music-autopilot" | "viral-factory" | "intake" | "channels-hub" | "deep-research" | "script" | "audio" | "veo-director" | "notebooklm" | "approval" | "briefing"
   >("music-autopilot");
   const [showTechTools, setShowTechTools] = useState(false);
+  const [showTutorialVideo, setShowTutorialVideo] = useState(true);
   const [viralChannelStates, setViralChannelStates] = useState<Record<string, string>>({});
 
   const [selectedBrand, setSelectedBrand] = useState("Bricolando.ro");
@@ -474,8 +475,51 @@ export default function StudioPage() {
           </div>
         </div>
 
-        {/* PANOU DE COMANDĂ MANAGER: CELE 3 RAMURI AUTOMATE + CONTURI */}
+        {/* PANOU DE COMANDĂ MANAGER: GHID VIDEO CU VOCE + CELE 4 RAMURI */}
         <div className="max-w-7xl mx-auto mt-8 border-t border-white/10 pt-5 font-mono text-xs">
+          {/* CASETA GHID VIDEO PAS CU PAS CU VOCE ÎN ROMÂNĂ ȘI SĂGEATĂ PE ECRAN */}
+          <div className="mb-6 rounded-3xl border-2 border-emerald-400/50 bg-emerald-950/25 p-5 shadow-[0_0_30px_rgba(52,211,153,0.15)]">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div>
+                <span className="inline-block px-3 py-1 rounded-full bg-emerald-400 text-black font-bold text-[10px] uppercase tracking-widest mb-1.5">
+                  🎓 GHID VIDEO CU VOCE ÎN ROMÂNĂ & SĂGEATĂ PE ECRAN
+                </span>
+                <h2 className="text-lg font-bold text-white font-sans">
+                  Cum folosești Reverb Studio de la cap la coadă (explicat simplu, buton cu buton)
+                </h2>
+                <p className="text-neutral-300 text-xs font-sans mt-0.5">
+                  Apasă Play mai jos: o voce în limba română și o săgeată luminoasă îți arată exact pe ce apeși în fiecare ecran și ce face fiecare căsuță.
+                </p>
+              </div>
+              <div className="flex items-center gap-2 shrink-0">
+                <button
+                  onClick={() => setShowTutorialVideo(!showTutorialVideo)}
+                  className="rounded-full bg-emerald-400 px-5 py-2.5 text-xs font-bold uppercase tracking-widest text-black hover:bg-emerald-300 transition-all"
+                >
+                  {showTutorialVideo ? "Ascunde Ghidul Video ▲" : "▶ Deschide Ghidul Video cu Voce"}
+                </button>
+                <a
+                  href="/media/ghid_reverb_studio_ro.mp4"
+                  download
+                  className="rounded-full border border-emerald-400/40 bg-black/50 px-4 py-2.5 text-xs font-bold text-emerald-300 hover:bg-emerald-500/20 transition-all"
+                >
+                  ⬇ Descarcă Ghidul MP4
+                </a>
+              </div>
+            </div>
+
+            {showTutorialVideo && (
+              <div className="mt-4 rounded-2xl overflow-hidden border border-emerald-400/30 bg-black max-w-4xl mx-auto shadow-2xl">
+                <video
+                  controls
+                  preload="metadata"
+                  className="w-full aspect-video"
+                  src="/media/ghid_reverb_studio_ro.mp4"
+                />
+              </div>
+            )}
+          </div>
+
           <div className="text-[10px] uppercase tracking-widest text-neutral-400 mb-3">
             Panou Central de Comandă (Cele 3 Ramuri care lucrează singure + Conturile unde se urcă totul):
           </div>
@@ -1662,6 +1706,67 @@ export default function StudioPage() {
                       </div>
                     </div>
 
+                    {/* ALBUME / COLAJE LUNGI DE COLINDE (ROMÂNĂ & ENGLEZĂ) */}
+                    {musicAutopilotData.audit.albums_built && (
+                      <div className="rounded-3xl border border-emerald-400/35 bg-emerald-950/15 p-6 space-y-5">
+                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-white/10 pb-4">
+                          <div>
+                            <span className="text-[10px] uppercase tracking-widest text-emerald-400 font-bold block">
+                              💿 Albume / Colaje de Colinde Randate Automat (Pentru Playlistul RO și Playlistul EN de pe Surya Music)
+                            </span>
+                            <h3 className="text-lg font-bold text-white font-sans mt-1">
+                              Cele 2 Albume Unite (Română & Engleză) — Vezi mai jos exact câte minute are fiecare
+                            </h3>
+                          </div>
+                          <span className="px-3 py-1 rounded-full bg-amber-400/20 border border-amber-400/40 text-amber-300 font-bold text-[10px]">
+                            Peste 8 min = Activează Reclamele Mid-Roll YouTube!
+                          </span>
+                        </div>
+
+                        <div className="grid lg:grid-cols-2 gap-6">
+                          {Object.entries(musicAutopilotData.audit.albums_built).map(([langKey, alb]: [string, any]) => (
+                            <div key={langKey} className="rounded-2xl border border-white/10 bg-black/60 p-5 space-y-4">
+                              <div className="flex items-center justify-between">
+                                <span className="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-bold text-[11px]">
+                                  ALBUM COLINDE #{langKey} ({alb.tracks_count} melodii/variante unite)
+                                </span>
+                                <span className="text-amber-300 font-bold text-sm">
+                                  Durată: {alb.duration_fmt} min
+                                </span>
+                              </div>
+
+                              <video
+                                controls
+                                preload="metadata"
+                                poster="/media/scena_colind_2.jpg"
+                                className="w-full aspect-video rounded-xl border border-white/10 bg-black"
+                                src={alb.video_url}
+                              />
+
+                              <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 text-[11px] space-y-1">
+                                <div className="text-amber-300 font-bold mb-1">Capitolele Albumului (Gata de lipit în descrierea YouTube):</div>
+                                {alb.chapters?.map((ch: string, cIdx: number) => (
+                                  <div key={cIdx} className="text-neutral-300">{ch}</div>
+                                ))}
+                              </div>
+
+                              <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-400/30 text-[11px] text-amber-200 font-sans">
+                                💡 <strong>Cât mai trebuie până la un Album de 1 Oră (60 min):</strong> Acest colaj are acum <strong>{alb.duration_fmt} minute</strong> (deja trece pragul de 8 minute pentru reclame Mid-Roll!). Dacă mai creezi în Suno încă <strong>~{alb.needed_for_60min} colinde noi</strong> în {langKey === "RO" ? "română" : "engleză"}, ajungem la 60 de minute complete!
+                              </div>
+
+                              <a
+                                href={alb.video_url}
+                                download
+                                className="block w-full text-center rounded-full bg-emerald-400 py-2.5 text-xs uppercase tracking-widest text-black font-bold hover:bg-emerald-300 transition-all"
+                              >
+                                ⬇ Descarcă Albumul {langKey} ({alb.duration_fmt} min) MP4
+                              </a>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
                     {/* Full Catalog Inventory & Monetization Architecture */}
                     <div className="grid md:grid-cols-2 gap-6">
                       <div className="p-6 rounded-2xl border border-white/10 bg-black/40">
@@ -1952,60 +2057,57 @@ export default function StudioPage() {
                   </div>
 
                   <div className="grid lg:grid-cols-2 gap-6 font-mono text-xs">
-                    {/* KIT 1: VATRA LUMINII (COLINDE & CÂNTĂRI) */}
+                    {/* KIT 1: SURYA MUSIC (FOSTUL BRICOARCH — CU 2 PLAYLISTURI: RO & EN) */}
                     <div className="rounded-3xl border border-amber-400/40 bg-black/60 p-6 flex flex-col justify-between">
                       <div>
                         <div className="flex items-center justify-between gap-2 mb-3">
                           <span className="px-3 py-1 rounded-full bg-amber-400/20 border border-amber-400/40 text-amber-300 font-bold text-[10px]">
-                            PRIORITATE #1 DECEMBRIE • CANAL NOU YOUTUBE + TIKTOK + DISTROKID
+                            CANALUL TĂU CU VECHIME 318 ZILE • REDENUMIRE DIN BRICOARCH ÎN SURYA MUSIC
                           </span>
                         </div>
                         <h3 className="text-lg font-bold text-white font-sans">
-                          1. Canalul de Colinde, Cântări & Poezie Românească
+                          1. Canalul „Surya Music” (Fostul Bricoarch — cu 2 Playlisturi: RO & EN)
                         </h3>
                         <p className="text-neutral-400 text-[11px] font-sans mt-1 mb-4">
-                          Se creează în 30 secunde ca Brand Channel pe <strong>alindrimbu@gmail.com</strong> (la fel cum ai creat Bricolando și Raft Plin). Aici urcăm toate colindele, cântările ortodoxe și poeziile în română + Albumul de 1 Oră.
+                          Folosim canalul tău existent <strong>Bricoarch</strong> (care are deja vechime de 1 an și 10 piese urcate). Îl redenumim în <strong>Surya Music</strong> și organizăm melodiile în <strong>2 Playlisturi separate</strong> (unul în Română, unul în Engleză).
                         </p>
 
                         <div className="space-y-2.5 bg-white/[0.03] border border-white/10 rounded-2xl p-4 mb-4">
                           <div>
-                            <span className="text-neutral-500 text-[10px] block">NUME CANAL YOUTUBE / TIKTOK (fără puncte):</span>
-                            <strong className="text-amber-300 text-sm select-all">Vatra Luminii — Colinde și Cântări</strong>
+                            <span className="text-neutral-500 text-[10px] block">NUME CANAL YOUTUBE (în loc de Bricoarch):</span>
+                            <strong className="text-amber-300 text-sm select-all">Surya Music</strong>
                           </div>
                           <div>
                             <span className="text-neutral-500 text-[10px] block">HANDLE (@):</span>
-                            <strong className="text-white select-all">@vatraluminii</strong> <span className="text-neutral-500">(sau @colindesilumina)</span>
+                            <strong className="text-white select-all">@suryamusic_official</strong> <span className="text-neutral-500">(sau @suryamusicro)</span>
                           </div>
                           <div>
-                            <span className="text-neutral-500 text-[10px] block">DESCRIERE SCURTĂ BIO TIKTOK (77/80 caractere):</span>
-                            <p className="text-emerald-300 select-all">Colinde românești, cântări de suflet și poezie pusă pe muzică · Alin Dragoș</p>
+                            <span className="text-neutral-500 text-[10px] block">CELE 2 PLAYLISTURI DE CREAT PE CANAL:</span>
+                            <p className="text-emerald-300 select-all">1. Colinde și Muzică de Suflet (Română)</p>
+                            <p className="text-sky-300 select-all">2. Soulful Music, Poetry & Carols (English)</p>
                           </div>
                           <div>
-                            <span className="text-neutral-500 text-[10px] block">DESCRIERE YOUTUBE (primele 95 car. vizibile pe mobil):</span>
-                            <p className="text-neutral-200 select-all">kalki.nexus — colinde românești, cântări de liniște și versuri originale de Alin Dragoș. Muzică pentru suflet, familie și sărbători cu pace.</p>
-                          </div>
-                          <div>
-                            <span className="text-neutral-500 text-[10px] block">NUME ARTIST DISTROKID (Spotify / Apple Music):</span>
-                            <p className="text-white select-all">Artist: <strong>Alin Dragoș</strong> • Textier/Compozitor: <strong>Alin-Dragoș Drîmbu</strong></p>
+                            <span className="text-neutral-500 text-[10px] block">DESCRIERE YOUTUBE (Bilingvă EN + RO):</span>
+                            <p className="text-neutral-200 select-all">Surya Music — Original music, poetry, and Christmas carols by Alin Dragoș (English & Romanian playlists). Muzică pentru suflet, colinde și versuri originale · kalki.nexus</p>
                           </div>
                           <div className="pt-2 border-t border-white/10 flex flex-wrap gap-3 text-[11px]">
-                            <a href="/media/vatraluminii_profil_1080.png" download className="text-amber-400 hover:underline font-bold">
-                              ⬇ Descarcă Poza de Profil (1080×1080)
+                            <a href="/media/surya_music_profil_1080.png" download className="text-amber-400 hover:underline font-bold">
+                              ⬇ Descarcă Poza Profil Surya Music (1080×1080)
                             </a>
-                            <a href="/media/vatraluminii_coperta_yt_2560x1440.jpg" download className="text-emerald-400 hover:underline font-bold">
-                              ⬇ Descarcă Coperta YouTube (2560×1440)
+                            <a href="/media/surya_music_coperta_yt_2560x1440.jpg" download className="text-emerald-400 hover:underline font-bold">
+                              ⬇ Descarcă Coperta Surya Music (2560×1440)
                             </a>
                           </div>
                         </div>
                       </div>
 
                       <a
-                        href="https://www.youtube.com/channel_switcher"
+                        href="https://studio.youtube.com/channel/UCVCflZBFfAsONCrZBP_WyVw/editing/profile"
                         target="_blank"
                         rel="noreferrer"
                         className="w-full text-center rounded-full bg-amber-400 py-3 text-xs uppercase tracking-widest text-black font-bold hover:bg-amber-300 transition-all block"
                       >
-                        ↗ Deschide YouTube Channel Switcher („Creează un canal”)
+                        ↗ Deschide Direct Personalizarea Bricoarch → Schimbă în „Surya Music”
                       </a>
                     </div>
 

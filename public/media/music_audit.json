@@ -655,5 +655,34 @@
         }
       ]
     }
-  ]
+  ],
+  "albums_built": {
+    "RO": {
+      "tracks_count": 6,
+      "total_seconds": 939.2,
+      "duration_fmt": "15:39",
+      "video_url": "/media/album_colinde_ro.mp4",
+      "chapters": [
+        "00:00 Varianta 1 — Magia Crăciunului .o5.wav (2:44)",
+        "02:45 Varianta 2 — Magia Crăciunului o.3.wav (2:47)",
+        "05:32 Varianta 3 — Magia Crăciunului .o1.wav (2:39)",
+        "08:12 Varianta 4 — Magia Crăciunului .o4.wav (2:12)",
+        "10:24 Varianta 5 — Magia Crăciunului .o2.wav (2:44)",
+        "13:09 Varianta 6 — Magia Crăciunului .o6.wav (2:29)"
+      ],
+      "needed_for_60min": 16
+    },
+    "EN": {
+      "tracks_count": 3,
+      "total_seconds": 469.9,
+      "duration_fmt": "7:49",
+      "video_url": "/media/album_colinde_en.mp4",
+      "chapters": [
+        "00:00 Varianta 1 — Together at Christmas.wav (2:59)",
+        "02:59 Varianta 2 — Together for Christmas.wav (2:37)",
+        "05:37 Varianta 3 — Together for Christmas (you).wav (2:12)"
+      ],
+      "needed_for_60min": 18
+    }
+  }
 }
