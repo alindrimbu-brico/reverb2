@@ -42,3 +42,6 @@ next-env.d.ts
 
 .vercel
 .env*.local
+
+# auditul acustic are căi locale de pe laptop; nu se publică (scos din public pe 12 nov 2026)
+public/media/music_audit.json

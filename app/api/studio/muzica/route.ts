@@ -1,10 +1,11 @@
 // Reverb Studio — Muzică (design_v2_1_decizii.md):
 //   POST {op:"compune", cerere, limbi}  → Gemini (prompt + versuri + scene + kit), verificat de musicLint, max 2 reîncercări
-//   POST {op:"comanda", actiune, piesa, date} → releul de pe bricolando.ro (HMAC A), laptopul o preia la ≤ 1 min
+//   POST {op:"comanda", actiune, piesa, date} → releul de pe bricolando.ro (HMAC A), laptopul o preia la ≤ 1 min;
+//        comanda e v2: {id, ts, actiune, piesa, date_json, sig}, semnată cu STUDIO_CMD_KEY și verificată de laptop (și pentru postări, post_*)
 //   GET  ?op=stare                       → oglinda catalogului + semnul de viață al laptopului
 //   GET  ?op=media&f=<nume>              → 302 spre linkul semnat (Vercel nu transferă octeți de media)
 import { NextResponse } from "next/server";
-import { createHmac, randomBytes } from "node:crypto";
+import { createHash, createHmac, randomBytes } from "node:crypto";
 import { STUDIO_COOKIE_NAME, STUDIO_SECURITY_HEADERS, verifyStudioSessionToken, extractCookieValue } from "@/lib/studioAuth";
 import { PROMPT_SISTEM, SCHEMA_RASPUNS, promptUtilizator, type Limba } from "@/lib/musicPrompt";
 import { lintToate, type PiesaCompusa } from "@/lib/musicLint";
@@ -13,9 +14,29 @@ export const maxDuration = 300; // o compunere Gemini 3.8 Flash cu schemă durea
 export const dynamic = "force-dynamic";
 
 const RELEU = (process.env.STUDIO_RELEU_URL || "https://bricolando.ro/wp-json/reverb-sr/v1").replace(/\/+$/, "");
-const ACTIUNI = new Set(["ciorna", "importa", "imagini", "aproba_sunet", "publica", "marcheaza_urcat", "anuleaza", "respinge"]);
+const ACTIUNI_MUZICA = new Set(["ciorna", "importa", "imagini", "aproba_sunet", "publica", "marcheaza_urcat", "anuleaza", "respinge"]);
+// Postările (design_v2_decizii.md din studio_instrument_2026-11-12): aceeași coadă, ținta e s-…
+const ACTIUNI_POSTARI = new Set(["post_creeaza", "post_refa", "post_text", "post_publica", "post_reincearca", "post_respinge", "post_oprire", "post_pornire"]);
 const RE_PIESA = /^p-[0-9a-f]{12}$/;
-const RE_MEDIA = /^[0-9a-f]{24}\.(mp3|mp4)$/;
+const RE_POSTARE = /^s-[0-9a-f]{12}$/;
+const RE_MEDIA = /^[0-9a-f]{24}\.(mp3|mp4|jpg|png)$/;
+
+/** Cheia cu care se semnează fiecare comandă pentru laptop. WordPress (releul) nu o are: doar păstrează comanda. */
+function cheieComenzi(): string | null {
+  const s = (process.env.STUDIO_CMD_KEY || "").trim();
+  return /^[0-9a-f]{64}$/.test(s) ? s : null;
+}
+
+/** POST doar de pe aceeași origine (apărare în plus față de SameSite=Strict). */
+function origineBuna(req: Request): boolean {
+  const o = req.headers.get("origin");
+  if (!o) return req.headers.get("sec-fetch-site") !== "cross-site";
+  try {
+    return new URL(o).host === (req.headers.get("x-forwarded-host") || req.headers.get("host") || new URL(req.url).host);
+  } catch {
+    return false;
+  }
+}
 
 function json(payload: unknown, status = 200) {
   return NextResponse.json(payload, { status, headers: STUDIO_SECURITY_HEADERS });
@@ -82,6 +103,7 @@ async function gemini(cerere: string, limbi: Limba[], motive: string[]): Promise
 
 export async function POST(req: Request) {
   if (!(await autentificat(req))) return json({ ok: false, mesaj: "Neautentificat." }, 401);
+  if (!origineBuna(req)) return json({ ok: false, mesaj: "Cerere din altă origine." }, 403);
   let corp: Record<string, unknown>;
   try {
     corp = await req.json();
@@ -119,13 +141,24 @@ export async function POST(req: Request) {
 
   if (corp.op === "comanda") {
     const actiune = String(corp.actiune || "");
-    const piesa = String(corp.piesa || "");
-    if (!ACTIUNI.has(actiune) || !RE_PIESA.test(piesa)) return json({ ok: false, mesaj: "Comandă invalidă." }, 400);
-    const date = corp.date && typeof corp.date === "object" ? corp.date : {};
-    const comanda = { v: 1, id: `c-${randomBytes(6).toString("hex")}`, ts: Math.floor(Date.now() / 1000), actiune, piesa, date };
+    let piesa = String(corp.piesa || "");
+    const ePostare = ACTIUNI_POSTARI.has(actiune);
+    if (ePostare && actiune === "post_creeaza") piesa = `s-${randomBytes(6).toString("hex")}`; // id-ul postării noi îl dă serverul
+    if (ePostare && (actiune === "post_oprire" || actiune === "post_pornire")) piesa = "s-000000000000";
+    const tintaBuna = ePostare ? RE_POSTARE.test(piesa) : ACTIUNI_MUZICA.has(actiune) && RE_PIESA.test(piesa);
+    if (!tintaBuna) return json({ ok: false, mesaj: "Comandă invalidă." }, 400);
+    const cheie = cheieComenzi();
+    if (!cheie) return json({ ok: false, mesaj: "Lipsește cheia de semnare a comenzilor (STUDIO_CMD_KEY)." }, 503);
+    const date = corp.date && typeof corp.date === "object" && !Array.isArray(corp.date) ? corp.date : {};
+    // Comanda v2: datele pleacă drept șir (date_json), ca semnătura să supraviețuiască decodării și recodării din WordPress.
+    const id = `c-${randomBytes(6).toString("hex")}`;
+    const ts = Math.floor(Date.now() / 1000);
+    const date_json = JSON.stringify(date);
+    const sig = semneaza(cheie, [id, String(ts), actiune, piesa, createHash("sha256").update(date_json, "utf8").digest("hex")].join("\n"));
+    const comanda = { v: 2, id, ts, actiune, piesa, date_json, sig };
     if (JSON.stringify(comanda).length > 24000) return json({ ok: false, mesaj: "Comanda e prea mare." }, 413);
     const r = await catreReleu("POST", "comanda", comanda);
-    return json({ ok: r.ok, id: comanda.id, ...(r.ok ? {} : { mesaj: (r.date as { mesaj?: string })?.mesaj || `HTTP ${r.status}` }) }, r.ok ? 200 : r.status);
+    return json({ ok: r.ok, id: comanda.id, piesa, ...(r.ok ? {} : { mesaj: (r.date as { mesaj?: string })?.mesaj || `HTTP ${r.status}` }) }, r.ok ? 200 : r.status);
   }
 
   return json({ ok: false, mesaj: "Operație necunoscută." }, 400);
