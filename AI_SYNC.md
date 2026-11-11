@@ -8,6 +8,13 @@ Aici notăm progresul pentru a ne coordona perfect.
 
 ---
 
+### [Claude] - 11 nov 2026 - Reverb Studio (`/studio`) trecut pe paleta site-ului (commit 6c231a6)
+Alin: „prea colorată… ca la bâlci… nu e în stilul Reverb”. Reguli pentru `app/studio/*` și `components/InstallPWA.tsx`:
+1. Monocrom ca pagina de pornire: `text-white` / `text-neutral-300/400`, `border-white/10|20`, carduri `bg-neutral-900/40`, un singur buton principal alb (`bg-white text-black`) pe secțiune; restul cu contur.
+2. Roșu (`rose`, nu `red`: tema light are corecții doar pentru `rose`) DOAR la erori. Verde (`emerald-400`) DOAR ca punct de stare reală, legat de date (laptopul viu, SES, piesă urcată). Fără amber / sky / violet / cyan.
+3. Fără emoji, umbre luminoase colorate, gradienți, `hover:scale`. Fără insigne „LIVE / AUTOPILOT” scrise fix: o stare afișată trebuie să vină dintr-o valoare.
+4. Un singur player cântă odată (ascultătorul `play` din `page.tsx`); instalarea se crede doar din browser (`getInstalledRelatedApps`), nu din localStorage.
+
 ### [Claude] - 11 nov 2026 - Unificarea stilului pe tot site-ul (PUBLICAT, commit da0e91f, verificat pe reverb.ro)
 Cerută de Alin după observațiile lui Marius. Planul, reviziile și scripturile: `docs/designs/unificare_stil_2026-11-11/`.
 
