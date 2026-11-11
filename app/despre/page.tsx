@@ -3,6 +3,7 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/despre", languages: { ro: "/despre", en: "/en/about", "x-default": "/despre" } },
   title: "Despre Noi — Reverb Digital",
   description:
     "Arhitectură digitală, execuție disciplinată și parteneriat strategic. Parteneri de tehnologie AI ai Zylaris Group London.",

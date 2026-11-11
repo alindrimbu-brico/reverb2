@@ -8,7 +8,7 @@ import path from "node:path";
 
 const base = (process.argv[2] ?? "http://localhost:3000").replace(/\/$/, "");
 const SITE_URL = "https://reverb.ro";
-const NOINDEX = ["/portal", "/en/portal", "/checkout", "/en/checkout", "/guru"];
+const NOINDEX = ["/portal", "/en/portal", "/checkout", "/en/checkout", "/guru", "/instaleaza", "/macheta", "/studio", "/templates", "/en/templates", "/templates/industrii"];
 const REDIRECTS = ["/showcase/xiaolong", "/en/showcase/xiaolong"];
 const GENERIC_TITLES = new Set(["Reverb — Structură, execuție, rezultate", "Clarity | Reverb", "Clarity"]);
 

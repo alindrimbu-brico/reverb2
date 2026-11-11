@@ -9,14 +9,14 @@ const navInfo = {
   ro: [
     { href: "/servicii", label: "Servicii" },
     { href: "/pachete", label: "Pachete" },
-    { href: "/showcase", label: "Portofoliu" },
+    { href: "/portofoliu", label: "Portofoliu" },
     { href: "/despre", label: "Despre" },
     { href: "/contact", label: "Contact" },
   ],
   en: [
     { href: "/en/services", label: "Services" },
     { href: "/en/packages", label: "Packages" },
-    { href: "/en/showcase", label: "Portfolio" },
+    { href: "/en/portfolio", label: "Portfolio" },
     { href: "/en/about", label: "About" },
     { href: "/en/contact", label: "Contact" },
   ]
@@ -156,27 +156,38 @@ export default function Header() {
     (pathname.startsWith("/en/showcase/") && pathname !== "/en/showcase")
   );
   if (isShowcaseDemo) {
-    return null;
+    // Machetele își au propriul antet; bara Reverb dispare, dar rămâne mereu un drum înapoi.
+    const inEnglish = pathname.startsWith("/en/");
+    return (
+      <Link
+        href={inEnglish ? "/en/showcase" : "/showcase"}
+        data-reverb-back
+        className="mech-magnetic fixed left-4 bottom-4 z-[70] inline-flex items-center gap-2 rounded-full border border-white/25 bg-[#111215]/90 px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.18em] text-[#ffffff] shadow-[0_8px_24px_rgba(0,0,0,0.35)] backdrop-blur-md transition-colors hover:bg-black"
+      >
+        <span aria-hidden="true">←</span>
+        {inEnglish ? "Back to concepts" : "Înapoi la concepte"}
+      </Link>
+    );
   }
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex flex-col items-center px-3 sm:px-4 pt-3 sm:pt-4 pointer-events-none">
       <div 
-        className={`w-full max-w-6xl rounded-full border bg-[#f5f1ea]/90 dark:bg-[#0a0a0c]/85 backdrop-blur-md px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between pointer-events-auto transition-all duration-500 shadow-sm ${
+        className={`w-full max-w-6xl rounded-full border bg-white/90 dark:bg-[#23262b]/90 backdrop-blur-md px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between pointer-events-auto transition-all duration-500 shadow-sm ${
           scrolled 
-            ? "border-[#1d2731]/15 dark:border-neutral-800 shadow-[0_12px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] py-2 sm:py-2.5 max-w-5xl" 
-            : "border-[#1d2731]/8 dark:border-neutral-800/40 py-2.5 sm:py-3.5"
+            ? "border-black/10 dark:border-white/15 shadow-[0_12px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] py-2 sm:py-2.5 max-w-5xl" 
+            : "border-black/[0.07] dark:border-white/10 py-2.5 sm:py-3.5"
         }`}
       >
         {/* Left: Logo and Brand Name */}
         <div className="flex-1 flex justify-start items-center min-w-0">
           <Link href={isEn ? "/en" : "/"} className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
-            <div className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-[#1d2731]/12 dark:border-white/10 bg-white/70 dark:bg-white/5 shadow-sm transition-all duration-500 group-hover:shadow-[0_8px_20px_rgba(29,39,49,0.15)] group-hover:-translate-y-0.5 text-[#1d2731] dark:text-white">
+            <div className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-black/10 dark:border-white/15 bg-black/[0.04] dark:bg-white/10 shadow-sm transition-all duration-500 group-hover:shadow-[0_8px_20px_rgba(29,39,49,0.15)] group-hover:-translate-y-0.5 text-[#111215] dark:text-white">
               <Logo size={26} />
             </div>
-            <div className="hidden xs:block sm:block text-left">
-              <div className="text-xs font-bold tracking-[0.3em] uppercase text-[#1d2731] dark:text-neutral-100 transition-colors duration-300">reverb.ro</div>
-              <div className="text-[8px] uppercase tracking-widest font-semibold text-[#1d2731]/50 dark:text-neutral-400">{translations.clarity}</div>
+            <div className="text-left">
+              <div className="text-[11px] sm:text-xs font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase text-[#111215] dark:text-neutral-100 transition-colors duration-300">reverb.ro</div>
+              <div className="hidden sm:block text-[8px] uppercase tracking-widest font-semibold text-[#111215]/50 dark:text-neutral-400">{translations.clarity}</div>
             </div>
           </Link>
         </div>
@@ -191,13 +202,13 @@ export default function Header() {
                 href={href}
                 className={`mech-nav-link transition-all duration-300 text-[10px] uppercase tracking-widest font-bold relative py-1 px-2 ${
                   isActive 
-                    ? "text-[#1d2731] dark:text-white" 
-                    : "text-[#1d2731]/50 dark:text-neutral-400 hover:text-[#1d2731] dark:hover:text-white"
+                    ? "text-[#111215] dark:text-white" 
+                    : "text-[#111215]/50 dark:text-neutral-400 hover:text-[#111215] dark:hover:text-white"
                 }`}
               >
                 {label}
                 {isActive && (
-                  <span className="absolute bottom-0 left-2 right-2 h-0.5 bg-[#1d2731] dark:bg-white rounded-full" />
+                  <span className="absolute bottom-0 left-2 right-2 h-0.5 bg-[#111215] dark:bg-white rounded-full" />
                 )}
               </Link>
             );
@@ -208,7 +219,7 @@ export default function Header() {
         <div className="flex-1 flex justify-end items-center gap-2 sm:gap-3 shrink-0">
           <Link
             href={isEn ? "/en/contact" : "/contact"}
-            className="mech-magnetic mech-btn hidden xl:inline-flex items-center justify-center rounded-full bg-[#1d2731] dark:bg-white px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-[#f5f1ea] dark:text-neutral-900 transition-all duration-300 shadow-[0_4px_12px_rgba(29,39,49,0.15)] hover:shadow-[0_8px_20px_rgba(29,39,49,0.3)] dark:shadow-none shrink-0"
+            className="mech-magnetic mech-btn hidden xl:inline-flex items-center justify-center rounded-full bg-[#111215] dark:bg-white px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-[#ffffff] dark:text-[#0a0a0c] hover:bg-black dark:hover:bg-neutral-200 transition-all duration-300 shadow-[0_4px_12px_rgba(29,39,49,0.15)] hover:shadow-[0_8px_20px_rgba(29,39,49,0.3)] dark:shadow-none shrink-0"
           >
             {translations.start}
           </Link>
@@ -217,25 +228,25 @@ export default function Header() {
           <button
             onClick={toggleTheme}
             aria-label="Toggle visual theme"
-            className="mech-magnetic flex items-center justify-center h-8 w-8 rounded-full border border-[#1d2731]/10 dark:border-white/10 bg-white/60 dark:bg-neutral-850/80 text-[#1d2731] dark:text-neutral-200 transition-all duration-300 hover:scale-105 shrink-0"
+            className="mech-magnetic flex items-center justify-center h-8 w-8 rounded-full border border-black/10 dark:border-white/15 bg-black/[0.04] dark:bg-white/10 text-[#111215] dark:text-white transition-all duration-300 hover:scale-105 shrink-0"
             title={theme === "dark" ? "Comută pe tema Light" : "Comută pe tema Dark"}
           >
             <span className="text-xs">{theme === "dark" ? "☾" : "☼"}</span>
           </button>
 
           {/* Discreet Language Selector with shrink-0 so it never clips off-screen */}
-          <div className="flex bg-[#1d2731]/5 dark:bg-neutral-850/80 rounded-full p-[2px] border border-[#1d2731]/10 dark:border-white/10 items-center shrink-0">
+          <div className="flex bg-black/[0.04] dark:bg-white/10 rounded-full p-[2px] border border-black/10 dark:border-white/15 items-center shrink-0">
              <button 
                onClick={() => handleLangChange("ro")} 
                aria-label="Limba Română"
-               className={`px-2 py-0.5 text-[8px] uppercase tracking-widest font-extrabold rounded-full transition-all duration-300 ${!isEn ? 'bg-white dark:bg-neutral-700 text-[#1d2731] dark:text-white shadow-sm' : 'text-[#1d2731]/40 dark:text-neutral-400 hover:text-[#1d2731]/70'}`}
+               className={`px-2 py-0.5 text-[8px] uppercase tracking-widest font-extrabold rounded-full transition-all duration-300 ${!isEn ? 'bg-[#111215] dark:bg-white text-[#ffffff] dark:text-[#0a0a0c] shadow-sm' : 'text-[#111215]/50 dark:text-neutral-300 hover:text-[#111215] dark:hover:text-white'}`}
              >
                RO
              </button>
              <button 
                onClick={() => handleLangChange("en")} 
                aria-label="English Language"
-               className={`px-2 py-0.5 text-[8px] uppercase tracking-widest font-extrabold rounded-full transition-all duration-300 ${isEn ? 'bg-white dark:bg-neutral-700 text-[#1d2731] dark:text-white shadow-sm' : 'text-[#1d2731]/40 dark:text-neutral-400 hover:text-[#1d2731]/70'}`}
+               className={`px-2 py-0.5 text-[8px] uppercase tracking-widest font-extrabold rounded-full transition-all duration-300 ${isEn ? 'bg-[#111215] dark:bg-white text-[#ffffff] dark:text-[#0a0a0c] shadow-sm' : 'text-[#111215]/50 dark:text-neutral-300 hover:text-[#111215] dark:hover:text-white'}`}
              >
                EN
              </button>
@@ -243,13 +254,13 @@ export default function Header() {
 
           {/* Mobile & Tablet Menu Button (< 1024px) */}
           <button
-            className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-[#1d2731]/10 dark:border-white/10 bg-white/60 dark:bg-neutral-850/80 lg:hidden transition-transform duration-300 hover:scale-105 pointer-events-auto shrink-0"
+            className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-black/10 dark:border-white/15 bg-black/[0.04] dark:bg-white/10 lg:hidden transition-transform duration-300 hover:scale-105 pointer-events-auto shrink-0"
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
           >
-            <span className={`block h-px w-4 bg-[#1d2731] dark:bg-white transition-all ${open ? "translate-y-px rotate-45" : "-translate-y-1"}`} />
-            <span className={`absolute block h-px w-4 bg-[#1d2731] dark:bg-white transition-all ${open ? "opacity-0" : "opacity-100"}`} />
-            <span className={`block h-px w-4 bg-[#1d2731] dark:bg-white transition-all ${open ? "-translate-y-px -rotate-45" : "translate-y-1"}`} />
+            <span className={`absolute block h-px w-4 bg-[#111215] dark:bg-white transition-all ${open ? "rotate-45" : "-translate-y-[5px]"}`} />
+            <span className={`absolute block h-px w-4 bg-[#111215] dark:bg-white transition-all ${open ? "opacity-0" : "opacity-100"}`} />
+            <span className={`absolute block h-px w-4 bg-[#111215] dark:bg-white transition-all ${open ? "-rotate-45" : "translate-y-[5px]"}`} />
           </button>
         </div>
       </div>
@@ -257,14 +268,14 @@ export default function Header() {
       {/* Mobile & Tablet Drawer Dropdown from the floating capsule */}
       {open && (
         <div className="w-full max-w-6xl mt-2 px-3 sm:px-4 pointer-events-auto lg:hidden">
-          <div className="rounded-3xl border border-[#1d2731]/10 dark:border-neutral-800/80 bg-[#f5f1ea]/95 dark:bg-[#0a0a0c]/95 backdrop-blur-lg p-6 shadow-2xl space-y-4">
+          <div className="rounded-3xl border border-black/10 dark:border-white/15 bg-white/95 dark:bg-[#23262b]/95 backdrop-blur-lg p-6 shadow-2xl space-y-4">
             {nav.map(({ href, label }) => (
               <Link
                 key={label}
                 href={href}
                 onClick={() => setOpen(false)}
                 className={`block py-2 text-xs uppercase tracking-widest font-bold transition-colors ${
-                  pathname === href ? "text-[#1d2731] dark:text-white" : "text-[#1d2731]/60 dark:text-neutral-400"
+                  pathname === href ? "text-[#111215] dark:text-white" : "text-[#111215]/60 dark:text-neutral-400"
                 }`}
               >
                 {label}
@@ -273,7 +284,7 @@ export default function Header() {
             <Link
               href={isEn ? "/en/contact" : "/contact"}
               onClick={() => setOpen(false)}
-              className="mt-3 inline-flex w-full items-center justify-center rounded-full bg-[#1d2731] dark:bg-white py-3 text-xs font-bold uppercase tracking-widest text-[#f5f1ea] dark:text-neutral-900 hover:opacity-90 transition-opacity"
+              className="mt-3 inline-flex w-full items-center justify-center rounded-full bg-[#111215] dark:bg-white py-3 text-xs font-bold uppercase tracking-widest text-[#ffffff] dark:text-[#0a0a0c] hover:opacity-90 transition-opacity"
             >
               {translations.start}
             </Link>

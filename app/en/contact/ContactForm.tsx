@@ -69,12 +69,12 @@ export default function ContactFormEN() {
 
   if (state === "success") {
     return (
-      <div className="flex flex-col items-center justify-center rounded-[32px] border border-[#1d2731]/8 bg-white/70 p-12 text-center shadow-[0_20px_60px_rgba(29,39,49,0.06)]">
-        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#1d2731] text-white text-2xl">
+      <div className="flex flex-col items-center justify-center rounded-3xl border border-white/10 bg-neutral-900/40 p-12 text-center shadow-[0_20px_60px_rgba(29,39,49,0.06)]">
+        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white text-black text-2xl">
           ✓
         </div>
-        <h3 className="mt-6 text-2xl font-medium text-[#1d2731]">Message sent.</h3>
-        <p className="mt-3 max-w-sm text-[15px] leading-7 text-[#1d2731]/65">
+        <h3 className="mt-6 text-2xl font-medium text-white">Message sent.</h3>
+        <p className="mt-3 max-w-sm text-[15px] leading-7 text-neutral-400">
           We&apos;ll confirm a call slot within 24 hours. Check your spam folder if you don&apos;t hear from us.
         </p>
         <button
@@ -85,7 +85,7 @@ export default function ContactFormEN() {
             setTouched({});
             setErrors({});
           }}
-          className="mt-8 text-sm font-medium text-[#1d2731]/50 transition hover:text-[#1d2731]"
+          className="mt-8 text-sm font-medium text-neutral-400 transition hover:text-white"
         >
           Send another message →
         </button>
@@ -94,8 +94,8 @@ export default function ContactFormEN() {
   }
 
   const inputBase =
-    "mt-2 w-full rounded-2xl border bg-white px-4 py-3 text-sm text-[#1d2731] placeholder:text-[#1d2731]/35 outline-none transition focus:border-[#1d2731]/40 focus:ring-2 focus:ring-[#1d2731]/8";
-  const inputOk = "border-[#1d2731]/12";
+    "mt-2 w-full rounded-2xl border bg-white/5 px-4 py-3 text-sm text-white placeholder:text-neutral-600 outline-none transition focus:border-white/40 focus:ring-2 focus:ring-white/10";
+  const inputOk = "border-white/10";
   const inputErr = "border-red-400/60 focus:border-red-400 focus:ring-red-100";
 
   return (
@@ -103,16 +103,16 @@ export default function ContactFormEN() {
       ref={formRef}
       onSubmit={handleSubmit}
       noValidate
-      className="rounded-[32px] border border-[#1d2731]/8 bg-white/70 p-8 shadow-[0_20px_60px_rgba(29,39,49,0.06)] md:p-10"
+      className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8 shadow-[0_20px_60px_rgba(29,39,49,0.06)] md:p-10"
     >
-      <h2 className="text-xl font-medium text-[#1d2731]">Send us a message</h2>
-      <p className="mt-2 text-sm text-[#1d2731]/55">Fill in the form and we&apos;ll get back to you within 24 hours.</p>
+      <h2 className="text-xl font-medium text-white">Send us a message</h2>
+      <p className="mt-2 text-sm text-neutral-400">Fill in the form and we&apos;ll get back to you within 24 hours.</p>
 
       <div className="mt-8 space-y-5">
         <div className="grid gap-5 sm:grid-cols-2">
           <div>
-            <label className="block text-sm font-medium text-[#1d2731]">
-              Name <span className="text-[#1d2731]/40">*</span>
+            <label className="block text-sm font-medium text-white">
+              Name <span className="text-neutral-500">*</span>
             </label>
             <input
               type="text"
@@ -128,8 +128,8 @@ export default function ContactFormEN() {
             )}
           </div>
           <div>
-            <label className="block text-sm font-medium text-[#1d2731]">
-              Email <span className="text-[#1d2731]/40">*</span>
+            <label className="block text-sm font-medium text-white">
+              Email <span className="text-neutral-500">*</span>
             </label>
             <input
               type="email"
@@ -147,7 +147,7 @@ export default function ContactFormEN() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-[#1d2731]">Business / Company</label>
+          <label className="block text-sm font-medium text-white">Business / Company</label>
           <input
             type="text"
             name="business"
@@ -159,8 +159,8 @@ export default function ContactFormEN() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-[#1d2731]">
-            What are you interested in? <span className="text-[#1d2731]/40">*</span>
+          <label className="block text-sm font-medium text-white">
+            What are you interested in? <span className="text-neutral-500">*</span>
           </label>
           <select
             name="service"
@@ -183,8 +183,8 @@ export default function ContactFormEN() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-[#1d2731]">
-            Your message <span className="text-[#1d2731]/40">*</span>
+          <label className="block text-sm font-medium text-white">
+            Your message <span className="text-neutral-500">*</span>
           </label>
           <textarea
             name="message"
@@ -198,7 +198,7 @@ export default function ContactFormEN() {
           {errors.message && touched.message && (
             <p className="mt-1.5 text-xs text-red-500/80">{errors.message}</p>
           )}
-          <div className="mt-1 text-right text-xs text-[#1d2731]/30">
+          <div className="mt-1 text-right text-xs text-neutral-500">
             {form.message.length > 0 && `${form.message.length} characters`}
           </div>
         </div>
@@ -213,12 +213,12 @@ export default function ContactFormEN() {
       <button
         type="submit"
         disabled={state === "submitting"}
-        className="mt-6 w-full rounded-full bg-[#1d2731] px-8 py-4 text-sm font-medium text-white transition hover:-translate-y-0.5 hover:shadow-lg disabled:opacity-60 disabled:translate-y-0 disabled:shadow-none"
+        className="mt-6 w-full rounded-full bg-white px-8 py-4 text-sm font-medium text-black transition hover:-translate-y-0.5 hover:shadow-lg disabled:opacity-60 disabled:translate-y-0 disabled:shadow-none"
       >
         {state === "submitting" ? "Sending..." : "Send message"}
       </button>
 
-      <p className="mt-4 text-center text-xs text-[#1d2731]/40">
+      <p className="mt-4 text-center text-xs text-neutral-500">
         We don&apos;t spam. Your data is safe and not shared with third parties.
       </p>
     </form>

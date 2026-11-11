@@ -4,6 +4,7 @@ import Reveal from "@/components/Reveal";
 import { packages } from "@/lib/packages";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/pachete", languages: { ro: "/pachete", en: "/en/packages", "x-default": "/pachete" } },
   title: "Pachete & Prețuri — Reverb Digital",
   description:
     "Prețuri fixe, fără surprize. Pachete de promovare video zilnică AI, magazine online la cheie și infrastructură digitală enterprise.",

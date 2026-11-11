@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { initMagnetic } from "@/lib/motion/magnetic";
 
 /**
  * MechanicalInteractions
@@ -12,8 +13,9 @@ import { usePathname } from "next/navigation";
  * 1. [data-mech="card"] / .mech-card:
  *    - Cursor-tracking spotlight glow (--mouse-x, --mouse-y)
  *    - 3D perspective spring tilt (--tilt-x, --tilt-y)
- * 2. [data-mech="magnetic"] / .mech-magnetic:
+ * 2. [data-mech="magnetic"] / .mech-magnetic + orice buton-pastilă din <main>:
  *    - Elastic magnetic attraction pulling the element towards cursor
+ *    - Implementarea e în lib/motion/magnetic.ts (biblioteca de mișcare)
  * 3. [data-mech="scan"] / .mech-scanline:
  *    - High-precision telemetry scanline sweep
  * 4. Micro-tactile sound / feedback for button engagements
@@ -27,75 +29,10 @@ export default function MechanicalInteractions() {
       return;
     }
 
-    // ── 1. Magnetic Elements Engine ──
-    const magneticElements = document.querySelectorAll<HTMLElement>(
-      '.mech-magnetic, [data-mech="magnetic"]'
-    );
-
-    const magneticCleanups: Array<() => void> = [];
-
-    magneticElements.forEach((el) => {
-      let rafId: number | null = null;
-      let targetX = 0;
-      let targetY = 0;
-      let currentX = 0;
-      let currentY = 0;
-      let isHovered = false;
-
-      const animate = () => {
-        if (!isHovered && Math.abs(currentX) < 0.1 && Math.abs(currentY) < 0.1) {
-          el.style.transform = "";
-          rafId = null;
-          return;
-        }
-
-        // Spring lerp
-        currentX += (targetX - currentX) * 0.18;
-        currentY += (targetY - currentY) * 0.18;
-
-        el.style.transform = `translate3d(${currentX.toFixed(2)}px, ${currentY.toFixed(2)}px, 0)`;
-        rafId = requestAnimationFrame(animate);
-      };
-
-      const onMouseMove = (e: MouseEvent) => {
-        const rect = el.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-
-        const maxPull = 6; // max pull in pixels
-        const dx = (e.clientX - centerX) / (rect.width / 2);
-        const dy = (e.clientY - centerY) / (rect.height / 2);
-
-        targetX = Math.max(-maxPull, Math.min(maxPull, dx * maxPull));
-        targetY = Math.max(-maxPull, Math.min(maxPull, dy * maxPull));
-
-        if (!rafId) {
-          rafId = requestAnimationFrame(animate);
-        }
-      };
-
-      const onMouseEnter = () => {
-        isHovered = true;
-        if (!rafId) rafId = requestAnimationFrame(animate);
-      };
-
-      const onMouseLeave = () => {
-        isHovered = false;
-        targetX = 0;
-        targetY = 0;
-      };
-
-      el.addEventListener("mousemove", onMouseMove, { passive: true });
-      el.addEventListener("mouseenter", onMouseEnter, { passive: true });
-      el.addEventListener("mouseleave", onMouseLeave, { passive: true });
-
-      magneticCleanups.push(() => {
-        el.removeEventListener("mousemove", onMouseMove);
-        el.removeEventListener("mouseenter", onMouseEnter);
-        el.removeEventListener("mouseleave", onMouseLeave);
-        if (rafId) cancelAnimationFrame(rafId);
-      });
-    });
+    // ── 1. Butoane magnetice: biblioteca lib/motion/magnetic.ts ──
+    // Pe machetele individuale (/showcase/<x>) rămân magnetice doar elementele marcate explicit.
+    const isShowcaseDemo = /^\/(en\/)?showcase\/.+/.test(pathname || "");
+    const stopMagnetic = initMagnetic({ auto: !isShowcaseDemo });
 
     // ── 2. Card 3D Tilt & Cursor Spotlight Engine ──
     const cardElements = document.querySelectorAll<HTMLElement>(
@@ -179,7 +116,7 @@ export default function MechanicalInteractions() {
     });
 
     return () => {
-      magneticCleanups.forEach((fn) => fn());
+      stopMagnetic();
       cardCleanups.forEach((fn) => fn());
     };
   }, [pathname]);

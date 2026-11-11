@@ -19,14 +19,12 @@ export const RO_EN_PAIRS: [string, string][] = [
   ["/legal", "/en/legal"],
   ["/ai-humans", "/en/ai-humans"],
   ["/nevronix", "/en/nevronix"],
-  ["/templates", "/en/templates"],
   ["/xiaolong", "/en/xiaolong"],
   ["/showcase", "/en/showcase"],
 ];
 
 /** Pagini doar în română (fără echivalent EN). */
 export const RO_ONLY: string[] = [
-  "/templates/industrii",
   "/clarity-architecture",
   "/convertor",
   "/humanoid-reality-2026",
@@ -117,7 +115,7 @@ export function neuroPath(locale: NeuroLocale, slug: string): string {
 }
 
 /** Pagini care rămân accesibile, dar nu se indexează. */
-export const NOINDEX: string[] = ["/portal", "/en/portal", "/checkout", "/en/checkout", "/guru"];
+export const NOINDEX: string[] = ["/portal", "/en/portal", "/checkout", "/en/checkout", "/guru", "/instaleaza", "/macheta", "/studio", "/templates", "/en/templates", "/templates/industrii"];
 
 /** Pagini care doar redirecționează (nu au conținut propriu). */
 export const REDIRECT_PAGES: string[] = ["/showcase/xiaolong", "/en/showcase/xiaolong"];

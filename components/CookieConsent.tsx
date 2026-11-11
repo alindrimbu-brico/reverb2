@@ -83,7 +83,7 @@ export default function CookieConsent() {
       aria-label="Cookie consent banner"
       className="fixed bottom-4 sm:bottom-6 left-4 right-4 sm:left-auto sm:right-6 md:right-8 z-50 max-w-xl transition-all duration-500 animate-in fade-in slide-in-from-bottom-6"
     >
-      <div className="relative rounded-2xl border border-white/15 dark:border-white/15 light:border-black/15 bg-[#090a0c]/95 dark:bg-[#090a0c]/95 light:bg-[#FAF8F5]/95 backdrop-blur-xl p-6 sm:p-7 shadow-[0_20px_50px_rgba(0,0,0,0.4)] text-white dark:text-white light:text-neutral-900 font-sans">
+      <div className="relative rounded-2xl border border-white/15 dark:border-white/15 light:border-black/15 bg-[#090a0c]/95 dark:bg-[#090a0c]/95 light:bg-[#F6F7F8]/95 backdrop-blur-xl p-6 sm:p-7 shadow-[0_20px_50px_rgba(0,0,0,0.4)] text-white dark:text-white light:text-neutral-900 font-sans">
         
         {/* CAD Crosshairs on corners */}
         <span className="absolute -top-1.5 -left-1.5 text-neutral-500 font-mono text-xs select-none">+</span>

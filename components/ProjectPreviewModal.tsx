@@ -69,11 +69,11 @@ export default function ProjectPreviewModal({
       </div>
 
       <div
-        className="relative w-full max-w-6xl h-[92vh] max-h-[920px] flex flex-col rounded-2xl border border-white/20 dark:border-white/20 light:border-black/20 bg-[#090a0d] dark:bg-[#090a0d] light:bg-[#FAF8F5] shadow-2xl overflow-hidden transition-all"
+        className="relative w-full max-w-6xl h-[92vh] max-h-[920px] flex flex-col rounded-2xl border border-white/20 dark:border-white/20 light:border-black/20 bg-[#090a0d] dark:bg-[#090a0d] light:bg-[#F6F7F8] shadow-2xl overflow-hidden transition-all"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Window Bar (Brutalist OS Chrome) */}
-        <div className="h-14 px-4 sm:px-6 border-b border-white/10 dark:border-white/10 light:border-black/10 flex items-center justify-between gap-3 bg-[#0c0d11] dark:bg-[#0c0d11] light:bg-[#F3EFEA] shrink-0 font-mono text-xs">
+        <div className="h-14 px-4 sm:px-6 border-b border-white/10 dark:border-white/10 light:border-black/10 flex items-center justify-between gap-3 bg-[#0c0d11] dark:bg-[#0c0d11] light:bg-[#EEF0F2] shrink-0 font-mono text-xs">
           
           {/* Left: Window Dots & Project Title */}
           <div className="flex items-center gap-3 shrink-0">
@@ -219,7 +219,7 @@ export default function ProjectPreviewModal({
         </div>
 
         {/* Bottom Technical Spec Bar */}
-        <div className="h-11 px-4 sm:px-6 border-t border-white/10 dark:border-white/10 light:border-black/10 flex items-center justify-between bg-[#08090b] dark:bg-[#08090b] light:bg-[#F3EFEA] font-mono text-[10px] text-neutral-400 shrink-0">
+        <div className="h-11 px-4 sm:px-6 border-t border-white/10 dark:border-white/10 light:border-black/10 flex items-center justify-between bg-[#08090b] dark:bg-[#08090b] light:bg-[#EEF0F2] font-mono text-[10px] text-neutral-400 shrink-0">
           <div className="flex items-center gap-3 sm:gap-4 truncate">
             <span className="text-white dark:text-white light:text-neutral-900 font-semibold truncate">
               SYS: {project.name}

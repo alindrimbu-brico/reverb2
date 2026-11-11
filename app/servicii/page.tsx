@@ -3,6 +3,7 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/servicii", languages: { ro: "/servicii", en: "/en/services", "x-default": "/servicii" } },
   title: "Servicii — Reverb Digital",
   description:
     "Arhitectură digitală completă: platforme web de mare viteză, conținut video zilnic AI, optimizare pentru căutare generativă GEO și infrastructură enterprise.",

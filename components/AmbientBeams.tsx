@@ -61,6 +61,8 @@ export default function AmbientBeams() {
         angle: -32 * (Math.PI / 180),
         colorA: "rgba(0, 229, 255, 0.038)",
         colorB: "rgba(99, 102, 241, 0.02)",
+        lightA: "rgba(2, 132, 199, 0.11)",
+        lightB: "rgba(79, 70, 229, 0.05)",
         phase: 0,
       },
       {
@@ -70,6 +72,8 @@ export default function AmbientBeams() {
         angle: -28 * (Math.PI / 180),
         colorA: "rgba(255, 255, 255, 0.042)",
         colorB: "rgba(201, 164, 68, 0.025)",
+        lightA: "rgba(17, 18, 21, 0.085)",
+        lightB: "rgba(71, 84, 103, 0.045)",
         phase: 2.1,
       },
       {
@@ -79,6 +83,8 @@ export default function AmbientBeams() {
         angle: -34 * (Math.PI / 180),
         colorA: "rgba(16, 185, 129, 0.03)",
         colorB: "rgba(0, 229, 255, 0.015)",
+        lightA: "rgba(5, 150, 105, 0.10)",
+        lightB: "rgba(2, 132, 199, 0.045)",
         phase: 4.3,
       },
       {
@@ -88,6 +94,8 @@ export default function AmbientBeams() {
         angle: -30 * (Math.PI / 180),
         colorA: "rgba(201, 164, 68, 0.032)",
         colorB: "rgba(255, 255, 255, 0.018)",
+        lightA: "rgba(17, 18, 21, 0.075)",
+        lightB: "rgba(71, 84, 103, 0.04)",
         phase: 1.5,
       },
       {
@@ -97,11 +105,14 @@ export default function AmbientBeams() {
         angle: -33 * (Math.PI / 180),
         colorA: "rgba(139, 92, 246, 0.035)",
         colorB: "rgba(0, 229, 255, 0.02)",
+        lightA: "rgba(109, 40, 217, 0.10)",
+        lightB: "rgba(2, 132, 199, 0.045)",
         phase: 3.2,
       },
     ];
 
     let startTime = performance.now();
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const render = (now: number) => {
       const elapsed = now - startTime;
@@ -139,12 +150,12 @@ export default function AmbientBeams() {
         );
 
         if (isLight) {
-          // Warm mineral alabaster tones for light mode
-          grad.addColorStop(0, "rgba(29, 39, 49, 0)");
-          grad.addColorStop(0.3, "rgba(217, 119, 6, 0.015)");
-          grad.addColorStop(0.5, "rgba(29, 39, 49, 0.025)");
-          grad.addColorStop(0.7, "rgba(217, 119, 6, 0.012)");
-          grad.addColorStop(1, "rgba(29, 39, 49, 0)");
+          // Tema light: aceleași dungi, în nuanțe închise pe fundal deschis, ca să se distingă
+          grad.addColorStop(0, "rgba(17, 18, 21, 0)");
+          grad.addColorStop(0.25, beam.lightB);
+          grad.addColorStop(0.5, beam.lightA);
+          grad.addColorStop(0.75, beam.lightB);
+          grad.addColorStop(1, "rgba(17, 18, 21, 0)");
         } else {
           // Deep obsidian luminous tones for dark mode
           grad.addColorStop(0, "rgba(0, 0, 0, 0)");
@@ -163,7 +174,7 @@ export default function AmbientBeams() {
         hairlineGrad.addColorStop(0, "rgba(255, 255, 255, 0)");
         hairlineGrad.addColorStop(
           0.5,
-          isLight ? "rgba(29, 39, 49, 0.04)" : "rgba(255, 255, 255, 0.06)"
+          isLight ? "rgba(17, 18, 21, 0.14)" : "rgba(255, 255, 255, 0.06)"
         );
         hairlineGrad.addColorStop(1, "rgba(255, 255, 255, 0)");
 
@@ -183,8 +194,8 @@ export default function AmbientBeams() {
         normW * 0.8
       );
       if (isLight) {
-        vignette.addColorStop(0, "rgba(250, 248, 245, 0)");
-        vignette.addColorStop(1, "rgba(250, 248, 245, 0.4)");
+        vignette.addColorStop(0, "rgba(246, 247, 248, 0)");
+        vignette.addColorStop(1, "rgba(246, 247, 248, 0.25)");
       } else {
         vignette.addColorStop(0, "rgba(7, 8, 9, 0)");
         vignette.addColorStop(1, "rgba(7, 8, 9, 0.5)");
@@ -193,7 +204,7 @@ export default function AmbientBeams() {
       ctx.fillStyle = vignette;
       ctx.fillRect(0, 0, normW, normH);
 
-      animationFrameId = requestAnimationFrame(render);
+      if (!reduceMotion) animationFrameId = requestAnimationFrame(render);
     };
 
     animationFrameId = requestAnimationFrame(render);

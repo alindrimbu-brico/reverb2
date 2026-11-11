@@ -1,6 +1,9 @@
 @import "tailwindcss";
 
 @custom-variant light (&:where(.light, .light *));
+/* dark: urmeaza tema site-ului (clasa de pe <html>), nu tema sistemului de operare.
+   Activ oriunde nu e html.light si nici "light-mode" NeuroLumina. */
+@custom-variant dark (&:where(:not(.light, .light *, .light-mode, .light-mode *)));
 
 :root {
   --bg: #070809;
@@ -13,7 +16,8 @@ html.dark {
 }
 
 html.light {
-  --bg: #FAF8F5;
+  color-scheme: light;
+  --bg: #F6F7F8;
   --ink: #111215;
 }
 
@@ -30,6 +34,7 @@ html.light {
 }
 
 html {
+  color-scheme: dark;
   background: var(--bg);
   color: var(--ink);
   scroll-behavior: smooth;
@@ -303,9 +308,14 @@ main > div.min-h-screen {
 }
 
 /* ── Reverb Global Light Theme Contrast Calibration (WCAG AAA) ── */
-html.light,
+html.light {
+  background-color: #F6F7F8 !important;
+  color: #111215 !important;
+}
+/* Fundalul stă pe <html>; <body> rămâne transparent, altfel acoperă dungile animate
+   (canvasul AmbientBeams e fix, sub conținut) și ele nu se mai văd în tema light. */
 html.light body {
-  background-color: #FAF8F5 !important;
+  background-color: transparent !important;
   color: #111215 !important;
 }
 
@@ -322,7 +332,7 @@ html.light .bg-black {
   color: #111215 !important;
 }
 
-/* Card surfaces: warm alabaster with crisp contrast (WCAG AAA) */
+/* Card surfaces: neutral light grey with crisp contrast (WCAG AAA) */
 html.light .bg-\[\#090a0c\]\/60,
 html.light .bg-\[\#070809\]\/60,
 html.light .bg-\[\#0a0a0c\]\/80,
@@ -333,7 +343,7 @@ html.light .bg-black\/40,
 html.light .bg-neutral-900\/20,
 html.light .bg-neutral-900\/30,
 html.light .bg-neutral-900\/40 {
-  background-color: #F3EFEA !important;
+  background-color: #EEF0F2 !important;
   border-color: rgba(29, 39, 49, 0.18) !important;
 }
 
@@ -604,7 +614,7 @@ html.light [role="dialog"] .border-white\/20 {
 
 /* ── Highlight / Recommended Cards in Light Mode ── */
 html.light .from-neutral-900.to-\[\#121316\] {
-  background-image: linear-gradient(to bottom, #FFFFFF, #F3EFEA) !important;
+  background-image: linear-gradient(to bottom, #FFFFFF, #EEF0F2) !important;
   border-color: rgba(29, 39, 49, 0.22) !important;
   box-shadow: 0 10px 30px rgba(29, 39, 49, 0.08) !important;
 }
@@ -694,12 +704,12 @@ html.light .showcase-wrapper .showcase-card:hover {
 
 /* ── Reverb Creator Studio AI (/studio) Light Theme Contrast Guarantee (WCAG AAA) ── */
 html.light .studio-light-root {
-  background-color: #FAF8F5 !important;
+  background-color: #F6F7F8 !important;
   color: #111215 !important;
 }
 
 html.light .studio-light-root .bg-\[\#090a0c\]\/80 {
-  background-color: rgba(250, 248, 245, 0.96) !important;
+  background-color: rgba(246, 247, 248, 0.96) !important;
   border-color: rgba(17, 18, 21, 0.14) !important;
 }
 
@@ -740,7 +750,7 @@ html.light .studio-light-root [class*="bg-sky-400/"] {
 }
 
 html.light .studio-light-root [class*="bg-white/"] {
-  background-color: #F3EFEA !important;
+  background-color: #EEF0F2 !important;
   border-color: rgba(17, 18, 21, 0.15) !important;
 }
 
@@ -807,4 +817,20 @@ html.light .studio-light-root .bg-sky-400 {
 
 html.light .studio-light-root video {
   background-color: #000000 !important;
+}
+
+/* ── Unificare stil (11 nov 2026) ── */
+/* Butonul principal (alb cu text negru) devine cerneala cu text alb in tema light,
+   in afara dialogurilor si a machetelor izolate. */
+html.light :where(a, button).bg-white.text-black:not(:where([role="dialog"] *, [data-showcase] *, .showcase-root *)) {
+  background-color: #111215 !important;
+  color: #FFFFFF !important;
+}
+/* Hover-urile scrise pentru tema dark raman lizibile in tema light. */
+html.light .hover\:text-white:hover:not(:where([role="dialog"] *, [data-showcase] *, .showcase-root *)),
+html.light .group:hover .group-hover\:text-white:not(:where([role="dialog"] *, [data-showcase] *, .showcase-root *)) {
+  color: #111215 !important;
+}
+html.light .text-white\/15:not(:where([role="dialog"] *, [data-showcase] *, .showcase-root *)) {
+  color: rgba(17, 18, 21, 0.14) !important;
 }

@@ -139,7 +139,7 @@ export default function TechAuthorityGrid({ lang = "ro" }: TechAuthorityGridProp
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border border-white/15 dark:border-white/15 light:border-black/15 gap-px bg-white/15 dark:bg-white/15 light:bg-black/15 rounded-none overflow-hidden">
           {stack.map((item, idx) => (
             <Reveal key={item.name} delay={idx * 80}>
-              <div className="mech-card mech-cad relative p-8 sm:p-10 flex flex-col justify-between min-h-[200px] h-full bg-[#070809] dark:bg-[#070809] light:bg-[#FAF8F5] group transition-all duration-300 hover:bg-white/[0.04] dark:hover:bg-white/[0.04] light:hover:bg-black/[0.02]">
+              <div className="mech-card mech-cad relative p-8 sm:p-10 flex flex-col justify-between min-h-[200px] h-full bg-[#070809] dark:bg-[#070809] light:bg-[#F6F7F8] group transition-all duration-300 hover:bg-white/[0.04] dark:hover:bg-white/[0.04] light:hover:bg-black/[0.02]">
                 
                 {/* Subtle Cell Crosshair Indicator */}
                 <span className="absolute top-2 right-2 text-[10px] font-mono text-neutral-600 dark:text-neutral-600 light:text-neutral-400 opacity-60">

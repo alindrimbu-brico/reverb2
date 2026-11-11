@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: false },
   alternates: { canonical: "/en/templates", languages: { ro: "/templates", en: "/en/templates", "x-default": "/templates" } },
   title: "Design Templates — Choose Your Visual Direction",
   description: "35+ design variations for your site. Each with a different personality — choose the direction that represents you.",
@@ -49,13 +50,13 @@ export default function TemplatesPage() {
   return (
     <div>
       {/* ── Navigation ─────────────────────────────────────────────── */}
-      <div className="sticky top-[65px] z-40 border-b border-[#1d2731]/10 bg-[#f5f1ea]/95 backdrop-blur-md">
+      <div className="sticky top-[65px] z-40 border-b border-white/10 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl gap-1 overflow-x-auto px-6 py-3 lg:px-10">
           {templates.map((t) => (
             <a
               key={t.id}
               href={`#${t.id}`}
-              className="shrink-0 rounded-full border border-[#1d2731]/10 px-4 py-1.5 text-xs font-medium text-[#1d2731]/65 transition hover:border-[#1d2731]/30 hover:text-[#1d2731]"
+              className="shrink-0 rounded-full border border-white/10 px-4 py-1.5 text-xs font-medium text-neutral-400 transition hover:border-white/30 hover:text-white"
             >
               {t.label}
             </a>
@@ -64,29 +65,29 @@ export default function TemplatesPage() {
       </div>
 
       {/* ── Intro ──────────────────────────────────────────────────── */}
-      <div className="bg-[#f5f1ea] px-6 py-16 text-center lg:px-10 lg:py-20">
-        <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/40">Reverb — Showcase</div>
-        <h1 className="mt-4 text-4xl font-medium tracking-[-0.04em] text-[#1d2731] md:text-6xl">
+      <div className=" px-6 py-16 text-center lg:px-10 lg:py-20">
+        <div className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-500">Reverb — Showcase</div>
+        <h1 className="mt-4 text-4xl font-medium tracking-[-0.04em] text-white md:text-6xl">
           35+ Design Directions
         </h1>
-        <p className="mt-5 mx-auto max-w-xl text-base leading-7 text-[#1d2731]/60">
+        <p className="mt-5 mx-auto max-w-xl text-base leading-7 text-neutral-400">
           Each variant is a different visual universe. Same content, different personality. Tell us which represents you — or what combination of elements feels right.
         </p>
       </div>
 
       {/* Templates Grid - Simplified */}
-      <div className="bg-[#f5f1ea] px-6 py-12 lg:px-10">
+      <div className=" px-6 py-12 lg:px-10">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {templates.map((t) => (
               <a
                 key={t.id}
                 href={`/showcase/${t.id}`}
-                className="group relative overflow-hidden rounded-2xl border border-[#1d2731]/10 bg-white p-12 text-center transition hover:border-[#1d2731]/30 hover:shadow-lg"
+                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-neutral-900/40 p-12 text-center transition hover:border-white/30 hover:shadow-lg"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-[#1d2731]/5 to-transparent opacity-0 transition group-hover:opacity-100" />
+                <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 transition group-hover:opacity-100" />
                 <div className="relative z-10">
-                  <div className="text-2xl font-black text-[#1d2731] group-hover:-translate-y-1 transition">{t.label}</div>
+                  <div className="text-2xl font-black text-white group-hover:-translate-y-1 transition">{t.label}</div>
                 </div>
               </a>
             ))}
@@ -95,15 +96,15 @@ export default function TemplatesPage() {
       </div>
 
       {/* ── CTA Section ────────────────────────────────────────────── */}
-      <section className="bg-white border-t border-[#1d2731]/10 py-16 text-center lg:py-20">
+      <section className="bg-neutral-900/40 border-t border-white/10 py-16 text-center lg:py-20">
         <div className="mx-auto max-w-2xl px-6 lg:px-10">
-          <h2 className="text-3xl font-medium tracking-tight text-[#1d2731] md:text-4xl">Which direction speaks to you?</h2>
-          <p className="mt-4 text-base leading-7 text-[#1d2731]/60">
+          <h2 className="text-3xl font-medium tracking-tight text-white md:text-4xl">Which direction speaks to you?</h2>
+          <p className="mt-4 text-base leading-7 text-neutral-400">
             Explore each template. Combine elements. Tell us your vision — we'll build it.
           </p>
           <Link
             href="/en/contact"
-            className="mt-8 inline-flex items-center justify-center rounded-full bg-[#1d2731] px-8 py-4 text-xs font-bold uppercase tracking-widest text-[#f5f1ea] transition hover:-translate-y-1 hover:shadow-lg"
+            className="mt-8 inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-xs font-bold uppercase tracking-widest text-black transition hover:-translate-y-1 hover:shadow-lg"
           >
             Start Your Project
           </Link>

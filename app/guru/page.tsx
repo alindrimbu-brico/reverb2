@@ -56,7 +56,7 @@ export default function GuruStore() {
     const total = cart.reduce((sum, item) => sum + item.price, 0);
 
     return (
-        <div className="relative min-h-screen bg-[#050505] text-[#f5f1ea] font-sans selection:bg-[#f5a623]/30 overflow-hidden">
+        <div className="relative min-h-screen bg-[#050505] text-[#f4f4f5] font-sans selection:bg-[#f5a623]/30 overflow-hidden">
             {/* Glow effect */}
             <div className="pointer-events-none absolute -top-[20%] left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(245,166,35,0.15)_0%,transparent_60%)] blur-2xl block" />
 

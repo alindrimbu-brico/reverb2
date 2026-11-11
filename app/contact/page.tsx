@@ -4,6 +4,7 @@ import Reveal from "@/components/Reveal";
 import ContactForm from "./ContactForm";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/contact", languages: { ro: "/contact", en: "/en/contact", "x-default": "/contact" } },
   title: "Contact — Reverb Digital",
   description:
     "Discută proiectul tău cu echipa Reverb Digital. Audit tehnic, ofertă fermă și termen precis de livrare.",

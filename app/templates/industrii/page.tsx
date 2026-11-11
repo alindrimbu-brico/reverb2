@@ -1,22 +1,24 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { categories, sectorOrder, type Sector } from "@/lib/templateCategories";
+import PageBackdrop from "@/components/PageBackdrop";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: false },
   alternates: { canonical: "/templates/industrii" },
   title: "Template-uri pe Industrii — 200+ Modele",
   description: "Template-uri de site personalizate pentru fiecare tip de business: florării, cabinete medicale, primării, SaaS, e-commerce și altele.",
 };
 
 const sectorColors: Record<Sector, string> = {
-  "Servicii Locale":        "bg-[#fff7ed] text-[#c2410c] border-[#c2410c]/20",
-  "Sănătate & Medical":     "bg-[#eff6ff] text-[#2563eb] border-[#2563eb]/20",
-  "Educație & Instituții":  "bg-[#eef2ff] text-[#4338ca] border-[#4338ca]/20",
-  "Turism & Ospitalitate":  "bg-[#f0f9ff] text-[#0ea5e9] border-[#0ea5e9]/20",
-  "Tech & Software":        "bg-[#f5f3ff] text-[#7c3aed] border-[#7c3aed]/20",
-  "E-Commerce":             "bg-[#fdf2f8] text-[#db2777] border-[#db2777]/20",
-  "Creativ & Media":        "bg-[#fdf4ff] text-[#a21caf] border-[#a21caf]/20",
-  "Industrie & Producție":  "bg-[#f9fafb] text-[#374151] border-[#374151]/20",
+  "Servicii Locale":        "border border-white/10 bg-white/5 text-neutral-300",
+  "Sănătate & Medical":     "border border-white/10 bg-white/5 text-neutral-300",
+  "Educație & Instituții":  "border border-white/10 bg-white/5 text-neutral-300",
+  "Turism & Ospitalitate":  "border border-white/10 bg-white/5 text-neutral-300",
+  "Tech & Software":        "border border-white/10 bg-white/5 text-neutral-300",
+  "E-Commerce":             "border border-white/10 bg-white/5 text-neutral-300",
+  "Creativ & Media":        "border border-white/10 bg-white/5 text-neutral-300",
+  "Industrie & Producție":  "border border-white/10 bg-white/5 text-neutral-300",
 };
 
 export default function IndustriiPage() {
@@ -28,15 +30,16 @@ export default function IndustriiPage() {
   const total = categories.length * 4;
 
   return (
-    <div className="bg-[#f5f1ea] text-[#1d2731]">
+    <div className="text-white">
+      <PageBackdrop />
       {/* Header */}
-      <section className="border-b border-[#1d2731]/8 px-6 py-16 lg:px-10 lg:py-20">
+      <section className="border-b border-white/10 px-6 pt-32 pb-16 lg:px-10 lg:pt-40 lg:pb-20">
         <div className="mx-auto max-w-7xl">
-          <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/40">Reverb — Showcase</div>
+          <div className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-500">Reverb — Showcase</div>
           <h1 className="mt-4 text-4xl font-medium tracking-[-0.04em] md:text-6xl">
             Template-uri pe industrii
           </h1>
-          <p className="mt-5 max-w-2xl text-base leading-7 text-[#1d2731]/60">
+          <p className="mt-5 max-w-2xl text-base leading-7 text-neutral-400">
             <strong>{total}+ template-uri</strong> organizate în{" "}
             <strong>{categories.length} categorii</strong> de business. Fiecare categorie vine cu 4 variante vizuale distincte — light, dark, bold și minimal. Alege industria, alege stilul.
           </p>
@@ -52,10 +55,10 @@ export default function IndustriiPage() {
             ))}
           </div>
           <div className="mt-4 flex items-center gap-4">
-            <Link href="/templates" className="text-sm text-[#1d2731]/45 transition hover:text-[#1d2731]">
+            <Link href="/templates" className="text-sm text-neutral-400 transition hover:text-white">
               ← Stiluri generale (35 template-uri)
             </Link>
-            <Link href="/" className="text-sm text-[#1d2731]/45 transition hover:text-[#1d2731]">
+            <Link href="/" className="text-sm text-neutral-400 transition hover:text-white">
               ← Înapoi la site
             </Link>
           </div>
@@ -67,19 +70,19 @@ export default function IndustriiPage() {
         <section
           key={sector}
           id={sector.toLowerCase().replace(/[^a-z]/g, "-")}
-          className="border-b border-[#1d2731]/6 px-6 py-14 lg:px-10 lg:py-16"
+          className="border-b border-white/10 px-6 py-14 lg:px-10 lg:py-16"
         >
           <div className="mx-auto max-w-7xl">
             <div className="mb-8 flex items-baseline gap-4">
               <h2 className="text-2xl font-semibold tracking-[-0.02em]">{sector}</h2>
-              <span className="text-sm text-[#1d2731]/40">{items.length} categorii · {items.length * 4} template-uri</span>
+              <span className="text-sm text-neutral-500">{items.length} categorii · {items.length * 4} template-uri</span>
             </div>
             <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
               {items.map((cat) => (
                 <Link
                   key={cat.slug}
                   href={`/templates/industrii/${cat.slug}`}
-                  className="group flex flex-col rounded-[20px] border border-[#1d2731]/8 bg-white/70 p-5 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#1d2731]/8"
+                  className="group flex flex-col rounded-[20px] border border-white/10 bg-neutral-900/40 p-5 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/40"
                 >
                   {/* Color swatch */}
                   <div
@@ -92,8 +95,8 @@ export default function IndustriiPage() {
                     <div className={`mb-1 inline-block rounded-full border px-2.5 py-0.5 text-[10px] font-medium ${sectorColors[sector]}`}>
                       {cat.sector}
                     </div>
-                    <h3 className="mt-1.5 text-sm font-semibold text-[#1d2731]">{cat.name}</h3>
-                    <p className="mt-1 text-xs leading-5 text-[#1d2731]/45 line-clamp-2">{cat.tagline}</p>
+                    <h3 className="mt-1.5 text-sm font-semibold text-white">{cat.name}</h3>
+                    <p className="mt-1 text-xs leading-5 text-neutral-400 line-clamp-2">{cat.tagline}</p>
                   </div>
                   <div className="mt-4 flex items-center justify-between">
                     <div className="flex gap-1">
@@ -108,7 +111,7 @@ export default function IndustriiPage() {
                         </div>
                       ))}
                     </div>
-                    <span className="text-xs text-[#1d2731]/35 transition group-hover:text-[#1d2731]">
+                    <span className="text-xs text-neutral-500 transition group-hover:text-white">
                       4 variante →
                     </span>
                   </div>
@@ -121,13 +124,13 @@ export default function IndustriiPage() {
 
       {/* Footer */}
       <div className="px-6 py-16 text-center lg:px-10">
-        <p className="text-sm text-[#1d2731]/50">Nu găsești industria ta?</p>
+        <p className="text-sm text-neutral-400">Nu găsești industria ta?</p>
         <h3 className="mt-2 text-2xl font-medium tracking-[-0.02em]">Facem un template personalizat.</h3>
         <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
-          <Link href="/contact" className="inline-flex items-center justify-center rounded-full bg-[#1d2731] px-8 py-4 text-sm font-medium text-white transition hover:-translate-y-0.5 hover:shadow-lg">
+          <Link href="/contact" className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-sm font-medium text-black transition hover:-translate-y-0.5 hover:shadow-lg">
             Discutăm proiectul tău
           </Link>
-          <Link href="/templates" className="text-sm text-[#1d2731]/45 transition hover:text-[#1d2731]">
+          <Link href="/templates" className="text-sm text-neutral-400 transition hover:text-white">
             ← Stiluri generale
           </Link>
         </div>

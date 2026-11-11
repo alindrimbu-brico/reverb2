@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: false },
   alternates: { canonical: "/templates", languages: { ro: "/templates", en: "/en/templates", "x-default": "/templates" } },
   title: "Design Templates — Alege direcția vizuală",
   description: "10 variațiuni de design pentru site-ul tău. Fiecare cu o personalitate diferită — alege direcția care te reprezintă.",
@@ -49,13 +50,13 @@ export default function TemplatesPage() {
   return (
     <div>
       {/* ── Navigation ─────────────────────────────────────────────── */}
-      <div className="sticky top-[65px] z-40 border-b border-[#1d2731]/10 bg-[#f5f1ea]/95 backdrop-blur-md">
+      <div className="sticky top-[65px] z-40 border-b border-white/10 bg-[#16181b]/95 light:bg-white/95 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl gap-1 overflow-x-auto px-6 py-3 lg:px-10">
           {templates.map((t) => (
             <a
               key={t.id}
               href={`#${t.id}`}
-              className="shrink-0 rounded-full border border-[#1d2731]/10 px-4 py-1.5 text-xs font-medium text-[#1d2731]/65 transition hover:border-[#1d2731]/30 hover:text-[#1d2731]"
+              className="shrink-0 rounded-full border border-white/10 px-4 py-1.5 text-xs font-medium text-neutral-400 transition hover:border-white/30 hover:text-white"
             >
               {t.label}
             </a>
@@ -64,12 +65,12 @@ export default function TemplatesPage() {
       </div>
 
       {/* ── Intro ──────────────────────────────────────────────────── */}
-      <div className="bg-[#f5f1ea] px-6 py-16 text-center lg:px-10 lg:py-20">
-        <div className="text-xs uppercase tracking-[0.3em] text-[#1d2731]/40">Reverb — Showcase</div>
-        <h1 className="mt-4 text-4xl font-medium tracking-[-0.04em] text-[#1d2731] md:text-6xl">
+      <div className=" px-6 py-16 text-center lg:px-10 lg:py-20">
+        <div className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-500">Reverb — Showcase</div>
+        <h1 className="mt-4 text-4xl font-medium tracking-[-0.04em] text-white md:text-6xl">
           10 direcții de design
         </h1>
-        <p className="mt-5 mx-auto max-w-xl text-base leading-7 text-[#1d2731]/60">
+        <p className="mt-5 mx-auto max-w-xl text-base leading-7 text-neutral-400">
           Fiecare variantă e un univers vizual diferit. Același conținut, altă personalitate. Spune-ne care te reprezintă — sau ce combinație de elemente ți se pare potrivită.
         </p>
       </div>
@@ -77,7 +78,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           01 — NOIR  (negru / auriu / colțuri ascuțite / luxury)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="noir" className="bg-[#080808] text-white">
+      <section data-showcase id="noir" className="bg-[#080808] text-white">
         <div className="mx-auto max-w-7xl px-8 py-24 lg:px-16 lg:py-32">
           <div className="mb-3 text-xs uppercase tracking-[0.4em] text-[#c9a444]/70">01 — Noir</div>
           <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
@@ -121,7 +122,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           02 — ARCTIC  (alb pur / albastru cobalt / ultra-minimal)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="arctic" className="bg-white text-[#0a0f1e]">
+      <section data-showcase id="arctic" className="bg-white text-[#0a0f1e]">
         <div className="mx-auto max-w-6xl px-8 py-24 lg:px-16 lg:py-32">
           <div className="mb-16 text-xs uppercase tracking-[0.4em] text-[#2563eb]/50">02 — Arctic</div>
           <h2 className="max-w-3xl text-6xl font-light leading-[1.0] tracking-[-0.04em] md:text-8xl">
@@ -153,7 +154,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           03 — PĂDURE  (verde închis / cremă / forme organice)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="padure" className="bg-[#0d2b1d] text-[#f0e9d6]">
+      <section data-showcase id="padure" className="bg-[#0d2b1d] text-[#f0e9d6]">
         <div className="mx-auto max-w-7xl px-8 py-24 lg:px-16 lg:py-32">
           <div className="mb-4 text-xs uppercase tracking-[0.35em] text-[#4ade80]/50">03 — Pădure</div>
           <div className="mb-14 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
@@ -188,7 +189,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           04 — TERACOTĂ  (cald / bold / tipografie dominantă)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="teracota" className="bg-[#fdf4ec] text-[#1a0800]">
+      <section data-showcase id="teracota" className="bg-[#fdf4ec] text-[#1a0800]">
         <div className="mx-auto max-w-7xl px-8 py-24 lg:px-16 lg:py-32">
           <div className="mb-4 text-xs uppercase tracking-[0.35em] text-[#c44b2b]/50">04 — Teracotă</div>
           <h2 className="max-w-4xl text-6xl font-black leading-[0.88] tracking-[-0.05em] md:text-8xl lg:text-[96px]">
@@ -222,7 +223,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           05 — OCEAN  (navy adânc / aqua / linii moderne)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="ocean" className="bg-[#071525] text-white">
+      <section data-showcase id="ocean" className="bg-[#071525] text-white">
         <div className="mx-auto max-w-7xl px-8 py-24 lg:px-16 lg:py-32">
           <div className="mb-4 text-xs uppercase tracking-[0.35em] text-[#06b6d4]/50">05 — Ocean</div>
           <div className="grid gap-16 lg:grid-cols-5 lg:items-center">
@@ -268,7 +269,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           06 — VIOLET  (mov adânc / lavandă / glassmorphism)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="violet" className="bg-[#130a2a] text-white" style={{ backgroundImage: "radial-gradient(circle at 70% 20%, rgba(139,92,246,0.15) 0%, transparent 50%), radial-gradient(circle at 20% 80%, rgba(99,102,241,0.10) 0%, transparent 40%)" }}>
+      <section data-showcase id="violet" className="bg-[#130a2a] text-white" style={{ backgroundImage: "radial-gradient(circle at 70% 20%, rgba(139,92,246,0.15) 0%, transparent 50%), radial-gradient(circle at 20% 80%, rgba(99,102,241,0.10) 0%, transparent 40%)" }}>
         <div className="mx-auto max-w-7xl px-8 py-24 lg:px-16 lg:py-32">
           <div className="mb-4 text-xs uppercase tracking-[0.35em] text-[#a78bfa]/50">06 — Violet</div>
           <h2 className="max-w-3xl text-5xl font-medium leading-[1.05] tracking-[-0.04em] md:text-7xl">
@@ -304,7 +305,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           07 — SUNSET  (gradient portocaliu-roșu / energic / bold)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="sunset" className="text-white" style={{ background: "linear-gradient(135deg, #c84b11 0%, #e8672a 35%, #f5a623 100%)" }}>
+      <section data-showcase id="sunset" className="text-white" style={{ background: "linear-gradient(135deg, #c84b11 0%, #e8672a 35%, #f5a623 100%)" }}>
         <div className="mx-auto max-w-7xl px-8 py-24 lg:px-16 lg:py-32">
           <div className="mb-4 text-xs uppercase tracking-[0.35em] text-white/50">07 — Sunset</div>
           <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
@@ -345,7 +346,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           08 — SAGE  (verde salvie / natural / calm)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="sage" className="bg-[#eef3ed] text-[#1a2b1a]">
+      <section data-showcase id="sage" className="bg-[#eef3ed] text-[#1a2b1a]">
         <div className="mx-auto max-w-7xl px-8 py-24 lg:px-16 lg:py-32">
           <div className="mb-4 text-xs uppercase tracking-[0.35em] text-[#4a7c59]/50">08 — Sage</div>
           <div className="mb-14">
@@ -380,7 +381,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           09 — SLATE  (gri corporate / albastru / curat)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="slate" className="bg-[#f1f5f9] text-[#0f172a]">
+      <section data-showcase id="slate" className="bg-[#f1f5f9] text-[#0f172a]">
         <div className="mx-auto max-w-7xl px-8 py-24 lg:px-16 lg:py-32">
           <div className="mb-4 text-xs uppercase tracking-[0.35em] text-[#3b82f6]/50">09 — Slate</div>
           <div className="grid gap-16 lg:grid-cols-2 lg:items-start">
@@ -443,7 +444,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           10 — NEON  (negru profund / verde neon / tech/startup)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="neon" className="bg-[#040810] text-white" style={{ backgroundImage: "radial-gradient(ellipse at 50% 0%, rgba(0,255,136,0.07) 0%, transparent 60%)" }}>
+      <section data-showcase id="neon" className="bg-[#040810] text-white" style={{ backgroundImage: "radial-gradient(ellipse at 50% 0%, rgba(0,255,136,0.07) 0%, transparent 60%)" }}>
         <div className="mx-auto max-w-7xl px-8 py-24 lg:px-16 lg:py-32">
           <div className="mb-4 font-mono text-xs uppercase tracking-[0.35em] text-[#00ff88]/40">10 — Neon</div>
           <h2 className="max-w-4xl font-mono text-5xl font-bold leading-[0.95] tracking-[-0.02em] md:text-7xl">
@@ -548,7 +549,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           11 — KINETIC  (marquee benzi + badge rotativ + mecanism)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="kinetic" className="overflow-hidden bg-[#0c0c0c] text-white">
+      <section data-showcase id="kinetic" className="overflow-hidden bg-[#0c0c0c] text-white">
         {/* Marquee band 1 */}
         <div className="border-y border-white/8 py-3 overflow-hidden">
           <div className="flex gap-0 whitespace-nowrap" style={{ animation: "marquee 18s linear infinite" }}>
@@ -650,7 +651,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           12 — GLITCH  (distorsiune digitală / scanlines / pâlpâire)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="glitch" className="relative overflow-hidden bg-[#050505] text-white">
+      <section data-showcase id="glitch" className="relative overflow-hidden bg-[#050505] text-white">
         {/* Scanline overlay */}
         <div
           className="pointer-events-none absolute inset-0 z-10 opacity-[0.04]"
@@ -719,7 +720,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           13 — ORBITAL  (inele concentrice rotative / sci-fi)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="orbital" className="relative overflow-hidden bg-[#03080f] text-white">
+      <section data-showcase id="orbital" className="relative overflow-hidden bg-[#03080f] text-white">
         {/* Orbital rings — decorative */}
         <div className="pointer-events-none absolute inset-0 flex items-center justify-end pr-0 opacity-30 lg:pr-8">
           <div className="relative" style={{ width: "500px", height: "500px" }}>
@@ -797,7 +798,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           14 — MORPH  (blob lichid + card-uri floating + gradient)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="morph" className="relative overflow-hidden text-white" style={{ background: "linear-gradient(135deg, #1a0533 0%, #2d0a4e 50%, #0f1a3d 100%)" }}>
+      <section data-showcase id="morph" className="relative overflow-hidden text-white" style={{ background: "linear-gradient(135deg, #1a0533 0%, #2d0a4e 50%, #0f1a3d 100%)" }}>
         {/* Morphing blob */}
         <div
           className="pointer-events-none absolute -right-32 -top-32 h-[600px] w-[600px] opacity-30"
@@ -860,7 +861,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           15 — DRIFT  (elemente care plutesc / layere de adâncime)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="drift" className="relative overflow-hidden bg-[#faf6f0] text-[#1a1208]">
+      <section data-showcase id="drift" className="relative overflow-hidden bg-[#faf6f0] text-[#1a1208]">
         {/* Drifting background elements */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           {[
@@ -942,16 +943,16 @@ export default function TemplatesPage() {
       {/* ═══════════════════════════════════════════════════════
           SEPARATOR — E-COMMERCE
       ═══════════════════════════════════════════════════════ */}
-      <div className="bg-[#f5f1ea] px-8 py-10 text-center">
-        <div className="text-xs uppercase tracking-[0.35em] text-[#1d2731]/40">Secțiunea 2</div>
-        <h2 className="mt-2 text-3xl font-medium tracking-[-0.03em] text-[#1d2731]">Magazine Online — 10 teme</h2>
-        <p className="mt-3 text-sm text-[#1d2731]/50">Fiecare temă e gândită pentru un tip specific de business e-commerce.</p>
+      <div className=" px-8 py-10 text-center">
+        <div className="text-xs uppercase tracking-[0.35em] text-neutral-500">Secțiunea 2</div>
+        <h2 className="mt-2 text-3xl font-medium tracking-[-0.03em] text-white">Magazine Online — 10 teme</h2>
+        <p className="mt-3 text-sm text-neutral-400">Fiecare temă e gândită pentru un tip specific de business e-commerce.</p>
       </div>
 
       {/* ══════════════════════════════════════════════════════════════
           16 — BOUTIQUE  (fashion editorial / negru-cremă / asimetric)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="boutique" className="bg-[#0c0c0a] text-[#f0ebe0]">
+      <section data-showcase id="boutique" className="bg-[#0c0c0a] text-[#f0ebe0]">
         <div className="mx-auto max-w-7xl px-8 py-24 lg:px-16">
           <div className="mb-3 text-xs uppercase tracking-[0.45em] text-[#f0ebe0]/30">16 — Boutique</div>
           <div className="grid gap-10 lg:grid-cols-2 lg:items-end">
@@ -991,7 +992,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           17 — FRESH  (alimentar / bio / verde deschis)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="fresh" className="bg-[#f4faf2] text-[#1a3a1a]">
+      <section data-showcase id="fresh" className="bg-[#f4faf2] text-[#1a3a1a]">
         <div className="mx-auto max-w-7xl px-8 py-24 lg:px-16">
           <div className="mb-3 text-xs uppercase tracking-[0.35em] text-[#4ade80]/60">17 — Fresh Market</div>
           <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
@@ -1031,7 +1032,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           18 — TECH STORE  (electronice / dark / spec-focused)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="techstore" className="bg-[#0a0d14] text-white">
+      <section data-showcase id="techstore" className="bg-[#0a0d14] text-white">
         <div className="mx-auto max-w-7xl px-8 py-24 lg:px-16">
           <div className="mb-3 text-xs uppercase tracking-[0.35em] text-[#3b82f6]/50">18 — Tech Store</div>
           <div className="mb-10 flex flex-wrap items-center justify-between gap-4 border-b border-white/6 pb-8">
@@ -1073,7 +1074,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           19 — ARTISAN  (handmade / craft / cald / poveste)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="artisan" className="bg-[#f5ede0] text-[#3d2412]">
+      <section data-showcase id="artisan" className="bg-[#f5ede0] text-[#3d2412]">
         <div className="mx-auto max-w-7xl px-8 py-24 lg:px-16">
           <div className="mb-3 text-xs uppercase tracking-[0.35em] text-[#a0522d]/50">19 — Artisan</div>
           <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
@@ -1113,7 +1114,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           20 — FLASH SALE  (urgență / roșu / energie maximă)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="flash" className="bg-[#0a0202] text-white overflow-hidden">
+      <section data-showcase id="flash" className="bg-[#0a0202] text-white overflow-hidden">
         {/* Flashing badge */}
         <div className="border-b border-red-900/50 bg-red-950/60 py-2 text-center">
           <span className="text-xs font-bold uppercase tracking-[0.3em] text-red-400" style={{ animation: "flash-badge 1.5s ease-in-out infinite" }}>
@@ -1154,7 +1155,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           21 — MINIMAL SHOP  (scandinav / alb pur / liniște)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="minishop" className="bg-white text-[#111]">
+      <section data-showcase id="minishop" className="bg-white text-[#111]">
         <div className="mx-auto max-w-6xl px-8 py-24 lg:px-16">
           <div className="mb-3 text-[10px] uppercase tracking-[0.5em] text-black/20">21 — Minimal Shop</div>
           <div className="mb-16 flex items-end justify-between border-b border-black/6 pb-8">
@@ -1186,7 +1187,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           22 — NIGHT MARKET  (streetwear / dark neon / urban bold)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="nightmkt" className="bg-[#050505] text-white">
+      <section data-showcase id="nightmkt" className="bg-[#050505] text-white">
         <div className="border-b border-white/5 py-2 overflow-hidden">
           <div className="flex whitespace-nowrap" style={{ animation: "marquee 12s linear infinite" }}>
             {Array(6).fill(null).map((_, i) => (
@@ -1233,7 +1234,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           23 — KIDS STORE  (culori pastel / rotund / jucăuș)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="kidstore" className="bg-[#fff8fb] text-[#2d1b2d]">
+      <section data-showcase id="kidstore" className="bg-[#fff8fb] text-[#2d1b2d]">
         <div className="mx-auto max-w-7xl px-8 py-24 lg:px-16">
           <div className="mb-3 text-xs uppercase tracking-[0.35em] text-[#ff9ecd]/60">23 — Kids Store</div>
           <div className="mb-10 text-center">
@@ -1266,7 +1267,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           24 — LUXE  (bijuterii / negru-auriu / ultra-premium)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="luxe" className="bg-[#08060a] text-white">
+      <section data-showcase id="luxe" className="bg-[#08060a] text-white">
         <div className="mx-auto max-w-6xl px-8 py-24 lg:px-16">
           <div className="mb-3 text-[10px] uppercase tracking-[0.5em] text-[#d4af6a]/35">24 — Luxe</div>
           <div className="mb-16 border-b border-[#d4af6a]/12 pb-12 text-center">
@@ -1301,7 +1302,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           25 — SPORT  (dinamic / diagonal / italic bold)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="sport" className="overflow-hidden bg-[#f0f0f0] text-[#111]">
+      <section data-showcase id="sport" className="overflow-hidden bg-[#f0f0f0] text-[#111]">
         <div className="mx-auto max-w-7xl px-8 py-24 lg:px-16">
           <div className="mb-3 text-xs uppercase tracking-[0.35em] text-[#ff5500]/55">25 — Sport</div>
           <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
@@ -1351,7 +1352,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           26 — TYPEWRITER  (text care se scrie singur / CSS steps)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="typewriter" className="bg-[#0d1117] text-white">
+      <section data-showcase id="typewriter" className="bg-[#0d1117] text-white">
         <div className="mx-auto max-w-7xl px-8 py-24 lg:px-16">
           <div className="mb-3 font-mono text-xs uppercase tracking-[0.35em] text-[#58a6ff]/40">26 — Typewriter</div>
           <div className="font-mono">
@@ -1389,7 +1390,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           27 — WIPE  (clip-path slide reveal la intrare)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="wipe" className="bg-[#f5f0e8] text-[#1a1208] overflow-hidden">
+      <section data-showcase id="wipe" className="bg-[#f5f0e8] text-[#1a1208] overflow-hidden">
         <div className="mx-auto max-w-7xl px-8 py-24 lg:px-16">
           <div className="mb-3 text-xs uppercase tracking-[0.35em] text-[#1a1208]/30">27 — Wipe Reveal</div>
           <div style={{ animation: "wipe-in 1.2s cubic-bezier(0.77,0,0.175,1) 0.2s both" }}>
@@ -1416,7 +1417,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           28 — STAGGER  (card-uri care apar în cascadă cu delay)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="stagger" className="bg-[#111827] text-white">
+      <section data-showcase id="stagger" className="bg-[#111827] text-white">
         <div className="mx-auto max-w-7xl px-8 py-24 lg:px-16">
           <div className="mb-3 text-xs uppercase tracking-[0.35em] text-white/30">28 — Stagger</div>
           <h2 className="mb-12 text-5xl font-semibold leading-[1.0] tracking-[-0.04em] md:text-6xl"
@@ -1450,7 +1451,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           29 — GRAD WALK  (fundal cu gradient care se plimbă lent)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="gradwalk" className="text-white" style={{
+      <section data-showcase id="gradwalk" className="text-white" style={{
         background: "linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #667eea 100%)",
         backgroundSize: "300% 300%",
         animation: "grad-walk 8s ease infinite",
@@ -1492,7 +1493,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           30 — ELASTIC  (intrare cu spring / bounce cubic-bezier)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="elastic" className="bg-[#fefce8] text-[#1a1a00]">
+      <section data-showcase id="elastic" className="bg-[#fefce8] text-[#1a1a00]">
         <div className="mx-auto max-w-7xl px-8 py-24 lg:px-16">
           <div className="mb-3 text-xs uppercase tracking-[0.35em] text-[#1a1a00]/30">30 — Elastic</div>
           <h2 className="mb-12 text-5xl font-black leading-[0.92] tracking-[-0.04em] md:text-7xl"
@@ -1524,7 +1525,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           31 — SHIMMER  (text cu scanare metalică)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="shimmer" className="bg-[#0a0806] text-white">
+      <section data-showcase id="shimmer" className="bg-[#0a0806] text-white">
         <div className="mx-auto max-w-7xl px-8 py-24 lg:px-16">
           <div className="mb-3 text-xs uppercase tracking-[0.35em] text-[#d4af6a]/35">31 — Shimmer</div>
           <h2 className="text-6xl font-black leading-[0.9] tracking-[-0.05em] md:text-9xl"
@@ -1563,7 +1564,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           32 — SPLIT  (hero se desparte în două jumătăți)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="split" className="overflow-hidden">
+      <section data-showcase id="split" className="overflow-hidden">
         <div className="grid lg:grid-cols-2" style={{ minHeight: "500px" }}>
           {/* Left half */}
           <div className="flex flex-col justify-center bg-[#1d2731] px-8 py-20 lg:px-14"
@@ -1605,7 +1606,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           33 — SPOTLIGHT  (lumina care se mișcă pe fundal negru)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="spotlight" className="relative overflow-hidden bg-[#030303] text-white">
+      <section data-showcase id="spotlight" className="relative overflow-hidden bg-[#030303] text-white">
         {/* Moving spotlight */}
         <div className="pointer-events-none absolute inset-0"
           style={{
@@ -1653,7 +1654,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           34 — TICKER 2  (randuri de date care se rotesc vertical)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="ticker2" className="bg-[#0a0f0a] text-white">
+      <section data-showcase id="ticker2" className="bg-[#0a0f0a] text-white">
         <div className="mx-auto max-w-7xl px-8 py-24 lg:px-16">
           <div className="mb-3 font-mono text-xs uppercase tracking-[0.35em] text-[#22c55e]/40">34 — Ticker</div>
           <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
@@ -1704,7 +1705,7 @@ export default function TemplatesPage() {
       {/* ══════════════════════════════════════════════════════════════
           35 — PULSE  (elemente care pulsează în ritm)
       ══════════════════════════════════════════════════════════════ */}
-      <section id="pulse" className="bg-[#0f0a1a] text-white">
+      <section data-showcase id="pulse" className="bg-[#0f0a1a] text-white">
         <div className="mx-auto max-w-7xl px-8 py-24 lg:px-16">
           <div className="mb-3 text-xs uppercase tracking-[0.35em] text-[#e879f9]/35">35 — Pulse</div>
           <div className="grid gap-14 lg:grid-cols-2 lg:items-center">
@@ -1749,18 +1750,18 @@ export default function TemplatesPage() {
       </section>
 
       {/* ── Footer CTA ─────────────────────────────────────────────── */}
-      <div className="bg-[#f5f1ea] px-8 py-16 text-center lg:px-10 lg:py-20">
-        <p className="text-sm text-[#1d2731]/50">
+      <div className=" px-8 py-16 text-center lg:px-10 lg:py-20">
+        <p className="text-sm text-neutral-400">
           Ai văzut o direcție care ți-a plăcut? Sau vrei o combinație?
         </p>
-        <h3 className="mt-3 text-2xl font-medium tracking-[-0.03em] text-[#1d2731] md:text-3xl">
+        <h3 className="mt-3 text-2xl font-medium tracking-[-0.03em] text-white md:text-3xl">
           Spune-ne ce te-a atras.
         </h3>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-          <Link href="/contact" className="inline-flex items-center justify-center rounded-full bg-[#1d2731] px-8 py-4 text-sm font-medium text-white transition hover:-translate-y-0.5 hover:shadow-lg">
+          <Link href="/contact" className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-sm font-medium text-black transition hover:-translate-y-0.5 hover:shadow-lg">
             Discutăm designul
           </Link>
-          <Link href="/" className="text-sm text-[#1d2731]/45 transition hover:text-[#1d2731]">
+          <Link href="/" className="text-sm text-neutral-400 transition hover:text-white">
             ← Înapoi la site
           </Link>
         </div>
