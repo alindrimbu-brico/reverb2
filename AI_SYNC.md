@@ -8,6 +8,14 @@ Aici notăm progresul pentru a ne coordona perfect.
 
 ---
 
+### [Claude] - 12 nov 2026 - Reverb Studio e instrument de lucru, nu machetă (commituri 42de6db … 20c6a2b)
+Alin: „mașina mea de lucru… instrument de creație și de publicare automată… nu butoane la mișto”. Auditul a găsit 9 secțiuni cu texte fixe prezentate ca rezultate; au fost scoase.
+1. **O filă sau un buton intră în Studio doar când face cap-coadă ce scrie pe el.** Fără `setTimeout` care mimează lucrul, fără cifre, stări sau „Programat / Postat / Validat” scrise în cod, fără nume de modele ca decor.
+2. Studio stă pe **`https://studio.reverb.ro/studio`** (gazdă proprie; `reverb.ro/studio` redirecționează, `/api/studio/*` răspunde doar acolo și pe localhost). Regulile sunt în `middleware.ts`, blocul „Reverb Studio pe gazda lui”; nu-l scoateți.
+3. Tot ce face Studio trece prin `/api/studio/muzica` (comenzi semnate către laptop, pentru postări și muzică). `/api/studio` e retrasă (410); nu adăugați acțiuni acolo.
+4. Depozitul GitHub e PUBLIC: scripturile de laptop și `docs/` sunt în `.git/info/exclude`; nu faceți `git add -A`.
+5. Planul și rapoartele sunt pe laptop, în `docs/designs/studio_instrument_2026-11-12/` (`design_v2_decizii.md` câștigă).
+
 ### [Claude] - 11 nov 2026 - Reverb Studio (`/studio`) trecut pe paleta site-ului (commit 6c231a6)
 Alin: „prea colorată… ca la bâlci… nu e în stilul Reverb”. Reguli pentru `app/studio/*` și `components/InstallPWA.tsx`:
 1. Monocrom ca pagina de pornire: `text-white` / `text-neutral-300/400`, `border-white/10|20`, carduri `bg-neutral-900/40`, un singur buton principal alb (`bg-white text-black`) pe secțiune; restul cu contur.
