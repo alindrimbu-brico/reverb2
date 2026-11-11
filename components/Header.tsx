@@ -150,8 +150,9 @@ export default function Header() {
     start: isEn ? "Start Project" : "Start Proiect"
   };
 
-  // Reverb Studio e aplicație separată: fără bara site-ului (din ea se ieșea în reverb.ro fără drum înapoi).
-  if (pathname === "/studio" || pathname.startsWith("/studio/")) return null;
+  // Reverb Studio e aplicația de lucru a lui Alin: bara rămâne (sigla + tema), dar fără meniul site-ului,
+  // fără „Start Proiect”, fără RO/EN și fără cele trei liniuțe (din ele se ieșea în reverb.ro fără drum înapoi).
+  const inStudio = pathname === "/studio" || pathname.startsWith("/studio/");
 
   // Hide global Reverb header on individual showcase prototypes (after all hooks)
   const isShowcaseDemo = Boolean(
@@ -184,19 +185,19 @@ export default function Header() {
       >
         {/* Left: Logo and Brand Name */}
         <div className="flex-1 flex justify-start items-center min-w-0">
-          <Link href={isEn ? "/en" : "/"} className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
+          <Link href={inStudio ? "/studio" : isEn ? "/en" : "/"} className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
             <div className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-black/10 dark:border-white/15 bg-black/[0.04] dark:bg-white/10 shadow-sm transition-all duration-500 group-hover:shadow-[0_8px_20px_rgba(29,39,49,0.15)] group-hover:-translate-y-0.5 text-[#111215] dark:text-white">
               <Logo size={26} />
             </div>
             <div className="text-left">
-              <div className="text-[11px] sm:text-xs font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase text-[#111215] dark:text-neutral-100 transition-colors duration-300">reverb.ro</div>
+              <div className="text-[11px] sm:text-xs font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase text-[#111215] dark:text-neutral-100 transition-colors duration-300">{inStudio ? "reverb studio" : "reverb.ro"}</div>
               <div className="hidden sm:block text-[8px] uppercase tracking-widest font-semibold text-[#111215]/50 dark:text-neutral-400">{translations.clarity}</div>
             </div>
           </Link>
         </div>
 
         {/* Center: centered navigation menu (visible on desktop >= 1024px to prevent tablet clipping) */}
-        <nav className="hidden lg:flex items-center gap-5 xl:gap-6 text-sm shrink-0">
+        <nav className={`${inStudio ? "hidden" : "hidden lg:flex"} items-center gap-5 xl:gap-6 text-sm shrink-0`}>
           {nav.map(({ href, label }) => {
             const isActive = pathname === href;
             return (
@@ -220,12 +221,12 @@ export default function Header() {
 
         {/* Right: CTA button, Theme Toggle, Language Switcher, Hamburger */}
         <div className="flex-1 flex justify-end items-center gap-2 sm:gap-3 shrink-0">
-          <Link
+          {!inStudio && <Link
             href={isEn ? "/en/contact" : "/contact"}
             className="mech-magnetic mech-btn hidden xl:inline-flex items-center justify-center rounded-full bg-[#111215] dark:bg-white px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-[#ffffff] dark:text-[#0a0a0c] hover:bg-black dark:hover:bg-neutral-200 transition-all duration-300 shadow-[0_4px_12px_rgba(29,39,49,0.15)] hover:shadow-[0_8px_20px_rgba(29,39,49,0.3)] dark:shadow-none shrink-0"
           >
             {translations.start}
-          </Link>
+          </Link>}
 
           {/* Minimalist Theme Toggle (Dark / Light) */}
           <button
@@ -238,7 +239,7 @@ export default function Header() {
           </button>
 
           {/* Discreet Language Selector with shrink-0 so it never clips off-screen */}
-          <div className="flex bg-black/[0.04] dark:bg-white/10 rounded-full p-[2px] border border-black/10 dark:border-white/15 items-center shrink-0">
+          <div className={`${inStudio ? "hidden" : "flex"} bg-black/[0.04] dark:bg-white/10 rounded-full p-[2px] border border-black/10 dark:border-white/15 items-center shrink-0`}>
              <button 
                onClick={() => handleLangChange("ro")} 
                aria-label="Limba Română"
@@ -257,7 +258,7 @@ export default function Header() {
 
           {/* Mobile & Tablet Menu Button (< 1024px) */}
           <button
-            className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-black/10 dark:border-white/15 bg-black/[0.04] dark:bg-white/10 lg:hidden transition-transform duration-300 hover:scale-105 pointer-events-auto shrink-0"
+            className={`${inStudio ? "hidden" : "flex lg:hidden"} h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-black/10 dark:border-white/15 bg-black/[0.04] dark:bg-white/10 transition-transform duration-300 hover:scale-105 pointer-events-auto shrink-0`}
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
           >
@@ -269,7 +270,7 @@ export default function Header() {
       </div>
 
       {/* Mobile & Tablet Drawer Dropdown from the floating capsule */}
-      {open && (
+      {open && !inStudio && (
         <div className="w-full max-w-6xl mt-2 px-3 sm:px-4 pointer-events-auto lg:hidden">
           <div className="rounded-3xl border border-black/10 dark:border-white/15 bg-white/95 dark:bg-[#23262b]/95 backdrop-blur-lg p-6 shadow-2xl space-y-4">
             {nav.map(({ href, label }) => (

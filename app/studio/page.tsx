@@ -558,7 +558,7 @@ export default function StudioPage() {
       <div className="fixed inset-0 pointer-events-none z-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.03)_0%,transparent_70%)]" />
 
       {/* Top Console Header */}
-      <div className="relative z-20 border-b border-white/10 pt-8 pb-8 px-6 lg:px-10 bg-[#090a0c]/80 backdrop-blur-md">
+      <div className="relative z-20 border-b border-white/10 pt-28 pb-8 px-6 lg:px-10 bg-[#090a0c]/80 backdrop-blur-md">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div>
             {/* Google AI Ultra Badge */}
