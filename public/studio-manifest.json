@@ -9,9 +9,12 @@
   "scope": "/studio",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#260840",
-  "theme_color": "#260840",
+  "background_color": "#070809",
+  "theme_color": "#070809",
   "categories": ["productivity", "music", "video"],
+  "related_applications": [
+    { "platform": "webapp", "url": "https://reverb.ro/studio-manifest.json" }
+  ],
   "icons": [
     {
       "src": "/icon-studio-192.png?v=3",

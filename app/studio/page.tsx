@@ -163,6 +163,20 @@ export default function StudioPage() {
   const [musicPublishState, setMusicPublishState] = useState<Record<string, string>>({});
   const [viralQueueState, setViralQueueState] = useState<Record<string, string>>({});
 
+  // Un singur player cântă: când pornește o piesă (audio sau clip), celelalte se opresc.
+  // „play” nu urcă prin DOM, de aceea ascultăm în faza de captură pe document.
+  useEffect(() => {
+    const doarUnul = (e: Event) => {
+      const pornit = e.target;
+      if (!(pornit instanceof HTMLMediaElement) || pornit.muted) return;
+      document.querySelectorAll<HTMLMediaElement>("audio, video").forEach((m) => {
+        if (m !== pornit && !m.paused && !m.muted) m.pause();
+      });
+    };
+    document.addEventListener("play", doarUnul, true);
+    return () => document.removeEventListener("play", doarUnul, true);
+  }, []);
+
   useEffect(() => {
     let active = true;
     (async () => {
@@ -477,16 +491,15 @@ export default function StudioPage() {
       <div className="studio-light-root bg-[#070809] min-h-screen text-white flex flex-col items-center justify-center p-6 antialiased font-mono">
         <div className="w-full max-w-md rounded-3xl border border-white/10 bg-neutral-900/60 p-8 backdrop-blur-md shadow-2xl text-center">
           <div className="h-12 w-12 mx-auto rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-lg mb-4">
-            🔒
-          </div>
+                      </div>
           <h2 className="text-xl font-medium text-white mb-1">Reverb Studio AI</h2>
           <p className="text-xs text-neutral-400 mb-6 font-sans">
             Panou intern securizat de producție, campanii B2B și distribuire automată (sesiune criptată HMAC-SHA256).
           </p>
 
           {authConfigured === false && (
-            <div className="mb-5 rounded-2xl border border-amber-400/40 bg-amber-950/30 p-4 text-left text-xs font-sans text-amber-200 leading-relaxed">
-              <strong className="block font-mono uppercase tracking-wider text-amber-300 mb-1">
+            <div className="mb-5 rounded-2xl border border-white/20 bg-white/[0.03] p-4 text-left text-xs font-sans text-neutral-200 leading-relaxed">
+              <strong className="block font-mono uppercase tracking-wider text-neutral-300 mb-1">
                 Configurare necesară în Vercel
               </strong>
               Setează variabila <code className="text-white font-mono">REVERB_STUDIO_PASSPHRASE</code> (minim 16 caractere) în{" "}
@@ -508,7 +521,7 @@ export default function StudioPage() {
               className="w-full text-center text-sm font-medium rounded-2xl border border-white/15 bg-black/40 px-4 py-3.5 text-white outline-none focus:border-white"
             />
             {authError && (
-              <p className="text-xs text-red-400 font-sans leading-relaxed">{authError}</p>
+              <p className="text-xs text-rose-300 font-sans leading-relaxed">{authError}</p>
             )}
             <button
               type="submit"
@@ -549,13 +562,9 @@ export default function StudioPage() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div>
             {/* Google AI Ultra Badge */}
-            <div className="inline-flex items-center gap-2.5 rounded-full border border-sky-400/30 bg-gradient-to-r from-sky-500/10 via-amber-500/10 to-rose-500/10 px-4 py-1 text-[11px] font-mono uppercase tracking-widest text-white mb-2 shadow-sm">
-              <span className="flex h-2 w-2 relative">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-gradient-to-br from-amber-400 via-rose-500 to-sky-400"></span>
-              </span>
-              <span className="font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-rose-300 to-sky-300">
-                Google AI Ultra Activat
+            <div className="inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/5 px-4 py-1 text-[10px] font-mono uppercase tracking-[0.22em] text-neutral-300 mb-2">
+              <span className="font-bold text-white">
+                Google AI Ultra
               </span>
               <span className="text-neutral-400">•</span>
               <span className="text-neutral-300 text-[10px]">Gemini 4 Argon & 20 TB Cloud</span>
@@ -563,9 +572,7 @@ export default function StudioPage() {
 
             <h1 className="text-3xl md:text-4xl font-medium text-white tracking-tight flex items-center gap-3">
               <span>Reverb Creator Studio AI</span>
-              <span className="text-xs px-2.5 py-0.5 rounded-full bg-white/10 text-neutral-300 font-mono font-normal">
-                Ultra Edition
-              </span>
+              
             </h1>
             <p className="text-xs md:text-sm text-neutral-400 font-mono mt-1">
               Deep Research Google • Model Gemini 4 Argon • Regie Cinematică Veo 2 • Sinteză Audio NotebookLM • 20 TB Asset Pipeline.
@@ -597,10 +604,10 @@ export default function StudioPage() {
             <InstallPWA mode="studio" />
             <Link
               href="/instaleaza"
-              className="rounded-full border border-cyan-400/40 bg-cyan-950/30 px-3.5 py-1.5 text-[11px] font-mono uppercase tracking-wider text-cyan-300 hover:bg-cyan-500/20 transition-all"
+              className="rounded-full border border-white/15 px-3.5 py-2 text-xs font-mono uppercase tracking-wider text-neutral-300 hover:bg-white/10 hover:text-white transition-all"
               title="Pagină privată pentru instalarea aplicației Reverb.ro (fără buton pe site-ul public)"
             >
-              📲 App Reverb.ro
+              App Reverb.ro
             </Link>
             <Link
               href="/"
@@ -610,10 +617,10 @@ export default function StudioPage() {
             </Link>
             <button
               onClick={handleLogout}
-              className="rounded-full border border-rose-400/30 bg-rose-950/30 px-3.5 py-2 text-xs font-mono uppercase tracking-wider text-rose-300 hover:bg-rose-500/20 transition-all"
+              className="rounded-full border border-white/15 px-3.5 py-2 text-xs font-mono uppercase tracking-wider text-neutral-300 hover:bg-white/10 hover:text-white transition-all"
               title="Închide sesiunea securizată Reverb Studio"
             >
-              🔒 Ieșire
+              Ieșire
             </button>
           </div>
         </div>
@@ -621,11 +628,11 @@ export default function StudioPage() {
         {/* PANOU DE COMANDĂ MANAGER: GHID VIDEO CU VOCE + CELE 4 RAMURI */}
         <div className="max-w-7xl mx-auto mt-8 border-t border-white/10 pt-5 font-mono text-xs">
           {/* CASETA GHID VIDEO PAS CU PAS CU VOCE ÎN ROMÂNĂ ȘI SĂGEATĂ PE ECRAN */}
-          <div className="mb-6 rounded-3xl border-2 border-emerald-400/50 bg-emerald-950/25 p-5 shadow-[0_0_30px_rgba(52,211,153,0.15)]">
+          <div className="mb-6 rounded-3xl border border-white/10 bg-neutral-900/40 p-5">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
-                <span className="inline-block px-3 py-1 rounded-full bg-emerald-400 text-black font-bold text-[10px] uppercase tracking-widest mb-1.5">
-                  🎓 GHID VIDEO CU VOCE ÎN ROMÂNĂ & SĂGEATĂ PE ECRAN
+                <span className="inline-block px-3 py-1 rounded-full border border-white/15 bg-white/5 text-neutral-300 font-bold text-[10px] uppercase tracking-widest mb-1.5">
+                  GHID VIDEO CU VOCE ÎN ROMÂNĂ & SĂGEATĂ PE ECRAN
                 </span>
                 <h2 className="text-lg font-bold text-white font-sans">
                   Cum folosești Reverb Studio de la cap la coadă (explicat simplu, buton cu buton)
@@ -637,22 +644,22 @@ export default function StudioPage() {
               <div className="flex items-center gap-2 shrink-0">
                 <button
                   onClick={() => setShowTutorialVideo(!showTutorialVideo)}
-                  className="rounded-full bg-emerald-400 px-5 py-2.5 text-xs font-bold uppercase tracking-widest text-black hover:bg-emerald-300 transition-all"
+                  className="rounded-full bg-white px-5 py-2.5 text-xs font-bold uppercase tracking-widest text-black hover:bg-neutral-200 transition-all"
                 >
                   {showTutorialVideo ? "Ascunde Ghidul Video ▲" : "▶ Deschide Ghidul Video cu Voce"}
                 </button>
                 <a
                   href="/media/ghid_reverb_studio_ro.mp4"
                   download
-                  className="rounded-full border border-emerald-400/40 bg-black/50 px-4 py-2.5 text-xs font-bold text-emerald-300 hover:bg-emerald-500/20 transition-all"
+                  className="rounded-full border border-white/20 bg-black/50 px-4 py-2.5 text-xs font-bold text-neutral-300 hover:bg-white/10 transition-all"
                 >
-                  ⬇ Descarcă Ghidul MP4
+                  ↓ Descarcă Ghidul MP4
                 </a>
               </div>
             </div>
 
             {showTutorialVideo && (
-              <div className="mt-4 rounded-2xl overflow-hidden border border-emerald-400/30 bg-black max-w-4xl mx-auto shadow-2xl">
+              <div className="mt-4 rounded-2xl overflow-hidden border border-white/10 bg-black max-w-4xl mx-auto shadow-2xl">
                 <video
                   controls
                   preload="metadata"
@@ -674,15 +681,14 @@ export default function StudioPage() {
               }}
               className={`p-4 rounded-2xl text-left transition-all border ${
                 activeTab === "marketing-engine"
-                  ? "bg-violet-400 text-black border-violet-300 shadow-[0_0_25px_rgba(167,139,250,0.35)]"
-                  : "bg-violet-500/15 text-violet-200 border-violet-400/40 hover:bg-violet-500/25"
+                  ? "bg-white text-black border-white light:border-black/40"
+                  : "bg-neutral-900/40 text-neutral-300 border-white/10 hover:bg-white/5 hover:border-white/20"
               }`}
             >
               <div className="font-bold text-sm flex items-center justify-between">
-                <span>⚡ 0. Mașina Marketing</span>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-black/20">LIVE</span>
+                <span>0. Mașina Marketing</span>
               </div>
-              <div className={`text-[11px] mt-1 font-sans ${activeTab === "marketing-engine" ? "text-black/80" : "text-neutral-400"}`}>
+              <div className={`text-[11px] mt-1 font-sans ${activeTab === "marketing-engine" ? "opacity-70" : "text-neutral-400"}`}>
                 Campanii furnizori, Scut Amazon SES, Ciorne Newsletter cu „da”, Coada Video Flow & eMAG.
               </div>
             </button>
@@ -691,15 +697,14 @@ export default function StudioPage() {
               onClick={() => setActiveTab("music-autopilot")}
               className={`p-4 rounded-2xl text-left transition-all border ${
                 activeTab === "music-autopilot"
-                  ? "bg-amber-400 text-black border-amber-300 shadow-[0_0_25px_rgba(251,191,36,0.25)]"
-                  : "bg-amber-500/10 text-amber-200 border-amber-400/30 hover:bg-amber-500/20"
+                  ? "bg-white text-black border-white light:border-black/40"
+                  : "bg-neutral-900/40 text-neutral-300 border-white/10 hover:bg-white/5 hover:border-white/20"
               }`}
             >
               <div className="font-bold text-sm flex items-center justify-between">
-                <span>🎵 1. Muzică & Colinde</span>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-black/20">AUTOPILOT</span>
+                <span>1. Muzică & Colinde</span>
               </div>
-              <div className={`text-[11px] mt-1 font-sans ${activeTab === "music-autopilot" ? "text-black/80" : "text-neutral-400"}`}>
+              <div className={`text-[11px] mt-1 font-sans ${activeTab === "music-autopilot" ? "opacity-70" : "text-neutral-400"}`}>
                 Cerere → prompt și versuri Suno → piesa în bibliotecă → clip cu versuri → kit YouTube. Nimic nu se publică singur.
               </div>
             </button>
@@ -708,15 +713,14 @@ export default function StudioPage() {
               onClick={() => setActiveTab("viral-factory")}
               className={`p-4 rounded-2xl text-left transition-all border ${
                 activeTab === "viral-factory"
-                  ? "bg-rose-500 text-white border-rose-400 shadow-[0_0_25px_rgba(244,63,94,0.3)]"
-                  : "bg-rose-500/10 text-rose-200 border-rose-400/30 hover:bg-rose-500/20"
+                  ? "bg-white text-black border-white light:border-black/40"
+                  : "bg-neutral-900/40 text-neutral-300 border-white/10 hover:bg-white/5 hover:border-white/20"
               }`}
             >
               <div className="font-bold text-sm flex items-center justify-between">
-                <span>🔥 2. Clipuri Virale (1M+)</span>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-black/20">URMĂRITORI</span>
+                <span>2. Clipuri Virale (1M+)</span>
               </div>
-              <div className={`text-[11px] mt-1 font-sans ${activeTab === "viral-factory" ? "text-white/90" : "text-neutral-400"}`}>
+              <div className={`text-[11px] mt-1 font-sans ${activeTab === "viral-factory" ? "opacity-70" : "text-neutral-400"}`}>
                 Copiază rețeta clipurilor cu milioane de vizualizări ca să crească rapid canalele noastre.
               </div>
             </button>
@@ -725,15 +729,14 @@ export default function StudioPage() {
               onClick={() => setActiveTab("intake")}
               className={`p-4 rounded-2xl text-left transition-all border ${
                 activeTab === "intake"
-                  ? "bg-emerald-400 text-black border-emerald-300 shadow-[0_0_25px_rgba(52,211,153,0.25)]"
-                  : "bg-emerald-500/10 text-emerald-200 border-emerald-400/30 hover:bg-emerald-500/20"
+                  ? "bg-white text-black border-white light:border-black/40"
+                  : "bg-neutral-900/40 text-neutral-300 border-white/10 hover:bg-white/5 hover:border-white/20"
               }`}
             >
               <div className="font-bold text-sm flex items-center justify-between">
-                <span>🛒 3. Reclame & Vânzări</span>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-black/20">CONVERSIE</span>
+                <span>3. Reclame & Vânzări</span>
               </div>
-              <div className={`text-[11px] mt-1 font-sans ${activeTab === "intake" ? "text-black/80" : "text-neutral-400"}`}>
+              <div className={`text-[11px] mt-1 font-sans ${activeTab === "intake" ? "opacity-70" : "text-neutral-400"}`}>
                 Transformă urmăritorii în clienți pe Bricolando.ro, RaftPlin.ro și Kalki Nexus (sau dictezi o idee).
               </div>
             </button>
@@ -742,15 +745,14 @@ export default function StudioPage() {
               onClick={() => setActiveTab("channels-hub")}
               className={`p-4 rounded-2xl text-left transition-all border ${
                 activeTab === "channels-hub"
-                  ? "bg-sky-400 text-black border-sky-300 shadow-[0_0_25px_rgba(56,189,248,0.3)]"
-                  : "bg-sky-500/10 text-sky-200 border-sky-400/30 hover:bg-sky-500/20"
+                  ? "bg-white text-black border-white light:border-black/40"
+                  : "bg-neutral-900/40 text-neutral-300 border-white/10 hover:bg-white/5 hover:border-white/20"
               }`}
             >
               <div className="font-bold text-sm flex items-center justify-between">
-                <span>📡 4. Conturi & Canale</span>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-black/20">KITURI & API</span>
+                <span>4. Conturi & Canale</span>
               </div>
-              <div className={`text-[11px] mt-1 font-sans ${activeTab === "channels-hub" ? "text-black/80" : "text-neutral-400"}`}>
+              <div className={`text-[11px] mt-1 font-sans ${activeTab === "channels-hub" ? "opacity-70" : "text-neutral-400"}`}>
                 Toate conturile existente + kiturile gata făcute (nume, bio, linkuri) pentru canalele noi.
               </div>
             </button>
@@ -762,10 +764,10 @@ export default function StudioPage() {
               onClick={() => setShowTechTools(!showTechTools)}
               className="text-[11px] text-neutral-400 hover:text-white flex items-center gap-1.5 py-1"
             >
-              <span>⚙️ {showTechTools ? "Ascunde" : "Arată"} Uneltele Tehnice din Spate (Deep Research, Veo 2, NotebookLM, Voce)</span>
+              <span>{showTechTools ? "Ascunde" : "Arată"} Uneltele Tehnice din Spate (Deep Research, Veo 2, NotebookLM, Voce)</span>
               <span>{showTechTools ? "▲" : "▼"}</span>
             </button>
-            <span className="text-[10px] text-emerald-400">● Toate cele 3 ramuri rulează automat</span>
+            
           </div>
 
           {showTechTools && (
@@ -776,10 +778,10 @@ export default function StudioPage() {
                   if (!researchData) handleLaunchDeepResearch();
                 }}
                 className={`px-3 py-1.5 rounded-xl transition-all ${
-                  activeTab === "deep-research" ? "bg-sky-400 text-black font-bold" : "text-sky-300 hover:bg-sky-500/10"
+                  activeTab === "deep-research" ? "bg-white text-black font-bold" : "text-neutral-400 hover:text-white hover:bg-white/5"
                 }`}
               >
-                ✨ Google Deep Research
+                Google Deep Research
               </button>
               <button
                 onClick={() => setActiveTab("script")}
@@ -803,10 +805,10 @@ export default function StudioPage() {
                   if (veoScenes.length === 0) handleGenerateVeoDirector();
                 }}
                 className={`px-3 py-1.5 rounded-xl transition-all ${
-                  activeTab === "veo-director" ? "bg-amber-400 text-black font-bold" : "text-amber-300 hover:bg-amber-500/10"
+                  activeTab === "veo-director" ? "bg-white text-black font-bold" : "text-neutral-400 hover:text-white hover:bg-white/5"
                 }`}
               >
-                🎬 Regizor Google Veo 2
+                Regizor Google Veo 2
               </button>
               <button
                 onClick={() => {
@@ -814,15 +816,15 @@ export default function StudioPage() {
                   if (!notebookData) handleGenerateNotebookLM();
                 }}
                 className={`px-3 py-1.5 rounded-xl transition-all ${
-                  activeTab === "notebooklm" ? "bg-rose-400 text-black font-bold" : "text-rose-300 hover:bg-rose-500/10"
+                  activeTab === "notebooklm" ? "bg-white text-black font-bold" : "text-neutral-400 hover:text-white hover:bg-white/5"
                 }`}
               >
-                🎙️ NotebookLM Podcast
+                NotebookLM Podcast
               </button>
               <button
                 onClick={() => setActiveTab("approval")}
                 className={`px-3 py-1.5 rounded-xl transition-all ${
-                  activeTab === "approval" ? "bg-emerald-500 text-black font-bold" : "text-neutral-400 hover:text-white"
+                  activeTab === "approval" ? "bg-white text-black font-bold" : "text-neutral-400 hover:text-white"
                 }`}
               >
                 Poarta de Aprobare
@@ -847,14 +849,14 @@ export default function StudioPage() {
         {activeTab === "marketing-engine" && (
           <Reveal>
             <div className="space-y-8">
-              <div className="rounded-3xl border border-violet-400/30 bg-neutral-900/50 p-6 md:p-8 backdrop-blur-md">
+              <div className="rounded-3xl border border-white/10 bg-neutral-900/50 p-6 md:p-8 backdrop-blur-md">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6">
                   <div>
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-violet-300 font-bold">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-300 font-bold">
                       Umbrela Reverb Digital • Motorul 7 Live Relay
                     </span>
                     <h2 className="text-2xl md:text-3xl font-medium text-white mt-1">
-                      ⚡ Mașina de Marketing (Live)
+                      Mașina de Marketing (Live)
                     </h2>
                     <p className="text-xs text-neutral-400 font-mono mt-1">
                       Oglindire automată campanii furnizori • Scut Global Amazon SES • Newslettere cu „da” • Coada Video Google AI Ultra Flow + Algenib • Campanii eMAG.
@@ -862,14 +864,14 @@ export default function StudioPage() {
                   </div>
                   <div className="flex flex-wrap items-center gap-3 shrink-0 font-mono text-xs">
                     {marketingEngineData?.relay_meta?.generat_la && (
-                      <span className="px-3 py-1.5 rounded-full border border-emerald-400/30 bg-emerald-500/10 text-emerald-300 text-[11px]">
+                      <span className="px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.03] text-neutral-300 text-[11px]">
                         ● Sincronizat: {String(marketingEngineData.relay_meta.generat_la).slice(0, 19).replace("T", " ")}
                       </span>
                     )}
                     <button
                       onClick={handleLoadMarketingEngine}
                       disabled={isLoadingMarketing}
-                      className="rounded-full bg-violet-400 px-4 py-2 text-xs font-bold uppercase tracking-wider text-black hover:bg-violet-300 transition-all disabled:opacity-50"
+                      className="rounded-full bg-white px-4 py-2 text-xs font-bold uppercase tracking-wider text-black hover:bg-neutral-200 transition-all disabled:opacity-50"
                     >
                       {isLoadingMarketing ? "Se încarcă..." : "↻ Reîmprospătează Live"}
                     </button>
@@ -880,23 +882,23 @@ export default function StudioPage() {
                   <div
                     className={`mt-5 rounded-2xl border p-4 text-xs font-mono ${
                       studioActionFeedback.ok
-                        ? "border-emerald-400/40 bg-emerald-950/30 text-emerald-200"
-                        : "border-rose-400/40 bg-rose-950/30 text-rose-200"
+                        ? "border-white/20 bg-white/[0.03] text-neutral-200"
+                        : "border-rose-400/30 text-rose-300"
                     }`}
                   >
-                    {studioActionFeedback.ok ? "✓ " : "⚠ "}
+                    {studioActionFeedback.ok ? "✓ " : "Eroare: "}
                     {studioActionFeedback.text}
                   </div>
                 )}
 
                 {marketingEngineData?.relay_configured === false && (
-                  <div className="mt-6 rounded-2xl border border-amber-400/40 bg-amber-950/25 p-5 font-mono text-xs text-amber-100">
-                    <div className="font-bold uppercase tracking-wider text-amber-300 mb-2">
+                  <div className="mt-6 rounded-2xl border border-white/20 bg-white/[0.03] p-5 font-mono text-xs text-neutral-200">
+                    <div className="font-bold uppercase tracking-wider text-neutral-300 mb-2">
                       Releul WordPress nu este încă conectat în Vercel Environment Variables
                     </div>
                     <p className="text-neutral-300 font-sans mb-3">
                       Pe serverul Hostinger releul <code className="text-white">panou-automatizari</code> primește deja cheia{" "}
-                      <code className="text-emerald-300">marketing</code>. Pentru a afișa datele în timp real pe Vercel (fără nicio cifră inventată), urmează pașii:
+                      <code className="text-neutral-300">marketing</code>. Pentru a afișa datele în timp real pe Vercel (fără nicio cifră inventată), urmează pașii:
                     </p>
                     <ul className="space-y-1.5 text-neutral-200">
                       {(marketingEngineData.setup_instructions || []).map((step: string, idx: number) => (
@@ -907,8 +909,8 @@ export default function StudioPage() {
                 )}
 
                 {marketingEngineData?.error && (
-                  <div className="mt-6 rounded-2xl border border-rose-400/40 bg-rose-950/25 p-4 font-mono text-xs text-rose-200">
-                    ⚠ {marketingEngineData.error}
+                  <div className="mt-6 rounded-2xl border border-rose-400/30 p-4 font-mono text-xs text-rose-300">
+                    Eroare: {marketingEngineData.error}
                   </div>
                 )}
 
@@ -918,14 +920,14 @@ export default function StudioPage() {
                   <div className="lg:col-span-5 rounded-2xl border border-white/10 bg-black/50 p-5 flex flex-col justify-between">
                     <div>
                       <div className="flex items-center justify-between mb-3">
-                        <span className="text-[10px] uppercase tracking-widest text-emerald-400 font-bold">
+                        <span className="text-[10px] uppercase tracking-widest text-neutral-400 font-bold">
                           Scut Global Amazon SES (eu-central-1)
                         </span>
                         <span
                           className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
                             marketingEngineData?.marketing?.ses_scut?.frana_activa
-                              ? "bg-rose-500/20 text-rose-300 border border-rose-400/40"
-                              : "bg-emerald-500/20 text-emerald-300 border border-emerald-400/40"
+                              ? "text-rose-300 border border-rose-400/30"
+                              : "text-emerald-400 border border-white/20"
                           }`}
                         >
                           {marketingEngineData?.marketing?.ses_scut?.frana_activa
@@ -961,10 +963,10 @@ export default function StudioPage() {
                   <div className="lg:col-span-7 rounded-2xl border border-white/10 bg-black/50 p-5 flex flex-col justify-between">
                     <div>
                       <div className="flex items-center justify-between mb-3">
-                        <span className="text-[10px] uppercase tracking-widest text-amber-300 font-bold">
+                        <span className="text-[10px] uppercase tracking-widest text-neutral-300 font-bold">
                           Ciorne Newsletter — Poarta de Aprobare cu „da”
                         </span>
-                        <span className="px-2.5 py-0.5 rounded-full bg-amber-400/15 text-amber-300 text-[10px]">
+                        <span className="px-2.5 py-0.5 rounded-full bg-white/5 text-neutral-300 text-[10px]">
                           {(marketingEngineData?.marketing?.ciorne_newsletter || []).length} în așteptare
                         </span>
                       </div>
@@ -994,7 +996,7 @@ export default function StudioPage() {
                                       newsletterId: String(nl.id),
                                     })
                                   }
-                                  className="rounded-full bg-emerald-400 px-3 py-1.5 text-[10px] font-bold uppercase text-black hover:bg-emerald-300 disabled:opacity-50"
+                                  className="rounded-full bg-white px-3 py-1.5 text-[10px] font-bold uppercase text-black hover:bg-neutral-200 disabled:opacity-50"
                                 >
                                   ✓ Aprobă („da”)
                                 </button>
@@ -1007,7 +1009,7 @@ export default function StudioPage() {
                                       newsletterId: String(nl.id),
                                     })
                                   }
-                                  className="rounded-full border border-rose-400/40 px-3 py-1.5 text-[10px] font-bold uppercase text-rose-300 hover:bg-rose-500/20 disabled:opacity-50"
+                                  className="rounded-full border border-white/20 px-3 py-1.5 text-[10px] font-bold uppercase text-neutral-300 hover:bg-white/10 disabled:opacity-50"
                                 >
                                   ■ Oprește
                                 </button>
@@ -1029,7 +1031,7 @@ export default function StudioPage() {
                   {/* CARD 3: CAMPANIILE FURNIZORILOR (ACTIVE & ÎN PREGĂTIRE) */}
                   <div className="lg:col-span-7 rounded-2xl border border-white/10 bg-black/50 p-5">
                     <div className="flex items-center justify-between mb-4">
-                      <span className="text-[10px] uppercase tracking-widest text-sky-300 font-bold">
+                      <span className="text-[10px] uppercase tracking-widest text-neutral-300 font-bold">
                         Campaniile Furnizorilor & Rotația Lansărilor (Bricolando D1 / Raft Plin N)
                       </span>
                       <span className="text-[10px] text-neutral-400">
@@ -1042,11 +1044,11 @@ export default function StudioPage() {
                         {marketingEngineData.marketing.campanii_furnizori.lista.map((c: any, idx: number) => (
                           <div
                             key={c.id || idx}
-                            className="rounded-xl border border-sky-400/25 bg-sky-950/15 p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+                            className="rounded-xl border border-white/10 bg-white/[0.03] p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
                           >
                             <div>
                               <div className="text-white font-bold">
-                                {c.titlu || c.id} <span className="text-sky-300">({c.furnizor || "furnizor"})</span>
+                                {c.titlu || c.id} <span className="text-neutral-300">({c.furnizor || "furnizor"})</span>
                               </div>
                               <div className="text-[10px] text-neutral-400 mt-0.5">
                                 Stare: {c.stare || "activă"} • Perioadă: {c.start_at || "—"} → {c.end_at || "—"} • Produse eligibile: {c.nr_produse_eligibile ?? "—"}
@@ -1061,7 +1063,7 @@ export default function StudioPage() {
                                   magazin: "ambele",
                                 })
                               }
-                              className="rounded-full border border-sky-400/40 px-3 py-1 text-[10px] text-sky-200 hover:bg-sky-400 hover:text-black font-bold shrink-0"
+                              className="rounded-full border border-white/20 px-3 py-1 text-[10px] text-neutral-200 hover:bg-neutral-200 hover:text-black font-bold shrink-0"
                             >
                               Prioritizează →
                             </button>
@@ -1084,7 +1086,7 @@ export default function StudioPage() {
                           {(marketingEngineData?.marketing?.furnizori_cadenta?.lansare_zilnica || []).map((f: any, idx: number) => (
                             <span
                               key={`lansare-${idx}`}
-                              className="px-2.5 py-1 rounded-full border border-amber-400/30 bg-amber-400/10 text-[10px] text-amber-200"
+                              className="px-2.5 py-1 rounded-full border border-white/10 bg-white/[0.03] text-[10px] text-neutral-200"
                             >
                               {f.categorie || f.cod}: <strong>1 clip/zi (lansare)</strong>
                             </span>
@@ -1105,7 +1107,7 @@ export default function StudioPage() {
                   {/* CARD 4: COADA VIDEO (FLOW / MAGICLIGHT / HIGGSFIELD) & CAMPANII EMAG */}
                   <div className="lg:col-span-5 rounded-2xl border border-white/10 bg-black/50 p-5 flex flex-col justify-between space-y-4">
                     <div>
-                      <div className="text-[10px] uppercase tracking-widest text-rose-300 font-bold mb-2">
+                      <div className="text-[10px] uppercase tracking-widest text-neutral-300 font-bold mb-2">
                         Coada Video (Google AI Ultra Flow • MagicLight • Higgsfield)
                       </div>
                       <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3 space-y-1.5 text-[11px]">
@@ -1115,11 +1117,11 @@ export default function StudioPage() {
                         </div>
                         <div className="flex justify-between">
                           <span className="text-neutral-400">Voce Standard:</span>
-                          <span className="text-emerald-300 font-bold">Gemini TTS Algenib</span>
+                          <span className="text-neutral-300 font-bold">Gemini TTS Algenib</span>
                         </div>
                         <div className="flex justify-between">
                           <span className="text-neutral-400">Clipuri în coadă / gata:</span>
-                          <span className="text-amber-300 font-bold">
+                          <span className="text-neutral-300 font-bold">
                             {marketingEngineData?.marketing?.coada_video?.in_asteptare ?? marketingEngineData?.marketing?.coada_video?.total ?? 0}
                           </span>
                         </div>
@@ -1127,13 +1129,13 @@ export default function StudioPage() {
                     </div>
 
                     <div>
-                      <div className="text-[10px] uppercase tracking-widest text-amber-300 font-bold mb-2">
+                      <div className="text-[10px] uppercase tracking-widest text-neutral-300 font-bold mb-2">
                         Campanii Profitabile eMAG Marketplace
                       </div>
                       <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3 text-[11px] text-neutral-300">
                         <div>
                           Campanii active:{" "}
-                          <strong className="text-emerald-300">
+                          <strong className="text-neutral-300">
                             {marketingEngineData?.marketing?.emag_campanii?.active ?? 0}
                           </strong>{" "}
                           • Propuneri eligibile:{" "}
@@ -1161,7 +1163,7 @@ export default function StudioPage() {
                           key={gate.id}
                           className={`px-3 py-1 rounded-full border text-[10px] ${
                             gate.status === "activ"
-                              ? "border-emerald-400/40 bg-emerald-500/15 text-emerald-300 font-bold"
+                              ? "border-white/20 bg-white/5 text-neutral-300 font-bold"
                               : "border-white/15 bg-white/[0.03] text-neutral-400"
                           }`}
                         >
@@ -1188,7 +1190,7 @@ export default function StudioPage() {
                         value={studioNoteInput}
                         onChange={(e) => setStudioNoteInput(e.target.value)}
                         placeholder="Trimite instrucțiune rapidă către agentul de pe laptop..."
-                        className="flex-1 rounded-full border border-white/15 bg-black/50 px-4 py-2.5 text-xs text-white outline-none focus:border-violet-400"
+                        className="flex-1 rounded-full border border-white/15 bg-black/50 px-4 py-2.5 text-xs text-white outline-none focus:border-white/30"
                       />
                       <button
                         type="submit"
@@ -1221,11 +1223,11 @@ export default function StudioPage() {
                     onClick={() => setIsRecording(!isRecording)}
                     className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-mono font-bold uppercase transition-all ${
                       isRecording
-                        ? "bg-red-500 text-white animate-pulse"
+                        ? "border border-white/30 bg-white/5 text-white"
                         : "bg-white/10 text-white hover:bg-white/20 border border-white/20"
                     }`}
                   >
-                    <span className={`h-2 w-2 rounded-full ${isRecording ? "bg-white" : "bg-red-500"}`} />
+                    <span className={`h-2 w-2 rounded-full ${isRecording ? "bg-rose-500 animate-pulse" : "bg-neutral-500"}`} />
                     {isRecording ? "Se Înregistrează (Microfon Activ)..." : "Simulează Dictare"}
                   </button>
                 </div>
@@ -1262,7 +1264,7 @@ export default function StudioPage() {
                         setActiveTab("deep-research");
                         handleLaunchDeepResearch();
                       }}
-                      className="text-[11px] font-mono text-sky-400 hover:text-sky-300 underline"
+                      className="text-[11px] font-mono text-neutral-400 hover:text-white underline"
                     >
                       Rulează Deep Research pe această temă →
                     </button>
@@ -1303,7 +1305,7 @@ export default function StudioPage() {
                         onClick={() => handleApplyPreset(p)}
                         className="w-full text-left p-4 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.06] transition-all group"
                       >
-                        <div className="text-xs font-semibold text-white group-hover:text-emerald-400 transition-colors">
+                        <div className="text-xs font-semibold text-white hover:text-white transition-colors">
                           {p.label}
                         </div>
                         <div className="text-[11px] text-neutral-400 font-mono mt-1 line-clamp-2">
@@ -1314,30 +1316,30 @@ export default function StudioPage() {
                   </div>
                 </div>
 
-                <div className="rounded-3xl border border-sky-400/20 bg-sky-950/10 p-6 font-mono text-xs">
-                  <div className="text-sky-300 font-bold uppercase tracking-widest text-[10px] mb-3 flex items-center gap-1.5">
-                    <span className="h-1.5 w-1.5 rounded-full bg-sky-400 animate-ping" />
+                <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 font-mono text-xs">
+                  <div className="text-neutral-300 font-bold uppercase tracking-widest text-[10px] mb-3 flex items-center gap-1.5">
+                    <span className="h-1.5 w-1.5 rounded-full bg-neutral-400" />
                     <span>Beneficii Active Google AI Ultra</span>
                   </div>
                   <ul className="space-y-2 text-neutral-300 text-[11px]">
                     <li className="flex items-start gap-2">
-                      <span className="text-sky-400">✓</span>
+                      <span className="text-neutral-400">✓</span>
                       <span>5x Rate Limit față de AI Pro (fără cozi de așteptare)</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-sky-400">✓</span>
+                      <span className="text-neutral-400">✓</span>
                       <span>Modelul Gemini 4 Argon cu 2M+ context window</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-sky-400">✓</span>
+                      <span className="text-neutral-400">✓</span>
                       <span>Deep Research cu Google Search Grounding live</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-sky-400">✓</span>
+                      <span className="text-neutral-400">✓</span>
                       <span>Studiu Creativ Google Veo 2 & Imagen 3 cinematic</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-sky-400">✓</span>
+                      <span className="text-neutral-400">✓</span>
                       <span>Spațiu de stocare 20 TB Google Cloud pentru master video</span>
                     </li>
                   </ul>
@@ -1351,10 +1353,10 @@ export default function StudioPage() {
         {activeTab === "deep-research" && (
           <Reveal>
             <div className="space-y-8">
-              <div className="rounded-3xl border border-sky-400/20 bg-neutral-900/40 p-8 backdrop-blur-md">
+              <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8 backdrop-blur-md">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6 mb-6">
                   <div>
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-sky-400 font-bold">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 font-bold">
                       Google Deep Research Engine • Grounding în Căutări Reale
                     </span>
                     <h2 className="text-2xl font-medium text-white mt-1">
@@ -1371,14 +1373,14 @@ export default function StudioPage() {
                       value={researchQuery}
                       onChange={(e) => setResearchQuery(e.target.value)}
                       placeholder="Introdu nișa sau produsul..."
-                      className="px-4 py-2 rounded-xl border border-white/15 bg-black/40 text-xs text-white font-mono outline-none focus:border-sky-400 w-64 md:w-80"
+                      className="px-4 py-2 rounded-xl border border-white/15 bg-black/40 text-xs text-white font-mono outline-none focus:border-white/30 w-64 md:w-80"
                     />
                     <button
                       onClick={handleLaunchDeepResearch}
                       disabled={isResearching}
-                      className="rounded-full bg-sky-400 px-5 py-2.5 text-xs font-mono uppercase tracking-widest text-black font-bold hover:bg-sky-300 transition-all disabled:opacity-50"
+                      className="rounded-full bg-white px-5 py-2.5 text-xs font-mono uppercase tracking-widest text-black font-bold hover:bg-neutral-200 transition-all disabled:opacity-50"
                     >
-                      {isResearching ? "Cercetează..." : "Re-analizează ⚡"}
+                      {isResearching ? "Cercetează..." : "Re-analizează "}
                     </button>
                   </div>
                 </div>
@@ -1389,9 +1391,9 @@ export default function StudioPage() {
                     <div className="grid md:grid-cols-3 gap-6 font-mono text-xs">
                       
                       {/* Friction Points */}
-                      <div className="p-6 rounded-2xl border border-rose-500/20 bg-rose-950/10">
-                        <div className="text-rose-400 uppercase tracking-wider font-bold mb-3 flex items-center gap-2">
-                          <span>⚠️</span> Fricțiuni & Dureri Clienți
+                      <div className="p-6 rounded-2xl border border-white/10 bg-white/[0.03]">
+                        <div className="text-neutral-400 uppercase tracking-wider font-bold mb-3 flex items-center gap-2">
+                          <span></span> Fricțiuni & Dureri Clienți
                         </div>
                         <ul className="space-y-3 text-neutral-300 text-[11px] leading-relaxed">
                           {researchData.marketSynthesis.coreAudienceFriction.map((f, i) => (
@@ -1403,9 +1405,9 @@ export default function StudioPage() {
                       </div>
 
                       {/* Viral Hooks Tested */}
-                      <div className="p-6 rounded-2xl border border-amber-500/20 bg-amber-950/10">
-                        <div className="text-amber-400 uppercase tracking-wider font-bold mb-3 flex items-center gap-2">
-                          <span>⚡</span> Cârlige Virale Validate (CTR)
+                      <div className="p-6 rounded-2xl border border-white/10 bg-white/[0.03]">
+                        <div className="text-neutral-400 uppercase tracking-wider font-bold mb-3 flex items-center gap-2">
+                          <span></span> Cârlige Virale Validate (CTR)
                         </div>
                         <ul className="space-y-3 text-neutral-300 text-[11px] leading-relaxed">
                           {researchData.marketSynthesis.viralHooksCTR.map((h, i) => (
@@ -1417,9 +1419,9 @@ export default function StudioPage() {
                       </div>
 
                       {/* Competitor Blindspots */}
-                      <div className="p-6 rounded-2xl border border-emerald-500/20 bg-emerald-950/10">
-                        <div className="text-emerald-400 uppercase tracking-wider font-bold mb-3 flex items-center gap-2">
-                          <span>🎯</span> Puncte Slabe Concurență
+                      <div className="p-6 rounded-2xl border border-white/10 bg-white/[0.03]">
+                        <div className="text-neutral-400 uppercase tracking-wider font-bold mb-3 flex items-center gap-2">
+                          <span></span> Puncte Slabe Concurență
                         </div>
                         <ul className="space-y-3 text-neutral-300 text-[11px] leading-relaxed">
                           {researchData.marketSynthesis.competitorBlindspots.map((b, i) => (
@@ -1441,14 +1443,14 @@ export default function StudioPage() {
                         {researchData.marketSynthesis.trendingSearchKeywords.map((k, i) => (
                           <div key={i} className="p-3.5 rounded-xl border border-white/5 bg-white/[0.02]">
                             <div className="text-white font-semibold">{k.keyword}</div>
-                            <div className="text-emerald-400 text-[11px] mt-1">{k.volume}</div>
+                            <div className="text-neutral-400 text-[11px] mt-1">{k.volume}</div>
                           </div>
                         ))}
                       </div>
                     </div>
 
                     {/* Action Bar */}
-                    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-6 rounded-2xl border border-sky-400/30 bg-sky-950/20">
+                    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-6 rounded-2xl border border-white/10 bg-white/[0.03]">
                       <div>
                         <div className="text-white font-bold text-sm">Sinteză Gata pentru Conversie Video</div>
                         <p className="text-xs text-neutral-400 font-mono mt-0.5">
@@ -1467,7 +1469,7 @@ export default function StudioPage() {
                   <div className="text-center py-16 text-neutral-400 font-mono text-xs">
                     {isResearching ? (
                       <div className="space-y-3">
-                        <div className="h-8 w-8 mx-auto border-2 border-sky-400 border-t-transparent rounded-full animate-spin" />
+                        <div className="h-8 w-8 mx-auto border border-white/30 border-t-transparent rounded-full animate-spin" />
                         <div>Google Deep Research analizează 142 de surse și trenduri în timp real...</div>
                       </div>
                     ) : (
@@ -1487,7 +1489,7 @@ export default function StudioPage() {
               <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8 backdrop-blur-md">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6 mb-6">
                   <div>
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-bold">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 font-bold">
                       {script.engineTier || "Google Gemini 4 Argon"} • Scenariu de Retenție 85%+
                     </span>
                     <h2 className="text-2xl font-medium text-white mt-1">{script.title}</h2>
@@ -1506,7 +1508,7 @@ export default function StudioPage() {
                         setActiveTab("veo-director");
                         if (veoScenes.length === 0) handleGenerateVeoDirector();
                       }}
-                      className="rounded-full bg-amber-400 px-5 py-2.5 text-xs font-mono uppercase tracking-widest text-black font-bold hover:bg-amber-300 transition-all shadow-md"
+                      className="rounded-full bg-white px-5 py-2.5 text-xs font-mono uppercase tracking-widest text-black font-bold hover:bg-neutral-200 transition-all shadow-md"
                     >
                       Vezi Regia Google Veo 2 →
                     </button>
@@ -1520,12 +1522,12 @@ export default function StudioPage() {
                 </div>
 
                 {/* Hook Box */}
-                <div className="rounded-2xl border border-amber-500/30 bg-amber-500/5 p-6 mb-6">
+                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 mb-6">
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-xs font-mono uppercase tracking-widest text-amber-400 font-bold">
-                      ⚡ THE HOOK (00:00 - 00:03) — Primele 3 secunde decid dacă utilizatorul face swipe
+                    <span className="text-xs font-mono uppercase tracking-widest text-neutral-400 font-bold">
+                      THE HOOK (00:00 - 00:03) — Primele 3 secunde decid dacă utilizatorul face swipe
                     </span>
-                    <span className="text-[10px] font-mono text-amber-300">Regula Retenției 85%+</span>
+                    <span className="text-[10px] font-mono text-neutral-300">Regula Retenției 85%+</span>
                   </div>
                   <div className="text-base text-white font-medium mb-3">
                     &ldquo;{script.hook.voiceover}&rdquo;
@@ -1570,7 +1572,7 @@ export default function StudioPage() {
                           <p className="text-xs text-neutral-400 bg-black/30 p-3 rounded-xl border border-white/5">
                             {scene.visualPrompt}
                           </p>
-                          <div className="mt-2 text-[11px] text-emerald-400">
+                          <div className="mt-2 text-[11px] text-neutral-400">
                             <strong>Direcție Cameră:</strong> {scene.cameraDirection}
                           </div>
                         </div>
@@ -1588,7 +1590,7 @@ export default function StudioPage() {
           <Reveal>
             <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8 backdrop-blur-md max-w-4xl mx-auto">
               <div className="border-b border-white/10 pb-6 mb-6">
-                <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400">
                   Modulul 1: Sinteză Vocală Google AI Ultra
                 </span>
                 <h2 className="text-2xl font-medium text-white mt-1">Sinteză Vocală Gemini TTS Algenib & Coloană Sonoră</h2>
@@ -1631,7 +1633,7 @@ export default function StudioPage() {
                       <span
                         key={idx}
                         className={`w-1 rounded-full transition-all ${
-                          isPlayingAudio ? "bg-emerald-400 animate-pulse" : "bg-neutral-700"
+                          isPlayingAudio ? "bg-white animate-pulse" : "bg-neutral-700"
                         }`}
                         style={{
                           height: `${Math.max(12, Math.sin(idx * 0.4) * 45 + 10)}px`,
@@ -1644,7 +1646,7 @@ export default function StudioPage() {
                     onClick={toggleAudio}
                     className="rounded-full bg-white px-6 py-2.5 text-xs font-mono uppercase tracking-widest text-black font-bold hover:bg-neutral-200 transition-all shadow-md"
                   >
-                    {isPlayingAudio ? "❚❚ Pauză Audio" : "▶ Ascultă Vocea Sintetizată"}
+                    {isPlayingAudio ? "Pauză Audio" : "▶ Ascultă Vocea Sintetizată"}
                   </button>
                 </div>
 
@@ -1665,10 +1667,10 @@ export default function StudioPage() {
         {/* ── TAB 5: GOOGLE VEO 2 & IMAGEN 3 CINEMATIC DIRECTOR ── */}
         {activeTab === "veo-director" && (
           <Reveal>
-            <div className="rounded-3xl border border-amber-500/20 bg-neutral-900/40 p-8 backdrop-blur-md max-w-5xl mx-auto">
+            <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8 backdrop-blur-md max-w-5xl mx-auto">
               <div className="border-b border-white/10 pb-6 mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-amber-400 font-bold">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 font-bold">
                     Studioul Creativ Google AI Ultra • Model Veo 2
                   </span>
                   <h2 className="text-2xl font-medium text-white mt-1">
@@ -1682,9 +1684,9 @@ export default function StudioPage() {
                 <button
                   onClick={handleGenerateVeoDirector}
                   disabled={isGeneratingVeo}
-                  className="rounded-full bg-amber-400 px-5 py-2.5 text-xs font-mono uppercase tracking-widest text-black font-bold hover:bg-amber-300 transition-all disabled:opacity-50 shadow-md"
+                  className="rounded-full bg-white px-5 py-2.5 text-xs font-mono uppercase tracking-widest text-black font-bold hover:bg-neutral-200 transition-all disabled:opacity-50 shadow-md"
                 >
-                  {isGeneratingVeo ? "Se Calibrează..." : "Regenerează Cadre Veo ⚡"}
+                  {isGeneratingVeo ? "Se Calibrează..." : "Regenerează Cadre Veo "}
                 </button>
               </div>
 
@@ -1694,11 +1696,11 @@ export default function StudioPage() {
                     {veoScenes.map((scene) => (
                       <div
                         key={scene.sceneNumber}
-                        className="rounded-2xl border border-white/10 bg-black/40 p-6 flex flex-col justify-between hover:border-amber-400/40 transition-all"
+                        className="rounded-2xl border border-white/10 bg-black/40 p-6 flex flex-col justify-between hover:border-white/20 transition-all"
                       >
                         <div>
                           <div className="flex items-center justify-between mb-3">
-                            <span className="px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 font-bold text-[10px]">
+                            <span className="px-3 py-1 rounded-full bg-white/[0.03] border border-white/10 text-neutral-300 font-bold text-[10px]">
                               Scena #{scene.sceneNumber} ({scene.duration})
                             </span>
                             <span className="text-neutral-500 text-[10px]">
@@ -1717,7 +1719,7 @@ export default function StudioPage() {
                             </div>
                             <div>
                               <strong className="text-neutral-400">Prompt Google Veo 2 / Imagen 3:</strong>
-                              <div className="mt-1 p-3 rounded-xl bg-white/[0.03] border border-white/5 text-amber-200 font-mono text-[10px] leading-relaxed">
+                              <div className="mt-1 p-3 rounded-xl bg-white/[0.03] border border-white/5 text-neutral-200 font-mono text-[10px] leading-relaxed">
                                 {scene.promptVeo2}
                               </div>
                             </div>
@@ -1726,10 +1728,10 @@ export default function StudioPage() {
 
                         <button
                           onClick={() => copyToClipboard(scene.promptVeo2, scene.sceneNumber)}
-                          className="mt-2 w-full rounded-xl border border-white/15 bg-white/5 py-2.5 text-xs text-white hover:bg-amber-400 hover:text-black hover:border-amber-400 transition-all font-semibold flex items-center justify-center gap-2"
+                          className="mt-2 w-full rounded-xl border border-white/15 bg-white/5 py-2.5 text-xs text-white hover:bg-neutral-200 hover:text-black hover:border-white/20 transition-all font-semibold flex items-center justify-center gap-2"
                         >
                           {copiedPromptId === scene.sceneNumber ? (
-                            <span className="text-emerald-400">✓ Prompt Copiat pentru VideoFX!</span>
+                            <span className="text-neutral-400">✓ Prompt Copiat pentru VideoFX!</span>
                           ) : (
                             <span>Copiază Prompt pentru Google Creative Studio →</span>
                           )}
@@ -1762,10 +1764,10 @@ export default function StudioPage() {
         {/* ── TAB 6: NOTEBOOKLM AUDIO OVERVIEW ── */}
         {activeTab === "notebooklm" && (
           <Reveal>
-            <div className="rounded-3xl border border-rose-500/20 bg-neutral-900/40 p-8 backdrop-blur-md max-w-4xl mx-auto">
+            <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8 backdrop-blur-md max-w-4xl mx-auto">
               <div className="border-b border-white/10 pb-6 mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-rose-400 font-bold">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 font-bold">
                     NotebookLM Audio Overview Engine (Google AI Ultra)
                   </span>
                   <h2 className="text-2xl font-medium text-white mt-1">
@@ -1779,9 +1781,9 @@ export default function StudioPage() {
                 <button
                   onClick={handleGenerateNotebookLM}
                   disabled={isGeneratingNotebook}
-                  className="rounded-full bg-rose-400 px-5 py-2.5 text-xs font-mono uppercase tracking-widest text-black font-bold hover:bg-rose-300 transition-all disabled:opacity-50 shadow-md"
+                  className="rounded-full bg-white px-5 py-2.5 text-xs font-mono uppercase tracking-widest text-black font-bold hover:bg-neutral-200 transition-all disabled:opacity-50 shadow-md"
                 >
-                  {isGeneratingNotebook ? "Se Sintetizează..." : "Generează Podcast 🎙️"}
+                  {isGeneratingNotebook ? "Se Sintetizează..." : "Generează Podcast "}
                 </button>
               </div>
 
@@ -1789,7 +1791,7 @@ export default function StudioPage() {
                 <div className="space-y-6">
                   <div className="p-4 rounded-2xl border border-white/10 bg-black/40 flex items-center justify-between text-xs font-mono">
                     <span className="text-white font-bold">{notebookData.title}</span>
-                    <span className="text-rose-400">Durată: {notebookData.totalDurationEstimated}</span>
+                    <span className="text-neutral-400">Durată: {notebookData.totalDurationEstimated}</span>
                   </div>
 
                   <div className="space-y-4">
@@ -1798,13 +1800,13 @@ export default function StudioPage() {
                         key={i}
                         className={`p-5 rounded-2xl border transition-all ${
                           turn.speaker.includes("Host A")
-                            ? "border-sky-500/20 bg-sky-950/10 text-neutral-200"
-                            : "border-amber-500/20 bg-amber-950/10 text-neutral-200"
+                            ? "border-white/10 bg-white/[0.03] text-neutral-200"
+                            : "border-white/10 bg-white/[0.03] text-neutral-200"
                         }`}
                       >
                         <div className="flex items-center gap-2 mb-2 font-mono text-xs font-bold">
-                          <span className={`h-2 w-2 rounded-full ${turn.speaker.includes("Host A") ? "bg-sky-400" : "bg-amber-400"}`} />
-                          <span className={turn.speaker.includes("Host A") ? "text-sky-300" : "text-amber-300"}>
+                          <span className={`h-2 w-2 rounded-full ${turn.speaker.includes("Host A") ? "bg-white" : "bg-neutral-500"}`} />
+                          <span className={turn.speaker.includes("Host A") ? "text-neutral-200" : "text-neutral-400"}>
                             {turn.speaker}
                           </span>
                         </div>
@@ -1838,7 +1840,7 @@ export default function StudioPage() {
         {activeTab === "approval" && (
           <Reveal>
             <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8 md:p-12 backdrop-blur-md max-w-4xl mx-auto text-center">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400">
                 Modulul Human Approval Gate & Distribuire
               </span>
               <h2 className="text-3xl font-medium text-white mt-2 mb-4">
@@ -1851,7 +1853,7 @@ export default function StudioPage() {
               {approvalStatus === "draft" && (
                 <div className="p-8 rounded-3xl border border-white/10 bg-black/40 mb-8 max-w-lg mx-auto">
                   <div className="text-xs font-mono text-neutral-400 mb-2">STATUS CURENT:</div>
-                  <div className="text-2xl font-bold text-amber-400 mb-4">GATA PENTRU APROBARE</div>
+                  <div className="text-2xl font-bold text-neutral-400 mb-4">GATA PENTRU APROBARE</div>
                   <div className="text-xs font-mono text-neutral-300 space-y-1.5 mb-6 text-left">
                     <div>• Scenariu: Generat cu Gemini 4 Argon Ultra (30s)</div>
                     <div>• Cercetare: Validat cu Google Deep Research</div>
@@ -1863,7 +1865,7 @@ export default function StudioPage() {
                   <div className="flex flex-col sm:flex-row gap-3 justify-center">
                     <button
                       onClick={handleApprove}
-                      className="rounded-full bg-emerald-400 px-8 py-3.5 text-xs font-mono uppercase tracking-widest text-black font-bold hover:bg-emerald-300 transition-all shadow-[0_0_25px_rgba(52,211,153,0.3)]"
+                      className="rounded-full bg-white px-8 py-3.5 text-xs font-mono uppercase tracking-widest text-black font-bold hover:bg-neutral-200 transition-all"
                     >
                       ✓ Aprobă & Trimite în Coada de Postare
                     </button>
@@ -1878,7 +1880,7 @@ export default function StudioPage() {
               )}
 
               {approvalStatus === "approved" && (
-                <div className="p-8 rounded-3xl border border-emerald-500/40 bg-emerald-950/20 max-w-lg mx-auto text-emerald-300 font-mono text-xs animate-pulse">
+                <div className="p-8 rounded-3xl border border-white/20 bg-white/[0.03] max-w-lg mx-auto text-neutral-300 font-mono text-xs animate-pulse">
                   <div className="text-3xl mb-2">✓</div>
                   <div className="text-lg font-bold text-white mb-2">Videoclip Aprobat!</div>
                   <p>Se pregătește injectarea în coada de distribuire automată...</p>
@@ -1886,9 +1888,9 @@ export default function StudioPage() {
               )}
 
               {approvalStatus === "queued" && (
-                <div className="p-8 rounded-3xl border border-emerald-500/30 bg-emerald-950/20 max-w-lg mx-auto text-left font-mono text-xs">
-                  <div className="flex items-center gap-2 text-emerald-400 font-bold mb-3 text-sm">
-                    <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
+                <div className="p-8 rounded-3xl border border-white/10 bg-white/[0.03] max-w-lg mx-auto text-left font-mono text-xs">
+                  <div className="flex items-center gap-2 text-neutral-400 font-bold mb-3 text-sm">
+                    <span className="h-2 w-2 rounded-full bg-neutral-400" />
                     ACTIV ÎN COADA DE DISTRIBUIRE
                   </div>
                   <div className="space-y-2 text-neutral-300 mb-6">
@@ -1916,7 +1918,7 @@ export default function StudioPage() {
               <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8 backdrop-blur-md">
                 <div className="border-b border-white/10 pb-6 mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
                   <div>
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400">
                       Sistem Autonom de Supraveghere • Google AI Ultra Hub
                     </span>
                     <h2 className="text-2xl font-medium text-white mt-1">Briefing Executiv & Conductă 20 TB</h2>
@@ -1934,25 +1936,25 @@ export default function StudioPage() {
                   <div className="p-5 rounded-2xl border border-white/10 bg-white/[0.02]">
                     <div className="text-neutral-500 uppercase text-[10px] mb-1">Capacitate zilnică</div>
                     <div className="text-3xl font-light text-white">5x Limită</div>
-                    <div className="text-sky-400 text-[10px] mt-1">Google AI Ultra Tier</div>
+                    <div className="text-neutral-400 text-[10px] mt-1">Google AI Ultra Tier</div>
                   </div>
 
                   <div className="p-5 rounded-2xl border border-white/10 bg-white/[0.02]">
                     <div className="text-neutral-500 uppercase text-[10px] mb-1">Leaduri Calificate AI</div>
-                    <div className="text-3xl font-light text-emerald-400">14</div>
+                    <div className="text-3xl font-light text-neutral-400">14</div>
                     <div className="text-neutral-400 text-[10px] mt-1">Direct din TikTok & Reels</div>
                   </div>
 
                   <div className="p-5 rounded-2xl border border-white/10 bg-white/[0.02]">
                     <div className="text-neutral-500 uppercase text-[10px] mb-1">Stocare Cloud Activă</div>
                     <div className="text-3xl font-light text-white">20 TB</div>
-                    <div className="text-amber-400 text-[10px] mt-1">4K Master Asset Vault</div>
+                    <div className="text-neutral-400 text-[10px] mt-1">4K Master Asset Vault</div>
                   </div>
 
                   <div className="p-5 rounded-2xl border border-white/10 bg-white/[0.02]">
                     <div className="text-neutral-500 uppercase text-[10px] mb-1">Conversie Căutare AI</div>
                     <div className="text-3xl font-light text-white">92%</div>
-                    <div className="text-emerald-400 text-[10px] mt-1">Indexat în Gemini & Search</div>
+                    <div className="text-neutral-400 text-[10px] mt-1">Indexat în Gemini & Search</div>
                   </div>
                 </div>
 
@@ -1962,10 +1964,10 @@ export default function StudioPage() {
                     <span className="text-white font-bold uppercase tracking-wider">
                       Conductă Stocare Google Cloud (20 TB Alocați):
                     </span>
-                    <span className="text-sky-400">1.4 TB Utilizați / 20 TB Disponibili (7%)</span>
+                    <span className="text-neutral-400">1.4 TB Utilizați / 20 TB Disponibili (7%)</span>
                   </div>
                   <div className="w-full h-3 rounded-full bg-white/10 overflow-hidden mb-4">
-                    <div className="h-full bg-gradient-to-r from-sky-400 via-amber-400 to-rose-400 rounded-full w-[7%]" />
+                    <div className="h-full bg-white light:bg-neutral-900 rounded-full w-[7%]" />
                   </div>
                   <div className="grid sm:grid-cols-3 gap-3 text-neutral-400 text-[11px]">
                     <div>• Cadre Raw 4K Veo 2: <strong>840 GB</strong></div>
@@ -1986,13 +1988,13 @@ export default function StudioPage() {
                       <p className="text-neutral-200">Trusa asta chiar ține la impact sau e doar reclamă? Am un service și rupem chei săptămânal.</p>
                     </div>
 
-                    <div className="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/20 text-emerald-300">
-                      <span className="text-emerald-500 text-[10px] block mb-1">Agent AI Bricolando (Răspuns autonom în 4 secunde via Gemini 4 Argon):</span>
+                    <div className="p-3 rounded-xl bg-white/[0.03] border border-white/10 text-neutral-300">
+                      <span className="text-neutral-400 text-[10px] block mb-1">Agent AI Bricolando (Răspuns autonom în 4 secunde via Gemini 4 Argon):</span>
                       <p>Salut! Trusa este din oțel crom-vanadiu tratat termic conform standardului DIN 3124, special concepută pentru ateliere. Suportă cuplu de torsiune de până la 450 Nm pe clichetul de 1/2. Dacă o comanzi acum, ai garanție de returnare fără întrebări timp de 30 de zile dacă nu trece testul la tine în atelier. Ți-am trimis fișa tehnică în mesaj privat!</p>
                     </div>
 
                     <div className="text-[10px] text-neutral-500 text-right">
-                      Status Lead: <strong className="text-emerald-400">CALIFICAT PENTRU VÂNZARE</strong> • Notificare trimisă pe panoul de comenzi
+                      Status Lead: <strong className="text-neutral-400">CALIFICAT PENTRU VÂNZARE</strong> • Notificare trimisă pe panoul de comenzi
                     </div>
                   </div>
                 </div>
@@ -2013,50 +2015,50 @@ export default function StudioPage() {
         {activeTab === "viral-factory" && (
           <Reveal>
             <div className="space-y-8">
-              <div className="rounded-3xl border border-rose-500/30 bg-neutral-900/40 p-8 backdrop-blur-md">
+              <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8 backdrop-blur-md">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6 mb-8">
                   <div>
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-rose-400 font-bold">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 font-bold">
                       Ramura 2 • Motor Autonom de Creștere Urmăritori & Audiență Masivă
                     </span>
                     <h2 className="text-2xl font-medium text-white mt-1">
-                      🔥 Fabrica de Clipuri Virale (Modelată pe Clipuri cu 1M – 10M+ Vizualizări)
+                      Fabrica de Clipuri Virale (Modelată pe Clipuri cu 1M – 10M+ Vizualizări)
                     </h2>
                     <p className="text-xs text-neutral-400 font-mono mt-1">
                       Analizează continuu structura videoclipurilor virale din lume, extrage rețeta (primele 1,8 secunde, ritmul de tăiere, curiozitatea) și produce automat clipuri în același stil pentru a aduna zeci de mii de urmăritori pe canalele noastre.
                     </p>
                   </div>
-                  <div className="px-4 py-2 rounded-full bg-rose-500/15 border border-rose-500/30 text-rose-300 font-mono text-xs font-bold shrink-0">
+                  <div className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-neutral-300 font-mono text-xs font-bold shrink-0">
                     ● Mod Continuu 24/7 Activ
                   </div>
                 </div>
 
                 {/* FORMULA CELOR 1 MILION DE VIZUALIZĂRI (DECONSTRUITĂ AUTOMAT) */}
-                <div className="mb-8 rounded-2xl border border-rose-500/20 bg-rose-500/[0.04] p-6">
-                  <div className="text-xs font-mono uppercase tracking-widest text-rose-300 font-bold mb-4">
+                <div className="mb-8 rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+                  <div className="text-xs font-mono uppercase tracking-widest text-neutral-300 font-bold mb-4">
                     De ce fac milioane de vizualizări clipurile virale și cum le replicăm automat:
                   </div>
                   <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
                     <div className="p-4 rounded-xl bg-black/50 border border-white/10">
-                      <div className="text-rose-400 font-mono font-bold mb-1">1. ȘOCUL VIZUAL (Secunda 0–2)</div>
+                      <div className="text-neutral-400 font-mono font-bold mb-1">1. ȘOCUL VIZUAL (Secunda 0–2)</div>
                       <p className="text-neutral-300 leading-relaxed">
                         Fără salut sau introducere lentă. Primul cadru arată un contrast extrem (ex. cheie ieftină care pocnește în menghină în slow-motion). Oprește degetul pe ecran.
                       </p>
                     </div>
                     <div className="p-4 rounded-xl bg-black/50 border border-white/10">
-                      <div className="text-amber-400 font-mono font-bold mb-1">2. SCHIMBARE LA 2,5 SECUNDE</div>
+                      <div className="text-neutral-400 font-mono font-bold mb-1">2. SCHIMBARE LA 2,5 SECUNDE</div>
                       <p className="text-neutral-300 leading-relaxed">
                         Unghiul camerei, zoom-ul sau textul de pe ecran se schimbă la fiecare 2,5 secunde (Pattern Interrupt), menținând retenția peste 80%.
                       </p>
                     </div>
                     <div className="p-4 rounded-xl bg-black/50 border border-white/10">
-                      <div className="text-sky-400 font-mono font-bold mb-1">3. BUCLA INFINITĂ (Loop)</div>
+                      <div className="text-neutral-400 font-mono font-bold mb-1">3. BUCLA INFINITĂ (Loop)</div>
                       <p className="text-neutral-300 leading-relaxed">
                         Ultima frază a videoclipului se leagă gramatical de prima frază. Când omul mai ascultă o dată, algoritmul TikTok/Reels îl împinge în toată țara.
                       </p>
                     </div>
-                    <div className="p-4 rounded-xl bg-black/50 border border-emerald-500/30">
-                      <div className="text-emerald-400 font-mono font-bold mb-1">4. PODUL SPRE VÂNZARE</div>
+                    <div className="p-4 rounded-xl bg-black/50 border border-white/10">
+                      <div className="text-neutral-400 font-mono font-bold mb-1">4. PODUL SPRE VÂNZARE</div>
                       <p className="text-neutral-300 leading-relaxed">
                         Clipul viral NU pare reclamă clasică — oferă spectacol sau emoție pură, iar în ultimele 3 secunde trimite toți urmăritorii noi către produsele noastre.
                       </p>
@@ -2067,7 +2069,7 @@ export default function StudioPage() {
                 {/* CELE 3 CANALE VIRALE AUTONOME */}
                 <div className="space-y-6">
                   <div className="text-xs font-mono uppercase tracking-widest text-white font-bold">
-                    ★ Cele 3 Linii Automate de Clipuri Virale (Lucrează în Paralel pentru Fiecare Public):
+                    Cele 3 Linii Automate de Clipuri Virale (Lucrează în Paralel pentru Fiecare Public):
                   </div>
 
                   <div className="grid lg:grid-cols-3 gap-6">
@@ -2134,43 +2136,43 @@ export default function StudioPage() {
                       return (
                         <div
                           key={engine.id}
-                          className="rounded-3xl border border-rose-500/25 bg-black/50 p-6 flex flex-col justify-between"
+                          className="rounded-3xl border border-white/10 bg-black/50 p-6 flex flex-col justify-between"
                         >
                           <div>
-                            <div className="text-[10px] font-mono uppercase tracking-widest text-rose-400 font-bold mb-2">
+                            <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 font-bold mb-2">
                               {engine.niche}
                             </div>
                             <div className="text-xs text-neutral-300 bg-white/[0.03] border border-white/5 rounded-xl p-3 mb-4 font-mono">
-                              <strong className="text-amber-300 block mb-1">Tipar Viral Analizat:</strong>
+                              <strong className="text-neutral-300 block mb-1">Tipar Viral Analizat:</strong>
                               {engine.benchmark}
                             </div>
 
                             <div className="space-y-3 text-xs mb-5">
                               <div>
-                                <span className="text-rose-300 font-bold font-mono text-[11px] block">⚡ Cârligul (Secunda 0–2):</span>
+                                <span className="text-neutral-300 font-bold font-mono text-[11px] block">Cârligul (Secunda 0–2):</span>
                                 <p className="text-neutral-300 mt-0.5 leading-relaxed">{engine.hookFormula}</p>
                               </div>
                               <div>
-                                <span className="text-sky-300 font-bold font-mono text-[11px] block">🎬 Ritmul & Montajul:</span>
+                                <span className="text-neutral-300 font-bold font-mono text-[11px] block">Ritmul & Montajul:</span>
                                 <p className="text-neutral-300 mt-0.5 leading-relaxed">{engine.pacing}</p>
                               </div>
                               <div>
-                                <span className="text-emerald-300 font-bold font-mono text-[11px] block">💰 Cum aduce clienți & vânzări:</span>
+                                <span className="text-neutral-300 font-bold font-mono text-[11px] block">Cum aduce clienți & vânzări:</span>
                                 <p className="text-neutral-300 mt-0.5 leading-relaxed">{engine.conversionBridge}</p>
                               </div>
                             </div>
 
                             {/* Ready Viral Scripts */}
                             <div className="space-y-2 mb-5">
-                              <div className="text-[10px] font-mono uppercase tracking-wider text-amber-300 font-bold">
+                              <div className="text-[10px] font-mono uppercase tracking-wider text-neutral-300 font-bold">
                                 Clipuri Virale Pregătite în Coadă:
                               </div>
                               {engine.readyScripts.map((sc: any, idx: number) => (
                                 <div key={idx} className="p-3 rounded-xl bg-white/[0.03] border border-white/10 text-xs">
                                   <div className="font-bold text-white">{sc.title}</div>
                                   <div className="flex justify-between items-center mt-1 text-[10px] font-mono">
-                                    <span className="text-rose-300">Potențial: {sc.expectedReach}</span>
-                                    <span className="text-emerald-400">{sc.status}</span>
+                                    <span className="text-neutral-300">Potențial: {sc.expectedReach}</span>
+                                    <span className="text-neutral-400">{sc.status}</span>
                                   </div>
                                 </div>
                               ))}
@@ -2183,13 +2185,13 @@ export default function StudioPage() {
                             }}
                             className={`w-full rounded-full py-3 text-xs font-mono uppercase tracking-widest font-bold transition-all ${
                               vState === "producing"
-                                ? "bg-emerald-500/20 border border-emerald-500/40 text-emerald-300"
-                                : "bg-rose-500 text-white hover:bg-rose-400 shadow-lg"
+                                ? "bg-white/5 border border-white/20 text-neutral-300"
+                                : "bg-white text-black hover:bg-neutral-200"
                             }`}
                           >
                             {vState === "producing"
                               ? "✓ Randează & Postează Automat în Coadă"
-                              : "🔥 Pornește Producția Automată pe Acest Canal"}
+                              : "Pornește Producția Automată pe Acest Canal"}
                           </button>
                         </div>
                       );
@@ -2205,28 +2207,28 @@ export default function StudioPage() {
         {activeTab === "channels-hub" && (
           <Reveal>
             <div className="space-y-8">
-              <div className="rounded-3xl border border-sky-400/30 bg-neutral-900/40 p-8 backdrop-blur-md">
+              <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8 backdrop-blur-md">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6 mb-8">
                   <div>
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-sky-400 font-bold">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 font-bold">
                       Ramura 4 • Arhitectura Conturilor & Separarea Audiențelor (Fără Amestecare de Algoritm)
                     </span>
                     <h2 className="text-2xl font-medium text-white mt-1">
-                      📡 Conturi & Canale Conectate: Unde se urcă automat fiecare producție
+                      Conturi & Canale Conectate: Unde se urcă automat fiecare producție
                     </h2>
                     <p className="text-xs text-neutral-400 font-mono mt-1">
                       Toate canalele YouTube stau sub contul tău unic Google (alindrimbu@gmail.com — comutare fără parolă), dar sunt 100% separate pentru public ca să nu amestecăm niciodată colindele și rugăciunile cu sculele de șantier.
                     </p>
                   </div>
-                  <div className="px-4 py-2 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 font-mono text-xs font-bold shrink-0">
+                  <div className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-neutral-300 font-mono text-xs font-bold shrink-0">
                     ● 5 Ecosisteme Active • 2 Canale Noi Gata de Deschis
                   </div>
                 </div>
 
                 {/* REGULA DE AUR A PEȘTIȘORILOR: DE CE NU AMESTECĂM CANALELE */}
-                <div className="mb-8 rounded-2xl border border-amber-400/25 bg-amber-400/[0.04] p-5 text-xs">
-                  <div className="font-mono uppercase tracking-widest text-amber-300 font-bold mb-2">
-                    ⚠️ Regula de Aur descoperită la Audit (De ce separăm canalele pe piloni):
+                <div className="mb-8 rounded-2xl border border-white/10 bg-white/[0.03] p-5 text-xs">
+                  <div className="font-mono uppercase tracking-widest text-neutral-300 font-bold mb-2">
+                    Regula de Aur descoperită la Audit (De ce separăm canalele pe piloni):
                   </div>
                   <p className="text-neutral-300 leading-relaxed">
                     Dacă pe același canal de YouTube sau TikTok pui dimineața o <strong>Colindă / Rugăciune Ortodoxă</strong> și seara o <strong>reclamă la chei tubulare</strong>, algoritmul le arată cheia tubulară oamenilor care au intrat pentru rugăciune — aceștia dau swipe în prima secundă, iar clipul rămâne blocat la 250 de vizualizări. De aceea, <strong>Reverb Studio</strong> trimite automat fiecare clip strict pe canalul nișei lui!
@@ -2235,16 +2237,16 @@ export default function StudioPage() {
 
                 {/* SECȚIUNEA A: CELE 2 CANALE NOI DE CREAT ACUM (KITURI COPY-PASTE 60 SECUNDE) */}
                 <div className="mb-10 space-y-4">
-                  <div className="text-xs font-mono uppercase tracking-widest text-sky-300 font-bold">
-                    ★ Pasul 1: Cele 2 Canale Noi de Deschis Acum (Totul pregătit gata de Copy-Paste • Fără numele firmei):
+                  <div className="text-xs font-mono uppercase tracking-widest text-neutral-300 font-bold">
+                    Pasul 1: Cele 2 Canale Noi de Deschis Acum (Totul pregătit gata de Copy-Paste • Fără numele firmei):
                   </div>
 
                   <div className="grid lg:grid-cols-2 gap-6 font-mono text-xs">
                     {/* KIT 1: SURYA MUSIC · ALIN DRAGOȘ (CU 2 PLAYLISTURI: RO & EN) */}
-                    <div className="rounded-3xl border border-amber-400/40 bg-black/60 p-6 flex flex-col justify-between">
+                    <div className="rounded-3xl border border-white/20 bg-black/60 p-6 flex flex-col justify-between">
                       <div>
                         <div className="flex items-center justify-between gap-2 mb-3">
-                          <span className="px-3 py-1 rounded-full bg-amber-400/20 border border-amber-400/40 text-amber-300 font-bold text-[10px]">
+                          <span className="px-3 py-1 rounded-full bg-white/5 border border-white/20 text-neutral-300 font-bold text-[10px]">
                             CANALUL OFICIAL DE MUZICĂ & COLINDE • SURYA MUSIC · ALIN DRAGOȘ
                           </span>
                         </div>
@@ -2258,7 +2260,7 @@ export default function StudioPage() {
                         <div className="space-y-2.5 bg-white/[0.03] border border-white/10 rounded-2xl p-4 mb-4">
                           <div>
                             <span className="text-neutral-500 text-[10px] block">NUME CANAL YOUTUBE:</span>
-                            <strong className="text-amber-300 text-sm select-all">Surya Music · Alin Dragoș</strong>
+                            <strong className="text-neutral-300 text-sm select-all">Surya Music · Alin Dragoș</strong>
                           </div>
                           <div>
                             <span className="text-neutral-500 text-[10px] block">HANDLE (@):</span>
@@ -2266,19 +2268,19 @@ export default function StudioPage() {
                           </div>
                           <div>
                             <span className="text-neutral-500 text-[10px] block">CELE 2 PLAYLISTURI DE PE CANAL:</span>
-                            <p className="text-emerald-300 select-all">1. Colinde și Muzică de Suflet (Română)</p>
-                            <p className="text-sky-300 select-all">2. Soulful Music, Poetry & Carols (English)</p>
+                            <p className="text-neutral-300 select-all">1. Colinde și Muzică de Suflet (Română)</p>
+                            <p className="text-neutral-300 select-all">2. Soulful Music, Poetry & Carols (English)</p>
                           </div>
                           <div>
                             <span className="text-neutral-500 text-[10px] block">DESCRIERE YOUTUBE (Bilingvă EN + RO):</span>
                             <p className="text-neutral-200 select-all">Surya Music · Alin Dragoș — Original music, poetry, and Christmas carols by Alin Dragoș (English & Romanian playlists). Muzică pentru suflet, colinde și versuri originale · kalki.nexus</p>
                           </div>
                           <div className="pt-2 border-t border-white/10 flex flex-wrap gap-3 text-[11px]">
-                            <a href="/media/surya_music_profil_1080.png" download className="text-amber-400 hover:underline font-bold">
-                              ⬇ Descarcă Poza Profil Surya Music (1080×1080)
+                            <a href="/media/surya_music_profil_1080.png" download className="text-neutral-400 hover:underline font-bold">
+                              ↓ Descarcă Poza Profil Surya Music (1080×1080)
                             </a>
-                            <a href="/media/surya_music_coperta_yt_2560x1440.jpg" download className="text-emerald-400 hover:underline font-bold">
-                              ⬇ Descarcă Coperta Surya Music (2560×1440)
+                            <a href="/media/surya_music_coperta_yt_2560x1440.jpg" download className="text-neutral-400 hover:underline font-bold">
+                              ↓ Descarcă Coperta Surya Music (2560×1440)
                             </a>
                           </div>
                         </div>
@@ -2288,17 +2290,17 @@ export default function StudioPage() {
                         href="https://studio.youtube.com/channel/UCVCflZBFfAsONCrZBP_WyVw/editing/profile"
                         target="_blank"
                         rel="noreferrer"
-                        className="w-full text-center rounded-full bg-amber-400 py-3 text-xs uppercase tracking-widest text-black font-bold hover:bg-amber-300 transition-all block"
+                        className="w-full text-center rounded-full bg-white py-3 text-xs uppercase tracking-widest text-black font-bold hover:bg-neutral-200 transition-all block"
                       >
                         ↗ Deschide YouTube Studio — Surya Music · Alin Dragoș (@suryamusic.alindragos)
                       </a>
                     </div>
 
                     {/* KIT 2: KALKI NEXUS / BY THE FIRE + RAFT PLIN TIKTOK */}
-                    <div className="rounded-3xl border border-sky-400/40 bg-black/60 p-6 flex flex-col justify-between">
+                    <div className="rounded-3xl border border-white/20 bg-black/60 p-6 flex flex-col justify-between">
                       <div>
                         <div className="flex items-center justify-between gap-2 mb-3">
-                          <span className="px-3 py-1 rounded-full bg-sky-400/20 border border-sky-400/40 text-sky-300 font-bold text-[10px]">
+                          <span className="px-3 py-1 rounded-full bg-white/5 border border-white/20 text-neutral-300 font-bold text-[10px]">
                             PRIORITATE #2 • CANAL YOUTUBE KALKI NEXUS + TIKTOK RAFT PLIN
                           </span>
                         </div>
@@ -2312,7 +2314,7 @@ export default function StudioPage() {
                         <div className="space-y-2.5 bg-white/[0.03] border border-white/10 rounded-2xl p-4 mb-4">
                           <div>
                             <span className="text-neutral-500 text-[10px] block">CANAL YOUTUBE #2 (Sub alindrimbu@gmail.com):</span>
-                            <strong className="text-sky-300 text-sm select-all">Kalki Nexus</strong> • Handle: <strong className="text-white select-all">@kalkinexus</strong>
+                            <strong className="text-neutral-300 text-sm select-all">Kalki Nexus</strong> • Handle: <strong className="text-white select-all">@kalkinexus</strong>
                           </div>
                           <div>
                             <span className="text-neutral-500 text-[10px] block">DESCRIERE YOUTUBE KALKI NEXUS:</span>
@@ -2320,7 +2322,7 @@ export default function StudioPage() {
                           </div>
                           <div className="border-t border-white/10 pt-2">
                             <span className="text-neutral-500 text-[10px] block">CONT TIKTOK RAFT PLIN (Singurul care lipsea la Raft Plin):</span>
-                            <strong className="text-emerald-300 select-all">@raftplin.ro</strong> <span className="text-neutral-500">(sau @raftplin_ro)</span>
+                            <strong className="text-neutral-300 select-all">@raftplin.ro</strong> <span className="text-neutral-500">(sau @raftplin_ro)</span>
                           </div>
                           <div>
                             <span className="text-neutral-500 text-[10px] block">BIO TIKTOK RAFT PLIN (73/80 caractere • Fără numele firmei):</span>
@@ -2334,7 +2336,7 @@ export default function StudioPage() {
                           href="https://www.youtube.com/account"
                           target="_blank"
                           rel="noreferrer"
-                          className="text-center rounded-full bg-sky-400 py-3 text-[11px] uppercase tracking-wider text-black font-bold hover:bg-sky-300 transition-all block"
+                          className="text-center rounded-full bg-white py-3 text-[11px] uppercase tracking-wider text-black font-bold hover:bg-neutral-200 transition-all block"
                         >
                           ↗ YouTube @kalkinexus
                         </a>
@@ -2342,7 +2344,7 @@ export default function StudioPage() {
                           href="https://www.tiktok.com/signup"
                           target="_blank"
                           rel="noreferrer"
-                          className="text-center rounded-full bg-emerald-400 py-3 text-[11px] uppercase tracking-wider text-black font-bold hover:bg-emerald-300 transition-all block"
+                          className="text-center rounded-full bg-white py-3 text-[11px] uppercase tracking-wider text-black font-bold hover:bg-neutral-200 transition-all block"
                         >
                           ↗ TikTok @raftplin.ro
                         </a>
@@ -2353,15 +2355,15 @@ export default function StudioPage() {
 
                 {/* SECȚIUNEA B: TABELUL COMPLET AL CONTURILOR DEJA EXISTENTE */}
                 <div className="space-y-4 font-mono text-xs">
-                  <div className="text-xs uppercase tracking-widest text-emerald-400 font-bold">
+                  <div className="text-xs uppercase tracking-widest text-neutral-400 font-bold">
                     ✓ Conturile Noastre Deja Create și Active (Inventar Verificat):
                   </div>
 
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div className="p-5 rounded-2xl border border-emerald-500/30 bg-black/50">
+                    <div className="p-5 rounded-2xl border border-white/10 bg-black/50">
                       <div className="flex justify-between items-center mb-2">
                         <span className="text-white font-bold text-sm">1. Bricolando.ro</span>
-                        <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">6/6 ACTIVE</span>
+                        <span className="text-[10px] px-2 py-0.5 rounded bg-white/5 text-neutral-300">6/6 ACTIVE</span>
                       </div>
                       <ul className="space-y-1 text-[11px] text-neutral-300">
                         <li>• YouTube: <strong>@bricolando</strong> (UCLqovxjEWDrM64S6vtXHhvQ)</li>
@@ -2371,23 +2373,23 @@ export default function StudioPage() {
                       </ul>
                     </div>
 
-                    <div className="p-5 rounded-2xl border border-emerald-500/30 bg-black/50">
+                    <div className="p-5 rounded-2xl border border-white/10 bg-black/50">
                       <div className="flex justify-between items-center mb-2">
                         <span className="text-white font-bold text-sm">2. RaftPlin.ro</span>
-                        <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">4/5 ACTIVE</span>
+                        <span className="text-[10px] px-2 py-0.5 rounded bg-white/5 text-neutral-300">4/5 ACTIVE</span>
                       </div>
                       <ul className="space-y-1 text-[11px] text-neutral-300">
                         <li>• YouTube: <strong>@raftplin</strong> (UC9ZYb9WoYDLEy_P90HNM0mA)</li>
                         <li>• Facebook & IG: <strong>Raft Plin / @raftplin.ro</strong></li>
                         <li>• Pinterest: <strong>raftplin</strong> (Business)</li>
-                        <li className="text-amber-300">• TikTok: kit pregătit mai sus (@raftplin.ro)</li>
+                        <li className="text-neutral-300">• TikTok: kit pregătit mai sus (@raftplin.ro)</li>
                       </ul>
                     </div>
 
-                    <div className="p-5 rounded-2xl border border-emerald-500/30 bg-black/50">
+                    <div className="p-5 rounded-2xl border border-white/10 bg-black/50">
                       <div className="flex justify-between items-center mb-2">
                         <span className="text-white font-bold text-sm">3. Numerarium & Muzică Modernă</span>
-                        <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">ACTIVE</span>
+                        <span className="text-[10px] px-2 py-0.5 rounded bg-white/5 text-neutral-300">ACTIVE</span>
                       </div>
                       <ul className="space-y-1 text-[11px] text-neutral-300">
                         <li>• YouTube Numerarium: <strong>@numerariumapp</strong></li>

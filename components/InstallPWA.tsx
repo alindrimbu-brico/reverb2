@@ -64,13 +64,24 @@ export default function InstallPWA({
       return;
     }
 
-    // Dacă Chrome a trimis deja beforeinstallprompt înainte de hidratarea React, îl preluăm imediat
+    // Dacă Chrome a trimis deja beforeinstallprompt înainte de hidratarea React, îl preluăm imediat.
+    // „Instalat” nu se mai crede din localStorage (semnul rămânea după dezinstalare și ascundea butonul);
+    // îl spune doar browserul, prin getInstalledRelatedApps (manifestul se declară pe sine în related_applications).
     if (window.__reverbDeferredPrompt) {
       setDeferredPrompt(window.__reverbDeferredPrompt);
       localStorage.removeItem(storageKey);
       setIsInstalled(false);
-    } else if (localStorage.getItem(storageKey) === "1") {
-      setIsInstalled(true);
+    } else {
+      localStorage.removeItem(storageKey);
+      const nav = navigator as any;
+      if (typeof nav.getInstalledRelatedApps === "function") {
+        nav
+          .getInstalledRelatedApps()
+          .then((apps: unknown[]) => {
+            if (Array.isArray(apps) && apps.length > 0 && !window.__reverbDeferredPrompt) setIsInstalled(true);
+          })
+          .catch(() => {});
+      }
     }
 
     // Detectează iOS / iPadOS (nu tabletele Android care au UA Linux)
@@ -195,10 +206,14 @@ export default function InstallPWA({
     if (compact) {
       return null;
     }
+    const numeApp = mode === "site" ? "Reverb.ro" : "Reverb Studio";
     return (
-      <span className="inline-flex items-center gap-1.5 text-[10px] font-mono text-emerald-400 bg-emerald-950/40 border border-emerald-500/20 px-3 py-1 rounded-full">
-        <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-        ✓ {mode === "site" ? "Aplicația Reverb.ro Instalată" : "Panou Studio Instalat"}
+      <span
+        className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-wider text-neutral-300 border border-white/15 px-3 py-1 rounded-full"
+        title={`Aplicația e instalată pe acest dispozitiv. O găsești în lista tuturor aplicațiilor (glisează în sus pe ecranul principal) cu numele „${numeApp}”, sau din Chrome: ⋮ → „Deschide în aplicație”.`}
+      >
+        <span className="h-1.5 w-1.5 rounded-full bg-neutral-300" />
+        Instalată · caut-o în aplicații ca „{numeApp}”
       </span>
     );
   }
@@ -206,16 +221,16 @@ export default function InstallPWA({
   const label =
     mode === "site"
       ? compact
-        ? "📲 Aplicație"
-        : "📲 Instalează Aplicația Reverb.ro"
-      : "📲 Instalează Panoul Studio";
+        ? "Aplicație"
+        : "Instalează Aplicația Reverb.ro"
+      : "Instalează Panoul Studio";
 
   const btnStyle =
     mode === "site"
       ? compact
-        ? "inline-flex items-center gap-1.5 rounded-full bg-cyan-400 text-slate-950 px-3 py-1.5 text-[10px] font-mono font-extrabold uppercase tracking-wider hover:bg-cyan-300 transition-all shadow-[0_0_16px_rgba(0,229,255,0.35)] hover:scale-105 active:scale-95 shrink-0"
-        : "inline-flex items-center justify-center gap-2 rounded-full bg-cyan-400 text-slate-950 px-4 py-2.5 text-xs font-mono font-extrabold uppercase tracking-wider hover:bg-cyan-300 transition-all shadow-[0_0_20px_rgba(0,229,255,0.35)]"
-      : "inline-flex items-center gap-2 rounded-full bg-rose-500 text-white px-4 py-1.5 text-[11px] font-mono font-bold uppercase tracking-wider hover:bg-rose-400 transition-all shadow-[0_0_20px_rgba(244,63,94,0.4)] hover:scale-105 active:scale-95";
+        ? "inline-flex items-center gap-1.5 rounded-full bg-white text-black px-3 py-1.5 text-[10px] font-mono font-bold uppercase tracking-wider hover:bg-neutral-200 transition-all shrink-0"
+        : "inline-flex items-center justify-center gap-2 rounded-full bg-white text-black px-4 py-2.5 text-xs font-mono font-bold uppercase tracking-wider hover:bg-neutral-200 transition-all"
+      : "inline-flex items-center gap-2 rounded-full border border-white/15 text-neutral-300 px-3.5 py-2 text-xs font-mono uppercase tracking-wider hover:bg-white/10 hover:text-white transition-all";
 
   const readyNow = Boolean(
     (typeof window !== "undefined" && window.__reverbDeferredPrompt) || deferredPrompt
@@ -250,7 +265,7 @@ export default function InstallPWA({
               alt="App Icon"
               className="w-16 h-16 mx-auto mb-3 rounded-2xl shadow-lg border border-white/15"
             />
-            <h3 className="text-sm font-bold uppercase tracking-wider mb-2 text-emerald-400">
+            <h3 className="text-sm font-bold uppercase tracking-wider mb-2 text-neutral-400">
               {mode === "site"
                 ? "Instalează Aplicația Reverb.ro"
                 : "Instalează Panoul Reverb Studio"}
@@ -269,14 +284,14 @@ export default function InstallPWA({
               </>
             ) : readyNow ? (
               <>
-                <p className="text-emerald-300 mb-4 leading-relaxed font-sans text-xs font-semibold">
-                  ✓ Instalarea automată este pregătită! Apasă butonul verde de mai jos și confirmă cu „Instalează”:
+                <p className="text-neutral-300 mb-4 leading-relaxed font-sans text-xs font-semibold">
+                  ✓ Instalarea automată este pregătită! Apasă butonul de mai jos și confirmă cu „Instalează”:
                 </p>
                 <button
                   onClick={() => triggerNativeInstall(window.__reverbDeferredPrompt || deferredPrompt)}
-                  className="w-full rounded-full bg-emerald-400 text-slate-950 py-3.5 px-5 font-extrabold uppercase tracking-wider text-xs shadow-[0_0_25px_rgba(52,211,153,0.5)] hover:bg-emerald-300 transition-all mb-3"
+                  className="w-full rounded-full bg-white text-black py-3.5 px-5 font-bold uppercase tracking-wider text-xs hover:bg-neutral-200 transition-all mb-3"
                 >
-                  📲 INSTALEAZĂ ACUM
+                  INSTALEAZĂ ACUM
                 </button>
               </>
             ) : !prepTimedOut ? (
@@ -286,7 +301,7 @@ export default function InstallPWA({
                 </p>
                 <div className="w-full h-2.5 bg-white/10 rounded-full overflow-hidden mb-4">
                   <div
-                    className="h-full bg-emerald-400 transition-all duration-300 rounded-full"
+                    className="h-full bg-white transition-all duration-300 rounded-full"
                     style={{ width: `${prepProgress}%` }}
                   />
                 </div>
@@ -294,12 +309,12 @@ export default function InstallPWA({
                   disabled
                   className="w-full rounded-full bg-white/15 text-neutral-300 py-3 px-4 font-bold uppercase tracking-wider text-xs opacity-80 mb-3"
                 >
-                  ⏳ Se pregătește instalarea ({prepProgress}%)…
+                  Se pregătește instalarea ({prepProgress}%)…
                 </button>
               </>
             ) : (
-              <p className="text-amber-300 mb-3 leading-relaxed font-sans text-xs">
-                Dacă aveai deja o versiune veche a aplicației pe tabletă/telefon, șterge mai întâi iconița veche de pe ecranul tabletei și reîncarcă pagina (sau apasă pe ⋮ sus în dreapta → „Instalează aplicația”).
+              <p className="text-neutral-300 mb-3 leading-relaxed font-sans text-xs">
+                Chrome nu a oferit instalarea. De obicei înseamnă că aplicația e deja pe dispozitiv: caut-o în lista tuturor aplicațiilor (glisează în sus pe ecranul principal) cu numele „{mode === "site" ? "Reverb.ro" : "Reverb Studio"}”, sau apasă ⋮ sus în dreapta → „Deschide în aplicație”. Dacă vrei s-o reinstalezi: Setări → Aplicații → „{mode === "site" ? "Reverb.ro" : "Reverb Studio"}” → Dezinstalează, apoi reîncarcă pagina.
               </p>
             )}
 

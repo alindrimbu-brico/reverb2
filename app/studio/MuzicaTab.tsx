@@ -27,12 +27,12 @@ type Stare = {
 };
 
 const ETICHETE_STARE: Record<string, [string, string]> = {
-  ciorna: ["Ciornă: lipsește piesa", "bg-neutral-700 text-neutral-200"],
-  generata: ["Piesă gata: alege și aprobă", "bg-sky-500/20 text-sky-200"],
-  previzualizare: ["Previzualizare clip", "bg-amber-400/20 text-amber-200"],
-  de_urcat: ["Kit gata de urcat", "bg-emerald-500/20 text-emerald-200"],
-  urcata: ["Urcată pe YouTube", "bg-emerald-600 text-white"],
-  respinsa: ["Respinsă", "bg-rose-500/20 text-rose-200"],
+  ciorna: ["Ciornă: lipsește piesa", "border border-white/10 text-neutral-400"],
+  generata: ["Piesă gata: alege și aprobă", "border border-white/20 text-neutral-200"],
+  previzualizare: ["Previzualizare clip", "border border-white/20 text-neutral-200"],
+  de_urcat: ["Kit gata de urcat", "border border-white/30 text-white"],
+  urcata: ["Urcată pe YouTube", "border border-emerald-400/40 text-emerald-400"],
+  respinsa: ["Respinsă", "border border-white/10 text-neutral-500 line-through"],
 };
 const CHEIE_LOCALA = "reverb-muzica-ciorne-v1";
 
@@ -192,18 +192,18 @@ export default function MuzicaTab({ onNeautentificat }: { onNeautentificat: () =
 
   return (
     <div className="space-y-6">
-      <div className="rounded-3xl border border-amber-400/25 bg-neutral-900/40 p-6 md:p-8 backdrop-blur-md">
+      <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-6 md:p-8 backdrop-blur-md">
         <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between border-b border-white/10 pb-5 mb-6">
           <div>
-            <span className="text-[10px] font-mono uppercase tracking-widest text-amber-400 font-bold">Surya Music · Alin Dragoș</span>
-            <h2 className="text-2xl font-medium text-white mt-1">🎵 Muzică: de la cerere la YouTube</h2>
+            <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 font-bold">Surya Music · Alin Dragoș</span>
+            <h2 className="text-2xl font-medium text-white mt-1">Muzică: de la cerere la YouTube</h2>
             <p className="text-xs text-neutral-400 mt-1 max-w-2xl">
               Scrii ce melodie vrei → primești promptul și versurile pentru Suno → lipești linkul piesei → laptopul o aduce aici, faci clipul,
               îl vezi, apeși „Publică” și primești kitul de urcare. Nimic nu se publică singur.
             </p>
           </div>
-          <div className={`shrink-0 rounded-2xl border px-4 py-3 text-xs ${laptopViu ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-200" : "border-rose-500/40 bg-rose-500/10 text-rose-200"}`}>
-            <div className="font-bold">{laptopViu ? "● Laptopul lucrează" : "● Laptopul e oprit"}</div>
+          <div className={`shrink-0 rounded-2xl border px-4 py-3 text-xs ${laptopViu ? "border-white/20 text-neutral-200" : "border-rose-400/30 text-rose-300"}`}>
+            <div className="font-bold flex items-center gap-2"><span className={`h-1.5 w-1.5 rounded-full ${laptopViu ? "bg-emerald-400" : "bg-rose-400"}`} />{laptopViu ? "Laptopul lucrează" : "Laptopul e oprit"}</div>
             <div className="mt-0.5 text-[11px] opacity-80">
               {laptopViu
                 ? stare?.viu?.lucrez_la ? `acum: ${stare.viu.pas}` : "așteaptă comenzi"
@@ -218,14 +218,14 @@ export default function MuzicaTab({ onNeautentificat }: { onNeautentificat: () =
             <button
               key={s}
               onClick={() => setSub(s)}
-              className={`rounded-full px-4 py-2 text-xs font-mono uppercase tracking-widest ${sub === s ? "bg-amber-400 text-black font-bold" : "bg-white/5 text-neutral-300 hover:bg-white/10"}`}
+              className={`rounded-full px-4 py-2 text-xs font-mono uppercase tracking-widest ${sub === s ? "bg-white text-black font-bold" : "bg-white/5 text-neutral-300 hover:bg-white/10"}`}
             >
               {s === "compune" ? "1. Compune" : `2. Bibliotecă (${piese.filter((p) => p.stare !== "respinsa").length})`}
             </button>
           ))}
         </div>
 
-        {eroareStare && <div className="mb-4 rounded-xl border border-rose-500/30 bg-rose-500/10 p-3 text-xs text-rose-200">{eroareStare}</div>}
+        {eroareStare && <div className="mb-4 rounded-xl border border-rose-400/30 p-3 text-xs text-rose-300">{eroareStare}</div>}
 
         {sub === "compune" && (
           <div className="space-y-6">
@@ -238,7 +238,7 @@ export default function MuzicaTab({ onNeautentificat }: { onNeautentificat: () =
                 rows={4}
                 maxLength={1500}
                 placeholder="Ex.: colind vesel de iarnă, Moș Crăciun, copii care se joacă pe uliță, obligatoriu zurgălăi, folk-pop cu acordeon"
-                className="w-full rounded-2xl border border-white/10 bg-black/40 p-4 text-sm text-white placeholder:text-neutral-500 focus:border-amber-400/60 focus:outline-none"
+                className="w-full rounded-2xl border border-white/10 bg-black/40 p-4 text-sm text-white placeholder:text-neutral-500 focus:border-white/30 focus:outline-none"
               />
               <div className="flex flex-wrap items-center gap-4">
                 {(["ro", "en"] as const).map((x) => (
@@ -250,13 +250,13 @@ export default function MuzicaTab({ onNeautentificat }: { onNeautentificat: () =
                 <button
                   onClick={scrie}
                   disabled={compune.lucreaza || cerere.trim().length < 8 || (!limbi.ro && !limbi.en)}
-                  className="rounded-full bg-amber-400 px-5 py-2.5 text-xs font-mono uppercase tracking-widest text-black font-bold hover:bg-amber-300 disabled:opacity-40"
+                  className="rounded-full bg-white px-5 py-2.5 text-xs font-mono uppercase tracking-widest text-black font-bold hover:bg-neutral-200 disabled:opacity-40"
                 >
                   {compune.lucreaza ? "Scriu… (~20 s)" : "Scrie promptul și versurile"}
                 </button>
               </div>
               {compune.eroare && (
-                <div className="rounded-xl border border-rose-500/30 bg-rose-500/10 p-3 text-xs text-rose-200">
+                <div className="rounded-xl border border-rose-400/30 p-3 text-xs text-rose-300">
                   {compune.eroare}
                   {compune.motive.length > 0 && <ul className="mt-2 list-disc pl-5">{compune.motive.map((m) => <li key={m}>{m}</li>)}</ul>}
                 </div>
@@ -267,7 +267,7 @@ export default function MuzicaTab({ onNeautentificat }: { onNeautentificat: () =
               <div key={p.id} className="rounded-2xl border border-white/10 bg-black/30 p-5 space-y-4">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <div>
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-amber-300">{p.limba === "ro" ? "Română" : "English"} · {p.id}</span>
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-300">{p.limba === "ro" ? "Română" : "English"} · {p.id}</span>
                     <h3 className="text-lg text-white font-medium">{p.titlu}</h3>
                   </div>
                   <button onClick={() => stergeCiornaLocala(p.id)} className="text-[11px] text-neutral-500 hover:text-neutral-300">ascunde</button>
@@ -296,7 +296,7 @@ export default function MuzicaTab({ onNeautentificat }: { onNeautentificat: () =
                     placeholder="Lipește linkul piesei din Suno (1 sau 2, separate prin spațiu)"
                     className="flex-1 rounded-full border border-white/10 bg-black/40 px-4 py-2 text-xs text-white placeholder:text-neutral-500"
                   />
-                  <button onClick={() => importa(p.id)} className="rounded-full bg-sky-400 px-4 py-2 text-xs font-mono uppercase tracking-widest text-black font-bold hover:bg-sky-300">
+                  <button onClick={() => importa(p.id)} className="rounded-full bg-white px-4 py-2 text-xs font-mono uppercase tracking-widest text-black font-bold hover:bg-neutral-200">
                     Importă în bibliotecă
                   </button>
                 </div>
@@ -321,14 +321,14 @@ export default function MuzicaTab({ onNeautentificat }: { onNeautentificat: () =
                     </div>
                     <span className={`rounded-full px-3 py-1 text-[11px] font-bold ${culoare}`}>{eticheta}</span>
                   </div>
-                  {p.lucru && <div className="rounded-xl bg-amber-400/10 p-3 text-xs text-amber-200">⏳ În lucru: {p.lucru.actiune}{stare?.viu?.lucrez_la === p.id ? ` · ${stare.viu.pas}` : ""}</div>}
-                  {p.eroare && <div className="rounded-xl bg-rose-500/10 p-3 text-xs text-rose-200">⚠ {p.eroare}</div>}
+                  {p.lucru && <div className="rounded-xl bg-white/[0.03] p-3 text-xs text-neutral-200">În lucru: {p.lucru.actiune}{stare?.viu?.lucrez_la === p.id ? ` · ${stare.viu.pas}` : ""}</div>}
+                  {p.eroare && <div className="rounded-xl border border-rose-400/30 p-3 text-xs text-rose-300">Eroare: {p.eroare}</div>}
                   {trimise[p.id] && <div className="text-[11px] text-neutral-400">{trimise[p.id]}</div>}
 
                   {p.variante.length > 0 && p.stare !== "urcata" && (
                     <div className="grid gap-3 md:grid-cols-2">
                       {p.variante.map((v) => (
-                        <label key={v.nr} className={`rounded-xl border p-3 text-xs ${(o.varianta ?? p.varianta_aleasa) === v.nr ? "border-amber-400/60 bg-amber-400/5" : "border-white/10"}`}>
+                        <label key={v.nr} className={`rounded-xl border p-3 text-xs ${(o.varianta ?? p.varianta_aleasa) === v.nr ? "border-white/40 light:border-black/50 bg-white/5" : "border-white/10"}`}>
                           <div className="flex items-center justify-between text-neutral-300">
                             <span>
                               <input type="radio" name={`v-${p.id}`} className="mr-2" checked={(o.varianta ?? p.varianta_aleasa) === v.nr}
@@ -348,7 +348,7 @@ export default function MuzicaTab({ onNeautentificat }: { onNeautentificat: () =
                       <input value={linkuri[p.id] || ""} onChange={(e) => setLinkuri((l) => ({ ...l, [p.id]: e.target.value }))}
                         placeholder={p.stare === "ciorna" ? "Linkul piesei din Suno" : "Alt link Suno (înlocuiește variantele)"}
                         className="flex-1 rounded-full border border-white/10 bg-black/40 px-4 py-2 text-xs text-white placeholder:text-neutral-500" />
-                      <button onClick={() => importa(p.id)} className="rounded-full bg-sky-400 px-4 py-2 text-xs font-mono uppercase tracking-widest text-black font-bold">Importă</button>
+                      <button onClick={() => importa(p.id)} className="rounded-full bg-white px-4 py-2 text-xs font-mono uppercase tracking-widest text-black font-bold">Importă</button>
                       <button onClick={() => trimite("importa", p.id, { local: true })} className="rounded-full border border-white/15 px-4 py-2 text-[11px] text-neutral-300">Importă fișierul pus în dosar</button>
                     </div>
                   )}
@@ -357,7 +357,7 @@ export default function MuzicaTab({ onNeautentificat }: { onNeautentificat: () =
                     <div className="rounded-xl border border-white/10 p-4 space-y-3">
                       <div className="text-xs text-neutral-300">
                         <b>Imagini: {p.imagini}</b> (minimum 4). Le poți face cu Nano Banana (aplicația Gemini / Flow, inclus în Ultra), MagicLight sau Higgsfield
-                        și le pui în <code className="text-amber-200">Music\Reverb Studio\piese\{p.id}\imagini\</code> ca <code>s01_…jpg</code>, <code>s02_…</code>;
+                        și le pui în <code className="text-neutral-200">Music\Reverb Studio\piese\{p.id}\imagini\</code> ca <code>s01_…jpg</code>, <code>s02_…</code>;
                         sau spune-i lui Claude „fă imaginile pentru {p.id}”.
                       </div>
                       {p.scene.length > 0 && (
@@ -374,7 +374,7 @@ export default function MuzicaTab({ onNeautentificat }: { onNeautentificat: () =
                         </details>
                       )}
                       {p.scene.length > 0 && (
-                        <button onClick={() => trimite("imagini", p.id, { sursa: "gemini_api" })} className="rounded-full border border-amber-400/40 px-4 py-2 text-[11px] text-amber-200">
+                        <button onClick={() => trimite("imagini", p.id, { sursa: "gemini_api" })} className="rounded-full border border-white/20 px-4 py-2 text-[11px] text-neutral-200">
                           Imagini automate (Gemini API, plătit separat de Ultra)
                         </button>
                       )}
@@ -387,7 +387,7 @@ export default function MuzicaTab({ onNeautentificat }: { onNeautentificat: () =
                       <label className="flex items-center gap-2"><input type="checkbox" checked={o.short} onChange={(e) => setOptiuni((x) => ({ ...x, [p.id]: { ...o, short: e.target.checked } }))} /> și un Short 9:16</label>
                       <button disabled={p.imagini < 4 || !!p.lucru}
                         onClick={() => trimite("aproba_sunet", p.id, { varianta: o.varianta ?? p.varianta_aleasa ?? 1, versuri_pe_ecran: o.versuri, short: o.short })}
-                        className="rounded-full bg-amber-400 px-5 py-2.5 text-xs font-mono uppercase tracking-widest text-black font-bold disabled:opacity-40">
+                        className="rounded-full bg-white px-5 py-2.5 text-xs font-mono uppercase tracking-widest text-black font-bold disabled:opacity-40">
                         {p.stare === "previzualizare" ? "Refă previzualizarea" : "Aprobă sunetul → fă clipul"}
                       </button>
                     </div>
@@ -396,17 +396,17 @@ export default function MuzicaTab({ onNeautentificat }: { onNeautentificat: () =
                   {p.stare === "previzualizare" && (
                     <div className="space-y-3">
                       {p.clip.previzualizare ? <video controls preload="none" src={mediaUrl(p.clip.previzualizare)} className="w-full rounded-xl" /> : <div className="text-xs text-neutral-500">previzualizarea se urcă…</div>}
-                      {p.clip.sincronizare === "aproximativa" && <div className="text-[11px] text-amber-200">Versurile sunt sincronizate aproximativ (pe strofe).</div>}
+                      {p.clip.sincronizare === "aproximativa" && <div className="text-[11px] text-neutral-200">Versurile sunt sincronizate aproximativ (pe strofe).</div>}
                       <div className="flex flex-wrap gap-2">
-                        <button onClick={() => trimite("publica", p.id)} disabled={!!p.lucru} className="rounded-full bg-emerald-400 px-5 py-2.5 text-xs font-mono uppercase tracking-widest text-black font-bold disabled:opacity-40">Publică (clip final + kit)</button>
+                        <button onClick={() => trimite("publica", p.id)} disabled={!!p.lucru} className="rounded-full bg-white px-5 py-2.5 text-xs font-mono uppercase tracking-widest text-black font-bold disabled:opacity-40">Publică (clip final + kit)</button>
                         <button onClick={() => trimite("anuleaza", p.id)} className="rounded-full border border-white/15 px-4 py-2 text-[11px] text-neutral-300">Înapoi (refac clipul)</button>
                       </div>
                     </div>
                   )}
 
                   {p.stare === "de_urcat" && (
-                    <div className="space-y-3 rounded-xl border border-emerald-500/30 bg-emerald-500/5 p-4 text-xs text-neutral-200">
-                      <div className="font-bold text-emerald-200">Kitul de urcare pe Surya Music — playlist „{p.kit.playlist}”, conținut sintetic: Da</div>
+                    <div className="space-y-3 rounded-xl border border-white/10 bg-white/[0.03] p-4 text-xs text-neutral-200">
+                      <div className="font-bold text-neutral-200">Kitul de urcare pe Surya Music — playlist „{p.kit.playlist}”, conținut sintetic: Da</div>
                       <div className="flex flex-wrap gap-2">
                         <Copiaza text={p.kit.titlu} eticheta="titlul" />
                         <Copiaza text={p.kit.descriere} eticheta="descrierea" />
@@ -416,14 +416,14 @@ export default function MuzicaTab({ onNeautentificat }: { onNeautentificat: () =
                       <div className="flex flex-col gap-2 md:flex-row">
                         <input value={ytLink[p.id] || ""} onChange={(e) => setYtLink((y) => ({ ...y, [p.id]: e.target.value }))} placeholder="Linkul YouTube după urcare"
                           className="flex-1 rounded-full border border-white/10 bg-black/40 px-4 py-2 text-xs text-white placeholder:text-neutral-500" />
-                        <button onClick={() => trimite("marcheaza_urcat", p.id, { youtube_url: (ytLink[p.id] || "").trim() })} className="rounded-full bg-emerald-400 px-4 py-2 text-xs font-mono uppercase tracking-widest text-black font-bold">Am urcat</button>
+                        <button onClick={() => trimite("marcheaza_urcat", p.id, { youtube_url: (ytLink[p.id] || "").trim() })} className="rounded-full bg-white px-4 py-2 text-xs font-mono uppercase tracking-widest text-black font-bold">Am urcat</button>
                         <button onClick={() => trimite("anuleaza", p.id)} className="rounded-full border border-white/15 px-4 py-2 text-[11px] text-neutral-300">Înapoi</button>
                       </div>
                     </div>
                   )}
 
                   {p.stare === "urcata" && p.youtube_url && (
-                    <a href={p.youtube_url} target="_blank" rel="noopener noreferrer" className="inline-block text-xs text-emerald-300 underline">Vezi pe YouTube ↗</a>
+                    <a href={p.youtube_url} target="_blank" rel="noopener noreferrer" className="inline-block text-xs text-neutral-300 underline">Vezi pe YouTube ↗</a>
                   )}
 
                   {!["urcata", "respinsa"].includes(p.stare) && (
