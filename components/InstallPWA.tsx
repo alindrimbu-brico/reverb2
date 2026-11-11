@@ -314,7 +314,7 @@ export default function InstallPWA({
               </>
             ) : (
               <p className="text-neutral-300 mb-3 leading-relaxed font-sans text-xs">
-                Chrome nu a oferit instalarea. De obicei înseamnă că aplicația e deja pe dispozitiv: caut-o în lista tuturor aplicațiilor (glisează în sus pe ecranul principal) cu numele „{mode === "site" ? "Reverb.ro" : "Reverb Studio"}”, sau apasă ⋮ sus în dreapta → „Deschide în aplicație”. Dacă vrei s-o reinstalezi: Setări → Aplicații → „{mode === "site" ? "Reverb.ro" : "Reverb Studio"}” → Dezinstalează, apoi reîncarcă pagina.
+                Chrome nu a oferit singur instalarea (după un „Anulează” mai vechi o blochează o vreme). Instalează din meniu: apasă ⋮ sus în dreapta → „Instalează aplicația” sau „Adaugă pe ecranul de pornire” → „Instalează”. Dacă în meniu vezi „Deschide în aplicație”, e deja instalată: apasă acolo.
               </p>
             )}
 
