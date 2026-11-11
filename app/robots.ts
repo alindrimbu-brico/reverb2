@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/api/', '/portal/', '/checkout/'],
+      disallow: ['/api/', '/api/studio', '/portal/', '/checkout/', '/studio', '/studio/', '/instaleaza'],
     },
     sitemap: 'https://reverb.ro/sitemap.xml',
     host: 'https://reverb.ro',

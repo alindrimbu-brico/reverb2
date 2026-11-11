@@ -4,6 +4,16 @@ export const metadata: Metadata = {
   title: "Reverb Studio AI — Panou Producție Muzică, Video & Virale",
   description: "Panoul de comandă Reverb Studio AI pentru producție muzicală, videoclipuri și conținut viral automatizat.",
   manifest: "/studio-manifest.json",
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    googleBot: {
+      index: false,
+      follow: false,
+      noimageindex: true,
+    },
+  },
   icons: {
     icon: [
       { url: "/icon-studio-192.png?v=3", sizes: "192x192", type: "image/png" },

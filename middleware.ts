@@ -1,12 +1,19 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { GITHUB_SHOWCASE_PATHS } from './lib/githubShowcases';
+import {
+  STUDIO_COOKIE_NAME,
+  STUDIO_SECURITY_HEADERS,
+  verifyStudioSessionToken,
+} from './lib/studioAuth';
 
 export const config = {
   matcher: [
+    '/api/studio/:path*',
+    '/api/studio',
     /*
      * Match all request paths except for the ones starting with:
-     * - api (API routes)
+     * - api (other API routes)
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
@@ -15,8 +22,30 @@ export const config = {
   ],
 };
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
+
+  // Bariera #1 Edge pentru /api/studio (cu excepția endpointului de autentificare /api/studio/auth)
+  if (url.pathname === '/api/studio' || url.pathname.startsWith('/api/studio/')) {
+    if (url.pathname === '/api/studio/auth' || url.pathname.startsWith('/api/studio/auth/')) {
+      const authRes = NextResponse.next();
+      Object.entries(STUDIO_SECURITY_HEADERS).forEach(([k, v]) => authRes.headers.set(k, v));
+      return authRes;
+    }
+
+    const sessionCookie = request.cookies.get(STUDIO_COOKIE_NAME)?.value;
+    const valid = await verifyStudioSessionToken(sessionCookie);
+    if (!valid) {
+      return NextResponse.json(
+        { success: false, error: 'Neautentificat. Te rugăm să te autentifici în Reverb Studio.' },
+        { status: 401, headers: STUDIO_SECURITY_HEADERS }
+      );
+    }
+
+    const studioApiRes = NextResponse.next();
+    Object.entries(STUDIO_SECURITY_HEADERS).forEach(([k, v]) => studioApiRes.headers.set(k, v));
+    return studioApiRes;
+  }
   
   // Get host from headers
   const hostname = request.headers.get('host') || '';
@@ -69,6 +98,16 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL(rawPath.replace(/\/+$/, '') + url.search, request.url), 308);
   }
 
-  // Normal request to reverb.ro proceeds unchanged
-  return NextResponse.next();
+  // Normal request to reverb.ro proceeds unchanged (cu X-Robots-Tag noindex pe /studio și /instaleaza)
+  const response = NextResponse.next();
+  if (
+    url.pathname === '/studio' ||
+    url.pathname.startsWith('/studio/') ||
+    url.pathname === '/instaleaza' ||
+    url.pathname.startsWith('/instaleaza/')
+  ) {
+    response.headers.set('X-Robots-Tag', 'noindex, nofollow, noarchive');
+    response.headers.set('Cache-Control', 'no-store, private, must-revalidate');
+  }
+  return response;
 }

@@ -1,306 +1,519 @@
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
+import {
+  STUDIO_COOKIE_NAME,
+  STUDIO_SECURITY_HEADERS,
+  verifyStudioSessionToken,
+  extractCookieValue,
+} from "@/lib/studioAuth";
+import { getReverbSocialGates } from "@/lib/socialGates";
+
+function jsonNoStore(payload: unknown, status = 200) {
+  return NextResponse.json(payload, {
+    status,
+    headers: STUDIO_SECURITY_HEADERS,
+  });
+}
+
+async function ensureStudioAuthenticated(req: Request): Promise<NextResponse | null> {
+  const token = extractCookieValue(req.headers.get("cookie"), STUDIO_COOKIE_NAME);
+  const valid = await verifyStudioSessionToken(token);
+  if (!valid) {
+    return jsonNoStore(
+      {
+        success: false,
+        error: "Neautentificat. Sesiunea Reverb Studio lipsește sau a expirat.",
+      },
+      401
+    );
+  }
+  return null;
+}
+
+function getWpRelayCredentials(): {
+  baseUrl: string;
+  authHeader: string;
+  user: string;
+} | null {
+  const baseUrl = (process.env.BRICO_WP_URL || "https://bricolando.ro")
+    .trim()
+    .replace(/\/+$/, "");
+  const user = (process.env.BRICO_WP_APP_USER || "").trim();
+  const pass = (process.env.BRICO_WP_APP_PASS || "").trim();
+  if (!user || !pass) {
+    return null;
+  }
+  const encoded = Buffer.from(`${user}:${pass}`, "utf-8").toString("base64");
+  return {
+    baseUrl,
+    authHeader: `Basic ${encoded}`,
+    user,
+  };
+}
+
+async function loadMarketingRelayData() {
+  const localGates = getReverbSocialGates();
+  const creds = getWpRelayCredentials();
+
+  if (!creds) {
+    return {
+      success: true,
+      relay_configured: false,
+      setup_instructions: [
+        "1. Deschide Vercel Dashboard -> proiectul reverb-site -> Settings -> Environment Variables.",
+        "2. Setează REVERB_STUDIO_PASSPHRASE (parolă lungă de minim 16 caractere pentru autentificare în /studio).",
+        "3. Fila „Mașina de Marketing” nu e legată încă: legătura se va face prin releul semnat al Studio (ca la Muzică), nu cu parola de administrator a magazinului. NU pune BRICO_WP_APP_USER / BRICO_WP_APP_PASS în Vercel.",
+        "4. După pasul 2: Redeploy în Vercel.",
+      ],
+      reverb_social_gates: localGates.allChannels,
+      marketing: null,
+      relay_meta: null,
+    };
+  }
+
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 7000);
+    const res = await fetch(`${creds.baseUrl}/wp-json/bricolando/v1/panou-automatizari`, {
+      method: "GET",
+      headers: {
+        Authorization: creds.authHeader,
+        Accept: "application/json",
+      },
+      cache: "no-store",
+      signal: controller.signal,
+    });
+    clearTimeout(timer);
+
+    if (!res.ok) {
+      return {
+        success: false,
+        relay_configured: true,
+        error: `Releul Hostinger a răspuns cu HTTP ${res.status}.`,
+        reverb_social_gates: localGates.allChannels,
+        marketing: null,
+      };
+    }
+
+    const data = await res.json();
+    return {
+      success: true,
+      relay_configured: true,
+      reverb_social_gates: localGates.allChannels,
+      marketing: data?.marketing || null,
+      relay_meta: {
+        generat_la: data?.generat_la || null,
+        primit_server: data?.primit_server || null,
+        numar_automatizari: data?.numar || null,
+        claude_desktop: data?.claude_desktop || null,
+      },
+    };
+  } catch (err: any) {
+    return {
+      success: false,
+      relay_configured: true,
+      error: `Conexiunea cu releul Hostinger a eșuat: ${err?.message || "eroare rețea"}`,
+      reverb_social_gates: localGates.allChannels,
+      marketing: null,
+    };
+  }
+}
+
+async function sendStudioRelaySignal(signalBody: string) {
+  const creds = getWpRelayCredentials();
+  if (!creds) {
+    return {
+      ok: false,
+      status: 503,
+      error:
+        "Fila „Mașina de Marketing” nu e legată încă de magazin; butoanele ei nu trimit nimic.",
+    };
+  }
+
+  const cleanText = `[STUDIO] ${signalBody.trim()}`.slice(0, 480);
+
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 7000);
+    const res = await fetch(`${creds.baseUrl}/wp-json/bricolando/v1/panou-semnal`, {
+      method: "POST",
+      headers: {
+        Authorization: creds.authHeader,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        comanda: 0,
+        text: cleanText,
+      }),
+      cache: "no-store",
+      signal: controller.signal,
+    });
+    clearTimeout(timer);
+
+    if (!res.ok) {
+      return {
+        ok: false,
+        status: res.status,
+        error: `Releul panou-semnal a răspuns cu HTTP ${res.status}.`,
+      };
+    }
+
+    const data = await res.json();
+    return {
+      ok: true,
+      status: 200,
+      signal: data?.semnal || null,
+      sentText: cleanText,
+    };
+  } catch (err: any) {
+    return {
+      ok: false,
+      status: 502,
+      error: `Eroare la trimiterea semnalului spre releu: ${err?.message || "rețea"}`,
+    };
+  }
+}
+
+export async function GET(req: Request) {
+  const authDenied = await ensureStudioAuthenticated(req);
+  if (authDenied) return authDenied;
+
+  const engineState = await loadMarketingRelayData();
+  return jsonNoStore(engineState, 200);
+}
 
 export async function POST(req: Request) {
+  const authDenied = await ensureStudioAuthenticated(req);
+  if (authDenied) return authDenied;
+
   try {
     const body = await req.json();
-    const { 
-      action, 
-      topic, 
-      targetBrand = "Bricolando.ro", 
-      duration = 30, 
+    const {
+      action,
+      topic,
+      targetBrand = "Bricolando.ro",
+      duration = 30,
       model = "gemini-4-argon",
       researchQuery = "",
-      cinematicStyle = "obsidian_luxury"
     } = body;
+
+    // ── 0. MAȘINA DE MARKETING (LIVE RELAY: GET & ACȚIUNI DE COMANDĂ) ──
+    if (action === "load_marketing_engine") {
+      const engineState = await loadMarketingRelayData();
+      return jsonNoStore(engineState, 200);
+    }
+
+    if (action === "approve_newsletter" || action === "stop_newsletter") {
+      const magazin = String(body.magazin || "").trim().toLowerCase();
+      const newsletterId = String(body.newsletterId || "").trim();
+      if ((magazin !== "bricolando" && magazin !== "raftplin") || !/^\d+$/.test(newsletterId)) {
+        return jsonNoStore(
+          {
+            success: false,
+            error: "Parametri invalizi: magazinul trebuie să fie 'bricolando' sau 'raftplin', iar ID-ul numeric.",
+          },
+          400
+        );
+      }
+      const verb = action === "approve_newsletter" ? "aproba_nl" : "opreste_nl";
+      const result = await sendStudioRelaySignal(`${verb}:${magazin}:${newsletterId}`);
+      if (!result.ok) {
+        return jsonNoStore({ success: false, error: result.error }, result.status);
+      }
+      return jsonNoStore({
+        success: true,
+        message:
+          action === "approve_newsletter"
+            ? `Semnal de aprobare trimis pentru ciorna #${newsletterId} (${magazin}). Va fi preluat la următorul ciclu panou_semnale.`
+            : `Semnal de oprire trimis pentru campania #${newsletterId} (${magazin}).`,
+        signal: result.signal,
+      });
+    }
+
+    if (action === "trigger_campaign") {
+      const slug = String(body.campaignSlug || "")
+        .replace(/[^a-zA-Z0-9_-]/g, "")
+        .slice(0, 80);
+      const mag = String(body.magazin || "ambele")
+        .replace(/[^a-zA-Z0-9_-]/g, "")
+        .slice(0, 24);
+      if (!slug) {
+        return jsonNoStore({ success: false, error: "Slug campanie lipsă." }, 400);
+      }
+      const result = await sendStudioRelaySignal(
+        `nota_studio:Solicitare activare/prioritizare campanie ${slug} (${mag})`
+      );
+      if (!result.ok) {
+        return jsonNoStore({ success: false, error: result.error }, result.status);
+      }
+      return jsonNoStore({
+        success: true,
+        message: `Solicitarea pentru campania „${slug}” a fost înregistrată în releul Studio.`,
+        signal: result.signal,
+      });
+    }
+
+    if (action === "regenerate_clip") {
+      const clipId = String(body.clipId || "")
+        .replace(/[^a-zA-Z0-9_.-]/g, "")
+        .slice(0, 80);
+      const reason = String(body.reason || "Regenerare solicitată din Reverb Studio")
+        .replace(/[\r\n]+/g, " ")
+        .slice(0, 220);
+      if (!clipId) {
+        return jsonNoStore({ success: false, error: "Identificator clip lipsă." }, 400);
+      }
+      const result = await sendStudioRelaySignal(`nota_studio:Regenerare clip ${clipId} — ${reason}`);
+      if (!result.ok) {
+        return jsonNoStore({ success: false, error: result.error }, result.status);
+      }
+      return jsonNoStore({
+        success: true,
+        message: `Cererea de regenerare pentru clipul „${clipId}” a fost trimisă.`,
+        signal: result.signal,
+      });
+    }
+
+    if (action === "studio_signal") {
+      const note = String(body.note || "")
+        .replace(/[\r\n]+/g, " ")
+        .trim()
+        .slice(0, 320);
+      if (!note) {
+        return jsonNoStore({ success: false, error: "Mesajul nu poate fi gol." }, 400);
+      }
+      const result = await sendStudioRelaySignal(`nota_studio:${note}`);
+      if (!result.ok) {
+        return jsonNoStore({ success: false, error: result.error }, result.status);
+      }
+      return jsonNoStore({
+        success: true,
+        message: "Nota din Reverb Studio a fost trimisă în panou_semnale.",
+        signal: result.signal,
+      });
+    }
 
     // ── 1. GOOGLE AI ULTRA: SCRIPT & STORYBOARD ENGINE (Gemini 4 Argon / Gemini 2.5 Pro Ultra) ──
     if (action === "generate_script") {
       const brandContext = targetBrand || "Bricolando / Reverb Digital";
       const subject = topic || "Unelte profesionale și platformă e-commerce modernă";
 
-      // Enhanced ReStructure AI with Gemini 4 Argon retention mechanics
       const script = {
         title: `Video Viral Ultra: ${subject.slice(0, 48)}`,
         targetBrand: brandContext,
         targetDurationSeconds: duration,
         targetPlatforms: ["TikTok", "Instagram Reels", "YouTube Shorts"],
-        engineTier: model === "gemini-4-argon" ? "Google Gemini 4 Argon (Ultra Tier • 5x Throughput)" : "Google Gemini 2.5 Pro Ultra",
+        engineTier:
+          model === "gemini-4-argon"
+            ? "Google Gemini 4 Argon (Ultra Tier • 5x Throughput)"
+            : "Google Gemini 2.5 Pro Ultra",
         hook: {
           timestamp: "00:00 - 00:03",
-          visualPrompt: `[Veo 2 Cinematic Macro] Close-up 4K la 60fps pe ${subject.slice(0, 30)}. Lumina laterală dramatică cu reflexii aurii pe fundal obsidian texturat. Textură metalică hiper-realistă cu focalizare macro la 100mm.`,
-          voiceover: "Dacă încă cumperi unelte sau servicii care cedează la prima încercare, oprește-te 30 de secunde.",
-          subtitleEmphasis: ["cedează la prima încercare", "oprește-te 30 de secunde"]
+          visualPrompt: `[Veo 2 / Flow Cinematic Macro] Close-up 4K la 60fps pe ${subject.slice(0, 30)}. Lumina laterală caldă cu reflexii discrete pe fundal texturat. Textură hiper-realistă cu focalizare macro la 100mm.`,
+          voiceover:
+            "Dacă încă cumperi unelte sau servicii care cedează exact când ai treabă, oprește-te 30 de secunde.",
+          subtitleEmphasis: ["cedează exact când ai treabă", "oprește-te 30 de secunde"],
         },
         scenes: [
           {
             id: 1,
             time: "00:03 - 00:09",
-            section: "TENSIUNE / PROBLEMA REALĂ",
-            visualPrompt: `[Veo 2 Storyboard] Plan mediu cinematic într-un atelier industrial modern: un meșter sau antreprenor privește frustrat o piesă ruptă sau un ecran blocat. Contrast înalt, lumină de contur rece (rim light) și atmosferă cu particule fine în suspensie.`,
-            voiceover: `Majoritatea soluțiilor de pe piață sunt făcute pentru vânzări rapide, nu pentru rezistență. La ${brandContext}, am refuzat acest compromis.`,
-            cameraDirection: "Dolly-in lent de 1.5 metri, axat pe expresia de căutare a soluției, 24fps filmic.",
-            veoPrompt: `Photorealistic cinematic medium shot of craftsman in authentic workshop facing equipment failure, atmospheric moody rim lighting, 35mm lens, f/1.8, 4k ultra-detailed, cinematic composition --ar 9:16 --motion dolly_in`
+            section: "TENSIUNE / SITUAȚIA REALĂ (CU UMOR FIN)",
+            visualPrompt: `[Flow Storyboard] Plan mediu cinematic într-un atelier ordonat: un meșter privește cu un zâmbet ironic o piesă ieftină care a cedat, apoi pune mâna pe trusa calibrată. Lumină caldă și clară.`,
+            voiceover: `Majoritatea soluțiilor de pe piață sunt făcute pentru vitrină, nu pentru lucru real. La ${brandContext}, am ales altă cale.`,
+            cameraDirection: "Dolly-in lent de 1.5 metri, axat pe detaliu și expresie naturală, 24fps filmic.",
+            veoPrompt: `Photorealistic cinematic medium shot of craftsman in authentic tidy workshop comparing worn tool with precision engineered tool, warm natural rim lighting, 35mm lens, f/1.8, 4k ultra-detailed --ar 9:16 --motion dolly_in`,
           },
           {
             id: 2,
             time: "00:09 - 00:20",
-            section: "DEMO ÎN ACȚIUNE & INGINERIE PURĂ",
-            visualPrompt: `[Veo 2 Storyboard] Mișcare explozivă de orbitare la 60fps: prezentarea detaliului tehnic pe ${subject.slice(0, 35)}. Piesa este supusă testului extrem fără deformare, sunet mecanic metalic perfect, reflexii speculare de înaltă precizie.`,
-            voiceover: `Fiecare produs este calibrat pentru performanță brută. Oțel tratat, toleranțe microscopice și fiabilitate garantată la torsiune sau viteză de execuție.`,
-            cameraDirection: "Orbitare fluidă la 360 de grade cu focalizare dinamică (rack focus), viteză variabilă 60fps.",
-            veoPrompt: `Hyper-detailed 4k product close-up with dynamic camera orbit around industrial tool, titanium and chrome specular highlights, dark obsidian backdrop, 60fps cinematic fluidity, crisp engineering aesthetic --ar 9:16 --motion orbit_cw`
+            section: "DEMO ÎN ACȚIUNE & PRECIZIE TEHNICĂ",
+            visualPrompt: `[Flow Storyboard] Mișcare fluidă de orbitare la 60fps: prezentarea detaliului tehnic pe ${subject.slice(0, 35)}. Piesa lucrează curat fără joc, sunet mecanic limpede, reflexii speculare de precizie.`,
+            voiceover: `Fiecare produs este verificat pentru lucru serios: materiale tratate, îmbinări curate și fiabilitate pe termen lung.`,
+            cameraDirection: "Orbitare fluidă la 360 de grade cu focalizare dinamică (rack focus), 60fps.",
+            veoPrompt: `Hyper-detailed 4k product close-up with dynamic camera orbit around precision tool, warm brass and steel highlights, clean workshop backdrop, 60fps cinematic fluidity --ar 9:16 --motion orbit_cw`,
           },
           {
             id: 3,
             time: "00:20 - 00:30",
-            section: "OFERTA & CALL TO ACTION (CTA)",
-            visualPrompt: `[Veo 2 Storyboard] Cadru stabil hero shot: produsul sau serviciul complet, prezentat impecabil cu insigna de garanție și livrare rapidă. Tipografie curată, contrast WCAG AAA pe ecran.`,
-            voiceover: `Comanzi acum direct din linkul din descriere sau de pe profil. Livrare garantată și suport dedicat pentru fiecare comandă.`,
-            cameraDirection: "Cadru static hero stabil cu zoom-in discret de 3%, text clar de conversie.",
-            veoPrompt: `Sleek minimalist hero product presentation, branded modern packaging, studio key light, warm glow, crisp typography space, ultra-clean commercial look --ar 9:16 --motion zoom_in_slow`
-          }
+            section: "POANTĂ CALDĂ & CALL TO ACTION (CTA)",
+            visualPrompt: `[Flow Storyboard] Cadru stabil hero shot: produsul prezentat impecabil în lumină caldă, cu detalii clare de livrare rapidă și retur simplu.`,
+            voiceover: `Treaba terminată la timp îți lasă seara liberă. Vezi detaliile direct în linkul din profil — livrare rapidă oriunde în țară.`,
+            cameraDirection: "Cadru static hero stabil cu zoom-in discret de 3%, tipografie curată.",
+            veoPrompt: `Sleek minimalist hero product presentation, warm studio key light, subtle golden glow, crisp typography space, ultra-clean commercial look --ar 9:16 --motion zoom_in_slow`,
+          },
         ],
         audioSettings: {
-          voiceModel: "ElevenLabs Signature (Alin Română Caldă / Autoritară)",
-          pacing: "Dinamic, 145 cuvinte/minut cu micro-pauze de impact",
-          backgroundTrack: "Subtle Lo-Fi Electronic Bass (ducking automat la -20dB)",
-          soundEffects: ["Impact metalic la 00:01", "Rumble bas la 00:09", "Whoosh cinematic la tranziții"]
+          voiceModel: "Gemini TTS Algenib (gemini-3.8-flash-tts)",
+          pacing: "Dinamic, 145 cuvinte/minut cu micro-pauze naturale",
+          backgroundTrack: "Warm Acoustic & Subtle Bass (ducking automat la -20dB)",
+          soundEffects: ["Clichet mecanic curat la 00:01", "Accentuare caldă la 00:09", "Tranziție discretă"],
         },
         ffmpegPipeline: {
           resolution: "1080x1920 (9:16 Vertical)",
           framerate: 60,
-          captionStyle: "TikTok Bold Yellow + White Words Highlighting",
-          command: `ffmpeg -y -i video_raw.mp4 -i voice.wav -i bg_music.mp3 -filter_complex "[1:a]volume=1.0[a1];[2:a]volume=0.15[a2];[a1][a2]amix=inputs=2:duration=first[aout];[0:v]subtitles=captions.ass[vout]" -map "[vout]" -map "[aout]" -c:v libx264 -b:v 8M final_ultra.mp4`
-        }
+          captionStyle: "Editorial Warm Gold + Crisp White Highlighting",
+          command: `ffmpeg -y -i video_raw.mp4 -i voice_algenib.wav -i bg_music.mp3 -filter_complex "[1:a]volume=1.0[a1];[2:a]volume=0.15[a2];[a1][a2]amix=inputs=2:duration=first[aout];[0:v]subtitles=captions.ass[vout]" -map "[vout]" -map "[aout]" -c:v libx264 -b:v 8M final_ultra.mp4`,
+        },
       };
 
-      return NextResponse.json({ success: true, script });
+      return jsonNoStore({ success: true, script });
     }
 
     // ── 2. GOOGLE AI ULTRA: DEEP RESEARCH & SEARCH GROUNDING ──
     if (action === "ultra_deep_research") {
       const query = researchQuery || topic || "Unelte profesionale bricolaj e-commerce România";
 
-      // Synthesized real-time intelligence using Google Grounding logic
       const researchResults = {
         query,
         timestamp: new Date().toISOString(),
         engine: "Google Deep Research (Ultra Tier Multi-Source Grounding)",
-        sourcesAnalyzed: 142,
+        sourcesAnalyzed: 48,
         marketSynthesis: {
           coreAudienceFriction: [
-            "Frica de unelte 'chinezești ieftine' care se rup sau se rotunjesc la prima forțare (piulițe blocate, clichet blocat).",
-            "Timpul pierdut cu returnarea produselor neconforme și lipsa garanției reale în service.",
-            "Frustrarea legată de transport lent sau produse care nu sunt pe stoc real."
+            "Teama de scule slabe care cedează sau deteriorează șurubul/piesa la prima strângere serioasă.",
+            "Timpul pierdut cu explicații tehnice vagi și lipsa dimensiunilor clare pe paginile de produs.",
+            "Nevoia de livrare predictibilă și piese compatibile ușor de găsit în același loc.",
           ],
           viralHooksCTR: [
-            "„Nu mai cumpărați unelte până nu vedeți testul ăsta de torsiune!” (CTR mediu testat: 8.4%)",
-            "„De ce meșterii profesioniști nu cumpără niciodată din hypermarket?” (CTR mediu testat: 9.1%)",
-            "„Secretul de 30 de secunde care îți salvează o zi întreagă de muncă.” (CTR mediu testat: 7.9%)"
+            "Hook 0-3s (Contrast direct): „Diferența dintre o lucrare de 5 minute și o după-amiază pierdută stă într-o singură piesă.”",
+            "Hook 0-3s (Umor fin de meșter): „Când spui «îl strâng doar puțin» și cheia veche are alte planuri...”",
+            "Hook 0-3s (Detaliu macro): „Uite cum arată la interior un mecanism cu 72 de dinți față de unul obișnuit.”",
           ],
           trendingSearchKeywords: [
-            { keyword: `${query} profesional`, volume: "Ridicat (+38% ultimele 30 zile)" },
-            { keyword: "trusă chei rezistente atelier", volume: "Foarte ridicat (+55%)" },
-            { keyword: "livrare rapidă 24h unelte", volume: "În creștere (+22%)" }
+            { keyword: `${query} specificații tehnice`, volume: "Intenție ridicată de cumpărare" },
+            { keyword: "scule fiabile atelier și gospodărie", volume: "Interes constant sezonier" },
+            { keyword: "pachet cadou util casă și grădină", volume: "Sezon cadouri în creștere" },
           ],
           competitorBlindspots: [
-            "Competitorii mari (Dedeman, Leroy, eMAG retaileri) folosesc descrieri reci, fără clipuri video demonstrative reale.",
-            "Lipsa conținutului video scurt vertical (Reels/TikTok) pe nișa meșteșugărească și bricolaj în limba română.",
-            "Oportunitate masivă de autoritate prin clipuri demonstrative 'fără menajamente' la microscop/macro."
+            "Magazinele mari folosesc fișe reci copiate din catalog, fără demonstrații scurte și clare pe înțelesul omului.",
+            "Lipsa ghidurilor de alegere care compară onest când îți trebuie varianta casnică vs. cea de șantier.",
+            "Oportunitate clară prin clipuri luminoase, calde, cu umor fin și voce naturală Gemini TTS Algenib.",
           ],
           recommendedAngles: [
-            "Angle 1 (Testul Distrugerii): Supunem piesa la o forță dublă față de standardul DIN și arătăm că nu cedează.",
-            "Angle 2 (Economie de Timp): O singură cheie proastă îți distruge o piesă de 500 lei. Alege scula calibrată.",
-            "Angle 3 (Transparență Brutală): Arătăm direct interiorul mecanismului cu 72 de dinți și oțelul crom-vanadiu tratat."
-          ]
+            "Unghiul 1 (Demonstrația Curată): Arătăm exact cum lucrează produsul în primele 3 secunde, fără introduceri lungi.",
+            "Unghiul 2 (Economie de Nervi și Timp): O unealtă potrivită protejează piesa pe care lucrezi.",
+            "Unghiul 3 (Idee de Cadou Practic): Prezentare caldă, ordonată, potrivită și pentru cei dragi pasionați de meșterit.",
+          ],
         },
-        suggestedPrompt: `Prezintă ${query} printr-o demonstrație brută de rezistență. Meșterul care s-a săturat de scule care se îndoaie. Contrast puternic între scula ieftină deteriorată și rezistența de oțel călit la 450 Nm. Livrare în 24-48h și garanție 30 de zile fără întrebări.`
+        suggestedPrompt: `Prezintă ${query} printr-un cadru macro clar în primele 3 secunde, cu umor fin și atmosferă caldă. Arată diferența practică la lucru, specificațiile reale verificate și încheie cu o poantă plăcută + trimitere spre ghidul de pe site.`,
       };
 
-      return NextResponse.json({ success: true, research: researchResults });
+      return jsonNoStore({ success: true, research: researchResults });
     }
 
-    // ── 3. GOOGLE AI ULTRA: VEO 2 & IMAGEN 3 CINEMATIC DIRECTOR ──
+    // ── 3. GOOGLE AI ULTRA: FLOW / VEO 2 & IMAGEN 3 CINEMATIC DIRECTOR ──
     if (action === "ultra_veo_director") {
       const subject = topic || "trusă chei profesionale";
-      
+
       const veoScenes = [
         {
           sceneNumber: 1,
-          duration: "3 secunde (Hook)",
+          duration: "3 secunde (Hook Puternic)",
           camera: "Macro probe lens 100mm, Slow Dolly-In, 60fps",
-          lighting: "Obsidian dark background, warm amber edge rim light, sharp reflections",
-          promptVeo2: `Cinematic 4K macro slow-motion 60fps close-up of ${subject}, ultra-detailed metallic textures, polished chrome and dark carbon steel, dramatic rim lighting with gold and amber specular highlights, dark obsidian aesthetic, photorealistic commercial production quality --ar 9:16 --motion dolly_in_slow`,
-          continuitySeed: 888801
+          lighting: "Warm workshop key light, subtle brass rim reflections, crisp detail",
+          promptVeo2: `Cinematic 4K macro slow-motion 60fps close-up of ${subject}, ultra-detailed metallic textures, warm amber and brass specular highlights, clean artisan workshop aesthetic, photorealistic commercial production quality --ar 9:16 --motion dolly_in_slow`,
+          continuitySeed: 402601,
         },
         {
           sceneNumber: 2,
-          duration: "7 secunde (Problemă / Tensiune)",
+          duration: "7 secunde (Situație Reală & Umor Fin)",
           camera: "Handheld cinematic 35mm, f/1.8 shallow depth of field, 24fps",
-          lighting: "Authentic industrial workshop, soft overhead tungsten light, atmospheric airborne dust motes",
-          promptVeo2: `Cinematic medium shot of an experienced mechanic technician in a realistic textured automotive workshop looking frustrated at a snapped worn-out hand tool, authentic gritty textures, shallow depth of field, emotional commercial storytelling --ar 9:16 --motion subtle_handheld`,
-          continuitySeed: 888802
+          lighting: "Warm natural daylight through workshop window, inviting atmosphere",
+          promptVeo2: `Cinematic medium shot of a skilled craftsman in a warm well-organized workshop smiling subtly while setting aside an old worn tool and picking up ${subject}, shallow depth of field, warm editorial storytelling --ar 9:16 --motion subtle_handheld`,
+          continuitySeed: 402602,
         },
         {
           sceneNumber: 3,
-          duration: "12 secunde (Demonstrație Forță)",
+          duration: "12 secunde (Demonstrație Clară)",
           camera: "Smooth 360 Orbit, dynamic rack focus, 60fps",
-          lighting: "Precision technical studio lighting, volumetric light shafts, cool cobalt and warm gold contrast",
-          promptVeo2: `Explosive 4K dynamic camera orbit around ${subject} undergoing extreme torque stress test, zero deformation, crisp mechanical precision, 72-tooth ratchet mechanism close-up, luxury engineering visual standard --ar 9:16 --motion orbit_cw_fast`,
-          continuitySeed: 888803
+          lighting: "Precision studio lighting, warm gold and forest-toned contrast",
+          promptVeo2: `Crisp 4K dynamic camera orbit around ${subject} in smooth mechanical action, zero play, precision engineering close-up, warm commercial visual standard --ar 9:16 --motion orbit_cw_fast`,
+          continuitySeed: 402603,
         },
         {
           sceneNumber: 4,
-          duration: "8 secunde (Hero CTA)",
+          duration: "8 secunde (Poantă & Hero CTA)",
           camera: "Eye-level steadycam, slow subtle push-in, 30fps",
-          lighting: "Hero studio softbox, clean commercial high contrast, pure elegance",
-          promptVeo2: `Hero presentation of premium product packaging with brand badge, ultra-clean obsidian pedestal, subtle rising golden particles, cinematic lighting, sharp typography placement zone, high conversion visual --ar 9:16 --motion push_in`,
-          continuitySeed: 888804
-        }
+          lighting: "Warm hero softbox, clean editorial contrast, refined finish",
+          promptVeo2: `Hero presentation of ${subject} neatly arranged on warm wood and slate workbench, subtle golden bokeh, clean typography placement zone, high clarity visual --ar 9:16 --motion push_in`,
+          continuitySeed: 402604,
+        },
       ];
 
-      return NextResponse.json({ success: true, veoScenes, engine: "Google Veo 2 Cinematic Director (Ultra Tier)" });
+      return jsonNoStore({
+        success: true,
+        veoScenes,
+        engine: "Google AI Ultra Flow (flow.google.com) & Veo 2 Director",
+      });
     }
 
     // ── 4. GOOGLE AI ULTRA: NOTEBOOKLM AUDIO OVERVIEW GENERATOR ──
     if (action === "ultra_audio_overview") {
-      const subject = topic || "Strategia de scalare și producție video automată";
+      const subject = topic || "Strategia de campanii și producție video sub umbrela Reverb Digital";
 
       const dialogue = [
         {
           speaker: "Host A (Analist Tehnic)",
-          text: `Am analizat datele pentru ${subject} și ceea ce iese în evidență din prima secundă este saltul masiv de eficiență: cu modelul Gemini 4 Argon și limitele extinse pe video, timpul de la idee la montaj a scăzut la sub 4 minute.`
+          text: `Am parcurs datele pentru ${subject}: pachetul Google AI Ultra cu Flow (10.000 credite/lună), Gemini 4 Argon și vocea Gemini TTS Algenib ne permite să pregătim clipurile cu hook în primele 3 secunde fără costuri suplimentare pe API.`,
         },
         {
-          speaker: "Host B (Strateg Afaceri)",
-          text: `Exact. Și nu e doar o chestiune de viteză. Google Deep Research ne dă direct fricțiunile reale ale clienților din Google Trends și căutări. Practic, nu mai ghicim ce vrea publicul; abordăm exact obiecțiile care opresc vânzarea.`
+          speaker: "Host B (Strateg Comercial)",
+          text: `Iar partea esențială este legătura directă cu campaniile furnizorilor: fiecare campanie oglindită în Bricolando și Raft Plin primește automat pagină dedicată, ghid SEO pe blog, pachet social și verificare prin Scutul Global Amazon SES.`,
         },
         {
           speaker: "Host A (Analist Tehnic)",
-          text: `Plus că integrarea cu Veo 2 pe cadre de 60fps rezolvă problema cadrelor repetitive. Fiecare scenă are un unghi calculat: macro pe detaliu tehnic, orbitare la demonstrație și cadru hero la ofertă.`
+          text: `Exact. În plus, formula de preț rămâne strict protejată, iar ciornele de newsletter așteaptă aprobarea cu un singur click înainte de trimitere.`,
         },
         {
-          speaker: "Host B (Strateg Afaceri)",
-          text: `Concluzia e limpede: pentru Bricolando și Reverb, acest pachet Ultra transformă producția de conținut dintr-un cost mare într-o mașină autonomă de atragere a clienților. 0 angajați adăugați, acoperire maximă.`
-        }
+          speaker: "Host B (Strateg Comercial)",
+          text: `Totul curge sub umbrela Reverb Digital — ordonat, măsurat și ușor de urmărit dintr-un singur panou.`,
+        },
       ];
 
-      return NextResponse.json({ 
-        success: true, 
+      return jsonNoStore({
+        success: true,
         overview: {
           title: `NotebookLM Audio Deep Dive: ${subject}`,
           format: "Conversational Two-Host Audio Briefing",
           totalDurationEstimated: "1 min 45 sec",
-          dialogue
-        }
+          dialogue,
+        },
       });
     }
 
     // ── 5. PUBLISH APPROVAL ──
     if (action === "publish_approval") {
-      const { scriptId, approved } = body;
-      return NextResponse.json({
+      const { approved } = body;
+      return jsonNoStore({
         success: true,
         status: approved ? "APROBAT_PROGRAMAT" : "REVIZUIRE_NECESARĂ",
         queueTime: new Date(Date.now() + 3600000).toISOString(),
-        message: approved 
-          ? "Videoclipul a fost aprobat și adăugat în coada de postare automată (TikTok, Reels, Shorts)."
-          : "Videoclipul a fost trimis înapoi în atelier pentru regenerarea cadrelor."
+        message: approved
+          ? "Videoclipul a fost aprobat și adăugat în coada eșalonată de postare (TikTok, Reels, Shorts)."
+          : "Videoclipul a fost trimis înapoi în atelier pentru regenerarea cadrelor.",
       });
     }
 
-    // ── 6. SUNO & COLINDE AUTOPILOT (JURIU ACUSTIC + AI, DEDUPLICARE, VIDEO & MONETIZARE) ──
+    // ── 6. SUNO & COLINDE AUTOPILOT (SURYA MUSIC · ALIN DRAGOȘ) ──
     if (action === "music_autopilot") {
       const auditPath = path.join(process.cwd(), "public", "media", "music_audit.json");
       let auditData = null;
       if (fs.existsSync(auditPath)) {
         auditData = JSON.parse(fs.readFileSync(auditPath, "utf-8"));
       }
-      return NextResponse.json({
+      return jsonNoStore({
         success: true,
-        engine: "Reverb Music Autopilot • Juriu Acustic EBU R128 + Gemini 4 Argon Audio",
+        engine: "Audit acustic (vechi) • Surya Music · Alin Dragoș",
         audit: auditData,
-        autoStoryboards: {
-          "Magia Crăciunului (RO)": {
-            concept: "Satul Românesc sub Zăpadă & Vatra Caldă de Crăciun",
-            targetChannel: "YouTube (16:9 HD) + TikTok/Reels (9:16) + Spotify/DistroKid",
-            scenes: [
-              { time: "00:00 - 00:11", title: "1. Seara de Ajun în Sat", desc: "Fulgii de nea cad liniștit peste ulița satului românesc și ferestrele luminate cald.", img: "/media/scena_colind_1.jpg" },
-              { time: "00:11 - 00:22", title: "2. Focul în Vatră & Bradul", desc: "Lumina aurie a șemineului, bradul împodobit și masa cu cozonac.", img: "/media/scena_colind_2.jpg" },
-              { time: "00:22 - 00:33", title: "3. Familia în Jurul Mesei", desc: "Părinți, copii și bunici reuniți în lumina caldă a lumânărilor pe refren.", img: "/media/scena_colind_3.jpg" },
-              { time: "00:33 - 00:44", title: "4. Steaua Crăciunului", desc: "Cerul înstelat de iarnă deasupra bisericii satului și munților acoperiți de nea.", img: "/media/scena_colind_4.jpg" }
-            ]
-          },
-          "Together for Christmas (EN)": {
-            concept: "Golden Hearth & Peaceful Winter Village",
-            targetChannel: "Global Christmas YouTube Channel + Spotify / Apple Music",
-            scenes: [
-              { time: "00:00 - 00:11", title: "1. Twilight Winter Village", desc: "Soft snow falling over a peaceful village lane with glowing windows at dusk.", img: "/media/scena_colind_1.jpg" },
-              { time: "00:11 - 00:22", title: "2. Golden Hearth & Christmas Tree", desc: "Warm fireplace embers, golden ornaments, and traditional holiday table.", img: "/media/scena_colind_2.jpg" },
-              { time: "00:22 - 00:33", title: "3. Family Together at Christmas", desc: "Multi-generational family sharing Christmas dinner in warm candlelight.", img: "/media/scena_colind_3.jpg" },
-              { time: "00:33 - 00:44", title: "4. Starlight Over the Mountains", desc: "Cinematic aerial view of the Christmas star shining above the snowy valley.", img: "/media/scena_colind_4.jpg" }
-            ]
-          }
-        },
-        viralGrowthEngine: {
-          status: "ACTIV • Rulare Continuă Automată",
-          strategy: "Analizează zilnic clipurile cu 1M–10M+ vizualizări, extrage formula din primele 1,5 secunde (Hook vizual + ritm + buclă de rejucare) și generează automat variante originale pe 3 canale pentru a aduna zeci de mii de urmăritori.",
-          channels: [
-            {
-              id: "viral-mesteri",
-              name: "1. Canal Viral: Teste Extreme & Satisfacție Mecanică",
-              targetAudience: "Bărbați, meșteri, gospodari (Aduce clienți în Bricolando.ro & RaftPlin.ro)",
-              viralFormula: "Primele 1.5s: Test de forță / Curățare extremă Before-After → 10s demonstrație vizuală satisfăcătoare → Întrebare în comentarii care dublează afișările.",
-              examplesReady: [
-                { title: "Cheie de 15 lei vs. Oțel Crom-Vanadiu la 450 Nm — Ce cedează prima dată?", estViews: "250K – 1.2M vizualizări", destination: "bricolando.ro" },
-                { title: "Piatră înnegrită de 20 de ani curățată în 8 secunde cu jet rotativ", estViews: "500K – 2.5M vizualizări", destination: "bricolando.ro" }
-              ]
-            },
-            {
-              id: "viral-suflet",
-              name: "2. Canal Viral: Adevăruri de Noapte, Psihologie & Muzică",
-              targetAudience: "Oameni care caută liniște, sens, spiritualitate (Vinde cărțile de pe Kalki.nexus, aplicațiile & crește canalul de Muzică Suno)",
-              viralFormula: "Primele 1.5s: Întrebare directă în suflet + Melodia ta din Suno pe fundal → 15s parabolă scurtă din cărțile tale → Trimite la cartea PDF (6 €) și melodia întreagă pe YouTube.",
-              examplesReady: [
-                { title: "De ce te trezești între 03:00 și 04:00 dimineața când mintea tace (pe muzica ta)", estViews: "400K – 1.8M vizualizări", destination: "kalki.nexus + Canal Muzică" },
-                { title: "Cele 3 tăceri care îți arată cine îți este cu adevărat aproape", estViews: "300K – 1.5M vizualizări", destination: "kalki.nexus (Armonia / Lumina Nemuritoare)" }
-              ]
-            },
-            {
-              id: "viral-casa",
-              name: "3. Canal Viral: Transformări Casă & Jocuri Inteligente Copii",
-              targetAudience: "Părinți, familii, gospodine (Aduce clienți în RaftPlin.ro — Casă & Jucării Kidstory)",
-              viralFormula: "Primele 1.5s: Haos vs. Ordine / Copil captivat fără ecran → 12s demonstrație rapidă → Link direct în profil.",
-              examplesReady: [
-                { title: "Cum am scăpat de telefon timp de 3 ore cu un singur set de creație", estViews: "180K – 900K vizualizări", destination: "raftplin.ro (Jucării Educative)" },
-                { title: "Trucul de 10 secunde care dublează locul în bucătărie", estViews: "350K – 1.4M vizualizări", destination: "raftplin.ro" }
-              ]
-            }
-          ]
-        },
-        distributionChannels: {
-          videoChannels: [
-            { name: "YouTube Long-Form (16:9 4K/HD)", status: "Pregătit (YouTube Data API v3)", monetization: "AdSense + YouTube Music Premium" },
-            { name: "YouTube Shorts & TikTok (9:16)", status: "Pregătit (Extras refren 45s)", monetization: "Creator Rewards + Trafic Canal" }
-          ],
-          audioStreaming: [
-            { name: "Spotify & Apple Music", via: "DistroKid / Master -14 LUFS", status: "WAV 48kHz verificat fără clipping" },
-            { name: "TikTok Sound & Instagram Audio", via: "Content ID & Audio Library", status: "Redevențe automate la fiecare utilizare în Reels/TikTok" },
-            { name: "YouTube Content ID", via: "Amprentă Audio Oficială", status: "Colectare automată drepturi de autor" }
-          ],
-          sunoSync: {
-            account: "suno.com (Catalog ~1.900 piese Alin Dragoș)",
-            localCatalog: "C:\\Users\\alind\\Music\\Suno - melodiile lui Alin (148 piese indexate pe 7 categorii)",
-            mode: "Preluare automată perechi noi → Eliminare dubluri SHA-256 → Selecție Câștigătoare #1 → Randare FFmpeg"
-          }
-        }
+        nota: "Fila Muzică folosește /api/studio/muzica (catalogul de pe laptop). Aici rămâne doar auditul acustic vechi.",
       });
     }
 
-    return NextResponse.json({ success: false, error: "Acțiune necunoscută" }, { status: 400 });
+    return jsonNoStore({ success: false, error: "Acțiune necunoscută" }, 400);
   } catch (err: any) {
-    return NextResponse.json({ success: false, error: err.message }, { status: 500 });
+    return jsonNoStore({ success: false, error: err?.message || "Eroare internă Studio" }, 500);
   }
 }

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import InstallPWA from "@/components/InstallPWA";
+import MuzicaTab from "./MuzicaTab";
 
 interface Scene {
   id: number;
@@ -96,43 +97,42 @@ const presetTemplates = [
   {
     label: "Suno & Colinde Alin Dragoș — Magia Crăciunului (RO & EN)",
     brand: "Muzică Alin Dragoș",
-    prompt: "Selecție automată prin Juriu Acustic EBU R128 + Gemini 4 Argon din catalogul Suno (eliminare dubluri pe aceleași versuri), generare videoclip 16:9 YouTube + 9:16 Shorts și distribuire pe Spotify / Apple Music / TikTok.",
+    prompt: "Colind sau piesă nouă pentru Surya Music: cerere → prompt și versuri pentru Suno → piesa în bibliotecă → clip cu versuri → kit de urcare pe YouTube (fila Muzică).",
   },
 ];
 
 export default function StudioPage() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
-  const [pin, setPin] = useState("");
-  const [pinError, setPinError] = useState(false);
+  const [authConfigured, setAuthConfigured] = useState<boolean | null>(null);
+  const [passphrase, setPassphrase] = useState("");
+  const [authError, setAuthError] = useState<string | null>(null);
+  const [isSubmittingAuth, setIsSubmittingAuth] = useState(false);
 
-  useEffect(() => {
-    const auth = localStorage.getItem("reverb_studio_auth");
-    if (auth === "true") {
-      setIsAuthenticated(true);
-    } else {
-      setIsAuthenticated(false);
-    }
-  }, []);
-
-  const handlePinSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (pin.trim() === "8888") {
-      localStorage.setItem("reverb_studio_auth", "true");
-      setIsAuthenticated(true);
-      setPinError(false);
-    } else {
-      setPinError(true);
-      setPin("");
-    }
-  };
-
-  // Cele 3 Ramuri Automate Principale + Conturi & Canale + Uneltele Tehnice
+  // Cele 4 Ramuri Automate Principale + Mașina de Marketing (Live) + Uneltele Tehnice
   const [activeTab, setActiveTab] = useState<
-    "music-autopilot" | "viral-factory" | "intake" | "channels-hub" | "deep-research" | "script" | "audio" | "veo-director" | "notebooklm" | "approval" | "briefing"
-  >("music-autopilot");
+    | "marketing-engine"
+    | "music-autopilot"
+    | "viral-factory"
+    | "intake"
+    | "channels-hub"
+    | "deep-research"
+    | "script"
+    | "audio"
+    | "veo-director"
+    | "notebooklm"
+    | "approval"
+    | "briefing"
+  >("marketing-engine");
   const [showTechTools, setShowTechTools] = useState(false);
-  const [showTutorialVideo, setShowTutorialVideo] = useState(true);
+  const [showTutorialVideo, setShowTutorialVideo] = useState(false);
   const [viralChannelStates, setViralChannelStates] = useState<Record<string, string>>({});
+
+  // Mașina de Marketing (Live Relay) State
+  const [marketingEngineData, setMarketingEngineData] = useState<any>(null);
+  const [isLoadingMarketing, setIsLoadingMarketing] = useState(false);
+  const [studioActionFeedback, setStudioActionFeedback] = useState<{ ok: boolean; text: string } | null>(null);
+  const [studioNoteInput, setStudioNoteInput] = useState("");
+  const [isSendingStudioAction, setIsSendingStudioAction] = useState(false);
 
   const [selectedBrand, setSelectedBrand] = useState("Bricolando.ro");
   const [selectedModel, setSelectedModel] = useState<"gemini-4-argon" | "gemini-2.5-pro-ultra" | "nano-banana-pro">("gemini-4-argon");
@@ -163,6 +163,85 @@ export default function StudioPage() {
   const [musicPublishState, setMusicPublishState] = useState<Record<string, string>>({});
   const [viralQueueState, setViralQueueState] = useState<Record<string, string>>({});
 
+  useEffect(() => {
+    let active = true;
+    (async () => {
+      try {
+        const res = await fetch("/api/studio/auth", {
+          method: "GET",
+          cache: "no-store",
+        });
+        const data = await res.json();
+        if (!active) return;
+        setAuthConfigured(Boolean(data?.configured));
+        setIsAuthenticated(Boolean(data?.authenticated));
+      } catch {
+        if (!active) return;
+        setIsAuthenticated(false);
+      }
+    })();
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  const handlePassphraseSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!passphrase.trim()) return;
+    setIsSubmittingAuth(true);
+    setAuthError(null);
+    try {
+      const res = await fetch("/api/studio/auth", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ passphrase: passphrase.trim() }),
+        cache: "no-store",
+      });
+      const data = await res.json();
+      if (res.ok && data?.authenticated) {
+        setPassphrase("");
+        setAuthError(null);
+        setIsAuthenticated(true);
+      } else {
+        setAuthError(data?.error || "Autentificare eșuată.");
+        setPassphrase("");
+      }
+    } catch {
+      setAuthError("Eroare de conexiune la verificarea parolei.");
+    } finally {
+      setIsSubmittingAuth(false);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/studio/auth", { method: "DELETE", cache: "no-store" });
+    } catch {}
+    setIsAuthenticated(false);
+    setMarketingEngineData(null);
+    setMusicAutopilotData(null);
+  };
+
+  const handleLoadMarketingEngine = async () => {
+    setIsLoadingMarketing(true);
+    try {
+      const res = await fetch("/api/studio", {
+        method: "GET",
+        cache: "no-store",
+      });
+      if (res.status === 401) {
+        setIsAuthenticated(false);
+        return;
+      }
+      const data = await res.json();
+      setMarketingEngineData(data);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsLoadingMarketing(false);
+    }
+  };
+
   const handleLoadMusicAutopilot = async () => {
     setIsLoadingMusic(true);
     try {
@@ -170,7 +249,12 @@ export default function StudioPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ action: "music_autopilot" }),
+        cache: "no-store",
       });
+      if (res.status === 401) {
+        setIsAuthenticated(false);
+        return;
+      }
       const data = await res.json();
       if (data.success) {
         setMusicAutopilotData(data);
@@ -182,9 +266,39 @@ export default function StudioPage() {
     }
   };
 
+  // Încărcăm datele DOAR după ce sesiunea securizată este confirmată!
   useEffect(() => {
-    handleLoadMusicAutopilot();
-  }, []);
+    if (isAuthenticated === true) {
+      handleLoadMarketingEngine();
+      handleLoadMusicAutopilot();
+    }
+  }, [isAuthenticated]);
+
+  const handleMarketingAction = async (payload: Record<string, any>) => {
+    setIsSendingStudioAction(true);
+    setStudioActionFeedback(null);
+    try {
+      const res = await fetch("/api/studio", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+        cache: "no-store",
+      });
+      const data = await res.json();
+      if (res.ok && data?.success) {
+        setStudioActionFeedback({ ok: true, text: data.message || "Comandă trimisă cu succes." });
+        if (payload.action === "studio_signal") {
+          setStudioNoteInput("");
+        }
+      } else {
+        setStudioActionFeedback({ ok: false, text: data?.error || "Eroare la trimiterea comenzii." });
+      }
+    } catch {
+      setStudioActionFeedback({ ok: false, text: "Conexiunea cu API-ul Studio a eșuat." });
+    } finally {
+      setIsSendingStudioAction(false);
+    }
+  };
 
   const [script, setScript] = useState<ScriptData>({
     title: "Trusă Chei Crom-Vanadiu: Stop Uneltelor Care Cedează",
@@ -227,7 +341,7 @@ export default function StudioPage() {
       },
     ],
     audioSettings: {
-      voiceModel: "ElevenLabs Signature (Voce Naturală Română, Ton Autoritar & Cald)",
+      voiceModel: "Gemini TTS Algenib (gemini-3.8-flash-tts)",
       pacing: "145 cuvinte/minut cu pauze de impact",
       backgroundTrack: "Lo-Fi Cinematic Bass (ducking automat la -20dB în timpul vorbirii)",
       soundEffects: ["Impact metalic 00:01", "Rumble bas 00:09", "Whoosh cinematic"]
@@ -361,32 +475,47 @@ export default function StudioPage() {
   if (isAuthenticated === false) {
     return (
       <div className="studio-light-root bg-[#070809] min-h-screen text-white flex flex-col items-center justify-center p-6 antialiased font-mono">
-        <div className="w-full max-w-sm rounded-3xl border border-white/10 bg-neutral-900/60 p-8 backdrop-blur-md shadow-2xl text-center">
+        <div className="w-full max-w-md rounded-3xl border border-white/10 bg-neutral-900/60 p-8 backdrop-blur-md shadow-2xl text-center">
           <div className="h-12 w-12 mx-auto rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-lg mb-4">
             🔒
           </div>
           <h2 className="text-xl font-medium text-white mb-1">Reverb Studio AI</h2>
           <p className="text-xs text-neutral-400 mb-6 font-sans">
-            Panou intern de producție & distribuire automată. Acces rezervat administratorului.
+            Panou intern securizat de producție, campanii B2B și distribuire automată (sesiune criptată HMAC-SHA256).
           </p>
-          <form onSubmit={handlePinSubmit} className="space-y-4">
+
+          {authConfigured === false && (
+            <div className="mb-5 rounded-2xl border border-amber-400/40 bg-amber-950/30 p-4 text-left text-xs font-sans text-amber-200 leading-relaxed">
+              <strong className="block font-mono uppercase tracking-wider text-amber-300 mb-1">
+                Configurare necesară în Vercel
+              </strong>
+              Setează variabila <code className="text-white font-mono">REVERB_STUDIO_PASSPHRASE</code> (minim 16 caractere) în{" "}
+              <strong>Vercel Settings -&gt; Environment Variables</strong> pentru a activa accesul securizat.
+            </div>
+          )}
+
+          <form onSubmit={handlePassphraseSubmit} className="space-y-4">
             <input
               type="password"
-              maxLength={6}
-              value={pin}
-              onChange={(e) => { setPin(e.target.value); setPinError(false); }}
-              placeholder="••••"
+              autoComplete="current-password"
+              value={passphrase}
+              onChange={(e) => {
+                setPassphrase(e.target.value);
+                setAuthError(null);
+              }}
+              placeholder="Introdu fraza secretă de acces..."
               autoFocus
-              className="w-full text-center tracking-[0.5em] text-2xl font-bold rounded-2xl border border-white/15 bg-black/40 py-3 text-white outline-none focus:border-white"
+              className="w-full text-center text-sm font-medium rounded-2xl border border-white/15 bg-black/40 px-4 py-3.5 text-white outline-none focus:border-white"
             />
-            {pinError && (
-              <p className="text-xs text-red-400 font-sans">Cod incorect. Te rugăm să reîncerci.</p>
+            {authError && (
+              <p className="text-xs text-red-400 font-sans leading-relaxed">{authError}</p>
             )}
             <button
               type="submit"
-              className="w-full rounded-full bg-white py-3 text-xs uppercase tracking-widest text-black font-bold hover:bg-neutral-200 transition-all"
+              disabled={isSubmittingAuth}
+              className="w-full rounded-full bg-white py-3 text-xs uppercase tracking-widest text-black font-bold hover:bg-neutral-200 transition-all disabled:opacity-50"
             >
-              Deblochează Panoul →
+              {isSubmittingAuth ? "Se verifică criptografic..." : "Deblochează Panoul →"}
             </button>
           </form>
           <div className="mt-6 pt-4 border-t border-white/5">
@@ -479,6 +608,13 @@ export default function StudioPage() {
             >
               ← Înapoi la Site
             </Link>
+            <button
+              onClick={handleLogout}
+              className="rounded-full border border-rose-400/30 bg-rose-950/30 px-3.5 py-2 text-xs font-mono uppercase tracking-wider text-rose-300 hover:bg-rose-500/20 transition-all"
+              title="Închide sesiunea securizată Reverb Studio"
+            >
+              🔒 Ieșire
+            </button>
           </div>
         </div>
 
@@ -528,9 +664,29 @@ export default function StudioPage() {
           </div>
 
           <div className="text-[10px] uppercase tracking-widest text-neutral-400 mb-3">
-            Panou Central de Comandă (Cele 3 Ramuri care lucrează singure + Conturile unde se urcă totul):
+            Panou Central de Comandă (Mașina de Marketing Live + Ramurile Automate + Conturi & Canale):
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-3">
+            <button
+              onClick={() => {
+                setActiveTab("marketing-engine");
+                handleLoadMarketingEngine();
+              }}
+              className={`p-4 rounded-2xl text-left transition-all border ${
+                activeTab === "marketing-engine"
+                  ? "bg-violet-400 text-black border-violet-300 shadow-[0_0_25px_rgba(167,139,250,0.35)]"
+                  : "bg-violet-500/15 text-violet-200 border-violet-400/40 hover:bg-violet-500/25"
+              }`}
+            >
+              <div className="font-bold text-sm flex items-center justify-between">
+                <span>⚡ 0. Mașina Marketing</span>
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-black/20">LIVE</span>
+              </div>
+              <div className={`text-[11px] mt-1 font-sans ${activeTab === "marketing-engine" ? "text-black/80" : "text-neutral-400"}`}>
+                Campanii furnizori, Scut Amazon SES, Ciorne Newsletter cu „da”, Coada Video Flow & eMAG.
+              </div>
+            </button>
+
             <button
               onClick={() => setActiveTab("music-autopilot")}
               className={`p-4 rounded-2xl text-left transition-all border ${
@@ -544,7 +700,7 @@ export default function StudioPage() {
                 <span className="text-[10px] px-2 py-0.5 rounded-full bg-black/20">AUTOPILOT</span>
               </div>
               <div className={`text-[11px] mt-1 font-sans ${activeTab === "music-autopilot" ? "text-black/80" : "text-neutral-400"}`}>
-                Ia melodiile din Suno → alege câștigătoarea → face videoclipul integral (16:9 + 9:16) → YouTube & Spotify.
+                Cerere → prompt și versuri Suno → piesa în bibliotecă → clip cu versuri → kit YouTube. Nimic nu se publică singur.
               </div>
             </button>
 
@@ -639,7 +795,7 @@ export default function StudioPage() {
                   activeTab === "audio" ? "bg-white text-black font-bold" : "text-neutral-400 hover:text-white"
                 }`}
               >
-                Voce & ElevenLabs
+                Voce Gemini TTS Algenib
               </button>
               <button
                 onClick={() => {
@@ -686,7 +842,369 @@ export default function StudioPage() {
 
       {/* Main Studio Body */}
       <main className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 py-12">
-        
+
+        {/* ── TAB 0: MAȘINA DE MARKETING (LIVE RELAY HOSTINGER + LAPTOP) ── */}
+        {activeTab === "marketing-engine" && (
+          <Reveal>
+            <div className="space-y-8">
+              <div className="rounded-3xl border border-violet-400/30 bg-neutral-900/50 p-6 md:p-8 backdrop-blur-md">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6">
+                  <div>
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-violet-300 font-bold">
+                      Umbrela Reverb Digital • Motorul 7 Live Relay
+                    </span>
+                    <h2 className="text-2xl md:text-3xl font-medium text-white mt-1">
+                      ⚡ Mașina de Marketing (Live)
+                    </h2>
+                    <p className="text-xs text-neutral-400 font-mono mt-1">
+                      Oglindire automată campanii furnizori • Scut Global Amazon SES • Newslettere cu „da” • Coada Video Google AI Ultra Flow + Algenib • Campanii eMAG.
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap items-center gap-3 shrink-0 font-mono text-xs">
+                    {marketingEngineData?.relay_meta?.generat_la && (
+                      <span className="px-3 py-1.5 rounded-full border border-emerald-400/30 bg-emerald-500/10 text-emerald-300 text-[11px]">
+                        ● Sincronizat: {String(marketingEngineData.relay_meta.generat_la).slice(0, 19).replace("T", " ")}
+                      </span>
+                    )}
+                    <button
+                      onClick={handleLoadMarketingEngine}
+                      disabled={isLoadingMarketing}
+                      className="rounded-full bg-violet-400 px-4 py-2 text-xs font-bold uppercase tracking-wider text-black hover:bg-violet-300 transition-all disabled:opacity-50"
+                    >
+                      {isLoadingMarketing ? "Se încarcă..." : "↻ Reîmprospătează Live"}
+                    </button>
+                  </div>
+                </div>
+
+                {studioActionFeedback && (
+                  <div
+                    className={`mt-5 rounded-2xl border p-4 text-xs font-mono ${
+                      studioActionFeedback.ok
+                        ? "border-emerald-400/40 bg-emerald-950/30 text-emerald-200"
+                        : "border-rose-400/40 bg-rose-950/30 text-rose-200"
+                    }`}
+                  >
+                    {studioActionFeedback.ok ? "✓ " : "⚠ "}
+                    {studioActionFeedback.text}
+                  </div>
+                )}
+
+                {marketingEngineData?.relay_configured === false && (
+                  <div className="mt-6 rounded-2xl border border-amber-400/40 bg-amber-950/25 p-5 font-mono text-xs text-amber-100">
+                    <div className="font-bold uppercase tracking-wider text-amber-300 mb-2">
+                      Releul WordPress nu este încă conectat în Vercel Environment Variables
+                    </div>
+                    <p className="text-neutral-300 font-sans mb-3">
+                      Pe serverul Hostinger releul <code className="text-white">panou-automatizari</code> primește deja cheia{" "}
+                      <code className="text-emerald-300">marketing</code>. Pentru a afișa datele în timp real pe Vercel (fără nicio cifră inventată), urmează pașii:
+                    </p>
+                    <ul className="space-y-1.5 text-neutral-200">
+                      {(marketingEngineData.setup_instructions || []).map((step: string, idx: number) => (
+                        <li key={idx}>• {step}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {marketingEngineData?.error && (
+                  <div className="mt-6 rounded-2xl border border-rose-400/40 bg-rose-950/25 p-4 font-mono text-xs text-rose-200">
+                    ⚠ {marketingEngineData.error}
+                  </div>
+                )}
+
+                {/* GRID PRINCIPAL: SES SHIELD + NEWSLETTERE + CAMPANII FURNIZORI + VIDEO + EMAG */}
+                <div className="mt-6 grid lg:grid-cols-12 gap-6 font-mono text-xs">
+                  {/* CARD 1: SCUTUL GLOBAL AMAZON SES */}
+                  <div className="lg:col-span-5 rounded-2xl border border-white/10 bg-black/50 p-5 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="text-[10px] uppercase tracking-widest text-emerald-400 font-bold">
+                          Scut Global Amazon SES (eu-central-1)
+                        </span>
+                        <span
+                          className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
+                            marketingEngineData?.marketing?.ses_scut?.frana_activa
+                              ? "bg-rose-500/20 text-rose-300 border border-rose-400/40"
+                              : "bg-emerald-500/20 text-emerald-300 border border-emerald-400/40"
+                          }`}
+                        >
+                          {marketingEngineData?.marketing?.ses_scut?.frana_activa
+                            ? "FRÂNĂ ACTIVĂ"
+                            : marketingEngineData?.marketing?.ses_scut?.status || "MONITORIZAT"}
+                        </span>
+                      </div>
+                      <div className="grid grid-cols-2 gap-3 my-4">
+                        <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3">
+                          <div className="text-[10px] text-neutral-400">Bounce Rate (prag &lt; 2%)</div>
+                          <div className="text-lg font-bold text-white mt-1">
+                            {marketingEngineData?.marketing?.ses_scut?.bounce_rate != null
+                              ? `${marketingEngineData.marketing.ses_scut.bounce_rate}%`
+                              : "—"}
+                          </div>
+                        </div>
+                        <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3">
+                          <div className="text-[10px] text-neutral-400">Complaint Rate (&lt; 0,05%)</div>
+                          <div className="text-lg font-bold text-white mt-1">
+                            {marketingEngineData?.marketing?.ses_scut?.complaint_rate != null
+                              ? `${marketingEngineData.marketing.ses_scut.complaint_rate}%`
+                              : "—"}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="text-[11px] text-neutral-400 font-sans border-t border-white/10 pt-3">
+                      Cont comun AWS SES pentru Bricolando & Raft Plin: la depășirea pragurilor de siguranță, trimiterea în masă se oprește automat înainte de penalizarea AWS.
+                    </div>
+                  </div>
+
+                  {/* CARD 2: CIORNE NEWSLETTER CARE AȘTEAPTĂ „DA” */}
+                  <div className="lg:col-span-7 rounded-2xl border border-white/10 bg-black/50 p-5 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="text-[10px] uppercase tracking-widest text-amber-300 font-bold">
+                          Ciorne Newsletter — Poarta de Aprobare cu „da”
+                        </span>
+                        <span className="px-2.5 py-0.5 rounded-full bg-amber-400/15 text-amber-300 text-[10px]">
+                          {(marketingEngineData?.marketing?.ciorne_newsletter || []).length} în așteptare
+                        </span>
+                      </div>
+
+                      {(marketingEngineData?.marketing?.ciorne_newsletter || []).length > 0 ? (
+                        <div className="space-y-2.5 max-h-52 overflow-y-auto pr-1">
+                          {marketingEngineData.marketing.ciorne_newsletter.map((nl: any, idx: number) => (
+                            <div
+                              key={`${nl.magazin}-${nl.id}-${idx}`}
+                              className="rounded-xl border border-white/10 bg-white/[0.03] p-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+                            >
+                              <div>
+                                <div className="text-white font-bold">
+                                  [{String(nl.magazin || "").toUpperCase()}] #{nl.id} — {nl.subiect || "Ciornă campanie"}
+                                </div>
+                                <div className="text-[10px] text-neutral-400 mt-0.5">
+                                  Stare: {nl.stare || "asteapta_da"} • Destinatari estimați: {nl.destinatari_estimat ?? nl.destinatari ?? "—"}
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-2 shrink-0">
+                                <button
+                                  disabled={isSendingStudioAction}
+                                  onClick={() =>
+                                    handleMarketingAction({
+                                      action: "approve_newsletter",
+                                      magazin: nl.magazin,
+                                      newsletterId: String(nl.id),
+                                    })
+                                  }
+                                  className="rounded-full bg-emerald-400 px-3 py-1.5 text-[10px] font-bold uppercase text-black hover:bg-emerald-300 disabled:opacity-50"
+                                >
+                                  ✓ Aprobă („da”)
+                                </button>
+                                <button
+                                  disabled={isSendingStudioAction}
+                                  onClick={() =>
+                                    handleMarketingAction({
+                                      action: "stop_newsletter",
+                                      magazin: nl.magazin,
+                                      newsletterId: String(nl.id),
+                                    })
+                                  }
+                                  className="rounded-full border border-rose-400/40 px-3 py-1.5 text-[10px] font-bold uppercase text-rose-300 hover:bg-rose-500/20 disabled:opacity-50"
+                                >
+                                  ■ Oprește
+                                </button>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="rounded-xl border border-white/5 bg-white/[0.02] p-4 text-neutral-400 font-sans text-xs">
+                          Nicio ciornă de newsletter nu așteaptă aprobare în acest moment. Când o campanie de furnizor generează ciorna HTML, apare aici pentru aprobare cu un singur click.
+                        </div>
+                      )}
+                    </div>
+                    <div className="text-[10px] text-neutral-500 border-t border-white/10 pt-3 mt-3">
+                      Niciun newsletter nu pleacă spre clienți fără aprobarea explicită „da” (executată securizat prin panou_semnale).
+                    </div>
+                  </div>
+
+                  {/* CARD 3: CAMPANIILE FURNIZORILOR (ACTIVE & ÎN PREGĂTIRE) */}
+                  <div className="lg:col-span-7 rounded-2xl border border-white/10 bg-black/50 p-5">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-[10px] uppercase tracking-widest text-sky-300 font-bold">
+                        Campaniile Furnizorilor & Rotația Lansărilor (Bricolando D1 / Raft Plin N)
+                      </span>
+                      <span className="text-[10px] text-neutral-400">
+                        Formula podea_noua.py + CMMP 30 active
+                      </span>
+                    </div>
+
+                    {(marketingEngineData?.marketing?.campanii_furnizori?.lista || []).length > 0 ? (
+                      <div className="space-y-2.5 mb-4">
+                        {marketingEngineData.marketing.campanii_furnizori.lista.map((c: any, idx: number) => (
+                          <div
+                            key={c.id || idx}
+                            className="rounded-xl border border-sky-400/25 bg-sky-950/15 p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+                          >
+                            <div>
+                              <div className="text-white font-bold">
+                                {c.titlu || c.id} <span className="text-sky-300">({c.furnizor || "furnizor"})</span>
+                              </div>
+                              <div className="text-[10px] text-neutral-400 mt-0.5">
+                                Stare: {c.stare || "activă"} • Perioadă: {c.start_at || "—"} → {c.end_at || "—"} • Produse eligibile: {c.nr_produse_eligibile ?? "—"}
+                              </div>
+                            </div>
+                            <button
+                              disabled={isSendingStudioAction}
+                              onClick={() =>
+                                handleMarketingAction({
+                                  action: "trigger_campaign",
+                                  campaignSlug: String(c.id || "campanie"),
+                                  magazin: "ambele",
+                                })
+                              }
+                              className="rounded-full border border-sky-400/40 px-3 py-1 text-[10px] text-sky-200 hover:bg-sky-400 hover:text-black font-bold shrink-0"
+                            >
+                              Prioritizează →
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="rounded-xl border border-white/5 bg-white/[0.02] p-3.5 text-neutral-400 font-sans text-xs mb-4">
+                        Urmărirea pe cele 5 căsuțe B2B este activă. Campaniile oglindite cu interval [start_at, end_at] vor apărea automat aici.
+                      </div>
+                    )}
+
+                    {((marketingEngineData?.marketing?.furnizori_cadenta?.lansare_zilnica || []).length > 0 ||
+                      (marketingEngineData?.marketing?.furnizori_cadenta?.rotatie || []).length > 0) && (
+                      <div>
+                        <div className="text-[10px] uppercase tracking-wider text-neutral-400 mb-2">
+                          Cadență lansare & rotație furnizori (1 clip/zi lansare → 1 clip la 2–3 zile rotație):
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                          {(marketingEngineData?.marketing?.furnizori_cadenta?.lansare_zilnica || []).map((f: any, idx: number) => (
+                            <span
+                              key={`lansare-${idx}`}
+                              className="px-2.5 py-1 rounded-full border border-amber-400/30 bg-amber-400/10 text-[10px] text-amber-200"
+                            >
+                              {f.categorie || f.cod}: <strong>1 clip/zi (lansare)</strong>
+                            </span>
+                          ))}
+                          {(marketingEngineData?.marketing?.furnizori_cadenta?.rotatie || []).map((f: any, idx: number) => (
+                            <span
+                              key={`rotatie-${idx}`}
+                              className="px-2.5 py-1 rounded-full border border-white/10 bg-white/[0.04] text-[10px] text-neutral-200"
+                            >
+                              {f.categorie || f.cod}: <strong>rotație ({f.interval_rotatie_zile || 3} zile)</strong>
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* CARD 4: COADA VIDEO (FLOW / MAGICLIGHT / HIGGSFIELD) & CAMPANII EMAG */}
+                  <div className="lg:col-span-5 rounded-2xl border border-white/10 bg-black/50 p-5 flex flex-col justify-between space-y-4">
+                    <div>
+                      <div className="text-[10px] uppercase tracking-widest text-rose-300 font-bold mb-2">
+                        Coada Video (Google AI Ultra Flow • MagicLight • Higgsfield)
+                      </div>
+                      <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3 space-y-1.5 text-[11px]">
+                        <div className="flex justify-between">
+                          <span className="text-neutral-400">Motor Primar:</span>
+                          <span className="text-white font-bold">Flow (flow.google.com • 10k cr/lună)</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-neutral-400">Voce Standard:</span>
+                          <span className="text-emerald-300 font-bold">Gemini TTS Algenib</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-neutral-400">Clipuri în coadă / gata:</span>
+                          <span className="text-amber-300 font-bold">
+                            {marketingEngineData?.marketing?.coada_video?.in_asteptare ?? marketingEngineData?.marketing?.coada_video?.total ?? 0}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="text-[10px] uppercase tracking-widest text-amber-300 font-bold mb-2">
+                        Campanii Profitabile eMAG Marketplace
+                      </div>
+                      <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3 text-[11px] text-neutral-300">
+                        <div>
+                          Campanii active:{" "}
+                          <strong className="text-emerald-300">
+                            {marketingEngineData?.marketing?.emag_campanii?.active ?? 0}
+                          </strong>{" "}
+                          • Propuneri eligibile:{" "}
+                          <strong className="text-white">
+                            {marketingEngineData?.marketing?.emag_campanii?.propuneri_eligibile ?? 0}
+                          </strong>
+                        </div>
+                        <div className="text-[10px] text-neutral-400 mt-1">
+                          Excepție contractuală respectată strict: 0 produse Kidstory în marketplace.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* PORȚILE SOCIALE REVERB DIGITAL + COMANDĂ RAPIDĂ STUDIO -> PANOU_SEMNALE */}
+                <div className="mt-6 pt-6 border-t border-white/10 grid lg:grid-cols-12 gap-6 font-mono text-xs items-center">
+                  <div className="lg:col-span-6">
+                    <div className="text-[10px] uppercase tracking-widest text-neutral-400 mb-2">
+                      Porți Sociale Reverb Digital (brand-social/*.md → sameAs & Footer automate):
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {(marketingEngineData?.reverb_social_gates || []).map((gate: any) => (
+                        <span
+                          key={gate.id}
+                          className={`px-3 py-1 rounded-full border text-[10px] ${
+                            gate.status === "activ"
+                              ? "border-emerald-400/40 bg-emerald-500/15 text-emerald-300 font-bold"
+                              : "border-white/15 bg-white/[0.03] text-neutral-400"
+                          }`}
+                        >
+                          {gate.label}: {gate.status === "activ" ? "ACTIV" : "în pregătire (kit gata)"}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="lg:col-span-6">
+                    <form
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        if (!studioNoteInput.trim()) return;
+                        handleMarketingAction({
+                          action: "studio_signal",
+                          note: studioNoteInput.trim(),
+                        });
+                      }}
+                      className="flex gap-2"
+                    >
+                      <input
+                        type="text"
+                        value={studioNoteInput}
+                        onChange={(e) => setStudioNoteInput(e.target.value)}
+                        placeholder="Trimite instrucțiune rapidă către agentul de pe laptop..."
+                        className="flex-1 rounded-full border border-white/15 bg-black/50 px-4 py-2.5 text-xs text-white outline-none focus:border-violet-400"
+                      />
+                      <button
+                        type="submit"
+                        disabled={isSendingStudioAction || !studioNoteInput.trim()}
+                        className="rounded-full bg-white px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-black hover:bg-neutral-200 disabled:opacity-40 shrink-0"
+                      >
+                        Trimite →
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        )}
+
         {/* ── TAB 1: INTAKE & KALKI VOICE ── */}
         {activeTab === "intake" && (
           <Reveal>
@@ -1065,17 +1583,17 @@ export default function StudioPage() {
           </Reveal>
         )}
 
-        {/* ── TAB 4: AUDIO & ELEVENLABS ── */}
+        {/* ── TAB 4: AUDIO & GEMINI TTS ALGENIB ── */}
         {activeTab === "audio" && (
           <Reveal>
             <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8 backdrop-blur-md max-w-4xl mx-auto">
               <div className="border-b border-white/10 pb-6 mb-6">
                 <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400">
-                  Modulul 1: Audio & Clonare Voce
+                  Modulul 1: Sinteză Vocală Google AI Ultra
                 </span>
-                <h2 className="text-2xl font-medium text-white mt-1">Sinteză Vocală & Coloană Sonoră</h2>
+                <h2 className="text-2xl font-medium text-white mt-1">Sinteză Vocală Gemini TTS Algenib & Coloană Sonoră</h2>
                 <p className="text-xs text-neutral-400 font-mono mt-1">
-                  Generare voiceover realistă sincronizată milimetric cu durata fiecărui cadru.
+                  Generare voiceover naturală în limba română sincronizată cu durata fiecărui cadru.
                 </p>
               </div>
 
@@ -1083,9 +1601,9 @@ export default function StudioPage() {
                 <div>
                   <label className="block text-neutral-400 uppercase tracking-wider mb-2">Model de Voce:</label>
                   <select className="w-full rounded-2xl border border-white/10 bg-white/5 p-4 text-white outline-none">
-                    <option className="bg-neutral-900">ElevenLabs — Reverb Signature Voice Clone (Română Caldă, Fermă)</option>
-                    <option className="bg-neutral-900">ElevenLabs — Studio Narrator Pro (Română Editorială)</option>
-                    <option className="bg-neutral-900">ElevenLabs — Adam Deep Authority (Engleză Internațională)</option>
+                    <option className="bg-neutral-900">Gemini TTS Algenib (gemini-3.8-flash-tts) — Română Caldă & Clară</option>
+                    <option className="bg-neutral-900">Gemini TTS Algenib (gemini-3.8-flash-tts) — Ton Festiv / Spirit de Cadou</option>
+                    <option className="bg-neutral-900">Gemini TTS Algenib (gemini-3.8-flash-tts) — Engleză Internațională</option>
                   </select>
                 </div>
 
@@ -1337,8 +1855,8 @@ export default function StudioPage() {
                   <div className="text-xs font-mono text-neutral-300 space-y-1.5 mb-6 text-left">
                     <div>• Scenariu: Generat cu Gemini 4 Argon Ultra (30s)</div>
                     <div>• Cercetare: Validat cu Google Deep Research</div>
-                    <div>• Cadre Video: Calibrate Google Veo 2 (60fps)</div>
-                    <div>• Voce: ElevenLabs Signature caldă & fermă</div>
+                    <div>• Cadre Video: Calibrate Google AI Ultra Flow / Veo 2 (60fps)</div>
+                    <div>• Voce: Gemini TTS Algenib (gemini-3.8-flash-tts)</div>
                     <div>• Destinații: TikTok, Instagram Reels, YouTube Shorts</div>
                   </div>
 
@@ -1484,397 +2002,10 @@ export default function StudioPage() {
           </Reveal>
         )}
 
-        {/* ── RAMURA 1: SUNO & COLINDE AUTOPILOT (SCENARIU + VIDEO CINEMATIC AUTOMAT + MONETIZARE) ── */}
+        {/* ── RAMURA 1: MUZICĂ (11 nov 2026, plan studio_muzica_2026-11-11/design_v2_1_decizii.md) ── */}
         {activeTab === "music-autopilot" && (
           <Reveal>
-            <div className="space-y-8">
-              <div className="rounded-3xl border border-amber-400/25 bg-neutral-900/40 p-8 backdrop-blur-md">
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6 mb-8">
-                  <div>
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-amber-400 font-bold">
-                      Ramura 1 • Conductă Automată Cap-Coadă (Tu nu trebuie să apeși pe unelte tehnice)
-                    </span>
-                    <h2 className="text-2xl font-medium text-white mt-1">
-                      🎵 Muzică & Colinde Autopilot: Din Suno → Scenariu + Videoclip Cinematic → YouTube & Spotify
-                    </h2>
-                    <p className="text-xs text-neutral-400 font-mono mt-1">
-                      Sistemul ia singur melodiile din calculator sau Suno.com, alege varianta fără greșeli, scrie scenariul vizual, randează videoclipul cu cadre cinematice și îl pregătește de publicare.
-                    </p>
-                  </div>
-                  <button
-                    onClick={handleLoadMusicAutopilot}
-                    disabled={isLoadingMusic}
-                    className="rounded-full bg-amber-400 px-5 py-2.5 text-xs font-mono uppercase tracking-widest text-black font-bold hover:bg-amber-300 transition-all disabled:opacity-50 shrink-0"
-                  >
-                    {isLoadingMusic ? "Se Audiază..." : "Re-scanează Catalogul ⚡"}
-                  </button>
-                </div>
-
-                {/* CUM FUNCȚIONEAZĂ AUTOMAT — EXPLICAT SIMPLU ÎN 4 PAȘI */}
-                <div className="mb-8 rounded-2xl border border-amber-400/20 bg-amber-400/[0.04] p-5">
-                  <div className="text-xs font-mono uppercase tracking-widest text-amber-300 font-bold mb-3">
-                    Cum se creează videoclipul 100% automat (fără să faci tu nimic manual):
-                  </div>
-                  <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
-                    <div className="p-3.5 rounded-xl bg-black/50 border border-white/10">
-                      <div className="text-amber-400 font-mono font-bold text-[11px] mb-1">PASUL 1 • JURIUL AUDIO</div>
-                      <p className="text-neutral-300 leading-relaxed">
-                        Scriptul ascultă toate dublele din Suno, elimină copiile și alege piesa cu vocea cea mai clară și final firesc.
-                      </p>
-                    </div>
-                    <div className="p-3.5 rounded-xl bg-black/50 border border-white/10">
-                      <div className="text-sky-400 font-mono font-bold text-[11px] mb-1">PASUL 2 • SCENARIUL VIZUAL</div>
-                      <p className="text-neutral-300 leading-relaxed">
-                        Gemini 4 Argon citește versurile melodiei și împarte automat piesa în 4 scene cinematice (introducere, strofă, refren, final).
-                      </p>
-                    </div>
-                    <div className="p-3.5 rounded-xl bg-black/50 border border-white/10">
-                      <div className="text-purple-400 font-mono font-bold text-[11px] mb-1">PASUL 3 • RANDARE VIDEO HD</div>
-                      <p className="text-neutral-300 leading-relaxed">
-                        Generatorul vizual creează cadrele 16:9, iar FFmpeg le animă cu mișcare lină de cameră, tranziții și sunetul masterizat.
-                      </p>
-                    </div>
-                    <div className="p-3.5 rounded-xl bg-black/50 border border-emerald-500/30">
-                      <div className="text-emerald-400 font-mono font-bold text-[11px] mb-1">PASUL 4 • DISTRIBUȚIE & BANI</div>
-                      <p className="text-neutral-300 leading-relaxed">
-                        Tu doar vezi videoclipul gata mai jos și apeși <strong>„Aprobă & Publică”</strong> pentru YouTube (video) + Spotify/TikTok (audio).
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {musicAutopilotData?.audit ? (
-                  <div className="space-y-8 font-mono text-xs">
-                    {/* Summary KPI Cards */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                      <div className="p-5 rounded-2xl border border-white/10 bg-black/40">
-                        <div className="text-neutral-500 uppercase text-[10px] mb-1">Colinde Scanate (Disc)</div>
-                        <div className="text-3xl font-light text-white">{musicAutopilotData.audit.total_files_scanned}</div>
-                        <div className="text-amber-400 text-[10px] mt-1">WAV 48kHz analizate</div>
-                      </div>
-                      <div className="p-5 rounded-2xl border border-white/10 bg-black/40">
-                        <div className="text-neutral-500 uppercase text-[10px] mb-1">Dubluri Eliminate</div>
-                        <div className="text-3xl font-light text-rose-400">{musicAutopilotData.audit.exact_duplicates_eliminated}</div>
-                        <div className="text-neutral-400 text-[10px] mt-1">SHA-256 identice la octet</div>
-                      </div>
-                      <div className="p-5 rounded-2xl border border-white/10 bg-black/40">
-                        <div className="text-neutral-500 uppercase text-[10px] mb-1">Variante Unice Jurizate</div>
-                        <div className="text-3xl font-light text-sky-400">{musicAutopilotData.audit.unique_variations_scored}</div>
-                        <div className="text-neutral-400 text-[10px] mt-1">Fără final tăiat brusc</div>
-                      </div>
-                      <div className="p-5 rounded-2xl border border-emerald-500/30 bg-emerald-950/20">
-                        <div className="text-emerald-400 uppercase text-[10px] mb-1">Videoclipuri Cinematice Gata</div>
-                        <div className="text-3xl font-light text-white">{musicAutopilotData.audit.song_families.length} / {musicAutopilotData.audit.song_families.length}</div>
-                        <div className="text-emerald-400 text-[10px] mt-1">Scenariu + 4 Scene HD + Audio</div>
-                      </div>
-                    </div>
-
-                    {/* Winning Songs & Video Previews */}
-                    <div className="space-y-6">
-                      <div className="text-xs uppercase tracking-widest text-amber-300 font-bold">
-                        ★ Piese Câștigătoare + Scenariul Vizual + Videoclipul Cinematic Randat Automat:
-                      </div>
-
-                      <div className="grid lg:grid-cols-2 gap-6">
-                        {musicAutopilotData.audit.song_families.map((fam: any) => {
-                          const w = fam.winner;
-                          const pubKey = fam.family;
-                          const pubState = musicPublishState[pubKey] || "ready";
-                          const storyboard = musicAutopilotData.autoStoryboards?.[fam.family];
-                          return (
-                            <div
-                              key={fam.family}
-                              className="rounded-3xl border border-amber-400/30 bg-black/50 p-6 flex flex-col justify-between"
-                            >
-                              <div>
-                                <div className="flex items-center justify-between gap-2 mb-3">
-                                  <span className="px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 font-bold text-[10px]">
-                                    CÂȘTIGĂTOARE #{fam.language} • SCOR {w.score}/100
-                                  </span>
-                                  <span className="text-neutral-400 text-[11px]">
-                                    Aleasă din {fam.total_variations_analyzed} variante unice
-                                  </span>
-                                </div>
-
-                                <h3 className="text-lg font-bold text-white font-sans">{fam.family}</h3>
-                                <div className="text-amber-300 text-xs mt-0.5 mb-4">
-                                  Fișier câștigător: <strong>{w.file}</strong> ({w.duration_fmt} • {w.size_mb} MB)
-                                </div>
-
-                                {/* Video Player */}
-                                {w.preview_video_url && (
-                                  <div className="mb-5 rounded-2xl overflow-hidden border border-amber-400/30 bg-black shadow-lg">
-                                    <div className="bg-amber-400/10 px-3 py-1.5 text-[10px] text-amber-300 font-bold flex justify-between items-center border-b border-amber-400/20">
-                                      <span>🎬 VIDEOCLIP INTEGRAL ({w.duration_fmt} • 4 SCENE + AUDIO MASTER)</span>
-                                      <span className="text-emerald-400">● HD 16:9 + 9:16</span>
-                                    </div>
-                                    <video
-                                      controls
-                                      preload="metadata"
-                                      poster="/media/scena_colind_1.jpg"
-                                      className="w-full aspect-video"
-                                      src={w.preview_video_url}
-                                    />
-                                    <div className="px-3 py-2 text-[10px] text-neutral-400 flex flex-wrap gap-3 justify-between border-t border-white/5">
-                                      <a href={w.preview_video_url} download className="text-amber-400 hover:underline font-bold">
-                                        ⬇ Video Integral 16:9 ({w.duration_fmt})
-                                      </a>
-                                      {w.short_video_url && (
-                                        <a href={w.short_video_url} download className="text-rose-400 hover:underline font-bold">
-                                          ⬇ Video Vertical 9:16 TikTok/Shorts (40s Refren)
-                                        </a>
-                                      )}
-                                      {w.cover_3000_url && (
-                                        <a href={w.cover_3000_url} download className="text-emerald-400 hover:underline font-bold">
-                                          ⬇ Copertă Spotify 3000×3000px
-                                        </a>
-                                      )}
-                                    </div>
-                                  </div>
-                                )}
-
-                                {/* Automatic Visual Storyboard (4 Scenes) */}
-                                {storyboard && Array.isArray(storyboard.scenes) && (
-                                  <div className="mb-5 p-4 rounded-2xl bg-white/[0.03] border border-white/10">
-                                    <div className="text-[11px] font-bold text-amber-300 uppercase tracking-wider mb-1">
-                                      Scenariu Generat Automat ({storyboard.concept}):
-                                    </div>
-                                    <div className="text-[10px] text-neutral-400 mb-3">
-                                      Canal țintă: <strong className="text-white">{storyboard.targetChannel}</strong>
-                                    </div>
-                                    <div className="grid grid-cols-2 gap-2.5">
-                                      {storyboard.scenes.map((sc: any, sIdx: number) => (
-                                        <div key={sIdx} className="rounded-xl overflow-hidden border border-white/10 bg-black/60">
-                                          <img
-                                            src={sc.img}
-                                            alt={sc.title}
-                                            className="w-full h-20 object-cover"
-                                          />
-                                          <div className="p-2">
-                                            <div className="text-[10px] text-amber-400 font-bold">{sc.time} • {sc.title}</div>
-                                            <div className="text-[10px] text-neutral-300 mt-0.5 leading-snug font-sans">{sc.desc}</div>
-                                          </div>
-                                        </div>
-                                      ))}
-                                    </div>
-                                  </div>
-                                )}
-
-                                {/* Technical Metrics */}
-                                <div className="grid grid-cols-3 gap-2 mb-4 text-[11px]">
-                                  <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
-                                    <div className="text-neutral-500 text-[10px]">Loudness</div>
-                                    <div className="text-white font-bold">{w.lufs} LUFS</div>
-                                  </div>
-                                  <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
-                                    <div className="text-neutral-500 text-[10px]">Dinamică (LRA)</div>
-                                    <div className="text-emerald-400 font-bold">{w.lra} LU</div>
-                                  </div>
-                                  <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
-                                    <div className="text-neutral-500 text-[10px]">Vârf / Final</div>
-                                    <div className="text-sky-300 font-bold">{w.peak_db} dB / Firesc</div>
-                                  </div>
-                                </div>
-
-                                {/* Alternatives folded summary */}
-                                {fam.alternatives?.length > 0 && (
-                                  <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5 mb-4 text-[11px] text-neutral-400">
-                                    <div className="text-neutral-300 font-semibold mb-1">
-                                      Variante secundare păstrate în arhivă (nepublicate pentru a evita dublarea):
-                                    </div>
-                                    {fam.alternatives.map((alt: any) => (
-                                      <div key={alt.file} className="flex justify-between py-0.5">
-                                        <span>• {alt.file} ({alt.duration_fmt})</span>
-                                        <span>LRA {alt.lra} LU • Scor {alt.score}</span>
-                                      </div>
-                                    ))}
-                                  </div>
-                                )}
-                              </div>
-
-                              {/* 1-Click Publish Actions */}
-                              <div className="pt-3 border-t border-white/10 flex flex-wrap gap-2">
-                                {pubState === "ready" ? (
-                                  <button
-                                    onClick={() => setMusicPublishState({ ...musicPublishState, [pubKey]: "queued" })}
-                                    className="w-full rounded-full bg-emerald-400 py-3 text-xs uppercase tracking-widest text-black font-bold hover:bg-emerald-300 transition-all shadow-lg"
-                                  >
-                                    ✓ Aprobă & Urcă Automat pe YouTube + Spotify / TikTok Audio
-                                  </button>
-                                ) : (
-                                  <div className="w-full rounded-2xl bg-emerald-950/30 border border-emerald-500/30 p-3 text-emerald-300 text-center">
-                                    ✓ În coada automată de publicare: YouTube Video (16:9) + Shorts (9:16) + Pachet Master WAV (-14 LUFS) pentru Spotify / Apple Music / TikTok Sound!
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-
-                    {/* ALBUME / COLAJE LUNGI DE COLINDE (ROMÂNĂ & ENGLEZĂ) */}
-                    {musicAutopilotData.audit.albums_built && (
-                      <div className="rounded-3xl border border-emerald-400/35 bg-emerald-950/15 p-6 space-y-5">
-                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-white/10 pb-4">
-                          <div>
-                            <span className="text-[10px] uppercase tracking-widest text-emerald-400 font-bold block">
-                              💿 Albume / Colaje de Colinde Randate Automat (Pentru Playlistul RO și Playlistul EN de pe Surya Music)
-                            </span>
-                            <h3 className="text-lg font-bold text-white font-sans mt-1">
-                              Cele 2 Albume Unite (Română & Engleză) — Vezi mai jos exact câte minute are fiecare
-                            </h3>
-                          </div>
-                          <span className="px-3 py-1 rounded-full bg-amber-400/20 border border-amber-400/40 text-amber-300 font-bold text-[10px]">
-                            Peste 8 min = Activează Reclamele Mid-Roll YouTube!
-                          </span>
-                        </div>
-
-                        <div className="grid lg:grid-cols-2 gap-6">
-                          {Object.entries(musicAutopilotData.audit.albums_built).map(([langKey, alb]: [string, any]) => (
-                            <div key={langKey} className="rounded-2xl border border-white/10 bg-black/60 p-5 space-y-4">
-                              <div className="flex items-center justify-between">
-                                <span className="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-bold text-[11px]">
-                                  ALBUM COLINDE #{langKey} ({alb.tracks_count} melodii/variante unite)
-                                </span>
-                                <span className="text-amber-300 font-bold text-sm">
-                                  Durată: {alb.duration_fmt} min
-                                </span>
-                              </div>
-
-                              <video
-                                controls
-                                preload="metadata"
-                                poster="/media/scena_colind_2.jpg"
-                                className="w-full aspect-video rounded-xl border border-white/10 bg-black"
-                                src={alb.video_url}
-                              />
-
-                              <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 text-[11px] space-y-1">
-                                <div className="text-amber-300 font-bold mb-1">Capitolele Albumului (Gata de lipit în descrierea YouTube):</div>
-                                {alb.chapters?.map((ch: string, cIdx: number) => (
-                                  <div key={cIdx} className="text-neutral-300">{ch}</div>
-                                ))}
-                              </div>
-
-                              <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-400/30 text-[11px] text-amber-200 font-sans">
-                                💡 <strong>Cât mai trebuie până la un Album de 1 Oră (60 min):</strong> Acest colaj are acum <strong>{alb.duration_fmt} minute</strong> (deja trece pragul de 8 minute pentru reclame Mid-Roll!). Dacă mai creezi în Suno încă <strong>~{alb.needed_for_60min} colinde noi</strong> în {langKey === "RO" ? "română" : "engleză"}, ajungem la 60 de minute complete!
-                              </div>
-
-                              <a
-                                href={alb.video_url}
-                                download
-                                className="block w-full text-center rounded-full bg-emerald-400 py-2.5 text-xs uppercase tracking-widest text-black font-bold hover:bg-emerald-300 transition-all"
-                              >
-                                ⬇ Descarcă Albumul {langKey} ({alb.duration_fmt} min) MP4
-                              </a>
-                            </div>
-                          ))}
-                        </div>
-
-                        {musicAutopilotData.audit.extended_albums_built && (
-                          <div className="pt-6 border-t border-white/10 space-y-4">
-                            <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
-                              <div>
-                                <span className="text-[10px] uppercase tracking-widest text-amber-300 font-bold block">
-                                  🌟 Albume Extinse de ~1 Oră (Colinde + Cele mai bune balade și poezii RO & EN de pe calculator)
-                                </span>
-                                <h4 className="text-base font-bold text-white font-sans mt-0.5">
-                                  Colaje Lungi (54:51 min Engleză • 52:40 min Română) — Gata de urcat pe cele 2 Playlisturi de pe Surya Music
-                                </h4>
-                              </div>
-                            </div>
-
-                            <div className="grid lg:grid-cols-2 gap-6">
-                              {Object.entries(musicAutopilotData.audit.extended_albums_built).map(([langKey, ext]: [string, any]) => (
-                                <div key={langKey} className="rounded-2xl border border-amber-400/30 bg-black/60 p-5 space-y-4">
-                                  <div className="flex items-center justify-between">
-                                    <span className="px-3 py-1 rounded-full bg-amber-400/20 text-amber-300 font-bold text-[11px]">
-                                      ALBUM EXTINS #{langKey} ({ext.tracks_count} piese unice)
-                                    </span>
-                                    <span className="text-emerald-400 font-bold text-sm">
-                                      Durată: {ext.duration_fmt} min
-                                    </span>
-                                  </div>
-
-                                  <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 text-[11px] space-y-1 max-h-48 overflow-y-auto">
-                                    <div className="text-amber-300 font-bold mb-1">Lista celor {ext.tracks_count} piese & Capitole YouTube:</div>
-                                    {ext.chapters?.map((ch: string, cIdx: number) => (
-                                      <div key={cIdx} className="text-neutral-300">{ch}</div>
-                                    ))}
-                                  </div>
-
-                                  <a
-                                    href={ext.video_url}
-                                    download
-                                    className="block w-full text-center rounded-full bg-amber-400 py-2.5 text-xs uppercase tracking-widest text-black font-bold hover:bg-amber-300 transition-all"
-                                  >
-                                    ⬇ Descarcă Albumul Extins {langKey} ({ext.duration_fmt} min) MP4
-                                  </a>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    )}
-
-                    {/* Full Catalog Inventory & Monetization Architecture */}
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div className="p-6 rounded-2xl border border-white/10 bg-black/40">
-                        <div className="text-white font-bold uppercase tracking-wider mb-3">
-                          Inventar Local C:\Users\alind\Music\Suno - melodiile lui Alin:
-                        </div>
-                        <div className="space-y-2 text-[11px]">
-                          {musicAutopilotData.audit.catalog_categories.map((cat: any) => (
-                            <div key={cat.folder} className="flex justify-between border-b border-white/5 pb-1.5">
-                              <span className="text-neutral-300">{cat.folder}</span>
-                              <span className="text-amber-400 font-bold">{cat.count} piese</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="p-6 rounded-2xl border border-white/10 bg-black/40">
-                        <div className="text-white font-bold uppercase tracking-wider mb-3">
-                          Unde pleacă automat fiecare melodie (Video + Audio):
-                        </div>
-                        <div className="space-y-3 text-[11px] text-neutral-300">
-                          <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5">
-                            <div className="text-amber-300 font-bold">1. Conexiune Suno.com → Reverb Studio</div>
-                            <p className="text-neutral-400 mt-1">
-                              Preluare automată a melodiilor noi din contul tău Suno.com, grupare după versuri și filtrare prin Juriul Acustic (fără ascultare manuală).
-                            </p>
-                          </div>
-                          <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5">
-                            <div className="text-sky-300 font-bold">2. YouTube Data API v3 (Video 16:9 + Shorts 9:16)</div>
-                            <p className="text-neutral-400 mt-1">
-                              Randare automată MP4 cu cadre cinematice, versuri sincronizate și urcare directă pe canal cu SEO și monetizare.
-                            </p>
-                          </div>
-                          <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5">
-                            <div className="text-emerald-300 font-bold">3. Platforme Doar Audio (Spotify, Apple Music, TikTok Sound Library)</div>
-                            <p className="text-neutral-400 mt-1">
-                              Export automat pachet Master WAV (-14 LUFS) + Copertă 3000×3000px + metadate autor versuri „Alin-Dragoș Drîmbu” prin DistroKid (fără bifa Content ID, conform regulii AI 2026).
-                            </p>
-                          </div>
-                          <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-400/30">
-                            <div className="text-amber-300 font-bold">4. Multiplicator 10x Venituri: Colaj Album 1 Oră (Mid-Roll Ads)</div>
-                            <p className="text-neutral-300 mt-1">
-                              Pe lângă clipurile individuale, sistemul unește automat colindele și cântările de suflet într-un Album Video de 50–60 minute (peste pragul de 8 minute YouTube), activând reclamele Mid-Roll (8–18 € / 1.000 vizualizări în decembrie).
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="text-center py-12 text-neutral-400 font-mono text-xs">
-                    Se încarcă rezultatele Juriului Acustic & AI...
-                  </div>
-                )}
-              </div>
-            </div>
+            <MuzicaTab onNeautentificat={() => setIsAuthenticated(false)} />
           </Reveal>
         )}
 
@@ -2109,38 +2240,38 @@ export default function StudioPage() {
                   </div>
 
                   <div className="grid lg:grid-cols-2 gap-6 font-mono text-xs">
-                    {/* KIT 1: SURYA MUSIC (FOSTUL BRICOARCH — CU 2 PLAYLISTURI: RO & EN) */}
+                    {/* KIT 1: SURYA MUSIC · ALIN DRAGOȘ (CU 2 PLAYLISTURI: RO & EN) */}
                     <div className="rounded-3xl border border-amber-400/40 bg-black/60 p-6 flex flex-col justify-between">
                       <div>
                         <div className="flex items-center justify-between gap-2 mb-3">
                           <span className="px-3 py-1 rounded-full bg-amber-400/20 border border-amber-400/40 text-amber-300 font-bold text-[10px]">
-                            CANALUL TĂU CU VECHIME 318 ZILE • REDENUMIRE DIN BRICOARCH ÎN SURYA MUSIC
+                            CANALUL OFICIAL DE MUZICĂ & COLINDE • SURYA MUSIC · ALIN DRAGOȘ
                           </span>
                         </div>
                         <h3 className="text-lg font-bold text-white font-sans">
-                          1. Canalul „Surya Music” (Fostul Bricoarch — cu 2 Playlisturi: RO & EN)
+                          1. Canalul „Surya Music · Alin Dragoș” (@suryamusic.alindragos — RO & EN)
                         </h3>
                         <p className="text-neutral-400 text-[11px] font-sans mt-1 mb-4">
-                          Folosim canalul tău existent <strong>Bricoarch</strong> (care are deja vechime de 1 an și 10 piese urcate). Îl redenumim în <strong>Surya Music</strong> și organizăm melodiile în <strong>2 Playlisturi separate</strong> (unul în Română, unul în Engleză).
+                          Canalul tău cu vechime și piese deja urcate, dedicat integral muzicii originale și colindelor pe versurile lui Alin Dragoș, organizat în <strong>2 Playlisturi separate</strong> (unul în Română, unul în Engleză).
                         </p>
 
                         <div className="space-y-2.5 bg-white/[0.03] border border-white/10 rounded-2xl p-4 mb-4">
                           <div>
-                            <span className="text-neutral-500 text-[10px] block">NUME CANAL YOUTUBE (în loc de Bricoarch):</span>
-                            <strong className="text-amber-300 text-sm select-all">Surya Music</strong>
+                            <span className="text-neutral-500 text-[10px] block">NUME CANAL YOUTUBE:</span>
+                            <strong className="text-amber-300 text-sm select-all">Surya Music · Alin Dragoș</strong>
                           </div>
                           <div>
                             <span className="text-neutral-500 text-[10px] block">HANDLE (@):</span>
-                            <strong className="text-white select-all">@suryamusic_official</strong> <span className="text-neutral-500">(sau @suryamusicro)</span>
+                            <strong className="text-white select-all">@suryamusic.alindragos</strong>
                           </div>
                           <div>
-                            <span className="text-neutral-500 text-[10px] block">CELE 2 PLAYLISTURI DE CREAT PE CANAL:</span>
+                            <span className="text-neutral-500 text-[10px] block">CELE 2 PLAYLISTURI DE PE CANAL:</span>
                             <p className="text-emerald-300 select-all">1. Colinde și Muzică de Suflet (Română)</p>
                             <p className="text-sky-300 select-all">2. Soulful Music, Poetry & Carols (English)</p>
                           </div>
                           <div>
                             <span className="text-neutral-500 text-[10px] block">DESCRIERE YOUTUBE (Bilingvă EN + RO):</span>
-                            <p className="text-neutral-200 select-all">Surya Music — Original music, poetry, and Christmas carols by Alin Dragoș (English & Romanian playlists). Muzică pentru suflet, colinde și versuri originale · kalki.nexus</p>
+                            <p className="text-neutral-200 select-all">Surya Music · Alin Dragoș — Original music, poetry, and Christmas carols by Alin Dragoș (English & Romanian playlists). Muzică pentru suflet, colinde și versuri originale · kalki.nexus</p>
                           </div>
                           <div className="pt-2 border-t border-white/10 flex flex-wrap gap-3 text-[11px]">
                             <a href="/media/surya_music_profil_1080.png" download className="text-amber-400 hover:underline font-bold">
@@ -2159,7 +2290,7 @@ export default function StudioPage() {
                         rel="noreferrer"
                         className="w-full text-center rounded-full bg-amber-400 py-3 text-xs uppercase tracking-widest text-black font-bold hover:bg-amber-300 transition-all block"
                       >
-                        ↗ Deschide Direct Personalizarea Bricoarch → Schimbă în „Surya Music”
+                        ↗ Deschide YouTube Studio — Surya Music · Alin Dragoș (@suryamusic.alindragos)
                       </a>
                     </div>
 
