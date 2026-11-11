@@ -4,7 +4,7 @@ import ConceptGallery, { type Concept } from "@/components/ConceptGallery";
 export const metadata: Metadata = {
   alternates: { canonical: "/en/showcase", languages: { ro: "/showcase", en: "/en/showcase", "x-default": "/showcase" } },
   title: "Design concepts and directions",
-  description: "Mock-ups and style studies built by Reverb for different niches: samples of visual direction, kept apart from the portfolio of live systems.",
+  description: "Mock-ups and style studies built by Reverb for different niches: samples of visual direction, kept apart from the portfolio of live projects.",
 };
 
 const showcases: Concept[] = [
@@ -36,8 +36,6 @@ const showcases: Concept[] = [
   { id: "bricolando", name: "Bricolando DIY", vibe: "Industrial Construction", color: "#E34A27", description: "Robust industrial eCommerce infrastructure engineered for wholesale hardware catalogs.", href: "/showcase/bricolando" },
   { id: "kalki", name: "Kalki Fashion", vibe: "High-End Vogue", color: "#F0F0F0", description: "Luxury visual platform with negative space and editorial asymmetric parallax.", href: "/showcase/kalki" },
   { id: "virtus", name: "Virtus Protocol", vibe: "Primal Masculine", color: "#8A1C14", description: "Extreme contrast brutalist design, high-density typography, and focus on discipline.", href: "/showcase/virtus" },
-  { id: "canapuff", name: "Canapuff Premium", vibe: "Neon Glassmorphism", color: "#E2FF00", description: "Modern eCommerce layout, gradient backdrop, infinite marquee, and saturated aesthetics.", href: "/showcase/canapuff" },
-  { id: "jim-curtis", name: "Jim Curtis Neuroscience", vibe: "Cognitive Reprogramming", color: "#06B6D4", description: "Digital experience focused on neuroscience, somatic healing, and clinical indigo clarity.", href: "/showcase/jim-curtis" },
   { id: "clarity-architecture", name: "Clarity Architecture", vibe: "Sacred Infographic", color: "#C9A444", description: "A visual architectural treatise on technical infrastructure and sacred proportions.", href: "/clarity-architecture" },
   { id: "soare", name: "Soare & Izvoare", vibe: "Ethereal Solaris", color: "#D97706", description: "Radiant, warm interface designed for businesses focused on clarity and organic elevation.", href: "/showcase/soare" },
   { id: "cuprum-medical", name: "Cuprum Clinic", vibe: "Medical Copper", color: "#C47022", description: "Revolutionary clinical design built around steel and cut with natural antimicrobial copper.", href: "/showcase/cuprum-medical" },

@@ -20,7 +20,7 @@ const copy = {
     h1b: "de design.",
     lead: (n: number) =>
       `${n} machete și studii de stil, fiecare gândită pentru altă nișă — de la rigoarea medicală la industrialul B2B. Sunt mostre de direcție vizuală. Sistemele aflate în producție sunt în Portofoliu.`,
-    toPortfolio: "Portofoliu — sisteme live",
+    toPortfolio: "Portofoliu — proiecte live",
     portfolioHref: "/portofoliu",
     open: "Deschide macheta",
   },
@@ -30,7 +30,7 @@ const copy = {
     h1b: "and directions.",
     lead: (n: number) =>
       `${n} mock-ups and style studies, each built for a different niche — from medical rigour to industrial B2B. They are samples of visual direction. Systems running in production are in the Portfolio.`,
-    toPortfolio: "Portfolio — live systems",
+    toPortfolio: "Portfolio — live projects",
     portfolioHref: "/en/portfolio",
     open: "Open the mock-up",
   },

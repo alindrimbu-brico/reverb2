@@ -16,22 +16,16 @@ const nextConfig: NextConfig = {
   // Repo-ul `flooare` are acum domeniul propriu (www.flooare.ro), deci github.io
   // redirecționează și proxy-ul vechi nu mai merge.
   redirects: async () => [
+    // Machetele cu nume de mărci reale au fost scoase (12 nov 2026); adresele vechi duc la galerie.
+    { source: "/showcase/canapuff", destination: "/showcase", permanent: true },
+    { source: "/showcase/jim-curtis", destination: "/showcase", permanent: true },
     { source: "/flooare-portal", destination: "https://www.flooare.ro/", permanent: true },
     { source: "/flooare-portal/:path*", destination: "https://www.flooare.ro/:path*", permanent: true },
   ],
   rewrites: async () => ({
-    beforeFiles: [
-      {
-        source: '/:path*',
-        destination: '/aura/:path*',
-        has: [
-          {
-            type: 'host',
-            value: 'oglinda.eu',
-          },
-        ],
-      },
-    ],
+    // oglinda.eu (site-ul AURA din public/aura) e servit din middleware.ts, care acoperă și www.
+    // O a doua regulă aici dubla prefixul (/aura/aura/...) și paginile ieșeau 404.
+    beforeFiles: [],
     // Slash-ul final se păstrează explicit: fără el GitHub răspunde cu 301 spre github.io.
     afterFiles: Object.entries(GITHUB_SHOWCASES).flatMap(([path, repo]) => {
       const origin = `https://alindrimbu-brico.github.io/${repo}`;

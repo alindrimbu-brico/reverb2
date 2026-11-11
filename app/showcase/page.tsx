@@ -4,7 +4,7 @@ import ConceptGallery, { type Concept } from "@/components/ConceptGallery";
 export const metadata: Metadata = {
   alternates: { canonical: "/showcase", languages: { ro: "/showcase", en: "/en/showcase", "x-default": "/showcase" } },
   title: "Concepte și direcții de design",
-  description: "Machete și studii de stil construite de Reverb pentru nișe diferite: mostre de direcție vizuală, separate de portofoliul de sisteme live.",
+  description: "Machete și studii de stil construite de Reverb pentru nișe diferite: mostre de direcție vizuală, separate de portofoliul de proiecte live.",
 };
 
 const showcases: Concept[] = [
@@ -36,8 +36,6 @@ const showcases: Concept[] = [
   { id: "bricolando", name: "Bricolando DIY", vibe: "Industrial Construction", color: "#E34A27", description: "Infrastructură digitală B2B robustă, dedicată mediului industrial și fluxului en-gros de mii de produse utilitare.", href: "/showcase/bricolando" },
   { id: "kalki", name: "Kalki Fashion", vibe: "High-End Vogue", color: "#F0F0F0", description: "Platformă luxury dominată de imagini. Spațiu negativ generos și paralaxă asimetrică specifică designului editorial.", href: "/showcase/kalki" },
   { id: "virtus", name: "Virtus Protocol", vibe: "Primal Masculine", color: "#8A1C14", description: "Forță absolută. Design brutalist dominat de contrast extrem, typography all-caps masiv și focus pe spiritul masculin: disciplină, corp, frăție.", href: "/showcase/virtus" },
-  { id: "canapuff", name: "Canapuff Premium", vibe: "Neon Glassmorphism", color: "#E2FF00", description: "Replică 1:1 a brandului Canapuff CBD. Layout gradient asimetric e-commerce, marquee infinit și experiență de modă ultra-saturată.", href: "/showcase/canapuff" },
-  { id: "jim-curtis", name: "Jim Curtis Neuroscience", vibe: "Cognitive Reprogramming", color: "#06B6D4", description: "O experiență digitală profundă axată pe neuroștiință, vindecare somatică și Hypno-Coaching℠. Estetică clinical-indigo.", href: "/showcase/jim-curtis" },
   { id: "clarity-architecture", name: "Arhitectura Clarității", vibe: "Sacred Infographic", color: "#C9A444", description: "Un tratat vizual. De la infrastructură tehnică (GitHub/Vercel) și structuri educaționale flashcard, până la estetica spațiului sacru.", href: "/clarity-architecture" },
   { id: "soare", name: "Soare & Izvoare", vibe: "Ethereal Solaris", color: "#D97706", description: "„Până sus în soare, la marile izboare”. Interfață luminoasă, radiind căldură, creată pentru afaceri axate pe claritate, ascensiune și organicitate premium.", href: "/showcase/soare" },
   { id: "cuprum-medical", name: "Cuprum Clinic", vibe: "Medical Copper", color: "#C47022", description: "Design clinic revoluționar construit în jurul oțelului și tăiat cu patina cuprului, reflectând moștenirea proprietăților sale antimicrobiene naturale.", href: "/showcase/cuprum-medical" },

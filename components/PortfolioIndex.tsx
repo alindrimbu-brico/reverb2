@@ -17,7 +17,7 @@ function offer(id: string, lang: Lang) {
 const copy = {
   ro: {
     label: "Portofoliu",
-    h1a: "Sisteme live.",
+    h1a: "Proiecte live.",
     h1b: "Făcute de noi.",
     lead: "Site-uri, magazine online și aplicații web construite de Reverb. Fiecare e pe adresa lui: deschide-l și verifică singur.",
     site: "Site de prezentare, 3–5 pagini: de la",
@@ -36,7 +36,7 @@ const copy = {
   },
   en: {
     label: "Portfolio",
-    h1a: "Live systems.",
+    h1a: "Live projects.",
     h1b: "Built by us.",
     lead: "Websites, online stores and web applications built by Reverb. Each one is on its own address: open it and check for yourself.",
     site: "Presentation website, 3–5 pages: from",

@@ -76,7 +76,8 @@ export async function middleware(request: NextRequest) {
     
     // For local assets (e.g. /aura.css loading from the index.html) or node HTMLs
     // they arrive as relative paths matching root, so we map them to /aura/
-    if (!url.pathname.startsWith('/aura')) {
+    // „/aura/” cu slash: fișierele aura.css și aura.js încep și ele cu „/aura”.
+    if (!url.pathname.startsWith('/aura/')) {
       url.pathname = `/aura${url.pathname}`;
       return NextResponse.rewrite(url);
     }

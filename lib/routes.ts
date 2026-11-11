@@ -58,11 +58,9 @@ export const SHOWCASE_RO_EN: string[] = [
 /** Showcase-uri doar în română. */
 export const SHOWCASE_RO_ONLY: string[] = [
   "bricolando",
-  "canapuff",
   "cuprum-medical",
   "fish-io",
   "inhale-exhale",
-  "jim-curtis",
   "kalki",
   "metanoia",
   "origini",
