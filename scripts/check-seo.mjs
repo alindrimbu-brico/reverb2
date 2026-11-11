@@ -3,6 +3,9 @@
 // 1. Fiecare page.tsx din app/ trebuie să fie în sitemap, în NOINDEX sau o redirecționare.
 // 2. Fiecare adresă din sitemap răspunde 200, are canonical = adresa ei și un titlu propriu.
 // 3. Paginile noindex au <meta name="robots" content="noindex...">.
+// 4. Machetele (/showcase/<x> și dosarele statice din public/) lipsesc din sitemap și
+//    răspund cu antetul X-Robots-Tag: noindex (middleware.ts + isMockupPath din lib/routes.ts).
+//    Listele de mai jos sunt copia celor din lib/routes.ts: se schimbă împreună.
 import fs from "node:fs";
 import path from "node:path";
 
@@ -10,7 +13,19 @@ const base = (process.argv[2] ?? "http://localhost:3000").replace(/\/$/, "");
 const SITE_URL = "https://reverb.ro";
 const NOINDEX = ["/portal", "/en/portal", "/checkout", "/en/checkout", "/guru", "/instaleaza", "/macheta", "/studio", "/templates", "/en/templates", "/templates/industrii"];
 const REDIRECTS = ["/showcase/xiaolong", "/en/showcase/xiaolong"];
-const GENERIC_TITLES = new Set(["Reverb — Structură, execuție, rezultate", "Clarity | Reverb", "Clarity"]);
+const SHOWCASE_INDEXABLE = ["florarte", "surya"];
+const MOCKUP_SAMPLES = [
+  "/acasa-showcase/index.html",
+  "/aura/index.html",
+  "/noapte/index.html",
+  "/spiritual-site/index.html",
+  "/guru-store/index.html",
+];
+const isMockup = (route) => {
+  const m = route.replace(/^\/(en|es|pt|ru|zh)(?=\/)/, "").match(/^\/showcase\/([^/]+)/);
+  return !!m && !SHOWCASE_INDEXABLE.includes(m[1]);
+};
+const GENERIC_TITLES =new Set(["Reverb — Structură, execuție, rezultate", "Clarity | Reverb", "Clarity"]);
 
 function walkPages(dir, out = []) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -34,11 +49,17 @@ async function main() {
   const urls = [...sitemapXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
   const sitemapPaths = new Set(urls.map((u) => u.replace(SITE_URL, "") || "/"));
   const problems = [];
+  const mockups = [];
 
   // 1. acoperirea paginilor statice (rutele dinamice se verifică prin adresele din sitemap)
   for (const file of walkPages(path.join(process.cwd(), "app"))) {
     const route = routeOf(file);
     if (/\[/.test(route)) continue;
+    if (isMockup(route)) {
+      if (sitemapPaths.has(route)) problems.push(`machetă în sitemap: ${route}`);
+      if (!REDIRECTS.includes(route)) mockups.push(route);
+      continue;
+    }
     if (!sitemapPaths.has(route) && !NOINDEX.includes(route) && !REDIRECTS.includes(route)) {
       problems.push(`pagină lipsă din sitemap și din NOINDEX: ${route}`);
     }
@@ -72,7 +93,22 @@ async function main() {
     if (!robots || !/noindex/.test(robots)) problems.push(`${p}: lipsește noindex (robots=${robots})`);
   }
 
-  console.log(`sitemap: ${urls.length} adrese, ${ok} verificate cu 200`);
+  // 4. machetele: antet noindex, iar cele indexabile fără el
+  let mk = 0;
+  for (const p of [...mockups, ...MOCKUP_SAMPLES]) {
+    const res = await fetch(`${base}${p}`, { headers: { "user-agent": "bingbot" } });
+    const tag = res.headers.get("x-robots-tag") || "";
+    if (res.status !== 200) problems.push(`machetă ${p}: HTTP ${res.status}`);
+    else if (!/noindex/.test(tag)) problems.push(`machetă ${p}: lipsește X-Robots-Tag noindex (acum „${tag}”)`);
+    else mk++;
+  }
+  for (const s of SHOWCASE_INDEXABLE) {
+    const res = await fetch(`${base}/showcase/${s}`, { headers: { "user-agent": "bingbot" } });
+    const tag = res.headers.get("x-robots-tag") || "";
+    if (/noindex/.test(tag)) problems.push(`/showcase/${s}: are noindex, dar e destinația unui domeniu propriu`);
+  }
+
+  console.log(`sitemap: ${urls.length} adrese, ${ok} verificate cu 200; machete cu noindex: ${mk}`);
   if (problems.length) {
     console.log(`PROBLEME (${problems.length}):`);
     for (const x of problems) console.log("  - " + x);

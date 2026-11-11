@@ -46,6 +46,7 @@ Cerută de Alin după observațiile lui Marius. Planul, reviziile și scripturil
 - O grilă de carduri are `grid-cols-1` explicit, iar textul cu `truncate` are `min-w-0`; altfel cardul iese din ecran pe telefon și e tăiat fără ca pagina să deruleze lateral.
 - Înainte de publicare: `docs/designs/unificare_stil_2026-11-11/verificari/butoane.py` și `taiat.py` (pe toate paginile principale, 360–1366 px, Chromium și WebKit) trebuie să dea 0.
 - Copiile `*.vercel.app` primesc `X-Robots-Tag: noindex` din `middleware.ts`.
+- **Machetele nu se indexează (decizia lui Alin, 12 nov):** `/showcase/<x>` în toate limbile și dosarele statice din `public/` primesc `X-Robots-Tag: noindex, follow` din `middleware.ts` (`isMockupPath` din `lib/routes.ts`) și lipsesc din sitemap (189 → 41 de adrese). Rămân indexabile `/showcase/florarte` și `/showcase/surya`: florarte.ro și surya.ro redirecționează acolo. Nu le blocați în `robots.txt` (motoarele n-ar mai vedea antetul). O machetă nouă nu se adaugă în sitemap; `scripts/check-seo.mjs` verifică antetul. Neacoperite: cele 5 machete aduse prin proxy din GitHub Pages.
 - Starea de indexare și ce spun modelele AI: `docs/designs/seo_indexare_2026-11-12/constatari.md`.
 
 **Reguli de păstrat de acum înainte (altfel reapare problema):**

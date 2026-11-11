@@ -112,6 +112,43 @@ export function neuroPath(locale: NeuroLocale, slug: string): string {
   return slug ? `${base}/${slug}` : base;
 }
 
+/**
+ * Machetele (conceptele din /showcase) rămân deschise vizitatorilor, dar nu se
+ * indexează și nu intră în sitemap (decizia lui Alin, 12 nov 2026: sitemapul avea
+ * 154 de machete la 18 pagini ale agenției). Semnalul e antetul X-Robots-Tag pus
+ * în middleware.ts; robots.txt NU le blochează, altfel motoarele nu văd antetul.
+ *
+ * Excepție: machetele care sunt destinația unui domeniu propriu
+ * (florarte.ro și surya.ro redirecționează aici) rămân indexabile.
+ */
+export const SHOWCASE_INDEXABLE: string[] = ["florarte", "surya"];
+
+/** Dosare statice din public/ cu machete întregi, legate din galeria /showcase. */
+export const STATIC_MOCKUP_DIRS: string[] = [
+  "acasa-showcase",
+  "aura",
+  "flooare",
+  "guru-store",
+  "noapte",
+  "spiritual-site",
+  "surya",
+  "templates",
+];
+
+const LOCALE_PREFIX = /^\/(en|es|pt|ru|zh)(?=\/)/;
+
+/** true = adresa e o machetă care nu se indexează (pe gazda reverb.ro). */
+export function isMockupPath(pathname: string): boolean {
+  const p = pathname.replace(LOCALE_PREFIX, "");
+  const showcase = p.match(/^\/showcase\/([^/]+)/);
+  if (showcase) return !SHOWCASE_INDEXABLE.includes(showcase[1]);
+  const first = p.split("/")[1] ?? "";
+  // Machetele aduse prin proxy din GitHub Pages (lib/githubShowcases.ts) NU sunt acoperite:
+  // răspunsul lor poartă doar antetele GitHub (încercat 12 nov 2026 din middleware și din
+  // headers() în next.config.ts). Nu sunt în sitemap.
+  return STATIC_MOCKUP_DIRS.includes(first);
+}
+
 /** Pagini care rămân accesibile, dar nu se indexează. */
 export const NOINDEX: string[] = ["/portal", "/en/portal", "/checkout", "/en/checkout", "/guru", "/instaleaza", "/macheta", "/studio", "/templates", "/en/templates", "/templates/industrii"];
 
@@ -152,5 +189,6 @@ export function publicRoutes(): { path: string; languages?: Record<string, strin
     out.push({ path: en, languages });
   }
 
-  return out;
+  // Machetele nu intră în sitemap (vezi isMockupPath); rămân doar cele indexabile.
+  return out.filter((r) => !isMockupPath(r.path));
 }

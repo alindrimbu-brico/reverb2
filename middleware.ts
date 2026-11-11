@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { GITHUB_SHOWCASE_PATHS } from './lib/githubShowcases';
+import { isMockupPath } from './lib/routes';
 import {
   STUDIO_COOKIE_NAME,
   STUDIO_SECURITY_HEADERS,
@@ -134,6 +135,12 @@ export async function middleware(request: NextRequest) {
 
   // Normal request to reverb.ro proceeds unchanged (cu X-Robots-Tag noindex pe /studio și /instaleaza)
   const response = NextResponse.next();
+  // Machetele rămân deschise vizitatorilor, dar nu se indexează (lib/routes.ts, isMockupPath).
+  // Pe gazdele proprii (surya.ro, oglinda.eu) aceleași fișiere sunt site-ul real, deci fără antet.
+  const gazdaProprie = /^(www\.)?(surya\.ro|oglinda\.eu)$/.test(hostname.split(':')[0]);
+  if (!gazdaProprie && isMockupPath(url.pathname)) {
+    response.headers.set('X-Robots-Tag', 'noindex, follow');
+  }
   // Copiile de pe *.vercel.app (reverb-one, reverb2, previzualizări) nu trebuie indexate: doar reverb.ro.
   if (hostname.endsWith('.vercel.app')) {
     response.headers.set('X-Robots-Tag', 'noindex, nofollow');
