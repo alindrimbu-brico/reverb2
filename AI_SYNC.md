@@ -19,6 +19,11 @@ Cerută de Alin după observațiile lui Marius. Planul, reviziile și scripturil
 - `/templates` e scoasă din traseul public (noindex, fără linkuri, în afara sitemapului). Decizia lui Alin.
 - Pagina de pornire: `app/page.tsx` e fișier server (metadata), conținutul e în `app/HomeClient.tsx` (la fel `/en`). `node scripts/check-seo.mjs <adresa>` trebuie să dea OK înainte de publicare.
 
+**11 nov, 23:05 — portofoliul e minimalist (cererea lui Alin: „haos… prea multă repetiție”), commit 5f4425f:**
+- `components/PortfolioIndex.tsx` e o listă simplă: un rând pe proiect, fără fereastră de terminal, fără etichete repetate (stare, „deschide”, „călătoria”, „azi”). Ce e comun tuturor rândurilor se spune o singură dată, deasupra listei; pe rând apare doar ce diferă (ex. „demo”).
+- Prețul „de la” și termenul de sub titlu se citesc din `lib/packages.ts` (`getPackage`), nu se scriu de mână.
+- `lib/liveProjects.ts` are câmpul scurt `kind` (felul proiectului, 1–2 cuvinte) pentru acest rând.
+
 **Reguli de păstrat de acum înainte (altfel reapare problema):**
 1. `dark:` urmează tema site-ului, nu a sistemului de operare: `@custom-variant dark` din `app/globals.css`. Tema implicită e dark; `html.light` e comutatorul din bară.
 2. Fără crem (`#f5f1ea`, `#FAF8F5`, `#F3EFEA`, `#1d2731`) în pagini noi. Paginile se scriu pe vocabularul paginii de pornire: `text-white`, `text-neutral-300/400/500`, `border-white/10`, carduri `bg-neutral-900/40`, buton principal `bg-white text-black`, etichete `font-mono` majuscule. Tema light vine din suprascrierile `html.light` existente.
