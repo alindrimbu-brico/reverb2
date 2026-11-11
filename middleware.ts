@@ -9,7 +9,7 @@ import {
 
 const STUDIO_HOST = 'studio.reverb.ro';
 // true = reverb.ro/studio redirecționează spre gazda Studio, iar /api/studio răspunde doar acolo (și pe localhost).
-const STUDIO_MUTAT = false;
+const STUDIO_MUTAT = true;
 
 export const config = {
   matcher: [
