@@ -849,6 +849,18 @@ html.light .border-emerald-500\/30:not(:where([role="dialog"] *, [data-showcase]
 html.light .bg-emerald-400:not(:where([role="dialog"] *, [data-showcase] *, .showcase-root *, .studio-light-root *)) {
   background-color: #047857 !important;
 }
+/* Cardurile cu degrade inchis (sectiunea „In 2026…” de pe prima pagina, serviciul evidentiat) raman gri inchis
+   in tema light, cu text inchis peste ele: primesc acelasi fond deschis ca restul cardurilor evidentiate. */
+html.light .from-neutral-900\/40.via-neutral-950\/70,
+html.light .from-neutral-900\/60.to-neutral-950\/80 {
+  background-image: linear-gradient(to bottom, #FFFFFF, #EEF0F2) !important;
+  border-color: rgba(29, 39, 49, 0.22) !important;
+  box-shadow: 0 10px 30px rgba(29, 39, 49, 0.08) !important;
+}
+/* Punctele albe (buline de lista, punctul din eticheta de deasupra titlului) nu se vad pe fond deschis. */
+html.light span.rounded-full.bg-white:empty:not(:where([role="dialog"] *, [data-showcase] *, .showcase-root *)) {
+  background-color: #111215 !important;
+}
 /* Eticheta-pastila alba (ex. „Recomandat”, „Cel mai solicitat”) nu se vede pe card alb: devine cerneala. */
 html.light .rounded-full.bg-white.text-black:not(:where([role="dialog"] *, [data-showcase] *, .showcase-root *)) {
   background-color: #111215 !important;
