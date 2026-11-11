@@ -13,7 +13,7 @@
   "theme_color": "#070809",
   "categories": ["productivity", "music", "video"],
   "related_applications": [
-    { "platform": "webapp", "url": "https://reverb.ro/studio-manifest.json" }
+    { "platform": "webapp", "url": "https://studio.reverb.ro/studio-manifest.json" }
   ],
   "icons": [
     {

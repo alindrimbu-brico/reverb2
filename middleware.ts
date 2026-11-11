@@ -7,6 +7,10 @@ import {
   verifyStudioSessionToken,
 } from './lib/studioAuth';
 
+const STUDIO_HOST = 'studio.reverb.ro';
+// true = reverb.ro/studio redirecționează spre gazda Studio, iar /api/studio răspunde doar acolo (și pe localhost).
+const STUDIO_MUTAT = false;
+
 export const config = {
   matcher: [
     '/api/studio/:path*',
@@ -24,6 +28,35 @@ export const config = {
 
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
+  // ── Reverb Studio pe gazda lui (docs/designs/studio_instrument_2026-11-12/design_v2_decizii.md, E.4) ──
+  // Studio stă pe studio.reverb.ro, ca machetele și paginile site-ului să nu mai împartă originea (și sesiunea) cu el.
+  // Pe gazda Studio se servește DOAR Studio; restul primește 404 (inclusiv rewrite-urile spre GitHub Pages).
+  const gazda = (request.headers.get('host') || '').toLowerCase().split(':')[0];
+  const cale = url.pathname;
+  const eStudio = cale === '/studio' || cale.startsWith('/studio/');
+  const eApiStudio = cale === '/api/studio' || cale.startsWith('/api/studio/');
+  if (gazda === STUDIO_HOST) {
+    if (cale === '/') {
+      return NextResponse.redirect(new URL('/studio', request.url), 307);
+    }
+    const permis =
+      eStudio ||
+      eApiStudio ||
+      cale === '/studio-manifest.json' ||
+      cale === '/favicon.ico' ||
+      /^\/(icon-studio-[a-z0-9-]+|apple-touch-icon-studio)\.png$/.test(cale);
+    if (!permis) {
+      return new NextResponse('Nu există pe această adresă.', { status: 404, headers: { ...STUDIO_SECURITY_HEADERS, 'Content-Type': 'text/plain; charset=utf-8' } });
+    }
+  } else if (STUDIO_MUTAT && gazda !== 'localhost' && gazda !== '127.0.0.1') {
+    if (eApiStudio) {
+      return NextResponse.json({ success: false, error: 'Reverb Studio s-a mutat pe https://studio.reverb.ro/studio.' }, { status: 404, headers: STUDIO_SECURITY_HEADERS });
+    }
+    if (eStudio) {
+      return NextResponse.redirect(`https://${STUDIO_HOST}/studio`, 307);
+    }
+  }
+  // ── sfârșitul regulilor de gazdă ale Studio-ului ──
 
   // Bariera #1 Edge pentru /api/studio (cu excepția endpointului de autentificare /api/studio/auth)
   if (url.pathname === '/api/studio' || url.pathname.startsWith('/api/studio/')) {

@@ -5,7 +5,6 @@
 // Machetele vechi (Clipuri Virale, Deep Research, Regizor Veo, NotebookLM, Poarta de Aprobare, Tablou) au fost scoase pe 12 nov 2026:
 // afișau texte fixe ca rezultate. O filă nouă intră aici doar când face cu adevărat ce scrie pe ea.
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import InstallPWA from "@/components/InstallPWA";
 import MuzicaTab from "./MuzicaTab";
 import PostariTab from "./PostariTab";
@@ -151,9 +150,9 @@ export default function StudioPage() {
             </button>
           </form>
           <div className="mt-6 pt-4 border-t border-white/5">
-            <Link href="/" className="text-[10px] text-neutral-500 hover:text-white uppercase tracking-wider">
+            <a href="https://reverb.ro/" className="text-[10px] text-neutral-500 hover:text-white uppercase tracking-wider">
               ← Înapoi la site
-            </Link>
+            </a>
           </div>
         </div>
       </div>
@@ -182,12 +181,12 @@ export default function StudioPage() {
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <InstallPWA mode="studio" />
-            <Link
-              href="/"
+            <a
+              href="https://reverb.ro/"
               className="[@media(display-mode:standalone)]:hidden rounded-full border border-white/15 px-4 py-2 text-xs font-mono uppercase tracking-wider text-neutral-300 hover:bg-white/10 transition-all"
             >
               ← Site
-            </Link>
+            </a>
             <button
               onClick={handleLogout}
               className="rounded-full border border-white/15 px-3.5 py-2 text-xs font-mono uppercase tracking-wider text-neutral-300 hover:bg-white/10 hover:text-white transition-all"
