@@ -76,6 +76,8 @@ export default function Footer({ socialLinks = [] }: { socialLinks?: SocialFoote
   };
 
   if (isShowcaseDemo) return null;
+  // Reverb Studio e aplicație separată: fără subsolul site-ului.
+  if (pathname === "/studio" || (pathname || "").startsWith("/studio/")) return null;
 
   return (
     <footer className="border-t border-black/10 dark:border-white/10 bg-white dark:bg-[#16181b] text-neutral-900 dark:text-neutral-100 font-sans antialiased transition-colors duration-300">

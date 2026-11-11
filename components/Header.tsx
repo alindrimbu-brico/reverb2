@@ -150,6 +150,9 @@ export default function Header() {
     start: isEn ? "Start Project" : "Start Proiect"
   };
 
+  // Reverb Studio e aplicație separată: fără bara site-ului (din ea se ieșea în reverb.ro fără drum înapoi).
+  if (pathname === "/studio" || pathname.startsWith("/studio/")) return null;
+
   // Hide global Reverb header on individual showcase prototypes (after all hooks)
   const isShowcaseDemo = Boolean(
     (pathname.startsWith("/showcase/") && pathname !== "/showcase") ||
