@@ -16,7 +16,7 @@ const nextConfig: NextConfig = {
   // Repo-ul `flooare` are acum domeniul propriu (www.flooare.ro), deci github.io
   // redirecționează și proxy-ul vechi nu mai merge.
   redirects: async () => [
-    // Machetele cu nume de mărci reale au fost scoase (12 nov 2026); adresele vechi duc la galerie.
+    // Machetele cu nume de mărci reale au fost scoase (11 nov 2026); adresele vechi duc la galerie.
     { source: "/showcase/canapuff", destination: "/showcase", permanent: true },
     { source: "/showcase/jim-curtis", destination: "/showcase", permanent: true },
     { source: "/flooare-portal", destination: "https://www.flooare.ro/", permanent: true },
