@@ -101,6 +101,10 @@ export async function middleware(request: NextRequest) {
 
   // Normal request to reverb.ro proceeds unchanged (cu X-Robots-Tag noindex pe /studio și /instaleaza)
   const response = NextResponse.next();
+  // Copiile de pe *.vercel.app (reverb-one, reverb2, previzualizări) nu trebuie indexate: doar reverb.ro.
+  if (hostname.endsWith('.vercel.app')) {
+    response.headers.set('X-Robots-Tag', 'noindex, nofollow');
+  }
   if (
     url.pathname === '/studio' ||
     url.pathname.startsWith('/studio/') ||

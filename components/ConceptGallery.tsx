@@ -46,7 +46,7 @@ export default function ConceptGallery({ lang, items }: { lang: Lang; items: Con
       {/* Hero — același tipar ca pe pagina de pornire */}
       <section className="relative z-10 pt-32 pb-16 md:pt-40 md:pb-20 border-b border-white/10">
         <div className="relative mx-auto max-w-5xl px-6 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-300 mb-6 backdrop-blur-md">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.1em] sm:tracking-[0.25em] text-neutral-300 mb-6 backdrop-blur-md">
             <span className="h-1.5 w-1.5 rounded-full bg-white" />
             <span>{t.badge}</span>
           </div>

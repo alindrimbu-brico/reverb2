@@ -67,9 +67,9 @@ export default function ServicesPageEN() {
       
       {/* Background Architectural Grid Pattern */}
       <div 
-        className="fixed inset-0 pointer-events-none z-0 opacity-[0.035]"
+        className="fixed inset-0 pointer-events-none z-0 opacity-[0.035] light:opacity-[0.075]"
         style={{
-          backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)`,
           backgroundSize: '48px 48px'
         }}
       />
@@ -79,7 +79,7 @@ export default function ServicesPageEN() {
       <section className="relative z-10 pt-32 pb-20 md:pt-40 md:pb-28 border-b border-white/10">
         <div className="relative mx-auto max-w-5xl px-6 text-center">
           <Reveal>
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-300 mb-6 backdrop-blur-md">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.1em] sm:tracking-[0.25em] text-neutral-300 mb-6 backdrop-blur-md">
               <span className="h-1.5 w-1.5 rounded-full bg-white" />
               <span>[ CLARITY IN ARCHITECTURE • SERVICES ]</span>
             </div>
@@ -102,7 +102,7 @@ export default function ServicesPageEN() {
       {/* Main 3 Pillars Grid */}
       <section className="relative z-10 py-20 md:py-32">
         <div className="mx-auto max-w-7xl px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {mainServices.map((srv, idx) => (
               <Reveal key={srv.id} delay={0.1 * idx}>
                 <div 
@@ -157,7 +157,7 @@ export default function ServicesPageEN() {
                         : "border border-white/20 bg-white/5 text-white hover:bg-white/10"
                     }`}
                   >
-                    Select Service • {srv.price} →
+                    Select Service →
                   </Link>
                 </div>
               </Reveal>

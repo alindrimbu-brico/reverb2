@@ -8,7 +8,7 @@ export default function PageBackdrop() {
     <>
       <div
         aria-hidden="true"
-        className="fixed inset-0 pointer-events-none -z-10 opacity-[0.035] light:opacity-[0.06]"
+        className="fixed inset-0 pointer-events-none -z-10 opacity-[0.035] light:opacity-[0.075]"
         style={{
           backgroundImage:
             "linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)",

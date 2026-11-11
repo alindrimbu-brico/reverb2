@@ -239,9 +239,9 @@ function ContactFormInner() {
       <button
         type="submit"
         disabled={state === "submitting"}
-        className="mt-8 w-full rounded-full bg-white py-4 text-xs font-mono uppercase tracking-widest text-black font-bold hover:bg-neutral-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)] disabled:opacity-60"
+        className="mt-8 w-full rounded-full bg-white px-4 py-4 text-[11px] sm:text-xs font-mono uppercase tracking-wider sm:tracking-widest text-black font-bold hover:bg-neutral-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)] disabled:opacity-60"
       >
-        {state === "submitting" ? "Se procesează..." : "Trimite Solicitarea Proiectului →"}
+        {state === "submitting" ? "Se procesează..." : "Trimite solicitarea →"}
       </button>
 
       <p className="mt-4 text-center text-[10px] font-mono text-neutral-500">

@@ -42,9 +42,9 @@ export default function PachetePage() {
       
       {/* Background Architectural Grid Pattern */}
       <div 
-        className="fixed inset-0 pointer-events-none z-0 opacity-[0.035]"
+        className="fixed inset-0 pointer-events-none z-0 opacity-[0.035] light:opacity-[0.075]"
         style={{
-          backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)`,
           backgroundSize: '48px 48px'
         }}
       />
@@ -54,7 +54,7 @@ export default function PachetePage() {
       <section className="relative z-10 pt-32 pb-20 md:pt-40 md:pb-28 border-b border-white/10">
         <div className="relative mx-auto max-w-5xl px-6 text-center">
           <Reveal>
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-300 mb-6 backdrop-blur-md">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.1em] sm:tracking-[0.25em] text-neutral-300 mb-6 backdrop-blur-md">
               <span className="h-1.5 w-1.5 rounded-full bg-white" />
               <span>[ CLARITATE FINANCIARĂ • PREȚURI FIXE ]</span>
             </div>
@@ -69,8 +69,8 @@ export default function PachetePage() {
             <p className="mt-8 max-w-2xl mx-auto text-base md:text-lg text-neutral-400 font-light leading-relaxed">
               Fiecare pachet Reverb Digital include un set fix de livrabile, un termen ferm de predare și o arhitectură pregătită pentru noile motoare de căutare AI.
             </p>
-            <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-5 py-2 text-xs font-mono text-emerald-300">
-              <span className="h-2 w-2 rounded-full bg-emerald-400" />
+            <div className="mt-8 mx-auto flex max-w-xl items-start gap-3 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-5 py-3.5 text-left text-xs leading-relaxed font-mono text-emerald-300">
+              <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-emerald-400" />
               <span>Fără contract obligatoriu pe 12 luni: testezi o lună, măsori rezultatele și decizi dacă dorești continuarea.</span>
             </div>
           </Reveal>

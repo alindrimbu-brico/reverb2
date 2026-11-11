@@ -386,10 +386,12 @@ html.light .text-neutral-600 {
 }
 
 /* Status, Links & Accents (High-Contrast WCAG AA) */
+html.light .text-emerald-200,
+html.light .text-emerald-300,
 html.light .text-emerald-400,
 html.light .text-emerald-500,
 html.light .text-emerald-600 {
-  color: #047857 !important; /* Contrast: 5.17:1 - PASS AA */
+  color: #065F46 !important; /* verdele temei light: un singur verde inchis, ~7:1 pe fundal deschis */
 }
 
 html.light .text-cyan-400,
@@ -833,4 +835,22 @@ html.light .group:hover .group-hover\:text-white:not(:where([role="dialog"] *, [
 }
 html.light .text-white\/15:not(:where([role="dialog"] *, [data-showcase] *, .showcase-root *)) {
   color: rgba(17, 18, 21, 0.14) !important;
+}
+
+/* ── Detalii fine (12 nov 2026) ── */
+/* Verdele din tema light: acelasi verde inchis pe fond, rama si punct (textul e mai sus, #065F46).
+   Dunga din mijloc a fundalului (components/AmbientBeams.tsx) foloseste aceeasi nuanta. */
+html.light .bg-emerald-500\/10:not(:where([role="dialog"] *, [data-showcase] *, .showcase-root *, .studio-light-root *)) {
+  background-color: rgba(6, 95, 70, 0.07) !important;
+}
+html.light .border-emerald-500\/30:not(:where([role="dialog"] *, [data-showcase] *, .showcase-root *, .studio-light-root *)) {
+  border-color: rgba(6, 95, 70, 0.32) !important;
+}
+html.light .bg-emerald-400:not(:where([role="dialog"] *, [data-showcase] *, .showcase-root *, .studio-light-root *)) {
+  background-color: #047857 !important;
+}
+/* Eticheta-pastila alba (ex. „Recomandat”, „Cel mai solicitat”) nu se vede pe card alb: devine cerneala. */
+html.light .rounded-full.bg-white.text-black:not(:where([role="dialog"] *, [data-showcase] *, .showcase-root *)) {
+  background-color: #111215 !important;
+  color: #FFFFFF !important;
 }

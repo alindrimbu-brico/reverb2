@@ -16,9 +16,9 @@ export default function ContactPage() {
       
       {/* Background Architectural Grid Pattern */}
       <div 
-        className="fixed inset-0 pointer-events-none z-0 opacity-[0.035]"
+        className="fixed inset-0 pointer-events-none z-0 opacity-[0.035] light:opacity-[0.075]"
         style={{
-          backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)`,
           backgroundSize: '48px 48px'
         }}
       />
@@ -28,7 +28,7 @@ export default function ContactPage() {
       <section className="relative z-10 pt-32 pb-20 md:pt-40 md:pb-28 border-b border-white/10">
         <div className="relative mx-auto max-w-5xl px-6 text-center">
           <Reveal>
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-300 mb-6 backdrop-blur-md">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.1em] sm:tracking-[0.25em] text-neutral-300 mb-6 backdrop-blur-md">
               <span className="h-1.5 w-1.5 rounded-full bg-white" />
               <span>Inițiere Proiect & Audit Tehnic</span>
             </div>
@@ -118,7 +118,7 @@ export default function ContactPage() {
           {/* Right Column: Formular */}
           <div>
             <Reveal delay={150}>
-              <div className="rounded-3xl border border-white/10 bg-neutral-900/30 p-8 md:p-12">
+              <div className="rounded-3xl border border-white/10 bg-neutral-900/30 p-6 sm:p-8 md:p-12">
                 <div className="text-xs font-mono uppercase tracking-[0.25em] text-neutral-500 mb-3">Formular Securizat</div>
                 <h3 className="text-2xl font-medium text-white mb-6">Trimite Detaliile Proiectului</h3>
                 <ContactForm />

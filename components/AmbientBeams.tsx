@@ -83,8 +83,8 @@ export default function AmbientBeams() {
         angle: -34 * (Math.PI / 180),
         colorA: "rgba(16, 185, 129, 0.03)",
         colorB: "rgba(0, 229, 255, 0.015)",
-        lightA: "rgba(5, 150, 105, 0.10)",
-        lightB: "rgba(2, 132, 199, 0.045)",
+        lightA: "rgba(6, 95, 70, 0.13)",
+        lightB: "rgba(6, 95, 70, 0.05)",
         phase: 4.3,
       },
       {

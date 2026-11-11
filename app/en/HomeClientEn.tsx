@@ -105,9 +105,9 @@ export default function EnglishHomePage() {
 
       {/* Background Architectural Grid Pattern */}
       <div 
-        className="fixed inset-0 pointer-events-none z-0 opacity-[0.035]"
+        className="fixed inset-0 pointer-events-none z-0 opacity-[0.035] light:opacity-[0.075]"
         style={{
-          backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)`,
           backgroundSize: '48px 48px'
         }}
       />
@@ -299,7 +299,7 @@ export default function EnglishHomePage() {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filteredProjects.map((p) => (
             <div
               key={p.name}
@@ -416,7 +416,7 @@ export default function EnglishHomePage() {
         </div>
 
         {/* Integrated Brutalist Grid • Zylaris Group */}
-        <div className="rounded-3xl border border-white/10 bg-[#070809] grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10 overflow-hidden">
+        <div className="rounded-3xl border border-white/10 bg-[#070809] grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-white/10 overflow-hidden">
           
           {/* Column 1: Social Growth */}
           <div className="mech-card mech-scanline p-8 lg:p-10 flex flex-col justify-between bg-white/[0.01] hover:bg-white/[0.02] transition-colors">
@@ -455,7 +455,7 @@ export default function EnglishHomePage() {
             <Link
               href="/en/contact?pachet=social-growth"
               onClick={() => sounds.playClick()}
-              className="mech-magnetic mech-btn block w-full text-center rounded-full border border-white/20 py-3 text-xs font-mono uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all"
+              className="mech-magnetic mech-btn block w-full text-center rounded-full px-4 border border-white/20 py-3 text-xs font-mono uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all"
             >
               Select Package →
             </Link>
@@ -503,7 +503,7 @@ export default function EnglishHomePage() {
             <Link
               href="/en/contact?pachet=daily-impact"
               onClick={() => sounds.playClick()}
-              className="mech-magnetic mech-btn block w-full text-center rounded-full bg-white py-3 text-xs font-mono font-bold uppercase tracking-widest text-black hover:bg-neutral-200 transition-all shadow-md"
+              className="mech-magnetic mech-btn block w-full text-center rounded-full px-4 bg-white py-3 text-xs font-mono font-bold uppercase tracking-widest text-black hover:bg-neutral-200 transition-all shadow-md"
             >
               Activate Daily Impact →
             </Link>
@@ -546,7 +546,7 @@ export default function EnglishHomePage() {
             <Link
               href="/en/contact?pachet=magazin-complet"
               onClick={() => sounds.playClick()}
-              className="mech-magnetic mech-btn block w-full text-center rounded-full border border-white/20 py-3 text-xs font-mono uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all"
+              className="mech-magnetic mech-btn block w-full text-center rounded-full px-4 border border-white/20 py-3 text-xs font-mono uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all"
             >
               Build Your Store →
             </Link>
@@ -569,7 +569,7 @@ export default function EnglishHomePage() {
           href="/en/contact"
           onMouseEnter={() => sounds.playHover()}
           onClick={() => sounds.playClick()}
-          className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-xs font-mono uppercase tracking-widest text-black font-bold hover:bg-neutral-200 transition-all shadow-[0_0_30px_rgba(255,255,255,0.15)]"
+          className="inline-flex items-center justify-center rounded-full bg-white px-6 sm:px-8 py-4 text-center text-xs font-mono uppercase tracking-wider sm:tracking-widest text-black font-bold hover:bg-neutral-200 transition-all shadow-[0_0_30px_rgba(255,255,255,0.15)]"
         >
           Schedule a Technical Discussion →
         </Link>

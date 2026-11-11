@@ -105,9 +105,9 @@ export default function HomePage() {
 
       {/* Background Architectural Grid Pattern */}
       <div 
-        className="fixed inset-0 pointer-events-none z-0 opacity-[0.035]"
+        className="fixed inset-0 pointer-events-none z-0 opacity-[0.035] light:opacity-[0.075]"
         style={{
-          backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)`,
           backgroundSize: '48px 48px'
         }}
       />
@@ -210,7 +210,7 @@ export default function HomePage() {
         <div className="rounded-3xl border border-white/15 bg-gradient-to-b from-neutral-900/40 via-neutral-950/70 to-neutral-900/30 p-8 md:p-14 backdrop-blur-md">
           
           <div className="max-w-3xl mb-12">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-mono uppercase tracking-widest text-neutral-300 mb-4">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-mono uppercase tracking-wide sm:tracking-widest text-neutral-300 mb-4">
               <span>● Noua Paradigmă a Căutării Online</span>
             </div>
             <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight leading-tight">
@@ -373,7 +373,8 @@ export default function HomePage() {
           ))}
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {/* grid-cols-1 explicit: fără el, coloana implicită se lățește după textul netăiat și cardul iese din ecran pe telefon */}
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filteredProjects.map((p) => (
             <div
               key={p.name}
@@ -384,7 +385,7 @@ export default function HomePage() {
               <div>
                 <div className="flex justify-between items-center text-[10px] font-mono text-neutral-500 mb-6">
                   <span>{p.category}</span>
-                  <span className="mech-badge border border-white/10 rounded-full px-2 py-0.5 text-neutral-400 group-hover:text-white transition-colors">
+                  <span className="mech-badge shrink-0 whitespace-nowrap border border-white/10 rounded-full px-2 py-0.5 text-neutral-400 group-hover:text-white transition-colors">
                     {p.status}
                   </span>
                 </div>
@@ -397,7 +398,7 @@ export default function HomePage() {
               </div>
 
               <div className="pt-4 border-t border-white/5 flex items-center justify-between text-[10px] font-mono gap-2">
-                <span className="text-neutral-500 truncate">{p.tech}</span>
+                <span className="min-w-0 text-neutral-500 truncate">{p.tech}</span>
                 <div className="flex items-center gap-2.5 shrink-0">
                   <span className="mech-telemetry inline-flex items-center gap-1 text-[10px] uppercase tracking-wider font-semibold text-neutral-400 group-hover:text-emerald-400 transition-colors">
                     <span>PREVIZUALIZARE</span>
@@ -441,7 +442,7 @@ export default function HomePage() {
         </div>
 
         {/* Cadru Arhitectural Brutalist • Zylaris Group */}
-        <div className="rounded-3xl border border-white/10 bg-[#070809] grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10 overflow-hidden">
+        <div className="rounded-3xl border border-white/10 bg-[#070809] grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-white/10 overflow-hidden">
           
           {/* Coloana 1: Social Growth */}
           <div className="mech-card mech-scanline p-8 lg:p-10 flex flex-col justify-between bg-white/[0.01] hover:bg-white/[0.02] transition-colors">
@@ -480,7 +481,7 @@ export default function HomePage() {
             <Link
               href="/contact?pachet=social-growth"
               onClick={() => sounds.playClick()}
-              className="mech-magnetic mech-btn block w-full text-center rounded-full border border-white/20 py-3 text-xs font-mono uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all"
+              className="mech-magnetic mech-btn block w-full text-center rounded-full px-4 border border-white/20 py-3 text-xs font-mono uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all"
             >
               Selectează Pachetul →
             </Link>
@@ -528,7 +529,7 @@ export default function HomePage() {
             <Link
               href="/contact?pachet=daily-impact"
               onClick={() => sounds.playClick()}
-              className="mech-magnetic mech-btn block w-full text-center rounded-full bg-white py-3 text-xs font-mono font-bold uppercase tracking-widest text-black hover:bg-neutral-200 transition-all shadow-md"
+              className="mech-magnetic mech-btn block w-full text-center rounded-full px-4 bg-white py-3 text-xs font-mono font-bold uppercase tracking-widest text-black hover:bg-neutral-200 transition-all shadow-md"
             >
               Activează Daily Impact →
             </Link>
@@ -571,7 +572,7 @@ export default function HomePage() {
             <Link
               href="/contact?pachet=magazin-complet"
               onClick={() => sounds.playClick()}
-              className="mech-magnetic mech-btn block w-full text-center rounded-full border border-white/20 py-3 text-xs font-mono uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all"
+              className="mech-magnetic mech-btn block w-full text-center rounded-full px-4 border border-white/20 py-3 text-xs font-mono uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all"
             >
               Construiește Magazinul →
             </Link>

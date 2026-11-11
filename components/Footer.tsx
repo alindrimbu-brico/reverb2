@@ -80,7 +80,7 @@ export default function Footer({ socialLinks = [] }: { socialLinks?: SocialFoote
   if (pathname === "/studio" || (pathname || "").startsWith("/studio/")) return null;
 
   return (
-    <footer className="border-t border-black/10 dark:border-white/10 bg-white dark:bg-[#16181b] text-neutral-900 dark:text-neutral-100 font-sans antialiased transition-colors duration-300">
+    <footer className="relative z-10 border-t border-black/10 dark:border-white/10 bg-white dark:bg-[#16181b] text-neutral-900 dark:text-neutral-100 font-sans antialiased transition-colors duration-300">
       {/* Container Principal Full-Width Grid */}
       <div className="mx-auto max-w-[100rem]">
         
@@ -143,7 +143,7 @@ export default function Footer({ socialLinks = [] }: { socialLinks?: SocialFoote
             <div className="flex-1 w-full font-mono">
                {/* TAB: NAVIGARE */}
                {activeTab === "navigare" && (
-                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
                     {nav.map(({ href, label }) => (
                       <Link 
                         key={href} 
@@ -160,7 +160,7 @@ export default function Footer({ socialLinks = [] }: { socialLinks?: SocialFoote
 
                {/* TAB: ECOSISTEM */}
                {activeTab === "ecosistem" && (
-                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
                     {showcaseLinks.map((item) => (
                       item.external ? (
                         <a 
