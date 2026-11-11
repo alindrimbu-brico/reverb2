@@ -8,6 +8,7 @@ export const metadata: Metadata = {
 };
 
 const showcases: Concept[] = [
+  { id: "digital-greenhouse", name: "The Digital Greenhouse", vibe: "Botanical Minimalism", color: "#7C8F6B", description: "A minimalist concept in Romanian and English: clear structure and botanical elegance, with plenty of air between sections.", href: "https://the-digital-greenhouse.vercel.app/" },
   { id: "surya", name: "Surya Group", vibe: "Brutalism Desyres", color: "#111111", description: "Robust webflow design, based on massive typography and sharp B2B boundaries.", href: "/en/showcase/surya" },
   { id: "florarte", name: "Florarte Textile", vibe: "Pastel Sage & Rose", color: "#4E6E59", description: "B2C floral atelier focused on mature textile aesthetics and sheer presence clarity.", href: "/en/showcase/florarte" },
   { id: "xiaolong", name: "Xiaolong Packaging", vibe: "Industrial B2B", color: "#208b53", description: "Mature corporate B2B design for a global Asian manufacturer, featuring a dynamic markup module.", href: "/en/showcase/xiaolong" },

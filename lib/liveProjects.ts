@@ -6,6 +6,8 @@
 // `journey` (de unde a pornit) se completează doar unde originea e scrisă undeva; altfel lipsește.
 export type LiveProject = {
   name: string;
+  /** Felul proiectului, în unul-două cuvinte (rândul din portofoliu). */
+  kind?: string;
   category: string;
   tech: string;
   host: string;
@@ -22,6 +24,7 @@ export type LiveProject = {
 export const liveProjectsRo: LiveProject[] = [
   {
     name: "Bricolando.ro",
+    kind: "Magazin online",
     category: "Magazin online de scule și utilaje",
     tech: "WooCommerce + module proprii",
     host: "Hostinger",
@@ -34,6 +37,7 @@ export const liveProjectsRo: LiveProject[] = [
   },
   {
     name: "RaftPlin.ro",
+    kind: "Magazin online",
     category: "Magazin online pentru casă și cadouri",
     tech: "WooCommerce + temă proprie",
     host: "Hostinger",
@@ -46,6 +50,7 @@ export const liveProjectsRo: LiveProject[] = [
   },
   {
     name: "Kalki.work",
+    kind: "Software",
     category: "Software pentru magazine și birou",
     tech: "Pagini statice + funcții Cloudflare",
     host: "Cloudflare Pages",
@@ -58,6 +63,7 @@ export const liveProjectsRo: LiveProject[] = [
   },
   {
     name: "Kalki.nexus",
+    kind: "Site editorial",
     category: "Cultură și spiritualitate",
     tech: "Site editorial, română și engleză",
     host: "Cloudflare",
@@ -70,6 +76,7 @@ export const liveProjectsRo: LiveProject[] = [
   },
   {
     name: "Numerarium.app",
+    kind: "Aplicație",
     category: "Aplicație de numerologie",
     tech: "JavaScript simplu, motor propriu de calcul",
     host: "Cloudflare",
@@ -82,6 +89,7 @@ export const liveProjectsRo: LiveProject[] = [
   },
   {
     name: "Bythefire.app",
+    kind: "Ghid",
     category: "Ghid pentru clipele grele",
     tech: "HTML, CSS și JavaScript simple",
     host: "Cloudflare",
@@ -94,6 +102,7 @@ export const liveProjectsRo: LiveProject[] = [
   },
   {
     name: "Elumia.app",
+    kind: "Ghid interactiv",
     category: "Ghid interactiv",
     tech: "Aplicație web",
     host: "Cloudflare",
@@ -105,6 +114,7 @@ export const liveProjectsRo: LiveProject[] = [
   },
   {
     name: "Immortallight.app",
+    kind: "Site de carte",
     category: "Site de carte",
     tech: "Site de prezentare, engleză și română",
     host: "GitHub Pages",
@@ -117,6 +127,7 @@ export const liveProjectsRo: LiveProject[] = [
   },
   {
     name: "Pentora.app",
+    kind: "Aplicație",
     category: "Oracol de 52 de cărți",
     tech: "O singură pagină web",
     host: "GitHub Pages",
@@ -129,6 +140,7 @@ export const liveProjectsRo: LiveProject[] = [
   },
   {
     name: "YourFinestForm.com",
+    kind: "Site de carte",
     category: "Site de carte",
     tech: "Vite + React, română și engleză",
     host: "GitHub Pages",
@@ -141,6 +153,7 @@ export const liveProjectsRo: LiveProject[] = [
   },
   {
     name: "Salariuldupataxe.ro",
+    kind: "Calculator",
     category: "Calculator de salariu",
     tech: "Calculator web",
     host: "Vercel",
@@ -152,6 +165,7 @@ export const liveProjectsRo: LiveProject[] = [
   },
   {
     name: "Arhitecturazilei.ro",
+    kind: "Aplicație",
     category: "Rutină zilnică",
     tech: "Aplicație web",
     host: "GitHub Pages",
@@ -163,6 +177,7 @@ export const liveProjectsRo: LiveProject[] = [
   },
   {
     name: "Candcinevabea.life",
+    kind: "Ghid",
     category: "Ghid de sprijin",
     tech: "Ghid web, română și engleză",
     host: "GitHub Pages",
@@ -174,6 +189,7 @@ export const liveProjectsRo: LiveProject[] = [
   },
   {
     name: "Millo.asia",
+    kind: "Jocuri",
     category: "Jocuri pentru copii",
     tech: "Pagini statice în 9 limbi",
     host: "Hostinger",
@@ -186,6 +202,7 @@ export const liveProjectsRo: LiveProject[] = [
   },
   {
     name: "DON Barbershop",
+    kind: "Concept",
     category: "Site-concept pentru frizerie",
     tech: "Film derulat odată cu pagina",
     host: "Cloudflare Pages",
@@ -201,6 +218,7 @@ export const liveProjectsRo: LiveProject[] = [
 export const liveProjectsEn: LiveProject[] = [
   {
     name: "Bricolando.ro",
+    kind: "Online store",
     category: "Online store for tools and equipment",
     tech: "WooCommerce + our own modules",
     host: "Hostinger",
@@ -213,6 +231,7 @@ export const liveProjectsEn: LiveProject[] = [
   },
   {
     name: "RaftPlin.ro",
+    kind: "Online store",
     category: "Online store for home and gifts",
     tech: "WooCommerce + our own theme",
     host: "Hostinger",
@@ -225,6 +244,7 @@ export const liveProjectsEn: LiveProject[] = [
   },
   {
     name: "Kalki.work",
+    kind: "Software",
     category: "Software for stores and the office",
     tech: "Static pages + Cloudflare functions",
     host: "Cloudflare Pages",
@@ -237,6 +257,7 @@ export const liveProjectsEn: LiveProject[] = [
   },
   {
     name: "Kalki.nexus",
+    kind: "Editorial site",
     category: "Culture and spirituality",
     tech: "Editorial site, Romanian and English",
     host: "Cloudflare",
@@ -249,6 +270,7 @@ export const liveProjectsEn: LiveProject[] = [
   },
   {
     name: "Numerarium.app",
+    kind: "App",
     category: "Numerology application",
     tech: "Plain JavaScript, our own calculation engine",
     host: "Cloudflare",
@@ -261,6 +283,7 @@ export const liveProjectsEn: LiveProject[] = [
   },
   {
     name: "Bythefire.app",
+    kind: "Guide",
     category: "A guide for hard moments",
     tech: "Plain HTML, CSS and JavaScript",
     host: "Cloudflare",
@@ -273,6 +296,7 @@ export const liveProjectsEn: LiveProject[] = [
   },
   {
     name: "Elumia.app",
+    kind: "Interactive guide",
     category: "Interactive guide",
     tech: "Web application",
     host: "Cloudflare",
@@ -284,6 +308,7 @@ export const liveProjectsEn: LiveProject[] = [
   },
   {
     name: "Immortallight.app",
+    kind: "Book site",
     category: "Book site",
     tech: "Presentation site, English and Romanian",
     host: "GitHub Pages",
@@ -296,6 +321,7 @@ export const liveProjectsEn: LiveProject[] = [
   },
   {
     name: "Pentora.app",
+    kind: "App",
     category: "A 52-card oracle",
     tech: "A single web page",
     host: "GitHub Pages",
@@ -308,6 +334,7 @@ export const liveProjectsEn: LiveProject[] = [
   },
   {
     name: "YourFinestForm.com",
+    kind: "Book site",
     category: "Book site",
     tech: "Vite + React, Romanian and English",
     host: "GitHub Pages",
@@ -320,6 +347,7 @@ export const liveProjectsEn: LiveProject[] = [
   },
   {
     name: "Salariuldupataxe.ro",
+    kind: "Calculator",
     category: "Salary calculator",
     tech: "Web calculator",
     host: "Vercel",
@@ -331,6 +359,7 @@ export const liveProjectsEn: LiveProject[] = [
   },
   {
     name: "Arhitecturazilei.ro",
+    kind: "App",
     category: "Daily routine",
     tech: "Web application",
     host: "GitHub Pages",
@@ -342,6 +371,7 @@ export const liveProjectsEn: LiveProject[] = [
   },
   {
     name: "Candcinevabea.life",
+    kind: "Guide",
     category: "Support guide",
     tech: "Web guide, Romanian and English",
     host: "GitHub Pages",
@@ -353,6 +383,7 @@ export const liveProjectsEn: LiveProject[] = [
   },
   {
     name: "Millo.asia",
+    kind: "Games",
     category: "Games for children",
     tech: "Static pages in 9 languages",
     host: "Hostinger",
@@ -365,6 +396,7 @@ export const liveProjectsEn: LiveProject[] = [
   },
   {
     name: "DON Barbershop",
+    kind: "Concept",
     category: "Concept site for a barbershop",
     tech: "A film that advances as you scroll",
     host: "Cloudflare Pages",
