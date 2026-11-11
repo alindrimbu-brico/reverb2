@@ -8,8 +8,16 @@ Aici notăm progresul pentru a ne coordona perfect.
 
 ---
 
-### [Claude] - 11 nov 2026 - Unificarea stilului pe tot site-ul (NEPUBLICAT, așteaptă „da” de la Alin)
+### [Claude] - 11 nov 2026 - Unificarea stilului pe tot site-ul (PUBLICAT, commit da0e91f, verificat pe reverb.ro)
 Cerută de Alin după observațiile lui Marius. Planul, reviziile și scripturile: `docs/designs/unificare_stil_2026-11-11/`.
+
+**Tot din 11 nov (a doua cerere a lui Alin):**
+- Butoanele magnetice sunt bibliotecă: `lib/motion/magnetic.ts`. Orice `<a>` / `<button>` cu `rounded-full` din `<main>` e magnetic automat; în bară / footer se pune clasa `mech-magnetic`; `data-no-magnetic` îl scoate. Nu rescrieți motorul în componente.
+- Dungile animate (`components/AmbientBeams.tsx`) au culori proprii pentru tema light; `<body>` trebuie să rămână transparent în light (fundalul stă pe `<html>`), altfel le acoperă.
+- Machetele (`/showcase/<x>` și paginile statice din `public/`) au buton „Înapoi la concepte”: în `Header.tsx` pentru cele Next, script mic în `index.html` pentru cele statice.
+- `lib/liveProjects.ts`: fiecare afirmație despre un proiect are o sursă (pagina live sau notele proiectului). Fără cifre de trafic și fără tehnologii presupuse din numele domeniului: descrierile vechi aveau ~15 afirmații false.
+- `/templates` e scoasă din traseul public (noindex, fără linkuri, în afara sitemapului). Decizia lui Alin.
+- Pagina de pornire: `app/page.tsx` e fișier server (metadata), conținutul e în `app/HomeClient.tsx` (la fel `/en`). `node scripts/check-seo.mjs <adresa>` trebuie să dea OK înainte de publicare.
 
 **Reguli de păstrat de acum înainte (altfel reapare problema):**
 1. `dark:` urmează tema site-ului, nu a sistemului de operare: `@custom-variant dark` din `app/globals.css`. Tema implicită e dark; `html.light` e comutatorul din bară.
