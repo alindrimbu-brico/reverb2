@@ -31,6 +31,15 @@ Cerută de Alin după observațiile lui Marius. Planul, reviziile și scripturil
 - Prețul „de la” și termenul de sub titlu se citesc din `lib/packages.ts` (`getPackage`), nu se scriu de mână.
 - `lib/liveProjects.ts` are câmpul scurt `kind` (felul proiectului, 1–2 cuvinte) pentru acest rând.
 
+**12 nov — detalii fine (Alin, de pe tabletă: „textele din butoane aproape ies din cadru… verdele nu se vede pe light… grila lipsește pe light”), commit-uri 4ad2011 + b95e67b:**
+- Grila de pătrate din fundal se desenează cu `currentColor`, nu cu `#ffffff` (altfel dispare în tema light); opacitatea: `opacity-[0.035] light:opacity-[0.075]`.
+- Verdele temei light e unul singur: `#065F46` (text), cu fond și ramă din aceeași nuanță; dunga din mijloc din `AmbientBeams.tsx` folosește tot nuanța aceasta. Nu puneți `text-emerald-*` deschis fără să-l vedeți în light.
+- Trei coloane de carduri cu butoane abia de la `lg` (1024 px), nu de la `md`: la 768 px butoanele-pastilă se rup pe două rânduri.
+- O grilă de carduri are `grid-cols-1` explicit, iar textul cu `truncate` are `min-w-0`; altfel cardul iese din ecran pe telefon și e tăiat fără ca pagina să deruleze lateral.
+- Înainte de publicare: `docs/designs/unificare_stil_2026-11-11/verificari/butoane.py` și `taiat.py` (pe toate paginile principale, 360–1366 px, Chromium și WebKit) trebuie să dea 0.
+- Copiile `*.vercel.app` primesc `X-Robots-Tag: noindex` din `middleware.ts`.
+- Starea de indexare și ce spun modelele AI: `docs/designs/seo_indexare_2026-11-12/constatari.md`.
+
 **Reguli de păstrat de acum înainte (altfel reapare problema):**
 1. `dark:` urmează tema site-ului, nu a sistemului de operare: `@custom-variant dark` din `app/globals.css`. Tema implicită e dark; `html.light` e comutatorul din bară.
 2. Fără crem (`#f5f1ea`, `#FAF8F5`, `#F3EFEA`, `#1d2731`) în pagini noi. Paginile se scriu pe vocabularul paginii de pornire: `text-white`, `text-neutral-300/400/500`, `border-white/10`, carduri `bg-neutral-900/40`, buton principal `bg-white text-black`, etichete `font-mono` majuscule. Tema light vine din suprascrierile `html.light` existente.
