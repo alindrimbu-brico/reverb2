@@ -25,15 +25,17 @@ export const theme = {
   muted: "#a1a1a1",
   /** Între neutral-400 și neutral-500: neutral-500 (#737373) are doar 4,2 : 1 pe --bg, prea puțin la 12 px. */
   faint: "#8a8a8a",
-  buttonBg: "#ffffff",
-  buttonText: "#070809",
-  /** border-white/20 peste card. */
+  /** Conturul butonului secundar: border-white/20 peste card. Butonul principal are conturul în `title`. */
   outline: "#3e3e3f",
   sans: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
   mono: "'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace",
   /** Imaginile au nume cu versiune: e-mailurile deja trimise le cer de la aceeași adresă, deci nu se redenumesc. */
   logo: "/email/logo-v1.png",
   grid: "/email/grid-v1.png",
+  /** Plăcuțe pline, de culoarea `bg`, `card` și `panel`: Outlook revopsește culorile de fundal, nu și imaginile (vezi layout.ts). */
+  tileBg: "/email/bg-v1.png",
+  tileCard: "/email/card-v1.png",
+  tilePanel: "/email/panel-v1.png",
   /** De unde se iau imaginile într-un e-mail trimis. Previzualizarea locală dă originea ei. */
   assetBase: "https://reverb.ro",
 } as const;
