@@ -5,6 +5,13 @@ import Link from "next/link";
 import TechAuthorityGrid from "@/components/TechAuthorityGrid";
 import ProjectPreviewModal, { PreviewProject } from "@/components/ProjectPreviewModal";
 import { liveProjectsRo } from "@/lib/liveProjects";
+import { getPackage } from "@/lib/packages";
+
+// Cardul 03 de pe prima pagină citește prețurile și termenele din registru, ca /pachete.
+const pachetSite = getPackage("start-digital");
+const pachetMagazin = getPackage("magazin-digital-activ");
+// „în 7–14 zile” rămâne pe un rând prin caractere care nu se rup (nu printr-un span nowrap: WebKit îl scoate din card).
+const termen = (p?: { delivery: string }) => `în ${p?.delivery ?? ""}`.replace("–", "–⁠").replace(/ /g, " ");
 
 // ── Web Audio API Procedural Sound Engine ──
 class SoundEngine {
@@ -535,46 +542,46 @@ export default function HomePage() {
             </Link>
           </div>
 
-          {/* Coloana 3: Magazin Online Complet */}
+          {/* Coloana 3: Site sau magazin online (prețurile vin din lib/packages.ts) */}
           <div className="mech-card mech-scanline p-8 lg:p-10 flex flex-col justify-between bg-white/[0.01] hover:bg-white/[0.02] transition-colors">
             <div>
               <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500 mb-4">
-                03 / Infrastructură E-Commerce
+                03 / Web și E-Commerce
               </div>
-              <h3 className="text-2xl font-light text-white mb-2">Magazin Online Complet</h3>
+              <h3 className="text-2xl font-light text-white mb-2">Site sau Magazin Online</h3>
               <div className="text-4xl font-light text-white tracking-tight mb-4">
-                €1.275 <span className="text-xs font-mono text-neutral-500">preț fix</span>
+                <span className="text-xs font-mono text-neutral-500">de la</span> {pachetSite?.price}
               </div>
               <p className="text-xs text-neutral-400 font-light leading-relaxed mb-8">
-                Construcție completă la cheie pe Next.js și WooCommerce, configurată direct pentru viteză, plăți cu cardul și conversie.
+                Construcție la cheie pe Next.js sau WooCommerce, cu clipuri video de lansare incluse. Preț fix pe pachet.
               </p>
-              
+
               <div className="space-y-3 font-mono text-xs text-neutral-300 border-t border-white/5 pt-6 mb-8">
                 <div className="flex items-start gap-2">
                   <span className="text-neutral-500">—</span>
-                  <span>Timp de încărcare garantat sub 1.2 secunde</span>
+                  <span>Site de prezentare + 15 clipuri: {pachetSite?.price}, {termen(pachetSite)}</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="text-neutral-500">—</span>
-                  <span>Checkout 1-step fluid, plăți cu cardul & AWB curieri</span>
+                  <span>Magazin online + 30 de clipuri: {pachetMagazin?.price}, {termen(pachetMagazin)}</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="text-neutral-500">—</span>
-                  <span>Optimizare semantică pentru căutare AI GEO JSON-LD</span>
+                  <span>La magazin: plăți cu cardul, AWB curieri, facturare FGO sau SmartBill</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="text-neutral-500">—</span>
-                  <span>Facturare automată instantanee FGO sau SmartBill</span>
+                  <span>Încărcare sub 1,2 secunde, date pregătite pentru căutarea AI</span>
                 </div>
               </div>
             </div>
 
             <Link
-              href="/contact?pachet=magazin-complet"
+              href="/pachete#web"
               onClick={() => sounds.playClick()}
               className="mech-magnetic mech-btn block w-full text-center rounded-full px-4 border border-white/20 py-3 text-xs font-mono uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all"
             >
-              Construiește Magazinul →
+              Vezi Pachetele Web →
             </Link>
           </div>
 

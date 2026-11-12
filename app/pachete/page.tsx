@@ -150,7 +150,7 @@ export default function PachetePage() {
       </section>
 
       {/* Platforme Web & E-Commerce & B2B */}
-      <section className="relative z-10 py-24 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
+      <section id="web" className="scroll-mt-16 relative z-10 py-24 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
         <Reveal>
           <div className="max-w-5xl mb-16">
             <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-3">02 / SISTEME COMPLETE & CONSTRUCȚIE</div>

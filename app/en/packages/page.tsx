@@ -268,7 +268,7 @@ export default function PackagesPageEN() {
       </section>
 
       {/* Web & eCommerce Packages */}
-      <section className="relative z-10 py-20 md:py-28 bg-[#050607] border-t border-white/10">
+      <section id="web" className="scroll-mt-16 relative z-10 py-20 md:py-28 bg-[#050607] border-t border-white/10">
         <div className="mx-auto max-w-7xl px-6">
           <Reveal>
             <div className="mb-12 border-b border-white/10 pb-6 max-w-5xl">

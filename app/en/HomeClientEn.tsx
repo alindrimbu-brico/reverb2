@@ -5,6 +5,15 @@ import Link from "next/link";
 import TechAuthorityGrid from "@/components/TechAuthorityGrid";
 import ProjectPreviewModal, { PreviewProject } from "@/components/ProjectPreviewModal";
 import { liveProjectsEn } from "@/lib/liveProjects";
+import { getPackage } from "@/lib/packages";
+
+// Card 03 reads prices from the registry (lib/packages.ts); English uses a comma for thousands.
+const enPrice = (id: string) => (getPackage(id)?.price ?? "").replace(".", ",");
+// "in 7–14 days" stays on one line through non-breaking characters (a nowrap span overflows the card in WebKit).
+const enDays = (id: string) =>
+  `in ${(getPackage(id)?.delivery ?? "").replace(" zile", " days")}`.replace("–", "–⁠").replace(/ /g, " ");
+const sitePrice = enPrice("start-digital");
+const storePrice = enPrice("magazin-digital-activ");
 
 // ── Web Audio API Procedural Sound Engine ──
 class SoundEngine {
@@ -513,42 +522,42 @@ export default function EnglishHomePage() {
           <div className="mech-card mech-scanline p-8 lg:p-10 flex flex-col justify-between bg-white/[0.01] hover:bg-white/[0.02] transition-colors">
             <div>
               <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500 mb-4">
-                03 / Commerce Architecture
+                03 / Web & E-Commerce
               </div>
-              <h3 className="text-2xl font-light text-white mb-2">Complete Digital Store</h3>
+              <h3 className="text-2xl font-light text-white mb-2">Website or Online Store</h3>
               <div className="text-4xl font-light text-white tracking-tight mb-4">
-                €1,275 <span className="text-xs font-mono text-neutral-500">fixed price</span>
+                <span className="text-xs font-mono text-neutral-500">from</span> {sitePrice}
               </div>
               <p className="text-xs text-neutral-400 font-light leading-relaxed mb-8">
-                Turnkey e-commerce infrastructure built on Next.js and WooCommerce, optimized for speed, conversion, and AI search.
+                Turnkey build on Next.js or WooCommerce, with launch videos included. Fixed price per package.
               </p>
-              
+
               <div className="space-y-3 font-mono text-xs text-neutral-300 border-t border-white/5 pt-6 mb-8">
                 <div className="flex items-start gap-2">
                   <span className="text-neutral-500">—</span>
-                  <span>Verified sub-1.2s load time across mobile & desktop</span>
+                  <span>Website + 15 videos: {sitePrice}, {enDays("start-digital")}</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="text-neutral-500">—</span>
-                  <span>1-step checkout, card processing & automated AWB</span>
+                  <span>Online store + 30 videos: {storePrice}, {enDays("magazin-digital-activ")}</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="text-neutral-500">—</span>
-                  <span>Native Generative Engine Optimization JSON-LD</span>
+                  <span>Store: card payments, courier labels, automated invoicing</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="text-neutral-500">—</span>
-                  <span>Instant fiscal invoice automation</span>
+                  <span>Sub-1.2s load time, structured data ready for AI search</span>
                 </div>
               </div>
             </div>
 
             <Link
-              href="/en/contact?pachet=magazin-complet"
+              href="/en/packages#web"
               onClick={() => sounds.playClick()}
               className="mech-magnetic mech-btn block w-full text-center rounded-full px-4 border border-white/20 py-3 text-xs font-mono uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all"
             >
-              Build Your Store →
+              See Web Packages →
             </Link>
           </div>
 
