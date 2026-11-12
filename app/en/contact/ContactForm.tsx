@@ -39,6 +39,7 @@ function ContactFormInner() {
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [errors, setErrors] = useState<FieldErrors>({});
   const formRef = useRef<HTMLFormElement>(null);
+  const hpRef = useRef<HTMLInputElement>(null);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -79,6 +80,9 @@ function ContactFormInner() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...form,
+          serviceId: form.service,
+          lang: "en",
+          hp: hpRef.current?.value ?? "",
           service: `[EN] ${serviceOptions.find((o) => o.value === form.service)?.label ?? form.service}`,
         }),
       });
@@ -96,7 +100,7 @@ function ContactFormInner() {
         </div>
         <h3 className="mt-6 text-2xl font-medium text-white">Message sent.</h3>
         <p className="mt-3 max-w-sm text-[15px] leading-7 text-neutral-400">
-          We&apos;ll confirm a call slot within 24 hours. Check your spam folder if you don&apos;t hear from us.
+          We&apos;ll reply by e-mail within 24 working hours. Check your spam folder if you don&apos;t hear from us.
         </p>
         <button
           type="button"
@@ -126,8 +130,12 @@ function ContactFormInner() {
       noValidate
       className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8 shadow-[0_20px_60px_rgba(29,39,49,0.06)] md:p-10"
     >
+      {/* Honeypot for bots: hidden from people and screen readers. The route sends nothing when it is filled. */}
+      <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden" }}>
+        <input ref={hpRef} type="text" name="rv_hp" tabIndex={-1} autoComplete="off" defaultValue="" />
+      </div>
       <h2 className="text-xl font-medium text-white">Send us a message</h2>
-      <p className="mt-2 text-sm text-neutral-400">Fill in the form and we&apos;ll get back to you within 24 hours.</p>
+      <p className="mt-2 text-sm text-neutral-400">Fill in the form and we&apos;ll get back to you within 24 working hours.</p>
 
       <div className="mt-8 space-y-5">
         <div className="grid gap-5 sm:grid-cols-2">

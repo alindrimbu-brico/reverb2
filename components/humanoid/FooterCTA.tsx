@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, Download, CheckCircle, AlertCircle, ExternalLink, Share2, Users, Play } from "lucide-react";
 import Link from "next/link";
@@ -16,6 +16,7 @@ export default function FooterCTA() {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const [focused, setFocused] = useState(false);
+  const hpRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,7 +28,7 @@ export default function FooterCTA() {
       const res = await fetch("/api/humanoid-subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, hp: hpRef.current?.value ?? "" }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -137,6 +138,10 @@ export default function FooterCTA() {
                     </div>
 
                     <form onSubmit={handleSubmit} className="space-y-4">
+                      {/* Câmp-capcană pentru roboți: ascuns oamenilor și cititoarelor de ecran. */}
+                      <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden" }}>
+                        <input ref={hpRef} type="text" name="rv_hp" tabIndex={-1} autoComplete="off" defaultValue="" />
+                      </div>
                       <div
                         className="relative rounded-xl overflow-hidden transition-all duration-300"
                         style={{

@@ -39,6 +39,7 @@ function ContactFormInner() {
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [errors, setErrors] = useState<FieldErrors>({});
   const formRef = useRef<HTMLFormElement>(null);
+  const hpRef = useRef<HTMLInputElement>(null);
   
   const [form, setForm] = useState({
     name: "",
@@ -85,7 +86,7 @@ function ContactFormInner() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, service: label }),
+        body: JSON.stringify({ ...form, service: label, serviceId: form.service, lang: "ro", hp: hpRef.current?.value ?? "" }),
       });
       setState(res.ok ? "success" : "error");
     } catch {
@@ -131,6 +132,10 @@ function ContactFormInner() {
       noValidate
       className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8 md:p-12 backdrop-blur-md"
     >
+      {/* Câmp-capcană pentru roboți: ascuns oamenilor și cititoarelor de ecran. Ruta nu trimite nimic dacă e completat. */}
+      <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden" }}>
+        <input ref={hpRef} type="text" name="rv_hp" tabIndex={-1} autoComplete="off" defaultValue="" />
+      </div>
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6 mb-8">
         <div>
           <h2 className="text-2xl font-medium text-white">Inițiază Discuția</h2>
