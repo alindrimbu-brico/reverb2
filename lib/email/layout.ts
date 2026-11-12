@@ -18,7 +18,8 @@ export type Block =
   | { kind: "steps"; items: { title: string; text?: string }[] }
   | { kind: "list"; label?: string; items: string[] }
   | { kind: "paragraph"; text: string }
-  | { kind: "button"; label: string; href: string; variant?: "primary" | "outline" }
+  /** `accent` = contur stins cu text verde (WhatsApp, ca pe site). */
+  | { kind: "button"; label: string; href: string; variant?: "primary" | "outline" | "accent" }
   | { kind: "signature"; name: string; role?: string }
   | { kind: "divider" };
 
@@ -102,10 +103,10 @@ function label(text: string): string {
   return `<div style="${LABEL}padding-bottom:10px;">${esc(text)}</div>`;
 }
 
-function link(href: string, text: string, color: string): string {
+function link(href: string, text: string, color: string, bold = false): string {
   const h = safeHref(href);
   return h
-    ? `<a href="${h}" target="_blank" style="color:${color};text-decoration:none;">${esc(text)}</a>`
+    ? `<a href="${h}" target="_blank" style="color:${color};text-decoration:none;${bold ? "font-weight:700;" : ""}">${esc(text)}</a>`
     : esc(text);
 }
 
@@ -119,7 +120,7 @@ function renderBlock(b: Block, base: string): string {
           return (
             `<tr>` +
             `<td width="34%" valign="top" style="${LABEL}padding:13px 12px 13px 0;${line}">${esc(r.label)}</td>` +
-            `<td valign="top" style="${SANS}font-size:15px;line-height:22px;color:${theme.strong};padding:11px 0 13px 0;${line}${WRAP}">${value}</td>` +
+            `<td valign="top" style="${MONO}font-size:13px;line-height:22px;color:${theme.strong};padding:12px 0 12px 0;${line}${WRAP}">${value}</td>` +
             `</tr>`
           );
         })
@@ -168,11 +169,11 @@ function renderBlock(b: Block, base: string): string {
     case "button": {
       const h = safeHref(b.href);
       if (!h) return "";
-      const primary = b.variant !== "outline";
+      const primary = b.variant !== "outline" && b.variant !== "accent";
       // Butoanele nu au fond. Un fond alb e revopsit în gri de Outlook în modul întunecat, iar textul lui închis
       // e făcut alb; nu există cale să ții ambele. Butonul principal e conturul alb, cel secundar conturul stins.
       const cell = `style="border:1px solid ${primary ? theme.title : theme.outline};border-radius:999px;"`;
-      const color = primary ? theme.title : theme.strong;
+      const color = primary ? theme.title : b.variant === "accent" ? theme.accent : theme.strong;
       // Spațiile <i> dau butonului înălțime și lățime în Outlook pe Windows, care ignoră padding-ul de pe <a>.
       return (
         `<table ${TABLE} style="border-collapse:separate;"><tr><td align="center" ${cell}>` +
@@ -195,7 +196,8 @@ function renderBlock(b: Block, base: string): string {
 
 function footerHtml(spec: EmailSpec): string {
   const en = spec.lang === "en";
-  const small = `${SANS}font-size:12px;line-height:20px;color:${theme.muted};`;
+  // Subsolul e în mono, ca subsolul site-ului: contactele albe, datele firmei stinse, WhatsApp verde.
+  const small = `${MONO}font-size:11px;line-height:19px;color:${theme.muted};`;
   const reason = spec.reason
     ? `<div style="${SANS}font-size:12px;line-height:19px;color:${theme.faint};padding-top:14px;${WRAP}">${esc(spec.reason)}</div>`
     : "";
@@ -208,12 +210,12 @@ function footerHtml(spec: EmailSpec): string {
   const sep = ` <span style="color:${theme.faint};">&middot;</span> `;
   const links = [
     link(company.tel, en ? company.phoneIntl : company.phoneDisplay, theme.text),
-    link(company.whatsapp, "WhatsApp", theme.text),
+    link(company.whatsapp, "WhatsApp", theme.accent, true),
     link(`mailto:${company.email}`, company.email, theme.text),
     link(company.site, company.siteLabel, theme.text),
   ].join(sep);
   return (
-    `<div style="${SANS}font-size:13px;line-height:22px;color:${theme.text};">${links}</div>` +
+    `<div style="${MONO}font-size:12px;line-height:22px;color:${theme.text};">${links}</div>` +
     `<div style="${small}padding-top:12px;">${who}</div>` +
     reason
   );
@@ -296,7 +298,7 @@ export function renderEmail(spec: EmailSpec): { html: string; text: string } {
     `<table ${TABLE} width="100%" ${cardS.attrs} style="${cardS.style}border:1px solid ${theme.border};border-radius:24px;border-collapse:separate;">` +
     `<tr><td class="rv-card rv-t" style="padding:38px 34px 36px 34px;border-radius:23px;${veil("card")}">` +
     `<table ${TABLE} width="100%" style="table-layout:fixed;">` +
-    `<tr><td style="${LABEL}"><span style="font-size:8px;line-height:18px;color:${theme.title};vertical-align:middle;">&#9679;</span>&nbsp;&nbsp;${esc(spec.eyebrow)}</td></tr>` +
+    `<tr><td style="${LABEL}"><span style="font-size:8px;line-height:18px;color:${theme.accent};vertical-align:middle;">&#9679;</span>&nbsp;&nbsp;${esc(spec.eyebrow)}</td></tr>` +
     `<tr><td class="rv-title" style="${SANS}font-size:28px;line-height:36px;font-weight:500;letter-spacing:-0.02em;color:${theme.title};padding-top:14px;${WRAP}">${esc(spec.title)}</td></tr>` +
     (spec.intro
       ? `<tr><td style="${SANS}font-size:16px;line-height:26px;color:${theme.text};padding-top:14px;${WRAP}">${multiline(spec.intro)}</td></tr>`

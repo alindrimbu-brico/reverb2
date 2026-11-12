@@ -96,7 +96,7 @@ export function contactConfirmation(i: {
         ? `If it is urgent, write to us on WhatsApp or call ${company.phoneIntl}.`
         : `Dacă e urgent, scrie-ne pe WhatsApp sau sună la ${company.phoneDisplay}.`,
     },
-    { kind: "button", label: "WhatsApp", href: company.whatsapp, variant: "outline" },
+    { kind: "button", label: "WhatsApp", href: company.whatsapp, variant: "accent" },
   );
   const { html, text } = renderEmail({
     lang: i.lang,

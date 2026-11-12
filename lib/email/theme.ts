@@ -1,7 +1,8 @@
 // Tema e-mailurilor Reverb: exact tema închisă a site-ului (app/globals.css: --bg #070809, --ink #ffffff) și
 // griurile neutre Tailwind folosite acolo. Culorile sunt hex plin, pentru că Outlook nu citește rgba; unde site-ul
 // are o culoare transparentă, aici e rezultatul ei peste fundal (calculul e scris lângă fiecare).
-// Fără verde, roșu sau alte accente: e-mailurile nu au stări. Fără griuri albăstrui: site-ul nu are.
+// Un singur accent, verdele site-ului (Alin, 12 nov: „adu și acel verde… echilibrat, discret”). Fără roșu sau alte
+// culori: e-mailurile nu au stări. Fără griuri albăstrui: site-ul nu are.
 // Contrastul fiecărei perechi text / fundal se verifică cu docs/designs/email_sabloane_2026-11-12/verificari/contrast.py.
 
 export const theme = {
@@ -27,8 +28,12 @@ export const theme = {
   faint: "#8a8a8a",
   /** Conturul butonului secundar: border-white/20 peste card. Butonul principal are conturul în `title`. */
   outline: "#3e3e3f",
+  /** Singurul accent: text-emerald-400 al site-ului („WhatsApp Direct” din subsol). Doar ca text, în puține locuri
+   *  (punctul din etichetă, WhatsApp în buton și în subsol); niciodată ca fundal. */
+  accent: "#00d492",
   sans: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-  mono: "'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace",
+  /** font-mono al site-ului (lista Tailwind). Mono = date: etichete, valori, numere, butoane, subsol. Sans = text de citit. */
+  mono: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
   /** Imaginile au nume cu versiune: e-mailurile deja trimise le cer de la aceeași adresă, deci nu se redenumesc. */
   logo: "/email/logo-v1.png",
   grid: "/email/grid-v1.png",
