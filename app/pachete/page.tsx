@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
+import WhoWeAre from "@/components/WhoWeAre";
 import { packages, VAT_LABEL } from "@/lib/packages";
 import { liveProjectsRo } from "@/lib/liveProjects";
 
@@ -23,6 +24,10 @@ const faqs = [
   {
     q: "Cum funcționează plata?",
     a: "Pentru pachetele de promovare video, plata se face lunar în avans. Pentru proiectele de construcție web/magazin: 50% avans la începere și 50% la predare și verificare completă.",
+  },
+  {
+    q: "Ce ajutor primesc după lansare?",
+    a: "La orice site sau magazin făcut de noi ai 30 de zile de sprijin după lansare: ne scrii pe WhatsApp, ne suni sau ne vedem, online ori la biroul nostru din Focșani. Îți arătăm cum adaugi produse și texte, ce să urmărești în primele săptămâni și ce ai de făcut ca să ajungi la primele comenzi.",
   },
   {
     q: "Ce mai plătesc pe lângă prețul pachetului?",
@@ -78,6 +83,9 @@ export default function PachetePage() {
             <p className="mt-8 max-w-2xl mx-auto text-base md:text-lg text-neutral-400 font-light leading-relaxed">
               Fiecare pachet Reverb Digital include un set fix de livrabile, un termen ferm de predare și un rezultat pregătit să fie găsit și de asistenții AI, nu doar de Google.
             </p>
+            <div className="mt-6">
+              <WhoWeAre center />
+            </div>
             <div className="mt-8 mx-auto flex max-w-xl items-start gap-3 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-5 py-3.5 text-left text-xs leading-relaxed font-mono text-emerald-300">
               <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-emerald-400" />
               <span>Fără contract obligatoriu pe 12 luni: testezi o lună, măsori rezultatele și decizi dacă dorești continuarea.</span>
@@ -169,6 +177,9 @@ export default function PachetePage() {
             <p className="mt-4 text-sm text-neutral-400 font-light leading-relaxed">
               Site-uri de prezentare și magazine online la preț fix: de la un început simplu, până la sisteme complete cu clipuri video și proiecte pentru companii mari.
             </p>
+            <div className="mt-6">
+              <WhoWeAre />
+            </div>
             <p className="mt-6 text-sm text-neutral-300 font-light leading-relaxed">
               Înainte să alegi, vezi ce am construit. Câteva lucrări care sunt online acum:
             </p>

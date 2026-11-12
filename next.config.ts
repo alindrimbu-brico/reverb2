@@ -20,6 +20,9 @@ const nextConfig: NextConfig = {
     { source: "/showcase/canapuff", destination: "/showcase", permanent: true },
     { source: "/showcase/jim-curtis", destination: "/showcase", permanent: true },
     // Pagini vechi scoase pe 12 nov 2026 (prețuri și servicii care nu mai există, un formular de card fără plată în spate).
+    { source: "/templates", destination: "/showcase", permanent: true },
+    { source: "/en/templates", destination: "/en/showcase", permanent: true },
+    { source: "/templates/industrii", destination: "/showcase", permanent: true },
     { source: "/macheta", destination: "/", permanent: true },
     { source: "/checkout", destination: "/pachete", permanent: true },
     { source: "/en/checkout", destination: "/en/packages", permanent: true },

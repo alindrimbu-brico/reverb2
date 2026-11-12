@@ -149,7 +149,7 @@ export function isMockupPath(pathname: string): boolean {
 }
 
 /** Pagini care rămân accesibile, dar nu se indexează. */
-export const NOINDEX: string[] = ["/portal", "/en/portal", "/guru", "/instaleaza", "/studio", "/templates", "/en/templates", "/templates/industrii"];
+export const NOINDEX: string[] = ["/portal", "/en/portal", "/guru", "/instaleaza", "/studio"];
 
 /** Pagini care doar redirecționează (nu au conținut propriu). */
 export const REDIRECT_PAGES: string[] = ["/showcase/xiaolong", "/en/showcase/xiaolong"];

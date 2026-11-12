@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
+import WhoWeAre from "@/components/WhoWeAre";
 import { packages } from "@/lib/packages";
 import { packagesEn, enPrice, enDelivery, VAT_LABEL_EN } from "@/lib/packagesEn";
 import { liveProjectsEn } from "@/lib/liveProjects";
@@ -24,6 +25,10 @@ const faqsEN = [
   {
     q: "How does billing work?",
     a: "For monthly video packages, payment is processed monthly in advance. For web and digital store builds: 50% upfront upon kickoff, 50% upon final delivery and deployment verification.",
+  },
+  {
+    q: "What help do I get after launch?",
+    a: "Every website or store we build comes with 30 days of support after launch: you write to us on WhatsApp, call us, or we meet, online or at our office in Focșani. We show you how to add products and texts, what to watch in the first weeks and what to do to reach your first orders.",
   },
   {
     q: "What else do I pay besides the package price?",
@@ -80,6 +85,9 @@ export default function PackagesPageEN() {
             <p className="mx-auto mt-6 max-w-2xl text-base sm:text-lg text-neutral-400 font-light leading-relaxed">
               Transparent investments. Predictable outcomes. High-velocity AI video engines, turnkey eCommerce stores, and enterprise architecture.
             </p>
+            <div className="mt-6">
+              <WhoWeAre lang="en" center />
+            </div>
           </Reveal>
         </div>
       </section>
@@ -181,6 +189,9 @@ export default function PackagesPageEN() {
               <h2 className="text-2xl sm:text-3xl font-light text-white font-mono uppercase">
                 Web & eCommerce Packages • Fixed Prices
               </h2>
+              <div className="mt-6">
+                <WhoWeAre lang="en" />
+              </div>
               <p className="mt-6 text-sm text-neutral-300 font-light leading-relaxed normal-case">
                 Before you choose, see what we have built. A few projects that are online now:
               </p>
