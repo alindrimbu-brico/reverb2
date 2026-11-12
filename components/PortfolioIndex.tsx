@@ -1,7 +1,7 @@
 import Link from "next/link";
 import PageBackdrop from "@/components/PageBackdrop";
 import type { LiveProject } from "@/lib/liveProjects";
-import { getPackage } from "@/lib/packages";
+import { deliveryEn, getPackage, priceEn } from "@/lib/packages";
 
 type Lang = "ro" | "en";
 
@@ -9,8 +9,9 @@ type Lang = "ro" | "en";
 function offer(id: string, lang: Lang) {
   const p = getPackage(id);
   if (!p) return null;
-  const price = p.price.replace(/^de la\s+/i, "");
-  const days = lang === "en" ? p.delivery.replace("zile", "days") : p.delivery;
+  const ro = p.price.replace(/^de la\s+/i, "");
+  const price = lang === "en" ? priceEn(ro) : ro;
+  const days = lang === "en" ? deliveryEn(p.delivery) : p.delivery;
   return { price, days };
 }
 
@@ -58,8 +59,8 @@ const copy = {
 export default function PortfolioIndex({ lang, projects }: { lang: Lang; projects: LiveProject[] }) {
   const t = copy[lang];
   const pad = (i: number) => String(i + 1).padStart(2, "0");
-  const site = offer("start-digital", lang);
-  const store = offer("magazin-digital-activ", lang);
+  const site = offer("site-start", lang);
+  const store = offer("magazin-start", lang);
 
   return (
     <div className="text-neutral-100 min-h-screen font-sans antialiased">

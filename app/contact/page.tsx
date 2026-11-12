@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import ContactForm from "./ContactForm";
+import { packages } from "@/lib/packages";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/contact", languages: { ro: "/contact", en: "/en/contact", "x-default": "/contact" } },
@@ -90,26 +91,15 @@ export default function ContactPage() {
               <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8">
                 <div className="text-xs font-mono uppercase tracking-[0.25em] text-neutral-500 mb-4">Repere Bugetare</div>
                 <div className="space-y-3.5 text-xs font-mono">
-                  <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
-                    <span className="text-neutral-300">Social Growth (12 video/l)</span>
-                    <span className="text-white font-bold">€330 / lună</span>
-                  </div>
-                  <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
-                    <span className="text-neutral-300">Daily Impact (30 video/l)</span>
-                    <span className="text-white font-bold">€588 / lună</span>
-                  </div>
-                  <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
-                    <span className="text-neutral-300">Start Digital (Web + Video)</span>
-                    <span className="text-white font-bold">€1.275</span>
-                  </div>
-                  <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
-                    <span className="text-neutral-300">Magazin Digital Activ</span>
-                    <span className="text-white font-bold">€2.499</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-neutral-300">Infrastructură Enterprise</span>
-                    <span className="text-white font-bold">de la €3.315</span>
-                  </div>
+                  {packages.map((p, i) => (
+                    <div
+                      key={p.id}
+                      className={`flex items-start justify-between gap-4 ${i < packages.length - 1 ? "border-b border-white/5 pb-2.5" : ""}`}
+                    >
+                      <span className="min-w-0 text-neutral-300">{p.shortName}</span>
+                      <span className="shrink-0 whitespace-nowrap text-white font-bold">{p.price}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </Reveal>

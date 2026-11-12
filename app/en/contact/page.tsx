@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
 import ContactForm from "./ContactForm";
 import PageBackdrop from "@/components/PageBackdrop";
+import { packages } from "@/lib/packages";
+import { packagesEn, enPrice } from "@/lib/packagesEn";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/en/contact", languages: { ro: "/contact", en: "/en/contact", "x-default": "/contact" } },
@@ -66,17 +68,10 @@ export default function ContactPageEN() {
               <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8 text-white">
                 <div className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-400">Available Packages</div>
                 <div className="mt-5 space-y-4">
-                  {[
-                    { name: "Social Growth (12 video/mo)", price: "€330 / month" },
-                    { name: "Daily Impact (30 video/mo)", price: "€588 / month" },
-                    { name: "Start Digital (Web + Video)", price: "€1,275" },
-                    { name: "Dominance 3X (90 video/mo)", price: "€1,275 / month" },
-                    { name: "Digital Store Active", price: "€2,499" },
-                    { name: "Enterprise Infrastructure", price: "from €3,315" },
-                  ].map((pkg) => (
-                    <div key={pkg.name} className="flex items-center justify-between text-sm">
-                      <span className="text-neutral-300">{pkg.name}</span>
-                      <span className="font-medium text-neutral-300">{pkg.price}</span>
+                  {packages.map((p) => (
+                    <div key={p.id} className="flex items-start justify-between gap-4 text-sm">
+                      <span className="min-w-0 text-neutral-300">{packagesEn[p.id].shortName}</span>
+                      <span className="shrink-0 whitespace-nowrap font-medium text-neutral-300">{enPrice(p.id)}</span>
                     </div>
                   ))}
                 </div>

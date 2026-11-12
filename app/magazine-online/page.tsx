@@ -2,12 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import PageBackdrop from "@/components/PageBackdrop";
+import { pkg } from "@/lib/packages";
+
+// Prețul, termenul și lista pachetului de pornire vin din registru (lib/packages.ts).
+const magazinStart = pkg("magazin-start");
 
 export const metadata: Metadata = {
   alternates: { canonical: "/magazine-online", languages: { ro: "/magazine-online", en: "/en/online-store", "x-default": "/magazine-online" } },
   title: "Magazin Digital",
   description:
-    "Construim magazine online pentru vânzare, nu doar pentru design. Platformă potrivită, structură de conversie, plăți & livrare configurate. De la €890.",
+    `Construim magazine online pentru vânzare, nu doar pentru design. Plată cu cardul, curier cu AWB și facturare automată, configurate. De la ${magazinStart.price}.`,
 };
 
 const included = [
@@ -89,7 +93,7 @@ const faq = [
   },
   {
     q: "Câte produse include pachetul?",
-    a: "Pachetul include produse demo și structurarea catalogului. Importul masiv sau migrarea completă se oferă separat.",
+    a: "Pachetul Magazin Start include încărcarea primelor 50 de produse și structurarea catalogului. Importul masiv sau migrarea completă se oferă separat.",
   },
   {
     q: "Pot începe fără campanii de promovare?",
@@ -153,7 +157,7 @@ export default function MagazineOnlinePage() {
               <ul className="space-y-3">
                 {[
                   "Setup platformă eCommerce potrivită proiectului",
-                  "Structură categorii + produse demo",
+                  "Structură categorii + primele produse încărcate",
                   "Checkout optimizat pentru conversie",
                   "Plăți & livrare configurate",
                   "Tracking esențial (vânzări, add-to-cart, checkout)",
@@ -287,18 +291,12 @@ export default function MagazineOnlinePage() {
         <div className="grid gap-5 md:grid-cols-2">
           <Reveal>
             <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8">
-              <div className="text-sm font-medium text-neutral-400">Pachet standard</div>
-              <div className="mt-2 text-sm font-semibold text-white">Magazin Digital</div>
-              <div className="mt-4 text-4xl font-medium tracking-[-0.04em] text-white">de la €890</div>
-              <div className="mt-2 text-sm text-neutral-400">Livrare: 14–30 zile</div>
+              <div className="text-sm font-medium text-neutral-400">Pachet de pornire, preț fix</div>
+              <div className="mt-2 text-sm font-semibold text-white">{magazinStart.name}</div>
+              <div className="mt-4 text-4xl font-medium tracking-[-0.04em] text-white">{magazinStart.price}</div>
+              <div className="mt-2 text-sm text-neutral-400">Livrare: {magazinStart.delivery}</div>
               <ul className="mt-6 space-y-3">
-                {[
-                  "Setup platformă eCommerce",
-                  "Structură categorii + produse demo",
-                  "Checkout optimizat",
-                  "Plăți & livrare configurate",
-                  "Tracking esențial",
-                ].map((f) => (
+                {magazinStart.includes.map((f) => (
                   <li key={f} className="flex items-start gap-3 text-[15px] leading-6 text-neutral-300">
                     <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-neutral-500" />
                     {f}

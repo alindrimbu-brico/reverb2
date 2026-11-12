@@ -2,119 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import { packages } from "@/lib/packages";
+import { packagesEn, enPrice, enDelivery } from "@/lib/packagesEn";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/en/packages", languages: { ro: "/pachete", en: "/en/packages", "x-default": "/pachete" } },
   title: "Packages & Pricing — Reverb Digital",
   description:
     "Fixed prices, zero surprises. Daily AI video content packages, turnkey digital stores, and enterprise infrastructure.",
-};
-
-const enPackageDetails: Record<string, {
-  name: string;
-  tagline: string;
-  price: string;
-  delivery: string;
-  description: string;
-  includes: string[];
-  ideal: string;
-  badge?: string;
-}> = {
-  "social-growth": {
-    name: "Social Growth AI Video",
-    tagline: "Constant video presence and visual credibility across channels.",
-    price: "€330 / month",
-    delivery: "Weekly delivery",
-    description: "12 short-form videos and 12 product carousels generated with modern AI models, optimized for TikTok, Reels, and YouTube Shorts algorithms.",
-    includes: [
-      "12 short-form videos monthly, 3 weekly cadence",
-      "12 graphic posts and product carousels",
-      "Synchronized publishing across TikTok, Instagram, Facebook, Shorts",
-      "Direct conversion scripts and dynamic subtitles",
-      "Clear monthly visibility and reach reporting",
-    ],
-    ideal: "Local businesses, clinics, and service firms seeking regular video presence without conventional shooting overhead.",
-  },
-  "daily-impact": {
-    name: "Daily Impact 1 Video Daily",
-    tagline: "Visual dominance through daily product video content.",
-    price: "€588 / month",
-    delivery: "Daily delivery",
-    description: "30 short-form video assets monthly, 1 published every day, plus 30 graphic posts. Real equipment and product demonstrations with synthetic voiceover.",
-    includes: [
-      "30 short-form videos monthly, 1 video every single day",
-      "30 graphic assets tailored for each platform",
-      "Product and hardware demonstrations in action",
-      "High-fidelity neural synthetic voiceover",
-      "Conversion-focused sales hooks and direct call to action",
-      "Weekly content consulting and algorithm optimization",
-    ],
-    ideal: "Online stores, distributors, and brands seeking accelerated organic growth through sustained volume.",
-    badge: "Most Requested",
-  },
-  "dominance-3x": {
-    name: "Dominance 3X 3 Videos Daily",
-    tagline: "Aggressive scaling for maximum algorithm coverage.",
-    price: "€1,275 / month",
-    delivery: "3 daily deliveries",
-    description: "90 short-form video assets monthly, 3 per day, for brands and retail companies wanting full saturation across feed algorithms.",
-    includes: [
-      "90 short-form videos monthly, 3 videos daily",
-      "Multi-account distribution across targeted campaigns",
-      "Systematic A/B angle testing for performance",
-      "Multilingual synthetic voiceover on request",
-      "24/7 dedicated priority support channel",
-    ],
-    ideal: "Large retailers, national brands, and enterprises with deep product catalogs.",
-  },
-  "start-digital": {
-    name: "Start Digital Web & Video",
-    tagline: "High-speed modern website powered by video from day one.",
-    price: "€1,275",
-    delivery: "7–14 days",
-    description: "High-speed 3–5 page presentation platform built on Next.js, integrated with contact forms, Google Maps, WhatsApp, and 15 launch videos.",
-    includes: [
-      "Next.js high-speed web platform under 1.2s loading",
-      "Bespoke architectural layout, zero generic templates",
-      "Contact forms, WhatsApp direct, and Google Maps integrated",
-      "Full mobile responsiveness and adaptive typography",
-      "Semantic data structures ready for Google and AI Agents GEO",
-      "Launch package: 15 short-form videos included",
-    ],
-    ideal: "Service companies, medical practices, consultancies entering the digital space with authority.",
-  },
-  "magazin-digital-activ": {
-    name: "Active Digital Store eCommerce & AI",
-    tagline: "Complete eCommerce platform engineered for conversion and AI search.",
-    price: "€2,499",
-    delivery: "14–30 days",
-    description: "Full eCommerce infrastructure on WooCommerce or Next.js with Payload CMS, cognitive checkout, card payments, automated billing, and 30 launch videos.",
-    includes: [
-      "Turnkey online store setup with card payments and courier APIs",
-      "Enterprise Control Panel option via Payload CMS or WooCommerce",
-      "Automated invoicing plus instant courier AWB dispatch",
-      "Conversion-engineered product catalog architecture",
-      "Generative Engine Optimization GEO and Schema JSON-LD",
-      "Launch package: 30 product demonstration videos",
-    ],
-    ideal: "Retailers, distributors, and growing brands scaling direct-to-consumer sales.",
-    badge: "Complete System",
-  },
-  "infrastructura-enterprise": {
-    name: "Enterprise Infrastructure & B2B",
-    tagline: "Dedicated digital systems and operational transformation.",
-    price: "from €3,315",
-    delivery: "Dedicated scope",
-    description: "Enterprise systems executed in strategic partnership with Zylaris Group London: B2B client portals, workflow automation, autonomous AI agents, and secure cloud hosting.",
-    includes: [
-      "Dedicated scalable cloud architecture",
-      "Secure client and partner B2B portals",
-      "Operational workflow audit and autonomous AI agent deployment",
-      "International corporate governance and security standards",
-      "Proactive 24/7 system monitoring and guaranteed SLA",
-    ],
-    ideal: "Enterprises, corporate networks, and organizations requiring zero-compromise digital reliability.",
-  },
 };
 
 const faqsEN = [
@@ -197,7 +91,7 @@ export default function PackagesPageEN() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {socialPackages.map((pkg, idx) => {
-              const details = enPackageDetails[pkg.id] || pkg;
+              const details = packagesEn[pkg.id];
               return (
                 <Reveal key={pkg.id} delay={0.1 * idx}>
                   <div
@@ -217,11 +111,11 @@ export default function PackagesPageEN() {
                       )}
 
                       <div className="text-2xl sm:text-3xl font-mono text-white mb-2 font-light">
-                        {details.price}
+                        {enPrice(pkg.id)}
                       </div>
 
                       <div className="text-xs font-mono text-neutral-400 mb-4 pb-4 border-b border-white/10">
-                        {details.delivery}
+                        {enDelivery(pkg.id)}
                       </div>
 
                       <h3 className="text-xl font-medium text-white mb-2">
@@ -276,14 +170,20 @@ export default function PackagesPageEN() {
                 02 / TECHNICAL FOUNDATION
               </div>
               <h2 className="text-2xl sm:text-3xl font-light text-white font-mono uppercase">
-                Web & eCommerce Packages • Built From Scratch
+                Web & eCommerce Packages • Fixed Prices
               </h2>
+              <p className="mt-4 text-sm text-neutral-300 font-light leading-relaxed">
+                Before you choose, see what we have built:{" "}
+                <Link href="/en/portfolio" className="underline underline-offset-4 hover:text-white">the live projects</Link>{" "}
+                and{" "}
+                <Link href="/showcase" className="underline underline-offset-4 hover:text-white">the concept gallery</Link>.
+              </p>
             </div>
           </Reveal>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {webPackages.map((pkg, idx) => {
-              const details = enPackageDetails[pkg.id] || pkg;
+              const details = packagesEn[pkg.id];
               return (
                 <Reveal key={pkg.id} delay={0.1 * idx}>
                   <div
@@ -303,11 +203,11 @@ export default function PackagesPageEN() {
                       )}
 
                       <div className="text-2xl sm:text-3xl font-mono text-white mb-2 font-light">
-                        {details.price}
+                        {enPrice(pkg.id)}
                       </div>
 
                       <div className="text-xs font-mono text-neutral-400 mb-4 pb-4 border-b border-white/10">
-                        {details.delivery}
+                        {enDelivery(pkg.id)}
                       </div>
 
                       <h3 className="text-xl font-medium text-white mb-2">

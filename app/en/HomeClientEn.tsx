@@ -5,15 +5,12 @@ import Link from "next/link";
 import TechAuthorityGrid from "@/components/TechAuthorityGrid";
 import ProjectPreviewModal, { PreviewProject } from "@/components/ProjectPreviewModal";
 import { liveProjectsEn } from "@/lib/liveProjects";
-import { getPackage } from "@/lib/packages";
+import { pkg, priceEn, splitPrice, noBreak } from "@/lib/packages";
+import { packagesEn, enPrice, enDelivery } from "@/lib/packagesEn";
 
-// Card 03 reads prices from the registry (lib/packages.ts); English uses a comma for thousands.
-const enPrice = (id: string) => (getPackage(id)?.price ?? "").replace(".", ",");
-// "in 7–14 days" stays on one line through non-breaking characters (a nowrap span overflows the card in WebKit).
-const enDays = (id: string) =>
-  `in ${(getPackage(id)?.delivery ?? "").replace(" zile", " days")}`.replace("–", "–⁠").replace(/ /g, " ");
-const sitePrice = enPrice("start-digital");
-const storePrice = enPrice("magazin-digital-activ");
+// The price cards read from the registry (lib/packages.ts); English texts come from lib/packagesEn.ts.
+const priceSocial = splitPrice(priceEn(pkg("social-growth").price));
+const priceDaily = splitPrice(priceEn(pkg("daily-impact").price));
 
 // ── Web Audio API Procedural Sound Engine ──
 class SoundEngine {
@@ -435,7 +432,7 @@ export default function EnglishHomePage() {
               </div>
               <h3 className="text-2xl font-light text-white mb-2">Social Growth</h3>
               <div className="text-4xl font-light text-white tracking-tight mb-4">
-                €330 <span className="text-xs font-mono text-neutral-500">/ month</span>
+                {priceSocial.amount} <span className="text-xs font-mono text-neutral-500">{priceSocial.period}</span>
               </div>
               <p className="text-xs text-neutral-400 font-light leading-relaxed mb-8">
                 Designed for businesses requiring continuous social credibility and brand authority without physical studio overhead.
@@ -483,7 +480,7 @@ export default function EnglishHomePage() {
               </div>
               <h3 className="text-2xl font-light text-white mb-2">Daily Impact</h3>
               <div className="text-4xl font-light text-white tracking-tight mb-4">
-                €588 <span className="text-xs font-mono text-neutral-400">/ month</span>
+                {priceDaily.amount} <span className="text-xs font-mono text-neutral-400">{priceDaily.period}</span>
               </div>
               <p className="text-xs text-neutral-300 font-light leading-relaxed mb-8">
                 Continuous daily high-fidelity video saturation for organic channel dominance and compounding awareness.
@@ -518,7 +515,7 @@ export default function EnglishHomePage() {
             </Link>
           </div>
 
-          {/* Column 3: Turnkey E-Commerce Store */}
+          {/* Column 3: Website or online store (prices come from lib/packages.ts) */}
           <div className="mech-card mech-scanline p-8 lg:p-10 flex flex-col justify-between bg-white/[0.01] hover:bg-white/[0.02] transition-colors">
             <div>
               <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500 mb-4">
@@ -526,28 +523,28 @@ export default function EnglishHomePage() {
               </div>
               <h3 className="text-2xl font-light text-white mb-2">Website or Online Store</h3>
               <div className="text-4xl font-light text-white tracking-tight mb-4">
-                <span className="text-xs font-mono text-neutral-500">from</span> {sitePrice}
+                <span className="text-xs font-mono text-neutral-500">from</span> {enPrice("site-start")}
               </div>
               <p className="text-xs text-neutral-400 font-light leading-relaxed mb-8">
-                Turnkey build on Next.js or WooCommerce, with launch videos included. Fixed price per package.
+                A website or an online store at a fixed price. The larger packages add custom design and launch videos.
               </p>
 
               <div className="space-y-3 font-mono text-xs text-neutral-300 border-t border-white/5 pt-6 mb-8">
                 <div className="flex items-start gap-2">
                   <span className="text-neutral-500">—</span>
-                  <span>Website + 15 videos: {sitePrice}, {enDays("start-digital")}</span>
+                  <span>{packagesEn["site-start"].name}: {enPrice("site-start")}, {noBreak(`in ${enDelivery("site-start")}`)}</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="text-neutral-500">—</span>
-                  <span>Online store + 30 videos: {storePrice}, {enDays("magazin-digital-activ")}</span>
+                  <span>Custom-design website + 15 videos: {enPrice("start-digital")}</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="text-neutral-500">—</span>
-                  <span>Store: card payments, courier labels, automated invoicing</span>
+                  <span>{packagesEn["magazin-start"].name}, with card, courier labels and invoices: {enPrice("magazin-start")}</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="text-neutral-500">—</span>
-                  <span>Sub-1.2s load time, structured data ready for AI search</span>
+                  <span>Complete store + 30 videos: {enPrice("magazin-digital-activ")}</span>
                 </div>
               </div>
             </div>

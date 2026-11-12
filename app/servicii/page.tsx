@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
+import { pkg } from "@/lib/packages";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/servicii", languages: { ro: "/servicii", en: "/en/services", "x-default": "/servicii" } },
@@ -13,7 +14,7 @@ const mainServices = [
   {
     id: "01",
     tag: "FUNDAȚIE TEHNICĂ",
-    price: "de la €1.275",
+    price: `de la ${pkg("site-start").price}`,
     title: "Platforme Web & Magazine Online",
     tagline: "Arhitectură de mare viteză construită direct pentru conversie.",
     text: "Dezvoltăm de la zero website-uri de prezentare și magazine online robuste pe Next.js și WooCommerce. Timp de încărcare garantat sub 1.2 secunde, flux de checkout optimizat cognitiv, integrări de plăți securizate cu cardul, facturare automată și emitere instantanee de AWB-uri curieri.",
@@ -24,12 +25,12 @@ const mainServices = [
       "Facturare automată FGO sau SmartBill + AWB curieri",
       "Optimizare completă pentru dispozitive mobile",
     ],
-    href: "/contact?pachet=site-magazin",
+    href: "/contact?pachet=site-start",
   },
   {
     id: "02",
     tag: "SCALARE SOCIAL MEDIA",
-    price: "de la €330 / lună",
+    price: `de la ${pkg("social-growth").price}`,
     title: "Motorul Video Social Media AI",
     tagline: "Volum zilnic de conținut video generat cu inteligență artificială.",
     text: "Eliminăm bariera costurilor caselor de producție clasice. Producem zilnic 1 până la 3 clipuri video de înaltă fidelitate pentru TikTok, Instagram Reels, YouTube Shorts și Facebook folosind tehnologiile Google Imagen & Veo. Demonstrații de produse și utilaje în acțiune, scenarii de vânzare și subtitrări dinamice.",
@@ -46,6 +47,7 @@ const mainServices = [
   {
     id: "03",
     tag: "NOUA CĂUTARE ONLINE",
+    // Serviciul GEO nu e pachet în registru: prețul lui se scrie aici.
     price: "de la €588 / lună",
     title: "Optimizare Pentru Agenți AI GEO",
     tagline: "Fii prima recomandare în ChatGPT, Perplexity, Claude și Gemini.",
@@ -73,7 +75,7 @@ const mainServices = [
       "Mentenanță proactivă 24/7 și SLA garantat",
       "Guvernanță și securitate gestionată internațional",
     ],
-    href: "/contact?pachet=enterprise",
+    href: "/contact?pachet=infrastructura-enterprise",
   },
 ];
 

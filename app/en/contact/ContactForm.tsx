@@ -63,8 +63,17 @@ export default function ContactFormEN() {
     if (Object.keys(newErrors).length > 0) return;
 
     setState("submitting");
-    await new Promise((r) => setTimeout(r, 1200));
-    setState("success");
+    // The request goes out by e-mail through /api/contact; "sent" shows only if the server confirmed it.
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, service: `[EN] ${form.service}` }),
+      });
+      setState(res.ok ? "success" : "error");
+    } catch {
+      setState("error");
+    }
   }
 
   if (state === "success") {
@@ -205,8 +214,9 @@ export default function ContactFormEN() {
       </div>
 
       {state === "error" && (
-        <p className="mt-4 rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-600">
-          Something went wrong. Please try again or email us directly.
+        <p role="alert" className="mt-4 rounded-2xl border border-rose-500/30 bg-rose-500/10 px-4 py-3 text-sm text-rose-300">
+          The message could not be sent. Please try again or write to us at{" "}
+          <a href="mailto:contact@reverb.ro" className="underline">contact@reverb.ro</a>.
         </p>
       )}
 

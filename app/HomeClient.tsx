@@ -5,13 +5,15 @@ import Link from "next/link";
 import TechAuthorityGrid from "@/components/TechAuthorityGrid";
 import ProjectPreviewModal, { PreviewProject } from "@/components/ProjectPreviewModal";
 import { liveProjectsRo } from "@/lib/liveProjects";
-import { getPackage } from "@/lib/packages";
+import { pkg, splitPrice, noBreak } from "@/lib/packages";
 
-// Cardul 03 de pe prima pagină citește prețurile și termenele din registru, ca /pachete.
-const pachetSite = getPackage("start-digital");
-const pachetMagazin = getPackage("magazin-digital-activ");
-// „în 7–14 zile” rămâne pe un rând prin caractere care nu se rup (nu printr-un span nowrap: WebKit îl scoate din card).
-const termen = (p?: { delivery: string }) => `în ${p?.delivery ?? ""}`.replace("–", "–⁠").replace(/ /g, " ");
+// Cardurile de preț de pe prima pagină citesc din registru (lib/packages.ts), ca /pachete.
+const pretSocial = splitPrice(pkg("social-growth").price);
+const pretDaily = splitPrice(pkg("daily-impact").price);
+const siteStart = pkg("site-start");
+const siteVideo = pkg("start-digital");
+const magazinStart = pkg("magazin-start");
+const magazinVideo = pkg("magazin-digital-activ");
 
 // ── Web Audio API Procedural Sound Engine ──
 class SoundEngine {
@@ -177,14 +179,14 @@ export default function HomePage() {
               className="inline-flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 transition-colors"
             >
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              WhatsApp Rapid: 0767 235 693
+              WhatsApp Rapid: 0767&nbsp;235&nbsp;693
             </a>
             <span className="text-neutral-700">•</span>
             <a
               href="tel:0767235693"
               className="hover:text-white transition-colors"
             >
-              Apel Direct: 0767 235 693
+              Apel Direct: 0767&nbsp;235&nbsp;693
             </a>
           </div>
 
@@ -459,7 +461,7 @@ export default function HomePage() {
               </div>
               <h3 className="text-2xl font-light text-white mb-2">Social Growth</h3>
               <div className="text-4xl font-light text-white tracking-tight mb-4">
-                €330 <span className="text-xs font-mono text-neutral-500">/ lună</span>
+                {pretSocial.amount} <span className="text-xs font-mono text-neutral-500">{pretSocial.period}</span>
               </div>
               <p className="text-xs text-neutral-400 font-light leading-relaxed mb-8">
                 Pentru companii și branduri care au nevoie de prezență constantă și credibilitate vizuală fără cheltuieli de studio.
@@ -507,7 +509,7 @@ export default function HomePage() {
               </div>
               <h3 className="text-2xl font-light text-white mb-2">Daily Impact</h3>
               <div className="text-4xl font-light text-white tracking-tight mb-4">
-                €588 <span className="text-xs font-mono text-neutral-400">/ lună</span>
+                {pretDaily.amount} <span className="text-xs font-mono text-neutral-400">{pretDaily.period}</span>
               </div>
               <p className="text-xs text-neutral-300 font-light leading-relaxed mb-8">
                 Volum zilnic neîntrerupt de conținut de înaltă fidelitate pentru saturarea canalelor sociale și creștere organică.
@@ -550,28 +552,28 @@ export default function HomePage() {
               </div>
               <h3 className="text-2xl font-light text-white mb-2">Site sau Magazin Online</h3>
               <div className="text-4xl font-light text-white tracking-tight mb-4">
-                <span className="text-xs font-mono text-neutral-500">de la</span> {pachetSite?.price}
+                <span className="text-xs font-mono text-neutral-500">de la</span> {siteStart.price}
               </div>
               <p className="text-xs text-neutral-400 font-light leading-relaxed mb-8">
-                Construcție la cheie pe Next.js sau WooCommerce, cu clipuri video de lansare incluse. Preț fix pe pachet.
+                Site de prezentare sau magazin online, la preț fix. Pachetele mari adaugă design exclusiv și clipuri video de lansare.
               </p>
 
               <div className="space-y-3 font-mono text-xs text-neutral-300 border-t border-white/5 pt-6 mb-8">
                 <div className="flex items-start gap-2">
                   <span className="text-neutral-500">—</span>
-                  <span>Site de prezentare + 15 clipuri: {pachetSite?.price}, {termen(pachetSite)}</span>
+                  <span>{siteStart.name}: {siteStart.price}, {noBreak(`în ${siteStart.delivery}`)}</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="text-neutral-500">—</span>
-                  <span>Magazin online + 30 de clipuri: {pachetMagazin?.price}, {termen(pachetMagazin)}</span>
+                  <span>Site cu design exclusiv + 15 clipuri: {siteVideo.price}</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="text-neutral-500">—</span>
-                  <span>La magazin: plăți cu cardul, AWB curieri, facturare FGO sau SmartBill</span>
+                  <span>{magazinStart.name}, cu card, AWB și facturi: {magazinStart.price}</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="text-neutral-500">—</span>
-                  <span>Încărcare sub 1,2 secunde, date pregătite pentru căutarea AI</span>
+                  <span>Magazin complet + 30 de clipuri: {magazinVideo.price}</span>
                 </div>
               </div>
             </div>

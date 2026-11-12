@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
+import { serviceOptions as buildServiceOptions, resolveService } from "@/lib/packages";
 
 type FormState = "idle" | "submitting" | "success" | "error";
 
@@ -26,20 +27,13 @@ function validate(form: Record<string, string>): FieldErrors {
   return errors;
 }
 
-const serviceOptions = [
-  { value: "daily-impact", label: "Pachet Daily Impact (€588 / lună — 30 video AI)" },
-  { value: "social-growth", label: "Pachet Social Growth (€330 / lună — 12 video AI)" },
-  { value: "dominant-omnichannel", label: "Pachet Dominant Omnichannel (€1.275 / lună — 90 video AI)" },
-  { value: "magazin-complet", label: "Start Digital Web și Video (€1.275)" },
-  { value: "platforma-prezentare", label: "Magazin Digital Activ eCommerce și AI (€2.499)" },
-  { value: "ecosistem-enterprise", label: "Infrastructură Enterprise & B2B (de la €3.315)" },
-  { value: "geo-search", label: "Optimizare Pentru Căutare AI (GEO)" },
-  { value: "consultanta-alta", label: "Consultanță / Proiect Personalizat" },
-];
+// Opțiunile vin din registru (valoarea = id-ul pachetului), ca linkurile ?pachet=<id> să preselecteze corect.
+const serviceOptions = buildServiceOptions();
 
 function ContactFormInner() {
   const searchParams = useSearchParams();
-  const initialPachet = searchParams.get("pachet") || "";
+  // Valorile vechi se traduc; o valoare necunoscută lasă selectul gol, iar validarea cere alegerea.
+  const initialPachet = resolveService(searchParams.get("pachet") ?? searchParams.get("package"));
 
   const [state, setState] = useState<FormState>("idle");
   const [touched, setTouched] = useState<Record<string, boolean>>({});
@@ -85,9 +79,18 @@ function ContactFormInner() {
     if (Object.keys(newErrors).length > 0) return;
 
     setState("submitting");
-    // Simulăm trimiterea directă
-    await new Promise((r) => setTimeout(r, 1000));
-    setState("success");
+    // Cererea pleacă pe e-mail prin /api/contact; „succes” apare doar dacă serverul a confirmat trimiterea.
+    try {
+      const label = serviceOptions.find((o) => o.value === form.service)?.label ?? form.service;
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, service: label }),
+      });
+      setState(res.ok ? "success" : "error");
+    } catch {
+      setState("error");
+    }
   }
 
   if (state === "success") {
@@ -235,6 +238,13 @@ function ContactFormInner() {
           </div>
         </div>
       </div>
+
+      {state === "error" && (
+        <p role="alert" className="mt-6 rounded-2xl border border-rose-500/30 bg-rose-500/10 px-4 py-3 text-xs leading-relaxed text-rose-300">
+          Mesajul nu a putut fi trimis. Încearcă din nou sau scrie-ne direct la{" "}
+          <a href="mailto:contact@reverb.ro" className="underline">contact@reverb.ro</a>.
+        </p>
+      )}
 
       <button
         type="submit"

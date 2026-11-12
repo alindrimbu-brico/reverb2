@@ -2,12 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import PageBackdrop from "@/components/PageBackdrop";
+import { packagesEn, enPrice, enDelivery } from "@/lib/packagesEn";
+
+// The starter package's price, term and list come from the registry (lib/packages.ts + lib/packagesEn.ts).
+const storeStart = packagesEn["magazin-start"];
 
 export const metadata: Metadata = {
   alternates: { canonical: "/en/online-store", languages: { ro: "/magazine-online", en: "/en/online-store", "x-default": "/magazine-online" } },
   title: "Digital Store",
   description:
-    "We build online stores for selling, not just for design. Right platform, conversion structure, payments & delivery configured. From €890.",
+    `We build online stores for selling, not just for design. Card payments, courier labels and automatic invoicing, configured. From ${enPrice("magazin-start")}.`,
 };
 
 const included = [
@@ -89,7 +93,7 @@ const faq = [
   },
   {
     q: "How many products does the package include?",
-    a: "The package includes demo products and catalogue structuring. Mass import or complete migration is offered separately.",
+    a: "The Store Start package includes loading your first 50 products and structuring the catalogue. Mass import or complete migration is offered separately.",
   },
   {
     q: "Can I start without promotion campaigns?",
@@ -153,7 +157,7 @@ export default function OnlineStorePage() {
               <ul className="space-y-3">
                 {[
                   "eCommerce platform setup suited to the project",
-                  "Category structure + demo products",
+                  "Category structure + first products loaded",
                   "Conversion-optimised checkout",
                   "Payments & delivery configured",
                   "Essential tracking (sales, add-to-cart, checkout)",
@@ -287,18 +291,12 @@ export default function OnlineStorePage() {
         <div className="grid gap-5 md:grid-cols-2">
           <Reveal>
             <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8">
-              <div className="text-sm font-medium text-neutral-400">Standard package</div>
-              <div className="mt-2 text-sm font-semibold text-white">Digital Store</div>
-              <div className="mt-4 text-4xl font-medium tracking-[-0.04em] text-white">from €890</div>
-              <div className="mt-2 text-sm text-neutral-400">Delivery: 14–30 days</div>
+              <div className="text-sm font-medium text-neutral-400">Starter package, fixed price</div>
+              <div className="mt-2 text-sm font-semibold text-white">{storeStart.name}</div>
+              <div className="mt-4 text-4xl font-medium tracking-[-0.04em] text-white">{enPrice("magazin-start")}</div>
+              <div className="mt-2 text-sm text-neutral-400">Delivery: {enDelivery("magazin-start")}</div>
               <ul className="mt-6 space-y-3">
-                {[
-                  "eCommerce platform setup",
-                  "Category structure + demo products",
-                  "Optimised checkout",
-                  "Payments & delivery configured",
-                  "Essential tracking",
-                ].map((f) => (
+                {storeStart.includes.map((f) => (
                   <li key={f} className="flex items-start gap-3 text-[15px] leading-6 text-neutral-300">
                     <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-neutral-500" />
                     {f}

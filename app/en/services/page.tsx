@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
+import { enPrice } from "@/lib/packagesEn";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/en/services", languages: { ro: "/servicii", en: "/en/services", "x-default": "/servicii" } },
@@ -13,7 +14,7 @@ const mainServices = [
   {
     id: "01",
     tag: "TECHNICAL FOUNDATION",
-    price: "from €1,275",
+    price: `from ${enPrice("site-start")}`,
     title: "Web Platforms & Digital Stores",
     tagline: "High-speed architecture built directly for conversion.",
     text: "We develop presentation websites and robust online stores from scratch on Next.js and WooCommerce. Guaranteed loading under 1.2 seconds, cognitive checkout flow, secure card integrations, automated invoicing, and instant courier dispatch.",
@@ -29,7 +30,7 @@ const mainServices = [
   {
     id: "02",
     tag: "SOCIAL MEDIA SCALING",
-    price: "from €330 / month",
+    price: `from ${enPrice("social-growth")}`,
     title: "AI Social Media Video Engine",
     tagline: "Daily volume of product video content generated with AI.",
     text: "We eliminate the barrier of traditional video production costs. We generate 1 to 3 high-fidelity video assets daily for TikTok, Instagram Reels, YouTube Shorts, and Facebook using Google Imagen and Veo technologies. Product demonstrations, sales hooks, and dynamic subtitles.",
@@ -46,6 +47,7 @@ const mainServices = [
   {
     id: "03",
     tag: "NEW SEARCH PARADIGM",
+    // The GEO service is not a package in the registry: its price is written here.
     price: "from €588 / month",
     title: "Generative Engine Optimization GEO",
     tagline: "Become the primary recommendation in ChatGPT, Perplexity, Claude, and Gemini.",

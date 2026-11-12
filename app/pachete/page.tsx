@@ -158,7 +158,13 @@ export default function PachetePage() {
               Platforme Web, Magazine & Arhitectură B2B
             </h2>
             <p className="mt-4 text-sm text-neutral-400 font-light leading-relaxed">
-              Arhitecturi Next.js de mare viteză, magazine online la cheie și soluții enterprise proiectate pentru reziliență și conversie.
+              Site-uri de prezentare și magazine online la preț fix: de la un început simplu, până la sisteme complete cu clipuri video și proiecte pentru companii mari.
+            </p>
+            <p className="mt-4 text-sm text-neutral-300 font-light leading-relaxed">
+              Înainte să alegi, vezi ce am construit:{" "}
+              <Link href="/portofoliu" className="underline underline-offset-4 hover:text-white">proiectele live</Link>{" "}
+              și{" "}
+              <Link href="/showcase" className="underline underline-offset-4 hover:text-white">galeria de concepte</Link>.
             </p>
           </div>
         </Reveal>
@@ -212,7 +218,7 @@ export default function PachetePage() {
                         : "border border-white/20 text-white hover:bg-white hover:text-black"
                     }`}
                   >
-                    Configurează Proiectul →
+                    Cere acest pachet →
                   </Link>
                 </div>
               </div>
