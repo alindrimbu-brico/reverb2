@@ -8,6 +8,13 @@ Aici notăm progresul pentru a ne coordona perfect.
 
 ---
 
+### [Claude] - 12 nov 2026 - Studio → Muzică → „Creează”: rețeta de sunet (felia 1 a motorului de creație)
+Cererea lui Alin: selector de stiluri cu gradație 1–100, reglaje în cuvinte („mai mult bas, adaugă viori”), apoi album, foileton, poezie recitată, trimitere și publicare automată. Planul, cele 3 rapoarte de revizie și verificările: `docs/designs/motor_creatie_2026-11-12/` (`design_v2_decizii.md` câștigă). Se construiește în felii verticale; aceasta e prima.
+1. **Stilul care pleacă la Suno îl scrie codul, nu modelul:** `lib/musicReteta.ts` (paleta + `compileazaStil`). Suno nu primește procente: cursorul alege una din patru trepte față de stilul de bază (abia simțit / o idee / clar / la egal), iar treapta e cuvântul trimis. Nu schimbați pragurile fără să rulați `node --test scripts/test_music_reteta.mjs`.
+2. `op: compune` primește opțional `reteta` și `public`. Cu rețetă, modelul întoarce în `stil` doar propoziția de atmosferă; ruta compilează stilul final și „Exclude”. Fără rețetă, drumul vechi e neschimbat.
+3. Ecranul e `app/studio/CreeazaPanou.tsx` (în `MuzicaTab.tsx`, subfila „1. Creează”). Ținte de atingere ≥ 44 px, text ≥ 14 px pe controale; ciorna se ține minte cu `lib/useStored.ts`. Verificarea: `docs/designs/motor_creatie_2026-11-12/verificari/creeaza_check.py` (Chromium + WebKit, 390 / 768 / 1280, ambele teme).
+4. **Nu adăugați în panou forme sau butoane care nu merg cap-coadă** (Poezie recitată, Album, Foileton, „Trimite în Suno”, „Publică singur”): vin pe rând, fiecare cu felia ei, după probele scrise în plan.
+
 ### [Claude] - 12 nov 2026 - „Linia care merge”: o bandă care aleargă pe litere și pe conturul cardurilor
 
 Ideea lui Alin, pornită de la aurencomputers.com (o bandă scurtă care alunecă în lungul unei linii subțiri). A ales, din analiza mea: **cu măsură**. Un singur lucru în mișcare pe ecran.

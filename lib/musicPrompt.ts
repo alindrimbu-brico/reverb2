@@ -59,9 +59,35 @@ export const SCHEMA_RASPUNS = {
   required: ["piese"],
 };
 
-export function promptUtilizator(cerere: string, limbi: Limba[], motiveAnterioare: string[] = []): string {
+/** Ce a hotărât Alin din panou (motorul de creație, design_v2_decizii.md); textele vin gata compilate din lib/musicReteta.ts. */
+export type DinPanou = {
+  stilFix?: string;                                  // stilul compilat din rețetă, fără atmosferă și fără limbă
+  instrumenteCerute?: { ro: string; en: string }[];  // instrumentele puse pe „mult”
+  excluse?: string;                                  // instrumentele puse pe „fără”
+  note?: string;                                     // ce a mai cerut în cuvinte și nu are reglaj
+  copii?: boolean;
+};
+
+export function promptUtilizator(cerere: string, limbi: Limba[], motiveAnterioare: string[] = [], panou: DinPanou = {}): string {
   const ce = limbi.length === 2 ? "o piesă în română și perechea ei în engleză" : limbi[0] === "ro" ? "o piesă în română" : "o piesă în engleză";
   let t = `Cererea lui Alin: ${cerere}\n\nScrie ${ce}.`;
+  if (panou.stilFix) {
+    const cerute = (panou.instrumenteCerute || []).map((i) => i.en);
+    t += `\n\nStilul muzical e deja hotărât de Alin din panou și îl scrie programul, nu tu: «${panou.stilFix}».`
+      + `\nDe aceea, în câmpul "stil" scrii DOAR o propoziție de atmosferă în engleză, de cel mult 160 de caractere (locul, lumina, sentimentul),`
+      + ` fără genuri, instrumente, tempo, voce sau limbă: acelea sunt deja în stilul fix. Regulile 1 și 2 despre conținutul câmpului "stil" nu se aplică.`
+      + `\nVersurile, scenele și kitul se potrivesc cu stilul fix.`
+      + (cerute.length
+        ? `\n"instrumente_cerute" conține exact: ${(panou.instrumenteCerute || []).map((i) => `{ro: "${i.ro}", en: "${i.en}"}`).join(", ")}.`
+          + ` Fiecare apare în versuri ca indicație între paranteze drepte, cu numele englezesc scris exact așa: ${cerute.map((e) => `[${e}]`).join(", ")}.`
+        : `\n"instrumente_cerute" rămâne listă goală.`);
+  }
+  if (panou.excluse) t += `\nAlin nu vrea aceste instrumente: ${panou.excluse}. Nu le pomeni nicăieri.`;
+  if (panou.note) t += `\n\nAlin a mai cerut, în cuvinte: «${panou.note}». Ține cont la versuri și în propoziția de atmosferă.`;
+  if (panou.copii) {
+    t += `\n\nPiesa e pentru copii: cuvinte simple, propoziții scurte, imagini vesele și calde, refren ușor de ținut minte.`
+      + ` Fără teme grele (moarte, despărțire, frică), fără ironie. Versurile au cel mult 1.600 de caractere.`;
+  }
   if (motiveAnterioare.length) {
     t += `\n\nVarianta anterioară a fost respinsă de verificator pentru: ${motiveAnterioare.join("; ")}. Corectează exact aceste probleme.`;
   }

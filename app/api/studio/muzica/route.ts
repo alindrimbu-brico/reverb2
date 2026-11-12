@@ -7,7 +7,8 @@
 import { NextResponse } from "next/server";
 import { createHash, createHmac, randomBytes } from "node:crypto";
 import { STUDIO_COOKIE_NAME, STUDIO_SECURITY_HEADERS, verifyStudioSessionToken, extractCookieValue } from "@/lib/studioAuth";
-import { PROMPT_SISTEM, SCHEMA_RASPUNS, promptUtilizator, type Limba } from "@/lib/musicPrompt";
+import { PROMPT_SISTEM, SCHEMA_RASPUNS, promptUtilizator, type DinPanou, type Limba } from "@/lib/musicPrompt";
+import { compileazaStil, normalizeazaReteta, retetaEGoala } from "@/lib/musicReteta";
 import { lintToate, type PiesaCompusa } from "@/lib/musicLint";
 
 export const maxDuration = 300; // o compunere Gemini 3.8 Flash cu schemă durează ~50 s (măsurat 11 nov); reîncercările se opresc după 180 s
@@ -79,23 +80,36 @@ async function catreReleu(metoda: "GET" | "POST", cale: string, corp?: unknown) 
   }
 }
 
-async function gemini(cerere: string, limbi: Limba[], motive: string[]): Promise<PiesaCompusa[]> {
+async function gemini(cerere: string, limbi: Limba[], motive: string[], panou: DinPanou = {}): Promise<PiesaCompusa[]> {
   // 11 nov 2026: GOOGLE_GENERATIVE_AI_API_KEY din Vercel (220 de zile) e invalidă; cheia bună e STUDIO_GEMINI_API_KEY.
   const cheie = (process.env.STUDIO_GEMINI_API_KEY || process.env.GOOGLE_GENERATIVE_AI_API_KEY || "").trim();
   if (!cheie) throw new Error("Cheia Gemini lipsește în Vercel (STUDIO_GEMINI_API_KEY).");
   const model = (process.env.STUDIO_GEMINI_MODEL || "gemini-3.8-flash").trim();
-  const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "x-goog-api-key": cheie },
-    body: JSON.stringify({
-      systemInstruction: { parts: [{ text: PROMPT_SISTEM }] },
-      contents: [{ role: "user", parts: [{ text: promptUtilizator(cerere, limbi, motive) }] }],
-      generationConfig: { responseMimeType: "application/json", responseSchema: SCHEMA_RASPUNS, temperature: 0.9 },
-    }),
-    cache: "no-store",
-  });
-  if (!r.ok) throw new Error(`Gemini a răspuns HTTP ${r.status}: ${(await r.text()).slice(0, 200)}`);
-  const d = await r.json();
+  // Limită pe apel: o cerere agățată nu mai ține ruta până la maxDuration (atunci panoul primea un 504 fără JSON).
+  const ctrl = new AbortController();
+  const limita = setTimeout(() => ctrl.abort(), 100000);
+  let r: Response;
+  let d: { candidates?: { content?: { parts?: { text?: string }[] } }[] };
+  try {
+    r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "x-goog-api-key": cheie },
+      body: JSON.stringify({
+        systemInstruction: { parts: [{ text: PROMPT_SISTEM }] },
+        contents: [{ role: "user", parts: [{ text: promptUtilizator(cerere, limbi, motive, panou) }] }],
+        generationConfig: { responseMimeType: "application/json", responseSchema: SCHEMA_RASPUNS, temperature: 0.9 },
+      }),
+      cache: "no-store",
+      signal: ctrl.signal,
+    });
+    if (!r.ok) throw new Error(`Gemini a răspuns HTTP ${r.status}: ${(await r.text()).slice(0, 200)}`);
+    d = await r.json();
+  } catch (e: unknown) {
+    if (e instanceof Error && e.name === "AbortError") throw new Error("Gemini nu a răspuns în 100 de secunde. Încearcă din nou.");
+    throw e;
+  } finally {
+    clearTimeout(limita);
+  }
   const text = d?.candidates?.[0]?.content?.parts?.map((p: { text?: string }) => p.text || "").join("") || "";
   const piese = (JSON.parse(text)?.piese || []) as PiesaCompusa[];
   return piese.filter((p) => limbi.includes(p.limba as Limba));
@@ -116,18 +130,39 @@ export async function POST(req: Request) {
     const limbi = (Array.isArray(corp.limbi) ? corp.limbi : ["ro"]).filter((l): l is Limba => l === "ro" || l === "en");
     if (cerere.length < 8) return json({ ok: false, mesaj: "Scrie cererea (ce fel de melodie, gen, stare, instrumente)." }, 400);
     if (!limbi.length) return json({ ok: false, mesaj: "Alege cel puțin o limbă." }, 400);
+    // Motorul de creație: rețeta din panou. Stilul îl compilează codul (lib/musicReteta.ts); modelul dă doar propoziția de atmosferă.
+    const reteta = normalizeazaReteta(corp.reteta);
+    const cuReteta = !retetaEGoala(reteta);
+    const fix = cuReteta ? compileazaStil(reteta) : null;
+    if (fix?.eroare) return json({ ok: false, mesaj: fix.eroare }, 400);
+    const panou: DinPanou = {
+      stilFix: fix?.text || undefined,
+      instrumenteCerute: fix?.instrumente_cerute,
+      excluse: fix?.exclude || undefined,
+      note: reteta.note || undefined,
+      copii: corp.public === "copii",
+    };
     let motive: string[] = [];
     const t0 = Date.now();
     for (let incercare = 0; incercare < 3 && (incercare === 0 || Date.now() - t0 < 180000); incercare++) {
       let piese: PiesaCompusa[];
       try {
-        piese = await gemini(cerere, limbi, motive);
+        piese = await gemini(cerere, limbi, motive, panou);
       } catch (e: unknown) {
         return json({ ok: false, mesaj: e instanceof Error ? e.message : "Eroare la Gemini." }, 502);
       }
       if (piese.length !== limbi.length) {
         motive = [`trebuie exact ${limbi.length} piese (${limbi.join(", ")})`];
         continue;
+      }
+      if (cuReteta) {
+        let preaLung: string | null = null;
+        piese = piese.map((p) => {
+          const c = compileazaStil(reteta, { limba: p.limba as Limba, atmosfera: p.stil, excludeModel: p.exclude });
+          if (c.eroare) preaLung = c.eroare;
+          return { ...p, stil: c.text, exclude: c.exclude, instrumente_cerute: c.instrumente_cerute };
+        });
+        if (preaLung) return json({ ok: false, mesaj: preaLung }, 400);
       }
       motive = lintToate(piese);
       if (!motive.length) {

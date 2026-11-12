@@ -1,9 +1,12 @@
 "use client";
 
-// Reverb Studio — Muzică: Compune (prompt + versuri pentru Suno) și Bibliotecă (piesele de pe laptop: player, imagini, clip, kit YouTube).
-// Plan: docs/designs/studio_muzica_2026-11-11/design_v2.md + design_v2_1_decizii.md. Nimic de aici nu publică singur pe YouTube.
+// Reverb Studio — Muzică: Creează (tema + rețeta de sunet → prompt + versuri pentru Suno; CreeazaPanou.tsx) și Bibliotecă (piesele de pe
+// laptop: player, imagini, clip, kit YouTube).
+// Plan: docs/designs/studio_muzica_2026-11-11/design_v2.md + design_v2_1_decizii.md; motorul de creație: docs/designs/motor_creatie_2026-11-12/.
+// Nimic de aici nu publică singur pe YouTube.
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import CreeazaPanou, { type CerereCreatie } from "./CreeazaPanou";
 
 type Instrument = { ro: string; en: string };
 type Scena = { nr: number; strofa: string; prompt_en: string };
@@ -86,8 +89,6 @@ function Copiaza({ text, eticheta }: { text: string; eticheta: string }) {
 
 export default function MuzicaTab({ onNeautentificat }: { onNeautentificat: () => void }) {
   const [sub, setSub] = useState<"compune" | "biblioteca">("compune");
-  const [cerere, setCerere] = useState("");
-  const [limbi, setLimbi] = useState<{ ro: boolean; en: boolean }>({ ro: true, en: true });
   const [compune, setCompune] = useState<{ lucreaza: boolean; eroare: string | null; motive: string[] }>({ lucreaza: false, eroare: null, motive: [] });
   const [ciorne, setCiorne] = useState<Record<string, PiesaCompusa>>({});
   const [linkuri, setLinkuri] = useState<Record<string, string>>({});
@@ -144,14 +145,13 @@ export default function MuzicaTab({ onNeautentificat }: { onNeautentificat: () =
     }
   }
 
-  async function scrie() {
-    const l = (["ro", "en"] as const).filter((x) => limbi[x]);
+  async function scrie(c: CerereCreatie) {
     setCompune({ lucreaza: true, eroare: null, motive: [] });
     try {
       const r = await fetch("/api/studio/muzica", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ op: "compune", cerere, limbi: l }),
+        body: JSON.stringify({ op: "compune", cerere: c.cerere, limbi: c.limbi, reteta: c.reteta, public: c.copii ? "copii" : "toti" }),
       });
       if (r.status === 401) return onNeautentificat();
       const d = await r.json();
@@ -198,8 +198,8 @@ export default function MuzicaTab({ onNeautentificat }: { onNeautentificat: () =
             <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 font-bold">Surya Music · Alin Dragoș</span>
             <h2 className="text-2xl font-medium text-white mt-1">Muzică: de la cerere la YouTube</h2>
             <p className="text-xs text-neutral-400 mt-1 max-w-2xl">
-              Scrii ce melodie vrei → primești promptul și versurile pentru Suno → lipești linkul piesei → laptopul o aduce aici, faci clipul,
-              îl vezi, apeși „Publică” și primești kitul de urcare. Nimic nu se publică singur.
+              Scrii tema și alegi stilul → primești promptul și versurile pentru Suno → lipești linkul piesei → laptopul o aduce aici, faci
+              clipul, îl vezi, apeși „Publică” și primești kitul de urcare. Nimic nu se publică singur.
             </p>
           </div>
           <div className={`shrink-0 rounded-2xl border px-4 py-3 text-xs ${laptopViu ? "border-white/20 text-neutral-200" : "border-rose-400/30 text-rose-300"}`}>
@@ -220,7 +220,7 @@ export default function MuzicaTab({ onNeautentificat }: { onNeautentificat: () =
               onClick={() => setSub(s)}
               className={`rounded-full px-4 py-2 text-xs font-mono uppercase tracking-widest ${sub === s ? "bg-white text-black font-bold" : "bg-white/5 text-neutral-300 hover:bg-white/10"}`}
             >
-              {s === "compune" ? "1. Compune" : `2. Bibliotecă (${piese.filter((p) => p.stare !== "respinsa").length})`}
+              {s === "compune" ? "1. Creează" : `2. Bibliotecă (${piese.filter((p) => p.stare !== "respinsa").length})`}
             </button>
           ))}
         </div>
@@ -229,39 +229,7 @@ export default function MuzicaTab({ onNeautentificat }: { onNeautentificat: () =
 
         {sub === "compune" && (
           <div className="space-y-6">
-            <div className="space-y-3">
-              <label className="block text-xs font-mono uppercase tracking-widest text-neutral-400" htmlFor="cerere-muzica">Ce melodie vrei?</label>
-              <textarea
-                id="cerere-muzica"
-                value={cerere}
-                onChange={(e) => setCerere(e.target.value)}
-                rows={4}
-                maxLength={1500}
-                placeholder="Ex.: colind vesel de iarnă, Moș Crăciun, copii care se joacă pe uliță, obligatoriu zurgălăi, folk-pop cu acordeon"
-                className="w-full rounded-2xl border border-white/10 bg-black/40 p-4 text-sm text-white placeholder:text-neutral-500 focus:border-white/30 focus:outline-none"
-              />
-              <div className="flex flex-wrap items-center gap-4">
-                {(["ro", "en"] as const).map((x) => (
-                  <label key={x} className="flex items-center gap-2 text-sm text-neutral-200">
-                    <input type="checkbox" checked={limbi[x]} onChange={(e) => setLimbi((l) => ({ ...l, [x]: e.target.checked }))} />
-                    {x === "ro" ? "Română" : "Engleză"}
-                  </label>
-                ))}
-                <button
-                  onClick={scrie}
-                  disabled={compune.lucreaza || cerere.trim().length < 8 || (!limbi.ro && !limbi.en)}
-                  className="rounded-full bg-white px-5 py-2.5 text-xs font-mono uppercase tracking-widest text-black font-bold hover:bg-neutral-200 disabled:opacity-40"
-                >
-                  {compune.lucreaza ? "Scriu… (~20 s)" : "Scrie promptul și versurile"}
-                </button>
-              </div>
-              {compune.eroare && (
-                <div className="rounded-xl border border-rose-400/30 p-3 text-xs text-rose-300">
-                  {compune.eroare}
-                  {compune.motive.length > 0 && <ul className="mt-2 list-disc pl-5">{compune.motive.map((m) => <li key={m}>{m}</li>)}</ul>}
-                </div>
-              )}
-            </div>
+            <CreeazaPanou lucreaza={compune.lucreaza} eroare={compune.eroare} motive={compune.motive} onScrie={scrie} />
 
             {ciorneRecente.map((p) => (
               <div key={p.id} className="rounded-2xl border border-white/10 bg-black/30 p-5 space-y-4">
