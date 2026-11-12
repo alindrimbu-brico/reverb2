@@ -866,3 +866,49 @@ html.light .rounded-full.bg-white.text-black:not(:where([role="dialog"] *, [data
   background-color: #111215 !important;
   color: #FFFFFF !important;
 }
+
+/* ── Diafragma paginilor cu mecanică (components/mech/Shutter.tsx) ──
+   Implicit deschisă: lamelele stau în afara ecranului. Fazele (data-phase) vin din MechProvider.
+   „intro” se joacă din CSS la prima intrare, deci merge și înainte ca JavaScript să pornească. */
+.mech-iris {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+}
+.mech-iris .mech-blade {
+  transform: translate(var(--dx), var(--dy)) rotate(26deg);
+  opacity: 0;
+}
+.mech-iris[data-phase="intro"] .mech-blade {
+  animation: mechIrisOpen 0.9s cubic-bezier(0.7, 0, 0.2, 1) both;
+}
+.mech-iris[data-phase="opening"] .mech-blade {
+  animation: mechIrisOpen 0.5s cubic-bezier(0.7, 0, 0.2, 1) both;
+}
+.mech-iris[data-phase="closing"] .mech-blade {
+  animation: mechIrisClose 0.3s cubic-bezier(0.6, 0, 0.3, 1) both;
+}
+.mech-iris[data-phase="blink"] .mech-blade {
+  animation: mechIrisBlink 0.7s cubic-bezier(0.6, 0, 0.3, 1) both;
+}
+@keyframes mechIrisOpen {
+  0% { transform: none; opacity: 1; }
+  95% { opacity: 1; }
+  100% { transform: translate(var(--dx), var(--dy)) rotate(26deg); opacity: 0; }
+}
+@keyframes mechIrisClose {
+  0% { transform: translate(var(--dx), var(--dy)) rotate(26deg); opacity: 1; }
+  100% { transform: none; opacity: 1; }
+}
+@keyframes mechIrisBlink {
+  0% { transform: translate(var(--dx), var(--dy)) rotate(26deg); opacity: 1; }
+  40%, 55% { transform: none; opacity: 1; }
+  97% { opacity: 1; }
+  100% { transform: translate(var(--dx), var(--dy)) rotate(26deg); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mech-iris .mech-blade {
+    animation: none !important;
+  }
+}

@@ -151,30 +151,19 @@ export default function AudioEngine() {
   return (
     <button
       onClick={toggle}
-      title={enabled ? "Mute ambient sound" : "Enable ambient sound"}
-      className="fixed left-4 z-50 flex items-center gap-2 rounded-full backdrop-blur-sm border transition-all duration-500 cursor-pointer group"
-      style={{
-        bottom: "calc(5rem + env(safe-area-inset-bottom, 0px))",
-        padding: "8px 14px",
-        background: enabled ? "rgba(0,229,255,0.12)" : "rgba(8,8,16,0.85)",
-        borderColor: enabled ? "rgba(0,229,255,0.40)" : "rgba(255,255,255,0.12)",
-        boxShadow: enabled ? "0 0 28px rgba(0,229,255,0.25)" : "none",
-      }}
+      aria-pressed={enabled}
+      aria-label={enabled ? "Oprește sunetul de fundal" : "Pornește sunetul de fundal"}
+      data-no-magnetic
+      className={`fixed right-4 z-30 flex h-11 items-center gap-2 rounded-full border px-3.5 backdrop-blur-sm transition-colors md:left-4 md:right-auto ${
+        enabled ? "border-white/30 bg-white/10" : "border-white/10 bg-neutral-900/40 hover:border-white/20"
+      }`}
+      style={{ bottom: "calc(5rem + env(safe-area-inset-bottom, 0px))" }}
     >
-      {enabled ? (
-        <Volume2 size={14} className="text-[#00E5FF] shrink-0" />
-      ) : (
-        <VolumeX size={14} className="text-white/40 group-hover:text-white/70 transition-colors shrink-0" />
-      )}
-      <span
-        className="text-[10px] font-semibold uppercase tracking-wider"
-        style={{ color: enabled ? "#00E5FF" : "rgba(255,255,255,0.35)" }}
-      >
-        {enabled ? "On" : "Sound"}
+      {enabled ? <Volume2 size={14} className="shrink-0 text-white" /> : <VolumeX size={14} className="shrink-0 text-neutral-400" />}
+      {/* Pe telefon rămâne doar pictograma: butonul stă pe dreapta și nu acoperă textul */}
+      <span className={`hidden font-mono text-[10px] font-medium uppercase tracking-wider md:inline ${enabled ? "text-white" : "text-neutral-400"}`}>
+        {enabled ? "Sunet pornit" : "Sunet"}
       </span>
-      {enabled && (
-        <span className="absolute inset-0 rounded-full border border-[#00E5FF]/25 animate-ping" style={{ animationDuration: "2s" }} />
-      )}
     </button>
   );
 }

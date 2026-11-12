@@ -58,7 +58,7 @@ const showcases: Concept[] = [
   { id: "acasa-showcase", name: "Acasă Showcase", vibe: "Premium Glassmorphism", color: "#6c5ce7", description: "Prezentare digitală pentru proiectele extrase din arhiva Acasă: NevronixAI, Florarte, inteligență artificială și ecosisteme de startup.", href: "/acasa-showcase/index.html" },
   { id: "guru-store", name: "Guru Store", vibe: "E-Commerce Fluid", color: "#f59e0b", description: "Prezentare interactivă de produse. Un magazin online fluid și rapid, cu animații elegante.", href: "/guru-store/index.html" },
   { id: "spiritual-site", name: "Spiritual Reading", vibe: "Ethereal Text", color: "#8b5cf6", description: "Platformă amplă de lectură conținând peste 140 de capitole, axată pe simplitate și claritatea textului pentru inteligență spirituală.", href: "/spiritual-site/index.html" },
-  { id: "humanoid-reality-2026", name: "Realitatea Umanoidă 2026", vibe: "Deep Space Cyberpunk", color: "#00E5FF", description: "Website premium de prezentare despre revoluția robotică. Piața de 750 Mld $, liderii AI, VLA models și ghidul de supraviețuire pentru era post-umanoide.", href: "/humanoid-reality-2026" }
+  { id: "humanoid-reality-2026", name: "Realitatea Umanoidă 2026", vibe: "Mecanică monocromă", color: "#D4D4D4", description: "Website premium de prezentare despre revoluția robotică. Piața de 750 Mld $, liderii AI, VLA models și ghidul de supraviețuire pentru era post-umanoide.", href: "/humanoid-reality-2026" }
 ];
 
 export default function ShowcaseIndex() {

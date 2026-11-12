@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
-import Link from "next/link";
+import Link from "@/components/mech/MechLink";
+import ChapterTop from "@/components/humanoid/ChapterTop";
+import { useLanguage } from "@/components/humanoid/LanguageContext";
 import { ArrowLeft, Globe, ChevronRight, TrendingDown, Users, Zap } from "lucide-react";
 
-type Lang = "ro" | "en";
 
 const content = {
   ro: {
@@ -112,9 +112,9 @@ const content = {
       ],
     },
     cards: [
-      { label: "$1,400", accent: "#FFE600", title: "Cel mai ieftin humanoidal", detail: "Noetix Bumi. Sub prețul unui smartphone flagship. Prima dată în istorie că robotica umanoidal devine bun de consum." },
-      { label: "15K+", accent: "#00E5FF", title: "Developeri Unitree G1", detail: "Comunitate open-source activă. Mii de aplicații pre-construite pentru retail, educație, cercetare și servicii." },
-      { label: "100x", accent: "#FFE600", title: "Piață adresabilă 2026–2035", detail: "Fiecare reducere de 50% a prețului dublează numărul cumpărătorilor potențiali. La $1,400, piața devine consum de masă." },
+      { label: "$1,400", accent: "var(--ink)", title: "Cel mai ieftin humanoidal", detail: "Noetix Bumi. Sub prețul unui smartphone flagship. Prima dată în istorie că robotica umanoidal devine bun de consum." },
+      { label: "15K+", accent: "var(--ink)", title: "Developeri Unitree G1", detail: "Comunitate open-source activă. Mii de aplicații pre-construite pentru retail, educație, cercetare și servicii." },
+      { label: "100x", accent: "var(--ink)", title: "Piață adresabilă 2026–2035", detail: "Fiecare reducere de 50% a prețului dublează numărul cumpărătorilor potențiali. La $1,400, piața devine consum de masă." },
     ],
     cta: { label: "ÎNAPOI LA OVERVIEW", text: "Explorează toți liderii pieței" },
   },
@@ -222,9 +222,9 @@ const content = {
       ],
     },
     cards: [
-      { label: "$1,400", accent: "#FFE600", title: "The cheapest humanoid", detail: "Noetix Bumi. Below the price of a flagship smartphone. The first time in history that humanoid robotics becomes a consumer good." },
-      { label: "15K+", accent: "#00E5FF", title: "Unitree G1 developers", detail: "Active open-source community. Thousands of pre-built applications for retail, education, research and services." },
-      { label: "100x", accent: "#FFE600", title: "Addressable market 2026–2035", detail: "Every 50% price reduction doubles the number of potential buyers. At $1,400, the market becomes mass consumption." },
+      { label: "$1,400", accent: "var(--ink)", title: "The cheapest humanoid", detail: "Noetix Bumi. Below the price of a flagship smartphone. The first time in history that humanoid robotics becomes a consumer good." },
+      { label: "15K+", accent: "var(--ink)", title: "Unitree G1 developers", detail: "Active open-source community. Thousands of pre-built applications for retail, education, research and services." },
+      { label: "100x", accent: "var(--ink)", title: "Addressable market 2026–2035", detail: "Every 50% price reduction doubles the number of potential buyers. At $1,400, the market becomes mass consumption." },
     ],
     cta: { label: "BACK TO OVERVIEW", text: "Explore all market leaders" },
   },
@@ -240,42 +240,26 @@ const fadeUp = {
 };
 
 export default function DemocratizationPage() {
-  const [lang, setLang] = useState<Lang>("ro");
+  const { lang } = useLanguage();
   const tx = content[lang];
 
   return (
-    <div className="min-h-screen bg-[#080810] text-white">
-      <nav className="sticky top-0 z-50 border-b border-white/6 bg-[#080810]/90 backdrop-blur-md">
-        <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-          <Link href="/humanoid-reality-2026" className="flex items-center gap-2 text-white/50 hover:text-white text-sm transition-colors">
-            <ArrowLeft size={14} />
-            <span className="text-[10px] uppercase tracking-widest hidden sm:inline">{tx.nav}</span>
-          </Link>
-          <span className="text-[10px] uppercase tracking-widest text-white/30 font-mono">{tx.chapterLabel} {tx.chapterNum}</span>
-          <button
-            onClick={() => setLang((l) => (l === "ro" ? "en" : "ro"))}
-            className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest border border-white/10 rounded-full px-3 py-1.5 hover:border-[#FFE600]/40 hover:text-[#FFE600] transition-all duration-200"
-          >
-            <span className={lang === "ro" ? "text-[#FFE600]" : "text-white/40"}>RO</span>
-            <span className="text-white/20">/</span>
-            <span className={lang === "en" ? "text-[#FFE600]" : "text-white/40"}>EN</span>
-          </button>
-        </div>
-      </nav>
+    <div className="min-h-screen bg-transparent text-white">
+      <ChapterTop back={tx.nav} label={`${tx.chapterLabel} ${tx.chapterNum}`} />
 
       <section className="relative pt-20 pb-16 px-6 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,230,0,0.06)_0%,transparent_65%)]" />
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#FFE600]/30 to-transparent" />
+        <div className="absolute inset-0 " />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
         <div className="max-w-6xl mx-auto text-center relative z-10">
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}>
-            <div className="inline-flex items-center gap-2 mb-6 border border-[#FFE600]/20 rounded-full px-4 py-1.5 bg-[#FFE600]/5">
-              <span className="text-[10px] uppercase tracking-[0.3em] text-[#FFE600]/70 font-semibold">{tx.badge}</span>
+            <div className="inline-flex items-center gap-2 mb-6 border border-white/10 rounded-full px-4 py-1.5 bg-white/5">
+              <span className="text-[10px] uppercase tracking-[0.3em] text-neutral-300 font-medium">{tx.badge}</span>
             </div>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }}>
-            <div className="text-[100px] md:text-[160px] font-black leading-none tracking-tighter text-white/[0.04] select-none mb-[-20px]">{tx.chapterNum}</div>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 bg-gradient-to-br from-white via-white to-[#FFE600]/60 bg-clip-text text-transparent">{tx.category}</h1>
-            <p className="text-white/50 text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed">{tx.subtitle}</p>
+            <div className="text-[100px] md:text-[160px] font-medium leading-none tracking-tighter text-neutral-600 select-none mb-[-20px]">{tx.chapterNum}</div>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight mb-6 text-white">{tx.category}</h1>
+            <p className="text-neutral-400 text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed">{tx.subtitle}</p>
           </motion.div>
         </div>
       </section>
@@ -287,22 +271,22 @@ export default function DemocratizationPage() {
         <div className="max-w-6xl mx-auto">
           <motion.div custom={0} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}>
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-8 h-8 rounded-lg bg-[#FFE600]/10 border border-[#FFE600]/25 flex items-center justify-center">
-                <Globe size={16} className="text-[#FFE600]" strokeWidth={1.5} />
+              <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
+                <Globe size={16} className="text-white" strokeWidth={1.5} />
               </div>
-              <span className="text-[10px] font-mono uppercase tracking-widest text-[#FFE600]/60">Unitree Robotics</span>
+              <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-300">Unitree Robotics</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">{tx.unitreeG1.title}</h2>
-            <p className="text-white/40 text-base mb-10">{tx.unitreeG1.tagline}</p>
+            <h2 className="text-3xl md:text-4xl font-medium text-white mb-2">{tx.unitreeG1.title}</h2>
+            <p className="text-neutral-500 text-base mb-10">{tx.unitreeG1.tagline}</p>
           </motion.div>
 
           <motion.div custom={1} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
             className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-12">
             {tx.unitreeG1.specs.map((spec, i) => (
-              <div key={i} className="rounded-xl border border-white/6 bg-[#0e0e1a] p-4 hover:border-[#FFE600]/20 transition-colors duration-200">
-                <div className="text-[10px] uppercase tracking-widest text-white/30 mb-1">{spec.label}</div>
-                <div className="text-[#FFE600] font-bold text-xl mb-1">{spec.value}</div>
-                <div className="text-white/40 text-xs leading-relaxed">{spec.detail}</div>
+              <div key={i} className="rounded-xl border border-white/10 bg-neutral-900/40 p-4 hover:border-white/10 transition-colors duration-200">
+                <div className="text-[10px] uppercase tracking-widest text-neutral-500 mb-1">{spec.label}</div>
+                <div className="text-white font-medium text-xl mb-1">{spec.value}</div>
+                <div className="text-neutral-500 text-xs leading-relaxed">{spec.detail}</div>
               </div>
             ))}
           </motion.div>
@@ -310,47 +294,47 @@ export default function DemocratizationPage() {
           <div className="space-y-8">
             {tx.unitreeG1.sections.map((s, i) => (
               <motion.div key={i} custom={i + 2} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
-                className="rounded-2xl border border-white/6 bg-[#0a0a14] p-7 hover:border-white/10 transition-colors duration-300">
-                <h3 className="text-white font-semibold text-lg mb-3 flex items-center gap-2">
-                  <ChevronRight size={16} className="text-[#FFE600]" />{s.heading}
+                className="rounded-2xl border border-white/10 bg-transparent p-7 hover:border-white/10 transition-colors duration-300">
+                <h3 className="text-white font-medium text-lg mb-3 flex items-center gap-2">
+                  <ChevronRight size={16} className="text-white" />{s.heading}
                 </h3>
-                <p className="text-white/50 text-sm leading-relaxed">{s.body}</p>
+                <p className="text-neutral-400 text-sm leading-relaxed">{s.body}</p>
               </motion.div>
             ))}
           </div>
 
           <motion.div custom={5} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} className="mt-8 flex flex-wrap gap-3">
-            <span className="inline-flex items-center gap-2 text-xs border border-[#FFE600]/25 rounded-full px-4 py-2 bg-[#FFE600]/8 text-[#FFE600]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#FFE600] animate-pulse" />{tx.unitreeG1.status}
+            <span className="inline-flex items-center gap-2 text-xs border border-white/10 rounded-full px-4 py-2 bg-white/5 text-white">
+              <span className="w-1.5 h-1.5 rounded-full bg-white " />{tx.unitreeG1.status}
             </span>
-            <span className="inline-flex items-center gap-2 text-xs border border-white/10 rounded-full px-4 py-2 text-white/50">{tx.unitreeG1.delivery}</span>
+            <span className="inline-flex items-center gap-2 text-xs border border-white/10 rounded-lg px-4 py-2 text-neutral-400">{tx.unitreeG1.delivery}</span>
           </motion.div>
         </div>
       </section>
 
-      <div className="h-px bg-gradient-to-r from-transparent via-[#00E5FF]/15 to-transparent mx-6" />
+      <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mx-6" />
 
       {/* Unitree R1 */}
-      <section className="py-20 px-6 bg-[#0a0a14]">
+      <section className="py-20 px-6 bg-transparent">
         <div className="max-w-6xl mx-auto">
           <motion.div custom={0} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}>
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-8 h-8 rounded-lg bg-[#00E5FF]/10 border border-[#00E5FF]/25 flex items-center justify-center">
-                <Users size={16} className="text-[#00E5FF]" strokeWidth={1.5} />
+              <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
+                <Users size={16} className="text-white" strokeWidth={1.5} />
               </div>
-              <span className="text-[10px] font-mono uppercase tracking-widest text-[#00E5FF]/60">Unitree Robotics</span>
+              <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-300">Unitree Robotics</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">{tx.unitreeR1.title}</h2>
-            <p className="text-white/40 text-base mb-10">{tx.unitreeR1.tagline}</p>
+            <h2 className="text-3xl md:text-4xl font-medium text-white mb-2">{tx.unitreeR1.title}</h2>
+            <p className="text-neutral-500 text-base mb-10">{tx.unitreeR1.tagline}</p>
           </motion.div>
 
           <motion.div custom={1} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
             className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-12">
             {tx.unitreeR1.specs.map((spec, i) => (
-              <div key={i} className="rounded-xl border border-white/6 bg-[#0e0e1a] p-4 hover:border-[#00E5FF]/20 transition-colors duration-200">
-                <div className="text-[10px] uppercase tracking-widest text-white/30 mb-1">{spec.label}</div>
-                <div className="text-[#00E5FF] font-bold text-xl mb-1">{spec.value}</div>
-                <div className="text-white/40 text-xs leading-relaxed">{spec.detail}</div>
+              <div key={i} className="rounded-xl border border-white/10 bg-neutral-900/40 p-4 hover:border-white/10 transition-colors duration-200">
+                <div className="text-[10px] uppercase tracking-widest text-neutral-500 mb-1">{spec.label}</div>
+                <div className="text-white font-medium text-xl mb-1">{spec.value}</div>
+                <div className="text-neutral-500 text-xs leading-relaxed">{spec.detail}</div>
               </div>
             ))}
           </motion.div>
@@ -358,40 +342,40 @@ export default function DemocratizationPage() {
           <div className="space-y-8">
             {tx.unitreeR1.sections.map((s, i) => (
               <motion.div key={i} custom={i + 2} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
-                className="rounded-2xl border border-white/6 bg-[#0e0e1a] p-7 hover:border-white/10 transition-colors duration-300">
-                <h3 className="text-white font-semibold text-lg mb-3 flex items-center gap-2">
-                  <ChevronRight size={16} className="text-[#00E5FF]" />{s.heading}
+                className="rounded-2xl border border-white/10 bg-neutral-900/40 p-7 hover:border-white/10 transition-colors duration-300">
+                <h3 className="text-white font-medium text-lg mb-3 flex items-center gap-2">
+                  <ChevronRight size={16} className="text-white" />{s.heading}
                 </h3>
-                <p className="text-white/50 text-sm leading-relaxed">{s.body}</p>
+                <p className="text-neutral-400 text-sm leading-relaxed">{s.body}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      <div className="h-px bg-gradient-to-r from-transparent via-[#FFE600]/15 to-transparent mx-6" />
+      <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mx-6" />
 
       {/* Noetix Bumi */}
       <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <motion.div custom={0} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}>
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-8 h-8 rounded-lg bg-[#FFE600]/10 border border-[#FFE600]/25 flex items-center justify-center">
-                <Zap size={16} className="text-[#FFE600]" strokeWidth={1.5} />
+              <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
+                <Zap size={16} className="text-white" strokeWidth={1.5} />
               </div>
-              <span className="text-[10px] font-mono uppercase tracking-widest text-[#FFE600]/60">Noetix Robotics</span>
+              <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-300">Noetix Robotics</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">{tx.noetix.title}</h2>
-            <p className="text-white/40 text-base mb-10">{tx.noetix.tagline}</p>
+            <h2 className="text-3xl md:text-4xl font-medium text-white mb-2">{tx.noetix.title}</h2>
+            <p className="text-neutral-500 text-base mb-10">{tx.noetix.tagline}</p>
           </motion.div>
 
           <motion.div custom={1} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
             className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-12">
             {tx.noetix.specs.map((spec, i) => (
-              <div key={i} className="rounded-xl border border-white/6 bg-[#0e0e1a] p-4 hover:border-[#FFE600]/20 transition-colors duration-200">
-                <div className="text-[10px] uppercase tracking-widest text-white/30 mb-1">{spec.label}</div>
-                <div className="text-[#FFE600] font-bold text-xl mb-1">{spec.value}</div>
-                <div className="text-white/40 text-xs leading-relaxed">{spec.detail}</div>
+              <div key={i} className="rounded-xl border border-white/10 bg-neutral-900/40 p-4 hover:border-white/10 transition-colors duration-200">
+                <div className="text-[10px] uppercase tracking-widest text-neutral-500 mb-1">{spec.label}</div>
+                <div className="text-white font-medium text-xl mb-1">{spec.value}</div>
+                <div className="text-neutral-500 text-xs leading-relaxed">{spec.detail}</div>
               </div>
             ))}
           </motion.div>
@@ -399,20 +383,20 @@ export default function DemocratizationPage() {
           <div className="space-y-8">
             {tx.noetix.sections.map((s, i) => (
               <motion.div key={i} custom={i + 2} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
-                className="rounded-2xl border border-white/6 bg-[#0a0a14] p-7 hover:border-white/10 transition-colors duration-300">
-                <h3 className="text-white font-semibold text-lg mb-3 flex items-center gap-2">
-                  <ChevronRight size={16} className="text-[#FFE600]" />{s.heading}
+                className="rounded-2xl border border-white/10 bg-transparent p-7 hover:border-white/10 transition-colors duration-300">
+                <h3 className="text-white font-medium text-lg mb-3 flex items-center gap-2">
+                  <ChevronRight size={16} className="text-white" />{s.heading}
                 </h3>
-                <p className="text-white/50 text-sm leading-relaxed">{s.body}</p>
+                <p className="text-neutral-400 text-sm leading-relaxed">{s.body}</p>
               </motion.div>
             ))}
           </div>
 
           <motion.div custom={5} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} className="mt-8 flex flex-wrap gap-3">
-            <span className="inline-flex items-center gap-2 text-xs border border-[#FFE600]/25 rounded-full px-4 py-2 bg-[#FFE600]/8 text-[#FFE600]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#FFE600] animate-pulse" />{tx.noetix.status}
+            <span className="inline-flex items-center gap-2 text-xs border border-white/10 rounded-full px-4 py-2 bg-white/5 text-white">
+              <span className="w-1.5 h-1.5 rounded-full bg-white " />{tx.noetix.status}
             </span>
-            <span className="inline-flex items-center gap-2 text-xs border border-white/10 rounded-full px-4 py-2 text-white/50">{tx.noetix.delivery}</span>
+            <span className="inline-flex items-center gap-2 text-xs border border-white/10 rounded-lg px-4 py-2 text-neutral-400">{tx.noetix.delivery}</span>
           </motion.div>
         </div>
       </section>
@@ -420,20 +404,20 @@ export default function DemocratizationPage() {
       <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent mx-6" />
 
       {/* Market Impact */}
-      <section className="py-20 px-6 bg-[#0a0a14]">
+      <section className="py-20 px-6 bg-transparent">
         <div className="max-w-6xl mx-auto">
           <motion.div custom={0} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} className="mb-10">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-8 h-8 rounded-lg bg-[#00E5FF]/10 border border-[#00E5FF]/25 flex items-center justify-center">
-                <TrendingDown size={16} className="text-[#00E5FF]" strokeWidth={1.5} />
+              <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
+                <TrendingDown size={16} className="text-white" strokeWidth={1.5} />
               </div>
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">{tx.impact.title}</h2>
+            <h2 className="text-2xl md:text-3xl font-medium text-white mb-2">{tx.impact.title}</h2>
           </motion.div>
           <div className="space-y-5">
             {[tx.impact.body1, tx.impact.body2, tx.impact.body3].map((para, i) => (
               <motion.p key={i} custom={i + 1} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
-                className="text-white/50 text-sm md:text-base leading-relaxed border-l-2 border-[#FFE600]/20 pl-5">
+                className="text-neutral-400 text-sm md:text-base leading-relaxed border-l-2 border-white/10 pl-5">
                 {para}
               </motion.p>
             ))}
@@ -441,33 +425,33 @@ export default function DemocratizationPage() {
         </div>
       </section>
 
-      <div className="h-px bg-gradient-to-r from-transparent via-[#FFE600]/15 to-transparent mx-6" />
+      <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mx-6" />
 
       {/* Metrics Table */}
       <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <motion.div custom={0} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} className="mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">{tx.metrics.title}</h2>
+            <h2 className="text-2xl md:text-3xl font-medium text-white mb-2">{tx.metrics.title}</h2>
           </motion.div>
           <motion.div custom={1} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
-            className="rounded-2xl border border-white/6 overflow-hidden">
+            className="rounded-2xl border border-white/10 overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="border-b border-white/6 bg-white/[0.02]">
+                  <tr className="border-b border-white/10 bg-white/[0.02]">
                     {tx.metrics.headers.map((h, i) => (
-                      <th key={i} className="text-left px-5 py-4 text-[10px] uppercase tracking-widest text-white/40 font-semibold whitespace-nowrap">{h}</th>
+                      <th key={i} className="text-left px-5 py-4 text-[10px] uppercase tracking-widest text-neutral-500 font-medium whitespace-nowrap">{h}</th>
                     ))}
                   </tr>
                 </thead>
                 <tbody>
                   {tx.metrics.rows.map((row, i) => (
-                    <tr key={i} className="border-b border-white/4 hover:bg-white/[0.015] transition-colors duration-150">
-                      <td className="px-5 py-3.5 text-white font-semibold text-sm">{row[0]}</td>
-                      <td className="px-5 py-3.5 text-[#FFE600] text-sm font-bold">{row[1]}</td>
-                      <td className="px-5 py-3.5 text-white/60 text-sm">{row[2]}</td>
-                      <td className="px-5 py-3.5 text-white/60 text-sm">{row[3]}</td>
-                      <td className="px-5 py-3.5 text-white/50 text-sm">{row[4]}</td>
+                    <tr key={i} className="border-b border-white/10 hover:bg-white/[0.015] transition-colors duration-150">
+                      <td className="px-5 py-3.5 text-white font-medium text-sm">{row[0]}</td>
+                      <td className="px-5 py-3.5 text-white text-sm font-medium">{row[1]}</td>
+                      <td className="px-5 py-3.5 text-neutral-400 text-sm">{row[2]}</td>
+                      <td className="px-5 py-3.5 text-neutral-400 text-sm">{row[3]}</td>
+                      <td className="px-5 py-3.5 text-neutral-400 text-sm">{row[4]}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -480,33 +464,31 @@ export default function DemocratizationPage() {
       <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent mx-6" />
 
       {/* Summary Cards */}
-      <section className="py-20 px-6 bg-[#0a0a14]">
+      <section className="py-20 px-6 bg-transparent">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-3 gap-5">
             {tx.cards.map((card, i) => (
               <motion.div key={i} custom={i} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
                 whileHover={{ y: -5, transition: { duration: 0.25 } }}
-                className="relative group rounded-2xl border bg-[#0e0e1a] p-8 overflow-hidden"
-                style={{ borderColor: `${card.accent}20` }}>
-                <div className="absolute top-0 right-0 w-40 h-40 rounded-full blur-[50px] opacity-50 group-hover:opacity-80 transition-opacity duration-500"
-                  style={{ background: `${card.accent}15` }} />
-                <div className="relative z-10 text-4xl font-black mb-3" style={{ color: card.accent }}>{card.label}</div>
-                <h3 className="relative z-10 text-white font-semibold text-lg mb-3">{card.title}</h3>
-                <p className="relative z-10 text-white/40 text-sm leading-relaxed">{card.detail}</p>
+                className="relative group rounded-2xl border bg-neutral-900/40 p-8 overflow-hidden"
+                style={{ borderColor: `color-mix(in srgb, ${card.accent} 13%, transparent)` }}>
+                <div className="relative z-10 text-4xl font-medium mb-3" style={{ color: card.accent }}>{card.label}</div>
+                <h3 className="relative z-10 text-white font-medium text-lg mb-3">{card.title}</h3>
+                <p className="relative z-10 text-neutral-500 text-sm leading-relaxed">{card.detail}</p>
                 <div className="absolute bottom-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{ background: `linear-gradient(90deg, transparent, ${card.accent}60, transparent)` }} />
+                  style={{ background: `linear-gradient(90deg, transparent, color-mix(in srgb, ${card.accent} 38%, transparent), transparent)` }} />
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-20 px-6 border-t border-white/6">
+      <section className="py-20 px-6 border-t border-white/10">
         <div className="max-w-6xl mx-auto text-center">
           <motion.div custom={0} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}>
-            <div className="text-[10px] uppercase tracking-widest text-white/30 mb-4">{tx.cta.label}</div>
+            <div className="text-[10px] uppercase tracking-widest text-neutral-500 mb-4">{tx.cta.label}</div>
             <Link href="/humanoid-reality-2026"
-              className="inline-flex items-center gap-3 border border-[#FFE600]/25 rounded-full px-8 py-4 text-[#FFE600] text-sm font-semibold hover:bg-[#FFE600]/8 hover:border-[#FFE600]/50 transition-all duration-300 group">
+              className="inline-flex items-center gap-3 border border-white/10 rounded-full px-8 py-4 text-white text-sm font-medium hover:bg-white/5 hover:border-white/20 transition-all duration-300 group">
               <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform duration-200" />
               {tx.cta.text}
             </Link>

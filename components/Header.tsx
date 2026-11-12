@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import Logo from "@/components/Logo";
+import { RO_ONLY } from "@/lib/routes";
 
 const navInfo = {
   ro: [
@@ -116,6 +117,9 @@ export default function Header() {
         const prefix = sortedKeys.find(k => pathname.startsWith(k + '/'));
         if (prefix) {
           targetPath = pathname.replace(prefix, routesRoToEn[prefix]);
+        } else if (RO_ONLY.some((r) => pathname === r || pathname.startsWith(r + "/"))) {
+          // Paginile care există doar în română nu au pereche /en: comutatorul duce la prima pagină în engleză, nu la un 404.
+          targetPath = "/en";
         } else {
           targetPath = "/en" + (pathname === "/" ? "" : pathname);
         }

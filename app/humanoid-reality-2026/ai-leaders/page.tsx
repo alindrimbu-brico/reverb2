@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
-import Link from "next/link";
+import Link from "@/components/mech/MechLink";
+import ChapterTop from "@/components/humanoid/ChapterTop";
+import { useLanguage } from "@/components/humanoid/LanguageContext";
 import { ArrowLeft, Brain, Zap, TrendingUp, ChevronRight, BarChart3, Shield } from "lucide-react";
 
-type Lang = "ro" | "en";
 
 const content = {
   ro: {
@@ -102,21 +102,21 @@ const content = {
       cards: [
         {
           icon: "TrendingUp",
-          accent: "#00E5FF",
+          accent: "var(--ink)",
           label: "$2.6B",
           title: "Valoarea Figure AI",
           detail: "La ultima rundă de finanțare. Susținută de OpenAI, Microsoft, Intel Capital și Parkway Venture Capital.",
         },
         {
           icon: "Shield",
-          accent: "#FFE600",
+          accent: "var(--ink)",
           label: "AGI moat",
           title: "Avantajul Sanctuary",
           detail: "Proprietatea intelectuală Carbon AI reprezintă cel mai adânc moat defensiv din industrie. Dificil de replicat în < 5 ani.",
         },
         {
           icon: "BarChart3",
-          accent: "#00E5FF",
+          accent: "var(--ink)",
           label: "2028",
           title: "Fereastra de oportunitate",
           detail: "Costul per unitate scade sub $50K la ambii jucători. Piața adresabilă se extinde de 10x față de 2026.",
@@ -222,21 +222,21 @@ const content = {
       cards: [
         {
           icon: "TrendingUp",
-          accent: "#00E5FF",
+          accent: "var(--ink)",
           label: "$2.6B",
           title: "Figure AI Valuation",
           detail: "At last funding round. Backed by OpenAI, Microsoft, Intel Capital and Parkway Venture Capital.",
         },
         {
           icon: "Shield",
-          accent: "#FFE600",
+          accent: "var(--ink)",
           label: "AGI moat",
           title: "Sanctuary's Advantage",
           detail: "Carbon AI intellectual property represents the deepest defensive moat in the industry. Difficult to replicate in < 5 years.",
         },
         {
           icon: "BarChart3",
-          accent: "#00E5FF",
+          accent: "var(--ink)",
           label: "2028",
           title: "Opportunity window",
           detail: "Cost per unit drops below $50K for both players. Addressable market expands 10x compared to 2026.",
@@ -260,41 +260,21 @@ const fadeUp = {
 };
 
 export default function AILeadersPage() {
-  const [lang, setLang] = useState<Lang>("ro");
+  const { lang } = useLanguage();
   const tx = content[lang];
 
   return (
-    <div className="min-h-screen bg-[#080810] text-white">
-      {/* Mini Nav */}
-      <nav className="sticky top-0 z-50 border-b border-white/6 bg-[#080810]/90 backdrop-blur-md">
-        <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-          <Link
-            href="/humanoid-reality-2026"
-            className="flex items-center gap-2 text-white/50 hover:text-white text-sm transition-colors"
-          >
-            <ArrowLeft size={14} />
-            <span className="text-[10px] uppercase tracking-widest hidden sm:inline">{tx.nav}</span>
-          </Link>
-          <span className="text-[10px] uppercase tracking-widest text-white/30 font-mono">{tx.chapterLabel} {tx.chapterNum}</span>
-          <button
-            onClick={() => setLang((l) => (l === "ro" ? "en" : "ro"))}
-            className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest border border-white/10 rounded-full px-3 py-1.5 hover:border-[#00E5FF]/40 hover:text-[#00E5FF] transition-all duration-200"
-          >
-            <span className={lang === "ro" ? "text-[#00E5FF]" : "text-white/40"}>RO</span>
-            <span className="text-white/20">/</span>
-            <span className={lang === "en" ? "text-[#00E5FF]" : "text-white/40"}>EN</span>
-          </button>
-        </div>
-      </nav>
+    <div className="min-h-screen bg-transparent text-white">
+      <ChapterTop back={tx.nav} label={`${tx.chapterLabel} ${tx.chapterNum}`} />
 
       {/* Hero */}
       <section className="relative pt-20 pb-16 px-6 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(0,229,255,0.07)_0%,transparent_65%)]" />
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#00E5FF]/30 to-transparent" />
+        <div className="absolute inset-0 " />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
         <div className="max-w-6xl mx-auto text-center relative z-10">
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}>
-            <div className="inline-flex items-center gap-2 mb-6 border border-[#00E5FF]/20 rounded-full px-4 py-1.5 bg-[#00E5FF]/5">
-              <span className="text-[10px] uppercase tracking-[0.3em] text-[#00E5FF]/70 font-semibold">{tx.badge}</span>
+            <div className="inline-flex items-center gap-2 mb-6 border border-white/10 rounded-full px-4 py-1.5 bg-white/5">
+              <span className="text-[10px] uppercase tracking-[0.3em] text-neutral-300 font-medium">{tx.badge}</span>
             </div>
           </motion.div>
           <motion.div
@@ -302,13 +282,13 @@ export default function AILeadersPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
           >
-            <div className="text-[100px] md:text-[160px] font-black leading-none tracking-tighter text-white/[0.04] select-none mb-[-20px]">
+            <div className="text-[100px] md:text-[160px] font-medium leading-none tracking-tighter text-neutral-600 select-none mb-[-20px]">
               {tx.chapterNum}
             </div>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 bg-gradient-to-br from-white via-white to-[#00E5FF]/60 bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight mb-6 text-white">
               {tx.category}
             </h1>
-            <p className="text-white/50 text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed">
+            <p className="text-neutral-400 text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed">
               {tx.subtitle}
             </p>
           </motion.div>
@@ -323,13 +303,13 @@ export default function AILeadersPage() {
         <div className="max-w-6xl mx-auto">
           <motion.div custom={0} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}>
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-8 h-8 rounded-lg bg-[#00E5FF]/10 border border-[#00E5FF]/25 flex items-center justify-center">
-                <Brain size={16} className="text-[#00E5FF]" strokeWidth={1.5} />
+              <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
+                <Brain size={16} className="text-white" strokeWidth={1.5} />
               </div>
-              <span className="text-[10px] font-mono uppercase tracking-widest text-[#00E5FF]/60">Figure AI</span>
+              <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-300">Figure AI</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">{tx.figure.title}</h2>
-            <p className="text-white/40 text-base mb-10">{tx.figure.tagline}</p>
+            <h2 className="text-3xl md:text-4xl font-medium text-white mb-2">{tx.figure.title}</h2>
+            <p className="text-neutral-500 text-base mb-10">{tx.figure.tagline}</p>
           </motion.div>
 
           {/* Specs Grid */}
@@ -338,10 +318,10 @@ export default function AILeadersPage() {
             className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-12"
           >
             {tx.figure.specs.map((spec, i) => (
-              <div key={i} className="rounded-xl border border-white/6 bg-[#0e0e1a] p-4 hover:border-[#00E5FF]/20 transition-colors duration-200">
-                <div className="text-[10px] uppercase tracking-widest text-white/30 mb-1">{spec.label}</div>
-                <div className="text-[#00E5FF] font-bold text-xl mb-1">{spec.value}</div>
-                <div className="text-white/40 text-xs leading-relaxed">{spec.detail}</div>
+              <div key={i} className="rounded-xl border border-white/10 bg-neutral-900/40 p-4 hover:border-white/10 transition-colors duration-200">
+                <div className="text-[10px] uppercase tracking-widest text-neutral-500 mb-1">{spec.label}</div>
+                <div className="text-white font-medium text-xl mb-1">{spec.value}</div>
+                <div className="text-neutral-500 text-xs leading-relaxed">{spec.detail}</div>
               </div>
             ))}
           </motion.div>
@@ -351,13 +331,13 @@ export default function AILeadersPage() {
             {tx.figure.sections.map((s, i) => (
               <motion.div
                 key={i} custom={i + 2} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
-                className="rounded-2xl border border-white/6 bg-[#0a0a14] p-7 hover:border-white/10 transition-colors duration-300"
+                className="rounded-2xl border border-white/10 bg-transparent p-7 hover:border-white/10 transition-colors duration-300"
               >
-                <h3 className="text-white font-semibold text-lg mb-3 flex items-center gap-2">
-                  <ChevronRight size={16} className="text-[#00E5FF]" />
+                <h3 className="text-white font-medium text-lg mb-3 flex items-center gap-2">
+                  <ChevronRight size={16} className="text-white" />
                   {s.heading}
                 </h3>
-                <p className="text-white/50 text-sm leading-relaxed">{s.body}</p>
+                <p className="text-neutral-400 text-sm leading-relaxed">{s.body}</p>
               </motion.div>
             ))}
           </div>
@@ -365,11 +345,11 @@ export default function AILeadersPage() {
           {/* Status Pills */}
           <motion.div custom={5} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
             className="mt-8 flex flex-wrap gap-3">
-            <span className="inline-flex items-center gap-2 text-xs border border-[#00E5FF]/25 rounded-full px-4 py-2 bg-[#00E5FF]/8 text-[#00E5FF]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] animate-pulse" />
+            <span className="inline-flex items-center gap-2 text-xs border border-white/10 rounded-full px-4 py-2 bg-white/5 text-white">
+              <span className="w-1.5 h-1.5 rounded-full bg-white " />
               {tx.figure.status}
             </span>
-            <span className="inline-flex items-center gap-2 text-xs border border-white/10 rounded-full px-4 py-2 text-white/50">
+            <span className="inline-flex items-center gap-2 text-xs border border-white/10 rounded-full px-4 py-2 text-neutral-400">
               {tx.figure.delivery}
             </span>
           </motion.div>
@@ -377,20 +357,20 @@ export default function AILeadersPage() {
       </section>
 
       {/* Divider */}
-      <div className="h-px bg-gradient-to-r from-transparent via-[#FFE600]/15 to-transparent mx-6" />
+      <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mx-6" />
 
       {/* Sanctuary Phoenix Section */}
-      <section className="py-20 px-6 bg-[#0a0a14]">
+      <section className="py-20 px-6 bg-transparent">
         <div className="max-w-6xl mx-auto">
           <motion.div custom={0} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}>
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-8 h-8 rounded-lg bg-[#FFE600]/10 border border-[#FFE600]/25 flex items-center justify-center">
-                <Zap size={16} className="text-[#FFE600]" strokeWidth={1.5} />
+              <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
+                <Zap size={16} className="text-white" strokeWidth={1.5} />
               </div>
-              <span className="text-[10px] font-mono uppercase tracking-widest text-[#FFE600]/60">Sanctuary AI</span>
+              <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-300">Sanctuary AI</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">{tx.sanctuary.title}</h2>
-            <p className="text-white/40 text-base mb-10">{tx.sanctuary.tagline}</p>
+            <h2 className="text-3xl md:text-4xl font-medium text-white mb-2">{tx.sanctuary.title}</h2>
+            <p className="text-neutral-500 text-base mb-10">{tx.sanctuary.tagline}</p>
           </motion.div>
 
           {/* Specs Grid */}
@@ -399,10 +379,10 @@ export default function AILeadersPage() {
             className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-12"
           >
             {tx.sanctuary.specs.map((spec, i) => (
-              <div key={i} className="rounded-xl border border-white/6 bg-[#0e0e1a] p-4 hover:border-[#FFE600]/20 transition-colors duration-200">
-                <div className="text-[10px] uppercase tracking-widest text-white/30 mb-1">{spec.label}</div>
-                <div className="text-[#FFE600] font-bold text-xl mb-1">{spec.value}</div>
-                <div className="text-white/40 text-xs leading-relaxed">{spec.detail}</div>
+              <div key={i} className="rounded-xl border border-white/10 bg-neutral-900/40 p-4 hover:border-white/10 transition-colors duration-200">
+                <div className="text-[10px] uppercase tracking-widest text-neutral-500 mb-1">{spec.label}</div>
+                <div className="text-white font-medium text-xl mb-1">{spec.value}</div>
+                <div className="text-neutral-500 text-xs leading-relaxed">{spec.detail}</div>
               </div>
             ))}
           </motion.div>
@@ -412,13 +392,13 @@ export default function AILeadersPage() {
             {tx.sanctuary.sections.map((s, i) => (
               <motion.div
                 key={i} custom={i + 2} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
-                className="rounded-2xl border border-white/6 bg-[#0e0e1a] p-7 hover:border-white/10 transition-colors duration-300"
+                className="rounded-2xl border border-white/10 bg-neutral-900/40 p-7 hover:border-white/10 transition-colors duration-300"
               >
-                <h3 className="text-white font-semibold text-lg mb-3 flex items-center gap-2">
-                  <ChevronRight size={16} className="text-[#FFE600]" />
+                <h3 className="text-white font-medium text-lg mb-3 flex items-center gap-2">
+                  <ChevronRight size={16} className="text-white" />
                   {s.heading}
                 </h3>
-                <p className="text-white/50 text-sm leading-relaxed">{s.body}</p>
+                <p className="text-neutral-400 text-sm leading-relaxed">{s.body}</p>
               </motion.div>
             ))}
           </div>
@@ -426,11 +406,11 @@ export default function AILeadersPage() {
           {/* Status Pills */}
           <motion.div custom={5} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
             className="mt-8 flex flex-wrap gap-3">
-            <span className="inline-flex items-center gap-2 text-xs border border-[#FFE600]/25 rounded-full px-4 py-2 bg-[#FFE600]/8 text-[#FFE600]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#FFE600] animate-pulse" />
+            <span className="inline-flex items-center gap-2 text-xs border border-white/10 rounded-full px-4 py-2 bg-white/5 text-white">
+              <span className="w-1.5 h-1.5 rounded-full bg-white " />
               {tx.sanctuary.status}
             </span>
-            <span className="inline-flex items-center gap-2 text-xs border border-white/10 rounded-full px-4 py-2 text-white/50">
+            <span className="inline-flex items-center gap-2 text-xs border border-white/10 rounded-full px-4 py-2 text-neutral-400">
               {tx.sanctuary.delivery}
             </span>
           </motion.div>
@@ -446,18 +426,18 @@ export default function AILeadersPage() {
           <motion.div custom={0} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
             className="mb-10">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-8 h-8 rounded-lg bg-[#00E5FF]/10 border border-[#00E5FF]/25 flex items-center justify-center">
-                <TrendingUp size={16} className="text-[#00E5FF]" strokeWidth={1.5} />
+              <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
+                <TrendingUp size={16} className="text-white" strokeWidth={1.5} />
               </div>
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">{tx.market.title}</h2>
-            <p className="text-white/40 text-sm">{tx.market.subtitle}</p>
+            <h2 className="text-2xl md:text-3xl font-medium text-white mb-2">{tx.market.title}</h2>
+            <p className="text-neutral-500 text-sm">{tx.market.subtitle}</p>
           </motion.div>
           <div className="space-y-5">
             {[tx.market.body1, tx.market.body2, tx.market.body3].map((para, i) => (
               <motion.p
                 key={i} custom={i + 1} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
-                className="text-white/50 text-sm md:text-base leading-relaxed border-l-2 border-[#00E5FF]/20 pl-5"
+                className="text-neutral-400 text-sm md:text-base leading-relaxed border-l-2 border-white/10 pl-5"
               >
                 {para}
               </motion.p>
@@ -467,23 +447,23 @@ export default function AILeadersPage() {
       </section>
 
       {/* Divider */}
-      <div className="h-px bg-gradient-to-r from-transparent via-[#FFE600]/15 to-transparent mx-6" />
+      <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mx-6" />
 
       {/* Metrics Table */}
-      <section className="py-20 px-6 bg-[#0a0a14]">
+      <section className="py-20 px-6 bg-transparent">
         <div className="max-w-6xl mx-auto">
           <motion.div custom={0} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
             className="mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">{tx.metrics.title}</h2>
+            <h2 className="text-2xl md:text-3xl font-medium text-white mb-2">{tx.metrics.title}</h2>
           </motion.div>
           <motion.div custom={1} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
-            className="rounded-2xl border border-white/6 overflow-hidden">
+            className="rounded-2xl border border-white/10 overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="border-b border-white/6 bg-white/[0.02]">
+                  <tr className="border-b border-white/10 bg-white/[0.02]">
                     {tx.metrics.headers.map((h, i) => (
-                      <th key={i} className="text-left px-5 py-4 text-[10px] uppercase tracking-widest text-white/40 font-semibold">
+                      <th key={i} className="text-left px-5 py-4 text-[10px] uppercase tracking-widest text-neutral-500 font-medium">
                         {h}
                       </th>
                     ))}
@@ -491,10 +471,10 @@ export default function AILeadersPage() {
                 </thead>
                 <tbody>
                   {tx.metrics.rows.map((row, i) => (
-                    <tr key={i} className="border-b border-white/4 hover:bg-white/[0.015] transition-colors duration-150">
-                      <td className="px-5 py-3.5 text-white/60 text-sm font-medium">{row[0]}</td>
-                      <td className="px-5 py-3.5 text-[#00E5FF] text-sm font-semibold">{row[1]}</td>
-                      <td className="px-5 py-3.5 text-[#FFE600] text-sm font-semibold">{row[2]}</td>
+                    <tr key={i} className="border-b border-white/10 hover:bg-white/[0.015] transition-colors duration-150">
+                      <td className="px-5 py-3.5 text-neutral-400 text-sm font-medium">{row[0]}</td>
+                      <td className="px-5 py-3.5 text-white text-sm font-medium">{row[1]}</td>
+                      <td className="px-5 py-3.5 text-white text-sm font-medium">{row[2]}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -512,29 +492,25 @@ export default function AILeadersPage() {
         <div className="max-w-6xl mx-auto">
           <motion.div custom={0} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
             className="mb-10 text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">{tx.investment.title}</h2>
-            <p className="text-white/40 text-sm">{tx.investment.subtitle}</p>
+            <h2 className="text-2xl md:text-3xl font-medium text-white mb-2">{tx.investment.title}</h2>
+            <p className="text-neutral-500 text-sm">{tx.investment.subtitle}</p>
           </motion.div>
           <div className="grid md:grid-cols-3 gap-5">
             {tx.investment.cards.map((card, i) => (
               <motion.div
                 key={i} custom={i + 1} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
                 whileHover={{ y: -5, transition: { duration: 0.25 } }}
-                className="relative group rounded-2xl border bg-[#0e0e1a] p-8 overflow-hidden transition-all duration-300"
-                style={{ borderColor: `${card.accent}20` }}
+                className="relative group rounded-2xl border bg-neutral-900/40 p-8 overflow-hidden transition-all duration-300"
+                style={{ borderColor: `color-mix(in srgb, ${card.accent} 13%, transparent)` }}
               >
-                <div
-                  className="absolute top-0 right-0 w-40 h-40 rounded-full blur-[50px] opacity-50 group-hover:opacity-80 transition-opacity duration-500"
-                  style={{ background: `${card.accent}15` }}
-                />
-                <div className="relative z-10 text-4xl font-black mb-3" style={{ color: card.accent }}>
+                <div className="relative z-10 text-4xl font-medium mb-3" style={{ color: card.accent }}>
                   {card.label}
                 </div>
-                <h3 className="relative z-10 text-white font-semibold text-lg mb-3">{card.title}</h3>
-                <p className="relative z-10 text-white/40 text-sm leading-relaxed">{card.detail}</p>
+                <h3 className="relative z-10 text-white font-medium text-lg mb-3">{card.title}</h3>
+                <p className="relative z-10 text-neutral-500 text-sm leading-relaxed">{card.detail}</p>
                 <div
                   className="absolute bottom-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{ background: `linear-gradient(90deg, transparent, ${card.accent}60, transparent)` }}
+                  style={{ background: `linear-gradient(90deg, transparent, color-mix(in srgb, ${card.accent} 38%, transparent), transparent)` }}
                 />
               </motion.div>
             ))}
@@ -543,13 +519,13 @@ export default function AILeadersPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 border-t border-white/6">
+      <section className="py-20 px-6 border-t border-white/10">
         <div className="max-w-6xl mx-auto text-center">
           <motion.div custom={0} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}>
-            <div className="text-[10px] uppercase tracking-widest text-white/30 mb-4">{tx.cta.label}</div>
+            <div className="text-[10px] uppercase tracking-widest text-neutral-500 mb-4">{tx.cta.label}</div>
             <Link
               href="/humanoid-reality-2026"
-              className="inline-flex items-center gap-3 border border-[#00E5FF]/25 rounded-full px-8 py-4 text-[#00E5FF] text-sm font-semibold hover:bg-[#00E5FF]/8 hover:border-[#00E5FF]/50 transition-all duration-300 group"
+              className="inline-flex items-center gap-3 border border-white/10 rounded-full px-8 py-4 text-white text-sm font-medium hover:bg-white/5 hover:border-white/20 transition-all duration-300 group"
             >
               <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform duration-200" />
               {tx.cta.text}
