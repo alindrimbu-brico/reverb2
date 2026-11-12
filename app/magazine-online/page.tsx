@@ -3,6 +3,7 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import PageBackdrop from "@/components/PageBackdrop";
 import { pkg, priceLei, VAT_LABEL } from "@/lib/packages";
+import { Linie } from "@/components/RunningLine";
 
 // Prețul, termenul și lista pachetului de pornire vin din registru (lib/packages.ts).
 const magazinStart = pkg("magazin-start");
@@ -119,7 +120,7 @@ export default function MagazineOnlinePage() {
             </Reveal>
             <Reveal delay={80}>
               <h1 className="mt-4 text-5xl font-medium leading-[0.94] tracking-[-0.04em] md:text-6xl lg:text-[72px]">
-                Un magazin online construit pentru vânzare.
+                <Linie>Un magazin online construit pentru vânzare.</Linie>
               </h1>
             </Reveal>
             <Reveal delay={160}>
@@ -182,7 +183,7 @@ export default function MagazineOnlinePage() {
             <div className="mb-12">
               <div className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-400">Pentru cine</div>
               <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
-                Pentru firme care vor să vândă online serios.
+                <Linie>Pentru firme care vor să vândă online serios.</Linie>
               </h2>
             </div>
           </Reveal>
@@ -218,7 +219,7 @@ export default function MagazineOnlinePage() {
           <div className="mb-12">
             <div className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-400">Multiplatformă</div>
             <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
-              Platforma potrivită, nu platforma la modă.
+              <Linie>Platforma potrivită, nu platforma la modă.</Linie>
             </h2>
             <p className="mt-4 max-w-2xl text-base leading-7 text-neutral-400">
               Nu forțăm o tehnologie. Alegem în funcție de catalog, buget, administrare și scalare.
@@ -243,7 +244,7 @@ export default function MagazineOnlinePage() {
             <div className="mb-12">
               <div className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-400">Ce construim</div>
               <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
-                Un magazin online complet, cu structură de conversie.
+                <Linie>Un magazin online complet, cu structură de conversie.</Linie>
               </h2>
             </div>
           </Reveal>
@@ -283,7 +284,7 @@ export default function MagazineOnlinePage() {
           <div className="mb-12">
             <div className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-400">Preț transparent</div>
             <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
-              Punctul de plecare este clar.
+              <Linie>Punctul de plecare este clar.</Linie>
             </h2>
           </div>
         </Reveal>
@@ -357,7 +358,7 @@ export default function MagazineOnlinePage() {
             <div className="mb-12">
               <div className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-400">Proces</div>
               <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
-                Proces clar în 4 pași.
+                <Linie>Proces clar în 4 pași.</Linie>
               </h2>
               <p className="mt-4 max-w-2xl text-base leading-7 text-neutral-400">
                 Structurat, predictibil, orientat pe livrare.
@@ -381,7 +382,7 @@ export default function MagazineOnlinePage() {
                       <div className="text-4xl font-medium tracking-[-0.04em] text-neutral-500">{s.num}</div>
                       <div className="rounded-full border border-white/10 px-3 py-1 text-xs text-neutral-400">{s.duration}</div>
                     </div>
-                    <h3 className="mt-4 text-xl font-medium text-white">{s.title}</h3>
+                    <h3 className="mt-4 text-xl font-medium text-white"><Linie>{s.title}</Linie></h3>
                     <p className="mt-3 text-[15px] leading-7 text-neutral-300">{s.text}</p>
                   </div>
                 </div>
@@ -398,7 +399,7 @@ export default function MagazineOnlinePage() {
             <div className="text-center">
               <div className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-400">FAQ</div>
               <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
-                Întrebări frecvente
+                <Linie>Întrebări frecvente</Linie>
               </h2>
             </div>
           </Reveal>
@@ -431,7 +432,7 @@ export default function MagazineOnlinePage() {
           <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8 text-white md:p-12 lg:p-16">
             <div className="mx-auto max-w-3xl text-center">
               <h2 className="text-3xl font-medium leading-tight tracking-[-0.03em] md:text-5xl">
-                Vrei un magazin online care poate fi scalat și optimizat?
+                <Linie>Vrei un magazin online care poate fi scalat și optimizat?</Linie>
               </h2>
               <p className="mt-6 text-lg leading-8 text-neutral-300">
                 Spune-ne ce vinzi și cum livrezi. Îți recomandăm platforma potrivită și pașii de lansare.

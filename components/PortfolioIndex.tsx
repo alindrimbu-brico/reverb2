@@ -3,6 +3,7 @@ import PageBackdrop from "@/components/PageBackdrop";
 import type { LiveProject } from "@/lib/liveProjects";
 import { deliveryEn, getPackage, priceEn, VAT_LABEL } from "@/lib/packages";
 import { VAT_LABEL_EN } from "@/lib/packagesEn";
+import { Linie } from "@/components/RunningLine";
 
 type Lang = "ro" | "en";
 
@@ -31,6 +32,7 @@ const copy = {
     count: (n: number) => `${n} proiecte`,
     legend: "de unde a pornit → ce e azi",
     demo: "demo",
+    wip: "în lucru",
     opens: "se deschide într-o filă nouă",
     conceptsText: "Machetele și studiile de stil stau separat, în galeria de concepte.",
     conceptsCta: "Vezi conceptele",
@@ -50,6 +52,7 @@ const copy = {
     count: (n: number) => `${n} projects`,
     legend: "where it started → what it is today",
     demo: "demo",
+    wip: "in progress",
     opens: "opens in a new tab",
     conceptsText: "Mock-ups and style studies are kept apart, in the concepts gallery.",
     conceptsCta: "See the concepts",
@@ -72,9 +75,9 @@ export default function PortfolioIndex({ lang, projects }: { lang: Lang; project
         <div className="relative mx-auto max-w-5xl px-6 text-center">
           <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-neutral-500 mb-6">{t.label}</div>
           <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-white leading-tight">
-            {t.h1a}
+            <Linie>{t.h1a}</Linie>
             <br />
-            <span className="text-neutral-400 font-light">{t.h1b}</span>
+            <span className="text-neutral-400 font-light"><Linie>{t.h1b}</Linie></span>
           </h1>
           <p className="mt-8 max-w-xl mx-auto text-base md:text-lg text-neutral-400 font-light leading-relaxed">
             {t.lead}
@@ -118,7 +121,8 @@ export default function PortfolioIndex({ lang, projects }: { lang: Lang; project
 
         <ul className="border-t border-white/10">
           {projects.map((p, i) => {
-            const isDemo = /demo/i.test(p.status);
+            // Pe rând apare doar ce diferă de „e live”: demo sau în lucru.
+            const mark = /lucru|progress/i.test(p.status) ? t.wip : /demo/i.test(p.status) ? t.demo : null;
             return (
               <li key={p.name} className="border-b border-white/10">
                 <a
@@ -134,10 +138,10 @@ export default function PortfolioIndex({ lang, projects }: { lang: Lang; project
                     <span className="block truncate text-lg font-medium tracking-tight text-white md:text-xl">{p.name}</span>
                     <span className="mt-1 flex items-center gap-2 text-xs text-neutral-500">
                       {p.kind ?? p.category}
-                      {isDemo && (
+                      {mark && (
                         <span className="inline-flex items-center gap-1.5 text-neutral-400">
                           <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
-                          {t.demo}
+                          {mark}
                         </span>
                       )}
                     </span>

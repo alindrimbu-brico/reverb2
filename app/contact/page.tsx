@@ -3,6 +3,7 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import ContactForm from "./ContactForm";
 import { packages, VAT_NOTE } from "@/lib/packages";
+import { Linie } from "@/components/RunningLine";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/contact", languages: { ro: "/contact", en: "/en/contact", "x-default": "/contact" } },
@@ -36,7 +37,7 @@ export default function ContactPage() {
           </Reveal>
           <Reveal delay={80}>
             <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-white leading-tight">
-              Hai să vorbim despre afacerea ta.
+              <Linie>Hai să vorbim despre afacerea ta.</Linie>
             </h1>
           </Reveal>
           <Reveal delay={160}>
@@ -56,7 +57,7 @@ export default function ContactPage() {
             <Reveal>
               <div className="rounded-3xl border border-white/10 bg-neutral-900/30 p-8 md:p-10">
                 <div className="text-xs font-mono uppercase tracking-[0.25em] text-neutral-500 mb-3">Contact Direct</div>
-                <h2 className="text-2xl md:text-3xl font-medium text-white mb-4">Discuție la Obiect</h2>
+                <h2 className="text-2xl md:text-3xl font-medium text-white mb-4"><Linie>Discuție la Obiect</Linie></h2>
                 <p className="text-sm text-neutral-400 font-light leading-relaxed mb-8">
                   Dacă ai nevoie de o estimare rapidă sau vrei să afli cum putem implementa conținut video AI sau un magazin nou, ne poți contacta direct:
                 </p>
@@ -111,7 +112,7 @@ export default function ContactPage() {
             <Reveal delay={150}>
               <div className="rounded-3xl border border-white/10 bg-neutral-900/30 p-6 sm:p-8 md:p-12">
                 <div className="text-xs font-mono uppercase tracking-[0.25em] text-neutral-500 mb-3">Formular Securizat</div>
-                <h3 className="text-2xl font-medium text-white mb-6">Trimite Detaliile Proiectului</h3>
+                <h3 className="text-2xl font-medium text-white mb-6"><Linie>Trimite Detaliile Proiectului</Linie></h3>
                 <ContactForm />
               </div>
             </Reveal>

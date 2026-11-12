@@ -1,4 +1,5 @@
 import { pageMeta } from "@/lib/seo";
+import DemoScope from "@/components/DemoScope";
 
 // Pagina este "use client", deci metadata ei (titlu, descriere, canonical) stă în acest layout.
 export const metadata = pageMeta({
@@ -9,5 +10,6 @@ export const metadata = pageMeta({
 });
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return children;
+  // Macheta își păstrează forma (capsule, fără ridicarea butoanelor): vezi components/DemoScope.tsx.
+  return <DemoScope fixed>{children}</DemoScope>;
 }

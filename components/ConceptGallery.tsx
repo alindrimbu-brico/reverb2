@@ -1,6 +1,7 @@
 import Link from "next/link";
 import PageBackdrop from "@/components/PageBackdrop";
 import { GITHUB_SHOWCASE_PATHS } from "@/lib/githubShowcases";
+import { Linie } from "@/components/RunningLine";
 
 export type Concept = {
   id: string;
@@ -51,9 +52,9 @@ export default function ConceptGallery({ lang, items }: { lang: Lang; items: Con
             <span>{t.badge}</span>
           </div>
           <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-white leading-tight">
-            {t.h1a}
+            <Linie>{t.h1a}</Linie>
             <br />
-            <span className="text-neutral-400 font-light">{t.h1b}</span>
+            <span className="text-neutral-400 font-light"><Linie>{t.h1b}</Linie></span>
           </h1>
           <p className="mt-8 max-w-2xl mx-auto text-base md:text-lg text-neutral-400 font-light leading-relaxed">
             {t.lead(items.length)}

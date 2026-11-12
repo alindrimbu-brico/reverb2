@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import WhoWeAre from "@/components/WhoWeAre";
-import { BorderRun } from "@/components/RunningLine";
+import { Linie } from "@/components/RunningLine";
 import { packages, priceLei, VAT_LABEL } from "@/lib/packages";
 import { liveProjectsRo } from "@/lib/liveProjects";
 
@@ -76,8 +76,8 @@ export default function PachetePage() {
           </Reveal>
           <Reveal delay={80}>
             <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-white leading-tight">
-              Prețuri fixe.<br />
-              <span className="text-neutral-400 font-light">Fără costuri ascunse.</span>
+              <Linie>Prețuri fixe.</Linie><br />
+              <span className="text-neutral-400 font-light"><Linie>Fără costuri ascunse.</Linie></span>
             </h1>
           </Reveal>
           <Reveal delay={160}>
@@ -101,7 +101,7 @@ export default function PachetePage() {
           <div className="max-w-5xl mb-16">
             <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-3">01 / PRODUCȚIE VIDEO ZILNICĂ AI</div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-tight leading-tight">
-              Pachete Social Media • Video Scurt și Imagini
+              <Linie>Pachete Social Media • Video Scurt și Imagini</Linie>
             </h2>
             <p className="mt-4 text-sm text-neutral-400 font-light leading-relaxed">
               Generăm conținut video de înaltă fidelitate cu Google Imagen & Veo pentru TikTok, Reels, Shorts și Facebook. Demonstrații de produse, scenarii de vânzare și subtitrări dinamice fără bătăi de cap.
@@ -119,7 +119,6 @@ export default function PachetePage() {
                     : "bg-neutral-900/30 border-white/10"
                 }`}
               >
-                <BorderRun radius={23.5} delay={idx * 0.58} />
                 {pkg.badge && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-white px-4 py-1 text-[9px] font-mono font-bold uppercase tracking-widest text-black shadow-md">
                     {pkg.badge}
@@ -130,7 +129,7 @@ export default function PachetePage() {
                   <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-2">
                     {pkg.delivery}
                   </div>
-                  <h3 className="text-2xl font-medium text-white mb-2">{pkg.name}</h3>
+                  <h3 className="text-2xl font-medium text-white mb-2"><Linie>{pkg.name}</Linie></h3>
                   <div className="text-4xl font-light text-white mb-1">{pkg.price} <span className="text-sm font-mono text-neutral-300">{VAT_LABEL}</span></div>
                   <div className="mb-4 text-xs text-neutral-400">{priceLei(pkg.price)}</div>
                   <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6 border-b border-white/10 pb-6">
@@ -175,7 +174,7 @@ export default function PachetePage() {
           <div className="max-w-5xl mb-16">
             <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-3">02 / SITE-URI ȘI MAGAZINE</div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-tight leading-tight">
-              Site-uri, Magazine Online și Proiecte Mari
+              <Linie>Site-uri, Magazine Online și Proiecte Mari</Linie>
             </h2>
             <p className="mt-4 text-sm text-neutral-400 font-light leading-relaxed">
               Site-uri de prezentare și magazine online la preț fix: de la un început simplu, până la sisteme complete cu clipuri video și proiecte pentru companii mari.
@@ -211,7 +210,6 @@ export default function PachetePage() {
                     : "bg-neutral-900/30 border-white/10"
                 }`}
               >
-                {pkg.highlight ? <BorderRun radius={23.5} /> : null}
                 {pkg.badge && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-white px-4 py-1 text-[9px] font-mono font-bold uppercase tracking-widest text-black shadow-md">
                     {pkg.badge}
@@ -222,7 +220,7 @@ export default function PachetePage() {
                   <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-2">
                     {pkg.delivery}
                   </div>
-                  <h3 className="text-2xl font-medium text-white mb-2">{pkg.name}</h3>
+                  <h3 className="text-2xl font-medium text-white mb-2"><Linie>{pkg.name}</Linie></h3>
                   <div className="text-4xl font-light text-white mb-1">{pkg.price} <span className="text-sm font-mono text-neutral-300">{VAT_LABEL}</span></div>
                   <div className="mb-4 text-xs text-neutral-400">{priceLei(pkg.price)}</div>
                   <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6 border-b border-white/10 pb-6">
@@ -267,7 +265,7 @@ export default function PachetePage() {
           <div className="text-center mb-16">
             <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-3">Claritate Operațională</div>
             <h2 className="text-3xl md:text-4xl font-light text-white tracking-tight">
-              Întrebări frecvente despre colaborare.
+              <Linie>Întrebări frecvente despre colaborare.</Linie>
             </h2>
           </div>
         </Reveal>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
+import { Linie } from "@/components/RunningLine";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/despre", languages: { ro: "/despre", en: "/en/about", "x-default": "/despre" } },
@@ -84,7 +85,7 @@ export default function DesprePage() {
           </Reveal>
           <Reveal delay={80}>
             <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-white leading-tight">
-              Structură, execuție, rezultate.
+              <Linie>Structură, execuție, rezultate.</Linie>
             </h1>
           </Reveal>
           <Reveal delay={160}>
@@ -102,8 +103,8 @@ export default function DesprePage() {
             <div>
               <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-4">Manifestul Reverb</div>
               <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight leading-tight">
-                Nu amplificăm zgomotul.<br />
-                <span className="text-neutral-400">Îl eliminăm.</span>
+                <Linie>Nu amplificăm zgomotul.</Linie><br />
+                <span className="text-neutral-400"><Linie>Îl eliminăm.</Linie></span>
               </h2>
             </div>
           </Reveal>
@@ -129,7 +130,7 @@ export default function DesprePage() {
           <div className="max-w-3xl mb-16">
             <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-3">Principiile Noastre</div>
             <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
-              Cum asigurăm predictibilitatea.
+              <Linie>Cum asigurăm predictibilitatea.</Linie>
             </h2>
           </div>
         </Reveal>
@@ -141,7 +142,7 @@ export default function DesprePage() {
               className="rounded-2xl border border-white/10 bg-neutral-900/30 p-8 flex flex-col justify-between"
             >
               <div>
-                <h3 className="text-xl font-medium text-white mb-3">{v.title}</h3>
+                <h3 className="text-xl font-medium text-white mb-3"><Linie>{v.title}</Linie></h3>
                 <p className="text-xs text-neutral-400 font-light leading-relaxed">{v.text}</p>
               </div>
             </div>
@@ -155,7 +156,7 @@ export default function DesprePage() {
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-3">Metodologie</div>
             <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight mb-4">
-              Proces ferm. Fără improvizații.
+              <Linie>Proces ferm. Fără improvizații.</Linie>
             </h2>
           </div>
         </Reveal>
@@ -176,7 +177,7 @@ export default function DesprePage() {
         <Reveal>
           <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-4">Pregătit pentru Următorul Pas?</div>
           <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight mb-6">
-            Hai să construim arhitectura afacerii tale.
+            <Linie>Hai să construim arhitectura afacerii tale.</Linie>
           </h2>
           <p className="text-neutral-400 text-sm md:text-base leading-relaxed mb-10 max-w-2xl mx-auto">
             Discutăm concret pe cifrele și obiectivele afacerii tale. Primești un plan tehnic ferm și un termen precis de livrare.

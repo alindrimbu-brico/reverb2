@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import { pkg, VAT_NOTE } from "@/lib/packages";
+import { Linie } from "@/components/RunningLine";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/servicii", languages: { ro: "/servicii", en: "/en/services", "x-default": "/servicii" } },
@@ -104,8 +105,8 @@ export default function ServiciiPage() {
           </Reveal>
           <Reveal delay={80}>
             <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-white leading-tight">
-              Sisteme inginerești.<br />
-              <span className="text-neutral-400 font-light">Rezultate măsurabile.</span>
+              <Linie>Sisteme inginerești.</Linie><br />
+              <span className="text-neutral-400 font-light"><Linie>Rezultate măsurabile.</Linie></span>
             </h1>
           </Reveal>
           <Reveal delay={160}>
@@ -138,14 +139,14 @@ export default function ServiciiPage() {
                       </span>
                     </div>
                     <h2 className="text-3xl md:text-4xl font-medium text-white mb-4">
-                      {srv.title}
+                      <Linie>{srv.title}</Linie>
                     </h2>
                     <p className="text-sm font-mono text-neutral-400 mb-6 leading-relaxed">
                       {srv.tagline}
                     </p>
                     <Link
                       href={srv.href}
-                      className="inline-flex items-center justify-center rounded-2xl sm:rounded-full bg-white px-5 py-3 text-center text-[11px] font-mono uppercase tracking-wider text-black hover:bg-neutral-200 transition-all font-bold"
+                      className="inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-center text-[11px] font-mono uppercase tracking-wider text-black hover:bg-neutral-200 transition-all font-bold"
                     >
                       Alege Serviciul • {srv.price} →
                     </Link>
@@ -184,7 +185,7 @@ export default function ServiciiPage() {
         <Reveal>
           <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-4">Pasul Următor</div>
           <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight mb-6">
-            Construiește pe o fundație solidă.
+            <Linie>Construiește pe o fundație solidă.</Linie>
           </h2>
           <p className="text-neutral-400 text-sm md:text-base leading-relaxed mb-10 max-w-2xl mx-auto">
             Oferim audit inițial gratuit pentru a evalua infrastructura ta digitală și compatibilitatea cu căutarea AI.

@@ -109,12 +109,12 @@ export default function ProjectPreviewModal({
                 <span className="truncate">{project.href}</span>
               </div>
               <span className="text-[9px] uppercase tracking-wider text-emerald-400 shrink-0 font-bold">
-                LIVE
+                {/lucru|progress/i.test(project.status ?? "") ? (isEn ? "IN PROGRESS" : "ÎN LUCRU") : "LIVE"}
               </span>
             </div>
 
             {/* Viewport Width Switchers */}
-            <div className="hidden sm:flex bg-white/5 dark:bg-white/5 light:bg-black/5 p-1 rounded-full border border-white/10 dark:border-white/10 light:border-black/10 shrink-0">
+            <div data-keep-pills className="hidden sm:flex bg-white/5 dark:bg-white/5 light:bg-black/5 p-1 rounded-full border border-white/10 dark:border-white/10 light:border-black/10 shrink-0">
               <button
                 onClick={() => setDevice("desktop")}
                 title={isEn ? "Desktop View (100%)" : "Vedere Desktop (100%)"}

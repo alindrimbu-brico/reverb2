@@ -108,6 +108,27 @@ async function main() {
     if (/noindex/.test(tag)) problems.push(`/showcase/${s}: are noindex, dar e destinația unui domeniu propriu`);
   }
 
+  // 5. „Linia care merge”: contururile literelor (lib/outlineRun/w*.ts) sunt făcute din fișierele de font Geist numite în
+  //    lib/outlineRun/fonts.json. Dacă site-ul servește alte fișiere (font actualizat), liniile dispar de pe titluri fără eroare.
+  try {
+    const want = JSON.parse(fs.readFileSync(path.join(process.cwd(), "lib", "outlineRun", "fonts.json"), "utf8")).files;
+    const home = await (await fetch(`${base}/`)).text();
+    const sheets = [...home.matchAll(/href="([^"]+\.css[^"]*)"/g)].map((m) => new URL(m[1].replace(/&amp;/g, "&"), base).href);
+    let css = "";
+    for (const s of new Set(sheets)) css += await (await fetch(s)).text();
+    const served = new Set();
+    for (const block of css.match(/@font-face\s*\{[^}]*\}/g) ?? []) {
+      if (!/font-family:\s*['"]?Geist['"]?\s*[;}]/.test(block)) continue;
+      const file = block.match(/url\(([^)]+\.woff2)[^)]*\)/);
+      if (file) served.add(file[1].split("/").pop().split("-")[0]);
+    }
+    const missing = want.filter((f) => !served.has(f));
+    if (!served.size) problems.push("linia care merge: nu am găsit fontul Geist în CSS-ul paginii de pornire");
+    else if (missing.length) problems.push(`linia care merge: fontul Geist s-a schimbat (lipsesc ${missing.join(", ")}); rulați „py -3 -X utf8 scripts/linia_atlas.py .next/static” după build și comiteți lib/outlineRun/`);
+  } catch (e) {
+    problems.push(`linia care merge: nu am putut compara fontul (${e.message})`);
+  }
+
   console.log(`sitemap: ${urls.length} adrese, ${ok} verificate cu 200; machete cu noindex: ${mk}`);
   if (problems.length) {
     console.log(`PROBLEME (${problems.length}):`);

@@ -21,6 +21,11 @@ export type LiveProject = {
   result?: string;
 };
 
+/** Câte proiecte din listă sunt în producție (fără demo și fără cele în lucru). Cifra de pe prima pagină se ia de aici, nu se scrie de mână. */
+export function inProduction(list: LiveProject[]): number {
+  return list.filter((p) => /live/i.test(p.status) && !/demo/i.test(p.status)).length;
+}
+
 export const liveProjectsRo: LiveProject[] = [
   {
     name: "Bricolando.ro",
@@ -211,6 +216,19 @@ export const liveProjectsRo: LiveProject[] = [
     result: "E un site-concept în română și engleză; frizeria nu este încă deschisă.",
     href: "https://don-barbershop.pages.dev",
     status: "DEMO LIVE",
+    badge: "Showcase"
+  },
+  {
+    // Sursa textelor: pagina live și codul proiectului (13 nov 2026). E în lucru: starea „ÎN LUCRU” se schimbă abia când e gata.
+    name: "The Digital Greenhouse",
+    kind: "Concept",
+    category: "Site-concept de studio digital",
+    tech: "Cursor propriu și animații la derulare",
+    host: "Vercel",
+    desc: "Site-concept minimalist, cu teme botanice: mult aer între secțiuni și un cursor rotund care inversează culorile de sub el și crește deasupra legăturilor.",
+    result: "E în lucru: are pagina principală în română și engleză; urmează restructurarea textelor și a paginilor de prezentare.",
+    href: "https://the-digital-greenhouse.vercel.app/",
+    status: "ÎN LUCRU",
     badge: "Showcase"
   },
 ];
@@ -405,6 +423,18 @@ export const liveProjectsEn: LiveProject[] = [
     result: "It is a concept site in Romanian and English; the barbershop is not open yet.",
     href: "https://don-barbershop.pages.dev",
     status: "LIVE DEMO",
+    badge: "Showcase"
+  },
+  {
+    name: "The Digital Greenhouse",
+    kind: "Concept",
+    category: "Concept site for a digital studio",
+    tech: "Custom cursor and scroll animations",
+    host: "Vercel",
+    desc: "A minimalist concept site with botanical themes: plenty of air between sections and a round cursor that inverts the colours beneath it and grows over links.",
+    result: "It is in progress: the main page exists in Romanian and English; the texts and the presentation pages are being restructured next.",
+    href: "https://the-digital-greenhouse.vercel.app/",
+    status: "IN PROGRESS",
     badge: "Showcase"
   },
 ];

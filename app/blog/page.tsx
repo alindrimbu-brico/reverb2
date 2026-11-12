@@ -4,6 +4,7 @@ import { posts } from "@/lib/posts";
 import Reveal from "@/components/Reveal";
 import PageEnter from "@/components/PageEnter";
 import PageBackdrop from "@/components/PageBackdrop";
+import { Linie } from "@/components/RunningLine";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/blog", languages: { ro: "/blog", en: "/en/blog", "x-default": "/blog" } },
@@ -32,7 +33,7 @@ export default function BlogPage() {
             </Reveal>
             <Reveal delay={80}>
               <h1 className="mt-4 max-w-3xl text-4xl font-medium leading-tight tracking-[-0.03em] md:text-6xl">
-                Perspective reale despre digital, marketing și AI.
+                <Linie>Perspective reale despre digital, marketing și AI.</Linie>
               </h1>
             </Reveal>
             <Reveal delay={160}>
@@ -93,7 +94,7 @@ export default function BlogPage() {
               <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
                 <div>
                   <h2 className="text-2xl font-medium tracking-[-0.02em]">
-                    Vrei să aplicăm asta pentru business-ul tău?
+                    <Linie>Vrei să aplicăm asta pentru business-ul tău?</Linie>
                   </h2>
                   <p className="mt-2 text-base text-neutral-400">
                     Hai la un call. Discutăm concret ce se poate face.

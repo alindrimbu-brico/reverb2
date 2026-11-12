@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import { enPrice, VAT_NOTE_EN } from "@/lib/packagesEn";
+import { Linie } from "@/components/RunningLine";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/en/services", languages: { ro: "/servicii", en: "/en/services", "x-default": "/servicii" } },
@@ -127,7 +128,7 @@ export default function ServicesPageEN() {
                     </div>
 
                     <h2 className="text-xl sm:text-2xl font-medium text-white mb-3">
-                      {srv.title}
+                      <Linie>{srv.title}</Linie>
                     </h2>
 
                     <p className="text-xs font-mono text-neutral-400 uppercase tracking-wider mb-6">

@@ -3,10 +3,10 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import TechAuthorityGrid from "@/components/TechAuthorityGrid";
-import { OutlineRun, OutlineWords, BorderRun, type OutlineSet } from "@/components/RunningLine";
+import { OutlineRun, Linie } from "@/components/RunningLine";
 import { heroRo } from "@/lib/outlineRun/heroRo";
 import ProjectPreviewModal, { PreviewProject } from "@/components/ProjectPreviewModal";
-import { liveProjectsRo } from "@/lib/liveProjects";
+import { inProduction, liveProjectsRo } from "@/lib/liveProjects";
 import { pkg, splitPrice, noBreak, VAT_NOTE } from "@/lib/packages";
 
 // Cardurile de preț de pe prima pagină citesc din registru (lib/packages.ts), ca /pachete.
@@ -94,24 +94,13 @@ function ProbaTag({ children }: { children: React.ReactNode }) {
   );
 }
 
-// `proba` = modul de probă al „liniei care merge”, folosit doar de /proba-linii (12 nov 2026). Pe prima pagină reală e fals:
-// titlurile rămân text simplu și cardurile fără contur. Nu îl porniți pe `/` fără cererea lui Alin.
+// `proba` = modul de probă al „liniei care merge”, folosit doar de /proba-linii (13 nov 2026): titlul mare cu liniuțe pe rândul alb,
+// verde lângă alb pe cardurile din caseta GEO, aceeași etichetă la trei valori de colț. Pe prima pagină reală e fals.
+// Nu îl porniți pe `/` fără cererea lui Alin; după ce alege, modul și pagina de probă se șterg.
 export default function HomePage({ proba = false }: { proba?: boolean }) {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [activeFilter, setActiveFilter] = useState("TOATE");
   const [selectedPreview, setSelectedPreview] = useState<PreviewProject | null>(null);
-  const [probaSet, setProbaSet] = useState<OutlineSet | null>(null);
-
-  // Contururile probei se încarcă doar în modul de probă, după prima afișare; dacă nu vin, rămâne textul simplu.
-  useEffect(() => {
-    if (!proba) return;
-    let alive = true;
-    import("@/lib/outlineRun/probaRo").then((m) => { if (alive) setProbaSet(m.probaRo); }).catch(() => {});
-    return () => { alive = false; };
-  }, [proba]);
-
-  // Un titlu: text simplu pe site, text cu liniuțe pe contur în modul de probă. `banda` = clasa care dă culoarea liniuței.
-  const linie = (text: string, banda: string) => (proba ? <OutlineWords text={text} set={probaSet} className={banda} /> : text);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -166,7 +155,7 @@ export default function HomePage({ proba = false }: { proba?: boolean }) {
           </div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[80px] font-medium tracking-[-0.04em] leading-[1.04] text-white break-words">
-            Infrastructură digitală.<br />
+            {proba ? <Linie>Infrastructură digitală.</Linie> : "Infrastructură digitală."}<br />
             <span className="text-neutral-400 font-light">
               <OutlineRun text="Sisteme care produc valoare." data={heroRo} />
             </span>
@@ -226,7 +215,7 @@ export default function HomePage({ proba = false }: { proba?: boolean }) {
               <div className="text-[10px] uppercase tracking-wider text-neutral-500">Structură Căutare Generativă</div>
             </div>
             <div>
-              <div className="text-2xl font-light text-white mb-1">15 Active</div>
+              <div className="text-2xl font-light text-white mb-1">{inProduction(realProjects)} Active</div>
               <div className="text-[10px] uppercase tracking-wider text-neutral-500">Sisteme Reale în Producție</div>
             </div>
             <div>
@@ -247,10 +236,26 @@ export default function HomePage({ proba = false }: { proba?: boolean }) {
             <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-mono uppercase tracking-wide sm:tracking-widest text-neutral-300 mb-4">
               <span>● Noua Paradigmă a Căutării Online</span>
             </div>
-            {proba ? <ProbaTag>Proba A · liniuțe pe textul mare (gri pe rândul alb, alb pe rândul gri)</ProbaTag> : null}
+            {proba ? (
+              <div className="mb-8">
+                <ProbaTag>Proba · colțul etichetelor și al butoanelor, la trei valori</ProbaTag>
+                <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
+                  {([["0.7", "mai drept"], ["1", "ca pe site"], ["1.4", "mai rotund"]] as const).map(([k, nume]) => (
+                    <div key={k} className="flex flex-wrap items-center gap-3">
+                      <span style={{ "--pill-k": k } as React.CSSProperties} className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-mono uppercase tracking-wide text-neutral-300">
+                        ● Colț {nume}
+                      </span>
+                      <span style={{ "--pill-k": k } as React.CSSProperties} className="inline-block rounded-full border border-white/20 px-6 py-3 text-xs font-mono uppercase tracking-widest text-white">
+                        Buton
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : null}
             <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight leading-tight">
-              {linie("În 2026, clienții nu mai caută doar pe Google.", "text-neutral-400")}<br />
-              <span className="text-neutral-400">{linie("Ei întreabă agenții AI.", "text-white")}</span>
+              <Linie>În 2026, clienții nu mai caută doar pe Google.</Linie><br />
+              <span className="text-neutral-400"><Linie>Ei întreabă agenții AI.</Linie></span>
             </h2>
             <p className="mt-5 text-sm md:text-base text-neutral-300 leading-relaxed font-light">
               Când un cumpărător întreabă ChatGPT, Perplexity, Claude sau Gemini: <em>„Care este cel mai bun furnizor de servicii sau magazin pentru nevoia mea și cât costă?”</em>, răspunsul este generat instant. Conform celor mai recente cercetări din industrie Profound 2026, peste 57% dintre site-urile tradiționale sunt invizibile sau citate greșit de către AI, deoarece datele și prețurile lor nu sunt structurate semantic.
@@ -262,8 +267,8 @@ export default function HomePage({ proba = false }: { proba?: boolean }) {
             <div className="mech-card rounded-2xl border border-white/10 bg-neutral-900/40 p-8 flex flex-col justify-between">
               <div>
                 <div className="text-xs font-mono text-neutral-500 mb-4">01 / LIZIBILITATE PENTRU AGENȚI AI</div>
-                {proba ? <ProbaTag>Proba B1 · liniuță verde</ProbaTag> : null}
-                <h3 className="text-xl font-medium text-white mb-3">{linie("AI-Readable Answer Stack", "rl-accent")}</h3>
+                {proba ? <ProbaTag>Proba 1 · alb, cu 25 % mai gros (ca pe site)</ProbaTag> : null}
+                <h3 className="text-xl font-medium text-white mb-3"><Linie>AI-Readable Answer Stack</Linie></h3>
                 <p className="text-xs text-neutral-400 leading-relaxed font-light">
                   Implementăm arhitectură semantică JSON-LD avansată și entități corelate direct în cod. Sistemele tale devin direct accesibile și citabile de către modelele de limbaj mari.
                 </p>
@@ -276,8 +281,8 @@ export default function HomePage({ proba = false }: { proba?: boolean }) {
             <div className="mech-card rounded-2xl border border-white/10 bg-neutral-900/40 p-8 flex flex-col justify-between">
               <div>
                 <div className="text-xs font-mono text-neutral-500 mb-4">02 / STRUCTURĂ TRANSPARENTĂ</div>
-                {proba ? <ProbaTag>Proba B2 · liniuță gri</ProbaTag> : null}
-                <h3 className="text-xl font-medium text-white mb-3">{linie("Indexare Prețuri & Servicii", "text-neutral-400")}</h3>
+                {proba ? <ProbaTag>Proba 2 · verde</ProbaTag> : null}
+                <h3 className="text-xl font-medium text-white mb-3"><Linie band={proba ? "rl-accent" : undefined}>Indexare Prețuri & Servicii</Linie></h3>
                 <p className="text-xs text-neutral-400 leading-relaxed font-light">
                   AI-ul compară și recomandă soluții înainte ca un client să discute cu vânzările. Ne asigurăm că pachetele și valoarea afacerii tale sunt reprezentate corect și favorabil în sintezele AI.
                 </p>
@@ -290,8 +295,8 @@ export default function HomePage({ proba = false }: { proba?: boolean }) {
             <div className="mech-card rounded-2xl border border-white/10 bg-neutral-900/40 p-8 flex flex-col justify-between">
               <div>
                 <div className="text-xs font-mono text-neutral-500 mb-4">03 / GENERATIVE ENGINE OPTIMIZATION</div>
-                {proba ? <ProbaTag>Proba B3 · liniuță albă, ca în subtitlu</ProbaTag> : null}
-                <h3 className="text-xl font-medium text-white mb-3">{linie("Generative Engine Optimization GEO", "text-white")}</h3>
+                {proba ? <ProbaTag>Proba 3 · verde, cu 25 % mai gros</ProbaTag> : null}
+                <h3 className="text-xl font-medium text-white mb-3"><Linie band={proba ? "rl-accent" : undefined} thick={proba ? true : undefined}>Generative Engine Optimization GEO</Linie></h3>
                 <p className="text-xs text-neutral-400 leading-relaxed font-light">
                   Trecem dincolo de SEO-ul clasic bazat pe cuvinte cheie statice. Optimizăm întreaga prezență a afacerii pentru a deveni sursa autoritară recomandată de noile motoare de căutare generative.
                 </p>
@@ -313,8 +318,8 @@ export default function HomePage({ proba = false }: { proba?: boolean }) {
           <div className="lg:col-span-5">
             <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-3">Modelul Operațional</div>
             <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight leading-tight">
-              Cum operăm: <br />
-              <span className="text-neutral-400">Arhitectură, nu doar design.</span>
+              <Linie>Cum operăm:</Linie><br />
+              <span className="text-neutral-400"><Linie>Arhitectură, nu doar design.</Linie></span>
             </h2>
           </div>
           <div className="lg:col-span-7 text-neutral-400 text-sm md:text-base leading-relaxed">
@@ -325,11 +330,9 @@ export default function HomePage({ proba = false }: { proba?: boolean }) {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           
           <div className="mech-card rounded-2xl border border-white/10 bg-neutral-900/30 p-8 flex flex-col justify-between">
-            {proba ? <BorderRun radius={15.5} delay={0.0} /> : null}
             <div>
-              {proba ? <ProbaTag>Proba C · doar contur</ProbaTag> : null}
               <div className="font-mono text-xs text-neutral-500 mb-6">/ 01 — PROIECTĂM</div>
-              <h3 className="text-xl font-medium text-white mb-3">Fundație Inginerească</h3>
+              <h3 className="text-xl font-medium text-white mb-3"><Linie>Fundație Inginerească</Linie></h3>
               <p className="text-xs text-neutral-400 leading-relaxed font-light">
                 Structuri web de mare viteză cu timpi de răspuns sub 1.2s. Bază tehnică gândită pentru scalabilitate pe termen lung, fără cod duplicat sau dependențe fragile.
               </p>
@@ -340,11 +343,9 @@ export default function HomePage({ proba = false }: { proba?: boolean }) {
           </div>
 
           <div className="mech-card rounded-2xl border border-white/10 bg-neutral-900/30 p-8 flex flex-col justify-between">
-            {proba ? <BorderRun radius={15.5} delay={0.45} /> : null}
             <div>
-              {proba ? <ProbaTag>Proba C · doar contur</ProbaTag> : null}
               <div className="font-mono text-xs text-neutral-500 mb-6">/ 02 — CONECTĂM</div>
-              <h3 className="text-xl font-medium text-white mb-3">Fluxuri de Vânzare</h3>
+              <h3 className="text-xl font-medium text-white mb-3"><Linie>Fluxuri de Vânzare</Linie></h3>
               <p className="text-xs text-neutral-400 leading-relaxed font-light">
                 Integrăm canalele de achiziție, cataloagele de produse, sistemele de plăți cu cardul, facturarea automată și livrarea prin curieri într-un mecanism continuu.
               </p>
@@ -355,11 +356,9 @@ export default function HomePage({ proba = false }: { proba?: boolean }) {
           </div>
 
           <div className="mech-card rounded-2xl border border-white/10 bg-neutral-900/30 p-8 flex flex-col justify-between">
-            {proba ? <BorderRun radius={15.5} delay={0.9} /> : null}
             <div>
-              {proba ? <ProbaTag>Proba D · titlu + contur</ProbaTag> : null}
               <div className="font-mono text-xs text-neutral-500 mb-6">/ 03 — AUTOMATIZĂM</div>
-              <h3 className="text-xl font-medium text-white mb-3">{linie("Capabilități AI", "text-neutral-400")}</h3>
+              <h3 className="text-xl font-medium text-white mb-3"><Linie>Capabilități AI</Linie></h3>
               <p className="text-xs text-neutral-400 leading-relaxed font-light">
                 Generare de conținut video și imagini pentru rețele sociale prin modele AI generative, plus optimizare nativă pentru motoarele de răspuns AI.
               </p>
@@ -370,11 +369,9 @@ export default function HomePage({ proba = false }: { proba?: boolean }) {
           </div>
 
           <div className="mech-card rounded-2xl border border-white/10 bg-neutral-900/30 p-8 flex flex-col justify-between">
-            {proba ? <BorderRun radius={15.5} delay={1.35} /> : null}
             <div>
-              {proba ? <ProbaTag>Proba D · titlu + contur</ProbaTag> : null}
               <div className="font-mono text-xs text-neutral-500 mb-6">/ 04 — SCALĂM</div>
-              <h3 className="text-xl font-medium text-white mb-3">{linie("Creștere Măsurabilă", "text-neutral-400")}</h3>
+              <h3 className="text-xl font-medium text-white mb-3"><Linie>Creștere Măsurabilă</Linie></h3>
               <p className="text-xs text-neutral-400 leading-relaxed font-light">
                 Date transparente, monitorizarea directă a cererilor și optimizare continuă. Afacerea ta deține controlul complet asupra propriilor date și active.
               </p>
@@ -394,7 +391,7 @@ export default function HomePage({ proba = false }: { proba?: boolean }) {
           <div>
             <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-3">Ecosistemul Tehnic Reverb</div>
             <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
-              Sisteme active în producție.
+              <Linie>Sisteme active în producție.</Linie>
             </h2>
           </div>
           <p className="text-xs font-mono text-neutral-500 max-w-xs text-left md:text-right">
@@ -479,7 +476,7 @@ export default function HomePage({ proba = false }: { proba?: boolean }) {
               Investiție Fermă & Predictibilă
             </div>
             <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
-              Prețuri fixe. Fără surprize.
+              <Linie>Prețuri fixe. Fără surprize.</Linie>
             </h2>
           </div>
           <p className="max-w-md text-xs md:text-sm text-neutral-400 font-light leading-relaxed">
@@ -496,7 +493,7 @@ export default function HomePage({ proba = false }: { proba?: boolean }) {
               <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500 mb-4">
                 01 / Tracțiune Vizuală
               </div>
-              <h3 className="text-2xl font-light text-white mb-2">Social Growth</h3>
+              <h3 className="text-2xl font-light text-white mb-2"><Linie>Social Growth</Linie></h3>
               <div className="text-4xl font-light text-white tracking-tight mb-4">
                 {pretSocial.amount} <span className="text-xs font-mono text-neutral-500">{pretSocial.period}</span>
               </div>
@@ -544,7 +541,7 @@ export default function HomePage({ proba = false }: { proba?: boolean }) {
                   Recomandat
                 </span>
               </div>
-              <h3 className="text-2xl font-light text-white mb-2">Daily Impact</h3>
+              <h3 className="text-2xl font-light text-white mb-2"><Linie>Daily Impact</Linie></h3>
               <div className="text-4xl font-light text-white tracking-tight mb-4">
                 {pretDaily.amount} <span className="text-xs font-mono text-neutral-400">{pretDaily.period}</span>
               </div>
@@ -587,7 +584,7 @@ export default function HomePage({ proba = false }: { proba?: boolean }) {
               <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500 mb-4">
                 03 / Web și E-Commerce
               </div>
-              <h3 className="text-2xl font-light text-white mb-2">Site sau Magazin Online</h3>
+              <h3 className="text-2xl font-light text-white mb-2"><Linie>Site sau Magazin Online</Linie></h3>
               <div className="text-4xl font-light text-white tracking-tight mb-4">
                 <span className="text-xs font-mono text-neutral-500">de la</span> {siteStart.price}
               </div>

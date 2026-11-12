@@ -4,6 +4,7 @@ import Reveal from "@/components/Reveal";
 import PageBackdrop from "@/components/PageBackdrop";
 import { packagesEn, enPrice, enDelivery, VAT_LABEL_EN } from "@/lib/packagesEn";
 import { pkg as registryPkg, priceLei } from "@/lib/packages";
+import { Linie } from "@/components/RunningLine";
 
 // The starter package's price, term and list come from the registry (lib/packages.ts + lib/packagesEn.ts).
 const storeStart = packagesEn["magazin-start"];
@@ -120,7 +121,7 @@ export default function OnlineStorePage() {
             </Reveal>
             <Reveal delay={80}>
               <h1 className="mt-4 text-5xl font-medium leading-[0.94] tracking-[-0.04em] md:text-6xl lg:text-[72px]">
-                An online store built to sell.
+                <Linie>An online store built to sell.</Linie>
               </h1>
             </Reveal>
             <Reveal delay={160}>
@@ -183,7 +184,7 @@ export default function OnlineStorePage() {
             <div className="mb-12">
               <div className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-400">Who it&apos;s for</div>
               <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
-                For companies that want to sell online seriously.
+                <Linie>For companies that want to sell online seriously.</Linie>
               </h2>
             </div>
           </Reveal>
@@ -219,7 +220,7 @@ export default function OnlineStorePage() {
           <div className="mb-12">
             <div className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-400">Multi-platform</div>
             <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
-              The right platform, not the trending one.
+              <Linie>The right platform, not the trending one.</Linie>
             </h2>
             <p className="mt-4 max-w-2xl text-base leading-7 text-neutral-400">
               We don&apos;t force a technology. We choose based on catalogue, budget, administration and scaling.
@@ -244,7 +245,7 @@ export default function OnlineStorePage() {
             <div className="mb-12">
               <div className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-400">What we build</div>
               <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
-                A complete online store with conversion structure.
+                <Linie>A complete online store with conversion structure.</Linie>
               </h2>
             </div>
           </Reveal>
@@ -284,7 +285,7 @@ export default function OnlineStorePage() {
           <div className="mb-12">
             <div className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-400">Transparent pricing</div>
             <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
-              The starting point is clear.
+              <Linie>The starting point is clear.</Linie>
             </h2>
           </div>
         </Reveal>
@@ -358,7 +359,7 @@ export default function OnlineStorePage() {
             <div className="mb-12">
               <div className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-400">Process</div>
               <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
-                Clear 4-step process.
+                <Linie>Clear 4-step process.</Linie>
               </h2>
               <p className="mt-4 max-w-2xl text-base leading-7 text-neutral-400">
                 Structured, predictable, delivery-oriented.
@@ -382,7 +383,7 @@ export default function OnlineStorePage() {
                       <div className="text-4xl font-medium tracking-[-0.04em] text-neutral-500">{s.num}</div>
                       <div className="rounded-full border border-white/10 px-3 py-1 text-xs text-neutral-400">{s.duration}</div>
                     </div>
-                    <h3 className="mt-4 text-xl font-medium text-white">{s.title}</h3>
+                    <h3 className="mt-4 text-xl font-medium text-white"><Linie>{s.title}</Linie></h3>
                     <p className="mt-3 text-[15px] leading-7 text-neutral-300">{s.text}</p>
                   </div>
                 </div>
@@ -399,7 +400,7 @@ export default function OnlineStorePage() {
             <div className="text-center">
               <div className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-400">FAQ</div>
               <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
-                Frequently asked questions
+                <Linie>Frequently asked questions</Linie>
               </h2>
             </div>
           </Reveal>
@@ -432,7 +433,7 @@ export default function OnlineStorePage() {
           <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8 text-white md:p-12 lg:p-16">
             <div className="mx-auto max-w-3xl text-center">
               <h2 className="text-3xl font-medium leading-tight tracking-[-0.03em] md:text-5xl">
-                Want an online store that can be scaled and optimised?
+                <Linie>Want an online store that can be scaled and optimised?</Linie>
               </h2>
               <p className="mt-6 text-lg leading-8 text-neutral-300">
                 Tell us what you sell and how you deliver. We&apos;ll recommend the right platform and launch steps.

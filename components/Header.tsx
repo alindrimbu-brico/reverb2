@@ -166,6 +166,7 @@ export default function Header() {
       <Link
         href={inEnglish ? "/en/showcase" : "/showcase"}
         data-reverb-back
+        data-keep-pills
         className="mech-magnetic fixed left-4 bottom-4 z-[70] inline-flex items-center gap-2 rounded-full border border-white/25 bg-[#111215]/90 px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.18em] text-[#ffffff] shadow-[0_8px_24px_rgba(0,0,0,0.35)] backdrop-blur-md transition-colors hover:bg-black"
       >
         <span aria-hidden="true">←</span>
@@ -176,7 +177,9 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex flex-col items-center px-3 sm:px-4 pt-3 sm:pt-4 pointer-events-none">
-      <div 
+      {/* data-keep-pills: bara și tot ce e în ea rămân capsule (regula „Pastile cu colț” din globals.css e pentru carduri și casete). */}
+      <div
+        data-keep-pills
         className={`w-full max-w-6xl rounded-full border bg-white/90 dark:bg-[#23262b]/90 backdrop-blur-md px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between pointer-events-auto transition-all duration-500 shadow-sm ${
           scrolled 
             ? "border-black/10 dark:border-white/15 shadow-[0_12px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] py-2 sm:py-2.5 max-w-5xl" 

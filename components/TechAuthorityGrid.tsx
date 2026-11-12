@@ -2,6 +2,7 @@
 
 import React from "react";
 import Reveal from "@/components/Reveal";
+import { Linie } from "@/components/RunningLine";
 
 interface TechAuthorityGridProps {
   lang?: "ro" | "en";
@@ -119,7 +120,7 @@ export default function TechAuthorityGrid({ lang = "ro" }: TechAuthorityGridProp
             <span>{t.badge}</span>
           </div>
           <h2 className="text-2xl sm:text-4xl md:text-[38px] font-light text-white dark:text-white light:text-neutral-900 tracking-tight leading-snug">
-            {t.heading}
+            <Linie>{t.heading}</Linie>
           </h2>
         </div>
       </Reveal>
@@ -178,10 +179,10 @@ export default function TechAuthorityGrid({ lang = "ro" }: TechAuthorityGridProp
       <Reveal delay={200}>
         <div className="text-center mt-16 sm:mt-24">
           <h3 className="text-3xl sm:text-5xl md:text-6xl font-light text-white dark:text-white light:text-neutral-900 tracking-tight leading-[1.15]">
-            {t.tagline1}
+            <Linie>{t.tagline1}</Linie>
             <br />
             <span className="text-neutral-400 font-normal">
-              {t.tagline2}
+              <Linie>{t.tagline2}</Linie>
             </span>
           </h3>
         </div>

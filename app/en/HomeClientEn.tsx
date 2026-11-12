@@ -3,10 +3,10 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import TechAuthorityGrid from "@/components/TechAuthorityGrid";
-import { OutlineRun } from "@/components/RunningLine";
+import { OutlineRun, Linie } from "@/components/RunningLine";
 import { heroEn } from "@/lib/outlineRun/heroEn";
 import ProjectPreviewModal, { PreviewProject } from "@/components/ProjectPreviewModal";
-import { liveProjectsEn } from "@/lib/liveProjects";
+import { inProduction, liveProjectsEn } from "@/lib/liveProjects";
 import { pkg, priceEn, splitPrice, noBreak } from "@/lib/packages";
 import { packagesEn, enPrice, enDelivery, VAT_NOTE_EN } from "@/lib/packagesEn";
 
@@ -199,7 +199,7 @@ export default function EnglishHomePage() {
               <div className="text-[10px] uppercase tracking-wider text-neutral-500">Generative Search Structure</div>
             </div>
             <div>
-              <div className="text-2xl font-light text-white mb-1">15 Active</div>
+              <div className="text-2xl font-light text-white mb-1">{inProduction(realProjects)} Active</div>
               <div className="text-[10px] uppercase tracking-wider text-neutral-500">Live Production Systems</div>
             </div>
             <div>
@@ -220,8 +220,8 @@ export default function EnglishHomePage() {
               <span>● The New Search Paradigm</span>
             </div>
             <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight leading-tight">
-              In 2026, clients no longer just search Google.<br />
-              <span className="text-neutral-400">They query AI agents.</span>
+              <Linie>In 2026, clients no longer just search Google.</Linie><br />
+              <span className="text-neutral-400"><Linie>They query AI agents.</Linie></span>
             </h2>
             <p className="mt-5 text-sm md:text-base text-neutral-300 leading-relaxed font-light">
               Traditional SEO was designed for search algorithms that index keywords. Large Language Models (ChatGPT, Perplexity, Claude, Gemini) operate differently: they synthesize answers, compare pricing matrices, and evaluate brand authority. If your digital infrastructure is not structured semantically, AI agents will cite your competitors instead.
@@ -278,10 +278,10 @@ export default function EnglishHomePage() {
               Portfolio & Ecosystem
             </div>
             <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
-              Live Production Systems
+              <Linie>Live Production Systems</Linie>
             </h2>
             <p className="mt-4 text-sm text-neutral-400 font-light max-w-xl">
-              15 active platforms engineered, hosted, and monitored in real time across Cloudflare, Vercel, and Hostinger. Real operations, real revenue.
+              {inProduction(realProjects)} active platforms engineered, hosted, and monitored in real time across Cloudflare, Vercel, and Hostinger. Real operations, real revenue.
             </p>
           </div>
 
@@ -362,7 +362,7 @@ export default function EnglishHomePage() {
             Operating Model
           </div>
           <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
-            Engineering discipline. Zero chaos.
+            <Linie>Engineering discipline. Zero chaos.</Linie>
           </h2>
           <p className="mt-4 text-sm text-neutral-400 font-light leading-relaxed">
             Every engagement follows a 4-stage operational blueprint designed to deliver measurable commercial returns.
@@ -415,7 +415,7 @@ export default function EnglishHomePage() {
               Predictable Investment
             </div>
             <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
-              Fixed Pricing. Full Transparency.
+              <Linie>Fixed Pricing. Full Transparency.</Linie>
             </h2>
           </div>
           <p className="max-w-md text-xs md:text-sm text-neutral-400 font-light leading-relaxed">
@@ -432,7 +432,7 @@ export default function EnglishHomePage() {
               <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500 mb-4">
                 01 / Visual Traction
               </div>
-              <h3 className="text-2xl font-light text-white mb-2">Social Growth</h3>
+              <h3 className="text-2xl font-light text-white mb-2"><Linie>Social Growth</Linie></h3>
               <div className="text-4xl font-light text-white tracking-tight mb-4">
                 {priceSocial.amount} <span className="text-xs font-mono text-neutral-500">{priceSocial.period}</span>
               </div>
@@ -480,7 +480,7 @@ export default function EnglishHomePage() {
                   Recommended
                 </span>
               </div>
-              <h3 className="text-2xl font-light text-white mb-2">Daily Impact</h3>
+              <h3 className="text-2xl font-light text-white mb-2"><Linie>Daily Impact</Linie></h3>
               <div className="text-4xl font-light text-white tracking-tight mb-4">
                 {priceDaily.amount} <span className="text-xs font-mono text-neutral-400">{priceDaily.period}</span>
               </div>
@@ -523,7 +523,7 @@ export default function EnglishHomePage() {
               <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500 mb-4">
                 03 / Web & E-Commerce
               </div>
-              <h3 className="text-2xl font-light text-white mb-2">Website or Online Store</h3>
+              <h3 className="text-2xl font-light text-white mb-2"><Linie>Website or Online Store</Linie></h3>
               <div className="text-4xl font-light text-white tracking-tight mb-4">
                 <span className="text-xs font-mono text-neutral-500">from</span> {enPrice("site-start")}
               </div>
@@ -568,7 +568,7 @@ export default function EnglishHomePage() {
       <section className="relative z-10 py-28 px-6 text-center max-w-4xl mx-auto">
         <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-4">Start Your Engagement</div>
         <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight mb-6">
-          Ready to engineer digital infrastructure that converts?
+          <Linie>Ready to engineer digital infrastructure that converts?</Linie>
         </h2>
         <p className="text-neutral-400 text-sm md:text-base leading-relaxed mb-10 max-w-2xl mx-auto font-light">
           We begin with a technical audit of your current stack and AI search indexation. Clear timelines, fixed costs, guaranteed delivery.

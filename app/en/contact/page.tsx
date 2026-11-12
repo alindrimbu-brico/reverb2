@@ -4,6 +4,7 @@ import ContactForm from "./ContactForm";
 import PageBackdrop from "@/components/PageBackdrop";
 import { packages } from "@/lib/packages";
 import { packagesEn, enPrice, VAT_NOTE_EN } from "@/lib/packagesEn";
+import { Linie } from "@/components/RunningLine";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/en/contact", languages: { ro: "/contact", en: "/en/contact", "x-default": "/contact" } },
@@ -25,7 +26,7 @@ export default function ContactPageEN() {
           </Reveal>
           <Reveal delay={80}>
             <h1 className="mt-4 max-w-3xl text-5xl font-medium leading-[0.94] tracking-[-0.04em] md:text-7xl lg:text-[80px]">
-              Let's talk about your business.
+              <Linie>Let's talk about your business.</Linie>
             </h1>
           </Reveal>
           <Reveal delay={160}>
@@ -43,7 +44,7 @@ export default function ContactPageEN() {
           <div className="space-y-8">
             <Reveal>
               <div className="card-hover rounded-3xl border border-white/10 bg-neutral-900/40 p-8">
-                <h2 className="text-2xl font-medium tracking-[-0.03em]">Schedule a Call</h2>
+                <h2 className="text-2xl font-medium tracking-[-0.03em]"><Linie>Schedule a Call</Linie></h2>
                 <p className="mt-4 text-[15px] leading-7 text-neutral-300">
                   20–30 minutes is enough for us to understand your situation and propose a concrete plan. If there's no good fit, we'll tell you directly.
                 </p>

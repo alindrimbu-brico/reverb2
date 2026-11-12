@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import WhoWeAre from "@/components/WhoWeAre";
-import { BorderRun } from "@/components/RunningLine";
+import { Linie } from "@/components/RunningLine";
 import { packages, priceLei } from "@/lib/packages";
 import { packagesEn, enPrice, enDelivery, VAT_LABEL_EN } from "@/lib/packagesEn";
 import { liveProjectsEn } from "@/lib/liveProjects";
@@ -119,7 +119,6 @@ export default function PackagesPageEN() {
                         : "bg-[#0c0d0e]/80 border-white/10 hover:border-white/20"
                     }`}
                   >
-                    <BorderRun radius={15.5} delay={idx * 0.58} />
                     <div>
                       {details.badge && (
                         <div className="mb-4">
@@ -139,7 +138,7 @@ export default function PackagesPageEN() {
                       </div>
 
                       <h3 className="text-xl font-medium text-white mb-2">
-                        {details.name}
+                        <Linie>{details.name}</Linie>
                       </h3>
 
                       <p className="text-xs font-mono text-neutral-400 uppercase tracking-wider mb-4">
@@ -225,7 +224,6 @@ export default function PackagesPageEN() {
                         : "bg-[#0c0d0e]/80 border-white/10 hover:border-white/20"
                     }`}
                   >
-                    {pkg.highlight ? <BorderRun radius={15.5} /> : null}
                     <div>
                       {details.badge && (
                         <div className="mb-4">
@@ -245,7 +243,7 @@ export default function PackagesPageEN() {
                       </div>
 
                       <h3 className="text-xl font-medium text-white mb-2">
-                        {details.name}
+                        <Linie>{details.name}</Linie>
                       </h3>
 
                       <p className="text-xs font-mono text-neutral-400 uppercase tracking-wider mb-4">
