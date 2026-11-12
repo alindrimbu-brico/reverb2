@@ -15,6 +15,8 @@ export const company = {
   tel: "tel:+40767235693",
   whatsapp: "https://wa.me/40767235693",
   email: "contact@reverb.ro",
+  /** Căsuța din care pleacă ofertele și răspunsurile scrise de mână (Alin, 12 nov 2026). */
+  offersEmail: "reverb@reverb.ro",
   site: "https://reverb.ro",
   siteLabel: "reverb.ro",
 } as const;

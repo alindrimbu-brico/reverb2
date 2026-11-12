@@ -66,7 +66,7 @@ function build(t: string, lang: "ro" | "en", ostil: boolean, assetBase: string):
             note: "If the offer suits you, reply to this e-mail and we send the contract.",
             button: { label: "See the package", href: `${company.site}/en/packages#web` },
             signatureName: "Reverb Digital team",
-            signatureRole: company.email,
+            signatureRole: company.offersEmail,
             assetBase,
           })
         : letter({
@@ -86,7 +86,7 @@ function build(t: string, lang: "ro" | "en", ostil: boolean, assetBase: string):
             note: "Dacă oferta ți se potrivește, răspunde la acest e-mail și îți trimitem contractul.",
             button: { label: "Vezi pachetul", href: `${company.site}/pachete#web` },
             signatureName: "Echipa Reverb Digital",
-            signatureRole: company.email,
+            signatureRole: company.offersEmail,
             assetBase,
           });
     }
