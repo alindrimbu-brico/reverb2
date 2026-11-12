@@ -52,6 +52,28 @@ function acumCat(iso?: string | null): string {
   return `acum ${Math.round(m / 1440)} zile`;
 }
 
+// rutina studio-publica rulează la :00 și :30, între 07:00 și 22:30
+function urmatoareaRulare(): string {
+  const d = new Date();
+  d.setSeconds(0, 0);
+  d.setMinutes(d.getMinutes() < 30 ? 30 : 60);
+  if (d.getHours() < 7) d.setHours(7, 0);
+  if (d.getHours() > 22) {
+    d.setDate(d.getDate() + 1);
+    d.setHours(7, 0);
+    return "07:00 mâine";
+  }
+  return d.toLocaleTimeString("ro-RO", { hour: "2-digit", minute: "2-digit" });
+}
+
+const NUME_COMANDA: Record<string, string> = {
+  post_publica: "Aprobarea de publicare",
+  post_refa: "Cererea de refacere",
+  post_text: "Textul schimbat",
+  post_reincearca: "Reîncercarea",
+  post_respinge: "Respingerea",
+};
+
 function mediaUrl(f: string) {
   return `/api/studio/muzica?op=media&f=${encodeURIComponent(f)}`;
 }
@@ -69,6 +91,10 @@ export default function PostariTab({ onNeautentificat }: { onNeautentificat: () 
   const [inAsteptare, setInAsteptare] = useState<{ id: string; marca: string; ideea: string; la: number }[]>([]);
   const [texteEditate, setTexteEditate] = useState<Record<string, string>>({});
   const [observatii, setObservatii] = useState<Record<string, string>>({});
+  // comenzile plecate din Studio și încă nepreluate de laptop: confirmarea stă lângă buton până se schimbă postarea
+  const [trimise, setTrimise] = useState<Record<string, { actiune: string; la: number; ref: string }>>({});
+  const [, setTic] = useState(0);
+  const asteaptaLaptop = Object.keys(trimise).length > 0;
 
   const incarca = useCallback(async () => {
     try {
@@ -87,9 +113,16 @@ export default function PostariTab({ onNeautentificat }: { onNeautentificat: () 
     incarca();
     const t = setInterval(() => {
       if (document.visibilityState === "visible") incarca();
-    }, 12000);
+    }, asteaptaLaptop ? 5000 : 12000);
     return () => clearInterval(t);
-  }, [incarca]);
+  }, [incarca, asteaptaLaptop]);
+
+  useEffect(() => {
+    // cât timp o comandă așteaptă laptopul, numărătoarea de lângă buton se împrospătează
+    if (!asteaptaLaptop) return;
+    const t = setInterval(() => setTic((n) => n + 1), 10000);
+    return () => clearInterval(t);
+  }, [asteaptaLaptop]);
 
   const og = stare?.stare?.postari;
   const marci = useMemo(() => og?.marci || [], [og]);
@@ -114,6 +147,14 @@ export default function PostariTab({ onNeautentificat }: { onNeautentificat: () 
     setInAsteptare((l) => l.filter((x) => !postari.some((p) => p.id === x.id)));
   }, [postari]);
 
+  useEffect(() => {
+    // confirmarea dispare când laptopul a atins postarea (starea sau ora ei s-a schimbat)
+    setTrimise((t) => {
+      const ramase = Object.fromEntries(Object.entries(t).filter(([id, x]) => postari.find((p) => p.id === id)?.actualizat_la === x.ref));
+      return Object.keys(ramase).length === Object.keys(t).length ? t : ramase;
+    });
+  }, [postari]);
+
   async function comanda(actiune: string, piesa: string, date: Record<string, unknown> = {}): Promise<{ ok: boolean; piesa?: string; mesaj?: string }> {
     const cheie = `${actiune}:${piesa}`;
     setTrimit((t) => ({ ...t, [cheie]: true }));
@@ -128,7 +169,13 @@ export default function PostariTab({ onNeautentificat }: { onNeautentificat: () 
         return { ok: false };
       }
       const d = await r.json();
-      setMesaje((m) => ({ ...m, [piesa]: d.ok ? (laptopViu ? "Trimis. Laptopul o preia în cel mult un minut." : "Trimis. Pornește când deschizi laptopul.") : `Nu s-a trimis: ${d.mesaj || "eroare"}` }));
+      const existenta = postari.find((p) => p.id === piesa);
+      if (d.ok && existenta) {
+        setTrimise((t) => ({ ...t, [piesa]: { actiune, la: Date.now(), ref: existenta.actualizat_la || "" } }));
+        setMesaje((m) => ({ ...m, [piesa]: "" }));
+      } else {
+        setMesaje((m) => ({ ...m, [piesa]: d.ok ? "" : `Nu s-a trimis: ${d.mesaj || "eroare"}` }));
+      }
       return d;
     } catch {
       setMesaje((m) => ({ ...m, [piesa]: "Nu s-a trimis: fără conexiune." }));
@@ -284,7 +331,7 @@ export default function PostariTab({ onNeautentificat }: { onNeautentificat: () 
           <div key={x.id} className="rounded-3xl border border-white/10 bg-neutral-900/40 p-5 text-xs text-neutral-300">
             <div className="flex items-center gap-2 font-bold text-neutral-200">
               <span className="h-1.5 w-1.5 rounded-full bg-neutral-400 animate-pulse" />
-              {x.marca}: trimisă, {laptopViu ? "laptopul o preia în cel mult un minut" : "așteaptă deschiderea laptopului"}
+              {x.marca}: trimisă, {laptopViu ? "laptopul o preia în 1–3 minute, apoi lucrează cam un minut" : "așteaptă deschiderea laptopului"}
             </div>
             <div className="mt-1 text-neutral-400">„{x.ideea.slice(0, 160)}”</div>
           </div>
@@ -296,7 +343,9 @@ export default function PostariTab({ onNeautentificat }: { onNeautentificat: () 
           const [eticheta, clasa] = ETICHETE[p.stare] || [p.stare, "border border-white/10 text-neutral-400"];
           const numeMarca = marci.find((m) => m.id === p.marca)?.nume || p.marca;
           const formate = Array.from(new Set(Object.values(p.format_retea || {})));
-          const blocat = Boolean(p.lucru);
+          const tr = trimise[p.id];
+          const blocat = Boolean(p.lucru) || Boolean(tr);
+          const minTr = tr ? (Date.now() - tr.la) / 60000 : 0;
           return (
             <article key={p.id} className="rounded-3xl border border-white/10 bg-neutral-900/40 p-5 md:p-6">
               <div className="flex flex-wrap items-start justify-between gap-3">
@@ -317,7 +366,6 @@ export default function PostariTab({ onNeautentificat }: { onNeautentificat: () 
                 </div>
               )}
               {p.eroare && <div className="mt-4 rounded-xl border border-rose-400/30 p-3 text-xs text-rose-300">Eroare: {p.eroare}</div>}
-              {mesaje[p.id] && <div className="mt-3 text-xs text-neutral-400">{mesaje[p.id]}</div>}
 
               {p.texte && (
                 <div className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,320px)_1fr]">
@@ -429,7 +477,12 @@ export default function PostariTab({ onNeautentificat }: { onNeautentificat: () 
                     )}
                   </>
                 )}
-                {p.stare === "aprobata" && <span className="text-xs text-neutral-400">Aprobată {acumCat(p.actualizat_la)}. Rutina de publicare o ia la următoarea rulare și o programează pe rețele.</span>}
+                {p.stare === "aprobata" && (
+                  <span className="text-xs text-neutral-200">
+                    Aprobată {acumCat(p.actualizat_la)}. Rutina de publicare o ia la {urmatoareaRulare()} și o programează pe rețele; primești mesaj pe Telegram.
+                    {!rutinaVie && " Atenție: rutina n-a rulat de curând, deci publică doar cu Claude Desktop pornit pe laptop."}
+                  </span>
+                )}
                 {!["publicata", "respinsa"].includes(p.stare) && (
                   <button
                     onClick={() => {
@@ -442,6 +495,29 @@ export default function PostariTab({ onNeautentificat }: { onNeautentificat: () 
                   </button>
                 )}
               </div>
+
+              {tr && (
+                <div role="status" className="mt-4 flex items-start gap-3 rounded-xl border border-white/25 bg-white/5 p-4 text-sm text-white">
+                  <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-white animate-pulse" />
+                  <div>
+                    <div className="font-medium">
+                      {NUME_COMANDA[tr.actiune] || "Comanda"} a plecat la {new Date(tr.la).toLocaleTimeString("ro-RO", { hour: "2-digit", minute: "2-digit" })}.
+                    </div>
+                    <div className="mt-1 text-xs text-neutral-300">
+                      {!laptopViu
+                        ? "Laptopul nu răspunde acum. Comanda rămâne în coadă și pornește când îl deschizi."
+                        : minTr < 4
+                          ? "Aștept laptopul să o preia. Durează de obicei 1–3 minute; pagina se schimbă singură."
+                          : `Au trecut ${Math.round(minTr)} minute și laptopul n-a preluat-o încă. Nu apăsa din nou: comanda e în coadă.`}
+                    </div>
+                  </div>
+                </div>
+              )}
+              {mesaje[p.id] && (
+                <div role="alert" className="mt-4 rounded-xl border border-rose-400/40 p-4 text-sm text-rose-300">
+                  {mesaje[p.id]}
+                </div>
+              )}
 
               {p.istoric && p.istoric.length > 0 && (
                 <details className="mt-4 text-[11px] text-neutral-500">
