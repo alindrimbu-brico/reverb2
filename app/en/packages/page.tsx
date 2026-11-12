@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import WhoWeAre from "@/components/WhoWeAre";
-import { packages } from "@/lib/packages";
+import { packages, priceLei } from "@/lib/packages";
 import { packagesEn, enPrice, enDelivery, VAT_LABEL_EN } from "@/lib/packagesEn";
 import { liveProjectsEn } from "@/lib/liveProjects";
 
@@ -130,6 +130,7 @@ export default function PackagesPageEN() {
                       <div className="text-2xl sm:text-3xl font-mono text-white mb-2 font-light">
                         {enPrice(pkg.id)} <span className="text-sm text-neutral-300">{VAT_LABEL_EN}</span>
                       </div>
+                      <div className="mb-3 text-xs text-neutral-400">{priceLei(pkg.price, "en")}</div>
 
                       <div className="text-xs font-mono text-neutral-400 mb-4 pb-4 border-b border-white/10">
                         {enDelivery(pkg.id)}
@@ -234,6 +235,7 @@ export default function PackagesPageEN() {
                       <div className="text-2xl sm:text-3xl font-mono text-white mb-2 font-light">
                         {enPrice(pkg.id)} <span className="text-sm text-neutral-300">{VAT_LABEL_EN}</span>
                       </div>
+                      <div className="mb-3 text-xs text-neutral-400">{priceLei(pkg.price, "en")}</div>
 
                       <div className="text-xs font-mono text-neutral-400 mb-4 pb-4 border-b border-white/10">
                         {enDelivery(pkg.id)}

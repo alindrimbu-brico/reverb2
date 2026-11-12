@@ -36,6 +36,26 @@ export type Package = {
 export const VAT_LABEL = "+ TVA"; // spațiu care nu se rupe: eticheta rămâne întreagă pe un rând
 export const VAT_NOTE = "Prețurile nu includ TVA.";
 
+/** Cota de TVA și cursul pentru rândul „aproximativ … lei cu TVA” de sub prețuri.
+ *  Cursul e orientativ (BCE, 11 nov 2026: 1 € = 5,3451 lei); se actualizează aici, într-un singur loc. */
+export const VAT_RATE = 0.21;
+export const EUR_RON = 5.3451;
+
+/** „€267” → „aproximativ 1.730 lei cu TVA”; „€330 / lună” → „… / lună”; „de la €3.315” → „de la aproximativ …”.
+ *  Rotunjit la 10 lei. Pentru engleză: separator de mii cu virgulă și textul în engleză. */
+export function priceLei(price: string, lang: "ro" | "en" = "ro"): string {
+  const m = price.match(/€\s*([\d.]+)/);
+  if (!m) return "";
+  const eur = Number(m[1].replace(/\./g, ""));
+  const lei = Math.round((eur * (1 + VAT_RATE) * EUR_RON) / 10) * 10;
+  const n = String(lei).replace(/\B(?=(\d{3})+(?!\d))/g, lang === "en" ? "," : ".");
+  const from = /^de la/i.test(price);
+  const monthly = price.includes("/ lună");
+  return lang === "en"
+    ? `${from ? "from " : ""}approx. ${n} lei incl. VAT${monthly ? " / month" : ""}`
+    : `${from ? "de la " : ""}aproximativ ${n} lei cu TVA${monthly ? " / lună" : ""}`;
+}
+
 export const packages: Package[] = [
   {
     id: "social-growth",

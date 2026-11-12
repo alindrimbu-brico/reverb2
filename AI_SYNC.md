@@ -57,7 +57,7 @@ Cerută de Alin după observațiile lui Marius. Planul, reviziile și scripturil
 - **Pe Pachete, lucrările reale stau lângă prețuri, ca butoane** (trei nume din `lib/liveProjects.ts` + „Vezi toate lucrările”), iar sub ele scrie ce urmează după „Cere acest pachet”. Cerute de trei revizori fără context la rând.
 - **„Cine suntem” apare pe Pachete** (sus și la secțiunea de site-uri), prin `components/WhoWeAre.tsx`: firma, orașul, telefon, WhatsApp. E singura excepție de la regula „cine vinde, doar în footer” (decizia lui Alin, 12 nov). Datele sunt cele din `Footer.tsx`; se schimbă împreună.
 - **Sprijin după lansare:** cele patru pachete de site și magazin includ 30 de zile de sprijin (WhatsApp, telefon, întâlniri online sau la birou, în Focșani). Rândul e în registru; nu promiteți altceva în pagini.
-- **`/templates` (+EN, + `/templates/industrii`) scoasă pe 12 nov**, cu redirecționare spre `/showcase`. Fișierele statice din `public/templates/` au rămas (machete, noindex).
+- **`/templates` (+EN, + `/templates/industrii`) scoasă pe 12 nov**, cu redirecționare spre `/showcase`. Cele 5 machete statice din `public/templates/` au fost șterse tot atunci.
 - După ce ștergeți o rută, ștergeți și `.next/dev/types` înainte de `next build`: tipurile generate de serverul de dezvoltare țin minte ruta veche și build-ul cade cu „Type 'Route' does not satisfy the constraint 'LayoutRoutes'”.
 - Starea de indexare și ce spun modelele AI: `docs/designs/seo_indexare_2026-11-12/constatari.md`.
 

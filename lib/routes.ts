@@ -131,7 +131,6 @@ export const STATIC_MOCKUP_DIRS: string[] = [
   "noapte",
   "spiritual-site",
   "surya",
-  "templates",
 ];
 
 const LOCALE_PREFIX = /^\/(en|es|pt|ru|zh)(?=\/)/;

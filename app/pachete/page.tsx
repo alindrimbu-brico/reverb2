@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import WhoWeAre from "@/components/WhoWeAre";
-import { packages, VAT_LABEL } from "@/lib/packages";
+import { packages, priceLei, VAT_LABEL } from "@/lib/packages";
 import { liveProjectsRo } from "@/lib/liveProjects";
 
 // Trei lucrări reale arătate lângă prețuri; numele și adresele vin din lista unică de proiecte live.
@@ -129,7 +129,8 @@ export default function PachetePage() {
                     {pkg.delivery}
                   </div>
                   <h3 className="text-2xl font-medium text-white mb-2">{pkg.name}</h3>
-                  <div className="text-4xl font-light text-white mb-4">{pkg.price} <span className="text-sm font-mono text-neutral-300">{VAT_LABEL}</span></div>
+                  <div className="text-4xl font-light text-white mb-1">{pkg.price} <span className="text-sm font-mono text-neutral-300">{VAT_LABEL}</span></div>
+                  <div className="mb-4 text-xs text-neutral-400">{priceLei(pkg.price)}</div>
                   <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6 border-b border-white/10 pb-6">
                     {pkg.description}
                   </p>
@@ -219,7 +220,8 @@ export default function PachetePage() {
                     {pkg.delivery}
                   </div>
                   <h3 className="text-2xl font-medium text-white mb-2">{pkg.name}</h3>
-                  <div className="text-4xl font-light text-white mb-4">{pkg.price} <span className="text-sm font-mono text-neutral-300">{VAT_LABEL}</span></div>
+                  <div className="text-4xl font-light text-white mb-1">{pkg.price} <span className="text-sm font-mono text-neutral-300">{VAT_LABEL}</span></div>
+                  <div className="mb-4 text-xs text-neutral-400">{priceLei(pkg.price)}</div>
                   <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6 border-b border-white/10 pb-6">
                     {pkg.description}
                   </p>

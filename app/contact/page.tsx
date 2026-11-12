@@ -64,14 +64,14 @@ export default function ContactPage() {
                 <div className="space-y-4 text-xs font-mono">
                   <div className="flex items-center justify-between p-4 rounded-xl border border-white/5 bg-white/[0.02]">
                     <span className="text-neutral-500">TELEFON:</span>
-                    <a href="tel:0771389846" className="text-white hover:underline font-bold">
-                      0771 389 846
+                    <a href="tel:0767235693" className="text-white hover:underline font-bold">
+                      0767&nbsp;235&nbsp;693
                     </a>
                   </div>
                   <div className="flex items-center justify-between p-4 rounded-xl border border-white/5 bg-white/[0.02]">
                     <span className="text-neutral-500">WHATSAPP:</span>
                     <a
-                      href="https://wa.me/40771389846"
+                      href="https://wa.me/40767235693"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-emerald-400 hover:underline font-bold"

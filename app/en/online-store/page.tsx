@@ -3,6 +3,7 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import PageBackdrop from "@/components/PageBackdrop";
 import { packagesEn, enPrice, enDelivery, VAT_LABEL_EN } from "@/lib/packagesEn";
+import { pkg as registryPkg, priceLei } from "@/lib/packages";
 
 // The starter package's price, term and list come from the registry (lib/packages.ts + lib/packagesEn.ts).
 const storeStart = packagesEn["magazin-start"];
@@ -294,6 +295,7 @@ export default function OnlineStorePage() {
               <div className="text-sm font-medium text-neutral-400">Starter package, fixed price</div>
               <div className="mt-2 text-sm font-semibold text-white">{storeStart.name}</div>
               <div className="mt-4 text-4xl font-medium tracking-[-0.04em] text-white">{enPrice("magazin-start")} <span className="whitespace-nowrap text-sm font-normal tracking-normal text-neutral-500">{VAT_LABEL_EN}</span></div>
+              <div className="mt-1 text-sm text-neutral-400">{priceLei(registryPkg("magazin-start").price, "en")}</div>
               <div className="mt-2 text-sm text-neutral-400">Delivery: {enDelivery("magazin-start")}</div>
               <ul className="mt-6 space-y-3">
                 {storeStart.includes.map((f) => (

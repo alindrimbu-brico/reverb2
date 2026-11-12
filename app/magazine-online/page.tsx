@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import PageBackdrop from "@/components/PageBackdrop";
-import { pkg, VAT_LABEL } from "@/lib/packages";
+import { pkg, priceLei, VAT_LABEL } from "@/lib/packages";
 
 // Prețul, termenul și lista pachetului de pornire vin din registru (lib/packages.ts).
 const magazinStart = pkg("magazin-start");
@@ -294,6 +294,7 @@ export default function MagazineOnlinePage() {
               <div className="text-sm font-medium text-neutral-400">Pachet de pornire, preț fix</div>
               <div className="mt-2 text-sm font-semibold text-white">{magazinStart.name}</div>
               <div className="mt-4 text-4xl font-medium tracking-[-0.04em] text-white">{magazinStart.price} <span className="whitespace-nowrap text-sm font-normal tracking-normal text-neutral-500">{VAT_LABEL}</span></div>
+              <div className="mt-1 text-sm text-neutral-400">{priceLei(magazinStart.price)}</div>
               <div className="mt-2 text-sm text-neutral-400">Livrare: {magazinStart.delivery}</div>
               <ul className="mt-6 space-y-3">
                 {magazinStart.includes.map((f) => (
