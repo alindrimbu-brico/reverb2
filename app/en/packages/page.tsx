@@ -119,7 +119,7 @@ export default function PackagesPageEN() {
                         : "bg-[#0c0d0e]/80 border-white/10 hover:border-white/20"
                     }`}
                   >
-                    {pkg.highlight ? <BorderRun radius={15.5} /> : null}
+                    <BorderRun radius={15.5} delay={idx * 0.58} />
                     <div>
                       {details.badge && (
                         <div className="mb-4">

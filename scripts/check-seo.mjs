@@ -11,7 +11,7 @@ import path from "node:path";
 
 const base = (process.argv[2] ?? "http://localhost:3000").replace(/\/$/, "");
 const SITE_URL = "https://reverb.ro";
-const NOINDEX = ["/portal", "/en/portal", "/guru", "/instaleaza", "/studio"];
+const NOINDEX = ["/portal", "/en/portal", "/guru", "/instaleaza", "/studio", "/proba-linii"];
 const REDIRECTS = ["/showcase/xiaolong", "/en/showcase/xiaolong"];
 const SHOWCASE_INDEXABLE = ["florarte", "surya"];
 const MOCKUP_SAMPLES = [

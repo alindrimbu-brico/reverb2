@@ -119,7 +119,7 @@ export default function PachetePage() {
                     : "bg-neutral-900/30 border-white/10"
                 }`}
               >
-                {pkg.highlight ? <BorderRun radius={23.5} /> : null}
+                <BorderRun radius={23.5} delay={idx * 0.58} />
                 {pkg.badge && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-white px-4 py-1 text-[9px] font-mono font-bold uppercase tracking-widest text-black shadow-md">
                     {pkg.badge}

@@ -926,7 +926,7 @@ html.light .rounded-full.bg-white.text-black:not(:where([role="dialog"] *, [data
 }
 .rl-glyphs svg { overflow: visible; }
 .rl-glyphs path {
-  fill: none; stroke: currentColor; stroke-width: 28; stroke-linecap: round; stroke-linejoin: round;
+  fill: none; stroke: currentColor; stroke-width: var(--rl-sw, 28); stroke-linecap: round; stroke-linejoin: round;
   stroke-dasharray: 480 6520; animation: rl-glyphs 6s linear infinite;
 }
 @keyframes rl-glyphs { to { stroke-dashoffset: -7000; } }
@@ -942,6 +942,16 @@ html.light .rounded-full.bg-white.text-black:not(:where([role="dialog"] *, [data
 .rl-flow { position: absolute; inset: 0; animation: rl-line 5s linear infinite; }
 .rl-flow > span { position: absolute; right: 0; top: 0; height: 3px; width: 40px; border-radius: 2px; background: currentColor; }
 @keyframes rl-line { from { transform: translateX(-100%); } to { transform: translateX(44px); } }
+/* În afara ecranului benzile se opresc și se ascund (clasa o pune componenta). */
+.rl-off .rl-glyphs, .rl-border.rl-off { visibility: hidden; }
+.rl-off .rl-glyphs path, .rl-border.rl-off rect { animation-play-state: paused; }
+/* Verdele de probă al benzii: culoare fixă, fiindcă text-emerald-400 se închide în tema deschisă. */
+.rl-accent { color: #00d492; }
+/* Pagină tradusă automat de browser: contururile ar rămâne peste alte cuvinte. */
+html.translated-ltr .rl-glyphs, html.translated-rtl .rl-glyphs { display: none; }
 @media (prefers-reduced-motion: reduce) {
+  .rl-glyphs, .rl-border, .rl-flow { display: none; }
+}
+@media print {
   .rl-glyphs, .rl-border, .rl-flow { display: none; }
 }
