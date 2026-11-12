@@ -66,6 +66,54 @@ const WRAP = "word-break:break-word;overflow-wrap:anywhere;";
 const TABLE = 'role="presentation" cellpadding="0" cellspacing="0" border="0"';
 const LABEL = `${MONO}font-size:11px;line-height:18px;letter-spacing:0.16em;text-transform:uppercase;color:${theme.muted};`;
 
+// Outlook pe web și noul Outlook pentru Windows (același motor), în modul întunecat, rescriu culorile de FUNDAL:
+// negrul nostru #070809 și cardul ajungeau gri #565657, cu textul și chenarele neschimbate (măsurat pe captura
+// lui Alin, 12 nov 2026). Regulile de mai jos se potrivesc doar acolo: [data-ogsb] / [data-ogab] sunt atributele
+// pe care Outlook le pune când rescrie un fundal, iar x_ e prefixul pe care îl pune claselor. Ele repun culoarea
+// și o dublează cu o imagine de fundal plină, pe care Outlook nu o rescrie.
+// - Fiecare selector are regula lui: dacă filtrul Outlook aruncă una, celelalte rămân.
+// - Nu se pun necondiționat și nu se mută pe element (style=""): Gmail pe iPhone inversează textul, iar un fundal
+//   ținut negru cu forța l-ar face de necitit.
+// - Butonul alb devine acolo buton cu contur alb (fond de card, text alb): Outlook îi rescrie și fondul (alb → gri)
+//   și textul (închis → alb), iar un fond ținut alb sub un text rămas alb ar da un buton gol. Conturul iese la fel
+//   oricum ar rescrie Outlook, fără gri.
+function owa(target: string, decl: string): string {
+  const cut = target.indexOf(" ");
+  const cls = cut === -1 ? target : target.slice(0, cut);
+  const rest = cut === -1 ? "" : target.slice(cut + 1);
+  return [
+    `[data-ogsb] .${cls}`,
+    `.${cls}[data-ogsb]`,
+    `[data-ogab] .${cls}`,
+    `.${cls}[data-ogab]`,
+    `[class~="x_${cls}"]`,
+  ]
+    .map((s) => `${s}${rest ? ` ${rest}` : ""}{${decl}}`)
+    .join("");
+}
+
+function solid(color: string): string {
+  return `background-color:${color}!important;background-image:linear-gradient(${color},${color})!important;`;
+}
+
+/** `gridUrl` e adresa neescapată: într-un <style> entitățile HTML nu se decodează. O adresă cu alte caractere e sărită. */
+function owaStyles(gridUrl: string): string {
+  const gridOk = /^https?:\/\/[A-Za-z0-9.:/_-]+$/.test(gridUrl);
+  return (
+    owa("rv-body", solid(theme.bg)) +
+    owa("rv-bg", solid(theme.bg)) +
+    // A doua regulă readuce grila peste negrul plin; dacă Outlook o aruncă, rămâne prima (negru, fără grilă).
+    (gridOk
+      ? owa("rv-bg", `background-image:url('${gridUrl}'),linear-gradient(${theme.bg},${theme.bg})!important;`)
+      : "") +
+    owa("rv-cardbox", solid(theme.card)) +
+    owa("rv-panel", solid(theme.panel)) +
+    owa("rv-btn", solid(theme.card) + `border-color:${theme.buttonBg}!important;`) +
+    owa("rv-btn a", `color:${theme.title}!important;`) +
+    owa("rv-btn span", `color:${theme.title}!important;`)
+  );
+}
+
 function label(text: string): string {
   return `<div style="${LABEL}padding-bottom:10px;">${esc(text)}</div>`;
 }
@@ -97,7 +145,7 @@ function renderBlock(b: Block): string {
     case "quote":
       return (
         (b.label ? label(b.label) : "") +
-        `<table ${TABLE} width="100%" bgcolor="${theme.panel}" style="table-layout:fixed;background-color:${theme.panel};border:1px solid ${theme.border};border-radius:16px;border-collapse:separate;">` +
+        `<table ${TABLE} width="100%" class="rv-panel" bgcolor="${theme.panel}" style="table-layout:fixed;background-color:${theme.panel};border:1px solid ${theme.border};border-radius:16px;border-collapse:separate;">` +
         `<tr><td style="${SANS}font-size:15px;line-height:25px;color:${theme.strong};padding:18px 20px;${WRAP}">${multiline(b.text)}</td></tr></table>`
       );
     case "steps": {
@@ -136,7 +184,7 @@ function renderBlock(b: Block): string {
       if (!h) return "";
       const primary = b.variant !== "outline";
       const cell = primary
-        ? `bgcolor="${theme.buttonBg}" style="background-color:${theme.buttonBg};border:1px solid ${theme.buttonBg};border-radius:999px;"`
+        ? `class="rv-btn" bgcolor="${theme.buttonBg}" style="background-color:${theme.buttonBg};border:1px solid ${theme.buttonBg};border-radius:999px;"`
         : `style="border:1px solid ${theme.outline};border-radius:999px;"`;
       const color = primary ? theme.buttonText : theme.strong;
       // Spațiile <i> dau butonului înălțime și lățime în Outlook pe Windows, care ignoră padding-ul de pe <a>.
@@ -256,7 +304,7 @@ export function renderEmail(spec: EmailSpec): { html: string; text: string } {
     `</tr></table>`;
 
   const card =
-    `<table ${TABLE} width="100%" bgcolor="${theme.card}" style="background-color:${theme.card};border:1px solid ${theme.border};border-radius:24px;border-collapse:separate;">` +
+    `<table ${TABLE} width="100%" class="rv-cardbox" bgcolor="${theme.card}" style="background-color:${theme.card};border:1px solid ${theme.border};border-radius:24px;border-collapse:separate;">` +
     `<tr><td class="rv-card" style="padding:38px 34px 36px 34px;">` +
     `<table ${TABLE} width="100%" style="table-layout:fixed;">` +
     `<tr><td style="${LABEL}"><span style="font-size:8px;line-height:18px;color:${theme.title};vertical-align:middle;">&#9679;</span>&nbsp;&nbsp;${esc(spec.eyebrow)}</td></tr>` +
@@ -291,12 +339,13 @@ export function renderEmail(spec: EmailSpec): { html: string; text: string } {
     `.rv-card{padding:30px 22px 28px 22px!important;}` +
     `.rv-title{font-size:24px!important;line-height:31px!important;}` +
     `}` +
+    owaStyles(base + theme.grid) +
     `</style>` +
     `</head>` +
-    `<body style="margin:0;padding:0;background-color:${theme.bg};">` +
+    `<body class="rv-body" style="margin:0;padding:0;background-color:${theme.bg};">` +
     `<!--[if gte mso 9]><v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t"><v:fill type="tile" src="${grid}" color="${theme.bg}"/></v:background><![endif]-->` +
     preheader +
-    `<table ${TABLE} width="100%" bgcolor="${theme.bg}" background="${grid}" style="background-color:${theme.bg};background-image:url('${grid}');background-repeat:repeat;background-position:center top;">` +
+    `<table ${TABLE} width="100%" class="rv-bg" bgcolor="${theme.bg}" background="${grid}" style="background-color:${theme.bg};background-image:url('${grid}');background-repeat:repeat;background-position:center top;">` +
     `<tr><td align="center" class="rv-wrap" style="padding:0 20px 48px 20px;">` +
     `<!--[if mso]><table role="presentation" width="600" align="center" cellpadding="0" cellspacing="0" border="0"><tr><td><![endif]-->` +
     `<table ${TABLE} width="100%" style="max-width:600px;margin:0 auto;">` +
