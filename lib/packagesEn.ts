@@ -1,7 +1,9 @@
 // English texts for the packages in lib/packages.ts. Prices are NOT written here:
 // they come from the registry through priceEn(), so the two languages cannot drift apart.
+// Package texts are written for a reader who does not work in IT: no technology names
+// (Next.js, Payload, JSON-LD) and no abbreviations (GEO, A/B, SLA) in what the client sees.
 
-import { deliveryEn, pkg, priceEn, type PackageId } from "./packages";
+import { deliveryEn, packages, pkg, priceEn, type PackageId } from "./packages";
 
 export type PackageEn = {
   name: string;
@@ -15,53 +17,57 @@ export type PackageEn = {
   badge?: string;
 };
 
+/** All registry prices exclude VAT. The label sits next to a price, the note under a price list. */
+export const VAT_LABEL_EN = "+ VAT"; // non-breaking space: the label stays on one line
+export const VAT_NOTE_EN = "Prices exclude VAT.";
+
 export const packagesEn: Record<PackageId, PackageEn> = {
   "social-growth": {
     name: "Social Growth AI Video",
     shortName: "Social Growth (12 videos/mo)",
-    tagline: "Constant video presence and visual credibility across channels.",
+    tagline: "A steady video presence on social media.",
     delivery: "Weekly delivery",
-    description: "12 short-form videos and 12 product carousels generated with modern AI models, optimized for TikTok, Reels, and YouTube Shorts algorithms.",
+    description: "12 short videos and 12 product carousels a month, made with AI and built for TikTok, Reels and YouTube Shorts.",
     includes: [
-      "12 short-form videos monthly, 3 weekly cadence",
+      "12 short videos a month, 3 every week",
       "12 graphic posts and product carousels",
-      "Synchronized publishing across TikTok, Instagram, Facebook, Shorts",
-      "Direct conversion scripts and dynamic subtitles",
-      "Clear monthly visibility and reach reporting",
+      "Published on TikTok, Instagram, Facebook and YouTube Shorts",
+      "Sales scripts and on-screen subtitles",
+      "Monthly report: how many people saw your videos",
     ],
-    ideal: "Local businesses, clinics, and service firms seeking regular video presence without conventional shooting overhead.",
+    ideal: "Local businesses, clinics and service firms that want a regular video presence without the cost of a film crew.",
   },
   "daily-impact": {
     name: "Daily Impact 1 Video Daily",
     shortName: "Daily Impact (30 videos/mo)",
-    tagline: "Visual dominance through daily product video content.",
+    tagline: "A new video every day, with your products.",
     delivery: "Daily delivery",
-    description: "30 short-form video assets monthly, 1 published every day, plus 30 graphic posts. Real equipment and product demonstrations with synthetic voiceover.",
+    description: "30 short videos a month, one every day, plus 30 graphic posts. We show your equipment, products and services in action, with an AI-generated voice and fast editing.",
     includes: [
-      "30 short-form videos monthly, 1 video every single day",
-      "30 graphic assets tailored for each platform",
-      "Product and hardware demonstrations in action",
-      "High-fidelity neural synthetic voiceover",
-      "Conversion-focused sales hooks and direct call to action",
-      "Weekly content consulting and algorithm optimization",
+      "30 short videos a month, one every day",
+      "30 graphic posts adapted to each platform",
+      "Products and equipment shown in action",
+      "AI-generated presenter voice that sounds natural",
+      "Scripts written to sell",
+      "A weekly talk: what worked and what we change",
     ],
-    ideal: "Online stores, distributors, and brands seeking accelerated organic growth through sustained volume.",
+    ideal: "Online stores, distributors and brands that want faster growth through steady volume.",
     badge: "Most Requested",
   },
   "dominance-3x": {
     name: "Dominance 3X 3 Videos Daily",
     shortName: "Dominance 3X (90 videos/mo)",
-    tagline: "Aggressive scaling for maximum algorithm coverage.",
+    tagline: "Three videos a day, so your brand shows up everywhere.",
     delivery: "3 daily deliveries",
-    description: "90 short-form video assets monthly, 3 per day, for brands and retail companies wanting full saturation across feed algorithms.",
+    description: "90 short videos a month, 3 a day, for large brands and retailers that want to be seen daily by everyone interested in their field.",
     includes: [
-      "90 short-form videos monthly, 3 videos daily",
-      "Multi-account distribution across targeted campaigns",
-      "Systematic A/B angle testing for performance",
-      "Multilingual synthetic voiceover on request",
-      "24/7 dedicated priority support channel",
+      "90 short videos a month, 3 every day",
+      "Published on several accounts",
+      "We test several versions of the message and keep what sells",
+      "Voice in several languages, on request",
+      "Priority support, at any hour",
     ],
-    ideal: "Large retailers, national brands, and enterprises with deep product catalogs.",
+    ideal: "Large retailers, national brands and companies with large product catalogues.",
   },
   "site-start": {
     name: "Website Start",
@@ -74,6 +80,7 @@ export const packagesEn: Record<PackageId, PackageEn> = {
       "Contact form, WhatsApp and Google map",
       "Optimized for phones and for speed",
       "Texts and photos come from you; two rounds of changes included",
+      "Hosting included for the first year; then €60 / year, or you move it to your own hosting",
       "Published on your domain (the domain is paid separately)",
     ],
     ideal: "Small firms, practices and tradespeople who need a correct online presence quickly, on a small budget.",
@@ -81,17 +88,17 @@ export const packagesEn: Record<PackageId, PackageEn> = {
   "start-digital": {
     name: "Start Digital Web & Video",
     shortName: "Start Digital (website + 15 videos)",
-    tagline: "High-speed modern website powered by video from day one.",
-    description: "High-speed 3–5 page presentation platform built on Next.js, integrated with contact forms, Google Maps, WhatsApp, and 15 launch videos.",
+    tagline: "A fast, modern website backed by video from day one.",
+    description: "A very fast presentation website of 3–5 pages, with a design made only for you, contact form, Google map and WhatsApp, plus 15 launch videos.",
     includes: [
-      "Next.js high-speed web platform under 1.2s loading",
-      "Bespoke architectural layout, zero generic templates",
-      "Contact forms, WhatsApp direct, and Google Maps integrated",
-      "Full mobile responsiveness and adaptive typography",
-      "Semantic data structures ready for Google and AI Agents GEO",
-      "Launch package: 15 short-form videos included",
+      "A very fast website: it loads in under 1.2 seconds",
+      "Exclusive design, no templates",
+      "Contact form, WhatsApp and Google map",
+      "Looks good on phones too",
+      "Prepared to be found by Google and by AI assistants (ChatGPT, Gemini)",
+      "15 short videos for the launch",
     ],
-    ideal: "Service companies, medical practices, consultancies entering the digital space with authority.",
+    ideal: "Service companies, practices, consultants and workshops that are serious about going online.",
   },
   "magazin-start": {
     name: "Store Start",
@@ -109,35 +116,35 @@ export const packagesEn: Record<PackageId, PackageEn> = {
     ideal: "Local producers and small shops that want to start selling online without a large investment.",
   },
   "magazin-digital-activ": {
-    name: "Active Digital Store eCommerce & AI",
+    name: "Active Digital Store",
     shortName: "Active Digital Store (+ 30 videos)",
-    tagline: "Complete eCommerce platform engineered for conversion and AI search.",
-    description: "Full eCommerce infrastructure on WooCommerce or Next.js with Payload CMS, cognitive checkout, card payments, automated billing, and 30 launch videos.",
+    tagline: "A complete online store, built to sell and to be found by Google and by AI assistants.",
+    description: "A complete online store with card payments, automatic invoicing and courier labels, a panel where you manage products and orders yourself, plus 30 launch videos.",
     includes: [
-      "Turnkey online store setup with card payments and courier APIs",
-      "Enterprise Control Panel option via Payload CMS or WooCommerce",
-      "Automated invoicing plus instant courier AWB dispatch",
-      "Conversion-engineered product catalog architecture",
-      "Generative Engine Optimization GEO and Schema JSON-LD",
-      "Launch package: 30 product demonstration videos",
+      "Complete online store with card payments and couriers",
+      "Admin panel for products and orders: WooCommerce or one built to order",
+      "Automatic invoicing and courier labels generated on the spot",
+      "Product catalogue organized to be easy to buy from",
+      "Prepared to be found by Google and by AI assistants (ChatGPT, Gemini)",
+      "30 product videos for the launch",
     ],
-    ideal: "Retailers, distributors, and growing brands scaling direct-to-consumer sales.",
+    ideal: "Retailers, distributors, local producers and growing brands that want to sell a lot online.",
     badge: "Complete System",
   },
   "infrastructura-enterprise": {
-    name: "Enterprise Infrastructure & B2B",
-    shortName: "Enterprise Infrastructure",
-    tagline: "Dedicated digital systems and operational transformation.",
+    name: "Large Projects & B2B",
+    shortName: "Large Projects & B2B",
+    tagline: "Custom digital systems for large companies.",
     delivery: "Dedicated scope",
-    description: "Enterprise systems executed in strategic partnership with Zylaris Group London: B2B client portals, workflow automation, autonomous AI agents, and secure cloud hosting.",
+    description: "Large projects, done together with our London partner, Zylaris Group: portals for clients and partners, automation of repetitive work inside the company, AI assistants that work on their own, and secure hosting.",
     includes: [
-      "Dedicated scalable cloud architecture",
-      "Secure client and partner B2B portals",
-      "Operational workflow audit and autonomous AI agent deployment",
-      "International corporate governance and security standards",
-      "Proactive 24/7 system monitoring and guaranteed SLA",
+      "Your own infrastructure, which grows with the company",
+      "Secure portals for clients and partners",
+      "A review of how the company works, and AI assistants that take over repetitive tasks",
+      "Security and working rules at international standard",
+      "Permanent monitoring and a response time guaranteed by contract",
     ],
-    ideal: "Enterprises, corporate networks, and organizations requiring zero-compromise digital reliability.",
+    ideal: "Large companies and organizations that need digital systems they can rely on.",
   },
 };
 
@@ -149,4 +156,13 @@ export function enPrice(id: PackageId): string {
 /** English delivery term: the hand-written one if present, otherwise the registry's day range. */
 export function enDelivery(id: PackageId): string {
   return packagesEn[id].delivery ?? deliveryEn(pkg(id).delivery);
+}
+
+/** Options of the English contact form: the same values (package ids) as the Romanian one, so ?package=<id> preselects. */
+export function serviceOptionsEn(): { value: string; label: string }[] {
+  return [
+    ...packages.map((p) => ({ value: p.id, label: `${packagesEn[p.id].shortName} — ${enPrice(p.id)}` })),
+    { value: "geo-search", label: "Being found by AI assistants (ChatGPT, Gemini)" },
+    { value: "consultanta-alta", label: "Consulting / Custom project" },
+  ];
 }

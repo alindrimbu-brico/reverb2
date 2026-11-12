@@ -3,7 +3,7 @@ import Reveal from "@/components/Reveal";
 import ContactForm from "./ContactForm";
 import PageBackdrop from "@/components/PageBackdrop";
 import { packages } from "@/lib/packages";
-import { packagesEn, enPrice } from "@/lib/packagesEn";
+import { packagesEn, enPrice, VAT_NOTE_EN } from "@/lib/packagesEn";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/en/contact", languages: { ro: "/contact", en: "/en/contact", "x-default": "/contact" } },
@@ -75,7 +75,7 @@ export default function ContactPageEN() {
                     </div>
                   ))}
                 </div>
-                <div className="mt-5 text-xs text-neutral-500">Terms: 50% advance / 50% on delivery.</div>
+                <div className="mt-5 text-xs text-neutral-500">Terms: 50% advance / 50% on delivery. {VAT_NOTE_EN}</div>
               </div>
             </Reveal>
 

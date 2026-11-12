@@ -1,6 +1,9 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+import { resolveService } from "@/lib/packages";
+import { serviceOptionsEn } from "@/lib/packagesEn";
 
 type FormState = "idle" | "submitting" | "success" | "error";
 
@@ -25,7 +28,13 @@ function validate(form: Record<string, string>): FieldErrors {
   return errors;
 }
 
-export default function ContactFormEN() {
+// Same values as the Romanian form (package ids), so /en/contact?package=<id> preselects the package.
+const serviceOptions = serviceOptionsEn();
+
+function ContactFormInner() {
+  const searchParams = useSearchParams();
+  // Old values are translated; an unknown value leaves the select empty and validation asks for a choice.
+  const initialService = resolveService(searchParams.get("package") ?? searchParams.get("pachet"));
   const [state, setState] = useState<FormState>("idle");
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -34,7 +43,7 @@ export default function ContactFormEN() {
     name: "",
     email: "",
     business: "",
-    service: "",
+    service: initialService,
     message: "",
   });
 
@@ -68,7 +77,10 @@ export default function ContactFormEN() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, service: `[EN] ${form.service}` }),
+        body: JSON.stringify({
+          ...form,
+          service: `[EN] ${serviceOptions.find((o) => o.value === form.service)?.label ?? form.service}`,
+        }),
       });
       setState(res.ok ? "success" : "error");
     } catch {
@@ -179,12 +191,11 @@ export default function ContactFormEN() {
             className={`${inputBase} appearance-none ${errors.service && touched.service ? inputErr : inputOk}`}
           >
             <option value="" disabled>Choose a service</option>
-            <option value="site">Website creation</option>
-            <option value="magazin">Complete online store</option>
-            <option value="marketing">Digital marketing</option>
-            <option value="branding">Branding & AI</option>
-            <option value="consultanta">Ongoing consulting</option>
-            <option value="altceva">Something else / not sure yet</option>
+            {serviceOptions.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
           </select>
           {errors.service && touched.service && (
             <p className="mt-1.5 text-xs text-red-500/80">{errors.service}</p>
@@ -232,5 +243,13 @@ export default function ContactFormEN() {
         We don&apos;t spam. Your data is safe and not shared with third parties.
       </p>
     </form>
+  );
+}
+
+export default function ContactFormEN() {
+  return (
+    <Suspense fallback={<div className="p-12 text-center text-xs text-neutral-500">Loading the form...</div>}>
+      <ContactFormInner />
+    </Suspense>
   );
 }

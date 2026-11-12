@@ -5,7 +5,7 @@ import Link from "next/link";
 import TechAuthorityGrid from "@/components/TechAuthorityGrid";
 import ProjectPreviewModal, { PreviewProject } from "@/components/ProjectPreviewModal";
 import { liveProjectsRo } from "@/lib/liveProjects";
-import { pkg, splitPrice, noBreak } from "@/lib/packages";
+import { pkg, splitPrice, noBreak, VAT_NOTE } from "@/lib/packages";
 
 // Cardurile de preț de pe prima pagină citesc din registru (lib/packages.ts), ca /pachete.
 const pretSocial = splitPrice(pkg("social-growth").price);
@@ -446,7 +446,7 @@ export default function HomePage() {
             </h2>
           </div>
           <p className="max-w-md text-xs md:text-sm text-neutral-400 font-light leading-relaxed">
-            Fiecare angajament include un set precis de livrabile, fără costuri ascunse și fără contracte obligatorii pe 12 luni.
+            Fiecare angajament include un set precis de livrabile, fără costuri ascunse și fără contracte obligatorii pe 12 luni. {VAT_NOTE}
           </p>
         </div>
 

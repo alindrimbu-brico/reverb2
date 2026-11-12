@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import PageBackdrop from "@/components/PageBackdrop";
-import { pkg } from "@/lib/packages";
+import { pkg, VAT_LABEL } from "@/lib/packages";
 
 // Prețul, termenul și lista pachetului de pornire vin din registru (lib/packages.ts).
 const magazinStart = pkg("magazin-start");
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/magazine-online", languages: { ro: "/magazine-online", en: "/en/online-store", "x-default": "/magazine-online" } },
   title: "Magazin Digital",
   description:
-    `Construim magazine online pentru vânzare, nu doar pentru design. Plată cu cardul, curier cu AWB și facturare automată, configurate. De la ${magazinStart.price}.`,
+    `Construim magazine online pentru vânzare, nu doar pentru design. Plată cu cardul, curier cu AWB și facturare automată, configurate. De la ${magazinStart.price} ${VAT_LABEL}.`,
 };
 
 const included = [
@@ -293,7 +293,7 @@ export default function MagazineOnlinePage() {
             <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8">
               <div className="text-sm font-medium text-neutral-400">Pachet de pornire, preț fix</div>
               <div className="mt-2 text-sm font-semibold text-white">{magazinStart.name}</div>
-              <div className="mt-4 text-4xl font-medium tracking-[-0.04em] text-white">{magazinStart.price}</div>
+              <div className="mt-4 text-4xl font-medium tracking-[-0.04em] text-white">{magazinStart.price} <span className="whitespace-nowrap text-sm font-normal tracking-normal text-neutral-500">{VAT_LABEL}</span></div>
               <div className="mt-2 text-sm text-neutral-400">Livrare: {magazinStart.delivery}</div>
               <ul className="mt-6 space-y-3">
                 {magazinStart.includes.map((f) => (

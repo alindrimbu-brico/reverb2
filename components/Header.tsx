@@ -88,9 +88,7 @@ export default function Header() {
       "/portofoliu": "/en/portfolio",
       "/blog": "/en/blog",
       "/legal": "/en/legal",
-      "/checkout": "/en/checkout",
-      "/nevronix": "/en/nevronix",
-      "/ai-humans": "/en/ai-humans"
+      "/nevronix": "/en/nevronix"
     };
 
     const routesEnToRo: Record<string, string> = {
@@ -105,9 +103,7 @@ export default function Header() {
       "/en/portfolio": "/portofoliu",
       "/en/blog": "/blog",
       "/en/legal": "/legal",
-      "/en/checkout": "/checkout",
-      "/en/nevronix": "/nevronix",
-      "/en/ai-humans": "/ai-humans"
+      "/en/nevronix": "/nevronix"
     };
 
     if (lang === "en") {

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
-import { pkg } from "@/lib/packages";
+import { pkg, VAT_NOTE } from "@/lib/packages";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/servicii", languages: { ro: "/servicii", en: "/en/services", "x-default": "/servicii" } },
@@ -110,7 +110,7 @@ export default function ServiciiPage() {
           </Reveal>
           <Reveal delay={160}>
             <p className="mt-8 max-w-2xl mx-auto text-base md:text-lg text-neutral-400 font-light leading-relaxed">
-              De la fundația tehnică de mare viteză a magazinului tău online, până la motoare de conținut video zilnic și optimizare pentru căutare generativă GEO. Fără improvizații.
+              De la fundația tehnică de mare viteză a magazinului tău online, până la motoare de conținut video zilnic și optimizare pentru căutare generativă GEO. Fără improvizații. {VAT_NOTE}
             </p>
           </Reveal>
         </div>

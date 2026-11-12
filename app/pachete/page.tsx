@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
-import { packages } from "@/lib/packages";
+import { packages, VAT_LABEL } from "@/lib/packages";
+import { liveProjectsRo } from "@/lib/liveProjects";
+
+// Trei lucrări reale arătate lângă prețuri; numele și adresele vin din lista unică de proiecte live.
+const LUCRARI = ["Bricolando.ro", "RaftPlin.ro", "Kalki.nexus"];
+const lucrari = LUCRARI.map((n) => liveProjectsRo.find((p) => p.name === n)).filter((p) => !!p);
 
 export const metadata: Metadata = {
   alternates: { canonical: "/pachete", languages: { ro: "/pachete", en: "/en/packages", "x-default": "/pachete" } },
@@ -20,12 +25,16 @@ const faqs = [
     a: "Pentru pachetele de promovare video, plata se face lunar în avans. Pentru proiectele de construcție web/magazin: 50% avans la începere și 50% la predare și verificare completă.",
   },
   {
-    q: "Ce înseamnă optimizarea pentru Agenți AI GEO?",
-    a: "Structurăm datele, cataloagele de produse și prețurile în format semantic JSON-LD avansat, astfel încât motoarele de căutare AI ChatGPT, Perplexity și Gemini să înțeleagă exact oferta ta și să o recomande ca primă opțiune utilizatorilor.",
+    q: "Ce mai plătesc pe lângă prețul pachetului?",
+    a: "TVA-ul, care se adaugă la prețurile afișate. La un site: domeniul (numele site-ului, câteva zeci de lei pe an), pe care îl cumperi pe firma ta; la Site Start găzduirea e inclusă în primul an, apoi o plătești anual (suma e scrisă în pachet) sau muți site-ul unde vrei. La un magazin: găzduirea, domeniul și comisioanele procesatorului de plăți și ale curierului, pe contractele tale. Îți spunem dinainte ce să alegi și cât costă fiecare, apoi le legăm noi de magazin.",
   },
   {
-    q: "Pot adăuga un panou Payload CMS pe magazinul meu?",
-    a: "Da. Pentru clienții care vor viteză maximă și independență de WordPress, construim panoul de administrare direct pe Payload CMS pe TypeScript nativ în Next.js, cu editare vizuală live și securitate enterprise.",
+    q: "Ce înseamnă „pregătit pentru asistenții AI”?",
+    a: "Tot mai mulți oameni întreabă ChatGPT, Gemini sau Perplexity în loc să caute pe Google. Scriem datele firmei, produsele și prețurile într-o formă pe care acești asistenți o pot citi corect, ca să îți înțeleagă oferta și să o poată recomanda.",
+  },
+  {
+    q: "Pot să îmi administrez singur magazinul?",
+    a: "Da. Primești un panou de administrare din care adaugi produse, schimbi prețuri și vezi comenzile. De obicei e WooCommerce; pentru magazinele care au nevoie de viteză mare construim un panou la comandă, cu editare direct pe pagină.",
   },
   {
     q: "Bugetul de promovare plătită Ads este inclus?",
@@ -67,7 +76,7 @@ export default function PachetePage() {
           </Reveal>
           <Reveal delay={160}>
             <p className="mt-8 max-w-2xl mx-auto text-base md:text-lg text-neutral-400 font-light leading-relaxed">
-              Fiecare pachet Reverb Digital include un set fix de livrabile, un termen ferm de predare și o arhitectură pregătită pentru noile motoare de căutare AI.
+              Fiecare pachet Reverb Digital include un set fix de livrabile, un termen ferm de predare și un rezultat pregătit să fie găsit și de asistenții AI, nu doar de Google.
             </p>
             <div className="mt-8 mx-auto flex max-w-xl items-start gap-3 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-5 py-3.5 text-left text-xs leading-relaxed font-mono text-emerald-300">
               <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-emerald-400" />
@@ -112,7 +121,7 @@ export default function PachetePage() {
                     {pkg.delivery}
                   </div>
                   <h3 className="text-2xl font-medium text-white mb-2">{pkg.name}</h3>
-                  <div className="text-4xl font-light text-white mb-4">{pkg.price}</div>
+                  <div className="text-4xl font-light text-white mb-4">{pkg.price} <span className="text-sm font-mono text-neutral-300">{VAT_LABEL}</span></div>
                   <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6 border-b border-white/10 pb-6">
                     {pkg.description}
                   </p>
@@ -153,18 +162,27 @@ export default function PachetePage() {
       <section id="web" className="scroll-mt-16 relative z-10 py-24 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
         <Reveal>
           <div className="max-w-5xl mb-16">
-            <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-3">02 / SISTEME COMPLETE & CONSTRUCȚIE</div>
+            <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-3">02 / SITE-URI ȘI MAGAZINE</div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-tight leading-tight">
-              Platforme Web, Magazine & Arhitectură B2B
+              Site-uri, Magazine Online și Proiecte Mari
             </h2>
             <p className="mt-4 text-sm text-neutral-400 font-light leading-relaxed">
               Site-uri de prezentare și magazine online la preț fix: de la un început simplu, până la sisteme complete cu clipuri video și proiecte pentru companii mari.
             </p>
-            <p className="mt-4 text-sm text-neutral-300 font-light leading-relaxed">
-              Înainte să alegi, vezi ce am construit:{" "}
-              <Link href="/portofoliu" className="underline underline-offset-4 hover:text-white">proiectele live</Link>{" "}
-              și{" "}
-              <Link href="/showcase" className="underline underline-offset-4 hover:text-white">galeria de concepte</Link>.
+            <p className="mt-6 text-sm text-neutral-300 font-light leading-relaxed">
+              Înainte să alegi, vezi ce am construit. Câteva lucrări care sunt online acum:
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2.5">
+              {lucrari.map((p) => (
+                <a key={p.name} href={p.href} target="_blank" rel="noopener noreferrer" className="rounded-full border border-white/20 px-4 py-2 text-xs font-mono text-neutral-200 transition hover:bg-white hover:text-black">
+                  {p.name} · {p.kind} ↗
+                </a>
+              ))}
+              <Link href="/portofoliu" className="rounded-full bg-white px-4 py-2 text-xs font-mono font-bold text-black transition hover:bg-neutral-200">Vezi toate lucrările →</Link>
+              <Link href="/showcase" className="rounded-full border border-white/20 px-4 py-2 text-xs font-mono text-neutral-200 transition hover:bg-white hover:text-black">Galeria de concepte →</Link>
+            </div>
+            <p className="mt-6 text-sm text-neutral-400 font-light leading-relaxed">
+              „Cere acest pachet” deschide un formular scurt. Îți răspundem în cel mult 24 de ore lucrătoare, fără nicio obligație.
             </p>
           </div>
         </Reveal>
@@ -190,7 +208,7 @@ export default function PachetePage() {
                     {pkg.delivery}
                   </div>
                   <h3 className="text-2xl font-medium text-white mb-2">{pkg.name}</h3>
-                  <div className="text-4xl font-light text-white mb-4">{pkg.price}</div>
+                  <div className="text-4xl font-light text-white mb-4">{pkg.price} <span className="text-sm font-mono text-neutral-300">{VAT_LABEL}</span></div>
                   <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6 border-b border-white/10 pb-6">
                     {pkg.description}
                   </p>

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import PageBackdrop from "@/components/PageBackdrop";
-import { packagesEn, enPrice, enDelivery } from "@/lib/packagesEn";
+import { packagesEn, enPrice, enDelivery, VAT_LABEL_EN } from "@/lib/packagesEn";
 
 // The starter package's price, term and list come from the registry (lib/packages.ts + lib/packagesEn.ts).
 const storeStart = packagesEn["magazin-start"];
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/en/online-store", languages: { ro: "/magazine-online", en: "/en/online-store", "x-default": "/magazine-online" } },
   title: "Digital Store",
   description:
-    `We build online stores for selling, not just for design. Card payments, courier labels and automatic invoicing, configured. From ${enPrice("magazin-start")}.`,
+    `We build online stores for selling, not just for design. Card payments, courier labels and automatic invoicing, configured. From ${enPrice("magazin-start")} ${VAT_LABEL_EN}.`,
 };
 
 const included = [
@@ -293,7 +293,7 @@ export default function OnlineStorePage() {
             <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8">
               <div className="text-sm font-medium text-neutral-400">Starter package, fixed price</div>
               <div className="mt-2 text-sm font-semibold text-white">{storeStart.name}</div>
-              <div className="mt-4 text-4xl font-medium tracking-[-0.04em] text-white">{enPrice("magazin-start")}</div>
+              <div className="mt-4 text-4xl font-medium tracking-[-0.04em] text-white">{enPrice("magazin-start")} <span className="whitespace-nowrap text-sm font-normal tracking-normal text-neutral-500">{VAT_LABEL_EN}</span></div>
               <div className="mt-2 text-sm text-neutral-400">Delivery: {enDelivery("magazin-start")}</div>
               <ul className="mt-6 space-y-3">
                 {storeStart.includes.map((f) => (

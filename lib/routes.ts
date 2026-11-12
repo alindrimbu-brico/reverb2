@@ -17,7 +17,6 @@ export const RO_EN_PAIRS: [string, string][] = [
   ["/blog", "/en/blog"],
   ["/contact", "/en/contact"],
   ["/legal", "/en/legal"],
-  ["/ai-humans", "/en/ai-humans"],
   ["/nevronix", "/en/nevronix"],
   ["/xiaolong", "/en/xiaolong"],
   ["/showcase", "/en/showcase"],
@@ -150,7 +149,7 @@ export function isMockupPath(pathname: string): boolean {
 }
 
 /** Pagini care rămân accesibile, dar nu se indexează. */
-export const NOINDEX: string[] = ["/portal", "/en/portal", "/checkout", "/en/checkout", "/guru", "/instaleaza", "/macheta", "/studio", "/templates", "/en/templates", "/templates/industrii"];
+export const NOINDEX: string[] = ["/portal", "/en/portal", "/guru", "/instaleaza", "/studio", "/templates", "/en/templates", "/templates/industrii"];
 
 /** Pagini care doar redirecționează (nu au conținut propriu). */
 export const REDIRECT_PAGES: string[] = ["/showcase/xiaolong", "/en/showcase/xiaolong"];

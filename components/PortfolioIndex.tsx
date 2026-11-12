@@ -1,7 +1,8 @@
 import Link from "next/link";
 import PageBackdrop from "@/components/PageBackdrop";
 import type { LiveProject } from "@/lib/liveProjects";
-import { deliveryEn, getPackage, priceEn } from "@/lib/packages";
+import { deliveryEn, getPackage, priceEn, VAT_LABEL } from "@/lib/packages";
+import { VAT_LABEL_EN } from "@/lib/packagesEn";
 
 type Lang = "ro" | "en";
 
@@ -12,7 +13,7 @@ function offer(id: string, lang: Lang) {
   const ro = p.price.replace(/^de la\s+/i, "");
   const price = lang === "en" ? priceEn(ro) : ro;
   const days = lang === "en" ? deliveryEn(p.delivery) : p.delivery;
-  return { price, days };
+  return { price: `${price} ${lang === "en" ? VAT_LABEL_EN : VAT_LABEL}`, days };
 }
 
 const copy = {
@@ -21,7 +22,7 @@ const copy = {
     h1a: "Proiecte live.",
     h1b: "Făcute de noi.",
     lead: "Site-uri, magazine online și aplicații web construite de Reverb. Fiecare e pe adresa lui: deschide-l și verifică singur.",
-    site: "Site de prezentare, 3–5 pagini: de la",
+    site: "Site de prezentare, până la 5 pagini: de la",
     store: "Magazin online cu plăți și curieri: de la",
     contactCta: "Discută proiectul tău",
     contactHref: "/contact",
@@ -40,7 +41,7 @@ const copy = {
     h1a: "Live projects.",
     h1b: "Built by us.",
     lead: "Websites, online stores and web applications built by Reverb. Each one is on its own address: open it and check for yourself.",
-    site: "Presentation website, 3–5 pages: from",
+    site: "Presentation website, up to 5 pages: from",
     store: "Online store with payments and couriers: from",
     contactCta: "Discuss your project",
     contactHref: "/en/contact",

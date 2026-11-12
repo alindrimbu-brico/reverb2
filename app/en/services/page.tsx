@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
-import { enPrice } from "@/lib/packagesEn";
+import { enPrice, VAT_NOTE_EN } from "@/lib/packagesEn";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/en/services", languages: { ro: "/servicii", en: "/en/services", "x-default": "/servicii" } },
@@ -95,7 +95,7 @@ export default function ServicesPageEN() {
 
           <Reveal delay={0.2}>
             <p className="mx-auto mt-6 max-w-2xl text-base sm:text-lg text-neutral-400 font-light leading-relaxed">
-              From the high-speed technical foundation of your digital store to automated daily AI video engines and verified positioning in AI search assistants.
+              From the high-speed technical foundation of your digital store to automated daily AI video engines and verified positioning in AI search assistants. {VAT_NOTE_EN}
             </p>
           </Reveal>
         </div>

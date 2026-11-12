@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import ContactForm from "./ContactForm";
-import { packages } from "@/lib/packages";
+import { packages, VAT_NOTE } from "@/lib/packages";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/contact", languages: { ro: "/contact", en: "/en/contact", "x-default": "/contact" } },
@@ -101,6 +101,7 @@ export default function ContactPage() {
                     </div>
                   ))}
                 </div>
+                <div className="mt-5 text-[11px] font-mono text-neutral-500">{VAT_NOTE}</div>
               </div>
             </Reveal>
           </div>

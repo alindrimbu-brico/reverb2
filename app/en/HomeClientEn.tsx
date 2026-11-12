@@ -6,7 +6,7 @@ import TechAuthorityGrid from "@/components/TechAuthorityGrid";
 import ProjectPreviewModal, { PreviewProject } from "@/components/ProjectPreviewModal";
 import { liveProjectsEn } from "@/lib/liveProjects";
 import { pkg, priceEn, splitPrice, noBreak } from "@/lib/packages";
-import { packagesEn, enPrice, enDelivery } from "@/lib/packagesEn";
+import { packagesEn, enPrice, enDelivery, VAT_NOTE_EN } from "@/lib/packagesEn";
 
 // The price cards read from the registry (lib/packages.ts); English texts come from lib/packagesEn.ts.
 const priceSocial = splitPrice(priceEn(pkg("social-growth").price));
@@ -417,7 +417,7 @@ export default function EnglishHomePage() {
             </h2>
           </div>
           <p className="max-w-md text-xs md:text-sm text-neutral-400 font-light leading-relaxed">
-            Every engagement delivers a defined set of milestones. No hidden fees, no mandatory 12-month lock-in.
+            Every engagement delivers a defined set of milestones. No hidden fees, no mandatory 12-month lock-in. {VAT_NOTE_EN}
           </p>
         </div>
 

@@ -1,6 +1,8 @@
 // Registrul de pachete: singurul loc unde se scrie un preț sau un termen de livrare.
 // Paginile (prima pagină, Pachete, Servicii, Contact, Magazine online, Portofoliu, RO și EN) citesc de aici.
 // Textele în engleză stau în lib/packagesEn.ts, fără preț.
+// Textele pachetelor se scriu pe înțelesul unui om care nu lucrează în IT: fără nume de tehnologii
+// (Next.js, Payload, JSON-LD) și fără prescurtări (GEO, A/B, SLA) în ce vede clientul.
 
 export type PackageId =
   | "social-growth"
@@ -30,23 +32,27 @@ export type Package = {
   category?: "social" | "web" | "b2b";
 };
 
+/** Toate prețurile din registru sunt fără TVA. Eticheta stă lângă preț, nota sub o listă de prețuri. */
+export const VAT_LABEL = "+ TVA"; // spațiu care nu se rupe: eticheta rămâne întreagă pe un rând
+export const VAT_NOTE = "Prețurile nu includ TVA.";
+
 export const packages: Package[] = [
   {
     id: "social-growth",
     name: "Social Growth AI Video",
     shortName: "Social Growth (12 video/lună)",
-    tagline: "Prezență video constantă și credibilitate vizuală pe rețele.",
+    tagline: "Prezență video constantă pe rețelele de socializare.",
     price: "€330 / lună",
     delivery: "Livrabil săptămânal",
     category: "social",
     description:
-      "12 clipuri video scurte și 12 caruseluri de produs generate cu modele AI, optimizate pentru algoritmii TikTok, Reels și YouTube Shorts.",
+      "12 clipuri video scurte și 12 caruseluri de produs pe lună, făcute cu AI și gândite pentru TikTok, Reels și YouTube Shorts.",
     includes: [
-      "12 clipuri video scurte lunar, ritm de 3 pe săptămână",
-      "12 postări grafice și carusel de produs",
-      "Publicare sincronizată TikTok, Instagram, Facebook, Shorts",
-      "Scenarii de vânzare și subtitrări dinamice",
-      "Raport lunar clar de vizibilitate și reach",
+      "12 clipuri video scurte pe lună, câte 3 pe săptămână",
+      "12 postări grafice și caruseluri de produs",
+      "Publicare pe TikTok, Instagram, Facebook și YouTube Shorts",
+      "Scenarii de vânzare și subtitrări pe ecran",
+      "Raport lunar: câți oameni ți-au văzut clipurile",
     ],
     ideal: "Firme locale, servicii, clinici și ateliere care vor prezență video constantă fără costuri de filmare clasică.",
     href: "/contact",
@@ -55,19 +61,19 @@ export const packages: Package[] = [
     id: "daily-impact",
     name: "Daily Impact 1 Video Zilnic",
     shortName: "Daily Impact (30 video/lună)",
-    tagline: "Dominare vizuală prin conținut video zilnic de produs.",
+    tagline: "Un clip nou în fiecare zi, cu produsele tale.",
     price: "€588 / lună",
     delivery: "Livrare zilnică",
     category: "social",
     description:
-      "30 de clipuri video lunar, câte 1 în fiecare zi, plus 30 de postări grafice. Demonstrații de utilaje, produse și servicii în acțiune, cu voiceover sintetic și montaj dinamic.",
+      "30 de clipuri video pe lună, câte unul în fiecare zi, plus 30 de postări grafice. Arătăm utilajele, produsele și serviciile tale în acțiune, cu voce generată cu AI și montaj alert.",
     includes: [
-      "30 de clipuri video scurte lunar, 1 clip în fiecare zi",
+      "30 de clipuri video scurte pe lună, unul în fiecare zi",
       "30 de postări grafice adaptate fiecărei platforme",
-      "Demonstrații de produse și utilaje în acțiune",
-      "Voiceover sintetic de înaltă fidelitate",
-      "Scenarii orientate spre conversie și vânzare directă",
-      "Consultanță săptămânală de conținut și optimizare",
+      "Produse și utilaje arătate în acțiune",
+      "Voce de prezentare generată cu AI, cu sunet natural",
+      "Scenarii scrise ca să vândă",
+      "O discuție pe săptămână: ce a mers și ce schimbăm",
     ],
     ideal: "Magazine online, distribuitori și companii care vor creștere accelerată prin volum susținut.",
     href: "/contact",
@@ -78,20 +84,20 @@ export const packages: Package[] = [
     id: "dominance-3x",
     name: "Dominance 3X 3 Video Zilnic",
     shortName: "Dominance 3X (90 video/lună)",
-    tagline: "Scalare agresivă pentru acoperire maximă pe algoritmi.",
+    tagline: "Trei clipuri pe zi, ca marca ta să apară peste tot.",
     price: "€1.275 / lună",
     delivery: "3 livrări zilnice",
     category: "social",
     description:
-      "90 de clipuri video lunar, câte 3 pe zi, pentru branduri și retaileri care vor să ocupe complet feed-ul utilizatorilor din nișa lor.",
+      "90 de clipuri video pe lună, câte 3 pe zi, pentru mărci și magazine mari care vor să fie văzute zilnic de toți cei interesați de domeniul lor.",
     includes: [
-      "90 de clipuri video scurte lunar, 3 clipuri zilnic",
-      "Distribuție pe multiple conturi de campanie",
-      "Testare A/B intensivă pe unghiuri de vânzare",
-      "Voiceover multilingv la cerere",
-      "Suport dedicat prioritar 24/7",
+      "90 de clipuri video scurte pe lună, 3 în fiecare zi",
+      "Publicare pe mai multe conturi",
+      "Testăm mai multe variante de mesaj și păstrăm ce vinde",
+      "Voce în mai multe limbi, la cerere",
+      "Suport cu prioritate, la orice oră",
     ],
-    ideal: "Retaileri mari, branduri naționale și companii cu cataloage vaste de produse.",
+    ideal: "Retaileri mari, mărci naționale și firme cu cataloage mari de produse.",
     href: "/contact",
   },
   {
@@ -110,7 +116,8 @@ export const packages: Package[] = [
       "Formular de contact, WhatsApp și hartă Google",
       "Optimizat pentru telefon și pentru viteză",
       "Textele și pozele vin de la tine; două runde de modificări incluse",
-      "Publicare pe domeniul tău (domeniul se plătește separat)",
+      "Găzduire inclusă în primul an; apoi €60 / an sau îl muți la găzduirea ta",
+      "Publicat pe domeniul tău (domeniul se plătește separat)",
     ],
     ideal: "Firme mici, cabinete și meșteri care au nevoie repede de o prezență online corectă, cu buget mic.",
     href: "/contact",
@@ -119,21 +126,21 @@ export const packages: Package[] = [
     id: "start-digital",
     name: "Start Digital Web și Video",
     shortName: "Start Digital (site + 15 video)",
-    tagline: "Un website rapid și modern, susținut de conținut video din prima zi.",
+    tagline: "Un site rapid și modern, susținut de clipuri video din prima zi.",
     price: "€1.275",
     delivery: "7–14 zile",
     category: "web",
     description:
-      "Website de prezentare cu 3–5 pagini, de mare viteză pe Next.js, conectat cu formular de contact, hartă Google, WhatsApp și un pachet de lansare de 15 clipuri video.",
+      "Site de prezentare cu 3–5 pagini, foarte rapid, cu design făcut doar pentru tine, formular de contact, hartă Google și WhatsApp, plus 15 clipuri video pentru lansare.",
     includes: [
-      "Website de mare viteză pe Next.js cu încărcare sub 1.2 secunde",
-      "Design exclusiv, fără șabloane generice",
-      "Formular contact, WhatsApp și Google Maps integrat",
-      "Optimizare completă pentru telefoane mobile",
-      "Structură de date pregătită pentru Google și Agenți AI GEO",
-      "Pachet lansare: 15 clipuri video scurte incluse",
+      "Site foarte rapid: se încarcă în sub 1,2 secunde",
+      "Design exclusiv, fără șabloane",
+      "Formular de contact, WhatsApp și hartă Google",
+      "Arată bine și pe telefon",
+      "Pregătit ca să fie găsit de Google și de asistenții AI (ChatGPT, Gemini)",
+      "15 clipuri video scurte pentru lansare",
     ],
-    ideal: "IMM-uri de servicii, cabinete, consultanță și ateliere care intră serios în digital.",
+    ideal: "Firme de servicii, cabinete, consultanți și ateliere care intră serios în online.",
     href: "/contact",
   },
   {
@@ -145,12 +152,12 @@ export const packages: Package[] = [
     delivery: "14–21 zile",
     category: "web",
     description:
-      "Magazin online pe WooCommerce, pornit dintr-o temă pregătită de noi, cu plată cu cardul, un curier cu AWB generat din comandă și facturare automată. Îți încărcăm primele 50 de produse.",
+      "Magazin online pe WooCommerce, o platformă de magazine foarte răspândită, pornit dintr-o temă pregătită de noi. Clientul plătește cu cardul, eticheta de curier (AWB) iese direct din comandă, iar factura se emite singură. Îți încărcăm primele 50 de produse.",
     includes: [
       "Până la 50 de produse încărcate de noi",
       "Plată cu cardul, ramburs și transfer bancar",
-      "Un curier integrat, cu AWB generat din comandă",
-      "Facturare automată FGO sau SmartBill",
+      "Un curier integrat: eticheta de curier (AWB) se face din comandă",
+      "Facturare automată, prin FGO sau SmartBill (programe de facturare)",
       "Temă pregătită de noi, adaptată mărcii tale; două runde de modificări",
       "Găzduirea, domeniul și contractele cu procesatorul de plăți, curierul și programul de facturare sunt ale tale",
     ],
@@ -159,45 +166,45 @@ export const packages: Package[] = [
   },
   {
     id: "magazin-digital-activ",
-    name: "Magazin Digital Activ eCommerce și AI",
+    name: "Magazin Digital Activ",
     shortName: "Magazin Digital Activ (+ 30 video)",
-    tagline: "Un magazin online complet construit pentru vânzare și optimizat pentru căutare AI.",
+    tagline: "Magazin online complet, făcut să vândă și să fie găsit de Google și de asistenții AI.",
     price: "€2.499",
     delivery: "14–30 zile",
     category: "web",
     description:
-      "Platformă eCommerce completă pe WooCommerce sau Next.js cu Payload CMS, checkout optimizat cognitiv, integrări plăți securizate, facturare automată, AWB curieri și 30 de clipuri video de lansare.",
+      "Magazin online complet, cu plată cu cardul, facturare automată și AWB la curieri, un panou din care îți administrezi singur produsele și comenzile, plus 30 de clipuri video pentru lansare.",
     includes: [
-      "Setup magazin online complet cu plăți card și curieri",
-      "Opțiune Panou Control Enterprise Payload CMS sau WooCommerce",
-      "Facturare automată FGO sau SmartBill plus emitere AWB instant",
-      "Catalog de produse structurat pe conversie",
-      "Optimizare pentru căutare generativă GEO și Schema JSON-LD",
-      "Pachet lansare: 30 de clipuri video de prezentare produse",
+      "Magazin online complet, cu plată cu cardul și curieri",
+      "Panou de administrare pentru produse și comenzi: WooCommerce sau unul construit la comandă",
+      "Facturare automată FGO sau SmartBill și AWB generat pe loc",
+      "Catalog de produse organizat ca să fie ușor de cumpărat",
+      "Pregătit ca să fie găsit de Google și de asistenții AI (ChatGPT, Gemini)",
+      "30 de clipuri video de prezentare a produselor, pentru lansare",
     ],
-    ideal: "Retail, distribuitori, producători locali și branduri în creștere care vor să vândă online masiv.",
+    ideal: "Magazine, distribuitori, producători locali și mărci în creștere care vor să vândă mult online.",
     href: "/contact",
     highlight: true,
     badge: "Sistem Complet",
   },
   {
     id: "infrastructura-enterprise",
-    name: "Infrastructură Enterprise & B2B",
-    shortName: "Infrastructură Enterprise",
-    tagline: "Arhitectură digitală dedicată și transformare operațională.",
+    name: "Proiecte Mari și B2B",
+    shortName: "Proiecte Mari și B2B",
+    tagline: "Sisteme digitale la comandă pentru firme mari.",
     price: "de la €3.315",
     delivery: "Proiect dedicat",
     category: "b2b",
     description:
-      "Proiecte de anvergură executate în parteneriat cu Zylaris Group London: portaluri de clienți B2B, automatizări de procese interne, integrarea agenților autonomi AI și hosting securizat.",
+      "Proiecte mari, lucrate împreună cu partenerul nostru din Londra, Zylaris Group: portaluri pentru clienți și parteneri, automatizarea muncii repetitive din firmă, asistenți AI care lucrează singuri și găzduire securizată.",
     includes: [
-      "Arhitectură cloud scalabilă dedicată",
-      "Portaluri securizate pentru clienți și parteneri B2B",
-      "Audit operațional și integrarea agenților autonomi AI",
-      "Guvernanță și securitate gestionată internațional",
-      "Mentenanță proactivă 24/7 și SLA garantat",
+      "Infrastructură proprie, care crește odată cu firma",
+      "Portaluri securizate pentru clienți și parteneri",
+      "Analiza proceselor din firmă și asistenți AI care preiau munca repetitivă",
+      "Securitate și reguli de lucru la standard internațional",
+      "Supraveghere permanentă și timp de răspuns garantat prin contract",
     ],
-    ideal: "Companii mari, corporații și organizații care necesită sisteme digitale robuste fără compromisuri.",
+    ideal: "Companii mari și organizații care au nevoie de sisteme digitale pe care se pot baza.",
     href: "/contact",
   },
 ];
@@ -250,7 +257,7 @@ export const packageAliases: Record<string, PackageId> = {
 
 /** Opțiunile care nu sunt pachete, în formularul de contact. */
 export const extraServiceOptions = [
-  { value: "geo-search", label: "Optimizare Pentru Căutare AI (GEO)" },
+  { value: "geo-search", label: "Să fiu găsit de asistenții AI (ChatGPT, Gemini)" },
   { value: "consultanta-alta", label: "Consultanță / Proiect Personalizat" },
 ];
 

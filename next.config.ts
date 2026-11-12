@@ -19,6 +19,12 @@ const nextConfig: NextConfig = {
     // Machetele cu nume de mărci reale au fost scoase (11 nov 2026); adresele vechi duc la galerie.
     { source: "/showcase/canapuff", destination: "/showcase", permanent: true },
     { source: "/showcase/jim-curtis", destination: "/showcase", permanent: true },
+    // Pagini vechi scoase pe 12 nov 2026 (prețuri și servicii care nu mai există, un formular de card fără plată în spate).
+    { source: "/macheta", destination: "/", permanent: true },
+    { source: "/checkout", destination: "/pachete", permanent: true },
+    { source: "/en/checkout", destination: "/en/packages", permanent: true },
+    { source: "/ai-humans", destination: "/servicii", permanent: true },
+    { source: "/en/ai-humans", destination: "/en/services", permanent: true },
     { source: "/flooare-portal", destination: "https://www.flooare.ro/", permanent: true },
     { source: "/flooare-portal/:path*", destination: "https://www.flooare.ro/:path*", permanent: true },
   ],

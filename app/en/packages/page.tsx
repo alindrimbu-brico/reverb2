@@ -2,7 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import { packages } from "@/lib/packages";
-import { packagesEn, enPrice, enDelivery } from "@/lib/packagesEn";
+import { packagesEn, enPrice, enDelivery, VAT_LABEL_EN } from "@/lib/packagesEn";
+import { liveProjectsEn } from "@/lib/liveProjects";
+
+// Three real projects shown next to the prices; names and addresses come from the single list of live projects.
+const WORK = ["Bricolando.ro", "RaftPlin.ro", "Kalki.nexus"];
+const work = WORK.map((n) => liveProjectsEn.find((p) => p.name === n)).filter((p) => !!p);
 
 export const metadata: Metadata = {
   alternates: { canonical: "/en/packages", languages: { ro: "/pachete", en: "/en/packages", "x-default": "/pachete" } },
@@ -21,12 +26,16 @@ const faqsEN = [
     a: "For monthly video packages, payment is processed monthly in advance. For web and digital store builds: 50% upfront upon kickoff, 50% upon final delivery and deployment verification.",
   },
   {
-    q: "What does Generative Engine Optimization GEO mean?",
-    a: "We structure your business data, product specs, and pricing matrices in advanced semantic JSON-LD format so AI search models such as ChatGPT, Perplexity, and Gemini identify and cite your company as the authoritative answer.",
+    q: "What else do I pay besides the package price?",
+    a: "VAT, which is added to the prices shown. For a website: the domain (the site's name, a small yearly fee), which you buy in your company's name; in Website Start hosting is included for the first year, then you pay it yearly (the amount is written in the package) or you move the site wherever you want. For a store: hosting, the domain and the fees of the payment processor and the courier, on your own contracts. We tell you beforehand what to choose and what each one costs, then we connect them to the store.",
+  },
+  {
+    q: "What does “prepared for AI assistants” mean?",
+    a: "More and more people ask ChatGPT, Gemini or Perplexity instead of searching on Google. We write your company data, products and prices in a form these assistants can read correctly, so they understand your offer and can recommend it.",
   },
   {
     q: "Can I manage content without coding?",
-    a: "Yes. For clients requiring instant visual independence, we build control dashboards using Payload CMS or WooCommerce with visual editing and secure access control.",
+    a: "Yes. You get an admin panel where you add products, change prices and see orders. It is usually WooCommerce; for stores that need high speed we build a custom panel with editing directly on the page.",
   },
   {
     q: "Is advertising ad budget included?",
@@ -111,7 +120,7 @@ export default function PackagesPageEN() {
                       )}
 
                       <div className="text-2xl sm:text-3xl font-mono text-white mb-2 font-light">
-                        {enPrice(pkg.id)}
+                        {enPrice(pkg.id)} <span className="text-sm text-neutral-300">{VAT_LABEL_EN}</span>
                       </div>
 
                       <div className="text-xs font-mono text-neutral-400 mb-4 pb-4 border-b border-white/10">
@@ -172,11 +181,20 @@ export default function PackagesPageEN() {
               <h2 className="text-2xl sm:text-3xl font-light text-white font-mono uppercase">
                 Web & eCommerce Packages • Fixed Prices
               </h2>
-              <p className="mt-4 text-sm text-neutral-300 font-light leading-relaxed">
-                Before you choose, see what we have built:{" "}
-                <Link href="/en/portfolio" className="underline underline-offset-4 hover:text-white">the live projects</Link>{" "}
-                and{" "}
-                <Link href="/showcase" className="underline underline-offset-4 hover:text-white">the concept gallery</Link>.
+              <p className="mt-6 text-sm text-neutral-300 font-light leading-relaxed normal-case">
+                Before you choose, see what we have built. A few projects that are online now:
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2.5">
+                {work.map((p) => (
+                  <a key={p.name} href={p.href} target="_blank" rel="noopener noreferrer" className="rounded-full border border-white/20 px-4 py-2 text-xs font-mono text-neutral-200 transition hover:bg-white hover:text-black">
+                    {p.name} · {p.kind} ↗
+                  </a>
+                ))}
+                <Link href="/en/portfolio" className="rounded-full bg-white px-4 py-2 text-xs font-mono font-bold text-black transition hover:bg-neutral-200">See all our work →</Link>
+                <Link href="/showcase" className="rounded-full border border-white/20 px-4 py-2 text-xs font-mono text-neutral-200 transition hover:bg-white hover:text-black">Concept gallery →</Link>
+              </div>
+              <p className="mt-6 text-sm text-neutral-400 font-light leading-relaxed">
+                “Select Package” opens a short form. We answer within 24 working hours, with no obligation.
               </p>
             </div>
           </Reveal>
@@ -203,7 +221,7 @@ export default function PackagesPageEN() {
                       )}
 
                       <div className="text-2xl sm:text-3xl font-mono text-white mb-2 font-light">
-                        {enPrice(pkg.id)}
+                        {enPrice(pkg.id)} <span className="text-sm text-neutral-300">{VAT_LABEL_EN}</span>
                       </div>
 
                       <div className="text-xs font-mono text-neutral-400 mb-4 pb-4 border-b border-white/10">
