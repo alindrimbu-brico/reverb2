@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import TechAuthorityGrid from "@/components/TechAuthorityGrid";
+import { OutlineRun } from "@/components/RunningLine";
+import { heroRo } from "@/lib/outlineRun/heroRo";
 import ProjectPreviewModal, { PreviewProject } from "@/components/ProjectPreviewModal";
 import { liveProjectsRo } from "@/lib/liveProjects";
 import { pkg, splitPrice, noBreak, VAT_NOTE } from "@/lib/packages";
@@ -143,7 +145,7 @@ export default function HomePage() {
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[80px] font-medium tracking-[-0.04em] leading-[1.04] text-white break-words">
             Infrastructură digitală.<br />
             <span className="text-neutral-400 font-light">
-              Sisteme care produc valoare.
+              <OutlineRun text="Sisteme care produc valoare." data={heroRo} />
             </span>
           </h1>
 

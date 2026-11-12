@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import WhoWeAre from "@/components/WhoWeAre";
+import { BorderRun } from "@/components/RunningLine";
 import { packages, priceLei, VAT_LABEL } from "@/lib/packages";
 import { liveProjectsRo } from "@/lib/liveProjects";
 
@@ -118,6 +119,7 @@ export default function PachetePage() {
                     : "bg-neutral-900/30 border-white/10"
                 }`}
               >
+                {pkg.highlight ? <BorderRun radius={23.5} /> : null}
                 {pkg.badge && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-white px-4 py-1 text-[9px] font-mono font-bold uppercase tracking-widest text-black shadow-md">
                     {pkg.badge}
@@ -209,6 +211,7 @@ export default function PachetePage() {
                     : "bg-neutral-900/30 border-white/10"
                 }`}
               >
+                {pkg.highlight ? <BorderRun radius={23.5} /> : null}
                 {pkg.badge && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-white px-4 py-1 text-[9px] font-mono font-bold uppercase tracking-widest text-black shadow-md">
                     {pkg.badge}

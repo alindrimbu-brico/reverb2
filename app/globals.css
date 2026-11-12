@@ -912,3 +912,36 @@ html.light .rounded-full.bg-white.text-black:not(:where([role="dialog"] *, [data
     animation: none !important;
   }
 }
+
+/* ── Linia care merge (12 nov 2026; components/RunningLine.tsx) ──
+   O bandă scurtă aleargă în lungul unei linii: pe conturul literelor (rl-glyphs), pe conturul unui card (rl-border),
+   pe o linie despărțitoare (rl-line). Cu măsură: un singur lucru în mișcare pe ecran. */
+.rl-word { white-space: nowrap; }
+/* Desenul are 1×1 px și stă cu marginea de sus pe linia de bază a textului (vertical-align: -1px); în el, un SVG de 1em
+   cu viewBox în unitățile fontului: lungimile de mai jos (grosime 28, bandă 480, perioadă 7000) sunt miimi de em.
+   Perioada e mai lungă decât orice contur, deci banda face un tur, dispare în punctul de pornire și reapare tot de acolo. */
+.rl-glyphs {
+  display: inline-block; width: 1px; height: 1px; margin-right: -1px; overflow: visible; vertical-align: -1px;
+  position: relative; z-index: 1; pointer-events: none; animation: rl-in 0.9s ease both;
+}
+.rl-glyphs svg { overflow: visible; }
+.rl-glyphs path {
+  fill: none; stroke: currentColor; stroke-width: 28; stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 480 6520; animation: rl-glyphs 6s linear infinite;
+}
+@keyframes rl-glyphs { to { stroke-dashoffset: -7000; } }
+@keyframes rl-in { from { opacity: 0; } }
+.rl-border { position: absolute; inset: -0.5px; width: calc(100% + 1px); height: calc(100% + 1px); overflow: visible; pointer-events: none; }
+.rl-border rect {
+  fill: none; stroke: currentColor; stroke-width: 2px; stroke-linecap: round;
+  stroke-dasharray: 7 93; animation: rl-border 7s linear infinite;
+}
+@keyframes rl-border { to { stroke-dashoffset: -100; } }
+.rl-line { display: block; position: relative; height: 3px; overflow: hidden; }
+.rl-line::before { content: ""; position: absolute; left: 0; right: 0; top: 1px; height: 1px; background: currentColor; opacity: 0.14; }
+.rl-flow { position: absolute; inset: 0; animation: rl-line 5s linear infinite; }
+.rl-flow > span { position: absolute; right: 0; top: 0; height: 3px; width: 40px; border-radius: 2px; background: currentColor; }
+@keyframes rl-line { from { transform: translateX(-100%); } to { transform: translateX(44px); } }
+@media (prefers-reduced-motion: reduce) {
+  .rl-glyphs, .rl-border, .rl-flow { display: none; }
+}

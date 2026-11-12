@@ -8,6 +8,19 @@ Aici notăm progresul pentru a ne coordona perfect.
 
 ---
 
+### [Claude] - 12 nov 2026 - „Linia care merge”: o bandă care aleargă pe litere și pe conturul cardurilor
+
+Ideea lui Alin, pornită de la aurencomputers.com (o bandă scurtă care alunecă în lungul unei linii subțiri). A ales, din analiza mea: **cu măsură**. Un singur lucru în mișcare pe ecran.
+
+- **Unde e acum:** pe rândul al doilea (gri) al titlului de pe prima pagină, RO și EN; pe conturul cardurilor scoase în evidență (`pkg.highlight`) din `/pachete` și `/en/packages`. Nu o puneți pe toate titlurile și nici pe toate cardurile: își pierde rostul. Un loc nou se adaugă doar la cererea lui Alin.
+- **Codul:** `components/RunningLine.tsx` (`OutlineRun` = litere, `BorderRun` = conturul unui card, `LineRun` = linie despărțitoare de tabel, încă nefolosită), stilurile `rl-*` la sfârșitul `app/globals.css`.
+- **Literele:** titlul rămâne text obișnuit și apare **o singură dată** în pagină. Prima încercare punea peste el același text ca `<text>` SVG: fiecare cuvânt ajungea de două ori în `<h1>`, iar Google și asistenții AI citesc și textul din SVG. Acum banda merge pe contururi desenate din fontul site-ului, generate de `scripts/linia_litere.py` în `lib/outlineRun/heroRo.ts` și `heroEn.ts`. Contururile se potrivesc doar cu Geist la grosimea 300 și spațierea −0,04em. **Dacă schimbați textul rândului gri, grosimea sau spațierea lui, rulați din nou scriptul** (după `npx next build`; lista de texte e în script), altfel componenta arată doar textul, fără linie. Contururile apar abia după ce fontul s-a încărcat.
+- **Cardul:** `<BorderRun radius={…} />` ca prim copil al unui card `relative` cu chenar de 1 px; `radius` = raza colțului minus 0,5 (rounded-3xl → 23.5, rounded-2xl → 15.5).
+- **Mișcare redusă:** la vizitatorii care au cerut-o, benzile nu se afișează deloc.
+- **Verificări** (`docs/designs/linia_care_merge_2026-11-12/verificari/`, dosar local): `linia_check.py` (suprapunerea contururilor peste litere, Chromium + WebKit, 3 lățimi, ambele teme: 48 din 48) și `linia_cls_reduced.py` (titlul nu se mișcă la apariția contururilor; mișcare redusă).
+- **Pagina `/proba-linii`** (neindexată, nelegată din meniu) arată cinci variante numerotate, ca Alin să poată alege alta. Se șterge când spune el.
+- **De știut la lucru:** `next dev` a servit CSS vechi după ce `globals.css` a fost scris de un script; dacă un stil nou nu apare, opriți serverul, ștergeți `.next/dev` și reporniți.
+
 ### [Claude] - 12 nov 2026 - Raportul „Realitatea Umanoidă 2026”: un singur stil și trusa de piese mecanice
 Cererea lui Alin: „într-un stil unic peste tot… multe elemente mecanice… la apropierea mouse-ului, singure, când se deschide pagina, când se închide, când se dă scroll”. Plan, revizii, verificări: `docs/designs/humanoid_mecanic_2026-11-12/` (`design_v2_decizii.md` câștigă).
 1. **Pagina și cele patru capitole stau într-un singur cadru**: `app/humanoid-reality-2026/layout.tsx` → `components/humanoid/HumanoidFrame.tsx` (limba RO / EN ținută minte, arborele motor, diafragma, șublerul). Paleta veche (cyan / galben) a dispărut; totul e pe vocabularul site-ului și merge în tema light. Nu readuceți culori scrise direct: `text-white`, `text-neutral-*`, `border-white/10`, iar în stiluri inline `var(--ink)` / `color-mix(in srgb, var(--ink) P%, transparent)`.

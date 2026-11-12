@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import TechAuthorityGrid from "@/components/TechAuthorityGrid";
+import { OutlineRun } from "@/components/RunningLine";
+import { heroEn } from "@/lib/outlineRun/heroEn";
 import ProjectPreviewModal, { PreviewProject } from "@/components/ProjectPreviewModal";
 import { liveProjectsEn } from "@/lib/liveProjects";
 import { pkg, priceEn, splitPrice, noBreak } from "@/lib/packages";
@@ -139,7 +141,7 @@ export default function EnglishHomePage() {
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[80px] font-medium tracking-[-0.04em] leading-[1.04] text-white break-words">
             Digital infrastructure.<br />
             <span className="text-neutral-400 font-light">
-              Systems that produce value.
+              <OutlineRun text="Systems that produce value." data={heroEn} />
             </span>
           </h1>
 
