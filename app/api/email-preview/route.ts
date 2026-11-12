@@ -6,8 +6,6 @@ import {
   contactConfirmation,
   contactRequest,
   letter,
-  subscriberNotice,
-  subscriberWelcome,
   type Rendered,
 } from "@/lib/email/templates";
 
@@ -15,7 +13,7 @@ import {
 // (`next dev`); oriunde altundeva răspunde 404. Niciun parametru nu ajunge în răspuns: se alege
 // doar dintr-o listă fixă. Datele de probă sunt inventate (depozitul e public).
 //
-//   /api/email-preview?t=cerere|confirmare|abonat|raport|scrisoare&lang=ro|en&caz=ostil&text=1
+//   /api/email-preview?t=cerere|confirmare|scrisoare&lang=ro|en&caz=ostil&text=1
 
 const OSTIL = {
   name: `<script>alert(1)</script> "O'Neil" ${"x".repeat(200)}`,
@@ -42,10 +40,6 @@ function build(t: string, lang: "ro" | "en", ostil: boolean, assetBase: string):
       return contactRequest({ ...d, receivedAt: at, assetBase });
     case "confirmare":
       return contactConfirmation({ lang, name: d.name, details: ostil ? [] : packageRows("site-start", lang), assetBase });
-    case "abonat":
-      return subscriberNotice({ email: d.email, receivedAt: at, assetBase });
-    case "raport":
-      return subscriberWelcome({ assetBase });
     case "scrisoare": {
       const p = pkg("site-start");
       return lang === "en"

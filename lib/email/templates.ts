@@ -116,62 +116,7 @@ export function contactConfirmation(i: {
   return { subject: en ? "We received your request — Reverb Digital" : "Am primit cererea ta — Reverb Digital", html, text };
 }
 
-// ───────────── 3. Abonat nou la raportul „Realitatea Umanoidă 2026” (către noi)
-
-export function subscriberNotice(i: { email: string; receivedAt?: Date; assetBase?: string }): Rendered {
-  const { html, text } = renderEmail({
-    lang: "ro",
-    preheader: i.email,
-    eyebrow: "Abonat nou",
-    title: i.email,
-    intro: "A cerut raportul „Realitatea Umanoidă 2026” de pe reverb.ro/humanoid-reality-2026.",
-    blocks: [
-      {
-        kind: "rows",
-        rows: [
-          { label: "E-mail", value: i.email, href: `mailto:${i.email}` },
-          { label: "Primit", value: oraRomaniei(i.receivedAt ?? new Date()) },
-        ],
-      },
-    ],
-    footer: "intern",
-    reason: "Trimis automat de formularul de pe reverb.ro/humanoid-reality-2026.",
-    assetBase: i.assetBase,
-  });
-  return { subject: `[Humanoid 2026] Nou abonat: ${i.email}`, html, text };
-}
-
-// ───────────── 4. Confirmare către abonatul la raport
-
-export function subscriberWelcome(i: { assetBase?: string } = {}): Rendered {
-  const { html, text } = renderEmail({
-    lang: "ro",
-    preheader: "Îți trimitem accesul la raport în cel mult 24 de ore.",
-    eyebrow: "Realitatea Umanoidă 2026",
-    title: "Raportul e al tău.",
-    intro: "Echipa Reverb îți trimite accesul complet la raport în cel mult 24 de ore.",
-    blocks: [
-      {
-        kind: "list",
-        label: "Ce vei primi",
-        items: [
-          "48 de pagini de date despre economia umanoidelor",
-          "Harta actorilor: liderii AI, producătorii de serie, cei care o fac accesibilă",
-          "Predicții pentru 2027–2030",
-          "Ghid de adaptare pentru companii europene",
-        ],
-      },
-      { kind: "button", label: "Deschide pagina raportului", href: `${company.site}/humanoid-reality-2026` },
-    ],
-    footer: "client",
-    reason:
-      "Ai primit acest e-mail pentru că adresa ta a fost scrisă în formularul de pe reverb.ro/humanoid-reality-2026. Dacă nu tu ai cerut raportul, răspunde la acest mesaj și ștergem adresa.",
-    assetBase: i.assetBase,
-  });
-  return { subject: "Raportul tău — Realitatea Umanoidă 2026", html, text };
-}
-
-// ───────────── 5. Scrisoare: ofertă, răspuns, „site-ul tău e live” (scrisă de mână, trimisă de un om)
+// ───────────── 3. Scrisoare: ofertă, răspuns, „site-ul tău e live” (scrisă de mână, trimisă de un om)
 
 export function letter(i: {
   lang: "ro" | "en";
