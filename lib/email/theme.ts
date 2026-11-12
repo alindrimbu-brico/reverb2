@@ -26,7 +26,10 @@ export const theme = {
   muted: "#a1a1a1",
   /** Între neutral-400 și neutral-500: neutral-500 (#737373) are doar 4,2 : 1 pe --bg, prea puțin la 12 px. */
   faint: "#8a8a8a",
-  /** Conturul butonului secundar: border-white/20 peste card. Butonul principal are conturul în `title`. */
+  /** Butonul principal: alb cu text închis, ca pe site (cum se ține alb în Outlook: vezi butonul din layout.ts). */
+  buttonBg: "#ffffff",
+  buttonText: "#070809",
+  /** Conturul butonului secundar: border-white/20 peste card. */
   outline: "#3e3e3f",
   /** Singurul accent: text-emerald-400 al site-ului („WhatsApp Direct” din subsol). Doar ca text, în puține locuri
    *  (punctul din etichetă, WhatsApp în buton și în subsol); niciodată ca fundal. */
@@ -41,6 +44,9 @@ export const theme = {
   tileBg: "/email/bg-v1.png",
   tileCard: "/email/card-v1.png",
   tilePanel: "/email/panel-v1.png",
+  /** Plăcuțele butonului alb: fondul alb și negrul de sub textul amestecat (#000000, ca amestecul să dea alb curat). */
+  tileWhite: "/email/white-v1.png",
+  tileBlack: "/email/black-v1.png",
   /** De unde se iau imaginile într-un e-mail trimis. Previzualizarea locală dă originea ei. */
   assetBase: "https://reverb.ro",
 } as const;

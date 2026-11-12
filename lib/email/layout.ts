@@ -170,18 +170,40 @@ function renderBlock(b: Block, base: string): string {
       const h = safeHref(b.href);
       if (!h) return "";
       const primary = b.variant !== "outline" && b.variant !== "accent";
-      // Butoanele nu au fond. Un fond alb e revopsit în gri de Outlook în modul întunecat, iar textul lui închis
-      // e făcut alb; nu există cale să ții ambele. Butonul principal e conturul alb, cel secundar conturul stins.
-      const cell = `style="border:1px solid ${primary ? theme.title : theme.outline};border-radius:999px;"`;
-      const color = primary ? theme.title : b.variant === "accent" ? theme.accent : theme.strong;
-      // Spațiile <i> dau butonului înălțime și lățime în Outlook pe Windows, care ignoră padding-ul de pe <a>.
+      const A = `display:inline-block;${MONO}font-size:12px;line-height:16px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;padding:15px 30px;border-radius:999px;mso-padding-alt:0;`;
+      const text = `${esc(b.label)}&nbsp;&rarr;`;
+      // Spațiile <i> dau butonului înălțime și lățime în Outlook pe Windows (motorul Word), care ignoră padding-ul de pe <a>.
+      const padL = `<!--[if mso]><i style="mso-font-width:300%;mso-text-raise:22pt" hidden>&nbsp;</i><![endif]-->`;
+      const padR = `<!--[if mso]><i style="mso-font-width:300%" hidden>&nbsp;&#8203;</i><![endif]-->`;
+      if (!primary) {
+        // Butonul secundar: contur stins, fără fond (nimic de revopsit). `accent` = text verde.
+        const color = b.variant === "accent" ? theme.accent : theme.strong;
+        return (
+          `<table ${TABLE} style="border-collapse:separate;"><tr><td align="center" style="border:1px solid ${theme.outline};border-radius:999px;">` +
+          `<a href="${h}" target="_blank" style="${A}color:${color};">${padL}<span style="mso-text-raise:11pt;">${text}</span>${padR}</a>` +
+          `</td></tr></table>`
+        );
+      }
+      // BUTONUL PRINCIPAL ALB, CA PE SITE. Proba din Outlook-ul lui Alin (12 nov 2026, 10 variante într-un e-mail):
+      // Outlook întunecat face ALB orice text închis (color, !important, <font>, -webkit-text-fill-color: toate au
+      // picat) și scoate linear-gradient; ține imaginile de fundal și mix-blend-mode. A ținut o singură variantă:
+      // text ALB (pe care Outlook nu-l atinge) cu mix-blend-mode:difference peste un fond alb ținut ca imagine.
+      // Cum e construit:
+      //   celula  = alb (culoare + plăcuță albă);
+      //   legătura = text alb pe plăcuță neagră, cu mix-blend-mode:difference → negrul iese alb, albul iese negru.
+      // Unde amestecul nu există sau e scos, rămâne o pastilă neagră cu text alb și contur alb: tot de citit.
+      // Outlook pe Windows cu motor Word primește varianta simplă (text închis pe alb), prin comentariu condițional.
+      // Gmail primește tot varianta simplă, prin regula „u + .rv-body .rv-bl” din <style>.
+      // Nu schimbați textul în închis și nu scoateți plăcuțele: în Outlook întunecat butonul ar rămâne gol.
+      const white = esc(base + theme.tileWhite);
+      const black = esc(base + theme.tileBlack);
       return (
-        `<table ${TABLE} style="border-collapse:separate;"><tr><td align="center" ${cell}>` +
-        `<a href="${h}" target="_blank" style="display:inline-block;${MONO}font-size:12px;line-height:16px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:${color};text-decoration:none;padding:15px 30px;border-radius:999px;mso-padding-alt:0;">` +
-        `<!--[if mso]><i style="mso-font-width:300%;mso-text-raise:22pt" hidden>&nbsp;</i><![endif]-->` +
-        `<span style="mso-text-raise:11pt;">${esc(b.label)}&nbsp;&rarr;</span>` +
-        `<!--[if mso]><i style="mso-font-width:300%" hidden>&nbsp;&#8203;</i><![endif]-->` +
-        `</a></td></tr></table>`
+        `<table ${TABLE} style="border-collapse:separate;"><tr>` +
+        `<td align="center" class="rv-t" bgcolor="${theme.buttonBg}" background="${white}" style="background-color:${theme.buttonBg};background-image:url('${white}');background-repeat:repeat;border:1px solid ${theme.buttonBg};border-radius:999px;">` +
+        // În ramura mso spațiile <i> stau fără comentariul lor: un comentariu condițional în altul l-ar închide pe primul.
+        `<!--[if mso]><a href="${h}" target="_blank" style="${A}color:${theme.buttonText};"><i style="mso-font-width:300%;mso-text-raise:22pt" hidden>&nbsp;</i><span style="mso-text-raise:11pt;color:${theme.buttonText};">${text}</span><i style="mso-font-width:300%" hidden>&nbsp;&#8203;</i></a><![endif]-->` +
+        `<!--[if !mso]><!--><a href="${h}" target="_blank" class="rv-bl" style="${A}color:#ffffff;background-color:#000000;background-image:url('${black}');background-repeat:repeat;mix-blend-mode:difference;"><span>${text}</span></a><!--<![endif]-->` +
+        `</td></tr></table>`
       );
     }
     case "signature":
@@ -332,6 +354,8 @@ export function renderEmail(spec: EmailSpec): { html: string; text: string } {
     `}` +
     // Doar Gmail (acolo <body> devine un <div> precedat de un <u>): scoate straturile de imagine, vezi comentariul de sus.
     `u + .rv-body .rv-t{background-image:none!important;}` +
+    // Tot doar Gmail: butonul alb în forma simplă (text închis pe alb), fără plăcuță neagră și fără amestec.
+    `u + .rv-body .rv-bl{color:${theme.buttonText}!important;background-color:transparent!important;background-image:none!important;mix-blend-mode:normal!important;}` +
     `</style>` +
     `</head>` +
     `<body class="rv-body" style="margin:0;padding:0;background-color:${theme.bg};">` +
