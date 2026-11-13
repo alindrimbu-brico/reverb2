@@ -1,10 +1,8 @@
 // Reverb Studio — Muzică: rețeta de sunet și compilarea ei în promptul de stil Suno
 // (docs/designs/motor_creatie_2026-11-12/design_v2_decizii.md). Fără importuri: fișierul e folosit de pagină, de rută și de testele Node.
 // Suno nu primește procente: cursorul unui stil alege o treaptă față de stilul de bază, iar treapta e cuvântul care pleacă.
-// Două trepte, nu patru (proba pe nevăzute din 13 nov 2026): din patru formulări ascultate, doar „touches of” și „strong influence”
-// s-au auzit în ordinea bună; „subtle hint” și „even blend” nu s-au deosebit, deci nu mai pleacă.
 
-export type Treapta = "baza" | "clar" | "idee";
+export type Treapta = "baza" | "egal" | "clar" | "idee" | "abia";
 export type Pozitie = "fara" | "putin" | "normal" | "mult"; // „auto” = instrumentul lipsește din rețetă
 export type StilActiv = { id: string; pondere: number };
 export type Reteta = {
@@ -26,11 +24,11 @@ export const MAX_STILURI = 4;
 export const MAX_INSTRUMENTE = 8;
 export const MAX_STARI = 3;
 export const TINTA_STIL = 950;
-export const ETICHETE_TREAPTA: Record<Treapta, string> = { baza: "baza", clar: "clar", idee: "o idee" };
+export const ETICHETE_TREAPTA: Record<Treapta, string> = { baza: "baza", egal: "la egal", clar: "clar", idee: "o idee", abia: "abia simțit" };
 export const ETICHETE_POZITIE: Record<Pozitie | "auto", string> = { auto: "auto", fara: "fără", putin: "puțin", normal: "normal", mult: "mult" };
 export const POZITII: Pozitie[] = ["fara", "putin", "normal", "mult"];
 /** Mijlocul fiecărei trepte, ca raport față de bază: folosit când o treaptă se alege din butoane sau din cuvinte. */
-export const MIJLOC_TREAPTA: Record<Exclude<Treapta, "baza">, number> = { clar: 0.75, idee: 0.3 };
+export const MIJLOC_TREAPTA: Record<Exclude<Treapta, "baza">, number> = { egal: 0.95, clar: 0.67, idee: 0.37, abia: 0.15 };
 
 export const FAMILII = [
   "Pop și folk", "Orchestră și film", "Jazz, soul, blues", "Rock", "Electronic și ambient", "Hip-hop și urban", "Din lume",
@@ -211,25 +209,28 @@ export function trepteStiluri(stiluri: StilActiv[]): Record<string, Treapta> {
   const baza = o[0].pondere;
   o.forEach((s, i) => {
     const r = s.pondere / baza;
-    rez[s.id] = i === 0 ? "baza" : r >= 0.5 ? "clar" : "idee";
+    rez[s.id] = i === 0 ? "baza" : r >= 0.85 ? "egal" : r >= 0.5 ? "clar" : r >= 0.25 ? "idee" : "abia";
   });
   return rez;
 }
 
 const lista = (v: string[]) => (v.length <= 1 ? v.join("") : `${v.slice(0, -1).join(", ")} and ${v[v.length - 1]}`);
 
-function frazaGenuri(stiluri: StilActiv[], faraIdee: boolean): string {
+function frazaGenuri(stiluri: StilActiv[], faraAbia: boolean): string {
   const o = ordonate(stiluri);
   if (!o.length) return "";
   const tr = trepteStiluri(stiluri);
   const en = (t: Treapta) => o.filter((s) => tr[s.id] === t).map((s) => gaseste(STILURI, s.id)!.en);
+  const egali = en("egal");
   const baza = en("baza")[0];
   if (o.length === 1) return baza;
-  const parti = [`primarily ${baza}`];
+  const parti = [egali.length ? `an even blend of ${lista([baza, ...egali])}` : `primarily ${baza}`];
   const clar = en("clar");
   if (clar.length) parti.push(clar.length === 1 ? `with a strong ${clar[0]} influence` : `with strong ${lista(clar)} influences`);
-  const idee = faraIdee ? [] : en("idee");
+  const idee = en("idee");
   if (idee.length) parti.push(`with touches of ${lista(idee)}`);
+  const abia = faraAbia ? [] : en("abia");
+  if (abia.length) parti.push(`with a subtle hint of ${lista(abia)}`);
   return parti.join(", ");
 }
 
@@ -258,10 +259,10 @@ export function compileazaStil(
   const atmosfera = (o.atmosfera || "").replace(/\s+/g, " ").trim().replace(/[.;,]+$/, "").slice(0, 160);
 
   const scoase: string[] = [];
-  let cuAtmosfera = !!atmosfera, cuPutin = true, cuIdee = true, nStari = stari.length;
+  let cuAtmosfera = !!atmosfera, cuPutin = true, cuAbia = true, nStari = stari.length;
   const construieste = () => {
     const parti: string[] = [];
-    const genuri = frazaGenuri(r.stiluri, !cuIdee);
+    const genuri = frazaGenuri(r.stiluri, !cuAbia);
     if (genuri) parti.push(genuri);
     if (nStari) parti.push(stari.slice(0, nStari).join(", "));
     if (r.tempo !== null) parti.push(`${r.tempo} BPM`);
@@ -286,7 +287,7 @@ export function compileazaStil(
   const pasi: [() => boolean, () => void, string][] = [
     [() => cuAtmosfera, () => { cuAtmosfera = false; }, "propoziția de atmosferă"],
     [() => cuPutin && pomenite.some((i) => r.instrumente[i.id] === "putin"), () => { cuPutin = false; }, "instrumentele „puțin”"],
-    [() => cuIdee && Object.values(trepte).includes("idee"), () => { cuIdee = false; }, "stilurile „o idee”"],
+    [() => cuAbia && Object.values(trepte).includes("abia"), () => { cuAbia = false; }, "stilurile „abia simțit”"],
     [() => nStari > 2, () => { nStari = 2; }, "a treia stare"],
     [() => nStari > 1, () => { nStari = 1; }, "a doua stare"],
   ];
@@ -389,7 +390,7 @@ export function regleazaInCuvinte(retetaBruta: unknown, fraza: string): Reglaj {
       } else if (gest === "adauga") schimbari.push(`${stil.ro}: e deja ales`);
       else {
         const t = trepteStiluri(r.stiluri)[stil.id];
-        const scara: Treapta[] = ["idee", "clar", "baza"];
+        const scara: Treapta[] = ["abia", "idee", "clar", "egal", "baza"];
         const k = scara.indexOf(t) + (gest === "plus" ? 1 : -1);
         if (r.stiluri.length === 1) schimbari.push(`${stil.ro}: e singurul stil; adaugă altul ca să-l poți doza`);
         else if (k < 0) schimbari.push(`${stil.ro}: e deja la minimum (spune „scoate” ca să dispară)`);

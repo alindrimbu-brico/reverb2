@@ -168,7 +168,7 @@ export default function CreeazaPanou({
 
         {reteta.stiluri.length > 1 && (
           <p className="text-sm text-neutral-400">
-            Suno nu măsoară procente. Cursorul alege una din două trepte față de stilul de bază: „o idee” (sub jumătatea bazei) sau „clar” (de la jumătate în sus). Treapta e cuvântul care pleacă; doza fină o alegi ascultând variantele.
+            Suno nu măsoară procente. Cursorul alege una din patru trepte față de stilul de bază (abia simțit, o idee, clar, la egal); treapta e cuvântul care pleacă.
           </p>
         )}
 
