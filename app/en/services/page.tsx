@@ -8,57 +8,57 @@ export const metadata: Metadata = {
   alternates: { canonical: "/en/services", languages: { ro: "/servicii", en: "/en/services", "x-default": "/servicii" } },
   title: "Services — Reverb Digital",
   description:
-    "Complete digital architecture: high-speed web platforms, daily AI video content, Generative Engine Optimization GEO, and enterprise infrastructure.",
+    "Websites and online stores at fixed prices, daily AI-made videos for social media, and help to be found and recommended by AI assistants such as ChatGPT.",
 };
 
 const mainServices = [
   {
     id: "01",
-    tag: "TECHNICAL FOUNDATION",
+    tag: "WEBSITES & STORES",
     price: `from ${enPrice("site-start")}`,
-    title: "Web Platforms & Digital Stores",
-    tagline: "High-speed architecture built directly for conversion.",
-    text: "We develop presentation websites and robust online stores from scratch on Next.js and WooCommerce. Guaranteed loading under 1.2 seconds, cognitive checkout flow, secure card integrations, automated invoicing, and instant courier dispatch.",
+    title: "Websites & Online Stores",
+    tagline: "Built to load fast and to sell.",
+    text: "We build presentation websites and online stores from scratch. Pages load in under 1.2 seconds, the customer pays by card in a few steps, the invoice is issued automatically and the courier label is created as soon as the order comes in.",
     deliverables: [
-      "Next.js and Edge Runtime architecture under 1.2s",
-      "Enterprise Control Panel with Payload CMS option",
-      "Frictionless 1-step checkout sales process",
-      "Automated invoicing plus instant courier AWB",
-      "Complete optimization for all mobile devices",
+      "Pages that load in under 1.2 seconds",
+      "An admin panel where you add products and change prices yourself",
+      "Checkout in one step, so buyers do not give up halfway",
+      "Automatic invoices and courier labels (AWB)",
+      "Works well on every phone and tablet",
     ],
     href: "/en/contact?package=web-store",
   },
   {
     id: "02",
-    tag: "SOCIAL MEDIA SCALING",
+    tag: "SOCIAL MEDIA",
     price: `from ${enPrice("social-growth")}`,
-    title: "AI Social Media Video Engine",
-    tagline: "Daily volume of product video content generated with AI.",
-    text: "We eliminate the barrier of traditional video production costs. We generate 1 to 3 high-fidelity video assets daily for TikTok, Instagram Reels, YouTube Shorts, and Facebook using Google Imagen and Veo technologies. Product demonstrations, sales hooks, and dynamic subtitles.",
+    title: "Daily Videos for Social Media",
+    tagline: "New product videos every day, made with AI.",
+    text: "A classic production company is expensive and slow. We make 1 to 3 short videos a day for TikTok, Instagram Reels, YouTube Shorts and Facebook, with AI: product demos, sales scripts and on-screen subtitles.",
     deliverables: [
-      "30 to 90 short-form video assets monthly",
-      "Graphic posts and product carousels for each network",
-      "Ultra-realistic synthetic voiceover and dynamic editing",
-      "Direct traffic routing to store or contact flow",
-      "Zero hours wasted with manual filming by client",
+      "30 to 90 short videos a month",
+      "Image posts and product carousels for each network",
+      "Natural-sounding AI voice-over and editing",
+      "Every video sends viewers to your store or contact page",
+      "You do not film anything",
     ],
     href: "/en/contact?package=daily-impact",
     featured: true,
   },
   {
     id: "03",
-    tag: "NEW SEARCH PARADIGM",
+    tag: "AI SEARCH",
     // The GEO service is not a package in the registry: its price is written here.
     price: "from €588 / month",
-    title: "Generative Engine Optimization GEO",
-    tagline: "Become the primary recommendation in ChatGPT, Perplexity, Claude, and Gemini.",
-    text: "In 2026, buyers ask direct questions to AI models instead of simple keyword queries. We structure your digital assets using advanced JSON-LD data, transparent pricing indices, and entity authority so LLMs recommend your business as the verified source.",
+    title: "Found by AI Assistants",
+    tagline: "So ChatGPT, Perplexity, Claude and Gemini can recommend you.",
+    text: "More and more buyers ask an AI assistant instead of typing keywords into Google. We write your company data, products and prices in a form these assistants read correctly, so they understand your offer and can recommend it.",
     deliverables: [
-      "AI-Readable Answer Stack with structured semantic data",
-      "Transparent and unambiguous pricing package index",
-      "Generative Engine Optimization GEO for Perplexity and ChatGPT",
-      "Brand entity validation and digital authority",
-      "Live citation tracking across AI model responses",
+      "Your company, products and prices written so AI assistants read them correctly",
+      "A clear, public price list for your packages",
+      "Pages that answer the questions buyers ask ChatGPT and Perplexity",
+      "Your brand described the same way everywhere online",
+      "We track how AI assistants mention your business",
     ],
     href: "/en/contact?package=geo-search",
   },
@@ -84,19 +84,19 @@ export default function ServicesPageEN() {
           <Reveal>
             <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.1em] sm:tracking-[0.25em] text-neutral-300 mb-6 backdrop-blur-md">
               <span className="h-1.5 w-1.5 rounded-full bg-white" />
-              <span>[ CLARITY IN ARCHITECTURE • SERVICES ]</span>
+              <span>[ SERVICES • FIXED PRICES ]</span>
             </div>
           </Reveal>
 
           <Reveal delay={0.1}>
             <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-white leading-tight">
-              <Linie>Systems & Execution</Linie>
+              <Linie>What we do for you.</Linie>
             </h1>
           </Reveal>
 
           <Reveal delay={0.2}>
             <p className="mx-auto mt-6 max-w-2xl text-base sm:text-lg text-neutral-400 font-light leading-relaxed">
-              From the high-speed technical foundation of your digital store to automated daily AI video engines and verified positioning in AI search assistants. {VAT_NOTE_EN}
+              We build your website or online store, make daily videos for your social media and help AI assistants find and recommend your business. {VAT_NOTE_EN}
             </p>
           </Reveal>
         </div>
@@ -141,7 +141,7 @@ export default function ServicesPageEN() {
 
                     <div className="space-y-2.5 pt-6 border-t border-white/10 font-mono text-xs text-neutral-400 mb-8">
                       <div className="text-[10px] uppercase tracking-[0.2em] text-neutral-400 font-bold mb-3">
-                        Included Deliverables:
+                        What you get:
                       </div>
                       {srv.deliverables.map((item, i) => (
                         <div key={i} className="flex items-start gap-2.5">
@@ -160,7 +160,7 @@ export default function ServicesPageEN() {
                         : "border border-white/20 bg-white/5 text-white hover:bg-white/10"
                     }`}
                   >
-                    Select Service →
+                    Ask about this service →
                   </Link>
                 </div>
               </Reveal>
@@ -174,19 +174,19 @@ export default function ServicesPageEN() {
         <div className="mx-auto max-w-4xl px-6 text-center">
           <Reveal>
             <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-neutral-400 mb-4">
-              [ TECHNICAL AUDIT & ARCHITECTURE ]
+              [ NOT SURE WHAT YOU NEED? ]
             </div>
             <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight mb-6">
-              <Linie>Need a Tailored System?</Linie>
+              <Linie>Need something made for you?</Linie>
             </h2>
             <p className="text-neutral-400 text-sm leading-relaxed max-w-xl mx-auto mb-8 font-light">
-              We analyze your current digital presence, traffic flows, and operational systems. Delivery plan and fixed quote within 24 hours.
+              Tell us what you sell and where you are now. We look at your website and social pages and come back within 24 working hours with a plan and a fixed price.
             </p>
             <Link
               href="/en/contact"
               className="inline-flex items-center justify-center rounded-full bg-white px-8 py-3.5 text-xs font-mono uppercase tracking-widest text-black hover:bg-neutral-200 transition-colors font-bold shadow-lg"
             >
-              Request Technical Discussion →
+              Talk to us →
             </Link>
           </Reveal>
         </div>

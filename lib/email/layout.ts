@@ -170,7 +170,7 @@ function renderBlock(b: Block, base: string): string {
       const h = safeHref(b.href);
       if (!h) return "";
       const primary = b.variant !== "outline" && b.variant !== "accent";
-      const A = `display:inline-block;${MONO}font-size:12px;line-height:16px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;padding:15px 30px;border-radius:999px;mso-padding-alt:0;`;
+      const A = `display:inline-block;${MONO}font-size:12px;line-height:16px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;padding:15px 30px;border-radius:12px;mso-padding-alt:0;`;
       const text = `${esc(b.label)}&nbsp;&rarr;`;
       // Spațiile <i> dau butonului înălțime și lățime în Outlook pe Windows (motorul Word), care ignoră padding-ul de pe <a>.
       const padL = `<!--[if mso]><i style="mso-font-width:300%;mso-text-raise:22pt" hidden>&nbsp;</i><![endif]-->`;
@@ -179,7 +179,7 @@ function renderBlock(b: Block, base: string): string {
         // Butonul secundar: contur stins, fără fond (nimic de revopsit). `accent` = text verde.
         const color = b.variant === "accent" ? theme.accent : theme.strong;
         return (
-          `<table ${TABLE} style="border-collapse:separate;"><tr><td align="center" style="border:1px solid ${theme.outline};border-radius:999px;">` +
+          `<table ${TABLE} style="border-collapse:separate;"><tr><td align="center" style="border:1px solid ${theme.outline};border-radius:12px;">` +
           `<a href="${h}" target="_blank" style="${A}color:${color};">${padL}<span style="mso-text-raise:11pt;">${text}</span>${padR}</a>` +
           `</td></tr></table>`
         );
@@ -199,7 +199,7 @@ function renderBlock(b: Block, base: string): string {
       const black = esc(base + theme.tileBlack);
       return (
         `<table ${TABLE} style="border-collapse:separate;"><tr>` +
-        `<td align="center" class="rv-t" bgcolor="${theme.buttonBg}" background="${white}" style="background-color:${theme.buttonBg};background-image:url('${white}');background-repeat:repeat;border:1px solid ${theme.buttonBg};border-radius:999px;">` +
+        `<td align="center" class="rv-t" bgcolor="${theme.buttonBg}" background="${white}" style="background-color:${theme.buttonBg};background-image:url('${white}');background-repeat:repeat;border:1px solid ${theme.buttonBg};border-radius:12px;">` +
         // În ramura mso spațiile <i> stau fără comentariul lor: un comentariu condițional în altul l-ar închide pe primul.
         `<!--[if mso]><a href="${h}" target="_blank" style="${A}color:${theme.buttonText};"><i style="mso-font-width:300%;mso-text-raise:22pt" hidden>&nbsp;</i><span style="mso-text-raise:11pt;color:${theme.buttonText};">${text}</span><i style="mso-font-width:300%" hidden>&nbsp;&#8203;</i></a><![endif]-->` +
         `<!--[if !mso]><!--><a href="${h}" target="_blank" class="rv-bl" style="${A}color:#ffffff;background-color:#000000;background-image:url('${black}');background-repeat:repeat;mix-blend-mode:difference;"><span>${text}</span></a><!--<![endif]-->` +
@@ -216,6 +216,13 @@ function renderBlock(b: Block, base: string): string {
   }
 }
 
+/** Rândul mic de la capătul subsolului: firma, codul fiscal, registrul. */
+function legalLine(en: boolean): string {
+  return en
+    ? `${company.legalName} · ${company.city}, Romania · VAT ID ${company.cui} · Reg. ${company.regCom}`
+    : `${company.legalName} · ${company.city}, ${company.county} · CUI ${company.cui} · ${company.regCom}`;
+}
+
 function footerHtml(spec: EmailSpec): string {
   const en = spec.lang === "en";
   // Subsolul e în mono, ca subsolul site-ului: contactele albe, datele firmei stinse, WhatsApp verde.
@@ -226,9 +233,15 @@ function footerHtml(spec: EmailSpec): string {
   if (spec.footer === "intern") {
     return `<div style="${small}">${link(company.site, company.siteLabel, theme.text)} &middot; ${esc(company.brand)}</div>${reason}`;
   }
-  const who = en
-    ? `${company.brand} is the brand of ${company.legalName} &middot; ${company.city}, Romania &middot; VAT ID ${company.cui} &middot; Reg. ${company.regCom}`
-    : `${company.brand} este marca firmei ${company.legalName} &middot; ${company.city}, ${company.county} &middot; CUI ${company.cui} &middot; ${company.regCom}`;
+  // Semnătura (Alin, 13 nov 2026): „Reverb Digital”, fără adresă, apoi „Zylaris Group” cu adresa, ca în subsolul site-ului.
+  // Firma care emite factura rămâne pe ultimul rând, mic: o ofertă e document comercial și trebuie să spună cine o face.
+  const p = company.partner;
+  const name = `${MONO}font-size:11px;line-height:19px;letter-spacing:0.16em;text-transform:uppercase;font-weight:700;color:${theme.text};`;
+  const who =
+    `<div style="${name}padding-top:16px;">${esc(company.brand)}</div>` +
+    `<div style="${name}padding-top:10px;">${esc(p.name)}</div>` +
+    `<div style="${small}">${esc(p.street)}<br>${esc(p.cityLine)}<br>${link(p.site, p.siteLabel, theme.muted)}</div>` +
+    `<div style="${MONO}font-size:10px;line-height:17px;color:${theme.faint};padding-top:14px;">${esc(legalLine(en))}</div>`;
   const sep = ` <span style="color:${theme.faint};">&middot;</span> `;
   const links = [
     link(company.tel, en ? company.phoneIntl : company.phoneDisplay, theme.text),
@@ -238,7 +251,7 @@ function footerHtml(spec: EmailSpec): string {
   ].join(sep);
   return (
     `<div style="${MONO}font-size:12px;line-height:22px;color:${theme.text};">${links}</div>` +
-    `<div style="${small}padding-top:12px;">${who}</div>` +
+    who +
     reason
   );
 }
@@ -274,10 +287,10 @@ function renderText(spec: EmailSpec): string {
     "--",
     spec.footer === "client"
       ? [
-          en
-            ? `${company.brand} is the brand of ${company.legalName}, ${company.city}, Romania. VAT ID ${company.cui}, Reg. ${company.regCom}.`
-            : `${company.brand} este marca firmei ${company.legalName}, ${company.city}, ${company.county}. CUI ${company.cui}, ${company.regCom}.`,
           `${en ? company.phoneIntl : company.phoneDisplay} · ${company.email} · ${company.site}`,
+          company.brand,
+          `${company.partner.name}, ${company.partner.street}, ${company.partner.cityLine} · ${company.partner.site}`,
+          legalLine(en),
         ].join("\n")
       : `${company.siteLabel} · ${company.brand}`,
     spec.reason ?? "",

@@ -7,56 +7,56 @@ export const metadata: Metadata = {
   alternates: { canonical: "/en/about", languages: { ro: "/despre", en: "/en/about", "x-default": "/despre" } },
   title: "About Us — Reverb Digital",
   description:
-    "Digital architecture, disciplined execution, and strategic partnership. AI technology partners with Zylaris Group London.",
+    "Who we are and how we work: fixed prices, clear steps and support after launch. Technology partner of Zylaris Group London.",
 };
 
 const values = [
   {
     title: "Fixed & Transparent Pricing",
-    text: "Every engagement starts with fixed quotes and unambiguous deliverables. Zero vague estimates, zero hidden costs.",
+    text: "Every project starts with a fixed price and a clear list of what you get. No vague estimates, no hidden costs.",
   },
   {
-    title: "4-Stage Operational Model",
-    text: "Design, Connect, Automate, and Scale. Structured execution without chaotic pivots or improvisation.",
+    title: "Four Clear Steps",
+    text: "We plan, build, launch and improve. You always know which step we are on, and nothing is improvised.",
   },
   {
-    title: "Value-Oriented Systems",
-    text: "We measure commercial impact: orders, verified conversions, and genuine customer inquiries. We construct durable digital assets.",
+    title: "Results You Can Count",
+    text: "We measure what matters to you: orders, requests and calls from real customers.",
   },
   {
-    title: "Engineering Discipline",
-    text: "We write clean code, configure production API integrations, and deliver 100% operational systems ready for scale.",
+    title: "We Build It, Not Just Advise",
+    text: "We do not hand you a strategy and leave. We write the code, connect payments and couriers, and hand over a site that works.",
   },
   {
-    title: "Human Taste & AI Velocity",
-    text: "Human vision defines the direction and aesthetics. AI models accelerate video asset generation and semantic optimization.",
+    title: "Human Taste, AI Speed",
+    text: "People decide the direction and the look. AI shortens the time it takes to make videos and to analyse data.",
   },
   {
-    title: "Generative Engine Optimization",
-    text: "We ensure semantic readability of your business for ChatGPT, Perplexity, Claude, and Gemini across all answer engines.",
+    title: "Found by AI Assistants",
+    text: "We write your business data so ChatGPT, Perplexity, Claude and Gemini understand it and can recommend you.",
   },
 ];
 
 const approach = [
   {
     step: "01",
-    title: "Audit & Architecture",
-    text: "We audit existing infrastructure, target audience, and customer journeys to establish exact key performance metrics.",
+    title: "We Listen and Plan",
+    text: "We look at what you have today, who your customers are and what you sell, and agree how we will measure success.",
   },
   {
     step: "02",
-    title: "Design & Build",
-    text: "We develop high-speed Next.js web platforms, integrate payment gateways, and configure automated fulfillment pipelines.",
+    title: "We Build",
+    text: "We build the website or the online store and connect card payments, invoices and couriers.",
   },
   {
     step: "03",
-    title: "Video Engine & GEO",
-    text: "We activate daily short-form AI video pipelines and inject semantic JSON-LD structures for AI search assistant citations.",
+    title: "Videos and AI Search",
+    text: "We start the daily videos for social media and prepare your data so AI assistants can read it.",
   },
   {
     step: "04",
-    title: "Scale & Reliability",
-    text: "We monitor uptime, manage cloud security protocols, and continuously optimize checkout conversion rates.",
+    title: "We Stay With You",
+    text: "We watch that the site stays online and safe, and keep improving what brings you orders.",
   },
 ];
 
@@ -80,7 +80,7 @@ export default function AboutPageEN() {
           <Reveal>
             <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.1em] sm:tracking-[0.25em] text-neutral-300 mb-6 backdrop-blur-md">
               <span className="h-1.5 w-1.5 rounded-full bg-white" />
-              <span>[ CLARITY & STRUCTURE • ABOUT US ]</span>
+              <span>[ ABOUT US ]</span>
             </div>
           </Reveal>
 
@@ -92,7 +92,7 @@ export default function AboutPageEN() {
 
           <Reveal delay={0.2}>
             <p className="mx-auto mt-6 max-w-2xl text-base sm:text-lg text-neutral-400 font-light leading-relaxed">
-              We design and operate resilient digital systems: high-velocity online stores, automated daily AI video engines, and full semantic integration for the AI search era.
+              We build websites and online stores, make daily videos for social media and help AI assistants find your business. We take you from zero to your first sale and keep advising you after launch.
             </p>
           </Reveal>
         </div>
@@ -104,10 +104,10 @@ export default function AboutPageEN() {
           <Reveal>
             <div className="mb-16 border-b border-white/10 pb-6 text-center">
               <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-neutral-500 mb-2">
-                OPERATIONAL PRINCIPLES
+                OUR PRINCIPLES
               </div>
               <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
-                <Linie>How We Build</Linie>
+                <Linie>How we work</Linie>
               </h2>
             </div>
           </Reveal>
@@ -140,10 +140,10 @@ export default function AboutPageEN() {
           <Reveal>
             <div className="mb-16 border-b border-white/10 pb-6 text-center">
               <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-neutral-500 mb-2">
-                4-STAGE FRAMEWORK
+                FOUR STEPS
               </div>
               <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
-                <Linie>Execution Architecture</Linie>
+                <Linie>How a project goes</Linie>
               </h2>
             </div>
           </Reveal>
@@ -176,7 +176,7 @@ export default function AboutPageEN() {
               <Linie>Start Your Project</Linie>
             </h2>
             <p className="text-neutral-400 text-sm leading-relaxed max-w-xl mx-auto mb-8 font-light">
-              Clear scope, fixed delivery timelines, and transparent pricing.
+              A clear list of what you get, a fixed delivery date and a fixed price.
             </p>
             <Link
               href="/en/contact"

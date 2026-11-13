@@ -19,4 +19,13 @@ export const company = {
   offersEmail: "reverb@reverb.ro",
   site: "https://reverb.ro",
   siteLabel: "reverb.ro",
+  /** Biroul din Londra, cum apare în subsolul site-ului (components/Footer.tsx). În subsolul e-mailurilor vine imediat
+   *  după „Reverb Digital” (Alin, 13 nov 2026: „Reverb Digital și, după aia, Zylaris Group cu adresa… ca pe site”). */
+  partner: {
+    name: "Zylaris Group London",
+    site: "https://zylarisgroup.com",
+    siteLabel: "zylarisgroup.com",
+    street: "167–169 Great Portland Street",
+    cityLine: "London, W1W 5PF, United Kingdom",
+  },
 } as const;

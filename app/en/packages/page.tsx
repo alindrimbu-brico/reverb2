@@ -15,17 +15,17 @@ export const metadata: Metadata = {
   alternates: { canonical: "/en/packages", languages: { ro: "/pachete", en: "/en/packages", "x-default": "/pachete" } },
   title: "Packages & Pricing — Reverb Digital",
   description:
-    "Fixed prices, zero surprises. Daily AI video content packages, turnkey digital stores, and enterprise infrastructure.",
+    "Fixed prices, no surprises. Websites and online stores ready for the first sale, and monthly video packages for social media.",
 };
 
 const faqsEN = [
   {
-    q: "How fast is delivery?",
-    a: "For AI video production, first deliverables launch within 48 hours of contract execution. Presentation websites deliver in 7 to 14 days. Complete digital stores deliver within 14 to 30 days.",
+    q: "How long does a project take?",
+    a: "For video packages, the first clips arrive within 48 hours of signing. A presentation website takes 7 to 14 days, a complete online store 14 to 30 days.",
   },
   {
-    q: "How does billing work?",
-    a: "For monthly video packages, payment is processed monthly in advance. For web and digital store builds: 50% upfront upon kickoff, 50% upon final delivery and deployment verification.",
+    q: "How do I pay?",
+    a: "For monthly video packages you pay each month, in advance. For a website or a store: 50% when we start and 50% at handover, after you have checked that everything works.",
   },
   {
     q: "What help do I get after launch?",
@@ -40,12 +40,12 @@ const faqsEN = [
     a: "More and more people ask ChatGPT, Gemini or Perplexity instead of searching on Google. We write your company data, products and prices in a form these assistants can read correctly, so they understand your offer and can recommend it.",
   },
   {
-    q: "Can I manage content without coding?",
+    q: "Can I run my store myself?",
     a: "Yes. You get an admin panel where you add products, change prices and see orders. It is usually WooCommerce; for stores that need high speed we build a custom panel with editing directly on the page.",
   },
   {
-    q: "Is advertising ad budget included?",
-    a: "Our package fees cover all AI video creation, copywriting, dynamic editing, and publishing operations. Paid ad spend for Meta, TikTok, or Google Ads is paid separately directly to the platforms.",
+    q: "Is the budget for paid ads included?",
+    a: "The package price covers making the videos, writing the texts, editing and publishing on the networks. The budget for paid ads on Meta, TikTok or Google is paid separately, straight to the platforms, from your own ad account.",
   },
 ];
 
@@ -72,19 +72,24 @@ export default function PackagesPageEN() {
           <Reveal>
             <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.1em] sm:tracking-[0.25em] text-neutral-300 mb-6 backdrop-blur-md">
               <span className="h-1.5 w-1.5 rounded-full bg-white" />
-              <span>[ FINANCIAL CLARITY • FIXED PRICING ]</span>
+              <span>[ PACKAGES • FIXED PRICES ]</span>
             </div>
           </Reveal>
 
           <Reveal delay={0.1}>
             <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-white leading-tight">
-              <Linie>Packages & Pricing</Linie>
+              <Linie>Fixed prices.</Linie><br />
+              <span className="text-neutral-400 font-light"><Linie>No hidden costs.</Linie></span>
             </h1>
           </Reveal>
 
           <Reveal delay={0.2}>
             <p className="mx-auto mt-6 max-w-2xl text-base sm:text-lg text-neutral-400 font-light leading-relaxed">
-              Transparent investments. Predictable outcomes. High-velocity AI video engines, turnkey eCommerce stores, and enterprise architecture.
+              Every package has a fixed list of what you get and a firm delivery date. What we build can be found on Google and by people who ask ChatGPT.
+            </p>
+            <p className="mx-auto mt-5 max-w-2xl text-sm text-neutral-300 font-light leading-relaxed">
+              Looking for a website or an online store?{" "}
+              <a href="#web" className="text-white underline underline-offset-4 decoration-white/40 hover:decoration-white">See websites and stores ↓</a>
             </p>
             <div className="mt-6">
               <WhoWeAre lang="en" center />
@@ -99,11 +104,14 @@ export default function PackagesPageEN() {
           <Reveal>
             <div className="mb-12 border-b border-white/10 pb-6 max-w-5xl">
               <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-neutral-500 mb-2">
-                01 / CONTINUOUS VISIBILITY
+                01 / VIDEO FOR SOCIAL MEDIA
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-tight leading-tight">
-                <Linie>Social Media Packages • Short-Form Video & Visuals</Linie>
+                <Linie>Social Media Packages • Short Videos and Images</Linie>
               </h2>
+              <p className="mt-4 text-sm text-neutral-400 font-light leading-relaxed">
+                Short videos and images for TikTok, Reels, Shorts and Facebook, made with AI: product demos, sales scripts and on-screen subtitles. You do not film anything.
+              </p>
             </div>
           </Reveal>
 
@@ -151,7 +159,7 @@ export default function PackagesPageEN() {
 
                       <div className="space-y-2.5 pt-6 border-t border-white/10 font-mono text-xs text-neutral-400 mb-8">
                         <div className="text-[10px] uppercase tracking-[0.2em] text-neutral-400 font-bold mb-3">
-                          Deliverables Included:
+                          What you get:
                         </div>
                         {details.includes.map((inc, i) => (
                           <div key={i} className="flex items-start gap-2.5">
@@ -170,7 +178,7 @@ export default function PackagesPageEN() {
                           : "border border-white/20 bg-white/5 text-white hover:bg-white/10"
                       }`}
                     >
-                      Select Package →
+                      Choose this package →
                     </Link>
                   </div>
                 </Reveal>
@@ -186,11 +194,14 @@ export default function PackagesPageEN() {
           <Reveal>
             <div className="mb-12 border-b border-white/10 pb-6 max-w-5xl">
               <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-neutral-500 mb-2">
-                02 / TECHNICAL FOUNDATION
+                02 / WEBSITES AND ONLINE STORES
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-tight leading-tight">
-                <Linie>Web & eCommerce Packages • Fixed Prices</Linie>
+                <Linie>Websites, Online Stores and Large Projects</Linie>
               </h2>
+              <p className="mt-4 text-sm text-neutral-400 font-light leading-relaxed">
+                Presentation websites and online stores at a fixed price: from a simple start to complete systems with video clips, and projects for large companies.
+              </p>
               <div className="mt-6">
                 <WhoWeAre lang="en" />
               </div>
@@ -207,7 +218,7 @@ export default function PackagesPageEN() {
                 <Link href="/showcase" className="rounded-full border border-white/20 px-4 py-2 text-xs font-mono text-neutral-200 transition hover:bg-white hover:text-black">Concept gallery →</Link>
               </div>
               <p className="mt-6 text-sm text-neutral-400 font-light leading-relaxed">
-                “Select Package” opens a short form. We answer within 24 working hours, with no obligation.
+                “Ask for this package” opens a short form. We answer within 24 working hours, with no obligation.
               </p>
             </div>
           </Reveal>
@@ -256,7 +267,7 @@ export default function PackagesPageEN() {
 
                       <div className="space-y-2.5 pt-6 border-t border-white/10 font-mono text-xs text-neutral-400 mb-8">
                         <div className="text-[10px] uppercase tracking-[0.2em] text-neutral-400 font-bold mb-3">
-                          Specifications Included:
+                          What you get:
                         </div>
                         {details.includes.map((inc, i) => (
                           <div key={i} className="flex items-start gap-2.5">
@@ -275,7 +286,7 @@ export default function PackagesPageEN() {
                           : "border border-white/20 bg-white/5 text-white hover:bg-white/10"
                       }`}
                     >
-                      Select Package →
+                      Ask for this package →
                     </Link>
                   </div>
                 </Reveal>
@@ -291,7 +302,7 @@ export default function PackagesPageEN() {
           <Reveal>
             <div className="text-center mb-16">
               <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-neutral-500 mb-3">
-                03 / SYSTEM CLARITY
+                03 / QUESTIONS
               </div>
               <h2 className="text-3xl md:text-4xl font-light text-white tracking-tight">
                 <Linie>Frequently Asked Questions</Linie>
