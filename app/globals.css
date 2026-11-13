@@ -913,6 +913,24 @@ html.light .rounded-full.bg-white.text-black:not(:where([role="dialog"] *, [data
   }
 }
 
+/* ── Fundalul animat (components/AmbientBeams.tsx) ──
+   Firul subțire din mijlocul fiecărei dungi de lumină. Poziția, înălțimea și unghiul le scrie componenta (transform). */
+.ambient-hairline {
+  position: absolute; left: 0; top: 0; width: 1.5px; height: 0;
+  transform-origin: 1px 50%; will-change: transform;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.052) 50%, rgba(255, 255, 255, 0));
+}
+html.light .ambient-hairline {
+  background: linear-gradient(to bottom, rgba(17, 18, 21, 0), rgba(17, 18, 21, 0.121) 50%, rgba(17, 18, 21, 0));
+}
+/* Pe ecrane obișnuite firul de 1,5 px se desenează pe 2 pixeli întregi, deci e mai slab cu 13 % ca să aibă aceeași tărie ca
+   în varianta desenată pe canvas (măsurat pe capturi, 13 nov 2026). Pe ecrane dense rămâne la valoarea de bază. */
+@media (min-resolution: 2dppx) {
+  .ambient-hairline { background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.06) 50%, rgba(255, 255, 255, 0)); }
+  html.light .ambient-hairline { background: linear-gradient(to bottom, rgba(17, 18, 21, 0), rgba(17, 18, 21, 0.14) 50%, rgba(17, 18, 21, 0)); }
+}
+@media print { .ambient-hairline { display: none; } }
+
 /* ── Pastile cu colț (13 nov 2026, cererea lui Alin) ──
    Pe site-ul agenției nimic cu text nu mai e capsulă: etichetele și butoanele au colț rotunjit, latură dreaptă, colț rotunjit,
    ca chenarul casetelor. În cod clasa rămâne `rounded-full` (de ea țin butoanele magnetice și corecțiile temei deschise);
@@ -920,9 +938,13 @@ html.light .rounded-full.bg-white.text-black:not(:where([role="dialog"] *, [data
    - „capsulă cu text” = `rounded-full` care are și `px-*` sau `py-*`; cercurile (puncte, butoane rotunde cu h-* / w-*) rămân cercuri;
    - trei trepte, după clasa `py-*` de bază: etichetă 6 px, buton mic 9 px, buton mare 12 px; `--pill-k` le înmulțește pe toate
      (mai rotund: 1.4; mai drept: 0.7);
-   - rămâne capsulă tot ce e sub `data-keep-pills`: machetele (components/DemoScope.tsx), bara de sus, comutatoarele în capsulă.
-     Un element nou care trebuie să rămână capsulă primește `data-keep-pills`. */
+   - rămâne capsulă doar ce e sub `data-keep-pills`: machetele (components/DemoScope.tsx). Bara de sus și comutatoarele
+     (limbă, lățimea previzualizării) au și ele colț din 13 nov seara (Alin: „bara de sus nu rămâne capsulă”);
+   - o piesă mai înaltă decât un buton își scrie singură raza: `.pill-bar` (bara de sus, 16 px) sau `style="--pill-r: …"`
+     pe un comutator (raza butoanelor din el + spațiul dintre ele);
+   - `data-no-lift` = butoanele de sub el nu se ridică la cursor (bara de sus, comutatoarele). */
 :root { --pill-k: 1; }
+.pill-bar { --pill-r: 16px; }
 :where(.rounded-full):where([class*="px-"], [class*="py-"]) { --pill-r: 9px; }
 :where(.rounded-full):where([class~="py-0.5"], [class~="py-1"]) { --pill-r: 6px; }
 :where(.rounded-full):where([class~="py-3"], [class~="py-3.5"], [class~="py-4"], [class~="py-5"], [class~="py-6"]) { --pill-r: 12px; }
@@ -933,18 +955,18 @@ html.light .rounded-full.bg-white.text-black:not(:where([role="dialog"] *, [data
 /* ── Butoanele se ridică (13 nov 2026, cererea lui Alin: „să vină în față, ca și cum ar fugi spre privitor”) ──
    La trecerea cursorului, butonul crește puțin și capătă o umbră care îl desprinde de plan. Proprietatea `scale` se adună cu
    tragerea magnetică (lib/motion/magnetic.ts scrie `transform`) și ține loc de `hover:scale-105`: nu puneți altă mărire pe butoane.
-   Doar cu mouse și fără „mișcare redusă”; nu pe machete, în bara de sus sau în Studio. Etichetele (nu sunt <a> / <button>) nu se ridică. */
+   Doar cu mouse și fără „mișcare redusă”; nu pe machete, în bara de sus (`data-no-lift`) sau în Studio. Etichetele (nu sunt <a> / <button>) nu se ridică. */
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  :is(main a.rounded-full, main button.rounded-full, a.mech-magnetic, button.mech-magnetic, a.mech-btn, button.mech-btn):not(:where(:disabled, [aria-disabled="true"], [data-keep-pills], [data-keep-pills] *, [data-showcase] *, .showcase-root *, .studio-light-root *)) {
+  :is(main a.rounded-full, main button.rounded-full, a.mech-magnetic, button.mech-magnetic, a.mech-btn, button.mech-btn):not(:where(:disabled, [aria-disabled="true"], [data-keep-pills], [data-keep-pills] *, [data-no-lift], [data-no-lift] *, [data-showcase] *, .showcase-root *, .studio-light-root *)) {
     transition: scale 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
                 transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, border-color 0.3s ease,
                 color 0.3s ease, opacity 0.3s ease;
   }
-  :is(main a.rounded-full, main button.rounded-full, a.mech-magnetic, button.mech-magnetic, a.mech-btn, button.mech-btn):is(:hover, :focus-visible):not(:where(:disabled, [aria-disabled="true"], [data-keep-pills], [data-keep-pills] *, [data-showcase] *, .showcase-root *, .studio-light-root *)) {
+  :is(main a.rounded-full, main button.rounded-full, a.mech-magnetic, button.mech-magnetic, a.mech-btn, button.mech-btn):is(:hover, :focus-visible):not(:where(:disabled, [aria-disabled="true"], [data-keep-pills], [data-keep-pills] *, [data-no-lift], [data-no-lift] *, [data-showcase] *, .showcase-root *, .studio-light-root *)) {
     scale: 1.045;
     box-shadow: 0 14px 34px -12px rgba(255, 255, 255, 0.24);
   }
-  html.light :is(main a.rounded-full, main button.rounded-full, a.mech-magnetic, button.mech-magnetic, a.mech-btn, button.mech-btn):is(:hover, :focus-visible):not(:where(:disabled, [aria-disabled="true"], [data-keep-pills], [data-keep-pills] *, [data-showcase] *, .showcase-root *, .studio-light-root *)) {
+  html.light :is(main a.rounded-full, main button.rounded-full, a.mech-magnetic, button.mech-magnetic, a.mech-btn, button.mech-btn):is(:hover, :focus-visible):not(:where(:disabled, [aria-disabled="true"], [data-keep-pills], [data-keep-pills] *, [data-no-lift], [data-no-lift] *, [data-showcase] *, .showcase-root *, .studio-light-root *)) {
     box-shadow: 0 14px 28px -10px rgba(17, 18, 21, 0.32);
   }
 }

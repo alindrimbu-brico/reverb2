@@ -89,8 +89,8 @@ export default function ServicesPageEN() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <h1 className="text-4xl font-extralight tracking-tight sm:text-6xl md:text-7xl uppercase text-white font-mono">
-              Systems & Execution
+            <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-white leading-tight">
+              <Linie>Systems & Execution</Linie>
             </h1>
           </Reveal>
 
@@ -176,8 +176,8 @@ export default function ServicesPageEN() {
             <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-neutral-400 mb-4">
               [ TECHNICAL AUDIT & ARCHITECTURE ]
             </div>
-            <h2 className="text-3xl font-extralight uppercase text-white font-mono mb-6">
-              Need a Tailored System?
+            <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight mb-6">
+              <Linie>Need a Tailored System?</Linie>
             </h2>
             <p className="text-neutral-400 text-sm leading-relaxed max-w-xl mx-auto mb-8 font-light">
               We analyze your current digital presence, traffic flows, and operational systems. Delivery plan and fixed quote within 24 hours.

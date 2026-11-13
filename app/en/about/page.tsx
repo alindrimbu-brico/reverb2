@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
+import { Linie } from "@/components/RunningLine";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/en/about", languages: { ro: "/despre", en: "/en/about", "x-default": "/despre" } },
@@ -84,8 +85,8 @@ export default function AboutPageEN() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <h1 className="text-4xl font-extralight tracking-tight sm:text-6xl md:text-7xl uppercase text-white font-mono">
-              Clarity & Structure
+            <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-white leading-tight">
+              <Linie>Clarity & Structure</Linie>
             </h1>
           </Reveal>
 
@@ -105,8 +106,8 @@ export default function AboutPageEN() {
               <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-neutral-500 mb-2">
                 OPERATIONAL PRINCIPLES
               </div>
-              <h2 className="text-2xl sm:text-4xl font-light text-white font-mono uppercase">
-                How We Build
+              <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
+                <Linie>How We Build</Linie>
               </h2>
             </div>
           </Reveal>
@@ -119,8 +120,8 @@ export default function AboutPageEN() {
                     <div className="font-mono text-xs text-neutral-500 mb-4 pb-2 border-b border-white/10">
                       0{i + 1} / PRINCIPLE
                     </div>
-                    <h3 className="text-lg font-medium text-white mb-3 font-mono">
-                      {v.title}
+                    <h3 className="text-xl font-medium text-white mb-3">
+                      <Linie>{v.title}</Linie>
                     </h3>
                     <p className="text-sm text-neutral-400 font-light leading-relaxed">
                       {v.text}
@@ -141,8 +142,8 @@ export default function AboutPageEN() {
               <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-neutral-500 mb-2">
                 4-STAGE FRAMEWORK
               </div>
-              <h2 className="text-2xl sm:text-4xl font-light text-white font-mono uppercase">
-                Execution Architecture
+              <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
+                <Linie>Execution Architecture</Linie>
               </h2>
             </div>
           </Reveal>
@@ -171,8 +172,8 @@ export default function AboutPageEN() {
       <section className="relative z-10 py-20 border-t border-white/10">
         <div className="mx-auto max-w-4xl px-6 text-center">
           <Reveal>
-            <h2 className="text-3xl font-extralight uppercase text-white font-mono mb-6">
-              Start Your Project
+            <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight mb-6">
+              <Linie>Start Your Project</Linie>
             </h2>
             <p className="text-neutral-400 text-sm leading-relaxed max-w-xl mx-auto mb-8 font-light">
               Clear scope, fixed delivery timelines, and transparent pricing.

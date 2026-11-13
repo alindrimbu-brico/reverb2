@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, type CSSProperties } from "react";
 import Logo from "@/components/Logo";
 import { RO_ONLY } from "@/lib/routes";
 
@@ -166,7 +166,6 @@ export default function Header() {
       <Link
         href={inEnglish ? "/en/showcase" : "/showcase"}
         data-reverb-back
-        data-keep-pills
         className="mech-magnetic fixed left-4 bottom-4 z-[70] inline-flex items-center gap-2 rounded-full border border-white/25 bg-[#111215]/90 px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.18em] text-[#ffffff] shadow-[0_8px_24px_rgba(0,0,0,0.35)] backdrop-blur-md transition-colors hover:bg-black"
       >
         <span aria-hidden="true">←</span>
@@ -177,10 +176,11 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex flex-col items-center px-3 sm:px-4 pt-3 sm:pt-4 pointer-events-none">
-      {/* data-keep-pills: bara și tot ce e în ea rămân capsule (regula „Pastile cu colț” din globals.css e pentru carduri și casete). */}
+      {/* Bara are colț ca restul site-ului (Alin, 13 nov: „nu rămâne capsulă”): `pill-bar` îi dă raza de 16 px (globals.css,
+          „Pastile cu colț”). `data-no-lift`: butoanele din bară nu se ridică la cursor. */}
       <div
-        data-keep-pills
-        className={`w-full max-w-6xl rounded-full border bg-white/90 dark:bg-[#23262b]/90 backdrop-blur-md px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between pointer-events-auto transition-all duration-500 shadow-sm ${
+        data-no-lift
+        className={`pill-bar w-full max-w-6xl rounded-full border bg-white/90 dark:bg-[#23262b]/90 backdrop-blur-md px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between pointer-events-auto transition-all duration-500 shadow-sm ${
           scrolled 
             ? "border-black/10 dark:border-white/15 shadow-[0_12px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] py-2 sm:py-2.5 max-w-5xl" 
             : "border-black/[0.07] dark:border-white/10 py-2.5 sm:py-3.5"
@@ -242,7 +242,7 @@ export default function Header() {
           </button>
 
           {/* Discreet Language Selector with shrink-0 so it never clips off-screen */}
-          <div className={`${inStudio ? "hidden" : "flex"} bg-black/[0.04] dark:bg-white/10 rounded-full p-[2px] border border-black/10 dark:border-white/15 items-center shrink-0`}>
+          <div style={{ "--pill-r": "8px" } as CSSProperties} className={`${inStudio ? "hidden" : "flex"} bg-black/[0.04] dark:bg-white/10 rounded-full px-[2px] py-[2px] border border-black/10 dark:border-white/15 items-center shrink-0`}>
              <button 
                onClick={() => handleLangChange("ro")} 
                aria-label="Limba Română"

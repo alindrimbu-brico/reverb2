@@ -95,7 +95,7 @@ function ProbaTag({ children }: { children: React.ReactNode }) {
 }
 
 // `proba` = modul de probă al „liniei care merge”, folosit doar de /proba-linii (13 nov 2026): titlul mare cu liniuțe pe rândul alb,
-// verde lângă alb pe cardurile din caseta GEO, aceeași etichetă la trei valori de colț. Pe prima pagină reală e fals.
+// sus aceeași propoziție mare cu liniuță albă / verde / verde groasă, apoi aceleași trei pe cardurile din caseta GEO. Pe prima pagină reală e fals.
 // Nu îl porniți pe `/` fără cererea lui Alin; după ce alege, modul și pagina de probă se șterg.
 export default function HomePage({ proba = false }: { proba?: boolean }) {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -137,6 +137,31 @@ export default function HomePage({ proba = false }: { proba?: boolean }) {
 
       {/* Ambient Radial Vignette */}
       <div className="fixed inset-0 pointer-events-none z-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.03)_0%,transparent_70%)]" />
+
+      {proba ? (
+        <section className="relative z-10 mx-auto max-w-5xl px-6 pt-32 md:pt-40">
+          <div className="rounded-3xl border border-emerald-500/30 bg-emerald-500/[0.04] p-6 md:p-10">
+            <p className="mb-8 text-sm md:text-base text-emerald-200">
+              Proba de culoare: aceeași propoziție, de trei ori. Se schimbă doar liniuța care aleargă pe litere.
+            </p>
+            {([
+              ["1", "albă, cu 25 % mai groasă (așa e acum pe tot site-ul)", undefined, undefined],
+              ["2", "verde", "rl-accent", undefined],
+              ["3", "verde, cu 25 % mai groasă", "rl-accent", true],
+            ] as const).map(([nr, nume, band, thick]) => (
+              <div key={nr} className="mb-8 last:mb-0">
+                <div className="mb-2 text-sm md:text-base font-medium text-emerald-300">Proba {nr}: liniuță {nume}</div>
+                <div className="text-3xl md:text-5xl font-light text-white tracking-tight leading-tight">
+                  <Linie band={band} thick={thick}>Clienții întreabă agenții AI.</Linie>
+                </div>
+              </div>
+            ))}
+            <p className="mt-8 text-xs md:text-sm text-neutral-400">
+              Aceleași trei variante sunt și mai jos, pe titlurile mici din cele trei carduri ale casetei „Noua paradigmă a căutării online”.
+            </p>
+          </div>
+        </section>
+      ) : null}
 
       {/* ── Hero Architectural ── */}
       <section className="relative z-10 pt-32 pb-24 md:pt-40 md:pb-32 border-b border-white/10">
@@ -236,23 +261,6 @@ export default function HomePage({ proba = false }: { proba?: boolean }) {
             <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-mono uppercase tracking-wide sm:tracking-widest text-neutral-300 mb-4">
               <span>● Noua Paradigmă a Căutării Online</span>
             </div>
-            {proba ? (
-              <div className="mb-8">
-                <ProbaTag>Proba · colțul etichetelor și al butoanelor, la trei valori</ProbaTag>
-                <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
-                  {([["0.7", "mai drept"], ["1", "ca pe site"], ["1.4", "mai rotund"]] as const).map(([k, nume]) => (
-                    <div key={k} className="flex flex-wrap items-center gap-3">
-                      <span style={{ "--pill-k": k } as React.CSSProperties} className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-mono uppercase tracking-wide text-neutral-300">
-                        ● Colț {nume}
-                      </span>
-                      <span style={{ "--pill-k": k } as React.CSSProperties} className="inline-block rounded-full border border-white/20 px-6 py-3 text-xs font-mono uppercase tracking-widest text-white">
-                        Buton
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ) : null}
             <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight leading-tight">
               <Linie>În 2026, clienții nu mai caută doar pe Google.</Linie><br />
               <span className="text-neutral-400"><Linie>Ei întreabă agenții AI.</Linie></span>

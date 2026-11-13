@@ -77,8 +77,8 @@ export default function PackagesPageEN() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <h1 className="text-4xl font-extralight tracking-tight sm:text-6xl md:text-7xl uppercase text-white font-mono">
-              Packages & Pricing
+            <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-white leading-tight">
+              <Linie>Packages & Pricing</Linie>
             </h1>
           </Reveal>
 
@@ -101,8 +101,8 @@ export default function PackagesPageEN() {
               <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-neutral-500 mb-2">
                 01 / CONTINUOUS VISIBILITY
               </div>
-              <h2 className="text-2xl sm:text-3xl font-light text-white font-mono uppercase">
-                Social Media Packages • Short-Form Video & Visuals
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-tight leading-tight">
+                <Linie>Social Media Packages • Short-Form Video & Visuals</Linie>
               </h2>
             </div>
           </Reveal>
@@ -188,8 +188,8 @@ export default function PackagesPageEN() {
               <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-neutral-500 mb-2">
                 02 / TECHNICAL FOUNDATION
               </div>
-              <h2 className="text-2xl sm:text-3xl font-light text-white font-mono uppercase">
-                Web & eCommerce Packages • Fixed Prices
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-tight leading-tight">
+                <Linie>Web & eCommerce Packages • Fixed Prices</Linie>
               </h2>
               <div className="mt-6">
                 <WhoWeAre lang="en" />
@@ -293,8 +293,8 @@ export default function PackagesPageEN() {
               <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-neutral-500 mb-3">
                 03 / SYSTEM CLARITY
               </div>
-              <h2 className="text-2xl sm:text-3xl font-light text-white font-mono uppercase">
-                Frequently Asked Questions
+              <h2 className="text-3xl md:text-4xl font-light text-white tracking-tight">
+                <Linie>Frequently Asked Questions</Linie>
               </h2>
             </div>
           </Reveal>

@@ -114,7 +114,7 @@ export default function ProjectPreviewModal({
             </div>
 
             {/* Viewport Width Switchers */}
-            <div data-keep-pills className="hidden sm:flex bg-white/5 dark:bg-white/5 light:bg-black/5 p-1 rounded-full border border-white/10 dark:border-white/10 light:border-black/10 shrink-0">
+            <div data-no-lift style={{ "--pill-r": "10px" } as React.CSSProperties} className="hidden sm:flex bg-white/5 dark:bg-white/5 light:bg-black/5 px-1 py-1 rounded-full border border-white/10 dark:border-white/10 light:border-black/10 shrink-0">
               <button
                 onClick={() => setDevice("desktop")}
                 title={isEn ? "Desktop View (100%)" : "Vedere Desktop (100%)"}
