@@ -13,6 +13,14 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Dicționarele selectorului de limbă (public/i18n/<cod>.json): adresa lor poartă hash-ul fișierului (?v=…,
+  // lib/i18n/generated.ts), deci pot sta în cache oricât. Un dicționar schimbat are altă adresă.
+  headers: async () => [
+    {
+      source: "/i18n/:file*",
+      headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+    },
+  ],
   // Repo-ul `flooare` are acum domeniul propriu (www.flooare.ro), deci github.io
   // redirecționează și proxy-ul vechi nu mai merge.
   redirects: async () => [

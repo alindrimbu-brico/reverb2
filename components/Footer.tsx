@@ -102,7 +102,7 @@ export default function Footer({ socialLinks = [] }: { socialLinks?: SocialFoote
               <p className="mt-6 text-xs text-neutral-700 dark:text-neutral-400 font-light leading-relaxed">
                 {t.desc}
               </p>
-              <div className="mt-8 text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-600 dark:text-neutral-500 border-l border-black/20 dark:border-white/20 pl-4 py-1 flex items-center gap-2">
+              <div className="mt-8 text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-600 dark:text-neutral-500 border-l border-black/20 dark:border-white/20 pl-4 py-1 flex flex-wrap items-center gap-x-2 gap-y-1">
                 <span>{t.tagline1}</span>
                 <span className="text-neutral-400 dark:text-neutral-700">•</span>
                 <span>{t.tagline2}</span>

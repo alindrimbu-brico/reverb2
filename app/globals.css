@@ -931,6 +931,17 @@ html.light .ambient-hairline {
 }
 @media print { .ambient-hairline { display: none; } }
 
+/* ── Selectorul de limbă (13 nov 2026) ──
+   Cât se descarcă dicționarul limbii alese, scriptul din HTML (lib/i18n/inline.ts) pune `data-rv-i18n` pe <html>, ca omul să
+   nu vadă întâi româna: "full" ascunde conținutul paginii, "chrome" doar subsolul; în ambele, textele din bară marcate cu
+   `data-i18n-wait`. Scriptul își scoate singur marcajul după cel mult 2 secunde. `visibility`, nu `display`: nimic nu se mută. */
+html[data-rv-i18n="full"] main,
+html[data-rv-i18n] body > footer,
+html[data-rv-i18n] [data-i18n-wait] { visibility: hidden; }
+/* Pagină afișată în altă limbă (motorul pune `data-rv-lang` pe <html>): un cuvânt mai lung decât locul lui se rupe,
+   nu iese din ecran. În română nu se aplică. */
+html[data-rv-lang] body { overflow-wrap: break-word; }
+
 /* ── Pastile cu colț (13 nov 2026, cererea lui Alin) ──
    Pe site-ul agenției nimic cu text nu mai e capsulă: etichetele și butoanele au colț rotunjit, latură dreaptă, colț rotunjit,
    ca chenarul casetelor. În cod clasa rămâne `rounded-full` (de ea țin butoanele magnetice și corecțiile temei deschise);
@@ -989,6 +1000,9 @@ html.light .ambient-hairline {
 }
 @keyframes rl-glyphs { to { stroke-dashoffset: -7000; } }
 @keyframes rl-in { from { opacity: 0; } }
+/* Titlu tradus (selectorul de limbă) cu un cuvânt mai lat decât rândul: cuvântul se rupe și rândul rămâne fără linie. */
+.rl-break .rl-word { white-space: normal; overflow-wrap: anywhere; }
+.rl-break .rl-glyphs { display: none; }
 /* În afara ecranului benzile se opresc și se ascund (clasa o pune componenta). */
 .rl-off .rl-glyphs { visibility: hidden; }
 .rl-off .rl-glyphs path { animation-play-state: paused; }

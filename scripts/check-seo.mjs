@@ -129,6 +129,27 @@ async function main() {
     problems.push(`linia care merge: nu am putut compara fontul (${e.message})`);
   }
 
+  // 6. Selectorul de limbă: fiecare limbă din lib/i18n/generated.ts are dicționarul ei servit (un fișier lipsă ar lăsa
+  //    limba în panou, dar pagina în română), iar un robot nu primește țara (altfel ar vedea pagina tradusă).
+  try {
+    const gen = fs.readFileSync(path.join(process.cwd(), "lib", "i18n", "generated.ts"), "utf8");
+    const versions = JSON.parse(gen.match(/DICT_VERSION[^=]*=\s*(\{[^}]*\})/)[1]);
+    for (const [code, v] of Object.entries(versions)) {
+      const res = await fetch(`${base}/i18n/${code}.json?v=${v}`);
+      let keys = 0;
+      try {
+        keys = Object.keys(await res.json()).length;
+      } catch {
+        /* nu e JSON */
+      }
+      if (res.status !== 200 || keys < 100) problems.push(`selectorul de limbă: dicționarul ${code} nu se servește (stare ${res.status}, ${keys} chei)`);
+    }
+    const bot = await fetch(`${base}/`, { headers: { "user-agent": "Googlebot/2.1", "x-vercel-ip-country": "DE" } });
+    if (/rvcc/.test(bot.headers.get("server-timing") || "")) problems.push("selectorul de limbă: un robot primește țara (antetul Server-Timing)");
+  } catch (e) {
+    problems.push(`selectorul de limbă: nu am putut verifica dicționarele (${e.message})`);
+  }
+
   console.log(`sitemap: ${urls.length} adrese, ${ok} verificate cu 200; machete cu noindex: ${mk}`);
   if (problems.length) {
     console.log(`PROBLEME (${problems.length}):`);

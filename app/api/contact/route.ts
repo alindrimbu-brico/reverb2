@@ -30,7 +30,11 @@ export async function POST(req: NextRequest) {
     // Eticheta se ia din registru după id; textul trimis de formular rămâne doar ca rezervă (pagini vechi în cache).
     const options = lang === "en" ? serviceOptionsEn() : serviceOptions();
     const fromRegistry = options.find((o) => o.value === serviceId)?.label;
-    const service = fromRegistry ? (lang === "en" ? `[EN] ${fromRegistry}` : fromRegistry) : oLinie(camp(body?.service, 160));
+    // Selectorul de limbă: cine a citit pagina românească în altă limbă (germană, franceză…) trimite `siteLang`; eticheta
+    // din subiect arată limba lui în loc de [EN], ca să știm cu cine vorbim. Confirmarea către el pleacă în engleză.
+    const siteLang = /^[a-z]{2}$/.test(camp(body?.siteLang, 2)) ? camp(body?.siteLang, 2).toUpperCase() : "";
+    const tag = siteLang || "EN";
+    const service = fromRegistry ? (lang === "en" ? `[${tag}] ${fromRegistry}` : fromRegistry) : oLinie(camp(body?.service, 160));
 
     if (!name || !email || !service || !message) {
       return NextResponse.json({ error: "Câmpuri obligatorii lipsă." }, { status: 400 });

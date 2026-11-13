@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { serviceOptions as buildServiceOptions, resolveService } from "@/lib/packages";
+import { useI18n } from "@/lib/i18n/useT";
 
 type FormState = "idle" | "submitting" | "success" | "error";
 
@@ -34,6 +35,10 @@ function ContactFormInner() {
   const searchParams = useSearchParams();
   // Valorile vechi se traduc; o valoare necunoscută lasă selectul gol, iar validarea cere alegerea.
   const initialPachet = resolveService(searchParams.get("pachet") ?? searchParams.get("package"));
+
+  // true = pagina e afișată într-o limbă din dicționar (nu română, nu engleză)
+  const i18n = useI18n();
+  const otherLang = i18n.status === "ready" && i18n.scope === "full" && i18n.locale !== "ro" && i18n.locale !== "en";
 
   const [state, setState] = useState<FormState>("idle");
   const [touched, setTouched] = useState<Record<string, boolean>>({});
@@ -86,7 +91,15 @@ function ContactFormInner() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, service: label, serviceId: form.service, lang: "ro", hp: hpRef.current?.value ?? "" }),
+        // Selectorul de limbă: cine a citit pagina în altă limbă primește confirmarea în engleză, iar noi vedem limba lui.
+        body: JSON.stringify({
+          ...form,
+          service: label,
+          serviceId: form.service,
+          lang: otherLang ? "en" : "ro",
+          siteLang: otherLang ? i18n.locale : undefined,
+          hp: hpRef.current?.value ?? "",
+        }),
       });
       setState(res.ok ? "success" : "error");
     } catch {
@@ -262,6 +275,10 @@ function ContactFormInner() {
       <p className="mt-4 text-center text-[10px] font-mono text-neutral-500">
         Securitate garantată. Nu facem spam și nu partajăm datele de contact cu nimeni.
       </p>
+      {/* Doar în limbile din dicționar (motorul traduce rândul): omul află în ce limbă îi răspundem. */}
+      {otherLang && (
+        <p className="mt-2 text-center text-[11px] font-mono text-neutral-300">Îți răspundem în română sau engleză.</p>
+      )}
     </form>
   );
 }

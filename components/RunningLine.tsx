@@ -5,6 +5,7 @@
 // Stilurile sunt în app/globals.css (clasele rl-*).
 
 import { memo, useEffect, useRef, useState, type CSSProperties } from "react";
+import { useLineText } from "@/lib/i18n/useT";
 
 /** Contururile literelor unui text, generate de scripts/linia_litere.py din fontul site-ului (doar titlul primei pagini). */
 export type OutlineData = {
@@ -46,6 +47,8 @@ const THICK = 1.25; // pe text de culoarea benzii (alb pe alb) banda e cu 25 % m
  */
 export function OutlineRun({ text, data, className = "text-white" }: { text: string; data: OutlineData; className?: string }) {
   const [fontReady, setFontReady] = useState(false);
+  // Selectorul de limbă: contururile din `data` sunt ale textului românesc. Când rândul e tradus, îl desenează <Linie>, din atlas.
+  const translated = useLineText(text).text !== text;
 
   useEffect(() => {
     const fonts = document.fonts;
@@ -61,6 +64,8 @@ export function OutlineRun({ text, data, className = "text-white" }: { text: str
       fonts.removeEventListener("loadingdone", test);
     };
   }, [text]);
+
+  if (translated) return <Linie band={className}>{text}</Linie>;
 
   const parts = text.split(" ");
   const show = fontReady && data.text === text && data.words.length === parts.length;
@@ -198,7 +203,9 @@ function rgb(color: string): [number, number, number] | null {
   return m ? [Number(m[1]), Number(m[2]), Number(m[3])] : null;
 }
 
-type Shown = { key: string; ready: Ready; placed: Placed[]; strokeUnits: number };
+type Shown = { key: string; text: string; ready: Ready; placed: Placed[]; strokeUnits: number };
+
+let measurer: HTMLCanvasElement | undefined; // pânza pe care se măsoară cuvintele traduse (una pentru toate titlurile)
 
 /**
  * Banda pe conturul literelor, pentru orice rând de titlu: `<Linie>Text</Linie>`. Conținutul e strict un șir; un titlu pe două
@@ -211,12 +218,15 @@ type Shown = { key: string; ready: Ready; placed: Placed[]; strokeUnits: number 
  * - Culoarea benzii = `band` (o clasă de text). Pe text de culoare apropiată de a benzii (alb pe alb) banda e cu 25 % mai
  *   groasă; `thick` o forțează.
  * - În afara ecranului benzile se opresc și se ascund (clasa rl-off).
+ * - Selectorul de limbă: textul vine prin `useLineText` (româna pe server și la hidratare, apoi limba afișată). Desenul ține
+ *   minte textul pentru care a fost calculat și nu se arată peste altul. Limbile cu litere în afara atlasului nu au liniuțe deloc.
  */
 export const Linie = memo(function Linie({ children, band = "text-white", thick }: { children: string; band?: string; thick?: boolean }) {
-  const text = children;
+  const { text, lines } = useLineText(children);
   const root = useRef<HTMLSpanElement>(null);
   const [shown, setShown] = useState<Shown | null>(null);
   const [inView, setInView] = useState(false);
+  const [breaks, setBreaks] = useState(false); // text tradus cu un cuvânt mai lat decât rândul: se rupe, fără linie
   const units = splitUnits(text);
 
   useEffect(() => {
@@ -238,6 +248,23 @@ export const Linie = memo(function Linie({ children, band = "text-white", thick 
       const cs = getComputedStyle(el);
       const size = parseFloat(cs.fontSize);
       if (!size) return;
+      // Selectorul de limbă: într-un titlu tradus, un cuvânt poate fi mai lat decât rândul (germană, maghiară, pe telefon).
+      // Atunci cuvintele au voie să se rupă (clasa rl-break) și rândul rămâne fără linie, în loc să iasă din ecran.
+      // Lățimea se măsoară pe o pânză, nu în pagină: un cuvânt deja rupt ar părea că încape. Româna nu trece pe aici.
+      let tooWide = false;
+      if (text !== children) {
+        const bcs = getComputedStyle(block);
+        const room = block.clientWidth - parseFloat(bcs.paddingLeft) - parseFloat(bcs.paddingRight);
+        const pen = (measurer ??= document.createElement("canvas")).getContext("2d");
+        if (pen && room > 0) {
+          pen.font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+          const gap = cs.letterSpacing === "normal" ? 0 : parseFloat(cs.letterSpacing) || 0;
+          tooWide = units.some((unit) => pen.measureText(unit.text).width + gap * unit.text.length > room + 1);
+        }
+      }
+      setBreaks(tooWide);
+      if (tooWide) return stop("un cuvânt tradus e mai lat decât rândul");
+      if (!lines) return stop("limba afișată nu are liniuțe (litere în afara atlasului)");
       if (el.textContent !== text) return stop("textul din pagină e altul (traducere automată?)");
       if (cs.fontStyle !== "normal") return stop("text înclinat");
       if (cs.textTransform !== "none") return stop("majuscule din CSS");
@@ -280,8 +307,8 @@ export const Linie = memo(function Linie({ children, band = "text-white", thick 
         if (a && b && Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]) < 90) factor = THICK;
       }
       const strokeUnits = Math.round(Math.max(STROKE_UNITS * factor, (STROKE_MIN_PX * factor * u) / size) * 10) / 10;
-      const key = `${weight}|${track}|${strokeUnits}`;
-      setShown((prev) => (prev && prev.key === key ? prev : { key, ready, placed, strokeUnits }));
+      const key = `${text}|${weight}|${track}|${strokeUnits}`;
+      setShown((prev) => (prev && prev.key === key ? prev : { key, text, ready, placed, strokeUnits }));
     };
 
     const again = () => {
@@ -310,13 +337,15 @@ export const Linie = memo(function Linie({ children, band = "text-white", thick 
       document.fonts?.removeEventListener("loadingdone", again);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [text, thick]);
+  }, [text, thick, lines]);
 
-  const u = shown ? shown.ready.atlas.upem : 1000;
+  // desenul calculat pentru alt text (limba tocmai s-a schimbat) nu se arată
+  const drawn = shown && shown.text === text ? shown : null;
+  const u = drawn ? drawn.ready.atlas.upem : 1000;
   let glyphIndex = 0;
 
   return (
-    <span ref={root} data-rl="" className={inView ? undefined : "rl-off"}>
+    <span ref={root} data-rl="" className={[inView ? "" : "rl-off", breaks ? "rl-break" : ""].filter(Boolean).join(" ") || undefined}>
       {units.map((unit, i) => (
         <span key={i}>
           {unit.space ? " " : null}
@@ -327,14 +356,14 @@ export const Linie = memo(function Linie({ children, band = "text-white", thick 
               height="1"
               aria-hidden="true"
               focusable="false"
-              style={shown ? ({ "--rl-sw": shown.strokeUnits } as CSSProperties) : undefined}
+              style={drawn ? ({ "--rl-sw": drawn.strokeUnits } as CSSProperties) : undefined}
             >
-              {shown && shown.placed[i] ? (
+              {drawn && drawn.placed[i] ? (
                 <svg x="0" y="-1em" width="1em" height="1em" viewBox={`0 ${-u} ${u} ${u}`}>
-                  {shown.placed[i].glyphs.map(([k, x], g) => {
+                  {drawn.placed[i].glyphs.map(([k, x], g) => {
                     // fiecare literă pornește în alt moment, ca benzile să nu meargă toate deodată
                     const delay = -(((glyphIndex++ * 0.618034) % 1) * PERIOD_S).toFixed(2);
-                    return <path key={g} d={shown.ready.atlas.paths[k]} transform={`translate(${x} 0)`} style={{ animationDelay: `${delay}s` }} />;
+                    return <path key={g} d={drawn.ready.atlas.paths[k]} transform={`translate(${x} 0)`} style={{ animationDelay: `${delay}s` }} />;
                   })}
                 </svg>
               ) : null}

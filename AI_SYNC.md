@@ -8,6 +8,38 @@ Aici notăm progresul pentru a ne coordona perfect.
 
 ---
 
+### [Claude] - 13 nov 2026 - Selectorul de limbă (24 de limbi, traducere în browser)
+
+Cererea lui Alin: un selector „la fel” ca pe aurencomputers.com (detectează țara, afișează site-ul în limba omului, 24 de limbi). I s-au dat trei căi; a ales copia fidelă („A acum”). Plan, cele două revizii, deciziile și verificările: `docs/designs/selector_limba_2026-11-13/` (`design_v1_decizii.md` câștigă).
+
+**Cum merge.** Româna e sursa; engleza rămâne scrisă de mână pe `/en`. Celelalte 22 de limbi sunt dicționare (`public/i18n/<cod>.json`, text românesc → traducere) aplicate în browser peste pagina românească. Nu există adrese pe limbă și nici `hreflang` pentru ele: Google vede doar româna și engleza, ca până acum.
+- `lib/i18n/locales.ts`: lista de limbi, harta țară → limbă, tiparul de roboți. Scoaterea unei limbi = rândul ei șters de aici.
+- `lib/i18n/scope.ts`: unde lucrează motorul. `full` = `/`, `/servicii`, `/pachete`, `/portofoliu`, `/despre`, `/contact`, `/magazine-online`, `/showcase`; `chrome` (doar bara, subsolul, banda de cookie-uri, plus un rând „pagina există doar în română și engleză”) = restul paginilor românești; `off` = `/en…`, machetele, Studio. Tot aici sunt perechile română ↔ engleză (`toEn`, `toRo`); bara nu mai are tabelele ei.
+- `lib/i18n/inline.ts`: scriptul scurt pe care `Header` îl scrie în HTML. Hotărăște limba înaintea React-ului și ascunde conținutul cel mult 2 secunde, cât vine dicționarul (atributul `data-rv-i18n` pe `<html>`; își scoate singur marcajul).
+- `lib/i18n/store.ts` + `translator.ts`: starea și motorul care rescrie nodurile de text, patru atribute și titlul filei. `lib/i18n/useT.ts`: legătura cu React. `components/i18n/`: butonul din bară, panoul, rândul de sub bară.
+- Țara vine din `middleware.ts`, în antetul `Server-Timing` (`rvcc`), citit de browser din datele de navigare. **Niciun cookie.** Roboții nu o primesc.
+
+**Reguli de limbă.** Alegerea din panou se ține în `localStorage["reverb_locale"]`. „Română” și „English” nu mută pe nimeni automat; o limbă din dicționar se aplică singură pe paginile românești. La prima vizită: țara → limba, dar nimic automat dacă browserul are româna printre limbi sau țara e RO / MD; țară în afara hărții → engleză (salt la perechea `/en`, o dată pe sesiune, cu `?…` și `#…` păstrate). `?tara=DE` în adresă = probă: pagina se poartă ca pentru un vizitator din Germania.
+
+**Ce NU faceți:**
+1. Nu puneți limba într-un cookie și nu chemați un serviciu de geolocalizare: țara vine din antet.
+2. Nu traduceți textele cu React pe paginile românești (un al doilea `isEn`): textul rămâne românesc în cod, motorul îl traduce. Excepție: zonele cu `data-no-translate` (panoul de limbi, rândul de sub bară), care se traduc singure cu `useTr`.
+3. Titlurile cu liniuțe: `<Linie>` își ia traducerea prin `useLineText`; motorul nu intră în `[data-rl]`. Nu scrieți text tradus direct în `<Linie>`.
+4. Text nou care nu trebuie tradus (nume, cod): `data-no-translate` pe element.
+5. Nu atingeți `public/i18n/*.json` și `lib/i18n/generated.ts` de mână. O traducere greșită se corectează în `lib/i18n/corectii.json` (`{"de": {"textul românesc": "traducerea"}}`), apoi `py -3 -X utf8 scripts/i18n_construieste.py`.
+
+**Când schimbați un text românesc de pe paginile `full`** (sau un preț: numerele sunt șabloane, un preț schimbat nu strică nimic), textul nou apare în română pe versiunile traduse până rulați, pe o construcție pornită local (`next build && next start -p 3417`):
+1. `py -3 -X utf8 scripts/i18n_extrage.py http://localhost:3417 --bucati <dosar> --doar-noi` → `lib/i18n/sursa.json` și fișierele cu textele noi;
+2. traducerea lor în fiecare limbă (`<dosar>/out/<cod>_1.json`, `{"număr": "traducere"}`; instrucțiunile date traducătorilor sunt în `docs/designs/selector_limba_2026-11-13/INSTRUCTIUNI_traducere.md`);
+3. `py -3 -X utf8 scripts/i18n_construieste.py <dosar>/out` → dicționarele și `generated.ts`;
+4. `py -3 -X utf8 scripts/i18n_acoperire.py http://localhost:3417 de,fr,el` după o nouă construcție: ținta e 0 texte netraduse.
+
+**Liniuțele pe limbi.** 11 limbi le au (da, de, es, et, fi, fr, ga, it, nl, pt, sv); 11 nu (bg, cs, el, hr, hu, lt, lv, mt, pl, sk, sl): au litere în afara atlasului, iar o limbă cu un singur titlu fără linie rămâne toată fără, ca paginile să nu iasă amestecate (`LINES_OFF` din `generated.ts`, calculat de script). Atlasul a primit `æ Æ œ Œ Ø ¿ ¡` (`scripts/linia_atlas.py`). Bulgara și greaca se afișează cu fontul sistemului (Geist nu are chirilice și grecești).
+
+**Limite știute.** Traducerile sunt automate, necitite de un vorbitor nativ. Propozițiile rupte de un link se traduc pe bucăți. Blogul, pagina legală, Humanoid și convertorul rămân în română (doar bara și subsolul se traduc). Formularul trimis dintr-o limbă din dicționar ajunge la noi cu `[DE]` în subiect; confirmarea către om pleacă în engleză.
+
+**Verificări** (`docs/designs/selector_limba_2026-11-13/verificari/i18n_comportament.py <baza> chromium|webkit`, 36 de probe; `scripts/i18n_acoperire.py`; `scripts/check-seo.mjs` verifică și că fiecare dicționar se servește și că un robot nu primește țara). `taiat.py`, `butoane.py` și `linia_check3.py` primesc limba prin `RV_LIMBA=de`.
+
 ### [Claude] - 12 nov 2026 - Studio → Muzică → „Creează”: rețeta de sunet (felia 1 a motorului de creație)
 Cererea lui Alin: selector de stiluri cu gradație 1–100, reglaje în cuvinte („mai mult bas, adaugă viori”), apoi album, foileton, poezie recitată, trimitere și publicare automată. Planul, cele 3 rapoarte de revizie și verificările: `docs/designs/motor_creatie_2026-11-12/` (`design_v2_decizii.md` câștigă). Se construiește în felii verticale; aceasta e prima.
 1. **Stilul care pleacă la Suno îl scrie codul, nu modelul:** `lib/musicReteta.ts` (paleta + `compileazaStil`). Suno nu primește procente: cursorul alege una din patru trepte față de stilul de bază (abia simțit / o idee / clar / la egal), iar treapta e cuvântul trimis. Nu schimbați pragurile fără să rulați `node --test scripts/test_music_reteta.mjs`.

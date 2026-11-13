@@ -44,6 +44,7 @@ CARACTERE = (
     "".join(chr(c) for c in range(0x21, 0x7F))
     + "ăâîșțĂÂÎȘȚşţŞŢ"
     + "áàäãåçéèêëíìïñóòôöõúùûüýÁÀÄÃÅÇÉÈÊËÍÌÏÑÓÒÔÖÕÚÙÛÜÝßø"
+    + "æÆœŒØ¿¡"  # selectorul de limbă (13 nov 2026): daneza, franceza și spaniola își păstrează liniuțele pe titluri
     + " –—‘’“”„…·•€£™®©°×«»"
 )
 # Cuvinte din titlurile site-ului, pentru verificarea de la sfârșit (pe lângă șirurile la întâmplare).

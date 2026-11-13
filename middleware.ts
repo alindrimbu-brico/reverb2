@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { GITHUB_SHOWCASE_PATHS } from './lib/githubShowcases';
 import { isMockupPath } from './lib/routes';
+import { BOT_UA } from './lib/i18n/locales';
 import {
   STUDIO_COOKIE_NAME,
   STUDIO_SECURITY_HEADERS,
@@ -153,6 +154,17 @@ export async function middleware(request: NextRequest) {
   ) {
     response.headers.set('X-Robots-Tag', 'noindex, nofollow, noarchive');
     response.headers.set('Cache-Control', 'no-store, private, must-revalidate');
+  }
+  // Selectorul de limbă (lib/i18n): țara vizitatorului, două litere, trimisă în antetul Server-Timing al paginii. Browserul
+  // o citește din datele de navigare (lib/i18n/inline.ts); nu se pune niciun cookie și nu se ține minte nimic despre om.
+  // Doar pe reverb.ro (și local, unde testele trimit antetul de mână); nu în Studio, nu pe gazdele proprii, nu pe *.vercel.app.
+  // Roboții nu o primesc, deci nu primesc nici traducere, nici salt automat spre /en: Google vede româna la adresa românească.
+  const gazdaSite = /^(www\.)?reverb\.ro$/.test(gazda) || gazda === 'localhost' || gazda === '127.0.0.1';
+  if (gazdaSite && !eStudio) {
+    const tara = (request.headers.get('x-vercel-ip-country') || '').toUpperCase();
+    if (/^[A-Z]{2}$/.test(tara) && BOT_UA.test(request.headers.get('user-agent') || 'bot') === false) {
+      response.headers.set('Server-Timing', `rvcc;desc="${tara}"`);
+    }
   }
   return response;
 }
