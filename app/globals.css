@@ -992,8 +992,6 @@ html.light .ambient-hairline {
 /* În afara ecranului benzile se opresc și se ascund (clasa o pune componenta). */
 .rl-off .rl-glyphs { visibility: hidden; }
 .rl-off .rl-glyphs path { animation-play-state: paused; }
-/* Verdele de probă al benzii (doar pe /proba-linii): culoare fixă, fiindcă text-emerald-400 se închide în tema deschisă. */
-.rl-accent { color: #00d492; }
 /* Pagină tradusă automat de browser: contururile ar rămâne peste alte cuvinte. */
 html.translated-ltr .rl-glyphs, html.translated-rtl .rl-glyphs { display: none; }
 @media (prefers-reduced-motion: reduce) {

@@ -85,19 +85,7 @@ const sounds = new SoundEngine();
 // ── Ecosistemul Tehnic Reverb (15 Proiecte Reale Active) ──
 const realProjects = liveProjectsRo;
 
-// Eticheta unei zone de probă (apare doar pe /proba-linii).
-function ProbaTag({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="mb-3 inline-block rounded-full border border-emerald-500/40 bg-emerald-500/10 px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-emerald-300">
-      {children}
-    </div>
-  );
-}
-
-// `proba` = modul de probă al „liniei care merge”, folosit doar de /proba-linii (13 nov 2026): titlul mare cu liniuțe pe rândul alb,
-// sus aceeași propoziție mare cu liniuță albă / verde / verde groasă, apoi aceleași trei pe cardurile din caseta GEO. Pe prima pagină reală e fals.
-// Nu îl porniți pe `/` fără cererea lui Alin; după ce alege, modul și pagina de probă se șterg.
-export default function HomePage({ proba = false }: { proba?: boolean }) {
+export default function HomePage() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [activeFilter, setActiveFilter] = useState("TOATE");
   const [selectedPreview, setSelectedPreview] = useState<PreviewProject | null>(null);
@@ -138,31 +126,6 @@ export default function HomePage({ proba = false }: { proba?: boolean }) {
       {/* Ambient Radial Vignette */}
       <div className="fixed inset-0 pointer-events-none z-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.03)_0%,transparent_70%)]" />
 
-      {proba ? (
-        <section className="relative z-10 mx-auto max-w-5xl px-6 pt-32 md:pt-40">
-          <div className="rounded-3xl border border-emerald-500/30 bg-emerald-500/[0.04] p-6 md:p-10">
-            <p className="mb-8 text-sm md:text-base text-emerald-200">
-              Proba de culoare: aceeași propoziție, de trei ori. Se schimbă doar liniuța care aleargă pe litere.
-            </p>
-            {([
-              ["1", "albă, cu 25 % mai groasă (așa e acum pe tot site-ul)", undefined, undefined],
-              ["2", "verde", "rl-accent", undefined],
-              ["3", "verde, cu 25 % mai groasă", "rl-accent", true],
-            ] as const).map(([nr, nume, band, thick]) => (
-              <div key={nr} className="mb-8 last:mb-0">
-                <div className="mb-2 text-sm md:text-base font-medium text-emerald-300">Proba {nr}: liniuță {nume}</div>
-                <div className="text-3xl md:text-5xl font-light text-white tracking-tight leading-tight">
-                  <Linie band={band} thick={thick}>Clienții întreabă agenții AI.</Linie>
-                </div>
-              </div>
-            ))}
-            <p className="mt-8 text-xs md:text-sm text-neutral-400">
-              Aceleași trei variante sunt și mai jos, pe titlurile mici din cele trei carduri ale casetei „Noua paradigmă a căutării online”.
-            </p>
-          </div>
-        </section>
-      ) : null}
-
       {/* ── Hero Architectural ── */}
       <section className="relative z-10 pt-32 pb-24 md:pt-40 md:pb-32 border-b border-white/10">
         
@@ -180,7 +143,7 @@ export default function HomePage({ proba = false }: { proba?: boolean }) {
           </div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[80px] font-medium tracking-[-0.04em] leading-[1.04] text-white break-words">
-            {proba ? <Linie>Infrastructură digitală.</Linie> : "Infrastructură digitală."}<br />
+            Infrastructură digitală.<br />
             <span className="text-neutral-400 font-light">
               <OutlineRun text="Sisteme care produc valoare." data={heroRo} />
             </span>
@@ -275,7 +238,6 @@ export default function HomePage({ proba = false }: { proba?: boolean }) {
             <div className="mech-card rounded-2xl border border-white/10 bg-neutral-900/40 p-8 flex flex-col justify-between">
               <div>
                 <div className="text-xs font-mono text-neutral-500 mb-4">01 / LIZIBILITATE PENTRU AGENȚI AI</div>
-                {proba ? <ProbaTag>Proba 1 · alb, cu 25 % mai gros (ca pe site)</ProbaTag> : null}
                 <h3 className="text-xl font-medium text-white mb-3"><Linie>AI-Readable Answer Stack</Linie></h3>
                 <p className="text-xs text-neutral-400 leading-relaxed font-light">
                   Implementăm arhitectură semantică JSON-LD avansată și entități corelate direct în cod. Sistemele tale devin direct accesibile și citabile de către modelele de limbaj mari.
@@ -289,8 +251,7 @@ export default function HomePage({ proba = false }: { proba?: boolean }) {
             <div className="mech-card rounded-2xl border border-white/10 bg-neutral-900/40 p-8 flex flex-col justify-between">
               <div>
                 <div className="text-xs font-mono text-neutral-500 mb-4">02 / STRUCTURĂ TRANSPARENTĂ</div>
-                {proba ? <ProbaTag>Proba 2 · verde</ProbaTag> : null}
-                <h3 className="text-xl font-medium text-white mb-3"><Linie band={proba ? "rl-accent" : undefined}>Indexare Prețuri & Servicii</Linie></h3>
+                <h3 className="text-xl font-medium text-white mb-3"><Linie>Indexare Prețuri & Servicii</Linie></h3>
                 <p className="text-xs text-neutral-400 leading-relaxed font-light">
                   AI-ul compară și recomandă soluții înainte ca un client să discute cu vânzările. Ne asigurăm că pachetele și valoarea afacerii tale sunt reprezentate corect și favorabil în sintezele AI.
                 </p>
@@ -303,8 +264,7 @@ export default function HomePage({ proba = false }: { proba?: boolean }) {
             <div className="mech-card rounded-2xl border border-white/10 bg-neutral-900/40 p-8 flex flex-col justify-between">
               <div>
                 <div className="text-xs font-mono text-neutral-500 mb-4">03 / GENERATIVE ENGINE OPTIMIZATION</div>
-                {proba ? <ProbaTag>Proba 3 · verde, cu 25 % mai gros</ProbaTag> : null}
-                <h3 className="text-xl font-medium text-white mb-3"><Linie band={proba ? "rl-accent" : undefined} thick={proba ? true : undefined}>Generative Engine Optimization GEO</Linie></h3>
+                <h3 className="text-xl font-medium text-white mb-3"><Linie>Generative Engine Optimization GEO</Linie></h3>
                 <p className="text-xs text-neutral-400 leading-relaxed font-light">
                   Trecem dincolo de SEO-ul clasic bazat pe cuvinte cheie statice. Optimizăm întreaga prezență a afacerii pentru a deveni sursa autoritară recomandată de noile motoare de căutare generative.
                 </p>

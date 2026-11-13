@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import WhoWeAre from "@/components/WhoWeAre";
+import WorkShots from "@/components/WorkShots";
 import { Linie } from "@/components/RunningLine";
 import { packages, priceLei } from "@/lib/packages";
 import { packagesEn, enPrice, enDelivery, VAT_LABEL_EN } from "@/lib/packagesEn";
@@ -88,8 +89,8 @@ export default function PackagesPageEN() {
               Every package has a fixed list of what you get and a firm delivery date. What we build can be found on Google and by people who ask ChatGPT.
             </p>
             <p className="mx-auto mt-5 max-w-2xl text-sm text-neutral-300 font-light leading-relaxed">
-              Looking for a website or an online store?{" "}
-              <a href="#web" className="text-white underline underline-offset-4 decoration-white/40 hover:decoration-white">See websites and stores ↓</a>
+              Looking for videos for social media?{" "}
+              <a href="#video" className="text-white underline underline-offset-4 decoration-white/40 hover:decoration-white">See the video packages ↓</a>
             </p>
             <div className="mt-6">
               <WhoWeAre lang="en" center />
@@ -98,13 +99,117 @@ export default function PackagesPageEN() {
         </div>
       </section>
 
-      {/* Social Media AI Packages */}
-      <section className="relative z-10 py-20 md:py-28">
+      {/* Web & eCommerce Packages */}
+      <section id="web" className="scroll-mt-16 relative z-10 py-20 md:py-28 bg-[#050607] border-t border-white/10">
         <div className="mx-auto max-w-7xl px-6">
           <Reveal>
             <div className="mb-12 border-b border-white/10 pb-6 max-w-5xl">
               <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-neutral-500 mb-2">
-                01 / VIDEO FOR SOCIAL MEDIA
+                01 / WEBSITES AND ONLINE STORES
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-tight leading-tight">
+                <Linie>Websites, Online Stores and Large Projects</Linie>
+              </h2>
+              <p className="mt-4 text-sm text-neutral-400 font-light leading-relaxed">
+                Presentation websites and online stores at a fixed price: from a simple start to complete systems with video clips, and projects for large companies.
+              </p>
+              <div className="mt-6">
+                <WhoWeAre lang="en" />
+              </div>
+              <p className="mt-6 text-sm text-neutral-300 font-light leading-relaxed normal-case">
+                Before you choose, see what we have built. A few projects that are online now:
+              </p>
+              <WorkShots items={work} lang="en" />
+              <div className="mt-4 flex flex-wrap gap-2.5">
+                <Link href="/en/portfolio" className="rounded-full bg-white px-4 py-2 text-xs font-mono font-bold text-black transition hover:bg-neutral-200">See all our work →</Link>
+                <Link href="/showcase" className="rounded-full border border-white/20 px-4 py-2 text-xs font-mono text-neutral-200 transition hover:bg-white hover:text-black">Concept gallery →</Link>
+              </div>
+              <p className="mt-6 text-sm text-neutral-400 font-light leading-relaxed">
+                “Ask for this package” opens a short form. We answer within 24 working hours, with no obligation.
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {webPackages.map((pkg, idx) => {
+              const details = packagesEn[pkg.id];
+              return (
+                <Reveal key={pkg.id} delay={0.1 * idx}>
+                  <div
+                    className={`relative flex flex-col justify-between p-8 sm:p-10 rounded-2xl border transition-all duration-300 h-full ${
+                      pkg.highlight
+                        ? "bg-gradient-to-b from-neutral-900 to-[#121316] border-white/30 shadow-[0_0_40px_rgba(255,255,255,0.05)]"
+                        : "bg-[#0c0d0e]/80 border-white/10 hover:border-white/20"
+                    }`}
+                  >
+                    <div>
+                      {details.badge && (
+                        <div className="mb-4">
+                          <span className="inline-block px-3 py-1 text-[9px] font-mono uppercase tracking-widest bg-white text-black font-bold rounded-full">
+                            {details.badge}
+                          </span>
+                        </div>
+                      )}
+
+                      <div className="text-2xl sm:text-3xl font-mono text-white mb-2 font-light">
+                        {enPrice(pkg.id)} <span className="text-sm text-neutral-300">{VAT_LABEL_EN}</span>
+                      </div>
+                      <div className="mb-3 text-xs text-neutral-400">{priceLei(pkg.price, "en")}</div>
+
+                      <div className="text-xs font-mono text-neutral-400 mb-4 pb-4 border-b border-white/10">
+                        {enDelivery(pkg.id)}
+                      </div>
+
+                      <h3 className="text-xl font-medium text-white mb-2">
+                        <Linie>{details.name}</Linie>
+                      </h3>
+
+                      <p className="text-xs font-mono text-neutral-400 uppercase tracking-wider mb-4">
+                        {details.tagline}
+                      </p>
+
+                      <p className="text-sm text-neutral-300 font-light leading-relaxed mb-8">
+                        {details.description}
+                      </p>
+
+                      <div className="space-y-2.5 pt-6 border-t border-white/10 font-mono text-xs text-neutral-400 mb-8">
+                        <div className="text-[10px] uppercase tracking-[0.2em] text-neutral-400 font-bold mb-3">
+                          What you get:
+                        </div>
+                        {details.includes.map((inc, i) => (
+                          <div key={i} className="flex items-start gap-2.5">
+                            <span className="text-white text-xs mt-0.5">▪</span>
+                            <span className="text-neutral-300 font-sans text-xs leading-relaxed">{inc}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <Link
+                      href={`/en/contact?package=${pkg.id}`}
+                      className={`inline-flex items-center justify-center rounded-full py-3.5 px-6 text-xs font-mono uppercase tracking-widest transition-all text-center ${
+                        pkg.highlight
+                          ? "bg-white text-black hover:bg-neutral-200 font-bold shadow-md"
+                          : "border border-white/20 bg-white/5 text-white hover:bg-white/10"
+                      }`}
+                    >
+                      Ask for this package →
+                    </Link>
+                  </div>
+                </Reveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Social Media AI Packages */}
+      <section id="video" className="scroll-mt-16 relative z-10 py-20 md:py-28 border-t border-white/10">
+        <div className="mx-auto max-w-7xl px-6">
+          <Reveal>
+            <div className="mb-12 border-b border-white/10 pb-6 max-w-5xl">
+              <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-neutral-500 mb-2">
+                02 / VIDEO FOR SOCIAL MEDIA
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-tight leading-tight">
                 <Linie>Social Media Packages • Short Videos and Images</Linie>
@@ -179,114 +284,6 @@ export default function PackagesPageEN() {
                       }`}
                     >
                       Choose this package →
-                    </Link>
-                  </div>
-                </Reveal>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Web & eCommerce Packages */}
-      <section id="web" className="scroll-mt-16 relative z-10 py-20 md:py-28 bg-[#050607] border-t border-white/10">
-        <div className="mx-auto max-w-7xl px-6">
-          <Reveal>
-            <div className="mb-12 border-b border-white/10 pb-6 max-w-5xl">
-              <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-neutral-500 mb-2">
-                02 / WEBSITES AND ONLINE STORES
-              </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-tight leading-tight">
-                <Linie>Websites, Online Stores and Large Projects</Linie>
-              </h2>
-              <p className="mt-4 text-sm text-neutral-400 font-light leading-relaxed">
-                Presentation websites and online stores at a fixed price: from a simple start to complete systems with video clips, and projects for large companies.
-              </p>
-              <div className="mt-6">
-                <WhoWeAre lang="en" />
-              </div>
-              <p className="mt-6 text-sm text-neutral-300 font-light leading-relaxed normal-case">
-                Before you choose, see what we have built. A few projects that are online now:
-              </p>
-              <div className="mt-3 flex flex-wrap gap-2.5">
-                {work.map((p) => (
-                  <a key={p.name} href={p.href} target="_blank" rel="noopener noreferrer" className="rounded-full border border-white/20 px-4 py-2 text-xs font-mono text-neutral-200 transition hover:bg-white hover:text-black">
-                    {p.name} · {p.kind} ↗
-                  </a>
-                ))}
-                <Link href="/en/portfolio" className="rounded-full bg-white px-4 py-2 text-xs font-mono font-bold text-black transition hover:bg-neutral-200">See all our work →</Link>
-                <Link href="/showcase" className="rounded-full border border-white/20 px-4 py-2 text-xs font-mono text-neutral-200 transition hover:bg-white hover:text-black">Concept gallery →</Link>
-              </div>
-              <p className="mt-6 text-sm text-neutral-400 font-light leading-relaxed">
-                “Ask for this package” opens a short form. We answer within 24 working hours, with no obligation.
-              </p>
-            </div>
-          </Reveal>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {webPackages.map((pkg, idx) => {
-              const details = packagesEn[pkg.id];
-              return (
-                <Reveal key={pkg.id} delay={0.1 * idx}>
-                  <div
-                    className={`relative flex flex-col justify-between p-8 sm:p-10 rounded-2xl border transition-all duration-300 h-full ${
-                      pkg.highlight
-                        ? "bg-gradient-to-b from-neutral-900 to-[#121316] border-white/30 shadow-[0_0_40px_rgba(255,255,255,0.05)]"
-                        : "bg-[#0c0d0e]/80 border-white/10 hover:border-white/20"
-                    }`}
-                  >
-                    <div>
-                      {details.badge && (
-                        <div className="mb-4">
-                          <span className="inline-block px-3 py-1 text-[9px] font-mono uppercase tracking-widest bg-white text-black font-bold rounded-full">
-                            {details.badge}
-                          </span>
-                        </div>
-                      )}
-
-                      <div className="text-2xl sm:text-3xl font-mono text-white mb-2 font-light">
-                        {enPrice(pkg.id)} <span className="text-sm text-neutral-300">{VAT_LABEL_EN}</span>
-                      </div>
-                      <div className="mb-3 text-xs text-neutral-400">{priceLei(pkg.price, "en")}</div>
-
-                      <div className="text-xs font-mono text-neutral-400 mb-4 pb-4 border-b border-white/10">
-                        {enDelivery(pkg.id)}
-                      </div>
-
-                      <h3 className="text-xl font-medium text-white mb-2">
-                        <Linie>{details.name}</Linie>
-                      </h3>
-
-                      <p className="text-xs font-mono text-neutral-400 uppercase tracking-wider mb-4">
-                        {details.tagline}
-                      </p>
-
-                      <p className="text-sm text-neutral-300 font-light leading-relaxed mb-8">
-                        {details.description}
-                      </p>
-
-                      <div className="space-y-2.5 pt-6 border-t border-white/10 font-mono text-xs text-neutral-400 mb-8">
-                        <div className="text-[10px] uppercase tracking-[0.2em] text-neutral-400 font-bold mb-3">
-                          What you get:
-                        </div>
-                        {details.includes.map((inc, i) => (
-                          <div key={i} className="flex items-start gap-2.5">
-                            <span className="text-white text-xs mt-0.5">▪</span>
-                            <span className="text-neutral-300 font-sans text-xs leading-relaxed">{inc}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <Link
-                      href={`/en/contact?package=${pkg.id}`}
-                      className={`inline-flex items-center justify-center rounded-full py-3.5 px-6 text-xs font-mono uppercase tracking-widest transition-all text-center ${
-                        pkg.highlight
-                          ? "bg-white text-black hover:bg-neutral-200 font-bold shadow-md"
-                          : "border border-white/20 bg-white/5 text-white hover:bg-white/10"
-                      }`}
-                    >
-                      Ask for this package →
                     </Link>
                   </div>
                 </Reveal>

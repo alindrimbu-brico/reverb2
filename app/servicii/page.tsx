@@ -8,73 +8,73 @@ export const metadata: Metadata = {
   alternates: { canonical: "/servicii", languages: { ro: "/servicii", en: "/en/services", "x-default": "/servicii" } },
   title: "Servicii — Reverb Digital",
   description:
-    "Arhitectură digitală completă: platforme web de mare viteză, conținut video zilnic AI, optimizare pentru căutare generativă GEO și infrastructură enterprise.",
+    "Site-uri și magazine online la preț fix, clipuri zilnice făcute cu AI pentru rețelele sociale și ajutor ca afacerea ta să fie găsită și recomandată de asistenți AI precum ChatGPT.",
 };
 
 const mainServices = [
   {
     id: "01",
-    tag: "FUNDAȚIE TEHNICĂ",
+    tag: "SITE-URI ȘI MAGAZINE",
     price: `de la ${pkg("site-start").price}`,
-    title: "Platforme Web & Magazine Online",
-    tagline: "Arhitectură de mare viteză construită direct pentru conversie.",
-    text: "Dezvoltăm de la zero website-uri de prezentare și magazine online robuste pe Next.js și WooCommerce. Timp de încărcare garantat sub 1.2 secunde, flux de checkout optimizat cognitiv, integrări de plăți securizate cu cardul, facturare automată și emitere instantanee de AWB-uri curieri.",
+    title: "Site-uri și Magazine Online",
+    tagline: "Făcute să se încarce repede și să vândă.",
+    text: "Construim de la zero site-uri de prezentare și magazine online. Paginile se încarcă în mai puțin de 1,2 secunde, clientul plătește cu cardul în câțiva pași, factura se emite singură, iar AWB-ul pentru curier se face imediat ce intră comanda.",
     deliverables: [
-      "Arhitectură Next.js / Edge Runtime cu viteză sub 1.2s",
-      "Opțiune Panou Control Enterprise cu Payload CMS",
-      "Proces de vânzare fără fricțiune cu checkout 1-step",
-      "Facturare automată FGO sau SmartBill + AWB curieri",
-      "Optimizare completă pentru dispozitive mobile",
+      "Pagini care se încarcă în mai puțin de 1,2 secunde",
+      "Un panou din care adaugi singur produse și schimbi prețuri",
+      "Comandă într-un singur pas, ca omul să nu renunțe pe drum",
+      "Facturi automate (FGO sau SmartBill) și AWB pentru curieri",
+      "Merge bine pe orice telefon și tabletă",
     ],
     href: "/contact?pachet=site-start",
   },
   {
     id: "02",
-    tag: "SCALARE SOCIAL MEDIA",
+    tag: "REȚELE SOCIALE",
     price: `de la ${pkg("social-growth").price}`,
-    title: "Motorul Video Social Media AI",
-    tagline: "Volum zilnic de conținut video generat cu inteligență artificială.",
-    text: "Eliminăm bariera costurilor caselor de producție clasice. Producem zilnic 1 până la 3 clipuri video de înaltă fidelitate pentru TikTok, Instagram Reels, YouTube Shorts și Facebook folosind tehnologiile Google Imagen & Veo. Demonstrații de produse și utilaje în acțiune, scenarii de vânzare și subtitrări dinamice.",
+    title: "Clipuri Zilnice pentru Rețelele Sociale",
+    tagline: "Clipuri noi cu produsele tale în fiecare zi, făcute cu AI.",
+    text: "O casă de producție clasică e scumpă și lentă. Noi facem zilnic 1 până la 3 clipuri scurte pentru TikTok, Instagram Reels, YouTube Shorts și Facebook, cu AI: produse și utilaje în acțiune, scenarii de vânzare și subtitrări pe ecran.",
     deliverables: [
-      "30 până la 90 de clipuri video scurte / lună",
-      "Postări grafice și caruseluri de produs adaptate fiecărei rețele",
-      "Voiceover sintetic ultra-realist și montaj dinamic",
-      "Direcționare directă a traficului către magazin sau contact",
-      "Fără timp pierdut cu filmări manuale de către client",
+      "30 până la 90 de clipuri scurte pe lună",
+      "Postări cu imagini și carusele de produs pentru fiecare rețea",
+      "Voce făcută cu AI, care sună natural, și montaj",
+      "Fiecare clip trimite omul spre magazin sau spre pagina de contact",
+      "Tu nu filmezi nimic",
     ],
     href: "/contact?pachet=daily-impact",
     featured: true,
   },
   {
     id: "03",
-    tag: "NOUA CĂUTARE ONLINE",
+    tag: "CĂUTAREA CU AI",
     // Serviciul GEO nu e pachet în registru: prețul lui se scrie aici.
     price: "de la €588 / lună",
-    title: "Optimizare Pentru Agenți AI GEO",
-    tagline: "Fii prima recomandare în ChatGPT, Perplexity, Claude și Gemini.",
-    text: "În 2026, clienții nu mai caută doar cuvinte cheie pe Google, ci adresează întrebări directe asistenților AI. Structurăm semantic întregul tău site prin date JSON-LD avansate, index de prețuri transparent și entități de autoritate, astfel încât LLM-urile să recomande afacerea ta ca sursă de încredere.",
+    title: "Găsit de Asistenții AI",
+    tagline: "Ca ChatGPT, Perplexity, Claude și Gemini să te poată recomanda.",
+    text: "Tot mai mulți cumpărători întreabă un asistent AI în loc să caute cuvinte pe Google. Scriem datele firmei, produsele și prețurile într-o formă pe care acești asistenți o citesc corect, ca să îți înțeleagă oferta și să o poată recomanda.",
     deliverables: [
-      "AI-Readable Answer Stack cu date structurate semantic",
-      "Indexare transparentă și clară a pachetelor de prețuri",
-      "Generative Engine Optimization GEO pentru Perplexity și ChatGPT",
-      "Validare entitate de brand și autoritate digitală",
-      "Monitorizare a citărilor în răspunsurile generate de AI",
+      "Firma, produsele și prețurile scrise astfel încât asistenții AI să le citească corect",
+      "O listă de prețuri clară și publică pentru pachetele tale",
+      "Pagini care răspund la întrebările puse de cumpărători în ChatGPT și Perplexity",
+      "Marca ta descrisă la fel peste tot pe internet",
+      "Urmărim cum te pomenesc asistenții AI",
     ],
     href: "/contact?pachet=geo-search",
   },
   {
     id: "04",
-    tag: "ENTERPRISE & SCALABILITATE",
-    price: "Enterprise / SLA",
-    title: "Infrastructură Digitală & Sisteme B2B",
-    tagline: "Arhitectură scalabilă și consultanță internațională.",
-    text: "Pentru companii mari și proiecte cu cerințe complexe, colaborăm direct cu Zylaris Group London. Proiectăm portaluri dedicate pentru clienți și parteneri B2B, automatizări de procese operaționale interne, securitate de nivel bancar și integrarea agenților autonomi AI.",
+    tag: "FIRME MARI",
+    price: pkg("infrastructura-enterprise").price,
+    title: "Proiecte Mari și Sisteme pentru Firme",
+    tagline: "Pentru companii cu cerințe complexe, împreună cu partenerul nostru din Londra.",
+    text: "Pentru companii mari și proiecte complicate lucrăm împreună cu Zylaris Group din Londra. Facem portaluri pentru clienți și parteneri, automatizăm munca repetitivă din firmă, punem securitate la nivelul băncilor și asistenți AI care lucrează în interiorul firmei.",
     deliverables: [
-      "Arhitectură cloud scalabilă dedicată",
-      "Portaluri securizate pentru fluxuri comenzi & contracte B2B",
-      "Audit operațional și implementare agenți AI interni",
-      "Mentenanță proactivă 24/7 și SLA garantat",
-      "Guvernanță și securitate gestionată internațional",
+      "Servere dedicate, care cresc odată cu firma",
+      "Portaluri sigure pentru comenzi și contracte între firme",
+      "Analiza muncii din firmă și asistenți AI pentru echipa ta",
+      "Întreținere permanentă, cu timp de răspuns garantat prin contract",
+      "Securitate administrată împreună cu partenerul nostru din Londra",
     ],
     href: "/contact?pachet=infrastructura-enterprise",
   },
@@ -100,18 +100,18 @@ export default function ServiciiPage() {
           <Reveal>
             <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.1em] sm:tracking-[0.25em] text-neutral-300 mb-6 backdrop-blur-md">
               <span className="h-1.5 w-1.5 rounded-full bg-white" />
-              <span>Capabilități Digitale & Arhitectură</span>
+              <span>Servicii • Prețuri fixe</span>
             </div>
           </Reveal>
           <Reveal delay={80}>
             <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-white leading-tight">
-              <Linie>Sisteme inginerești.</Linie><br />
-              <span className="text-neutral-400 font-light"><Linie>Rezultate măsurabile.</Linie></span>
+              <Linie>Ce facem pentru tine.</Linie><br />
+              <span className="text-neutral-400 font-light"><Linie>La preț fix, cu termen clar.</Linie></span>
             </h1>
           </Reveal>
           <Reveal delay={160}>
             <p className="mt-8 max-w-2xl mx-auto text-base md:text-lg text-neutral-400 font-light leading-relaxed">
-              De la fundația tehnică de mare viteză a magazinului tău online, până la motoare de conținut video zilnic și optimizare pentru căutare generativă GEO. Fără improvizații. {VAT_NOTE}
+              Îți facem site-ul sau magazinul online, îți facem clipuri zilnice pentru rețelele sociale și te ajutăm să fii găsit și recomandat de asistenții AI. {VAT_NOTE}
             </p>
           </Reveal>
         </div>
@@ -148,7 +148,7 @@ export default function ServiciiPage() {
                       href={srv.href}
                       className="inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-center text-[11px] font-mono uppercase tracking-wider text-black hover:bg-neutral-200 transition-all font-bold"
                     >
-                      Alege Serviciul • {srv.price} →
+                      Cere acest serviciu • {srv.price} →
                     </Link>
                   </div>
 
@@ -159,7 +159,7 @@ export default function ServiciiPage() {
                     
                     <div className="border-t border-white/10 pt-6">
                       <div className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-4">
-                        Livrabile & Standarde Tehnice:
+                        Ce primești:
                       </div>
                       <div className="grid sm:grid-cols-1 gap-3">
                         {srv.deliverables.map((item) => (
@@ -185,10 +185,10 @@ export default function ServiciiPage() {
         <Reveal>
           <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-4">Pasul Următor</div>
           <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight mb-6">
-            <Linie>Construiește pe o fundație solidă.</Linie>
+            <Linie>Hai să vedem ce ți se potrivește.</Linie>
           </h2>
           <p className="text-neutral-400 text-sm md:text-base leading-relaxed mb-10 max-w-2xl mx-auto">
-            Oferim audit inițial gratuit pentru a evalua infrastructura ta digitală și compatibilitatea cu căutarea AI.
+            Ne uităm gratuit la site-ul tău și la paginile tale de pe rețelele sociale și îți spunem ce ar merita făcut întâi și cât costă.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link

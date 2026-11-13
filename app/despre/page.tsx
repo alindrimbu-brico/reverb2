@@ -7,56 +7,56 @@ export const metadata: Metadata = {
   alternates: { canonical: "/despre", languages: { ro: "/despre", en: "/en/about", "x-default": "/despre" } },
   title: "Despre Noi — Reverb Digital",
   description:
-    "Arhitectură digitală, execuție disciplinată și parteneriat strategic. Parteneri de tehnologie AI ai Zylaris Group London.",
+    "Cine suntem și cum lucrăm: prețuri fixe, pași clari și sprijin după lansare. Partener de tehnologie al Zylaris Group London.",
 };
 
 const values = [
   {
     title: "Prețuri Fixe & Transparente",
-    text: "Fiecare proiect are de la bun început un preț ferm și livrabile clare. Fără estimări vagi, fără costuri ascunse.",
+    text: "Fiecare proiect are de la bun început un preț ferm și o listă clară cu ce primești. Fără estimări vagi, fără costuri ascunse.",
   },
   {
-    title: "Model Operațional în 4 Pași",
-    text: "Proiectăm, Conectăm, Automatizăm și Scalăm. Fără improvizații sau schimbări haotice de direcție.",
+    title: "Patru Pași Clari",
+    text: "Plănuim, construim, lansăm și îmbunătățim. Știi mereu la ce pas suntem și nimic nu se face pe ghicite.",
   },
   {
-    title: "Sisteme Orientate pe Valoare",
-    text: "Măsurăm ce contează: comenzi, conversii și cereri concrete. Construim active care produc rezultate continue.",
+    title: "Rezultate pe Care le Poți Număra",
+    text: "Măsurăm ce contează pentru tine: comenzi, cereri și telefoane de la clienți adevărați.",
   },
   {
-    title: "Execuție Inginerească",
-    text: "Nu livrăm doar strategii teoretice. Construim codul, configurăm integrările și predăm sisteme 100% funcționale.",
+    title: "Construim, nu Doar Sfătuim",
+    text: "Nu îți lăsăm o strategie pe hârtie. Scriem codul, legăm plățile și curierii și îți predăm un site care merge.",
   },
   {
-    title: "Viziune Umană + Viteză AI",
-    text: "Omul stabilește direcția și gustul. Modelele AI comprimă timpul de producție video și analiză de date.",
+    title: "Gust de Om, Viteză de AI",
+    text: "Omul hotărăște direcția și felul în care arată. AI-ul scurtează timpul în care se fac clipurile și se analizează datele.",
   },
   {
-    title: "Optimizare pentru Noile Motoare AI",
-    text: "Asigurăm lizibilitatea semantică a afacerii tale pentru ChatGPT, Perplexity și Gemini Generative Engine Optimization GEO.",
+    title: "Găsit de Asistenții AI",
+    text: "Scriem datele afacerii tale astfel încât ChatGPT, Perplexity, Claude și Gemini să le înțeleagă și să te poată recomanda.",
   },
 ];
 
 const approach = [
   {
     step: "01",
-    title: "Audit & Obiectiv",
-    text: "Analizăm arhitectura actuală, publicul țintă, oferta și stabilim indicatorii concreți de succes.",
+    title: "Ascultăm și Plănuim",
+    text: "Ne uităm la ce ai acum, cine îți sunt clienții și ce vinzi și stabilim împreună cum măsurăm reușita.",
   },
   {
     step: "02",
-    title: "Proiectare & Implementare",
-    text: "Construim platforma web sau magazinul online, integrăm plățile și configurăm fluxurile de date.",
+    title: "Construim",
+    text: "Facem site-ul sau magazinul online și legăm plata cu cardul, facturile și curierii.",
   },
   {
     step: "03",
-    title: "Activare Conținut & GEO",
-    text: "Lansăm motorul de conținut video zilnic și structurăm datele pentru indexarea optimă de către agenții AI.",
+    title: "Clipuri și Căutarea cu AI",
+    text: "Pornim clipurile zilnice pentru rețelele sociale și pregătim datele tale ca asistenții AI să le poată citi.",
   },
   {
     step: "04",
-    title: "Scalare & Mentenanță",
-    text: "Monitorizăm stabilitatea, protecția serverelor și optimizăm continuu rata de conversie.",
+    title: "Rămânem lângă Tine",
+    text: "Avem grijă ca site-ul să fie mereu pornit și în siguranță și îmbunătățim mereu ce aduce comenzi.",
   },
 ];
 
@@ -80,7 +80,7 @@ export default function DesprePage() {
           <Reveal>
             <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.1em] sm:tracking-[0.25em] text-neutral-300 mb-6 backdrop-blur-md">
               <span className="h-1.5 w-1.5 rounded-full bg-white" />
-              <span>Filozofie Operațională & Identitate</span>
+              <span>Despre noi</span>
             </div>
           </Reveal>
           <Reveal delay={80}>
@@ -90,7 +90,7 @@ export default function DesprePage() {
           </Reveal>
           <Reveal delay={160}>
             <p className="mt-8 max-w-2xl mx-auto text-base md:text-lg text-neutral-400 font-light leading-relaxed">
-              Reverb provine din <em>reverberation</em> — semnalul se întoarce mai puternic și mai curat decât a plecat. Proiectăm infrastructură digitală și sisteme de conținut care produc valoare reală.
+              Reverb vine de la <em>reverberation</em>: semnalul se întoarce mai puternic și mai curat decât a plecat. Facem site-uri, magazine online și clipuri pentru rețelele sociale, te ducem de la zero până la prima vânzare și te sfătuim și după.
             </p>
           </Reveal>
         </div>
@@ -111,13 +111,13 @@ export default function DesprePage() {
           <Reveal delay={120}>
             <div className="space-y-6 text-sm md:text-base leading-relaxed text-neutral-300 font-light">
               <p>
-                Reverb Digital aduce afacerile online înapoi la esență. Nu adăugăm straturi inutile sau jargon pompos. Construim sisteme clare, inginerești, care funcționează fără fricțiune.
+                Reverb Digital face lucrurile simplu. Nu adăugăm nimic de umplutură și nu vorbim în termeni pe care nu îi înțelegi. Construim site-uri și magazine clare, care merg fără bătăi de cap.
               </p>
               <p>
-                Folosim inteligența artificială pentru a comprima timpii de producție și de analiză a datelor, nu pentru a înlocui judecata strategică. Omul trasează direcția de brand, AI-ul accelerează execuția, iar sistemul livrează conversii.
+                Folosim inteligența artificială ca să scurtăm timpul de lucru, nu ca să înlocuim judecata omului. Omul hotărăște direcția și felul în care arată marca, AI-ul grăbește execuția, iar rezultatul se vede în comenzi.
               </p>
               <p>
-                Platformele noastre web încarcă instant, cataloagele de produse sunt structurate cognitiv, iar datele afacerii tale sunt formate nativ pentru a fi recomandate de noile motoare de căutare generative.
+                Site-urile noastre se încarcă imediat, produsele sunt așezate ușor de găsit, iar datele firmei tale sunt scrise astfel încât să poată fi recomandate și de asistenții AI, nu doar găsite pe Google.
               </p>
             </div>
           </Reveal>
@@ -130,7 +130,7 @@ export default function DesprePage() {
           <div className="max-w-3xl mb-16">
             <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-3">Principiile Noastre</div>
             <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
-              <Linie>Cum asigurăm predictibilitatea.</Linie>
+              <Linie>Cum lucrăm.</Linie>
             </h2>
           </div>
         </Reveal>
@@ -154,7 +154,7 @@ export default function DesprePage() {
       <section className="relative z-10 py-24 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
         <Reveal>
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-3">Metodologie</div>
+            <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-3">Cum decurge un proiect</div>
             <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight mb-4">
               <Linie>Proces ferm. Fără improvizații.</Linie>
             </h2>
@@ -177,10 +177,10 @@ export default function DesprePage() {
         <Reveal>
           <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-4">Pregătit pentru Următorul Pas?</div>
           <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight mb-6">
-            <Linie>Hai să construim arhitectura afacerii tale.</Linie>
+            <Linie>Hai să construim site-ul afacerii tale.</Linie>
           </h2>
           <p className="text-neutral-400 text-sm md:text-base leading-relaxed mb-10 max-w-2xl mx-auto">
-            Discutăm concret pe cifrele și obiectivele afacerii tale. Primești un plan tehnic ferm și un termen precis de livrare.
+            Vorbim concret despre ce vinzi și unde vrei să ajungi. Primești un plan clar, un preț fix și un termen precis de livrare.
           </p>
           <Link
             href="/contact"
