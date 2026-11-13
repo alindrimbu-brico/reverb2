@@ -14,19 +14,19 @@ test("un singur stil: pleacă doar numele lui, la orice pondere", () => {
   assert.equal(stil(cu({ stiluri: [{ id: "folk", pondere: 100 }] })), "folk");
 });
 
-test("la egal: 50/50 și 33/33/33", () => {
-  assert.equal(stil(cu({ stiluri: [{ id: "folk", pondere: 50 }, { id: "jazz", pondere: 50 }] })), "an even blend of folk and jazz");
+test("ponderi egale: baza e primul activat, celelalte sunt „clar” (fără „even blend”)", () => {
+  assert.equal(stil(cu({ stiluri: [{ id: "folk", pondere: 50 }, { id: "jazz", pondere: 50 }] })), "primarily folk, with a strong jazz influence");
   assert.equal(
     stil(cu({ stiluri: [{ id: "folk", pondere: 33 }, { id: "jazz", pondere: 33 }, { id: "orchestral", pondere: 33 }] })),
-    "an even blend of folk, jazz and orchestral",
+    "primarily folk, with strong jazz and orchestral influences",
   );
 });
 
-test("baza plus adaosuri pe trepte", () => {
+test("baza plus adaosuri pe două trepte", () => {
   assert.equal(stil(cu({ stiluri: [{ id: "folk", pondere: 60 }, { id: "jazz", pondere: 40 }] })), "primarily folk, with a strong jazz influence");
   assert.equal(
-    stil(cu({ stiluri: [{ id: "folk", pondere: 100 }, { id: "jazz", pondere: 40 }, { id: "ambient", pondere: 20 }] })),
-    "primarily folk, with touches of jazz, with a subtle hint of ambient",
+    stil(cu({ stiluri: [{ id: "folk", pondere: 100 }, { id: "jazz", pondere: 60 }, { id: "ambient", pondere: 20 }] })),
+    "primarily folk, with a strong jazz influence, with touches of ambient",
   );
   assert.equal(
     stil(cu({ stiluri: [{ id: "jazz", pondere: 30 }, { id: "folk", pondere: 100 }, { id: "blues", pondere: 35 }] })),
@@ -34,18 +34,25 @@ test("baza plus adaosuri pe trepte", () => {
   );
 });
 
+test("formulările scoase după proba pe nevăzute nu mai pleacă", () => {
+  for (const p of [1, 10, 24, 25, 49, 50, 84, 85, 100]) {
+    const t = stil(cu({ stiluri: [{ id: "folk", pondere: 100 }, { id: "jazz", pondere: p }, { id: "blues", pondere: 100 - p + 1 }] }));
+    assert.ok(!/subtle hint|even blend/.test(t), t);
+  }
+});
+
 test("mutarea unui adaos nu schimbă cuvântul altuia", () => {
   const a = trepteStiluri([{ id: "folk", pondere: 80 }, { id: "jazz", pondere: 50 }, { id: "ambient", pondere: 10 }]);
   const b = trepteStiluri([{ id: "folk", pondere: 80 }, { id: "jazz", pondere: 50 }, { id: "ambient", pondere: 70 }]);
   assert.equal(a.jazz, "clar");
   assert.equal(b.jazz, "clar");
-  assert.equal(a.ambient, "abia");
-  assert.equal(b.ambient, "egal");
+  assert.equal(a.ambient, "idee");
+  assert.equal(b.ambient, "clar");
 });
 
 test("pragurile treptelor", () => {
   const t = (p) => trepteStiluri([{ id: "folk", pondere: 100 }, { id: "jazz", pondere: p }]).jazz;
-  assert.deepEqual([85, 84, 50, 49, 25, 24, 1].map(t), ["egal", "clar", "clar", "idee", "idee", "abia", "abia"]);
+  assert.deepEqual([100, 85, 50, 49, 25, 1].map(t), ["clar", "clar", "clar", "idee", "idee", "idee"]);
 });
 
 test("normalizarea: al cincilea stil, pondere 0, id necunoscut, dublură", () => {
@@ -124,7 +131,7 @@ test("depășirea: se scoate în ordine, baza și limba rămân", () => {
     { limba: "ro", atmosfera: lunga },
   );
   assert.ok(c.text.length <= TINTA_STIL || c.eroare);
-  for (const s of c.scoase) assert.ok(["propoziția de atmosferă", "instrumentele „puțin”", "stilurile „abia simțit”", "a treia stare", "a doua stare"].includes(s));
+  for (const s of c.scoase) assert.ok(["propoziția de atmosferă", "instrumentele „puțin”", "stilurile „o idee”", "a treia stare", "a doua stare"].includes(s));
 });
 
 test("aceeași rețetă dă același text", () => {
