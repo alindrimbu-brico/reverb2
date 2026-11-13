@@ -32,7 +32,7 @@ PAGINI = ["/", "/servicii", "/pachete", "/portofoliu", "/despre", "/contact", "/
 
 # Texte care nu se pot atinge prin apăsări (stări trecătoare, elemente care apar doar în altă limbă).
 IN_PLUS = [
-    ("linie", "/", "Sisteme care produc valoare."),
+    ("linie", "/", "Pentru afaceri la început."),  # rândul gri al titlului (OutlineRun): același text ca în app/HomeClient.tsx
     ("text", "/contact", "Se procesează..."),
     ("text", "/contact", "Se încarcă formularul..."),
     ("text", "/contact", "Îți răspundem în română sau engleză."),

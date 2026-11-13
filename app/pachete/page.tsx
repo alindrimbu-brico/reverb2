@@ -4,19 +4,40 @@ import Reveal from "@/components/Reveal";
 import WhoWeAre from "@/components/WhoWeAre";
 import WorkShots from "@/components/WorkShots";
 import { Linie } from "@/components/RunningLine";
-import { packages, priceLei, VAT_LABEL } from "@/lib/packages";
+import { HOSTING_AFTER_FIRST_YEAR, packages, pkg, priceLei, VAT_LABEL } from "@/lib/packages";
 import { liveProjectsRo } from "@/lib/liveProjects";
 
 // Trei lucrări reale arătate lângă prețuri; numele și adresele vin din lista unică de proiecte live.
 const LUCRARI = ["Bricolando.ro", "RaftPlin.ro", "Kalki.nexus"];
 const lucrari = LUCRARI.map((n) => liveProjectsRo.find((p) => p.name === n)).filter((p) => !!p);
 
+// Prețurile de pornire, din registru: propoziția de sus, descrierea paginii și caseta „Cât plătești în total”.
+const site = pkg("site-start");
+const magazin = pkg("magazin-start");
+
 export const metadata: Metadata = {
   alternates: { canonical: "/pachete", languages: { ro: "/pachete", en: "/en/packages", "x-default": "/pachete" } },
   title: "Pachete & Prețuri — Reverb Digital",
-  description:
-    "Prețuri fixe, fără surprize. Pachete de promovare video zilnică AI, magazine online la cheie și infrastructură digitală enterprise.",
+  description: `Prețuri fixe pentru site-uri de prezentare, magazine online și clipuri video pentru rețelele sociale. Site de la ${site.price}, magazin online de la ${magazin.price}, plus TVA.`,
 };
+
+// Caseta „Cât plătești în total”: doar ce scrie deja în registru și în întrebările frecvente, fără cifre ale altor firme.
+// Fiecare rând e un singur șir (traducerea nu se face pe bucăți).
+const platesti = (p: { price: string }) =>
+  `Ne plătești o singură dată ${p.price} ${VAT_LABEL} (${priceLei(p.price)}): jumătate la început, jumătate la predare.`;
+const costSite = [
+  platesti(site),
+  "Domeniul (numele site-ului, de exemplu numele-firmei.ro): câteva zeci de lei pe an, plătiți de tine firmei de la care îl cumperi.",
+  `Găzduirea (locul unde stă site-ul pe internet): inclusă în primul an. Din al doilea an, ${HOSTING_AFTER_FIRST_YEAR} ${VAT_LABEL} sau muți site-ul la altă firmă de găzduire.`,
+  `Pe scurt: în primul an ${site.price} și domeniul; apoi ${HOSTING_AFTER_FIRST_YEAR} și domeniul.`,
+];
+const costMagazin = [
+  platesti(magazin),
+  "Pentru magazin nu ne plătești nimic lunar.",
+  "Plătești și dacă nu vinzi nimic: găzduirea, domeniul și programul de facturare. Le plătești tu, direct firmelor respective.",
+  "Plătești doar când vinzi: un comision la fiecare plată cu cardul și curierul la fiecare colet.",
+  "Îți spunem dinainte ce să alegi și cât costă fiecare, apoi le legăm noi de magazin.",
+];
 
 const faqs = [
   {
@@ -72,7 +93,7 @@ export default function PachetePage() {
           <Reveal>
             <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.1em] sm:tracking-[0.25em] text-neutral-300 mb-6 backdrop-blur-md">
               <span className="h-1.5 w-1.5 rounded-full bg-white" />
-              <span>[ CLARITATE FINANCIARĂ • PREȚURI FIXE ]</span>
+              <span>[ SITE-URI • MAGAZINE ONLINE • CLIPURI VIDEO ]</span>
             </div>
           </Reveal>
           <Reveal delay={80}>
@@ -82,7 +103,14 @@ export default function PachetePage() {
             </h1>
           </Reveal>
           <Reveal delay={160}>
-            <p className="mt-8 max-w-2xl mx-auto text-base md:text-lg text-neutral-400 font-light leading-relaxed">
+            {/* Ce facem și de la cât pornește (din registru), apoi legătura spre exemplul de cost total. */}
+            <p className="mt-8 max-w-2xl mx-auto text-lg md:text-xl text-white font-light leading-relaxed">
+              {`Facem site-uri de prezentare și magazine online. Site de la ${site.price} ${VAT_LABEL} (${priceLei(site.price)}), magazin online de la ${magazin.price} ${VAT_LABEL} (${priceLei(magazin.price)}).`}
+            </p>
+            <p className="mt-3 text-sm text-neutral-300 font-light">
+              <a href="#cost" className="text-white underline underline-offset-4 decoration-white/40 hover:decoration-white">Vezi un exemplu de cost total ↓</a>
+            </p>
+            <p className="mt-6 max-w-2xl mx-auto text-base md:text-lg text-neutral-400 font-light leading-relaxed">
               Fiecare pachet are o listă fixă cu ce primești și un termen ferm de predare. Ce construim poate fi găsit pe Google și de oamenii care întreabă ChatGPT.
             </p>
             <p className="mx-auto mt-5 max-w-2xl text-sm text-neutral-300 font-light leading-relaxed">
@@ -125,6 +153,32 @@ export default function PachetePage() {
             <p className="mt-6 text-sm text-neutral-400 font-light leading-relaxed">
               „Cere acest pachet” deschide un formular scurt. Îți răspundem în cel mult 24 de ore lucrătoare, fără nicio obligație.
             </p>
+
+            {/* Cât plătești în total: două exemple */}
+            <div id="cost" className="scroll-mt-20 mt-8 rounded-2xl border border-white/10 bg-neutral-900/30 p-6 md:p-8">
+              <h3 className="text-xl md:text-2xl font-medium text-white"><Linie>Cât plătești în total</Linie></h3>
+              <p className="mt-2 text-sm text-neutral-400 font-light leading-relaxed">
+                Două exemple, cu tot ce se adaugă la prețul pachetului.
+              </p>
+              <div className="mt-6 grid grid-cols-1 gap-8 md:grid-cols-2">
+                {[
+                  { nume: site.name, randuri: costSite },
+                  { nume: magazin.name, randuri: costMagazin },
+                ].map((ex) => (
+                  <div key={ex.nume} className="min-w-0">
+                    <h4 className="text-base font-medium text-white">{ex.nume}</h4>
+                    <ul className="mt-3 space-y-2.5 text-sm text-neutral-300 font-light leading-relaxed">
+                      {ex.randuri.map((rand) => (
+                        <li key={rand} className="flex items-start gap-2.5">
+                          <span className="text-neutral-500 mt-0.5">•</span>
+                          <span className="min-w-0">{rand}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </Reveal>
 

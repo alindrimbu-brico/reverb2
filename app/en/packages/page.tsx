@@ -4,7 +4,7 @@ import Reveal from "@/components/Reveal";
 import WhoWeAre from "@/components/WhoWeAre";
 import WorkShots from "@/components/WorkShots";
 import { Linie } from "@/components/RunningLine";
-import { packages, priceLei } from "@/lib/packages";
+import { HOSTING_AFTER_FIRST_YEAR, packages, pkg, priceEn, priceLei } from "@/lib/packages";
 import { packagesEn, enPrice, enDelivery, VAT_LABEL_EN } from "@/lib/packagesEn";
 import { liveProjectsEn } from "@/lib/liveProjects";
 
@@ -12,12 +12,33 @@ import { liveProjectsEn } from "@/lib/liveProjects";
 const WORK = ["Bricolando.ro", "RaftPlin.ro", "Kalki.nexus"];
 const work = WORK.map((n) => liveProjectsEn.find((p) => p.name === n)).filter((p) => !!p);
 
+// Starting prices, from the registry: the sentence at the top, the page description and the "What you pay in total" box.
+const siteName = packagesEn["site-start"].name;
+const storeName = packagesEn["magazin-start"].name;
+const hostingLater = priceEn(HOSTING_AFTER_FIRST_YEAR);
+
 export const metadata: Metadata = {
   alternates: { canonical: "/en/packages", languages: { ro: "/pachete", en: "/en/packages", "x-default": "/pachete" } },
   title: "Packages & Pricing — Reverb Digital",
-  description:
-    "Fixed prices, no surprises. Websites and online stores ready for the first sale, and monthly video packages for social media.",
+  description: `Fixed prices for presentation websites, online stores and short videos for social media. Website from ${enPrice("site-start")}, online store from ${enPrice("magazin-start")}, plus VAT.`,
 };
+
+// The "What you pay in total" box: only what the registry and the FAQ already say, with no figures of other companies.
+const youPay = (id: "site-start" | "magazin-start") =>
+  `You pay us once: ${enPrice(id)} ${VAT_LABEL_EN} (${priceLei(pkg(id).price, "en")}), half at the start and half on delivery.`;
+const costSite = [
+  youPay("site-start"),
+  "The domain (the name of the site, for example your-business.com): a small yearly fee, paid by you to the company you buy it from.",
+  `Hosting (where the site lives on the internet): included for the first year. From the second year, ${hostingLater} ${VAT_LABEL_EN}, or you move the site to another hosting company.`,
+  `In short: ${enPrice("site-start")} and the domain in the first year; then ${hostingLater} and the domain.`,
+];
+const costStore = [
+  youPay("magazin-start"),
+  "For the store you pay us nothing monthly.",
+  "You pay even if you sell nothing: hosting, the domain and the invoicing program. You pay these yourself, directly to those companies.",
+  "You pay only when you sell: a fee on each card payment and the courier for each parcel.",
+  "We tell you in advance what to choose and what each one costs, then we connect them to the store.",
+];
 
 const faqsEN = [
   {
@@ -73,7 +94,7 @@ export default function PackagesPageEN() {
           <Reveal>
             <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.1em] sm:tracking-[0.25em] text-neutral-300 mb-6 backdrop-blur-md">
               <span className="h-1.5 w-1.5 rounded-full bg-white" />
-              <span>[ PACKAGES • FIXED PRICES ]</span>
+              <span>[ WEBSITES • ONLINE STORES • VIDEO CLIPS ]</span>
             </div>
           </Reveal>
 
@@ -85,6 +106,13 @@ export default function PackagesPageEN() {
           </Reveal>
 
           <Reveal delay={0.2}>
+            {/* What we do and where prices start (from the registry), then the link to the total-cost example. */}
+            <p className="mx-auto mt-6 max-w-2xl text-lg md:text-xl text-white font-light leading-relaxed">
+              {`We build presentation websites and online stores. Website from ${enPrice("site-start")} ${VAT_LABEL_EN} (${priceLei(pkg("site-start").price, "en")}), online store from ${enPrice("magazin-start")} ${VAT_LABEL_EN} (${priceLei(pkg("magazin-start").price, "en")}).`}
+            </p>
+            <p className="mt-3 text-sm text-neutral-300 font-light">
+              <a href="#cost" className="text-white underline underline-offset-4 decoration-white/40 hover:decoration-white">See an example of the total cost ↓</a>
+            </p>
             <p className="mx-auto mt-6 max-w-2xl text-base sm:text-lg text-neutral-400 font-light leading-relaxed">
               Every package has a fixed list of what you get and a firm delivery date. What we build can be found on Google and by people who ask ChatGPT.
             </p>
@@ -127,6 +155,32 @@ export default function PackagesPageEN() {
               <p className="mt-6 text-sm text-neutral-400 font-light leading-relaxed">
                 “Ask for this package” opens a short form. We answer within 24 working hours, with no obligation.
               </p>
+
+              {/* What you pay in total: two examples */}
+              <div id="cost" className="scroll-mt-20 mt-8 rounded-2xl border border-white/10 bg-neutral-900/30 p-6 md:p-8">
+                <h3 className="text-xl md:text-2xl font-medium text-white"><Linie>What you pay in total</Linie></h3>
+                <p className="mt-2 text-sm text-neutral-400 font-light leading-relaxed">
+                  Two examples, with everything that adds to the package price.
+                </p>
+                <div className="mt-6 grid grid-cols-1 gap-8 md:grid-cols-2">
+                  {[
+                    { name: siteName, rows: costSite },
+                    { name: storeName, rows: costStore },
+                  ].map((ex) => (
+                    <div key={ex.name} className="min-w-0">
+                      <h4 className="text-base font-medium text-white">{ex.name}</h4>
+                      <ul className="mt-3 space-y-2.5 text-sm text-neutral-300 font-light leading-relaxed">
+                        {ex.rows.map((row) => (
+                          <li key={row} className="flex items-start gap-2.5">
+                            <span className="text-neutral-500 mt-0.5">•</span>
+                            <span className="min-w-0">{row}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </Reveal>
 

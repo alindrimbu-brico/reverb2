@@ -51,10 +51,15 @@ export function priceLei(price: string, lang: "ro" | "en" = "ro"): string {
   const n = String(lei).replace(/\B(?=(\d{3})+(?!\d))/g, lang === "en" ? "," : ".");
   const from = /^de la/i.test(price);
   const monthly = price.includes("/ lună");
+  const yearly = price.includes("/ an");
   return lang === "en"
-    ? `${from ? "from " : ""}approx. ${n} lei incl. VAT${monthly ? " / month" : ""}`
-    : `${from ? "de la " : ""}aproximativ ${n} lei cu TVA${monthly ? " / lună" : ""}`;
+    ? `${from ? "from " : ""}approx. ${n} lei incl. VAT${monthly ? " / month" : yearly ? " / year" : ""}`
+    : `${from ? "de la " : ""}aproximativ ${n} lei cu TVA${monthly ? " / lună" : yearly ? " / an" : ""}`;
 }
+
+/** Găzduirea unui site făcut de noi, din al doilea an (primul an e inclus la Site Start). Fără TVA, ca toate prețurile.
+ *  Se schimbă doar aici: o citesc rândul pachetului Site Start (RO și EN) și caseta „Cât plătești în total” de pe Pachete. */
+export const HOSTING_AFTER_FIRST_YEAR = "€60 / an";
 
 export const packages: Package[] = [
   {
@@ -136,7 +141,7 @@ export const packages: Package[] = [
       "Formular de contact, WhatsApp și hartă Google",
       "Optimizat pentru telefon și pentru viteză",
       "Textele și pozele vin de la tine; două runde de modificări incluse",
-      "Găzduire inclusă în primul an; apoi €60 / an sau îl muți la găzduirea ta",
+      `Găzduire inclusă în primul an; apoi ${HOSTING_AFTER_FIRST_YEAR} sau îl muți la găzduirea ta`,
       "Publicat pe domeniul tău (domeniul se plătește separat)",
       "30 de zile de sprijin după lansare: WhatsApp, telefon și întâlniri online sau la biroul nostru din Focșani",
     ],
@@ -249,7 +254,8 @@ export function priceEn(price: string): string {
   return price
     .replace(/^de la\s+/i, "from ")
     .replace(/(\d)\.(\d{3})/g, "$1,$2")
-    .replace("/ lună", "/ month");
+    .replace("/ lună", "/ month")
+    .replace("/ an", "/ year");
 }
 
 /** „7–14 zile” → „7–14 days”. Termenele care nu sunt în zile au textul lor în lib/packagesEn.ts. */

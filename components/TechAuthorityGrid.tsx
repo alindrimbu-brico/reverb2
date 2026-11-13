@@ -12,19 +12,18 @@ export default function TechAuthorityGrid({ lang = "ro" }: TechAuthorityGridProp
   const isEn = lang === "en";
 
   const t = {
-    badge: isEn ? "[ ENTERPRISE FOUNDATION ]" : "[ FUNDAȚIE TEHNOLOGICĂ ENTERPRISE ]",
+    badge: isEn ? "[ WHAT WE BUILD WITH ]" : "[ CU CE LUCRĂM ]",
     heading: isEn
-      ? "The technical stack powering Reverb runs in production at the most innovative companies on earth."
-      : "Infrastructura și tehnologiile pe care construim Reverb rulează în producție la cele mai mari companii din lume.",
-    tagline1: isEn ? "Code-first for performance." : "Inginerie nativă pentru viteză.",
-    tagline2: isEn ? "Conversion-first for business." : "Claritate cognitivă pentru conversie.",
+      ? "We build with tools that the largest companies in the world use too."
+      : "Construim cu unelte pe care le folosesc și cele mai mari companii din lume.",
+    tagline1: isEn ? "Built to run fast." : "Făcut să meargă repede.",
+    tagline2: isEn ? "Written to sell." : "Scris ca să vândă.",
   };
 
   const stack = [
     {
       name: "Next.js",
-      role: isEn ? "Frontend Architecture" : "Arhitectură Frontend",
-      metric: "< 1.2s Edge Latency",
+      role: isEn ? "Fast websites" : "Site-uri rapide",
       usedBy: isEn ? "Used by Apple, Netflix, Twitch, Nike" : "Folosit de Apple, Netflix, Twitch, Nike",
       svg: (
         <svg viewBox="0 0 180 180" className="h-8 w-auto fill-current" aria-label="Next.js">
@@ -41,8 +40,7 @@ export default function TechAuthorityGrid({ lang = "ro" }: TechAuthorityGridProp
     },
     {
       name: "Payload CMS",
-      role: isEn ? "Headless Backend" : "Panou Control Headless",
-      metric: "100% Native TypeScript",
+      role: isEn ? "Admin panel" : "Panou de administrare",
       usedBy: isEn ? "Used by Figma, Kong, Red Bull, Nintendo" : "Folosit de Figma, Kong, Red Bull, Nintendo",
       svg: (
         <svg viewBox="0 0 120 120" className="h-8 w-auto fill-current" aria-label="Payload CMS">
@@ -54,8 +52,7 @@ export default function TechAuthorityGrid({ lang = "ro" }: TechAuthorityGridProp
     },
     {
       name: "Cloudflare",
-      role: isEn ? "Edge Network & Security" : "Rețea Edge & Securitate",
-      metric: "99.99% Guaranteed SLA",
+      role: isEn ? "Speed and protection" : "Viteză și protecție",
       usedBy: isEn ? "Secures 20% of Global Internet Traffic" : "Protejează 20% din traficul global de internet",
       svg: (
         <svg viewBox="0 0 120 60" className="h-7 w-auto fill-current" aria-label="Cloudflare">
@@ -65,9 +62,8 @@ export default function TechAuthorityGrid({ lang = "ro" }: TechAuthorityGridProp
     },
     {
       name: "Google DeepMind",
-      role: isEn ? "Neural Video & Imagen Models" : "Modele Video Veo & Imagen",
-      metric: "60 FPS Neural Generation",
-      usedBy: isEn ? "SOTA Generative AI Architecture" : "Arhitectură Generativă de Vârf Mondial",
+      role: isEn ? "AI videos and images" : "Clipuri și imagini cu AI",
+      usedBy: isEn ? "The Veo and Imagen models" : "Modelele Veo și Imagen",
       svg: (
         <svg viewBox="0 0 120 120" className="h-8 w-auto fill-current" aria-label="Google AI">
           <circle cx="60" cy="60" r="48" fill="none" stroke="currentColor" strokeWidth="5" strokeDasharray="6 4" />
@@ -82,8 +78,7 @@ export default function TechAuthorityGrid({ lang = "ro" }: TechAuthorityGridProp
     },
     {
       name: "Stripe",
-      role: isEn ? "Global Payments Infrastructure" : "Infrastructură Plăți Securizate",
-      metric: "PCI-DSS Level 1 Encryption",
+      role: isEn ? "Card payments" : "Plăți cu cardul",
       usedBy: isEn ? "Powers OpenAI, Amazon, Shopify" : "Procesează plăți pentru OpenAI, Amazon, Shopify",
       svg: (
         <svg viewBox="0 0 80 40" className="h-7 w-auto fill-current" aria-label="Stripe">
@@ -95,8 +90,7 @@ export default function TechAuthorityGrid({ lang = "ro" }: TechAuthorityGridProp
     },
     {
       name: "ElevenLabs",
-      role: isEn ? "Neural Voice Synthesizer" : "Sinteză Vocală Neurală",
-      metric: "Ultra-Realistic Conversions",
+      role: isEn ? "AI-generated voice" : "Voce generată cu AI",
       usedBy: isEn ? "Used by Time, HarperCollins, Global Media" : "Folosit de Time, HarperCollins și publicații globale",
       svg: (
         <svg viewBox="0 0 100 40" className="h-7 w-auto fill-current" aria-label="ElevenLabs">
@@ -160,11 +154,8 @@ export default function TechAuthorityGrid({ lang = "ro" }: TechAuthorityGridProp
                   </div>
                 </div>
 
-                {/* Metrics & Authority Callout */}
-                <div className="pt-4 border-t border-white/10 dark:border-white/10 light:border-black/10 font-mono text-[11px] space-y-1">
-                  <div className="mech-telemetry text-emerald-400 dark:text-emerald-400 light:text-emerald-600 font-bold tracking-wider">
-                    {item.metric}
-                  </div>
+                {/* Cine mai folosește unealta */}
+                <div className="pt-4 border-t border-white/10 dark:border-white/10 light:border-black/10 font-mono text-[11px]">
                   <div className="text-neutral-400 text-[10px] leading-relaxed">
                     {item.usedBy}
                   </div>
@@ -175,7 +166,7 @@ export default function TechAuthorityGrid({ lang = "ro" }: TechAuthorityGridProp
         </div>
       </div>
 
-      {/* Dual-Thesis Punchline (Matching Image 2 Style) */}
+      {/* Cele două rânduri mari de la final */}
       <Reveal delay={200}>
         <div className="text-center mt-16 sm:mt-24">
           <h3 className="text-3xl sm:text-5xl md:text-6xl font-light text-white dark:text-white light:text-neutral-900 tracking-tight leading-[1.15]">

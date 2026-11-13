@@ -3,7 +3,7 @@
 // Package texts are written for a reader who does not work in IT: no technology names
 // (Next.js, Payload, JSON-LD) and no abbreviations (GEO, A/B, SLA) in what the client sees.
 
-import { deliveryEn, packages, pkg, priceEn, type PackageId } from "./packages";
+import { deliveryEn, HOSTING_AFTER_FIRST_YEAR, packages, pkg, priceEn, type PackageId } from "./packages";
 
 export type PackageEn = {
   name: string;
@@ -80,7 +80,7 @@ export const packagesEn: Record<PackageId, PackageEn> = {
       "Contact form, WhatsApp and Google map",
       "Optimized for phones and for speed",
       "Texts and photos come from you; two rounds of changes included",
-      "Hosting included for the first year; then €60 / year, or you move it to your own hosting",
+      `Hosting included for the first year; then ${priceEn(HOSTING_AFTER_FIRST_YEAR)}, or you move it to your own hosting`,
       "Published on your domain (the domain is paid separately)",
       "30 days of support after launch: WhatsApp, phone and meetings online or at our office in Focșani",
     ],
