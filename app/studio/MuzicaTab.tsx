@@ -7,6 +7,8 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import CreeazaPanou, { type CerereCreatie } from "./CreeazaPanou";
+import SunoStare, { textCota, type SunoCota, type SunoPiesa } from "./SunoStare";
+import { useStored } from "@/lib/useStored";
 
 type Instrument = { ro: string; en: string };
 type Scena = { nr: number; strofa: string; prompt_en: string };
@@ -15,16 +17,20 @@ type PiesaCompusa = {
   id: string; pereche: string | null; cerere: string; limba: "ro" | "en"; titlu: string; stil: string; exclude: string;
   versuri: string; instrumente_cerute: Instrument[]; scene: Scena[]; kit: Kit;
 };
-type Varianta = { nr: number; durata_s: number | null; scor: number | null; media: string | null };
+type Varianta = { nr: number; durata_s: number | null; scor: number | null; media: string | null; suno_id?: string | null };
 type PiesaOglinda = {
   id: string; titlu: string; limba: "ro" | "en"; pereche: string | null; sursa: string; stare: string;
   lucru: { actiune: string; pornit_la: string } | null; eroare: string | null; varianta_aleasa: number | null; imagini: number;
   variante: Varianta[]; scene: Scena[];
   clip: { previzualizare: string | null; sincronizare: string | null; final: boolean; short: boolean };
   kit: Kit; youtube_url: string | null; actualizat_la: string;
+  suno?: SunoPiesa; poate_suno?: boolean;   // coada Suno (felia 2); lipsesc până când laptopul trimite oglinda nouă
 };
 type Stare = {
-  stare?: { piese?: PiesaOglinda[]; erori_comenzi?: { comanda: string; piesa: string; actiune: string; la: string; motiv: string }[]; generat_la?: string };
+  stare?: {
+    piese?: PiesaOglinda[]; erori_comenzi?: { comanda: string; piesa: string; actiune: string; la: string; motiv: string }[]; generat_la?: string;
+    suno?: { in_coada: number; cota: SunoCota };
+  };
   viu?: { lucrez_la: string | null; pas: string; primit: string } | null;
   coada?: number;
 };
@@ -97,6 +103,16 @@ export default function MuzicaTab({ onNeautentificat }: { onNeautentificat: () =
   const [trimise, setTrimise] = useState<Record<string, string>>({});
   const [optiuni, setOptiuni] = useState<Record<string, { varianta?: number; versuri: boolean; short: boolean }>>({});
   const [ytLink, setYtLink] = useState<Record<string, string>>({});
+  // Ora la care s-a apăsat „Pune în coada Suno”, ținută în browser: după o reîncărcare se vede că piesa a fost pusă la rând.
+  const [asteptariBrut, setAsteptariBrut] = useStored("reverb-muzica-suno-asteptari-v1", "{}");
+  const asteptari = useMemo<Record<string, string>>(() => {
+    try {
+      const d = JSON.parse(asteptariBrut);
+      return d && typeof d === "object" ? d : {};
+    } catch {
+      return {};
+    }
+  }, [asteptariBrut]);
 
   useEffect(() => setCiorne(citesteLocal()), []);
 
@@ -127,8 +143,8 @@ export default function MuzicaTab({ onNeautentificat }: { onNeautentificat: () =
   const piese = useMemo(() => stare?.stare?.piese || [], [stare]);
   const laptopViu = minute(stare?.viu?.primit) < 5;
 
-  async function trimite(actiune: string, piesa: string, date: Record<string, unknown> = {}) {
-    setTrimise((t) => ({ ...t, [piesa]: `trimis „${actiune}”, aștept laptopul…` }));
+  async function trimite(actiune: string, piesa: string, date: Record<string, unknown> = {}, mesaj?: string) {
+    setTrimise((t) => ({ ...t, [piesa]: mesaj ?? `trimis „${actiune}”, aștept laptopul…` }));
     try {
       const r = await fetch("/api/studio/muzica", {
         method: "POST",
@@ -181,6 +197,35 @@ export default function MuzicaTab({ onNeautentificat }: { onNeautentificat: () =
     trimite("importa", id, { linkuri: l });
   }
 
+  // Coada Suno călătorește pe acțiunea „ciorna” (releul nu se schimbă): date.suno = "trimite" | "retrage".
+  // Dacă piesa nu e (încă) în oglinda laptopului, comanda poartă tot conținutul, ca o ciornă pierdută pe drum să se refacă.
+  function puneInCoada(id: string, continut?: PiesaCompusa) {
+    setAsteptariBrut(JSON.stringify({ ...asteptari, [id]: new Date().toISOString() }));
+    const peLaptop = piese.some((x) => x.id === id);
+    const date = continut && !peLaptop
+      ? {
+          titlu: continut.titlu, limba: continut.limba, pereche: continut.pereche, cerere: continut.cerere, stil: continut.stil, exclude: continut.exclude,
+          versuri: continut.versuri, instrumente: continut.instrumente_cerute, scene: continut.scene, kit: continut.kit, suno: "trimite",
+        }
+      : { suno: "trimite" };
+    trimite("ciorna", id, date, "");
+  }
+
+  function retrageDinCoada(id: string) {
+    const rest = { ...asteptari };
+    delete rest[id];
+    setAsteptariBrut(JSON.stringify(rest));
+    trimite("ciorna", id, { suno: "retrage" }, "retragere trimisă, aștept laptopul…");
+  }
+
+  /** Ultimul refuz al laptopului pentru piesă, dacă e de după apăsare. */
+  function refuzSuno(id: string): string | null {
+    const de = asteptari[id];
+    if (!de) return null;
+    const e = (stare?.stare?.erori_comenzi || []).filter((x) => x.piesa === id && x.actiune === "ciorna" && Date.parse(x.la) >= Date.parse(de) - 5000).pop();
+    return e ? e.motiv : null;
+  }
+
   function stergeCiornaLocala(id: string) {
     const noi = { ...ciorne };
     delete noi[id];
@@ -198,9 +243,20 @@ export default function MuzicaTab({ onNeautentificat }: { onNeautentificat: () =
             <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 font-bold">Surya Music · Alin Dragoș</span>
             <h2 className="text-2xl font-medium text-white mt-1">Muzică: de la cerere la YouTube</h2>
             <p className="text-xs text-neutral-400 mt-1 max-w-2xl">
-              Scrii tema și alegi stilul → primești promptul și versurile pentru Suno → lipești linkul piesei → laptopul o aduce aici, faci
-              clipul, îl vezi, apeși „Publică” și primești kitul de urcare. Nimic nu se publică singur.
+              Scrii tema și alegi stilul → primești promptul și versurile → pui piesa în coada Suno (o generează Claude pe laptop, când îi
+              spui) sau o faci tu de mână în Suno → o asculți aici, faci clipul, apeși „Publică” și primești kitul de urcare. Nimic nu se
+              publică singur.
             </p>
+            {((stare?.stare?.suno?.in_coada ?? 0) > 0 || textCota(stare?.stare?.suno?.cota ?? null)) && (
+              <p className="text-sm text-neutral-300 mt-2" data-suno-antet>
+                {(stare?.stare?.suno?.in_coada ?? 0) > 0 && (
+                  <b className="text-white font-medium">
+                    {stare?.stare?.suno?.in_coada === 1 ? "1 piesă așteaptă" : `${stare?.stare?.suno?.in_coada} piese așteaptă`} în coada Suno.{" "}
+                  </b>
+                )}
+                {textCota(stare?.stare?.suno?.cota ?? null) && <span className="first-letter:uppercase inline-block">{textCota(stare?.stare?.suno?.cota ?? null)}.</span>}
+              </p>
+            )}
           </div>
           <div className={`shrink-0 rounded-2xl border px-4 py-3 text-xs ${laptopViu ? "border-white/20 text-neutral-200" : "border-rose-400/30 text-rose-300"}`}>
             <div className="font-bold flex items-center gap-2"><span className={`h-1.5 w-1.5 rounded-full ${laptopViu ? "bg-emerald-400" : "bg-rose-400"}`} />{laptopViu ? "Laptopul lucrează" : "Laptopul e oprit"}</div>
@@ -231,7 +287,9 @@ export default function MuzicaTab({ onNeautentificat }: { onNeautentificat: () =
           <div className="space-y-6">
             <CreeazaPanou lucreaza={compune.lucreaza} eroare={compune.eroare} motive={compune.motive} onScrie={scrie} />
 
-            {ciorneRecente.map((p) => (
+            {ciorneRecente.map((p) => {
+              const o = piese.find((x) => x.id === p.id);
+              return (
               <div key={p.id} className="rounded-2xl border border-white/10 bg-black/30 p-5 space-y-4">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <div>
@@ -240,16 +298,12 @@ export default function MuzicaTab({ onNeautentificat }: { onNeautentificat: () =
                   </div>
                   <button onClick={() => stergeCiornaLocala(p.id)} className="text-[11px] text-neutral-500 hover:text-neutral-300">ascunde</button>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  <Copiaza text={p.titlu} eticheta="titlul" />
-                  <Copiaza text={p.stil} eticheta="stilul" />
-                  <Copiaza text={p.exclude} eticheta="exclude" />
-                  <Copiaza text={p.versuri} eticheta="versurile" />
-                  <a href="https://suno.com/create" target="_blank" rel="noopener noreferrer"
-                    className="rounded-full bg-white px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider text-black font-bold hover:bg-neutral-200">
-                    Deschide Suno ↗
-                  </a>
-                </div>
+                <SunoStare
+                  stare={o ? o.stare : null} suno={o?.suno ?? null} poate={o ? !!o.poate_suno : true} cota={stare?.stare?.suno?.cota ?? null}
+                  aduse={(o?.variante || []).map((v) => v.suno_id || "").filter(Boolean)} titlu={p.titlu}
+                  asteptare={asteptari[p.id] || null} refuz={refuzSuno(p.id)} laptopViu={laptopViu}
+                  onPune={() => puneInCoada(p.id, p)} onRetrage={() => retrageDinCoada(p.id)} onBiblioteca={() => setSub("biblioteca")}
+                />
                 <details className="text-xs text-neutral-300">
                   <summary className="cursor-pointer text-neutral-400">Vezi stilul și versurile</summary>
                   <div className="mt-3 grid gap-3 md:grid-cols-2">
@@ -257,20 +311,36 @@ export default function MuzicaTab({ onNeautentificat }: { onNeautentificat: () =
                     <pre className="whitespace-pre-wrap rounded-xl bg-black/50 p-3 font-mono text-[11px]">{p.versuri}</pre>
                   </div>
                 </details>
-                <div className="flex flex-col gap-2 md:flex-row">
-                  <input
-                    value={linkuri[p.id] || ""}
-                    onChange={(e) => setLinkuri((l) => ({ ...l, [p.id]: e.target.value }))}
-                    placeholder="Lipește linkul piesei din Suno (1 sau 2, separate prin spațiu)"
-                    className="flex-1 rounded-full border border-white/10 bg-black/40 px-4 py-2 text-xs text-white placeholder:text-neutral-500"
-                  />
-                  <button onClick={() => importa(p.id)} className="rounded-full bg-white px-4 py-2 text-xs font-mono uppercase tracking-widest text-black font-bold hover:bg-neutral-200">
-                    Importă în bibliotecă
-                  </button>
-                </div>
+                <details className="text-xs text-neutral-300">
+                  <summary className="cursor-pointer text-neutral-400">Fac eu de mână în Suno (copiez, generez, lipesc linkul)</summary>
+                  <div className="mt-3 space-y-3">
+                    <div className="flex flex-wrap gap-2">
+                      <Copiaza text={p.titlu} eticheta="titlul" />
+                      <Copiaza text={p.stil} eticheta="stilul" />
+                      <Copiaza text={p.exclude} eticheta="exclude" />
+                      <Copiaza text={p.versuri} eticheta="versurile" />
+                      <a href="https://suno.com/create" target="_blank" rel="noopener noreferrer"
+                        className="rounded-full bg-white px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider text-black font-bold hover:bg-neutral-200">
+                        Deschide Suno ↗
+                      </a>
+                    </div>
+                    <div className="flex flex-col gap-2 md:flex-row">
+                      <input
+                        value={linkuri[p.id] || ""}
+                        onChange={(e) => setLinkuri((l) => ({ ...l, [p.id]: e.target.value }))}
+                        placeholder="Lipește linkul piesei din Suno (1 sau 2, separate prin spațiu)"
+                        className="flex-1 rounded-full border border-white/10 bg-black/40 px-4 py-2 text-xs text-white placeholder:text-neutral-500"
+                      />
+                      <button onClick={() => importa(p.id)} className="rounded-full bg-white px-4 py-2 text-xs font-mono uppercase tracking-widest text-black font-bold hover:bg-neutral-200">
+                        Importă în bibliotecă
+                      </button>
+                    </div>
+                  </div>
+                </details>
                 {trimise[p.id] && <div className="text-[11px] text-neutral-400">{trimise[p.id]}</div>}
               </div>
-            ))}
+              );
+            })}
           </div>
         )}
 
@@ -278,8 +348,13 @@ export default function MuzicaTab({ onNeautentificat }: { onNeautentificat: () =
           <div className="space-y-4">
             {piese.length === 0 && <div className="py-10 text-center text-xs text-neutral-400">Nicio piesă încă. Compune una sau așteaptă laptopul.</div>}
             {piese.filter((p) => p.stare !== "respinsa").map((p) => {
-              const [eticheta, culoare] = ETICHETE_STARE[p.stare] || [p.stare, "bg-neutral-700 text-white"];
+              const inCoadaSuno = p.stare === "ciorna" && !!p.suno?.trimis_la;
+              const [eticheta, culoare] = inCoadaSuno
+                ? [p.suno?.ids?.length ? "Generată în Suno, neadusă" : p.suno?.inceput_la ? "Se generează în Suno" : "În coada Suno", "border border-white/30 text-white"]
+                : ETICHETE_STARE[p.stare] || [p.stare, "bg-neutral-700 text-white"];
               const o = optiuni[p.id] || { versuri: true, short: false };
+              const aduseSuno = p.variante.map((v) => v.suno_id || "").filter(Boolean);
+              const arataSuno = p.stare === "ciorna" ? p.poate_suno || inCoadaSuno : (p.suno?.ids || []).some((id) => !aduseSuno.includes(id));
               return (
                 <div key={p.id} className="rounded-2xl border border-white/10 bg-black/30 p-5 space-y-4">
                   <div className="flex flex-wrap items-center justify-between gap-2">
@@ -292,6 +367,14 @@ export default function MuzicaTab({ onNeautentificat }: { onNeautentificat: () =
                   {p.lucru && <div className="rounded-xl bg-white/[0.03] p-3 text-xs text-neutral-200">În lucru: {p.lucru.actiune}{stare?.viu?.lucrez_la === p.id ? ` · ${stare.viu.pas}` : ""}</div>}
                   {p.eroare && <div className="rounded-xl border border-rose-400/30 p-3 text-xs text-rose-300">Eroare: {p.eroare}</div>}
                   {trimise[p.id] && <div className="text-[11px] text-neutral-400">{trimise[p.id]}</div>}
+
+                  {arataSuno && p.stare !== "urcata" && (
+                    <SunoStare
+                      stare={p.stare} suno={p.suno ?? null} poate={!!p.poate_suno} cota={stare?.stare?.suno?.cota ?? null} aduse={aduseSuno} titlu={p.titlu}
+                      asteptare={asteptari[p.id] || null} refuz={refuzSuno(p.id)} laptopViu={laptopViu}
+                      onPune={() => puneInCoada(p.id)} onRetrage={() => retrageDinCoada(p.id)}
+                    />
+                  )}
 
                   {p.variante.length > 0 && p.stare !== "urcata" && (
                     <div className="grid gap-3 md:grid-cols-2">
