@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import WhoWeAre from "@/components/WhoWeAre";
+import { costLead, costRows, costSummary, costVatNote } from "@/lib/thirdPartyCosts";
 import WorkShots from "@/components/WorkShots";
 import { Linie } from "@/components/RunningLine";
 import { HOSTING_AFTER_FIRST_YEAR, packages, pkg, priceLei, VAT_LABEL } from "@/lib/packages";
@@ -21,7 +22,8 @@ export const metadata: Metadata = {
   description: `Prețuri fixe pentru site-uri de prezentare, magazine online și clipuri video pentru rețelele sociale. Site de la ${site.price}, magazin online de la ${magazin.price}, plus TVA.`,
 };
 
-// Caseta „Cât plătești în total”: doar ce scrie deja în registru și în întrebările frecvente, fără cifre ale altor firme.
+// Caseta „Cât plătești în total”: ce scrie în registru și în întrebările frecvente; dedesubt, exemple de prețuri ale altor
+// firme, din lib/thirdPartyCosts.ts (Alin, 13 nov 2026: „Ia din listele publice de preț cifre pentru magazin mic”).
 // Fiecare rând e un singur șir (traducerea nu se face pe bucăți).
 const platesti = (p: { price: string }) =>
   `Ne plătești o singură dată ${p.price} ${VAT_LABEL} (${priceLei(p.price)}): jumătate la început, jumătate la predare.`;
@@ -177,6 +179,31 @@ export default function PachetePage() {
                     </ul>
                   </div>
                 ))}
+              </div>
+              <div className="mt-8 border-t border-white/10 pt-6">
+                <h4 className="text-base font-medium text-white">Exemple de prețuri pentru un magazin mic</h4>
+                <p className="mt-2 text-sm text-white font-normal leading-relaxed">{costSummary()}</p>
+                <p className="mt-2 text-sm text-neutral-400 font-light leading-relaxed">{costLead()}</p>
+                <ul className="mt-4 space-y-3 text-sm text-neutral-300 font-light leading-relaxed">
+                  {costRows().map((rand) => (
+                    <li key={rand.host} className="flex items-start gap-2.5">
+                      <span className="text-neutral-500 mt-0.5">•</span>
+                      <span className="min-w-0">
+                        <span>{rand.text}</span>{" "}
+                        <a
+                          href={rand.url}
+                          target="_blank"
+                          rel="noopener noreferrer nofollow"
+                          data-no-translate
+                          className="whitespace-nowrap font-mono text-xs text-neutral-400 underline underline-offset-4 transition hover:text-white"
+                        >
+                          {rand.host} ↗
+                        </a>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-4 text-sm text-neutral-400 font-light leading-relaxed">{costVatNote()}</p>
               </div>
             </div>
           </div>

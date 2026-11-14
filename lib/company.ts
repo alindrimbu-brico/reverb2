@@ -1,6 +1,5 @@
-// Datele firmei, într-un singur loc. Folosite de components/WhoWeAre.tsx și de e-mailuri (lib/email).
+// Datele firmei, într-un singur loc. Folosite de components/WhoWeAre.tsx, de components/Footer.tsx și de e-mailuri (lib/email).
 // Fișier fără importuri, ca să poată fi citit și din afara aplicației Next.
-// components/Footer.tsx își scrie încă datele de mână: la o schimbare, se schimbă și acolo.
 
 export const company = {
   brand: "Reverb Digital",

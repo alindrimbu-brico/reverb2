@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import TechAuthorityGrid from "@/components/TechAuthorityGrid";
+import WhoWeAre from "@/components/WhoWeAre";
 import WorkShots from "@/components/WorkShots";
 import { OutlineRun, Linie } from "@/components/RunningLine";
 import { heroEn } from "@/lib/outlineRun/heroEn";
@@ -249,6 +249,11 @@ export default function EnglishHomePage() {
         <div className="mt-4 flex flex-wrap gap-2.5">
           <Link href="/en/portfolio" className="rounded-full bg-white px-4 py-2 text-xs font-mono font-bold text-black transition hover:bg-neutral-200">See all our work →</Link>
           <Link href="/showcase" className="rounded-full border border-white/20 px-4 py-2 text-xs font-mono text-neutral-200 transition hover:bg-white hover:text-black">Concept gallery →</Link>
+        </div>
+        {/* Who made the projects above (same block as on the Romanian home page). */}
+        <div className="mt-8 border-t border-white/10 pt-6">
+          <div className="mb-3 text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500">Who we are</div>
+          <WhoWeAre lang="en" full />
         </div>
       </section>
 
@@ -582,9 +587,6 @@ export default function EnglishHomePage() {
         </div>
 
       </section>
-
-      {/* ── What we build with ── */}
-      <TechAuthorityGrid lang="en" />
 
       {/* ── Final call to action ── */}
       <section className="relative z-10 py-28 px-6 text-center max-w-4xl mx-auto">

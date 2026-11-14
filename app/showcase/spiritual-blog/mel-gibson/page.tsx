@@ -442,7 +442,7 @@ export default function MelGibsonPage() {
               <div className="relative w-full aspect-video bg-black/50 flex items-center justify-center overflow-hidden">
                 <iframe
                   className="w-full h-full"
-                  src="https://www.youtube.com/embed/nRHIEtKhI_w?start=0"
+                  src="https://www.youtube-nocookie.com/embed/nRHIEtKhI_w?start=0"
                   title="The Passion of the Christ - Official Trailer"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -469,7 +469,7 @@ export default function MelGibsonPage() {
               <div className="relative w-full aspect-video bg-black/50 flex items-center justify-center overflow-hidden">
                 <iframe
                   className="w-full h-full"
-                  src="https://www.youtube.com/embed/aqoHcY-7Dgk?start=0"
+                  src="https://www.youtube-nocookie.com/embed/aqoHcY-7Dgk?start=0"
                   title="Apocalypto - Official Trailer"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -496,7 +496,7 @@ export default function MelGibsonPage() {
               <div className="relative w-full aspect-video bg-black/50 flex items-center justify-center overflow-hidden">
                 <iframe
                   className="w-full h-full"
-                  src="https://www.youtube.com/embed/s2-1ZHngtXE?start=0"
+                  src="https://www.youtube-nocookie.com/embed/s2-1ZHngtXE?start=0"
                   title="Hacksaw Ridge - Official Trailer"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -547,7 +547,7 @@ export default function MelGibsonPage() {
               <div className="relative w-full aspect-video bg-black/50 flex items-center justify-center overflow-hidden">
                 <iframe
                   className="w-full h-full"
-                  src="https://www.youtube.com/embed/OclKVfZ-tK0?start=0"
+                  src="https://www.youtube-nocookie.com/embed/OclKVfZ-tK0?start=0"
                   title="Braveheart - Official Trailer"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

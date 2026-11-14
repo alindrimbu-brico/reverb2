@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import Logo from "@/components/Logo";
+import { company } from "@/lib/company";
 
 interface SocialFooterLink {
   id: string;
@@ -49,7 +50,7 @@ export default function Footer({ socialLinks = [] }: { socialLinks?: SocialFoote
   const showcaseLinks = [
     { href: "https://reverb.ro", label: "Reverb.ro", external: true },
     { href: "https://bythefire.app", label: "ByTheFire.app", external: true },
-    { href: isEn ? "/en/showcase" : "/showcase", label: isEn ? "Design Concepts" : "Concepte Design" },
+    { href: isEn ? "/en/showcase" : "/showcase", label: isEn ? "Design Concepts" : "Concepte de design" },
     { href: "https://bricolando.ro", label: "Bricolando.ro", external: true },
     { href: "https://raftplin.ro", label: "RaftPlin.ro", external: true },
     { href: "https://kalki.work", label: "Kalki.work", external: true },
@@ -61,17 +62,20 @@ export default function Footer({ socialLinks = [] }: { socialLinks?: SocialFoote
 
   const t = {
     desc: isEn 
-      ? "Digital architecture, disciplined execution, and enterprise performance. Partnered with Zylaris Group London."
-      : "Arhitectură digitală, execuție inginerească și performanță comercială măsurabilă. Parteneriat tehnologic cu Zylaris Group London.",
-    tagline1: isEn ? "High Speed" : "Viteză Maximă",
-    tagline2: isEn ? "Cognitive Ease" : "Claritate Nativă",
-    tagline3: isEn ? "Measurable Growth" : "Rezultate Măsurabile",
-    communications: isEn ? "Communications" : "Comunicații",
-    hq: isEn ? "Headquarters" : "Cartier General",
-    partner: isEn ? "Strategic Partner" : "Partener Strategic",
+      ? "We build presentation websites, online stores and videos for new businesses."
+      : "Facem site-uri de prezentare, magazine online și clipuri video pentru afaceri la început.",
+    tagline1: isEn ? "Fixed price" : "Preț Fix",
+    tagline2: isEn ? "Clear steps" : "Pași clari",
+    tagline3: isEn ? "Support after launch" : "Sprijin după lansare",
+    communications: "Contact",
+    hq: isEn ? "Where we are" : "Unde suntem",
+    office: isEn ? "Our office" : "Biroul nostru",
+    partnerTitle: isEn ? "Our partner in London, for large projects" : "Partenerul nostru din Londra, pentru proiecte mari",
+    partner: isEn ? "Partner" : "Partener",
+    whatsapp: isEn ? "Message us on WhatsApp" : "Scrie-ne pe WhatsApp",
     navTab: isEn ? "Navigation" : "Navigare",
-    ecoTab: isEn ? "Production Systems" : "Sisteme Live",
-    clarity: isEn ? "Clarity & Structure" : "Claritate & Structură",
+    ecoTab: isEn ? "Our work" : "Lucrările noastre",
+    clarity: isEn ? "Websites and online stores" : "Site-uri și magazine online",
     rights: isEn ? "ALL RIGHTS RESERVED" : "TOATE DREPTURILE REZERVATE",
   };
 
@@ -116,7 +120,7 @@ export default function Footer({ socialLinks = [] }: { socialLinks?: SocialFoote
           <div className="p-8 lg:p-14 lg:col-span-4 xl:col-span-5 flex flex-col bg-[#F1F2F4] dark:bg-[#1d2024]">
             
             {/* Headers Tab-uri cu contrast ridicat în ambele teme */}
-            <div className="flex items-center gap-3 mb-8 border-b border-black/10 dark:border-white/10 pb-4 font-mono">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-2 mb-8 border-b border-black/10 dark:border-white/10 pb-4 font-mono">
                <button 
                   onClick={() => setActiveTab("navigare")} 
                   className={`text-[10px] font-bold uppercase tracking-[0.2em] transition-all px-4 py-1.5 rounded-full ${
@@ -201,21 +205,21 @@ export default function Footer({ socialLinks = [] }: { socialLinks?: SocialFoote
                   {t.communications}
                 </div>
                 <div className="space-y-2">
-                  <a href="mailto:contact@reverb.ro" className="flex items-center justify-between text-neutral-900 dark:text-neutral-300 hover:text-neutral-600 dark:hover:text-white transition-colors font-medium">
-                    <span>contact@reverb.ro</span>
+                  <a href={`mailto:${company.email}`} className="flex items-center justify-between text-neutral-900 dark:text-neutral-300 hover:text-neutral-600 dark:hover:text-white transition-colors font-medium">
+                    <span>{company.email}</span>
                     <span className="text-neutral-500">↗</span>
                   </a>
-                  <a href="tel:0767235693" className="flex items-center justify-between text-neutral-900 dark:text-neutral-300 hover:text-neutral-600 dark:hover:text-white transition-colors font-medium">
-                    <span>+40 767 235 693</span>
+                  <a href={company.tel} className="flex items-center justify-between text-neutral-900 dark:text-neutral-300 hover:text-neutral-600 dark:hover:text-white transition-colors font-medium">
+                    <span>{company.phoneIntl}</span>
                     <span className="text-neutral-500">↗</span>
                   </a>
                   <a 
-                    href="https://wa.me/40767235693"
+                    href={company.whatsapp}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-between text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 transition-colors font-bold"
                   >
-                    <span>WhatsApp Direct</span>
+                    <span>{t.whatsapp}</span>
                     <span>↗</span>
                   </a>
                 </div>
@@ -245,16 +249,26 @@ export default function Footer({ socialLinks = [] }: { socialLinks?: SocialFoote
                   {/* Birou România */}
                   <div>
                     <div className="text-[10px] uppercase font-bold text-neutral-900 dark:text-neutral-200 tracking-wider">
-                      {isEn ? "Romania Office" : "Birou România"}
+                      {t.office}
                     </div>
                     <p className="text-neutral-700 dark:text-neutral-400 text-[11px] leading-relaxed mt-0.5">
-                      Focșani, Vrancea, România<br />
-                      <span className="text-neutral-500 dark:text-neutral-600 block font-medium">SC Kalki Drim Magazin SRL</span>
+                      {isEn ? "Focșani, Vrancea, Romania" : "Focșani, Vrancea, România"}<br />
+                      <span data-no-translate className="text-neutral-700 dark:text-neutral-400 block font-medium">
+                        {`${company.legalName} · CUI ${company.cui} · ${company.regCom}`}
+                      </span>
                     </p>
                   </div>
+                </div>
+              </div>
 
-                  {/* Birou Londra - Zylaris Group London */}
-                  <div className="pt-2 border-t border-black/5 dark:border-white/5">
+              <div className="space-y-3">
+                <div className="text-[9px] font-bold tracking-[0.3em] uppercase text-neutral-600 dark:text-neutral-500 border-b border-black/10 dark:border-white/10 pb-2">
+                  {t.partnerTitle}
+                </div>
+                <div className="space-y-3">
+
+                  {/* Partenerul din Londra - Zylaris Group London */}
+                  <div>
                     <div className="text-[10px] uppercase font-bold text-neutral-900 dark:text-neutral-200 tracking-wider flex flex-wrap items-center justify-between gap-1">
                       <span>Zylaris Group London</span>
                       <a href="https://zylarisgroup.com" target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-neutral-900 dark:hover:text-white text-[9px]">zylarisgroup.com ↗</a>
@@ -280,7 +294,7 @@ export default function Footer({ socialLinks = [] }: { socialLinks?: SocialFoote
           </div>
         </div>
 
-        {/* Bara Subsol: Strategic Partner & Legal */}
+        {/* Bara Subsol: partenerul și drepturile */}
         <div className="px-8 lg:px-14 py-6 flex flex-col gap-6 md:flex-row md:items-center md:justify-between bg-[#E9EBEE] dark:bg-[#101214] font-mono text-xs border-t border-black/10 dark:border-white/10">
           {/* Strategic Partner */}
           <div className="flex items-center gap-3">

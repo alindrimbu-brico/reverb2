@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import TechAuthorityGrid from "@/components/TechAuthorityGrid";
+import WhoWeAre from "@/components/WhoWeAre";
 import WorkShots from "@/components/WorkShots";
 import { OutlineRun, Linie } from "@/components/RunningLine";
 import { heroRo } from "@/lib/outlineRun/heroRo";
@@ -251,6 +251,11 @@ export default function HomePage() {
         <div className="mt-4 flex flex-wrap gap-2.5">
           <Link href="/portofoliu" className="rounded-full bg-white px-4 py-2 text-xs font-mono font-bold text-black transition hover:bg-neutral-200">Vezi toate lucrările →</Link>
           <Link href="/showcase" className="rounded-full border border-white/20 px-4 py-2 text-xs font-mono text-neutral-200 transition hover:bg-white hover:text-black">Galeria de concepte →</Link>
+        </div>
+        {/* Cine a făcut lucrările de mai sus (Alin, 13 nov 2026: „Pune cine suntem și pe prima pagină”). */}
+        <div className="mt-8 border-t border-white/10 pt-6">
+          <div className="mb-3 text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500">Cine suntem</div>
+          <WhoWeAre full />
         </div>
       </section>
 
@@ -581,8 +586,22 @@ export default function HomePage() {
           ))}
         </div>
       </section>
-      {/* ── Cu ce lucrăm ── */}
-      <TechAuthorityGrid lang="ro" />
+      {/* ── Chemarea de la capăt: aceleași texte ca la capătul paginii /despre (deja traduse în toate limbile). ── */}
+      <section className="relative z-10 py-24 px-6 text-center max-w-4xl mx-auto">
+        <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-4">Pregătit pentru Următorul Pas?</div>
+        <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight mb-6">
+          <Linie>Hai să construim site-ul afacerii tale.</Linie>
+        </h2>
+        <p className="text-neutral-400 text-sm md:text-base leading-relaxed mb-10 max-w-2xl mx-auto">
+          Vorbim concret despre ce vinzi și unde vrei să ajungi. Primești un plan clar, un preț fix și un termen precis de livrare.
+        </p>
+        <Link
+          href="/contact"
+          className="inline-flex items-center justify-center rounded-full bg-white px-6 sm:px-8 py-4 text-center text-xs font-mono uppercase tracking-wider sm:tracking-widest text-black hover:bg-neutral-200 transition-colors"
+        >
+          Programează o Discuție Directă →
+        </Link>
+      </section>
 
       {/* Live System Inspection Pop-up Modal */}
       <ProjectPreviewModal project={selectedPreview} onClose={() => setSelectedPreview(null)} lang="ro" />

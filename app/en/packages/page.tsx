@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import WhoWeAre from "@/components/WhoWeAre";
+import { costLead, costRows, costSummary, costVatNote } from "@/lib/thirdPartyCosts";
 import WorkShots from "@/components/WorkShots";
 import { Linie } from "@/components/RunningLine";
 import { HOSTING_AFTER_FIRST_YEAR, packages, pkg, priceEn, priceLei } from "@/lib/packages";
@@ -23,7 +24,8 @@ export const metadata: Metadata = {
   description: `Fixed prices for presentation websites, online stores and short videos for social media. Website from ${enPrice("site-start")}, online store from ${enPrice("magazin-start")}, plus VAT.`,
 };
 
-// The "What you pay in total" box: only what the registry and the FAQ already say, with no figures of other companies.
+// The "What you pay in total" box: what the registry and the FAQ say; below it, example prices of other companies,
+// from lib/thirdPartyCosts.ts.
 const youPay = (id: "site-start" | "magazin-start") =>
   `You pay us once: ${enPrice(id)} ${VAT_LABEL_EN} (${priceLei(pkg(id).price, "en")}), half at the start and half on delivery.`;
 const costSite = [
@@ -179,6 +181,30 @@ export default function PackagesPageEN() {
                       </ul>
                     </div>
                   ))}
+                </div>
+                <div className="mt-8 border-t border-white/10 pt-6">
+                  <h4 className="text-base font-medium text-white">Example prices for a small store</h4>
+                  <p className="mt-2 text-sm text-white font-normal leading-relaxed">{costSummary("en")}</p>
+                  <p className="mt-2 text-sm text-neutral-400 font-light leading-relaxed">{costLead("en")}</p>
+                  <ul className="mt-4 space-y-3 text-sm text-neutral-300 font-light leading-relaxed">
+                    {costRows("en").map((row) => (
+                      <li key={row.host} className="flex items-start gap-2.5">
+                        <span className="text-neutral-500 mt-0.5">•</span>
+                        <span className="min-w-0">
+                          <span>{row.text}</span>{" "}
+                          <a
+                            href={row.url}
+                            target="_blank"
+                            rel="noopener noreferrer nofollow"
+                            className="whitespace-nowrap font-mono text-xs text-neutral-400 underline underline-offset-4 transition hover:text-white"
+                          >
+                            {row.host} ↗
+                          </a>
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="mt-4 text-sm text-neutral-400 font-light leading-relaxed">{costVatNote("en")}</p>
                 </div>
               </div>
             </div>

@@ -100,7 +100,7 @@ export default function Header() {
   const nav = isEn ? navInfo.en : navInfo.ro;
   
   const translations = {
-    clarity: isEn ? "Clarity & Structure" : "Claritate & Structură",
+    clarity: isEn ? "Websites and online stores" : "Site-uri și magazine online",
     start: isEn ? "Start Project" : "Start Proiect"
   };
 

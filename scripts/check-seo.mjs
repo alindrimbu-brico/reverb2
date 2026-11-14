@@ -150,6 +150,28 @@ async function main() {
     problems.push(`selectorul de limbă: nu am putut verifica dicționarele (${e.message})`);
   }
 
+  // 6. Nota despre cookie-uri (components/CookieConsent.tsx) spune „nu măsurăm ce faci pe site”. Un pachet de măsurare
+  //    o face falsă: întâi se reface banda ca cerere de acord (cu altă cheie), abia apoi intră pachetul.
+  try {
+    const pkg = JSON.parse(fs.readFileSync(path.join(process.cwd(), "package.json"), "utf8"));
+    const deps = Object.keys({ ...pkg.dependencies, ...pkg.devDependencies });
+    const masurare = deps.filter((d) => /^@vercel\/(analytics|speed-insights)$|^@next\/third-parties$|gtag|google-analytics|posthog|plausible|hotjar|facebook-pixel/.test(d));
+    if (masurare.length) problems.push(`pachet de măsurare în package.json (${masurare.join(", ")}), dar nota de cookie-uri spune că nu măsurăm nimic`);
+  } catch (e) {
+    problems.push(`nu am putut citi package.json (${e.message})`);
+  }
+
+  // 7. Prețurile altor firme din caseta de cost (lib/thirdPartyCosts.ts) au o dată a citirii: avertisment după 90 de zile.
+  try {
+    const src = fs.readFileSync(path.join(process.cwd(), "lib", "thirdPartyCosts.ts"), "utf8");
+    const m = src.match(/READ_ON = "(\d{4}-\d{2}-\d{2})"/);
+    const zile = m ? Math.floor((Date.now() - new Date(m[1]).getTime()) / 86400000) : null;
+    if (zile === null) problems.push("lib/thirdPartyCosts.ts: nu găsesc READ_ON");
+    else if (zile > 90) console.log(`ATENȚIE: prețurile altor firme din caseta de cost au fost citite acum ${zile} zile (${m[1]}). Recitește-le din surse și actualizează lib/thirdPartyCosts.ts.`);
+  } catch (e) {
+    problems.push(`nu am putut citi lib/thirdPartyCosts.ts (${e.message})`);
+  }
+
   console.log(`sitemap: ${urls.length} adrese, ${ok} verificate cu 200; machete cu noindex: ${mk}`);
   if (problems.length) {
     console.log(`PROBLEME (${problems.length}):`);

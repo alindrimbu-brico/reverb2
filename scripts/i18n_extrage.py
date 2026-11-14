@@ -1,7 +1,7 @@
 """Culege textele românești pe care selectorul de limbă le traduce (docs/designs/selector_limba_2026-11-13).
 
 Deschide paginile agenției pe o construcție pornită local, pe laptop și pe telefon, apasă fiecare buton (meniu, filtre,
-preferințe de cookie-uri, ferestre) și simulează /api/contact (nu se trimite nimic). Regulile de culegere sunt cele ale
+ferestre; nota de cookie-uri se culege cât e deschisă) și simulează /api/contact (nu se trimite nimic). Regulile de culegere sunt cele ale
 motorului din lib/i18n/translator.ts: aceeași normalizare, aceleași zone sărite. Se schimbă împreună.
 
 Scrie lib/i18n/sursa.json: listă în ordinea din pagină, fiecare intrare cu
