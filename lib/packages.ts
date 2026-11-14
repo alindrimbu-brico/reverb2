@@ -12,6 +12,7 @@ export type PackageId =
   | "start-digital"
   | "magazin-start"
   | "magazin-digital-activ"
+  | "vizibil-local"
   | "infrastructura-enterprise";
 
 export type Package = {
@@ -29,7 +30,8 @@ export type Package = {
   href: string;
   highlight?: boolean;
   badge?: string;
-  category?: "social" | "web" | "b2b";
+  /** „local” = abonamentul pentru firme locale: apare în formular, pe Contact și pe Servicii, nu pe Pachete. */
+  category?: "social" | "web" | "b2b" | "local";
 };
 
 /** Toate prețurile din registru sunt fără TVA. Eticheta stă lângă preț, nota sub o listă de prețuri. */
@@ -217,6 +219,29 @@ export const packages: Package[] = [
     badge: "Sistem Complet",
   },
   {
+    // Prețul: Alin, 14 nov 2026 („Da, 103”), după analiza de piață din reverb\motor-seo-local\docs\cercetare\preturi_piata_2026-11-14.md.
+    // Rândul „În fiecare lună…” e textul aprobat de Alin pentru e-mailul de verificare („Da, rând”).
+    id: "vizibil-local",
+    name: "Vizibil Local",
+    shortName: "Vizibil Local (site + Google, lunar)",
+    tagline: "Site-ul și fișa firmei de pe Google, ținute la zi, lună de lună.",
+    price: "€103 / lună",
+    delivery: "Lunar",
+    category: "local",
+    description:
+      "În fiecare lună reparăm ce găsim pe site, ținem la zi fișa firmei pe Google și îți trimitem un raport scurt cu ce s-a schimbat.",
+    includes: [
+      // Doi cititori fără context (14 nov) n-au înțeles „pagini fără titlu sau fără descriere” și au citit „Primim cel
+      // mult 5 firme” ca presiune: primul rând spune efectul, limita de 5 firme a ieșit.
+      "În fiecare lună reparăm ce găsim pe site: linkuri care duc la pagini șterse, pagini care apar greșit în Google",
+      "Ținem la zi fișa firmei pe Google: program, poze, răspunsuri la recenzii",
+      "Un raport scurt, în fiecare lună, cu ce s-a schimbat",
+      "Ce avem nevoie de la tine: acces la fișa firmei pe Google, la site și la datele lui din Google",
+    ],
+    ideal: "Firme locale care au deja site și fișă pe Google: magazine, ateliere, cabinete, hoteluri.",
+    href: "/contact?pachet=vizibil-local",
+  },
+  {
     id: "infrastructura-enterprise",
     name: "Proiecte Mari și B2B",
     shortName: "Proiecte Mari și B2B",
@@ -285,8 +310,14 @@ export const packageAliases: Record<string, PackageId> = {
   "web-store": "site-start",
 };
 
+/** Verificarea gratuită a site-ului (doar în română: raportul se scrie în română). Formularul și confirmarea
+ *  automată se poartă altfel pentru ea: câmpul de mesaj cere adresa site-ului, confirmarea promite e-mailul cu
+ *  verificarea în cel mult 2 zile lucrătoare (textul aprobat de Alin, 14 nov 2026: „da, confirmare”). */
+export const VERIFICARE_SITE = "verificare-site";
+
 /** Opțiunile care nu sunt pachete, în formularul de contact. */
 export const extraServiceOptions = [
+  { value: VERIFICARE_SITE, label: "Verificare gratuită a site-ului — Gratuit" },
   { value: "geo-search", label: "Să fiu găsit de asistenții AI (ChatGPT, Gemini)" },
   { value: "consultanta-alta", label: "Consultanță / Proiect Personalizat" },
 ];

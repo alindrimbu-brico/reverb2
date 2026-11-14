@@ -62,16 +62,31 @@ export function contactConfirmation(i: {
   name: string;
   /** Ce a ales omul: nume, preț, termen. Vin din registru (lib/email/packageRows.ts), niciodată din textul formularului. */
   details?: { label: string; value: string }[];
+  /** Id-ul ales în formular; „verificare-site” are pașii lui (textul aprobat de Alin, 14 nov 2026). */
+  serviceId?: string;
   assetBase?: string;
 }): Rendered {
   const en = i.lang === "en";
   const fn = firstName(i.name);
+  const verificare = i.serviceId === "verificare-site";
   const blocks: Block[] = [];
   if (i.details?.length) blocks.push({ kind: "rows", rows: i.details });
   blocks.push(
     {
       kind: "steps",
-      items: en
+      items: verificare
+        ? en
+          ? [
+              { title: "A person reads your request", text: "Not a robot: someone on our team." },
+              { title: "We e-mail you the check within 2 working days", text: "What we found on your website, in plain words, with examples you can open. It is free and you are under no obligation." },
+              { title: "If you want, we talk", text: `By phone, online or at our office in ${company.city}, about what can be fixed and what it costs.` },
+            ]
+          : [
+              { title: "Un om îți citește cererea", text: "Nu un robot: cineva din echipa noastră." },
+              { title: "Îți trimitem verificarea pe e-mail în cel mult 2 zile lucrătoare", text: "Ce am găsit pe site-ul tău, pe înțeles, cu exemple pe care le poți deschide. E gratuită și nu te obligă la nimic." },
+              { title: "Dacă vrei, vorbim", text: `La telefon, online sau la biroul nostru din ${company.city}, despre ce se poate repara și cât costă.` },
+            ]
+        : en
         ? [
             { title: "A person reads your request", text: "Not a robot: someone on our team." },
             { title: "We reply by e-mail within 24 working hours", text: "With our questions and a proposal at a fixed price." },
@@ -100,7 +115,13 @@ export function contactConfirmation(i: {
   );
   const { html, text } = renderEmail({
     lang: i.lang,
-    preheader: en ? "We reply by e-mail within 24 working hours." : "Îți răspundem pe e-mail în cel mult 24 de ore lucrătoare.",
+    preheader: verificare
+      ? en
+        ? "We e-mail you the check within 2 working days."
+        : "Îți trimitem verificarea pe e-mail în cel mult 2 zile lucrătoare."
+      : en
+        ? "We reply by e-mail within 24 working hours."
+        : "Îți răspundem pe e-mail în cel mult 24 de ore lucrătoare.",
     eyebrow: en ? "Request received" : "Cerere primită",
     title: en
       ? fn ? `Thank you, ${fn}. We have your request.` : "Thank you. We have your request."

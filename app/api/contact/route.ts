@@ -80,7 +80,7 @@ export async function POST(req: NextRequest) {
     // O eroare aici nu strică cererea, care a plecat deja.
     if (process.env.CONTACT_CONFIRMATION === "on") {
       try {
-        const c = contactConfirmation({ lang, name, details: packageRows(serviceId, lang) });
+        const c = contactConfirmation({ lang, name, details: packageRows(serviceId, lang), serviceId });
         await transporter.sendMail({
           from: `"Reverb Digital" <${process.env.REVERB_EMAIL_USER}>`,
           to: email,

@@ -150,6 +150,21 @@ export const packagesEn: Record<PackageId, PackageEn> = {
     ],
     ideal: "Large companies and organizations that need digital systems they can rely on.",
   },
+  "vizibil-local": {
+    name: "Vizibil Local",
+    shortName: "Vizibil Local (website + Google, monthly)",
+    tagline: "Your website and your Google business profile, kept up to date every month.",
+    delivery: "Monthly",
+    description:
+      "Every month we fix what we find on your website, keep your Google business profile up to date and send you a short report of what changed.",
+    includes: [
+      "Every month we fix what we find on your website: links to deleted pages, pages that show up wrong on Google",
+      "We keep your Google business profile up to date: opening hours, photos, replies to reviews",
+      "A short report every month with what changed",
+      "What we need from you: access to your Google business profile, your website and its Google data",
+    ],
+    ideal: "Local businesses that already have a website and a Google profile: shops, workshops, clinics, hotels.",
+  },
 };
 
 /** English price of a package, from the registry. */

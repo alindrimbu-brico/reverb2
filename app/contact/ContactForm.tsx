@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { serviceOptions as buildServiceOptions, resolveService } from "@/lib/packages";
+import { serviceOptions as buildServiceOptions, resolveService, VERIFICARE_SITE } from "@/lib/packages";
 import { useI18n } from "@/lib/i18n/useT";
 
 type FormState = "idle" | "submitting" | "success" | "error";
@@ -23,8 +23,12 @@ function validate(form: Record<string, string>): FieldErrors {
     errors.email = "Adresa de email nu pare validă.";
   }
   if (!form.service) errors.service = "Alege un serviciu sau pachet.";
-  if (!form.message.trim()) errors.message = "Scrie-ne câteva cuvinte.";
-  else if (form.message.trim().length < 10) errors.message = "Mesajul trebuie să aibă minim 10 caractere.";
+  // La verificarea gratuită mesajul e adresa site-ului: „firma.ro” are 8 caractere, deci pragul e 4, nu 10.
+  const verificare = form.service === VERIFICARE_SITE;
+  if (!form.message.trim()) errors.message = verificare ? "Scrie adresa site-ului." : "Scrie-ne câteva cuvinte.";
+  else if (verificare && (form.message.trim().length < 4 || !form.message.includes(".")))
+    errors.message = "Scrie adresa site-ului, de exemplu firma-ta.ro.";
+  else if (!verificare && form.message.trim().length < 10) errors.message = "Mesajul trebuie să aibă minim 10 caractere.";
   return errors;
 }
 
@@ -115,7 +119,9 @@ function ContactFormInner() {
         </div>
         <h3 className="mt-6 text-2xl font-medium text-white">Mesaj recepționat cu succes.</h3>
         <p className="mt-3 max-w-sm text-sm font-light text-neutral-300 leading-relaxed">
-          Răspuns în cel mult 24 de ore lucrătoare.
+          {form.service === VERIFICARE_SITE
+            ? "Îți trimitem verificarea pe e-mail în cel mult 2 zile lucrătoare."
+            : "Răspuns în cel mult 24 de ore lucrătoare."}
         </p>
         <button
           type="button"
@@ -226,15 +232,22 @@ function ContactFormInner() {
 
         <div>
           <label className="block text-neutral-300">
-            Descrierea Proiectului & Obiective <span className="text-neutral-500">*</span>
+            {form.service === VERIFICARE_SITE
+              ? "Adresa site-ului și, dacă vrei, un telefon"
+              : "Descrierea Proiectului & Obiective"}{" "}
+            <span className="text-neutral-500">*</span>
           </label>
           <textarea
             name="message"
-            rows={5}
+            rows={form.service === VERIFICARE_SITE ? 2 : 5}
             value={form.message}
             onChange={handleChange}
             onBlur={handleBlur}
-            placeholder="Descrie pe scurt activitatea actuală, produsele, provocările sau ce dorești să construim împreună."
+            placeholder={
+              form.service === VERIFICARE_SITE
+                ? "Ex: firma-ta.ro, 0722 000 000"
+                : "Descrie pe scurt activitatea actuală, produsele, provocările sau ce dorești să construim împreună."
+            }
             className={`${inputBase} resize-none ${errors.message && touched.message ? inputErr : inputOk}`}
           />
           {errors.message && touched.message && (

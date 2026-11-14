@@ -11,7 +11,19 @@ export const metadata: Metadata = {
     "Site-uri și magazine online la preț fix, clipuri zilnice făcute cu AI pentru rețelele sociale și ajutor ca afacerea ta să fie găsită și recomandată de asistenți AI precum ChatGPT.",
 };
 
-const mainServices = [
+type Service = {
+  id: string;
+  tag: string;
+  price: string;
+  title: string;
+  deliverables: string[];
+  href: string;
+  featured?: boolean;
+  /** Textul butonului, când „Cere acest serviciu • preț” nu se potrivește. */
+  cta?: string;
+};
+
+const mainServices: Service[] = [
   {
     id: "01",
     tag: "SITE-URI ȘI MAGAZINE",
@@ -31,7 +43,32 @@ const mainServices = [
     href: "/contact?pachet=site-start",
   },
   {
+    // Abonamentul pentru firme care au deja site: lista vine din registru, ca prețul și ce intră să nu se despartă.
     id: "02",
+    tag: "FIRME LOCALE",
+    price: pkg("vizibil-local").price,
+    title: "Site-ul și Fișa de pe Google, Ținute la Zi",
+    deliverables: pkg("vizibil-local").includes,
+    href: "/contact?pachet=vizibil-local",
+  },
+  {
+    // Card separat, cu un singur buton (regula „doar date” a cardurilor): verificarea nu e pachet în registru.
+    id: "03",
+    tag: "VERIFICARE GRATUITĂ",
+    price: "Gratuit",
+    title: "Verificarea Gratuită a Site-ului",
+    deliverables: [
+      "Citim până la 25 de pagini din site-ul tău",
+      "Îți scriem pe e-mail, pe înțeles, ce e de reparat, cu exemple pe care le poți deschide",
+      "Ce verificăm: linkuri care duc la pagini șterse, butonul de telefon, cum apare fiecare pagină în Google",
+      "Primești verificarea în cel mult 2 zile lucrătoare",
+      "Nu te obligă la nimic: lista o poate repara și cine ți-a făcut site-ul",
+    ],
+    href: "/contact?pachet=verificare-site",
+    cta: "Cere verificarea • Gratuit →",
+  },
+  {
+    id: "04",
     tag: "REȚELE SOCIALE",
     price: `de la ${pkg("social-growth").price}`,
     title: "Clipuri Zilnice pentru Rețelele Sociale",
@@ -47,7 +84,7 @@ const mainServices = [
     featured: true,
   },
   {
-    id: "03",
+    id: "05",
     tag: "CĂUTAREA CU AI",
     // Serviciul GEO nu e pachet în registru: prețul lui se scrie aici.
     price: "de la €588 / lună",
@@ -62,7 +99,7 @@ const mainServices = [
     href: "/contact?pachet=geo-search",
   },
   {
-    id: "04",
+    id: "06",
     tag: "FIRME MARI",
     price: pkg("infrastructura-enterprise").price,
     title: "Proiecte Mari și Sisteme pentru Firme",
@@ -133,7 +170,7 @@ export default function ServiciiPage() {
                       href={srv.href}
                       className="inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-center text-[11px] font-mono uppercase tracking-wider text-black hover:bg-neutral-200 transition-all font-bold"
                     >
-                      Cere acest serviciu • {srv.price} →
+                      {srv.cta ?? `Cere acest serviciu • ${srv.price} →`}
                     </Link>
                   </div>
 
