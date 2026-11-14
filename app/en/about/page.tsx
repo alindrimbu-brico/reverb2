@@ -4,6 +4,11 @@ import Reveal from "@/components/Reveal";
 import { Linie } from "@/components/RunningLine";
 import WhoWeAre, { AGENCY_DEF } from "@/components/WhoWeAre";
 import { inProduction, liveProjectsEn, STATUS_LABEL } from "@/lib/liveProjects";
+import WorkShots from "@/components/WorkShots";
+
+const work = ["Bricolando.ro", "RaftPlin.ro", "Kalki.nexus"]
+  .map((n) => liveProjectsEn.find((p) => p.name === n))
+  .filter((p) => !!p);
 
 // The "About" page: data only, mirroring app/despre/page.tsx. The definition comes from components/WhoWeAre.tsx,
 // the figures and names from lib/liveProjects.ts. The partner appears in the footer only.
@@ -74,20 +79,6 @@ export default function AboutPageEN() {
           <div className="rounded-2xl border border-white/10 bg-neutral-900/30 p-8">
             <div className="font-mono text-5xl font-light text-white">{managed.length}</div>
             <div className="mt-3 text-xs font-mono uppercase tracking-widest text-neutral-300">{STATUS_LABEL.en.managed}</div>
-            <div className="mt-5 flex flex-wrap items-center justify-center gap-2.5">
-              {managed.slice(0, 3).map((p) => (
-                <a
-                  key={p.name}
-                  href={p.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${p.name} — opens in a new tab`}
-                  className="rounded-full border border-white/20 px-4 py-2 text-xs font-mono text-neutral-200 transition hover:bg-white hover:text-black"
-                >
-                  {`${p.name} ↗`}
-                </a>
-              ))}
-            </div>
           </div>
           {wip > 0 && (
             <div className="rounded-2xl border border-white/10 bg-neutral-900/30 p-8">
@@ -97,6 +88,11 @@ export default function AboutPageEN() {
               </div>
             </div>
           )}
+        </div>
+
+        {/* Three projects with a picture, the same as on the home page. */}
+        <div className="mt-6 text-left">
+          <WorkShots items={work} lang="en" />
         </div>
 
         <div className="mt-12 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4">

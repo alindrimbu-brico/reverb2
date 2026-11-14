@@ -4,6 +4,11 @@ import Reveal from "@/components/Reveal";
 import { Linie } from "@/components/RunningLine";
 import WhoWeAre, { AGENCY_DEF } from "@/components/WhoWeAre";
 import { inProduction, liveProjectsRo, STATUS_LABEL } from "@/lib/liveProjects";
+import WorkShots from "@/components/WorkShots";
+
+const lucrari = ["Bricolando.ro", "RaftPlin.ro", "Kalki.nexus"]
+  .map((n) => liveProjectsRo.find((p) => p.name === n))
+  .filter((p) => !!p);
 
 // Pagina „Despre”: doar date (Alin, 14 nov 2026: „o prezentare a unei agenții de marketing profesioniste, simplă”).
 // Definiția vine din components/WhoWeAre.tsx, cifrele și numele din lib/liveProjects.ts. Partenerul apare doar în subsol.
@@ -74,20 +79,6 @@ export default function DesprePage() {
           <div className="rounded-2xl border border-white/10 bg-neutral-900/30 p-8">
             <div data-no-translate className="font-mono text-5xl font-light text-white">{managed.length}</div>
             <div className="mt-3 text-xs font-mono uppercase tracking-widest text-neutral-300">{STATUS_LABEL.ro.managed}</div>
-            <div className="mt-5 flex flex-wrap items-center justify-center gap-2.5">
-              {managed.slice(0, 3).map((p) => (
-                <a
-                  key={p.name}
-                  href={p.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${p.name} — se deschide într-o filă nouă`}
-                  className="rounded-full border border-white/20 px-4 py-2 text-xs font-mono text-neutral-200 transition hover:bg-white hover:text-black"
-                >
-                  <span data-no-translate>{`${p.name} ↗`}</span>
-                </a>
-              ))}
-            </div>
           </div>
           {wip > 0 && (
             <div className="rounded-2xl border border-white/10 bg-neutral-900/30 p-8">
@@ -97,6 +88,11 @@ export default function DesprePage() {
               </div>
             </div>
           )}
+        </div>
+
+        {/* Trei lucrări cu poză, aceleași ca pe prima pagină (Alin, 14 nov 2026: „Da, la poze”). */}
+        <div className="mt-6 text-left">
+          <WorkShots items={lucrari} />
         </div>
 
         <div className="mt-12 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4">
