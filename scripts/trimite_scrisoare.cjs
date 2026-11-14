@@ -36,6 +36,9 @@ function argumente(argv) {
     else if (x === "--html") a.html = argv[++i];
     else if (x === "--eyebrow") a.eyebrow = argv[++i];
     else if (x === "--test") a.test = true;
+    else if (x === "--eticheta") a.eticheta = argv[++i];
+    else if (x === "--de") a.de = argv[++i];
+    else if (x === "--doar-text") a.doarText = true;
     else if (x === "--da") a.da = true;
     else if (!a.fisier) a.fisier = x;
     else throw new Error(`argument necunoscut: ${x}`);
@@ -104,13 +107,13 @@ async function main() {
   const { user, pass } = cheiSmtp();
   const t = nodemailer.createTransport({ host: "smtp.hostinger.com", port: 465, secure: true, auth: { user, pass } });
   const info = await t.sendMail({
-    from: `"Alin · Reverb Digital" <${user}>`,
+    from: `"${a.de ?? "Alin · Reverb Digital"}" <${user}>`,
     to: a.test ? user : a.catre,
     bcc: a.test ? undefined : user,
     replyTo: user,
-    subject: a.test ? `[TEST] ${subiect}` : subiect,
+    subject: a.test ? `${a.eticheta ?? "[TEST]"} ${subiect}`.trim() : subiect,
     text,
-    html,
+    html: a.doarText ? undefined : html,
   });
   console.log(`TRIMIS ${a.test ? "(test, la noi)" : ""}: acceptat de server pentru ${info.accepted.join(", ")}; respins: ${info.rejected.join(", ") || "nimic"}; id ${info.messageId}`);
 }
