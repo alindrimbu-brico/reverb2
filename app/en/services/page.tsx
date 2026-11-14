@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
-import { enPrice, VAT_NOTE_EN } from "@/lib/packagesEn";
+import { enDelivery, enPrice, VAT_NOTE_EN } from "@/lib/packagesEn";
 import { Linie } from "@/components/RunningLine";
 
 export const metadata: Metadata = {
@@ -17,12 +17,14 @@ const mainServices = [
     tag: "WEBSITES & STORES",
     price: `from ${enPrice("site-start")}`,
     title: "Websites & Online Stores",
-    tagline: "Built to load fast and to sell.",
-    text: "We build presentation websites and online stores from scratch. Pages load in under 1.2 seconds, the customer pays by card in a few steps, the invoice is issued automatically and the courier label is created as soon as the order comes in.",
     deliverables: [
+      // Price and delivery term come from the registry (lib/packages.ts).
+      `Website: ${enPrice("site-start")}, in ${enDelivery("site-start")}`,
+      `Online store: ${enPrice("magazin-start")}, in ${enDelivery("magazin-start")}`,
       "Pages that load in under 1.2 seconds",
       "An admin panel where you add products and change prices yourself",
       "Checkout in one step, so buyers do not give up halfway",
+      "Card payment in a few steps",
       "Automatic invoices and courier labels (AWB)",
       "Works well on every phone and tablet",
     ],
@@ -33,16 +35,15 @@ const mainServices = [
     tag: "SOCIAL MEDIA",
     price: `from ${enPrice("social-growth")}`,
     title: "Daily Videos for Social Media",
-    tagline: "New product videos every day, made with AI.",
-    text: "A classic production company is expensive and slow. We make 1 to 3 short videos a day for TikTok, Instagram Reels, YouTube Shorts and Facebook, with AI: product demos, sales scripts and on-screen subtitles.",
     deliverables: [
       "30 to 90 short videos a month",
+      "TikTok, Instagram Reels, YouTube Shorts, Facebook",
       "Image posts and product carousels for each network",
       "Natural-sounding AI voice-over and editing",
       "Every video sends viewers to your store or contact page",
       "You do not film anything",
     ],
-    href: "/en/contact?package=daily-impact",
+    href: "/en/contact?package=social-growth",
     featured: true,
   },
   {
@@ -51,8 +52,6 @@ const mainServices = [
     // The GEO service is not a package in the registry: its price is written here.
     price: "from €588 / month",
     title: "Found by AI Assistants",
-    tagline: "So ChatGPT, Perplexity, Claude and Gemini can recommend you.",
-    text: "More and more buyers ask an AI assistant instead of typing keywords into Google. We write your company data, products and prices in a form these assistants read correctly, so they understand your offer and can recommend it.",
     deliverables: [
       "Your company, products and prices written so AI assistants read them correctly",
       "A clear, public price list for your packages",
@@ -81,23 +80,15 @@ export default function ServicesPageEN() {
       {/* Hero */}
       <section className="relative z-10 pt-32 pb-20 md:pt-40 md:pb-28 border-b border-white/10">
         <div className="relative mx-auto max-w-5xl px-6 text-center">
-          <Reveal>
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.1em] sm:tracking-[0.25em] text-neutral-300 mb-6 backdrop-blur-md">
-              <span className="h-1.5 w-1.5 rounded-full bg-white" />
-              <span>[ SERVICES • FIXED PRICES ]</span>
-            </div>
-          </Reveal>
-
           <Reveal delay={0.1}>
             <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-white leading-tight">
-              <Linie>What we do for you.</Linie>
+              <Linie>Services.</Linie><br />
+              <span className="text-neutral-400 font-light"><Linie>Fixed prices.</Linie></span>
             </h1>
           </Reveal>
 
           <Reveal delay={0.2}>
-            <p className="mx-auto mt-6 max-w-2xl text-base sm:text-lg text-neutral-400 font-light leading-relaxed">
-              We build your website or online store, make daily videos for your social media and help AI assistants find and recommend your business. {VAT_NOTE_EN}
-            </p>
+            <p className="mt-8 text-xs font-mono text-neutral-400">{VAT_NOTE_EN}</p>
           </Reveal>
         </div>
       </section>
@@ -127,17 +118,9 @@ export default function ServicesPageEN() {
                       {srv.price}
                     </div>
 
-                    <h2 className="text-xl sm:text-2xl font-medium text-white mb-3">
+                    <h2 className="text-xl sm:text-2xl font-medium text-white mb-6">
                       <Linie>{srv.title}</Linie>
                     </h2>
-
-                    <p className="text-xs font-mono text-neutral-400 uppercase tracking-wider mb-6">
-                      {srv.tagline}
-                    </p>
-
-                    <p className="text-sm text-neutral-300 font-light leading-relaxed mb-8">
-                      {srv.text}
-                    </p>
 
                     <div className="space-y-2.5 pt-6 border-t border-white/10 font-mono text-xs text-neutral-400 mb-8">
                       <div className="text-[10px] uppercase tracking-[0.2em] text-neutral-400 font-bold mb-3">
@@ -173,14 +156,11 @@ export default function ServicesPageEN() {
       <section className="relative z-10 py-20 border-t border-white/10 bg-[#050607]">
         <div className="mx-auto max-w-4xl px-6 text-center">
           <Reveal>
-            <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-neutral-400 mb-4">
-              [ NOT SURE WHAT YOU NEED? ]
-            </div>
             <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight mb-6">
-              <Linie>Need something made for you?</Linie>
+              <Linie>Let&apos;s talk.</Linie>
             </h2>
             <p className="text-neutral-400 text-sm leading-relaxed max-w-xl mx-auto mb-8 font-light">
-              Tell us what you sell and where you are now. We look at your website and social pages and come back within 24 working hours with a plan and a fixed price.
+              The first review is free. An answer within 24 working hours.
             </p>
             <Link
               href="/en/contact"

@@ -115,7 +115,7 @@ function ContactFormInner() {
         </div>
         <h3 className="mt-6 text-2xl font-medium text-white">Mesaj recepționat cu succes.</h3>
         <p className="mt-3 max-w-sm text-sm font-light text-neutral-300 leading-relaxed">
-          Îți mulțumim! Un arhitect tehnic Reverb Digital te va contacta în maximum 24 de ore lucrătoare cu analiza inițială a proiectului.
+          Răspuns în cel mult 24 de ore lucrătoare.
         </p>
         <button
           type="button"
@@ -149,17 +149,6 @@ function ContactFormInner() {
       <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden" }}>
         <input ref={hpRef} type="text" name="rv_hp" tabIndex={-1} autoComplete="off" defaultValue="" />
       </div>
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6 mb-8">
-        <div>
-          <h2 className="text-2xl font-medium text-white">Inițiază Discuția</h2>
-          <p className="text-xs text-neutral-400 font-mono mt-1">Completează datele pentru auditul tehnic preliminar.</p>
-        </div>
-        <div className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1 text-[11px] font-mono text-emerald-300">
-          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-          <span>Răspuns garantat &le; 24h</span>
-        </div>
-      </div>
-
       <div className="space-y-6 font-mono text-xs">
         <div className="grid gap-6 sm:grid-cols-2">
           <div>
@@ -273,7 +262,7 @@ function ContactFormInner() {
       </button>
 
       <p className="mt-4 text-center text-[10px] font-mono text-neutral-500">
-        Securitate garantată. Nu facem spam și nu partajăm datele de contact cu nimeni.
+        Nu facem spam și nu partajăm datele de contact cu nimeni.
       </p>
       {/* Doar în limbile din dicționar (motorul traduce rândul): omul află în ce limbă îi răspundem. */}
       {otherLang && (

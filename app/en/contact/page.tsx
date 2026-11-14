@@ -4,13 +4,14 @@ import ContactForm from "./ContactForm";
 import PageBackdrop from "@/components/PageBackdrop";
 import { packages } from "@/lib/packages";
 import { packagesEn, enPrice, VAT_NOTE_EN } from "@/lib/packagesEn";
+import { company } from "@/lib/company";
 import { Linie } from "@/components/RunningLine";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/en/contact", languages: { ro: "/contact", en: "/en/contact", "x-default": "/contact" } },
   title: "Contact",
   description:
-    "Schedule a 20–30 minute call. We'll define the goal, structure, and implementation timeline. No obligations.",
+    "Contact Reverb Digital: phone, WhatsApp, e-mail and a form. An answer within 24 working hours.",
 };
 
 export default function ContactPageEN() {
@@ -26,12 +27,12 @@ export default function ContactPageEN() {
           </Reveal>
           <Reveal delay={80}>
             <h1 className="mt-4 max-w-3xl text-5xl font-medium leading-[0.94] tracking-[-0.04em] md:text-7xl lg:text-[80px]">
-              <Linie>Let's talk about your business.</Linie>
+              <Linie>Let's talk.</Linie>
             </h1>
           </Reveal>
           <Reveal delay={160}>
             <p className="mt-8 max-w-2xl text-lg leading-8 text-neutral-300 md:text-xl">
-              We'll define the goal, structure, and implementation timeline in our first call. No obligations. No pressure.
+              An answer within 24 working hours.
             </p>
           </Reveal>
         </div>
@@ -44,22 +45,25 @@ export default function ContactPageEN() {
           <div className="space-y-8">
             <Reveal>
               <div className="card-hover rounded-3xl border border-white/10 bg-neutral-900/40 p-8">
-                <h2 className="text-2xl font-medium tracking-[-0.03em]"><Linie>Schedule a Call</Linie></h2>
-                <p className="mt-4 text-[15px] leading-7 text-neutral-300">
-                  20–30 minutes is enough for us to understand your situation and propose a concrete plan. If there's no good fit, we'll tell you directly.
-                </p>
-                <div className="mt-6 space-y-3 text-sm text-neutral-400">
-                  <div className="flex items-center gap-3">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-neutral-900/40 text-xs">1</span>
-                    Fill out the form below
+                <h2 className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-400">Direct contact</h2>
+                <div className="mt-5 space-y-4 text-sm">
+                  <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
+                    <span className="text-neutral-400">Contact</span>
+                    <span className="font-medium text-white">{company.contactName}</span>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-neutral-900/40 text-xs">2</span>
-                    We'll confirm a slot within 24h
+                  <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
+                    <span className="text-neutral-400">Phone</span>
+                    <a href={company.tel} className="whitespace-nowrap font-medium text-white hover:underline">{company.phoneIntl}</a>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-neutral-900/40 text-xs">3</span>
-                    We talk, clarify, and propose
+                  <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
+                    <span className="text-neutral-400">WhatsApp</span>
+                    <a href={company.whatsapp} target="_blank" rel="noopener noreferrer" className="font-medium text-emerald-400 hover:underline">
+                      Message on WhatsApp ↗
+                    </a>
+                  </div>
+                  <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
+                    <span className="text-neutral-400">E-mail</span>
+                    <a href={`mailto:${company.email}`} className="font-medium text-white hover:underline">{company.email}</a>
                   </div>
                 </div>
               </div>
@@ -67,7 +71,7 @@ export default function ContactPageEN() {
 
             <Reveal delay={100}>
               <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8 text-white">
-                <div className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-400">Available Packages</div>
+                <div className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-400">Prices</div>
                 <div className="mt-5 space-y-4">
                   {packages.map((p) => (
                     <div key={p.id} className="flex items-start justify-between gap-4 text-sm">
@@ -76,28 +80,7 @@ export default function ContactPageEN() {
                     </div>
                   ))}
                 </div>
-                <div className="mt-5 text-xs text-neutral-500">Terms: 50% advance / 50% on delivery. {VAT_NOTE_EN}</div>
-              </div>
-            </Reveal>
-
-            <Reveal delay={200}>
-              <div className="card-hover rounded-3xl border border-white/10 bg-white/5 p-8">
-                <div className="text-sm font-semibold text-white">What We Can Discuss</div>
-                <ul className="mt-5 space-y-3">
-                  {[
-                    "New or redesigned website",
-                    "Complete online store",
-                    "Local clients — SEO + Ads",
-                    "Monthly continuous promotion",
-                    "Positioning and visual direction (AI Creative Sprint)",
-                    "Any combination of the above",
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-[14px] leading-6 text-neutral-300">
-                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-neutral-500" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+                <div className="mt-5 text-xs text-neutral-500">{VAT_NOTE_EN}</div>
               </div>
             </Reveal>
           </div>

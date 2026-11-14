@@ -134,10 +134,7 @@ function ContactFormInner() {
       <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden" }}>
         <input ref={hpRef} type="text" name="rv_hp" tabIndex={-1} autoComplete="off" defaultValue="" />
       </div>
-      <h2 className="text-xl font-medium text-white">Send us a message</h2>
-      <p className="mt-2 text-sm text-neutral-400">Fill in the form and we&apos;ll get back to you within 24 working hours.</p>
-
-      <div className="mt-8 space-y-5">
+      <div className="space-y-5">
         <div className="grid gap-5 sm:grid-cols-2">
           <div>
             <label className="block text-sm font-medium text-white">

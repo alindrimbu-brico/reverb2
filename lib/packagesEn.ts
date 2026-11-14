@@ -140,7 +140,7 @@ export const packagesEn: Record<PackageId, PackageEn> = {
     shortName: "Large Projects & B2B",
     tagline: "Custom digital systems for large companies.",
     delivery: "Dedicated scope",
-    description: "Large projects, done together with our London partner, Zylaris Group: portals for clients and partners, automation of repetitive work inside the company, AI assistants that work on their own, and secure hosting.",
+    description: "Portals for clients and partners, automation of repetitive work inside the company, AI assistants that work on their own, and secure hosting.",
     includes: [
       "Your own infrastructure, which grows with the company",
       "Secure portals for clients and partners",

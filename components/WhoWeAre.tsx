@@ -8,13 +8,31 @@ import { company } from "@/lib/company";
 const BTN =
   "rounded-full border border-white/20 px-4 py-2 text-xs font-mono text-neutral-200 transition hover:bg-white hover:text-black";
 
-export default function WhoWeAre({ lang = "ro", center = false }: { lang?: "ro" | "en"; center?: boolean }) {
+/** Definiția agenției, în două bucăți (două chei de traducere): pagina Despre le folosește ca titlu și ca rând de sub titlu. */
+export const AGENCY_DEF = {
+  ro: { what: "Agenție de marketing digital.", does: "Construim, promovăm și administrăm site-uri, magazine online și aplicații." },
+  en: { what: "Digital marketing agency.", does: "We build, promote and manage websites, online stores and apps." },
+} as const;
+
+export default function WhoWeAre({
+  lang = "ro",
+  center = false,
+  showDef = true,
+}: {
+  lang?: "ro" | "en";
+  center?: boolean;
+  /** `false` pe pagina Despre, unde definiția e deja titlul paginii. */
+  showDef?: boolean;
+}) {
   const en = lang === "en";
+  const def = AGENCY_DEF[lang];
   return (
     <div className={`flex flex-col gap-2.5 ${center ? "items-center text-center" : ""}`}>
-      <p className="text-sm font-light leading-relaxed text-neutral-300">
-        {en ? "Digital marketing agency. Design, development, promotion." : "Agenție de marketing digital. Design, dezvoltare, promovare."}
-      </p>
+      {showDef && (
+        <p className="text-sm font-light leading-relaxed text-neutral-300">
+          <span>{def.what}</span> <span>{def.does}</span>
+        </p>
+      )}
       <p data-no-translate className="text-xs font-mono leading-relaxed text-neutral-400">
         {`${company.brand} · ${company.legalName} · ${company.city} · CUI ${company.cui}`}
       </p>

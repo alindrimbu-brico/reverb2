@@ -33,7 +33,7 @@ type Lang = "ro" | "en";
 const IN_PROGRESS = new Set<string>([
   "DON Barbershop",
   "The Digital Greenhouse",
-  "Oglinda",
+  "Oglinda.eu",
   "Flooare.ro",
   "Artisan Café",
   "Arhitectura Vie a Numerelor",
@@ -218,15 +218,15 @@ export const liveProjectsRo: LiveProject[] = withState("ro", [
     badge: "Platformă"
   },
   {
-    // Sursa: public/aura (titlul paginii, fișierele). Domeniul oglinda.eu nu răspunde încă (lipsesc două înregistrări DNS);
-    // când răspunde, `href` devine https://oglinda.eu și numele „Oglinda.eu” (scripts/check-seo.mjs avertizează).
-    name: "Oglinda",
+    // Sursa: public/aura (titlul paginii, fișierele). Domeniul oglinda.eu răspunde din 14 nov 2026 (două înregistrări DNS în
+    // Cloudflare, certificat Vercel); aceeași aplicație rămâne și la reverb.ro/aura. scripts/check-seo.mjs avertizează dacă domeniul cade.
+    name: "Oglinda.eu",
     kind: "Aplicație web",
     category: "Aplicație web de reflecție",
     tech: "HTML, CSS și JavaScript simple",
     host: "Vercel",
     desc: "„Refugiu interior”: aplicație web de reflecție și conștientizare.",
-    href: "https://reverb.ro/aura/index.html",
+    href: "https://www.oglinda.eu/",
     badge: "Aplicație"
   },
   {
@@ -426,13 +426,13 @@ export const liveProjectsEn: LiveProject[] = withState("en", [
     badge: "Portal"
   },
   {
-    name: "Oglinda",
+    name: "Oglinda.eu",
     kind: "Web app",
     category: "Web app for reflection",
     tech: "Plain HTML, CSS and JavaScript",
     host: "Vercel",
     desc: "“Inner refuge”: a web app for reflection and awareness, in Romanian.",
-    href: "https://reverb.ro/aura/index.html",
+    href: "https://www.oglinda.eu/",
     badge: "Application"
   },
   {

@@ -243,12 +243,20 @@
 "i": 31,
 "k": "text",
 "p": "/",
-"t": "Agenție de marketing digital. Design, dezvoltare, promovare.",
-"c": "",
-"key": "Agenție de marketing digital. Design, dezvoltare, promovare."
+"t": "Agenție de marketing digital.",
+"c": "Agenție de marketing digital. Construim, promovăm și administrăm site-uri, magazine online și aplicații.",
+"key": "Agenție de marketing digital."
 },
 {
 "i": 32,
+"k": "text",
+"p": "/",
+"t": "Construim, promovăm și administrăm site-uri, magazine online și aplicații.",
+"c": "Agenție de marketing digital. Construim, promovăm și administrăm site-uri, magazine online și aplicații.",
+"key": "Construim, promovăm și administrăm site-uri, magazine online și aplicații."
+},
+{
+"i": 33,
 "k": "text",
 "p": "/",
 "t": "Sună: 0767 235 693",
@@ -256,7 +264,7 @@
 "key": "Sună: # # #"
 },
 {
-"i": 33,
+"i": 34,
 "k": "text",
 "p": "/",
 "t": "/ 01 — DISCUTĂM",
@@ -264,7 +272,7 @@
 "key": "/ # — DISCUTĂM"
 },
 {
-"i": 34,
+"i": 35,
 "k": "text",
 "p": "/",
 "t": "De la tine: texte și poze. De la noi: termen și preț fix, înainte de început.",
@@ -272,7 +280,7 @@
 "key": "De la tine: texte și poze. De la noi: termen și preț fix, înainte de început."
 },
 {
-"i": 35,
+"i": 36,
 "k": "text",
 "p": "/",
 "t": "/ 02 — CONSTRUIM",
@@ -280,7 +288,7 @@
 "key": "/ # — CONSTRUIM"
 },
 {
-"i": 36,
+"i": 37,
 "k": "text",
 "p": "/",
 "t": "Site: 7–10 zile. Magazin: 14–21 zile. Plată: jumătate la început, jumătate la predare.",
@@ -288,7 +296,7 @@
 "key": "Site: #–# zile. Magazin: #–# zile. Plată: jumătate la început, jumătate la predare."
 },
 {
-"i": 37,
+"i": 38,
 "k": "text",
 "p": "/",
 "t": "/ 03 — PROMOVĂM",
@@ -296,7 +304,7 @@
 "key": "/ # — PROMOVĂM"
 },
 {
-"i": 38,
+"i": 39,
 "k": "text",
 "p": "/",
 "t": "Clipuri video pentru rețelele sociale. Pachete separate, cu plată lunară.",
@@ -304,7 +312,7 @@
 "key": "Clipuri video pentru rețelele sociale. Pachete separate, cu plată lunară."
 },
 {
-"i": 39,
+"i": 40,
 "k": "text",
 "p": "/",
 "t": "/ 04 — RĂMÂNEM",
@@ -312,7 +320,7 @@
 "key": "/ # — RĂMÂNEM"
 },
 {
-"i": 40,
+"i": 41,
 "k": "text",
 "p": "/",
 "t": "Sprijin pe WhatsApp, la telefon sau față în față.",
@@ -320,7 +328,7 @@
 "key": "Sprijin pe WhatsApp, la telefon sau față în față."
 },
 {
-"i": 41,
+"i": 42,
 "k": "text",
 "p": "/",
 "t": "Fără contract obligatoriu pe 12 luni.",
@@ -328,7 +336,7 @@
 "key": "Fără contract obligatoriu pe # luni."
 },
 {
-"i": 42,
+"i": 43,
 "k": "text",
 "p": "/",
 "t": "Prețurile nu includ TVA.",
@@ -336,7 +344,7 @@
 "key": "Prețurile nu includ TVA."
 },
 {
-"i": 43,
+"i": 44,
 "k": "text",
 "p": "/",
 "t": "01 / Site-uri și magazine",
@@ -344,7 +352,7 @@
 "key": "# / Site-uri și magazine"
 },
 {
-"i": 44,
+"i": 45,
 "k": "text",
 "p": "/",
 "t": "de la",
@@ -352,7 +360,7 @@
 "key": "de la"
 },
 {
-"i": 45,
+"i": 46,
 "k": "text",
 "p": "/",
 "t": "+ TVA",
@@ -360,7 +368,7 @@
 "key": "+ TVA"
 },
 {
-"i": 46,
+"i": 47,
 "k": "text",
 "p": "/",
 "t": "Site Start",
@@ -368,7 +376,7 @@
 "key": "Site Start"
 },
 {
-"i": 47,
+"i": 48,
 "k": "text",
 "p": "/",
 "t": "în 7–10 zile",
@@ -376,7 +384,7 @@
 "key": "în #–# zile"
 },
 {
-"i": 48,
+"i": 49,
 "k": "text",
 "p": "/",
 "t": "Până la 5 pagini: Acasă, Despre, Servicii, Galerie, Contact",
@@ -384,7 +392,7 @@
 "key": "Până la # pagini: Acasă, Despre, Servicii, Galerie, Contact"
 },
 {
-"i": 49,
+"i": 50,
 "k": "text",
 "p": "/",
 "t": "Găzduire inclusă în primul an; apoi €60 / an sau îl muți la găzduirea ta",
@@ -392,7 +400,7 @@
 "key": "Găzduire inclusă în primul an; apoi €# / an sau îl muți la găzduirea ta"
 },
 {
-"i": 50,
+"i": 51,
 "k": "text",
 "p": "/",
 "t": "Publicat pe domeniul tău (domeniul se plătește separat)",
@@ -400,7 +408,7 @@
 "key": "Publicat pe domeniul tău (domeniul se plătește separat)"
 },
 {
-"i": 51,
+"i": 52,
 "k": "text",
 "p": "/",
 "t": "Site cu design exclusiv + 15 clipuri:",
@@ -408,7 +416,7 @@
 "key": "Site cu design exclusiv + # clipuri:"
 },
 {
-"i": 52,
+"i": 53,
 "k": "text",
 "p": "/",
 "t": "Magazin Start",
@@ -416,7 +424,7 @@
 "key": "Magazin Start"
 },
 {
-"i": 53,
+"i": 54,
 "k": "text",
 "p": "/",
 "t": ", cu plată cu cardul, curier și facturi:",
@@ -424,7 +432,7 @@
 "key": ", cu plată cu cardul, curier și facturi:"
 },
 {
-"i": 54,
+"i": 55,
 "k": "text",
 "p": "/",
 "t": "Până la 50 de produse încărcate de noi",
@@ -432,7 +440,7 @@
 "key": "Până la # de produse încărcate de noi"
 },
 {
-"i": 55,
+"i": 56,
 "k": "text",
 "p": "/",
 "t": "Găzduirea, domeniul și contractele cu procesatorul de plăți, curierul și programul de facturare sunt ale tale",
@@ -440,7 +448,7 @@
 "key": "Găzduirea, domeniul și contractele cu procesatorul de plăți, curierul și programul de facturare sunt ale tale"
 },
 {
-"i": 56,
+"i": 57,
 "k": "text",
 "p": "/",
 "t": "Magazin complet + 30 de clipuri:",
@@ -448,7 +456,7 @@
 "key": "Magazin complet + # de clipuri:"
 },
 {
-"i": 57,
+"i": 58,
 "k": "text",
 "p": "/",
 "t": "Vezi toate pachetele →",
@@ -456,7 +464,7 @@
 "key": "Vezi toate pachetele →"
 },
 {
-"i": 58,
+"i": 59,
 "k": "text",
 "p": "/",
 "t": "02 / Clipuri, de 3 ori pe săptămână",
@@ -464,7 +472,7 @@
 "key": "# / Clipuri, de # ori pe săptămână"
 },
 {
-"i": 59,
+"i": 60,
 "k": "text",
 "p": "/",
 "t": "/ lună",
@@ -472,7 +480,7 @@
 "key": "/ lună"
 },
 {
-"i": 60,
+"i": 61,
 "k": "text",
 "p": "/",
 "t": "12 clipuri video scurte pe lună, câte 3 pe săptămână",
@@ -480,7 +488,7 @@
 "key": "# clipuri video scurte pe lună, câte # pe săptămână"
 },
 {
-"i": 61,
+"i": 62,
 "k": "text",
 "p": "/",
 "t": "12 postări grafice și caruseluri de produs",
@@ -488,7 +496,7 @@
 "key": "# postări grafice și caruseluri de produs"
 },
 {
-"i": 62,
+"i": 63,
 "k": "text",
 "p": "/",
 "t": "Publicare pe TikTok, Instagram, Facebook și YouTube Shorts",
@@ -496,7 +504,7 @@
 "key": "Publicare pe TikTok, Instagram, Facebook și YouTube Shorts"
 },
 {
-"i": 63,
+"i": 64,
 "k": "text",
 "p": "/",
 "t": "Scenarii de vânzare și subtitrări pe ecran",
@@ -504,7 +512,7 @@
 "key": "Scenarii de vânzare și subtitrări pe ecran"
 },
 {
-"i": 64,
+"i": 65,
 "k": "text",
 "p": "/",
 "t": "Cere acest pachet →",
@@ -512,7 +520,7 @@
 "key": "Cere acest pachet →"
 },
 {
-"i": 65,
+"i": 66,
 "k": "text",
 "p": "/",
 "t": "03 / Un clip în fiecare zi",
@@ -520,7 +528,7 @@
 "key": "# / Un clip în fiecare zi"
 },
 {
-"i": 66,
+"i": 67,
 "k": "text",
 "p": "/",
 "t": "Recomandat",
@@ -528,7 +536,7 @@
 "key": "Recomandat"
 },
 {
-"i": 67,
+"i": 68,
 "k": "text",
 "p": "/",
 "t": "30 de clipuri video scurte pe lună, unul în fiecare zi",
@@ -536,7 +544,7 @@
 "key": "# de clipuri video scurte pe lună, unul în fiecare zi"
 },
 {
-"i": 68,
+"i": 69,
 "k": "text",
 "p": "/",
 "t": "30 de postări grafice adaptate fiecărei platforme",
@@ -544,7 +552,7 @@
 "key": "# de postări grafice adaptate fiecărei platforme"
 },
 {
-"i": 69,
+"i": 70,
 "k": "text",
 "p": "/",
 "t": "Produse și utilaje arătate în acțiune",
@@ -552,7 +560,7 @@
 "key": "Produse și utilaje arătate în acțiune"
 },
 {
-"i": 70,
+"i": 71,
 "k": "text",
 "p": "/",
 "t": "Voce de prezentare generată cu AI, cu sunet natural",
@@ -560,7 +568,7 @@
 "key": "Voce de prezentare generată cu AI, cu sunet natural"
 },
 {
-"i": 71,
+"i": 72,
 "k": "text",
 "p": "/",
 "t": "Intră în pachetele Start Digital Web și Video și Magazin Digital Activ. Se poate face și separat, pentru orice site.",
@@ -568,7 +576,7 @@
 "key": "Intră în pachetele Start Digital Web și Video și Magazin Digital Activ. Se poate face și separat, pentru orice site."
 },
 {
-"i": 72,
+"i": 73,
 "k": "text",
 "p": "/",
 "t": "Vezi serviciile →",
@@ -576,7 +584,7 @@
 "key": "Vezi serviciile →"
 },
 {
-"i": 73,
+"i": 74,
 "k": "text",
 "p": "/",
 "t": "TOATE",
@@ -584,7 +592,7 @@
 "key": "TOATE"
 },
 {
-"i": 74,
+"i": 75,
 "k": "text",
 "p": "/",
 "t": "MAGAZINE",
@@ -592,7 +600,7 @@
 "key": "MAGAZINE"
 },
 {
-"i": 75,
+"i": 76,
 "k": "text",
 "p": "/",
 "t": "SOFTWARE",
@@ -600,7 +608,7 @@
 "key": "SOFTWARE"
 },
 {
-"i": 76,
+"i": 77,
 "k": "text",
 "p": "/",
 "t": "APLICAȚII",
@@ -608,7 +616,7 @@
 "key": "APLICAȚII"
 },
 {
-"i": 77,
+"i": 78,
 "k": "text",
 "p": "/",
 "t": "UNELTE",
@@ -616,7 +624,7 @@
 "key": "UNELTE"
 },
 {
-"i": 78,
+"i": 79,
 "k": "text",
 "p": "/",
 "t": "Magazin online de scule și utilaje",
@@ -624,7 +632,7 @@
 "key": "Magazin online de scule și utilaje"
 },
 {
-"i": 79,
+"i": 80,
 "k": "text",
 "p": "/",
 "t": "Magazin online de scule și utilaje, cu prețuri urmărite automat față de concurență, facturare automată și comenzi duse singure până la curier.",
@@ -632,7 +640,7 @@
 "key": "Magazin online de scule și utilaje, cu prețuri urmărite automat față de concurență, facturare automată și comenzi duse singure până la curier."
 },
 {
-"i": 80,
+"i": 81,
 "k": "text",
 "p": "/",
 "t": "WooCommerce + module proprii",
@@ -640,7 +648,7 @@
 "key": "WooCommerce + module proprii"
 },
 {
-"i": 81,
+"i": 82,
 "k": "text",
 "p": "/",
 "t": "PREVIZUALIZARE",
@@ -648,7 +656,7 @@
 "key": "PREVIZUALIZARE"
 },
 {
-"i": 82,
+"i": 83,
 "k": "text",
 "p": "/",
 "t": "Hostinger",
@@ -656,7 +664,7 @@
 "key": "Hostinger"
 },
 {
-"i": 83,
+"i": 84,
 "k": "text",
 "p": "/",
 "t": "Magazin online pentru casă și cadouri",
@@ -664,7 +672,7 @@
 "key": "Magazin online pentru casă și cadouri"
 },
 {
-"i": 84,
+"i": 85,
 "k": "text",
 "p": "/",
 "t": "Magazin online pentru casă, grădină și copii, cu ghid de cadouri și card cadou.",
@@ -672,7 +680,7 @@
 "key": "Magazin online pentru casă, grădină și copii, cu ghid de cadouri și card cadou."
 },
 {
-"i": 85,
+"i": 86,
 "k": "text",
 "p": "/",
 "t": "WooCommerce + temă proprie",
@@ -680,7 +688,7 @@
 "key": "WooCommerce + temă proprie"
 },
 {
-"i": 86,
+"i": 87,
 "k": "text",
 "p": "/",
 "t": "Software pentru magazine și birou",
@@ -688,7 +696,7 @@
 "key": "Software pentru magazine și birou"
 },
 {
-"i": 87,
+"i": 88,
 "k": "text",
 "p": "/",
 "t": "Software: Argot, căutare pentru magazine online, și Kalki Voice, dictare vocală.",
@@ -696,7 +704,7 @@
 "key": "Software: Argot, căutare pentru magazine online, și Kalki Voice, dictare vocală."
 },
 {
-"i": 88,
+"i": 89,
 "k": "text",
 "p": "/",
 "t": "Pagini statice + funcții Cloudflare",
@@ -704,7 +712,7 @@
 "key": "Pagini statice + funcții Cloudflare"
 },
 {
-"i": 89,
+"i": 90,
 "k": "text",
 "p": "/",
 "t": "Cloudflare Pages",
@@ -712,7 +720,7 @@
 "key": "Cloudflare Pages"
 },
 {
-"i": 90,
+"i": 91,
 "k": "text",
 "p": "/",
 "t": "Cultură și spiritualitate",
@@ -720,7 +728,7 @@
 "key": "Cultură și spiritualitate"
 },
 {
-"i": 91,
+"i": 92,
 "k": "text",
 "p": "/",
 "t": "Un loc de cultură și spiritualitate, în negru și auriu, gândit fără reclame și fără grabă.",
@@ -728,7 +736,7 @@
 "key": "Un loc de cultură și spiritualitate, în negru și auriu, gândit fără reclame și fără grabă."
 },
 {
-"i": 92,
+"i": 93,
 "k": "text",
 "p": "/",
 "t": "Site editorial, română și engleză",
@@ -736,7 +744,7 @@
 "key": "Site editorial, română și engleză"
 },
 {
-"i": 93,
+"i": 94,
 "k": "text",
 "p": "/",
 "t": "Cloudflare",
@@ -744,7 +752,7 @@
 "key": "Cloudflare"
 },
 {
-"i": 94,
+"i": 95,
 "k": "text",
 "p": "/",
 "t": "Aplicație de numerologie",
@@ -752,7 +760,7 @@
 "key": "Aplicație de numerologie"
 },
 {
-"i": 95,
+"i": 96,
 "k": "text",
 "p": "/",
 "t": "Calculator de numerologie cu motor propriu și texte pe înțelesul tuturor.",
@@ -760,7 +768,7 @@
 "key": "Calculator de numerologie cu motor propriu și texte pe înțelesul tuturor."
 },
 {
-"i": 96,
+"i": 97,
 "k": "text",
 "p": "/",
 "t": "JavaScript simplu, motor propriu de calcul",
@@ -768,7 +776,7 @@
 "key": "JavaScript simplu, motor propriu de calcul"
 },
 {
-"i": 97,
+"i": 98,
 "k": "text",
 "p": "/",
 "t": "Ghid pentru clipele grele",
@@ -776,7 +784,7 @@
 "key": "Ghid pentru clipele grele"
 },
 {
-"i": 98,
+"i": 99,
 "k": "text",
 "p": "/",
 "t": "„Lângă foc”: un ghid cu texte originale pentru clipele grele, cu întrebări și câte o practică scurtă.",
@@ -784,7 +792,7 @@
 "key": "„Lângă foc”: un ghid cu texte originale pentru clipele grele, cu întrebări și câte o practică scurtă."
 },
 {
-"i": 99,
+"i": 100,
 "k": "text",
 "p": "/",
 "t": "HTML, CSS și JavaScript simple",
@@ -792,7 +800,7 @@
 "key": "HTML, CSS și JavaScript simple"
 },
 {
-"i": 100,
+"i": 101,
 "k": "text",
 "p": "/",
 "t": "Ghid interactiv",
@@ -800,7 +808,7 @@
 "key": "Ghid interactiv"
 },
 {
-"i": 101,
+"i": 102,
 "k": "text",
 "p": "/",
 "t": "Ghid interactiv despre energia vitală și planul nevăzut.",
@@ -808,7 +816,7 @@
 "key": "Ghid interactiv despre energia vitală și planul nevăzut."
 },
 {
-"i": 102,
+"i": 103,
 "k": "text",
 "p": "/",
 "t": "Aplicație web",
@@ -816,7 +824,7 @@
 "key": "Aplicație web"
 },
 {
-"i": 103,
+"i": 104,
 "k": "text",
 "p": "/",
 "t": "Site de carte",
@@ -824,7 +832,7 @@
 "key": "Site de carte"
 },
 {
-"i": 104,
+"i": 105,
 "k": "text",
 "p": "/",
 "t": "Site-ul cărții „Lumina Nemuritoare”: 55 de parabole din tradițiile lumii.",
@@ -832,7 +840,7 @@
 "key": "Site-ul cărții „Lumina Nemuritoare”: # de parabole din tradițiile lumii."
 },
 {
-"i": 105,
+"i": 106,
 "k": "text",
 "p": "/",
 "t": "Site de prezentare, engleză și română",
@@ -840,7 +848,7 @@
 "key": "Site de prezentare, engleză și română"
 },
 {
-"i": 106,
+"i": 107,
 "k": "text",
 "p": "/",
 "t": "GitHub Pages",
@@ -848,7 +856,7 @@
 "key": "GitHub Pages"
 },
 {
-"i": 107,
+"i": 108,
 "k": "text",
 "p": "/",
 "t": "Oracol de 52 de cărți",
@@ -856,7 +864,7 @@
 "key": "Oracol de # de cărți"
 },
 {
-"i": 108,
+"i": 109,
 "k": "text",
 "p": "/",
 "t": "„Oracolul celor Cinci Cercuri”: 52 de cărți de înțelepciune, de tras una câte una.",
@@ -864,7 +872,7 @@
 "key": "„Oracolul celor Cinci Cercuri”: # de cărți de înțelepciune, de tras una câte una."
 },
 {
-"i": 109,
+"i": 110,
 "k": "text",
 "p": "/",
 "t": "O singură pagină web",
@@ -872,7 +880,7 @@
 "key": "O singură pagină web"
 },
 {
-"i": 110,
+"i": 111,
 "k": "text",
 "p": "/",
 "t": "Site-ul cărții „Armonia”: 21 de scrisori scurte, fiecare cu o practică și un aforism.",
@@ -880,7 +888,7 @@
 "key": "Site-ul cărții „Armonia”: # de scrisori scurte, fiecare cu o practică și un aforism."
 },
 {
-"i": 111,
+"i": 112,
 "k": "text",
 "p": "/",
 "t": "Vite + React, română și engleză",
@@ -888,7 +896,7 @@
 "key": "Vite + React, română și engleză"
 },
 {
-"i": 112,
+"i": 113,
 "k": "text",
 "p": "/",
 "t": "Calculator de salariu",
@@ -896,7 +904,7 @@
 "key": "Calculator de salariu"
 },
 {
-"i": 113,
+"i": 114,
 "k": "text",
 "p": "/",
 "t": "Scrii salariul brut și vezi pe loc pensia, sănătatea, impozitul și salariul net pentru 2026.",
@@ -904,7 +912,7 @@
 "key": "Scrii salariul brut și vezi pe loc pensia, sănătatea, impozitul și salariul net pentru #."
 },
 {
-"i": 114,
+"i": 115,
 "k": "text",
 "p": "/",
 "t": "Calculator web",
@@ -912,7 +920,7 @@
 "key": "Calculator web"
 },
 {
-"i": 115,
+"i": 116,
 "k": "text",
 "p": "/",
 "t": "Vercel",
@@ -920,7 +928,7 @@
 "key": "Vercel"
 },
 {
-"i": 116,
+"i": 117,
 "k": "text",
 "p": "/",
 "t": "Rutină zilnică",
@@ -928,7 +936,7 @@
 "key": "Rutină zilnică"
 },
 {
-"i": 117,
+"i": 118,
 "k": "text",
 "p": "/",
 "t": "O rutină zilnică împărțită în cinci ferestre, fundamentată pe neuroștiință.",
@@ -936,7 +944,7 @@
 "key": "O rutină zilnică împărțită în cinci ferestre, fundamentată pe neuroștiință."
 },
 {
-"i": 118,
+"i": 119,
 "k": "text",
 "p": "/",
 "t": "Ghid de sprijin",
@@ -944,7 +952,7 @@
 "key": "Ghid de sprijin"
 },
 {
-"i": 119,
+"i": 120,
 "k": "text",
 "p": "/",
 "t": "Ghid despre rolurile din familia în care cineva bea, scris cu un ton cald.",
@@ -952,7 +960,7 @@
 "key": "Ghid despre rolurile din familia în care cineva bea, scris cu un ton cald."
 },
 {
-"i": 120,
+"i": 121,
 "k": "text",
 "p": "/",
 "t": "Ghid web, română și engleză",
@@ -960,7 +968,7 @@
 "key": "Ghid web, română și engleză"
 },
 {
-"i": 121,
+"i": 122,
 "k": "text",
 "p": "/",
 "t": "Jocuri pentru copii",
@@ -968,7 +976,7 @@
 "key": "Jocuri pentru copii"
 },
 {
-"i": 122,
+"i": 123,
 "k": "text",
 "p": "/",
 "t": "Casa jocurilor pentru copii: fiecare joc are adresa lui, iar site-ul e în 9 limbi.",
@@ -976,7 +984,7 @@
 "key": "Casa jocurilor pentru copii: fiecare joc are adresa lui, iar site-ul e în # limbi."
 },
 {
-"i": 123,
+"i": 124,
 "k": "text",
 "p": "/",
 "t": "Pagini statice în 9 limbi",
@@ -984,7 +992,7 @@
 "key": "Pagini statice în # limbi"
 },
 {
-"i": 124,
+"i": 125,
 "k": "text",
 "p": "/",
 "t": "Proiect în desfășurare",
@@ -992,7 +1000,7 @@
 "key": "Proiect în desfășurare"
 },
 {
-"i": 125,
+"i": 126,
 "k": "text",
 "p": "/",
 "t": "DON Barbershop",
@@ -1000,7 +1008,7 @@
 "key": "DON Barbershop"
 },
 {
-"i": 126,
+"i": 127,
 "k": "text",
 "p": "/",
 "t": "Site pentru frizerie",
@@ -1008,7 +1016,7 @@
 "key": "Site pentru frizerie"
 },
 {
-"i": 127,
+"i": 128,
 "k": "text",
 "p": "/",
 "t": "Site pentru o frizerie cu cafenea: atmosferă de seară și un film care înaintează odată cu derularea paginii.",
@@ -1016,7 +1024,7 @@
 "key": "Site pentru o frizerie cu cafenea: atmosferă de seară și un film care înaintează odată cu derularea paginii."
 },
 {
-"i": 128,
+"i": 129,
 "k": "text",
 "p": "/",
 "t": "Film derulat odată cu pagina",
@@ -1024,7 +1032,7 @@
 "key": "Film derulat odată cu pagina"
 },
 {
-"i": 129,
+"i": 130,
 "k": "text",
 "p": "/",
 "t": "The Digital Greenhouse",
@@ -1032,7 +1040,7 @@
 "key": "The Digital Greenhouse"
 },
 {
-"i": 130,
+"i": 131,
 "k": "text",
 "p": "/",
 "t": "Site de studio digital",
@@ -1040,7 +1048,7 @@
 "key": "Site de studio digital"
 },
 {
-"i": 131,
+"i": 132,
 "k": "text",
 "p": "/",
 "t": "Site minimalist, cu teme botanice: mult aer între secțiuni și un cursor rotund care inversează culorile de sub el.",
@@ -1048,20 +1056,12 @@
 "key": "Site minimalist, cu teme botanice: mult aer între secțiuni și un cursor rotund care inversează culorile de sub el."
 },
 {
-"i": 132,
+"i": 133,
 "k": "text",
 "p": "/",
 "t": "Cursor propriu și animații la derulare",
 "c": "",
 "key": "Cursor propriu și animații la derulare"
-},
-{
-"i": 133,
-"k": "text",
-"p": "/",
-"t": "Oglinda",
-"c": "",
-"key": "Oglinda"
 },
 {
 "i": 134,
@@ -1483,28 +1483,12 @@
 "i": 186,
 "k": "text",
 "p": "/servicii",
-"t": "Servicii • Prețuri fixe",
-"c": "",
-"key": "Servicii • Prețuri fixe"
-},
-{
-"i": 187,
-"k": "text",
-"p": "/servicii",
-"t": "Îți facem site-ul sau magazinul online, îți facem clipuri zilnice pentru rețelele sociale și te ajutăm să fii găsit și recomandat de asistenții AI.",
-"c": "Îți facem site-ul sau magazinul online, îți facem clipuri zilnice pentru rețelele sociale și te ajutăm să fii găsit și recomandat de asistenții AI. Prețurile nu includ TVA.",
-"key": "Îți facem site-ul sau magazinul online, îți facem clipuri zilnice pentru rețelele sociale și te ajutăm să fii găsit și recomandat de asistenții AI."
-},
-{
-"i": 188,
-"k": "text",
-"p": "/servicii",
 "t": "SITE-URI ȘI MAGAZINE",
 "c": "",
 "key": "SITE-URI ȘI MAGAZINE"
 },
 {
-"i": 189,
+"i": 187,
 "k": "text",
 "p": "/servicii",
 "t": "de la €267",
@@ -1512,15 +1496,7 @@
 "key": "de la €#"
 },
 {
-"i": 190,
-"k": "text",
-"p": "/servicii",
-"t": "Făcute să se încarce repede și să vândă.",
-"c": "",
-"key": "Făcute să se încarce repede și să vândă."
-},
-{
-"i": 191,
+"i": 188,
 "k": "text",
 "p": "/servicii",
 "t": "Cere acest serviciu •",
@@ -1528,15 +1504,7 @@
 "key": "Cere acest serviciu •"
 },
 {
-"i": 192,
-"k": "text",
-"p": "/servicii",
-"t": "Construim de la zero site-uri de prezentare și magazine online. Paginile se încarcă în mai puțin de 1,2 secunde, clientul plătește cu cardul în câțiva pași, factura se emite singură, iar AWB-ul pentru curier se face imediat ce intră comanda.",
-"c": "",
-"key": "Construim de la zero site-uri de prezentare și magazine online. Paginile se încarcă în mai puțin de # secunde, clientul plătește cu cardul în câțiva pași, factura se emite singură, iar AWB-ul pentru curier se face imediat ce intră comanda."
-},
-{
-"i": 193,
+"i": 189,
 "k": "text",
 "p": "/servicii",
 "t": "Ce primești:",
@@ -1544,7 +1512,23 @@
 "key": "Ce primești:"
 },
 {
-"i": 194,
+"i": 190,
+"k": "text",
+"p": "/servicii",
+"t": "Site: €267, în 7–10 zile",
+"c": "",
+"key": "Site: €#, în #–# zile"
+},
+{
+"i": 191,
+"k": "text",
+"p": "/servicii",
+"t": "Magazin online: €690, în 14–21 zile",
+"c": "",
+"key": "Magazin online: €#, în #–# zile"
+},
+{
+"i": 192,
 "k": "text",
 "p": "/servicii",
 "t": "Pagini care se încarcă în mai puțin de 1,2 secunde",
@@ -1552,7 +1536,7 @@
 "key": "Pagini care se încarcă în mai puțin de # secunde"
 },
 {
-"i": 195,
+"i": 193,
 "k": "text",
 "p": "/servicii",
 "t": "Un panou din care adaugi singur produse și schimbi prețuri",
@@ -1560,7 +1544,7 @@
 "key": "Un panou din care adaugi singur produse și schimbi prețuri"
 },
 {
-"i": 196,
+"i": 194,
 "k": "text",
 "p": "/servicii",
 "t": "Comandă într-un singur pas, ca omul să nu renunțe pe drum",
@@ -1568,7 +1552,15 @@
 "key": "Comandă într-un singur pas, ca omul să nu renunțe pe drum"
 },
 {
-"i": 197,
+"i": 195,
+"k": "text",
+"p": "/servicii",
+"t": "Plată cu cardul, în câțiva pași",
+"c": "",
+"key": "Plată cu cardul, în câțiva pași"
+},
+{
+"i": 196,
 "k": "text",
 "p": "/servicii",
 "t": "Facturi automate (FGO sau SmartBill) și AWB pentru curieri",
@@ -1576,7 +1568,7 @@
 "key": "Facturi automate (FGO sau SmartBill) și AWB pentru curieri"
 },
 {
-"i": 198,
+"i": 197,
 "k": "text",
 "p": "/servicii",
 "t": "Merge bine pe orice telefon și tabletă",
@@ -1584,7 +1576,7 @@
 "key": "Merge bine pe orice telefon și tabletă"
 },
 {
-"i": 199,
+"i": 198,
 "k": "text",
 "p": "/servicii",
 "t": "REȚELE SOCIALE",
@@ -1592,7 +1584,7 @@
 "key": "REȚELE SOCIALE"
 },
 {
-"i": 200,
+"i": 199,
 "k": "text",
 "p": "/servicii",
 "t": "de la €330 / lună",
@@ -1600,23 +1592,7 @@
 "key": "de la €# / lună"
 },
 {
-"i": 201,
-"k": "text",
-"p": "/servicii",
-"t": "Clipuri noi cu produsele tale în fiecare zi, făcute cu AI.",
-"c": "",
-"key": "Clipuri noi cu produsele tale în fiecare zi, făcute cu AI."
-},
-{
-"i": 202,
-"k": "text",
-"p": "/servicii",
-"t": "O casă de producție clasică e scumpă și lentă. Noi facem zilnic 1 până la 3 clipuri scurte pentru TikTok, Instagram Reels, YouTube Shorts și Facebook, cu AI: produse și utilaje în acțiune, scenarii de vânzare și subtitrări pe ecran.",
-"c": "",
-"key": "O casă de producție clasică e scumpă și lentă. Noi facem zilnic # până la # clipuri scurte pentru TikTok, Instagram Reels, YouTube Shorts și Facebook, cu AI: produse și utilaje în acțiune, scenarii de vânzare și subtitrări pe ecran."
-},
-{
-"i": 203,
+"i": 200,
 "k": "text",
 "p": "/servicii",
 "t": "30 până la 90 de clipuri scurte pe lună",
@@ -1624,7 +1600,15 @@
 "key": "# până la # de clipuri scurte pe lună"
 },
 {
-"i": 204,
+"i": 201,
+"k": "text",
+"p": "/servicii",
+"t": "TikTok, Instagram Reels, YouTube Shorts, Facebook",
+"c": "",
+"key": "TikTok, Instagram Reels, YouTube Shorts, Facebook"
+},
+{
+"i": 202,
 "k": "text",
 "p": "/servicii",
 "t": "Postări cu imagini și carusele de produs pentru fiecare rețea",
@@ -1632,7 +1616,7 @@
 "key": "Postări cu imagini și carusele de produs pentru fiecare rețea"
 },
 {
-"i": 205,
+"i": 203,
 "k": "text",
 "p": "/servicii",
 "t": "Voce făcută cu AI, care sună natural, și montaj",
@@ -1640,7 +1624,7 @@
 "key": "Voce făcută cu AI, care sună natural, și montaj"
 },
 {
-"i": 206,
+"i": 204,
 "k": "text",
 "p": "/servicii",
 "t": "Fiecare clip trimite omul spre magazin sau spre pagina de contact",
@@ -1648,7 +1632,7 @@
 "key": "Fiecare clip trimite omul spre magazin sau spre pagina de contact"
 },
 {
-"i": 207,
+"i": 205,
 "k": "text",
 "p": "/servicii",
 "t": "Tu nu filmezi nimic",
@@ -1656,7 +1640,7 @@
 "key": "Tu nu filmezi nimic"
 },
 {
-"i": 208,
+"i": 206,
 "k": "text",
 "p": "/servicii",
 "t": "CĂUTAREA CU AI",
@@ -1664,23 +1648,7 @@
 "key": "CĂUTAREA CU AI"
 },
 {
-"i": 209,
-"k": "text",
-"p": "/servicii",
-"t": "Ca ChatGPT, Perplexity, Claude și Gemini să te poată recomanda.",
-"c": "",
-"key": "Ca ChatGPT, Perplexity, Claude și Gemini să te poată recomanda."
-},
-{
-"i": 210,
-"k": "text",
-"p": "/servicii",
-"t": "Tot mai mulți cumpărători întreabă un asistent AI în loc să caute cuvinte pe Google. Scriem datele firmei, produsele și prețurile într-o formă pe care acești asistenți o citesc corect, ca să îți înțeleagă oferta și să o poată recomanda.",
-"c": "",
-"key": "Tot mai mulți cumpărători întreabă un asistent AI în loc să caute cuvinte pe Google. Scriem datele firmei, produsele și prețurile într-o formă pe care acești asistenți o citesc corect, ca să îți înțeleagă oferta și să o poată recomanda."
-},
-{
-"i": 211,
+"i": 207,
 "k": "text",
 "p": "/servicii",
 "t": "Firma, produsele și prețurile scrise astfel încât asistenții AI să le citească corect",
@@ -1688,7 +1656,7 @@
 "key": "Firma, produsele și prețurile scrise astfel încât asistenții AI să le citească corect"
 },
 {
-"i": 212,
+"i": 208,
 "k": "text",
 "p": "/servicii",
 "t": "O listă de prețuri clară și publică pentru pachetele tale",
@@ -1696,7 +1664,7 @@
 "key": "O listă de prețuri clară și publică pentru pachetele tale"
 },
 {
-"i": 213,
+"i": 209,
 "k": "text",
 "p": "/servicii",
 "t": "Pagini care răspund la întrebările puse de cumpărători în ChatGPT și Perplexity",
@@ -1704,7 +1672,7 @@
 "key": "Pagini care răspund la întrebările puse de cumpărători în ChatGPT și Perplexity"
 },
 {
-"i": 214,
+"i": 210,
 "k": "text",
 "p": "/servicii",
 "t": "Marca ta descrisă la fel peste tot pe internet",
@@ -1712,7 +1680,7 @@
 "key": "Marca ta descrisă la fel peste tot pe internet"
 },
 {
-"i": 215,
+"i": 211,
 "k": "text",
 "p": "/servicii",
 "t": "Urmărim cum te pomenesc asistenții AI",
@@ -1720,7 +1688,7 @@
 "key": "Urmărim cum te pomenesc asistenții AI"
 },
 {
-"i": 216,
+"i": 212,
 "k": "text",
 "p": "/servicii",
 "t": "FIRME MARI",
@@ -1728,23 +1696,7 @@
 "key": "FIRME MARI"
 },
 {
-"i": 217,
-"k": "text",
-"p": "/servicii",
-"t": "Pentru companii cu cerințe complexe, împreună cu partenerul nostru din Londra.",
-"c": "",
-"key": "Pentru companii cu cerințe complexe, împreună cu partenerul nostru din Londra."
-},
-{
-"i": 218,
-"k": "text",
-"p": "/servicii",
-"t": "Pentru companii mari și proiecte complicate lucrăm împreună cu Zylaris Group din Londra. Facem portaluri pentru clienți și parteneri, automatizăm munca repetitivă din firmă, punem securitate la nivelul băncilor și asistenți AI care lucrează în interiorul firmei.",
-"c": "",
-"key": "Pentru companii mari și proiecte complicate lucrăm împreună cu Zylaris Group din Londra. Facem portaluri pentru clienți și parteneri, automatizăm munca repetitivă din firmă, punem securitate la nivelul băncilor și asistenți AI care lucrează în interiorul firmei."
-},
-{
-"i": 219,
+"i": 213,
 "k": "text",
 "p": "/servicii",
 "t": "Servere dedicate, care cresc odată cu firma",
@@ -1752,7 +1704,7 @@
 "key": "Servere dedicate, care cresc odată cu firma"
 },
 {
-"i": 220,
+"i": 214,
 "k": "text",
 "p": "/servicii",
 "t": "Portaluri sigure pentru comenzi și contracte între firme",
@@ -1760,7 +1712,7 @@
 "key": "Portaluri sigure pentru comenzi și contracte între firme"
 },
 {
-"i": 221,
+"i": 215,
 "k": "text",
 "p": "/servicii",
 "t": "Analiza muncii din firmă și asistenți AI pentru echipa ta",
@@ -1768,7 +1720,7 @@
 "key": "Analiza muncii din firmă și asistenți AI pentru echipa ta"
 },
 {
-"i": 222,
+"i": 216,
 "k": "text",
 "p": "/servicii",
 "t": "Întreținere permanentă, cu timp de răspuns garantat prin contract",
@@ -1776,31 +1728,15 @@
 "key": "Întreținere permanentă, cu timp de răspuns garantat prin contract"
 },
 {
-"i": 223,
+"i": 217,
 "k": "text",
 "p": "/servicii",
-"t": "Securitate administrată împreună cu partenerul nostru din Londra",
-"c": "",
-"key": "Securitate administrată împreună cu partenerul nostru din Londra"
+"t": "Prima evaluare e gratuită.",
+"c": "Prima evaluare e gratuită. Răspuns în cel mult 24 de ore lucrătoare.",
+"key": "Prima evaluare e gratuită."
 },
 {
-"i": 224,
-"k": "text",
-"p": "/servicii",
-"t": "Pasul Următor",
-"c": "",
-"key": "Pasul Următor"
-},
-{
-"i": 225,
-"k": "text",
-"p": "/servicii",
-"t": "Ne uităm gratuit la site-ul tău și la paginile tale de pe rețelele sociale și îți spunem ce ar merita făcut întâi și cât costă.",
-"c": "",
-"key": "Ne uităm gratuit la site-ul tău și la paginile tale de pe rețelele sociale și îți spunem ce ar merita făcut întâi și cât costă."
-},
-{
-"i": 226,
+"i": 218,
 "k": "text",
 "p": "/servicii",
 "t": "Contactează Reverb Digital →",
@@ -1808,7 +1744,7 @@
 "key": "Contactează Reverb Digital →"
 },
 {
-"i": 227,
+"i": 219,
 "k": "text",
 "p": "/servicii",
 "t": "Vezi Toate Pachetele",
@@ -1816,23 +1752,15 @@
 "key": "Vezi Toate Pachetele"
 },
 {
-"i": 228,
+"i": 220,
 "k": "linie",
 "p": "/servicii",
-"t": "Ce facem pentru tine.",
+"t": "Servicii.",
 "c": "",
-"key": "Ce facem pentru tine."
+"key": "Servicii."
 },
 {
-"i": 229,
-"k": "linie",
-"p": "/servicii",
-"t": "La preț fix, cu termen clar.",
-"c": "",
-"key": "La preț fix, cu termen clar."
-},
-{
-"i": 230,
+"i": 221,
 "k": "linie",
 "p": "/servicii",
 "t": "Site-uri și Magazine Online",
@@ -1840,7 +1768,7 @@
 "key": "Site-uri și Magazine Online"
 },
 {
-"i": 231,
+"i": 222,
 "k": "linie",
 "p": "/servicii",
 "t": "Clipuri Zilnice pentru Rețelele Sociale",
@@ -1848,7 +1776,7 @@
 "key": "Clipuri Zilnice pentru Rețelele Sociale"
 },
 {
-"i": 232,
+"i": 223,
 "k": "linie",
 "p": "/servicii",
 "t": "Găsit de Asistenții AI",
@@ -1856,7 +1784,7 @@
 "key": "Găsit de Asistenții AI"
 },
 {
-"i": 233,
+"i": 224,
 "k": "linie",
 "p": "/servicii",
 "t": "Proiecte Mari și Sisteme pentru Firme",
@@ -1864,15 +1792,15 @@
 "key": "Proiecte Mari și Sisteme pentru Firme"
 },
 {
-"i": 234,
+"i": 225,
 "k": "linie",
 "p": "/servicii",
-"t": "Hai să vedem ce ți se potrivește.",
+"t": "Hai să vorbim.",
 "c": "",
-"key": "Hai să vedem ce ți se potrivește."
+"key": "Hai să vorbim."
 },
 {
-"i": 235,
+"i": 226,
 "k": "title",
 "p": "/servicii",
 "t": "Servicii — Reverb Digital | Reverb",
@@ -1880,7 +1808,7 @@
 "key": "Servicii — Reverb Digital | Reverb"
 },
 {
-"i": 236,
+"i": 227,
 "k": "text",
 "p": "/pachete",
 "t": "[ SITE-URI • MAGAZINE ONLINE • CLIPURI VIDEO ]",
@@ -1888,7 +1816,7 @@
 "key": "[ SITE-URI • MAGAZINE ONLINE • CLIPURI VIDEO ]"
 },
 {
-"i": 237,
+"i": 228,
 "k": "text",
 "p": "/pachete",
 "t": "Facem site-uri de prezentare și magazine online. Site de la €267 + TVA (aproximativ 1.730 lei cu TVA), magazin online de la €690 + TVA (aproximativ 4.460 lei cu TVA).",
@@ -1896,7 +1824,7 @@
 "key": "Facem site-uri de prezentare și magazine online. Site de la €# + TVA (aproximativ # lei cu TVA), magazin online de la €# + TVA (aproximativ # lei cu TVA)."
 },
 {
-"i": 238,
+"i": 229,
 "k": "text",
 "p": "/pachete",
 "t": "Vezi un exemplu de cost total ↓",
@@ -1904,7 +1832,7 @@
 "key": "Vezi un exemplu de cost total ↓"
 },
 {
-"i": 239,
+"i": 230,
 "k": "text",
 "p": "/pachete",
 "t": "Fiecare pachet are o listă fixă cu ce primești și un termen ferm de predare. Ce construim poate fi găsit pe Google și de oamenii care întreabă ChatGPT.",
@@ -1912,7 +1840,7 @@
 "key": "Fiecare pachet are o listă fixă cu ce primești și un termen ferm de predare. Ce construim poate fi găsit pe Google și de oamenii care întreabă ChatGPT."
 },
 {
-"i": 240,
+"i": 231,
 "k": "text",
 "p": "/pachete",
 "t": "Cauți clipuri pentru rețelele sociale?",
@@ -1920,7 +1848,7 @@
 "key": "Cauți clipuri pentru rețelele sociale?"
 },
 {
-"i": 241,
+"i": 232,
 "k": "text",
 "p": "/pachete",
 "t": "Vezi pachetele video ↓",
@@ -1928,7 +1856,7 @@
 "key": "Vezi pachetele video ↓"
 },
 {
-"i": 242,
+"i": 233,
 "k": "text",
 "p": "/pachete",
 "t": "Fără contract obligatoriu pe 12 luni: testezi o lună, măsori rezultatele și decizi dacă dorești continuarea.",
@@ -1936,7 +1864,7 @@
 "key": "Fără contract obligatoriu pe # luni: testezi o lună, măsori rezultatele și decizi dacă dorești continuarea."
 },
 {
-"i": 243,
+"i": 234,
 "k": "text",
 "p": "/pachete",
 "t": "01 / SITE-URI ȘI MAGAZINE",
@@ -1944,7 +1872,7 @@
 "key": "# / SITE-URI ȘI MAGAZINE"
 },
 {
-"i": 244,
+"i": 235,
 "k": "text",
 "p": "/pachete",
 "t": "Site-uri de prezentare și magazine online la preț fix: de la un început simplu, până la sisteme complete cu clipuri video și proiecte pentru companii mari.",
@@ -1952,7 +1880,7 @@
 "key": "Site-uri de prezentare și magazine online la preț fix: de la un început simplu, până la sisteme complete cu clipuri video și proiecte pentru companii mari."
 },
 {
-"i": 245,
+"i": 236,
 "k": "text",
 "p": "/pachete",
 "t": "„Cere acest pachet” deschide un formular scurt. Îți răspundem în cel mult 24 de ore lucrătoare, fără nicio obligație.",
@@ -1960,7 +1888,7 @@
 "key": "„Cere acest pachet” deschide un formular scurt. Îți răspundem în cel mult # de ore lucrătoare, fără nicio obligație."
 },
 {
-"i": 246,
+"i": 237,
 "k": "text",
 "p": "/pachete",
 "t": "Două exemple, cu tot ce se adaugă la prețul pachetului.",
@@ -1968,7 +1896,7 @@
 "key": "Două exemple, cu tot ce se adaugă la prețul pachetului."
 },
 {
-"i": 247,
+"i": 238,
 "k": "text",
 "p": "/pachete",
 "t": "Ne plătești o singură dată €267 + TVA (aproximativ 1.730 lei cu TVA): jumătate la început, jumătate la predare.",
@@ -1976,7 +1904,7 @@
 "key": "Ne plătești o singură dată €# + TVA (aproximativ # lei cu TVA): jumătate la început, jumătate la predare."
 },
 {
-"i": 248,
+"i": 239,
 "k": "text",
 "p": "/pachete",
 "t": "Domeniul (numele site-ului, de exemplu numele-firmei.ro): câteva zeci de lei pe an, plătiți de tine firmei de la care îl cumperi.",
@@ -1984,7 +1912,7 @@
 "key": "Domeniul (numele site-ului, de exemplu numele-firmei.ro): câteva zeci de lei pe an, plătiți de tine firmei de la care îl cumperi."
 },
 {
-"i": 249,
+"i": 240,
 "k": "text",
 "p": "/pachete",
 "t": "Găzduirea (locul unde stă site-ul pe internet): inclusă în primul an. Din al doilea an, €60 / an + TVA sau muți site-ul la altă firmă de găzduire.",
@@ -1992,7 +1920,7 @@
 "key": "Găzduirea (locul unde stă site-ul pe internet): inclusă în primul an. Din al doilea an, €# / an + TVA sau muți site-ul la altă firmă de găzduire."
 },
 {
-"i": 250,
+"i": 241,
 "k": "text",
 "p": "/pachete",
 "t": "Pe scurt: în primul an €267 și domeniul; apoi €60 / an și domeniul.",
@@ -2000,7 +1928,7 @@
 "key": "Pe scurt: în primul an €# și domeniul; apoi €# / an și domeniul."
 },
 {
-"i": 251,
+"i": 242,
 "k": "text",
 "p": "/pachete",
 "t": "Pentru magazin nu ne plătești nimic lunar.",
@@ -2008,7 +1936,7 @@
 "key": "Pentru magazin nu ne plătești nimic lunar."
 },
 {
-"i": 252,
+"i": 243,
 "k": "text",
 "p": "/pachete",
 "t": "Plătești și dacă nu vinzi nimic: găzduirea, domeniul și programul de facturare. Le plătești tu, direct firmelor respective.",
@@ -2016,7 +1944,7 @@
 "key": "Plătești și dacă nu vinzi nimic: găzduirea, domeniul și programul de facturare. Le plătești tu, direct firmelor respective."
 },
 {
-"i": 253,
+"i": 244,
 "k": "text",
 "p": "/pachete",
 "t": "Plătești doar când vinzi: un comision la fiecare plată cu cardul și curierul la fiecare colet.",
@@ -2024,7 +1952,7 @@
 "key": "Plătești doar când vinzi: un comision la fiecare plată cu cardul și curierul la fiecare colet."
 },
 {
-"i": 254,
+"i": 245,
 "k": "text",
 "p": "/pachete",
 "t": "Îți spunem dinainte ce să alegi și cât costă fiecare, apoi le legăm noi de magazin.",
@@ -2032,7 +1960,7 @@
 "key": "Îți spunem dinainte ce să alegi și cât costă fiecare, apoi le legăm noi de magazin."
 },
 {
-"i": 255,
+"i": 246,
 "k": "text",
 "p": "/pachete",
 "t": "Exemple de prețuri pentru un magazin mic",
@@ -2040,7 +1968,7 @@
 "key": "Exemple de prețuri pentru un magazin mic"
 },
 {
-"i": 256,
+"i": 247,
 "k": "text",
 "p": "/pachete",
 "t": "Pe scurt, dacă nu vinzi nimic: între 75 și 90 de lei pe lună în primii patru ani (găzduirea și programul de facturare, cu TVA), apoi între 150 și 180 de lei pe lună, plus domeniul. Sumele sunt aproximative.",
@@ -2048,7 +1976,7 @@
 "key": "Pe scurt, dacă nu vinzi nimic: între # și # de lei pe lună în primii patru ani (găzduirea și programul de facturare, cu TVA), apoi între # și # de lei pe lună, plus domeniul. Sumele sunt aproximative."
 },
 {
-"i": 257,
+"i": 248,
 "k": "text",
 "p": "/pachete",
 "t": "Sunt prețurile de listă ale acestor firme, nu ale noastre, citite pe 13.11.2026. Se pot schimba, iar contractul tău poate avea alt preț. Îți spunem dinainte cu ce firme putem lega magazinul.",
@@ -2056,7 +1984,7 @@
 "key": "Sunt prețurile de listă ale acestor firme, nu ale noastre, citite pe #. Se pot schimba, iar contractul tău poate avea alt preț. Îți spunem dinainte cu ce firme putem lega magazinul."
 },
 {
-"i": 258,
+"i": 249,
 "k": "text",
 "p": "/pachete",
 "t": "Găzduirea: la Hostinger, cel mai ieftin plan pentru magazine se plătește pe 48 de luni dinainte: 143,52 € o dată (aproximativ 770 de lei), adică 2,99 € pe lună, preț de promoție. După aceea costă 16,99 € pe lună (aproximativ 90 de lei).",
@@ -2064,7 +1992,7 @@
 "key": "Găzduirea: la Hostinger, cel mai ieftin plan pentru magazine se plătește pe # de luni dinainte: # € o dată (aproximativ # de lei), adică # € pe lună, preț de promoție. După aceea costă # € pe lună (aproximativ # de lei)."
 },
 {
-"i": 259,
+"i": 250,
 "k": "text",
 "p": "/pachete",
 "t": "Programul de facturare: la FGO, abonamentul care se leagă de magazin (GO Premium) costă 57 de lei pe lună plus TVA, adică aproximativ 69 de lei, sau 570 de lei pe an plus TVA.",
@@ -2072,7 +2000,7 @@
 "key": "Programul de facturare: la FGO, abonamentul care se leagă de magazin (GO Premium) costă # de lei pe lună plus TVA, adică aproximativ # de lei, sau # de lei pe an plus TVA."
 },
 {
-"i": 260,
+"i": 251,
 "k": "text",
 "p": "/pachete",
 "t": "Plata cu cardul: la NETOPIA, 1,19% din sumă plus 0,30 lei la fiecare plată. La o comandă de 200 de lei, asta înseamnă 2,68 lei.",
@@ -2080,7 +2008,7 @@
 "key": "Plata cu cardul: la NETOPIA, #% din sumă plus # lei la fiecare plată. La o comandă de # de lei, asta înseamnă # lei."
 },
 {
-"i": 261,
+"i": 252,
 "k": "text",
 "p": "/pachete",
 "t": "Curierul: în lista de prețuri Cargus pentru firme cu contract, un colet de până la 1 kg trimis în altă localitate costă 27,83 lei, iar fiecare kilogram în plus 2,30 lei. Dacă clientul plătește la livrare, se adaugă 8,47 lei. Costul curierului îl poți trece la client, ca taxă de livrare.",
@@ -2088,7 +2016,7 @@
 "key": "Curierul: în lista de prețuri Cargus pentru firme cu contract, un colet de până la # kg trimis în altă localitate costă # lei, iar fiecare kilogram în plus # lei. Dacă clientul plătește la livrare, se adaugă # lei. Costul curierului îl poți trece la client, ca taxă de livrare."
 },
 {
-"i": 262,
+"i": 253,
 "k": "text",
 "p": "/pachete",
 "t": "Doar FGO scrie clar că prețul este fără TVA; la celelalte trei nu e clar dacă se mai adaugă TVA.",
@@ -2096,7 +2024,7 @@
 "key": "Doar FGO scrie clar că prețul este fără TVA; la celelalte trei nu e clar dacă se mai adaugă TVA."
 },
 {
-"i": 263,
+"i": 254,
 "k": "text",
 "p": "/pachete",
 "t": "aproximativ 1.730 lei cu TVA",
@@ -2104,7 +2032,7 @@
 "key": "aproximativ # lei cu TVA"
 },
 {
-"i": 264,
+"i": 255,
 "k": "text",
 "p": "/pachete",
 "t": "Site de prezentare cu până la 5 pagini, construit pornind de la un stil din galeria noastră de concepte și adaptat la firma ta: culori, texte, poze.",
@@ -2112,7 +2040,7 @@
 "key": "Site de prezentare cu până la # pagini, construit pornind de la un stil din galeria noastră de concepte și adaptat la firma ta: culori, texte, poze."
 },
 {
-"i": 265,
+"i": 256,
 "k": "text",
 "p": "/pachete",
 "t": "Design pornit dintr-un stil din galeria noastră, adaptat mărcii tale",
@@ -2120,7 +2048,7 @@
 "key": "Design pornit dintr-un stil din galeria noastră, adaptat mărcii tale"
 },
 {
-"i": 266,
+"i": 257,
 "k": "text",
 "p": "/pachete",
 "t": "Formular de contact, WhatsApp și hartă Google",
@@ -2128,7 +2056,7 @@
 "key": "Formular de contact, WhatsApp și hartă Google"
 },
 {
-"i": 267,
+"i": 258,
 "k": "text",
 "p": "/pachete",
 "t": "Optimizat pentru telefon și pentru viteză",
@@ -2136,7 +2064,7 @@
 "key": "Optimizat pentru telefon și pentru viteză"
 },
 {
-"i": 268,
+"i": 259,
 "k": "text",
 "p": "/pachete",
 "t": "Textele și pozele vin de la tine; două runde de modificări incluse",
@@ -2144,7 +2072,7 @@
 "key": "Textele și pozele vin de la tine; două runde de modificări incluse"
 },
 {
-"i": 269,
+"i": 260,
 "k": "text",
 "p": "/pachete",
 "t": "30 de zile de sprijin după lansare: WhatsApp, telefon și întâlniri online sau la biroul nostru din Focșani",
@@ -2152,7 +2080,7 @@
 "key": "# de zile de sprijin după lansare: WhatsApp, telefon și întâlniri online sau la biroul nostru din Focșani"
 },
 {
-"i": 270,
+"i": 261,
 "k": "text",
 "p": "/pachete",
 "t": "Ideal pentru:",
@@ -2160,7 +2088,7 @@
 "key": "Ideal pentru:"
 },
 {
-"i": 271,
+"i": 262,
 "k": "text",
 "p": "/pachete",
 "t": "Firme mici, cabinete și meșteri care au nevoie repede de o prezență online corectă, cu buget mic.",
@@ -2168,7 +2096,7 @@
 "key": "Firme mici, cabinete și meșteri care au nevoie repede de o prezență online corectă, cu buget mic."
 },
 {
-"i": 272,
+"i": 263,
 "k": "text",
 "p": "/pachete",
 "t": "Site de prezentare cu 3–5 pagini, foarte rapid, cu design făcut doar pentru tine, formular de contact, hartă Google și WhatsApp, plus 15 clipuri video pentru lansare.",
@@ -2176,7 +2104,7 @@
 "key": "Site de prezentare cu #–# pagini, foarte rapid, cu design făcut doar pentru tine, formular de contact, hartă Google și WhatsApp, plus # clipuri video pentru lansare."
 },
 {
-"i": 273,
+"i": 264,
 "k": "text",
 "p": "/pachete",
 "t": "Site foarte rapid: se încarcă în sub 1,2 secunde",
@@ -2184,7 +2112,7 @@
 "key": "Site foarte rapid: se încarcă în sub # secunde"
 },
 {
-"i": 274,
+"i": 265,
 "k": "text",
 "p": "/pachete",
 "t": "Design exclusiv, fără șabloane",
@@ -2192,7 +2120,7 @@
 "key": "Design exclusiv, fără șabloane"
 },
 {
-"i": 275,
+"i": 266,
 "k": "text",
 "p": "/pachete",
 "t": "Arată bine și pe telefon",
@@ -2200,7 +2128,7 @@
 "key": "Arată bine și pe telefon"
 },
 {
-"i": 276,
+"i": 267,
 "k": "text",
 "p": "/pachete",
 "t": "Pregătit ca să fie găsit de Google și de asistenții AI (ChatGPT, Gemini)",
@@ -2208,7 +2136,7 @@
 "key": "Pregătit ca să fie găsit de Google și de asistenții AI (ChatGPT, Gemini)"
 },
 {
-"i": 277,
+"i": 268,
 "k": "text",
 "p": "/pachete",
 "t": "15 clipuri video scurte pentru lansare",
@@ -2216,7 +2144,7 @@
 "key": "# clipuri video scurte pentru lansare"
 },
 {
-"i": 278,
+"i": 269,
 "k": "text",
 "p": "/pachete",
 "t": "Firme de servicii, cabinete, consultanți și ateliere care intră serios în online.",
@@ -2224,7 +2152,7 @@
 "key": "Firme de servicii, cabinete, consultanți și ateliere care intră serios în online."
 },
 {
-"i": 279,
+"i": 270,
 "k": "text",
 "p": "/pachete",
 "t": "Magazin online pe WooCommerce, o platformă de magazine foarte răspândită, pornit dintr-o temă pregătită de noi. Clientul plătește cu cardul, eticheta de curier (AWB) iese direct din comandă, iar factura se emite singură. Îți încărcăm primele 50 de produse.",
@@ -2232,7 +2160,7 @@
 "key": "Magazin online pe WooCommerce, o platformă de magazine foarte răspândită, pornit dintr-o temă pregătită de noi. Clientul plătește cu cardul, eticheta de curier (AWB) iese direct din comandă, iar factura se emite singură. Îți încărcăm primele # de produse."
 },
 {
-"i": 280,
+"i": 271,
 "k": "text",
 "p": "/pachete",
 "t": "Plată cu cardul, ramburs și transfer bancar",
@@ -2240,7 +2168,7 @@
 "key": "Plată cu cardul, ramburs și transfer bancar"
 },
 {
-"i": 281,
+"i": 272,
 "k": "text",
 "p": "/pachete",
 "t": "Un curier integrat: eticheta de curier (AWB) se face din comandă",
@@ -2248,7 +2176,7 @@
 "key": "Un curier integrat: eticheta de curier (AWB) se face din comandă"
 },
 {
-"i": 282,
+"i": 273,
 "k": "text",
 "p": "/pachete",
 "t": "Facturare automată, prin FGO sau SmartBill (programe de facturare)",
@@ -2256,7 +2184,7 @@
 "key": "Facturare automată, prin FGO sau SmartBill (programe de facturare)"
 },
 {
-"i": 283,
+"i": 274,
 "k": "text",
 "p": "/pachete",
 "t": "Temă pregătită de noi, adaptată mărcii tale; două runde de modificări",
@@ -2264,7 +2192,7 @@
 "key": "Temă pregătită de noi, adaptată mărcii tale; două runde de modificări"
 },
 {
-"i": 284,
+"i": 275,
 "k": "text",
 "p": "/pachete",
 "t": "Producători locali și magazine mici care vor să înceapă să vândă online fără o investiție mare.",
@@ -2272,7 +2200,7 @@
 "key": "Producători locali și magazine mici care vor să înceapă să vândă online fără o investiție mare."
 },
 {
-"i": 285,
+"i": 276,
 "k": "text",
 "p": "/pachete",
 "t": "Sistem Complet",
@@ -2280,7 +2208,7 @@
 "key": "Sistem Complet"
 },
 {
-"i": 286,
+"i": 277,
 "k": "text",
 "p": "/pachete",
 "t": "Magazin online complet, cu plată cu cardul, facturare automată și AWB la curieri, un panou din care îți administrezi singur produsele și comenzile, plus 30 de clipuri video pentru lansare.",
@@ -2288,7 +2216,7 @@
 "key": "Magazin online complet, cu plată cu cardul, facturare automată și AWB la curieri, un panou din care îți administrezi singur produsele și comenzile, plus # de clipuri video pentru lansare."
 },
 {
-"i": 287,
+"i": 278,
 "k": "text",
 "p": "/pachete",
 "t": "Magazin online complet, cu plată cu cardul și curieri",
@@ -2296,7 +2224,7 @@
 "key": "Magazin online complet, cu plată cu cardul și curieri"
 },
 {
-"i": 288,
+"i": 279,
 "k": "text",
 "p": "/pachete",
 "t": "Panou de administrare pentru produse și comenzi: WooCommerce sau unul construit la comandă",
@@ -2304,7 +2232,7 @@
 "key": "Panou de administrare pentru produse și comenzi: WooCommerce sau unul construit la comandă"
 },
 {
-"i": 289,
+"i": 280,
 "k": "text",
 "p": "/pachete",
 "t": "Facturare automată FGO sau SmartBill și AWB generat pe loc",
@@ -2312,7 +2240,7 @@
 "key": "Facturare automată FGO sau SmartBill și AWB generat pe loc"
 },
 {
-"i": 290,
+"i": 281,
 "k": "text",
 "p": "/pachete",
 "t": "Catalog de produse organizat ca să fie ușor de cumpărat",
@@ -2320,7 +2248,7 @@
 "key": "Catalog de produse organizat ca să fie ușor de cumpărat"
 },
 {
-"i": 291,
+"i": 282,
 "k": "text",
 "p": "/pachete",
 "t": "30 de clipuri video de prezentare a produselor, pentru lansare",
@@ -2328,7 +2256,7 @@
 "key": "# de clipuri video de prezentare a produselor, pentru lansare"
 },
 {
-"i": 292,
+"i": 283,
 "k": "text",
 "p": "/pachete",
 "t": "Magazine, distribuitori, producători locali și mărci în creștere care vor să vândă mult online.",
@@ -2336,7 +2264,7 @@
 "key": "Magazine, distribuitori, producători locali și mărci în creștere care vor să vândă mult online."
 },
 {
-"i": 293,
+"i": 284,
 "k": "text",
 "p": "/pachete",
 "t": "Proiect dedicat",
@@ -2344,7 +2272,7 @@
 "key": "Proiect dedicat"
 },
 {
-"i": 294,
+"i": 285,
 "k": "text",
 "p": "/pachete",
 "t": "de la aproximativ 21.440 lei cu TVA",
@@ -2352,15 +2280,15 @@
 "key": "de la aproximativ # lei cu TVA"
 },
 {
-"i": 295,
+"i": 286,
 "k": "text",
 "p": "/pachete",
-"t": "Proiecte mari, lucrate împreună cu partenerul nostru din Londra, Zylaris Group: portaluri pentru clienți și parteneri, automatizarea muncii repetitive din firmă, asistenți AI care lucrează singuri și găzduire securizată.",
+"t": "Portaluri pentru clienți și parteneri, automatizarea muncii repetitive din firmă, asistenți AI care lucrează singuri și găzduire securizată.",
 "c": "",
-"key": "Proiecte mari, lucrate împreună cu partenerul nostru din Londra, Zylaris Group: portaluri pentru clienți și parteneri, automatizarea muncii repetitive din firmă, asistenți AI care lucrează singuri și găzduire securizată."
+"key": "Portaluri pentru clienți și parteneri, automatizarea muncii repetitive din firmă, asistenți AI care lucrează singuri și găzduire securizată."
 },
 {
-"i": 296,
+"i": 287,
 "k": "text",
 "p": "/pachete",
 "t": "Infrastructură proprie, care crește odată cu firma",
@@ -2368,7 +2296,7 @@
 "key": "Infrastructură proprie, care crește odată cu firma"
 },
 {
-"i": 297,
+"i": 288,
 "k": "text",
 "p": "/pachete",
 "t": "Portaluri securizate pentru clienți și parteneri",
@@ -2376,7 +2304,7 @@
 "key": "Portaluri securizate pentru clienți și parteneri"
 },
 {
-"i": 298,
+"i": 289,
 "k": "text",
 "p": "/pachete",
 "t": "Analiza proceselor din firmă și asistenți AI care preiau munca repetitivă",
@@ -2384,7 +2312,7 @@
 "key": "Analiza proceselor din firmă și asistenți AI care preiau munca repetitivă"
 },
 {
-"i": 299,
+"i": 290,
 "k": "text",
 "p": "/pachete",
 "t": "Securitate și reguli de lucru la standard internațional",
@@ -2392,7 +2320,7 @@
 "key": "Securitate și reguli de lucru la standard internațional"
 },
 {
-"i": 300,
+"i": 291,
 "k": "text",
 "p": "/pachete",
 "t": "Supraveghere permanentă și timp de răspuns garantat prin contract",
@@ -2400,7 +2328,7 @@
 "key": "Supraveghere permanentă și timp de răspuns garantat prin contract"
 },
 {
-"i": 301,
+"i": 292,
 "k": "text",
 "p": "/pachete",
 "t": "Companii mari și organizații care au nevoie de sisteme digitale pe care se pot baza.",
@@ -2408,7 +2336,7 @@
 "key": "Companii mari și organizații care au nevoie de sisteme digitale pe care se pot baza."
 },
 {
-"i": 302,
+"i": 293,
 "k": "text",
 "p": "/pachete",
 "t": "02 / CLIPURI PENTRU REȚELELE SOCIALE",
@@ -2416,7 +2344,7 @@
 "key": "# / CLIPURI PENTRU REȚELELE SOCIALE"
 },
 {
-"i": 303,
+"i": 294,
 "k": "text",
 "p": "/pachete",
 "t": "Generăm conținut video de înaltă fidelitate cu Google Imagen & Veo pentru TikTok, Reels, Shorts și Facebook. Demonstrații de produse, scenarii de vânzare și subtitrări dinamice fără bătăi de cap.",
@@ -2424,7 +2352,7 @@
 "key": "Generăm conținut video de înaltă fidelitate cu Google Imagen & Veo pentru TikTok, Reels, Shorts și Facebook. Demonstrații de produse, scenarii de vânzare și subtitrări dinamice fără bătăi de cap."
 },
 {
-"i": 304,
+"i": 295,
 "k": "text",
 "p": "/pachete",
 "t": "Livrabil săptămânal",
@@ -2432,7 +2360,7 @@
 "key": "Livrabil săptămânal"
 },
 {
-"i": 305,
+"i": 296,
 "k": "text",
 "p": "/pachete",
 "t": "€330 / lună",
@@ -2440,7 +2368,7 @@
 "key": "€# / lună"
 },
 {
-"i": 306,
+"i": 297,
 "k": "text",
 "p": "/pachete",
 "t": "aproximativ 2.130 lei cu TVA / lună",
@@ -2448,7 +2376,7 @@
 "key": "aproximativ # lei cu TVA / lună"
 },
 {
-"i": 307,
+"i": 298,
 "k": "text",
 "p": "/pachete",
 "t": "12 clipuri video scurte și 12 caruseluri de produs pe lună, făcute cu AI și gândite pentru TikTok, Reels și YouTube Shorts.",
@@ -2456,7 +2384,7 @@
 "key": "# clipuri video scurte și # caruseluri de produs pe lună, făcute cu AI și gândite pentru TikTok, Reels și YouTube Shorts."
 },
 {
-"i": 308,
+"i": 299,
 "k": "text",
 "p": "/pachete",
 "t": "Raport lunar: câți oameni ți-au văzut clipurile",
@@ -2464,7 +2392,7 @@
 "key": "Raport lunar: câți oameni ți-au văzut clipurile"
 },
 {
-"i": 309,
+"i": 300,
 "k": "text",
 "p": "/pachete",
 "t": "Firme locale, servicii, clinici și ateliere care vor prezență video constantă fără costuri de filmare clasică.",
@@ -2472,7 +2400,7 @@
 "key": "Firme locale, servicii, clinici și ateliere care vor prezență video constantă fără costuri de filmare clasică."
 },
 {
-"i": 310,
+"i": 301,
 "k": "text",
 "p": "/pachete",
 "t": "Alege Pachetul →",
@@ -2480,7 +2408,7 @@
 "key": "Alege Pachetul →"
 },
 {
-"i": 311,
+"i": 302,
 "k": "text",
 "p": "/pachete",
 "t": "Cel Mai Solicitat",
@@ -2488,7 +2416,7 @@
 "key": "Cel Mai Solicitat"
 },
 {
-"i": 312,
+"i": 303,
 "k": "text",
 "p": "/pachete",
 "t": "Livrare zilnică",
@@ -2496,7 +2424,7 @@
 "key": "Livrare zilnică"
 },
 {
-"i": 313,
+"i": 304,
 "k": "text",
 "p": "/pachete",
 "t": "30 de clipuri video pe lună, câte unul în fiecare zi, plus 30 de postări grafice. Arătăm utilajele, produsele și serviciile tale în acțiune, cu voce generată cu AI și montaj alert.",
@@ -2504,7 +2432,7 @@
 "key": "# de clipuri video pe lună, câte unul în fiecare zi, plus # de postări grafice. Arătăm utilajele, produsele și serviciile tale în acțiune, cu voce generată cu AI și montaj alert."
 },
 {
-"i": 314,
+"i": 305,
 "k": "text",
 "p": "/pachete",
 "t": "Scenarii scrise ca să vândă",
@@ -2512,7 +2440,7 @@
 "key": "Scenarii scrise ca să vândă"
 },
 {
-"i": 315,
+"i": 306,
 "k": "text",
 "p": "/pachete",
 "t": "O discuție pe săptămână: ce a mers și ce schimbăm",
@@ -2520,7 +2448,7 @@
 "key": "O discuție pe săptămână: ce a mers și ce schimbăm"
 },
 {
-"i": 316,
+"i": 307,
 "k": "text",
 "p": "/pachete",
 "t": "Magazine online, distribuitori și companii care vor creștere accelerată prin volum susținut.",
@@ -2528,7 +2456,7 @@
 "key": "Magazine online, distribuitori și companii care vor creștere accelerată prin volum susținut."
 },
 {
-"i": 317,
+"i": 308,
 "k": "text",
 "p": "/pachete",
 "t": "3 livrări zilnice",
@@ -2536,7 +2464,7 @@
 "key": "# livrări zilnice"
 },
 {
-"i": 318,
+"i": 309,
 "k": "text",
 "p": "/pachete",
 "t": "90 de clipuri video pe lună, câte 3 pe zi, pentru mărci și magazine mari care vor să fie văzute zilnic de toți cei interesați de domeniul lor.",
@@ -2544,7 +2472,7 @@
 "key": "# de clipuri video pe lună, câte # pe zi, pentru mărci și magazine mari care vor să fie văzute zilnic de toți cei interesați de domeniul lor."
 },
 {
-"i": 319,
+"i": 310,
 "k": "text",
 "p": "/pachete",
 "t": "90 de clipuri video scurte pe lună, 3 în fiecare zi",
@@ -2552,7 +2480,7 @@
 "key": "# de clipuri video scurte pe lună, # în fiecare zi"
 },
 {
-"i": 320,
+"i": 311,
 "k": "text",
 "p": "/pachete",
 "t": "Publicare pe mai multe conturi",
@@ -2560,7 +2488,7 @@
 "key": "Publicare pe mai multe conturi"
 },
 {
-"i": 321,
+"i": 312,
 "k": "text",
 "p": "/pachete",
 "t": "Testăm mai multe variante de mesaj și păstrăm ce vinde",
@@ -2568,7 +2496,7 @@
 "key": "Testăm mai multe variante de mesaj și păstrăm ce vinde"
 },
 {
-"i": 322,
+"i": 313,
 "k": "text",
 "p": "/pachete",
 "t": "Voce în mai multe limbi, la cerere",
@@ -2576,7 +2504,7 @@
 "key": "Voce în mai multe limbi, la cerere"
 },
 {
-"i": 323,
+"i": 314,
 "k": "text",
 "p": "/pachete",
 "t": "Suport cu prioritate, la orice oră",
@@ -2584,7 +2512,7 @@
 "key": "Suport cu prioritate, la orice oră"
 },
 {
-"i": 324,
+"i": 315,
 "k": "text",
 "p": "/pachete",
 "t": "Retaileri mari, mărci naționale și firme cu cataloage mari de produse.",
@@ -2592,7 +2520,7 @@
 "key": "Retaileri mari, mărci naționale și firme cu cataloage mari de produse."
 },
 {
-"i": 325,
+"i": 316,
 "k": "text",
 "p": "/pachete",
 "t": "Claritate Operațională",
@@ -2600,7 +2528,7 @@
 "key": "Claritate Operațională"
 },
 {
-"i": 326,
+"i": 317,
 "k": "text",
 "p": "/pachete",
 "t": "Cât durează un proiect?",
@@ -2608,7 +2536,7 @@
 "key": "Cât durează un proiect?"
 },
 {
-"i": 327,
+"i": 318,
 "k": "text",
 "p": "/pachete",
 "t": "Pentru promovare video AI, primele livrabile încep în 48 de ore de la semnare. Un website de prezentare durează 7–14 zile, iar un magazin online complet între 14 și 30 de zile.",
@@ -2616,7 +2544,7 @@
 "key": "Pentru promovare video AI, primele livrabile încep în # de ore de la semnare. Un website de prezentare durează #–# zile, iar un magazin online complet între # și # de zile."
 },
 {
-"i": 328,
+"i": 319,
 "k": "text",
 "p": "/pachete",
 "t": "Cum funcționează plata?",
@@ -2624,7 +2552,7 @@
 "key": "Cum funcționează plata?"
 },
 {
-"i": 329,
+"i": 320,
 "k": "text",
 "p": "/pachete",
 "t": "Pentru pachetele de promovare video, plata se face lunar în avans. Pentru proiectele de construcție web/magazin: 50% avans la începere și 50% la predare și verificare completă.",
@@ -2632,7 +2560,7 @@
 "key": "Pentru pachetele de promovare video, plata se face lunar în avans. Pentru proiectele de construcție web/magazin: #% avans la începere și #% la predare și verificare completă."
 },
 {
-"i": 330,
+"i": 321,
 "k": "text",
 "p": "/pachete",
 "t": "Ce ajutor primesc după lansare?",
@@ -2640,7 +2568,7 @@
 "key": "Ce ajutor primesc după lansare?"
 },
 {
-"i": 331,
+"i": 322,
 "k": "text",
 "p": "/pachete",
 "t": "La orice site sau magazin făcut de noi ai 30 de zile de sprijin după lansare: ne scrii pe WhatsApp, ne suni sau ne vedem, online ori la biroul nostru din Focșani. Îți arătăm cum adaugi produse și texte, ce să urmărești în primele săptămâni și ce ai de făcut ca să ajungi la primele comenzi.",
@@ -2648,7 +2576,7 @@
 "key": "La orice site sau magazin făcut de noi ai # de zile de sprijin după lansare: ne scrii pe WhatsApp, ne suni sau ne vedem, online ori la biroul nostru din Focșani. Îți arătăm cum adaugi produse și texte, ce să urmărești în primele săptămâni și ce ai de făcut ca să ajungi la primele comenzi."
 },
 {
-"i": 332,
+"i": 323,
 "k": "text",
 "p": "/pachete",
 "t": "Ce mai plătesc pe lângă prețul pachetului?",
@@ -2656,7 +2584,7 @@
 "key": "Ce mai plătesc pe lângă prețul pachetului?"
 },
 {
-"i": 333,
+"i": 324,
 "k": "text",
 "p": "/pachete",
 "t": "TVA-ul, care se adaugă la prețurile afișate. La un site: domeniul (numele site-ului, câteva zeci de lei pe an), pe care îl cumperi pe firma ta; la Site Start găzduirea e inclusă în primul an, apoi o plătești anual (suma e scrisă în pachet) sau muți site-ul unde vrei. La un magazin: găzduirea, domeniul și comisioanele procesatorului de plăți și ale curierului, pe contractele tale. Îți spunem dinainte ce să alegi și cât costă fiecare, apoi le legăm noi de magazin.",
@@ -2664,7 +2592,7 @@
 "key": "TVA-ul, care se adaugă la prețurile afișate. La un site: domeniul (numele site-ului, câteva zeci de lei pe an), pe care îl cumperi pe firma ta; la Site Start găzduirea e inclusă în primul an, apoi o plătești anual (suma e scrisă în pachet) sau muți site-ul unde vrei. La un magazin: găzduirea, domeniul și comisioanele procesatorului de plăți și ale curierului, pe contractele tale. Îți spunem dinainte ce să alegi și cât costă fiecare, apoi le legăm noi de magazin."
 },
 {
-"i": 334,
+"i": 325,
 "k": "text",
 "p": "/pachete",
 "t": "Ce înseamnă „pregătit pentru asistenții AI”?",
@@ -2672,7 +2600,7 @@
 "key": "Ce înseamnă „pregătit pentru asistenții AI”?"
 },
 {
-"i": 335,
+"i": 326,
 "k": "text",
 "p": "/pachete",
 "t": "Tot mai mulți oameni întreabă ChatGPT, Gemini sau Perplexity în loc să caute pe Google. Scriem datele firmei, produsele și prețurile într-o formă pe care acești asistenți o pot citi corect, ca să îți înțeleagă oferta și să o poată recomanda.",
@@ -2680,7 +2608,7 @@
 "key": "Tot mai mulți oameni întreabă ChatGPT, Gemini sau Perplexity în loc să caute pe Google. Scriem datele firmei, produsele și prețurile într-o formă pe care acești asistenți o pot citi corect, ca să îți înțeleagă oferta și să o poată recomanda."
 },
 {
-"i": 336,
+"i": 327,
 "k": "text",
 "p": "/pachete",
 "t": "Pot să îmi administrez singur magazinul?",
@@ -2688,7 +2616,7 @@
 "key": "Pot să îmi administrez singur magazinul?"
 },
 {
-"i": 337,
+"i": 328,
 "k": "text",
 "p": "/pachete",
 "t": "Da. Primești un panou de administrare din care adaugi produse, schimbi prețuri și vezi comenzile. De obicei e WooCommerce; pentru magazinele care au nevoie de viteză mare construim un panou la comandă, cu editare direct pe pagină.",
@@ -2696,7 +2624,7 @@
 "key": "Da. Primești un panou de administrare din care adaugi produse, schimbi prețuri și vezi comenzile. De obicei e WooCommerce; pentru magazinele care au nevoie de viteză mare construim un panou la comandă, cu editare direct pe pagină."
 },
 {
-"i": 338,
+"i": 329,
 "k": "text",
 "p": "/pachete",
 "t": "Bugetul de promovare plătită Ads este inclus?",
@@ -2704,7 +2632,7 @@
 "key": "Bugetul de promovare plătită Ads este inclus?"
 },
 {
-"i": 339,
+"i": 330,
 "k": "text",
 "p": "/pachete",
 "t": "Prețurile pachetelor noastre acoperă integral producția video AI, copywritingul, montajul și publicarea pe rețele. Bugetul de reclame plătite pentru reclame Meta, TikTok sau Google Ads se plătește separat, direct către platforme, în contul tău de publicitate.",
@@ -2712,7 +2640,7 @@
 "key": "Prețurile pachetelor noastre acoperă integral producția video AI, copywritingul, montajul și publicarea pe rețele. Bugetul de reclame plătite pentru reclame Meta, TikTok sau Google Ads se plătește separat, direct către platforme, în contul tău de publicitate."
 },
 {
-"i": 340,
+"i": 331,
 "k": "linie",
 "p": "/pachete",
 "t": "Fără costuri ascunse.",
@@ -2720,7 +2648,7 @@
 "key": "Fără costuri ascunse."
 },
 {
-"i": 341,
+"i": 332,
 "k": "linie",
 "p": "/pachete",
 "t": "Site-uri, Magazine Online și Proiecte Mari",
@@ -2728,7 +2656,7 @@
 "key": "Site-uri, Magazine Online și Proiecte Mari"
 },
 {
-"i": 342,
+"i": 333,
 "k": "linie",
 "p": "/pachete",
 "t": "Cât plătești în total",
@@ -2736,7 +2664,7 @@
 "key": "Cât plătești în total"
 },
 {
-"i": 343,
+"i": 334,
 "k": "linie",
 "p": "/pachete",
 "t": "Start Digital Web și Video",
@@ -2744,7 +2672,7 @@
 "key": "Start Digital Web și Video"
 },
 {
-"i": 344,
+"i": 335,
 "k": "linie",
 "p": "/pachete",
 "t": "Magazin Digital Activ",
@@ -2752,7 +2680,7 @@
 "key": "Magazin Digital Activ"
 },
 {
-"i": 345,
+"i": 336,
 "k": "linie",
 "p": "/pachete",
 "t": "Proiecte Mari și B2B",
@@ -2760,7 +2688,7 @@
 "key": "Proiecte Mari și B#B"
 },
 {
-"i": 346,
+"i": 337,
 "k": "linie",
 "p": "/pachete",
 "t": "Pachete Social Media • Video Scurt și Imagini",
@@ -2768,7 +2696,7 @@
 "key": "Pachete Social Media • Video Scurt și Imagini"
 },
 {
-"i": 347,
+"i": 338,
 "k": "linie",
 "p": "/pachete",
 "t": "Social Growth AI Video",
@@ -2776,7 +2704,7 @@
 "key": "Social Growth AI Video"
 },
 {
-"i": 348,
+"i": 339,
 "k": "linie",
 "p": "/pachete",
 "t": "Daily Impact 1 Video Zilnic",
@@ -2784,7 +2712,7 @@
 "key": "Daily Impact # Video Zilnic"
 },
 {
-"i": 349,
+"i": 340,
 "k": "linie",
 "p": "/pachete",
 "t": "Dominance 3X 3 Video Zilnic",
@@ -2792,7 +2720,7 @@
 "key": "Dominance #X # Video Zilnic"
 },
 {
-"i": 350,
+"i": 341,
 "k": "linie",
 "p": "/pachete",
 "t": "Întrebări frecvente despre colaborare.",
@@ -2800,7 +2728,7 @@
 "key": "Întrebări frecvente despre colaborare."
 },
 {
-"i": 351,
+"i": 342,
 "k": "title",
 "p": "/pachete",
 "t": "Pachete & Prețuri — Reverb Digital | Reverb",
@@ -2808,7 +2736,7 @@
 "key": "Pachete & Prețuri — Reverb Digital | Reverb"
 },
 {
-"i": 352,
+"i": 343,
 "k": "text",
 "p": "/portofoliu",
 "t": "Site de prezentare, până la 5 pagini: de la",
@@ -2816,7 +2744,7 @@
 "key": "Site de prezentare, până la # pagini: de la"
 },
 {
-"i": 353,
+"i": 344,
 "k": "text",
 "p": "/portofoliu",
 "t": "€267 + TVA",
@@ -2824,7 +2752,7 @@
 "key": "€# + TVA"
 },
 {
-"i": 354,
+"i": 345,
 "k": "text",
 "p": "/portofoliu",
 "t": "Magazin online cu plăți și curieri: de la",
@@ -2832,7 +2760,7 @@
 "key": "Magazin online cu plăți și curieri: de la"
 },
 {
-"i": 355,
+"i": 346,
 "k": "text",
 "p": "/portofoliu",
 "t": "Discută proiectul tău",
@@ -2840,7 +2768,7 @@
 "key": "Discută proiectul tău"
 },
 {
-"i": 356,
+"i": 347,
 "k": "text",
 "p": "/portofoliu",
 "t": "Pachete și prețuri",
@@ -2848,7 +2776,7 @@
 "key": "Pachete și prețuri"
 },
 {
-"i": 357,
+"i": 348,
 "k": "text",
 "p": "/portofoliu",
 "t": "Software",
@@ -2856,7 +2784,7 @@
 "key": "Software"
 },
 {
-"i": 358,
+"i": 349,
 "k": "text",
 "p": "/portofoliu",
 "t": "Aplicație",
@@ -2864,7 +2792,7 @@
 "key": "Aplicație"
 },
 {
-"i": 359,
+"i": 350,
 "k": "text",
 "p": "/portofoliu",
 "t": "Ghid",
@@ -2872,7 +2800,7 @@
 "key": "Ghid"
 },
 {
-"i": 360,
+"i": 351,
 "k": "text",
 "p": "/portofoliu",
 "t": "Calculator",
@@ -2880,7 +2808,7 @@
 "key": "Calculator"
 },
 {
-"i": 361,
+"i": 352,
 "k": "text",
 "p": "/portofoliu",
 "t": "Jocuri",
@@ -2888,7 +2816,7 @@
 "key": "Jocuri"
 },
 {
-"i": 362,
+"i": 353,
 "k": "text",
 "p": "/portofoliu",
 "t": "Proiecte în desfășurare",
@@ -2896,7 +2824,7 @@
 "key": "Proiecte în desfășurare"
 },
 {
-"i": 363,
+"i": 354,
 "k": "text",
 "p": "/portofoliu",
 "t": "Site",
@@ -2904,7 +2832,7 @@
 "key": "Site"
 },
 {
-"i": 364,
+"i": 355,
 "k": "text",
 "p": "/portofoliu",
 "t": "Portal",
@@ -2912,7 +2840,7 @@
 "key": "Portal"
 },
 {
-"i": 365,
+"i": 356,
 "k": "text",
 "p": "/portofoliu",
 "t": "Galeria de concepte",
@@ -2920,7 +2848,7 @@
 "key": "Galeria de concepte"
 },
 {
-"i": 366,
+"i": 357,
 "k": "attr",
 "p": "/portofoliu",
 "t": "Bricolando.ro — se deschide într-o filă nouă",
@@ -2928,7 +2856,7 @@
 "key": "Bricolando.ro — se deschide într-o filă nouă"
 },
 {
-"i": 367,
+"i": 358,
 "k": "attr",
 "p": "/portofoliu",
 "t": "RaftPlin.ro — se deschide într-o filă nouă",
@@ -2936,7 +2864,7 @@
 "key": "RaftPlin.ro — se deschide într-o filă nouă"
 },
 {
-"i": 368,
+"i": 359,
 "k": "attr",
 "p": "/portofoliu",
 "t": "Kalki.work — se deschide într-o filă nouă",
@@ -2944,7 +2872,7 @@
 "key": "Kalki.work — se deschide într-o filă nouă"
 },
 {
-"i": 369,
+"i": 360,
 "k": "attr",
 "p": "/portofoliu",
 "t": "Kalki.nexus — se deschide într-o filă nouă",
@@ -2952,7 +2880,7 @@
 "key": "Kalki.nexus — se deschide într-o filă nouă"
 },
 {
-"i": 370,
+"i": 361,
 "k": "attr",
 "p": "/portofoliu",
 "t": "Numerarium.app — se deschide într-o filă nouă",
@@ -2960,7 +2888,7 @@
 "key": "Numerarium.app — se deschide într-o filă nouă"
 },
 {
-"i": 371,
+"i": 362,
 "k": "attr",
 "p": "/portofoliu",
 "t": "Bythefire.app — se deschide într-o filă nouă",
@@ -2968,7 +2896,7 @@
 "key": "Bythefire.app — se deschide într-o filă nouă"
 },
 {
-"i": 372,
+"i": 363,
 "k": "attr",
 "p": "/portofoliu",
 "t": "Elumia.app — se deschide într-o filă nouă",
@@ -2976,7 +2904,7 @@
 "key": "Elumia.app — se deschide într-o filă nouă"
 },
 {
-"i": 373,
+"i": 364,
 "k": "attr",
 "p": "/portofoliu",
 "t": "Immortallight.app — se deschide într-o filă nouă",
@@ -2984,7 +2912,7 @@
 "key": "Immortallight.app — se deschide într-o filă nouă"
 },
 {
-"i": 374,
+"i": 365,
 "k": "attr",
 "p": "/portofoliu",
 "t": "Pentora.app — se deschide într-o filă nouă",
@@ -2992,7 +2920,7 @@
 "key": "Pentora.app — se deschide într-o filă nouă"
 },
 {
-"i": 375,
+"i": 366,
 "k": "attr",
 "p": "/portofoliu",
 "t": "YourFinestForm.com — se deschide într-o filă nouă",
@@ -3000,7 +2928,7 @@
 "key": "YourFinestForm.com — se deschide într-o filă nouă"
 },
 {
-"i": 376,
+"i": 367,
 "k": "attr",
 "p": "/portofoliu",
 "t": "Salariuldupataxe.ro — se deschide într-o filă nouă",
@@ -3008,7 +2936,7 @@
 "key": "Salariuldupataxe.ro — se deschide într-o filă nouă"
 },
 {
-"i": 377,
+"i": 368,
 "k": "attr",
 "p": "/portofoliu",
 "t": "Arhitecturazilei.ro — se deschide într-o filă nouă",
@@ -3016,7 +2944,7 @@
 "key": "Arhitecturazilei.ro — se deschide într-o filă nouă"
 },
 {
-"i": 378,
+"i": 369,
 "k": "attr",
 "p": "/portofoliu",
 "t": "Candcinevabea.life — se deschide într-o filă nouă",
@@ -3024,7 +2952,7 @@
 "key": "Candcinevabea.life — se deschide într-o filă nouă"
 },
 {
-"i": 379,
+"i": 370,
 "k": "attr",
 "p": "/portofoliu",
 "t": "Millo.asia — se deschide într-o filă nouă",
@@ -3032,7 +2960,7 @@
 "key": "Millo.asia — se deschide într-o filă nouă"
 },
 {
-"i": 380,
+"i": 371,
 "k": "attr",
 "p": "/portofoliu",
 "t": "DON Barbershop — se deschide într-o filă nouă",
@@ -3040,7 +2968,7 @@
 "key": "DON Barbershop — se deschide într-o filă nouă"
 },
 {
-"i": 381,
+"i": 372,
 "k": "attr",
 "p": "/portofoliu",
 "t": "The Digital Greenhouse — se deschide într-o filă nouă",
@@ -3048,15 +2976,15 @@
 "key": "The Digital Greenhouse — se deschide într-o filă nouă"
 },
 {
-"i": 382,
+"i": 373,
 "k": "attr",
 "p": "/portofoliu",
-"t": "Oglinda — se deschide într-o filă nouă",
+"t": "Oglinda.eu — se deschide într-o filă nouă",
 "c": "",
-"key": "Oglinda — se deschide într-o filă nouă"
+"key": "Oglinda.eu — se deschide într-o filă nouă"
 },
 {
-"i": 383,
+"i": 374,
 "k": "attr",
 "p": "/portofoliu",
 "t": "Flooare.ro — se deschide într-o filă nouă",
@@ -3064,7 +2992,7 @@
 "key": "Flooare.ro — se deschide într-o filă nouă"
 },
 {
-"i": 384,
+"i": 375,
 "k": "attr",
 "p": "/portofoliu",
 "t": "Artisan Café — se deschide într-o filă nouă",
@@ -3072,7 +3000,7 @@
 "key": "Artisan Café — se deschide într-o filă nouă"
 },
 {
-"i": 385,
+"i": 376,
 "k": "attr",
 "p": "/portofoliu",
 "t": "Arhitectura Vie a Numerelor — se deschide într-o filă nouă",
@@ -3080,7 +3008,7 @@
 "key": "Arhitectura Vie a Numerelor — se deschide într-o filă nouă"
 },
 {
-"i": 386,
+"i": 377,
 "k": "title",
 "p": "/portofoliu",
 "t": "Portofoliu | Reverb",
@@ -3088,7 +3016,7 @@
 "key": "Portofoliu | Reverb"
 },
 {
-"i": 387,
+"i": 378,
 "k": "text",
 "p": "/despre",
 "t": "Despre noi",
@@ -3096,279 +3024,23 @@
 "key": "Despre noi"
 },
 {
-"i": 388,
+"i": 379,
 "k": "text",
 "p": "/despre",
-"t": "Reverb vine de la",
-"c": "Reverb vine de la reverberation: semnalul se întoarce mai puternic și mai curat decât a plecat. Facem site-uri, magazine online și clipuri pentru rețelele sociale, te ducem de la zero până la prima vânzare și te sfătuim și după.",
-"key": "Reverb vine de la"
+"t": "Servicii și prețuri →",
+"c": "",
+"key": "Servicii și prețuri →"
 },
 {
-"i": 389,
+"i": 380,
 "k": "text",
 "p": "/despre",
-"t": "reverberation",
-"c": "Reverb vine de la reverberation: semnalul se întoarce mai puternic și mai curat decât a plecat. Facem site-uri, magazine online și clipuri pentru rețelele sociale, te ducem de la zero până la prima vânzare și te sfătuim și după.",
-"key": "reverberation"
-},
-{
-"i": 390,
-"k": "text",
-"p": "/despre",
-"t": ": semnalul se întoarce mai puternic și mai curat decât a plecat. Facem site-uri, magazine online și clipuri pentru rețelele sociale, te ducem de la zero până la prima vânzare și te sfătuim și după.",
-"c": "Reverb vine de la reverberation: semnalul se întoarce mai puternic și mai curat decât a plecat. Facem site-uri, magazine online și clipuri pentru rețelele sociale, te ducem de la zero până la prima vânzare și te sfătuim și după.",
-"key": ": semnalul se întoarce mai puternic și mai curat decât a plecat. Facem site-uri, magazine online și clipuri pentru rețelele sociale, te ducem de la zero până la prima vânzare și te sfătuim și după."
-},
-{
-"i": 391,
-"k": "text",
-"p": "/despre",
-"t": "Manifestul Reverb",
+"t": "Contact →",
 "c": "",
-"key": "Manifestul Reverb"
+"key": "Contact →"
 },
 {
-"i": 392,
-"k": "text",
-"p": "/despre",
-"t": "Reverb Digital face lucrurile simplu. Nu adăugăm nimic de umplutură și nu vorbim în termeni pe care nu îi înțelegi. Construim site-uri și magazine clare, care merg fără bătăi de cap.",
-"c": "",
-"key": "Reverb Digital face lucrurile simplu. Nu adăugăm nimic de umplutură și nu vorbim în termeni pe care nu îi înțelegi. Construim site-uri și magazine clare, care merg fără bătăi de cap."
-},
-{
-"i": 393,
-"k": "text",
-"p": "/despre",
-"t": "Folosim inteligența artificială ca să scurtăm timpul de lucru, nu ca să înlocuim judecata omului. Omul hotărăște direcția și felul în care arată marca, AI-ul grăbește execuția, iar rezultatul se vede în comenzi.",
-"c": "",
-"key": "Folosim inteligența artificială ca să scurtăm timpul de lucru, nu ca să înlocuim judecata omului. Omul hotărăște direcția și felul în care arată marca, AI-ul grăbește execuția, iar rezultatul se vede în comenzi."
-},
-{
-"i": 394,
-"k": "text",
-"p": "/despre",
-"t": "Site-urile noastre se încarcă imediat, produsele sunt așezate ușor de găsit, iar datele firmei tale sunt scrise astfel încât să poată fi recomandate și de asistenții AI, nu doar găsite pe Google.",
-"c": "",
-"key": "Site-urile noastre se încarcă imediat, produsele sunt așezate ușor de găsit, iar datele firmei tale sunt scrise astfel încât să poată fi recomandate și de asistenții AI, nu doar găsite pe Google."
-},
-{
-"i": 395,
-"k": "text",
-"p": "/despre",
-"t": "Principiile Noastre",
-"c": "",
-"key": "Principiile Noastre"
-},
-{
-"i": 396,
-"k": "text",
-"p": "/despre",
-"t": "Fiecare proiect are de la bun început un preț ferm și o listă clară cu ce primești. Fără estimări vagi, fără costuri ascunse.",
-"c": "",
-"key": "Fiecare proiect are de la bun început un preț ferm și o listă clară cu ce primești. Fără estimări vagi, fără costuri ascunse."
-},
-{
-"i": 397,
-"k": "text",
-"p": "/despre",
-"t": "Plănuim, construim, lansăm și îmbunătățim. Știi mereu la ce pas suntem și nimic nu se face pe ghicite.",
-"c": "",
-"key": "Plănuim, construim, lansăm și îmbunătățim. Știi mereu la ce pas suntem și nimic nu se face pe ghicite."
-},
-{
-"i": 398,
-"k": "text",
-"p": "/despre",
-"t": "Măsurăm ce contează pentru tine: comenzi, cereri și telefoane de la clienți adevărați.",
-"c": "",
-"key": "Măsurăm ce contează pentru tine: comenzi, cereri și telefoane de la clienți adevărați."
-},
-{
-"i": 399,
-"k": "text",
-"p": "/despre",
-"t": "Nu îți lăsăm o strategie pe hârtie. Scriem codul, legăm plățile și curierii și îți predăm un site care merge.",
-"c": "",
-"key": "Nu îți lăsăm o strategie pe hârtie. Scriem codul, legăm plățile și curierii și îți predăm un site care merge."
-},
-{
-"i": 400,
-"k": "text",
-"p": "/despre",
-"t": "Omul hotărăște direcția și felul în care arată. AI-ul scurtează timpul în care se fac clipurile și se analizează datele.",
-"c": "",
-"key": "Omul hotărăște direcția și felul în care arată. AI-ul scurtează timpul în care se fac clipurile și se analizează datele."
-},
-{
-"i": 401,
-"k": "text",
-"p": "/despre",
-"t": "Scriem datele afacerii tale astfel încât ChatGPT, Perplexity, Claude și Gemini să le înțeleagă și să te poată recomanda.",
-"c": "",
-"key": "Scriem datele afacerii tale astfel încât ChatGPT, Perplexity, Claude și Gemini să le înțeleagă și să te poată recomanda."
-},
-{
-"i": 402,
-"k": "text",
-"p": "/despre",
-"t": "Cum decurge un proiect",
-"c": "",
-"key": "Cum decurge un proiect"
-},
-{
-"i": 403,
-"k": "text",
-"p": "/despre",
-"t": "Ascultăm și Plănuim",
-"c": "",
-"key": "Ascultăm și Plănuim"
-},
-{
-"i": 404,
-"k": "text",
-"p": "/despre",
-"t": "Ne uităm la ce ai acum, cine îți sunt clienții și ce vinzi și stabilim împreună cum măsurăm reușita.",
-"c": "",
-"key": "Ne uităm la ce ai acum, cine îți sunt clienții și ce vinzi și stabilim împreună cum măsurăm reușita."
-},
-{
-"i": 405,
-"k": "text",
-"p": "/despre",
-"t": "Construim",
-"c": "",
-"key": "Construim"
-},
-{
-"i": 406,
-"k": "text",
-"p": "/despre",
-"t": "Facem site-ul sau magazinul online și legăm plata cu cardul, facturile și curierii.",
-"c": "",
-"key": "Facem site-ul sau magazinul online și legăm plata cu cardul, facturile și curierii."
-},
-{
-"i": 407,
-"k": "text",
-"p": "/despre",
-"t": "Clipuri și Căutarea cu AI",
-"c": "",
-"key": "Clipuri și Căutarea cu AI"
-},
-{
-"i": 408,
-"k": "text",
-"p": "/despre",
-"t": "Pornim clipurile zilnice pentru rețelele sociale și pregătim datele tale ca asistenții AI să le poată citi.",
-"c": "",
-"key": "Pornim clipurile zilnice pentru rețelele sociale și pregătim datele tale ca asistenții AI să le poată citi."
-},
-{
-"i": 409,
-"k": "text",
-"p": "/despre",
-"t": "Rămânem lângă Tine",
-"c": "",
-"key": "Rămânem lângă Tine"
-},
-{
-"i": 410,
-"k": "text",
-"p": "/despre",
-"t": "Avem grijă ca site-ul să fie mereu pornit și în siguranță și îmbunătățim mereu ce aduce comenzi.",
-"c": "",
-"key": "Avem grijă ca site-ul să fie mereu pornit și în siguranță și îmbunătățim mereu ce aduce comenzi."
-},
-{
-"i": 411,
-"k": "text",
-"p": "/despre",
-"t": "Pregătit pentru Următorul Pas?",
-"c": "",
-"key": "Pregătit pentru Următorul Pas?"
-},
-{
-"i": 412,
-"k": "text",
-"p": "/despre",
-"t": "Vorbim concret despre ce vinzi și unde vrei să ajungi. Primești un plan clar, un preț fix și un termen precis de livrare.",
-"c": "",
-"key": "Vorbim concret despre ce vinzi și unde vrei să ajungi. Primești un plan clar, un preț fix și un termen precis de livrare."
-},
-{
-"i": 413,
-"k": "linie",
-"p": "/despre",
-"t": "Structură, execuție, rezultate.",
-"c": "",
-"key": "Structură, execuție, rezultate."
-},
-{
-"i": 414,
-"k": "linie",
-"p": "/despre",
-"t": "Nu amplificăm zgomotul.",
-"c": "",
-"key": "Nu amplificăm zgomotul."
-},
-{
-"i": 415,
-"k": "linie",
-"p": "/despre",
-"t": "Îl eliminăm.",
-"c": "",
-"key": "Îl eliminăm."
-},
-{
-"i": 416,
-"k": "linie",
-"p": "/despre",
-"t": "Prețuri Fixe & Transparente",
-"c": "",
-"key": "Prețuri Fixe & Transparente"
-},
-{
-"i": 417,
-"k": "linie",
-"p": "/despre",
-"t": "Patru Pași Clari",
-"c": "",
-"key": "Patru Pași Clari"
-},
-{
-"i": 418,
-"k": "linie",
-"p": "/despre",
-"t": "Rezultate pe Care le Poți Număra",
-"c": "",
-"key": "Rezultate pe Care le Poți Număra"
-},
-{
-"i": 419,
-"k": "linie",
-"p": "/despre",
-"t": "Construim, nu Doar Sfătuim",
-"c": "",
-"key": "Construim, nu Doar Sfătuim"
-},
-{
-"i": 420,
-"k": "linie",
-"p": "/despre",
-"t": "Gust de Om, Viteză de AI",
-"c": "",
-"key": "Gust de Om, Viteză de AI"
-},
-{
-"i": 421,
-"k": "linie",
-"p": "/despre",
-"t": "Proces ferm. Fără improvizații.",
-"c": "",
-"key": "Proces ferm. Fără improvizații."
-},
-{
-"i": 422,
+"i": 381,
 "k": "title",
 "p": "/despre",
 "t": "Despre Noi — Reverb Digital | Reverb",
@@ -3376,23 +3048,7 @@
 "key": "Despre Noi — Reverb Digital | Reverb"
 },
 {
-"i": 423,
-"k": "text",
-"p": "/contact",
-"t": "Inițiere Proiect & Audit Tehnic",
-"c": "",
-"key": "Inițiere Proiect & Audit Tehnic"
-},
-{
-"i": 424,
-"k": "text",
-"p": "/contact",
-"t": "Stabilim obiectivul, arhitectura optimă și termenul de implementare din prima discuție. Fără obligații sau presiune.",
-"c": "",
-"key": "Stabilim obiectivul, arhitectura optimă și termenul de implementare din prima discuție. Fără obligații sau presiune."
-},
-{
-"i": 425,
+"i": 382,
 "k": "text",
 "p": "/contact",
 "t": "Contact Direct",
@@ -3400,15 +3056,15 @@
 "key": "Contact Direct"
 },
 {
-"i": 426,
+"i": 383,
 "k": "text",
 "p": "/contact",
-"t": "Dacă ai nevoie de o estimare rapidă sau vrei să afli cum putem implementa conținut video AI sau un magazin nou, ne poți contacta direct:",
+"t": "CONTACT:",
 "c": "",
-"key": "Dacă ai nevoie de o estimare rapidă sau vrei să afli cum putem implementa conținut video AI sau un magazin nou, ne poți contacta direct:"
+"key": "CONTACT:"
 },
 {
-"i": 427,
+"i": 384,
 "k": "text",
 "p": "/contact",
 "t": "TELEFON:",
@@ -3416,7 +3072,7 @@
 "key": "TELEFON:"
 },
 {
-"i": 428,
+"i": 385,
 "k": "text",
 "p": "/contact",
 "t": "WHATSAPP:",
@@ -3424,7 +3080,7 @@
 "key": "WHATSAPP:"
 },
 {
-"i": 429,
+"i": 386,
 "k": "text",
 "p": "/contact",
 "t": "Mesaj Rapid WhatsApp ↗",
@@ -3432,7 +3088,7 @@
 "key": "Mesaj Rapid WhatsApp ↗"
 },
 {
-"i": 430,
+"i": 387,
 "k": "text",
 "p": "/contact",
 "t": "EMAIL:",
@@ -3440,15 +3096,15 @@
 "key": "EMAIL:"
 },
 {
-"i": 431,
+"i": 388,
 "k": "text",
 "p": "/contact",
-"t": "Repere Bugetare",
+"t": "Prețuri",
 "c": "",
-"key": "Repere Bugetare"
+"key": "Prețuri"
 },
 {
-"i": 432,
+"i": 389,
 "k": "text",
 "p": "/contact",
 "t": "Social Growth (12 video/lună)",
@@ -3456,7 +3112,7 @@
 "key": "Social Growth (# video/lună)"
 },
 {
-"i": 433,
+"i": 390,
 "k": "text",
 "p": "/contact",
 "t": "Daily Impact (30 video/lună)",
@@ -3464,7 +3120,7 @@
 "key": "Daily Impact (# video/lună)"
 },
 {
-"i": 434,
+"i": 391,
 "k": "text",
 "p": "/contact",
 "t": "Dominance 3X (90 video/lună)",
@@ -3472,7 +3128,7 @@
 "key": "Dominance #X (# video/lună)"
 },
 {
-"i": 435,
+"i": 392,
 "k": "text",
 "p": "/contact",
 "t": "Start Digital (site + 15 video)",
@@ -3480,7 +3136,7 @@
 "key": "Start Digital (site + # video)"
 },
 {
-"i": 436,
+"i": 393,
 "k": "text",
 "p": "/contact",
 "t": "Magazin Digital Activ (+ 30 video)",
@@ -3488,39 +3144,7 @@
 "key": "Magazin Digital Activ (+ # video)"
 },
 {
-"i": 437,
-"k": "text",
-"p": "/contact",
-"t": "Formular Securizat",
-"c": "",
-"key": "Formular Securizat"
-},
-{
-"i": 438,
-"k": "text",
-"p": "/contact",
-"t": "Inițiază Discuția",
-"c": "",
-"key": "Inițiază Discuția"
-},
-{
-"i": 439,
-"k": "text",
-"p": "/contact",
-"t": "Completează datele pentru auditul tehnic preliminar.",
-"c": "",
-"key": "Completează datele pentru auditul tehnic preliminar."
-},
-{
-"i": 440,
-"k": "text",
-"p": "/contact",
-"t": "Răspuns garantat ≤ 24h",
-"c": "",
-"key": "Răspuns garantat ≤ #h"
-},
-{
-"i": 441,
+"i": 394,
 "k": "text",
 "p": "/contact",
 "t": "Nume complet",
@@ -3528,7 +3152,7 @@
 "key": "Nume complet"
 },
 {
-"i": 442,
+"i": 395,
 "k": "text",
 "p": "/contact",
 "t": "Email de contact",
@@ -3536,7 +3160,7 @@
 "key": "Email de contact"
 },
 {
-"i": 443,
+"i": 396,
 "k": "text",
 "p": "/contact",
 "t": "Nume Companie / Website Actual (Opțional)",
@@ -3544,7 +3168,7 @@
 "key": "Nume Companie / Website Actual (Opțional)"
 },
 {
-"i": 444,
+"i": 397,
 "k": "text",
 "p": "/contact",
 "t": "Pachet sau Serviciu Vizat",
@@ -3552,7 +3176,7 @@
 "key": "Pachet sau Serviciu Vizat"
 },
 {
-"i": 445,
+"i": 398,
 "k": "text",
 "p": "/contact",
 "t": "Selectează pachetul sau serviciul dorit",
@@ -3560,7 +3184,7 @@
 "key": "Selectează pachetul sau serviciul dorit"
 },
 {
-"i": 446,
+"i": 399,
 "k": "text",
 "p": "/contact",
 "t": "Social Growth (12 video/lună) — €330 / lună",
@@ -3568,7 +3192,7 @@
 "key": "Social Growth (# video/lună) — €# / lună"
 },
 {
-"i": 447,
+"i": 400,
 "k": "text",
 "p": "/contact",
 "t": "Daily Impact (30 video/lună) — €588 / lună",
@@ -3576,7 +3200,7 @@
 "key": "Daily Impact (# video/lună) — €# / lună"
 },
 {
-"i": 448,
+"i": 401,
 "k": "text",
 "p": "/contact",
 "t": "Dominance 3X (90 video/lună) — €1.275 / lună",
@@ -3584,7 +3208,7 @@
 "key": "Dominance #X (# video/lună) — €# / lună"
 },
 {
-"i": 449,
+"i": 402,
 "k": "text",
 "p": "/contact",
 "t": "Site Start — €267",
@@ -3592,7 +3216,7 @@
 "key": "Site Start — €#"
 },
 {
-"i": 450,
+"i": 403,
 "k": "text",
 "p": "/contact",
 "t": "Start Digital (site + 15 video) — €1.275",
@@ -3600,7 +3224,7 @@
 "key": "Start Digital (site + # video) — €#"
 },
 {
-"i": 451,
+"i": 404,
 "k": "text",
 "p": "/contact",
 "t": "Magazin Start — €690",
@@ -3608,7 +3232,7 @@
 "key": "Magazin Start — €#"
 },
 {
-"i": 452,
+"i": 405,
 "k": "text",
 "p": "/contact",
 "t": "Magazin Digital Activ (+ 30 video) — €2.499",
@@ -3616,7 +3240,7 @@
 "key": "Magazin Digital Activ (+ # video) — €#"
 },
 {
-"i": 453,
+"i": 406,
 "k": "text",
 "p": "/contact",
 "t": "Proiecte Mari și B2B — de la €3.315",
@@ -3624,7 +3248,7 @@
 "key": "Proiecte Mari și B#B — de la €#"
 },
 {
-"i": 454,
+"i": 407,
 "k": "text",
 "p": "/contact",
 "t": "Să fiu găsit de asistenții AI (ChatGPT, Gemini)",
@@ -3632,7 +3256,7 @@
 "key": "Să fiu găsit de asistenții AI (ChatGPT, Gemini)"
 },
 {
-"i": 455,
+"i": 408,
 "k": "text",
 "p": "/contact",
 "t": "Consultanță / Proiect Personalizat",
@@ -3640,7 +3264,7 @@
 "key": "Consultanță / Proiect Personalizat"
 },
 {
-"i": 456,
+"i": 409,
 "k": "text",
 "p": "/contact",
 "t": "Descrierea Proiectului & Obiective",
@@ -3648,7 +3272,7 @@
 "key": "Descrierea Proiectului & Obiective"
 },
 {
-"i": 457,
+"i": 410,
 "k": "text",
 "p": "/contact",
 "t": "Trimite solicitarea →",
@@ -3656,15 +3280,15 @@
 "key": "Trimite solicitarea →"
 },
 {
-"i": 458,
+"i": 411,
 "k": "text",
 "p": "/contact",
-"t": "Securitate garantată. Nu facem spam și nu partajăm datele de contact cu nimeni.",
+"t": "Nu facem spam și nu partajăm datele de contact cu nimeni.",
 "c": "",
-"key": "Securitate garantată. Nu facem spam și nu partajăm datele de contact cu nimeni."
+"key": "Nu facem spam și nu partajăm datele de contact cu nimeni."
 },
 {
-"i": 459,
+"i": 412,
 "k": "attr",
 "p": "/contact",
 "t": "Ex: Radu Ionescu",
@@ -3672,7 +3296,7 @@
 "key": "Ex: Radu Ionescu"
 },
 {
-"i": 460,
+"i": 413,
 "k": "attr",
 "p": "/contact",
 "t": "Ex: Compania Mea SRL / companie.ro",
@@ -3680,7 +3304,7 @@
 "key": "Ex: Compania Mea SRL / companie.ro"
 },
 {
-"i": 461,
+"i": 414,
 "k": "attr",
 "p": "/contact",
 "t": "Descrie pe scurt activitatea actuală, produsele, provocările sau ce dorești să construim împreună.",
@@ -3688,31 +3312,7 @@
 "key": "Descrie pe scurt activitatea actuală, produsele, provocările sau ce dorești să construim împreună."
 },
 {
-"i": 462,
-"k": "linie",
-"p": "/contact",
-"t": "Hai să vorbim despre afacerea ta.",
-"c": "",
-"key": "Hai să vorbim despre afacerea ta."
-},
-{
-"i": 463,
-"k": "linie",
-"p": "/contact",
-"t": "Discuție la Obiect",
-"c": "",
-"key": "Discuție la Obiect"
-},
-{
-"i": 464,
-"k": "linie",
-"p": "/contact",
-"t": "Trimite Detaliile Proiectului",
-"c": "",
-"key": "Trimite Detaliile Proiectului"
-},
-{
-"i": 465,
+"i": 415,
 "k": "title",
 "p": "/contact",
 "t": "Contact — Reverb Digital | Reverb",
@@ -3720,7 +3320,7 @@
 "key": "Contact — Reverb Digital | Reverb"
 },
 {
-"i": 466,
+"i": 416,
 "k": "text",
 "p": "/contact",
 "t": "Te rugăm să completezi numele.",
@@ -3728,7 +3328,7 @@
 "key": "Te rugăm să completezi numele."
 },
 {
-"i": 467,
+"i": 417,
 "k": "text",
 "p": "/contact",
 "t": "Te rugăm să completezi emailul.",
@@ -3736,7 +3336,7 @@
 "key": "Te rugăm să completezi emailul."
 },
 {
-"i": 468,
+"i": 418,
 "k": "text",
 "p": "/contact",
 "t": "Alege un serviciu sau pachet.",
@@ -3744,7 +3344,7 @@
 "key": "Alege un serviciu sau pachet."
 },
 {
-"i": 469,
+"i": 419,
 "k": "text",
 "p": "/contact",
 "t": "Scrie-ne câteva cuvinte.",
@@ -3752,7 +3352,7 @@
 "key": "Scrie-ne câteva cuvinte."
 },
 {
-"i": 470,
+"i": 420,
 "k": "text",
 "p": "/contact",
 "t": "Adresa de email nu pare validă.",
@@ -3760,7 +3360,7 @@
 "key": "Adresa de email nu pare validă."
 },
 {
-"i": 471,
+"i": 421,
 "k": "text",
 "p": "/contact",
 "t": "Mesajul trebuie să aibă minim 10 caractere.",
@@ -3768,7 +3368,7 @@
 "key": "Mesajul trebuie să aibă minim # caractere."
 },
 {
-"i": 472,
+"i": 422,
 "k": "text",
 "p": "/contact",
 "t": "5 caractere",
@@ -3776,7 +3376,7 @@
 "key": "# caractere"
 },
 {
-"i": 473,
+"i": 423,
 "k": "text",
 "p": "/contact",
 "t": "Mesajul nu a putut fi trimis. Încearcă din nou sau scrie-ne direct la",
@@ -3784,7 +3384,7 @@
 "key": "Mesajul nu a putut fi trimis. Încearcă din nou sau scrie-ne direct la"
 },
 {
-"i": 474,
+"i": 424,
 "k": "text",
 "p": "/contact",
 "t": "Mesaj recepționat cu succes.",
@@ -3792,15 +3392,7 @@
 "key": "Mesaj recepționat cu succes."
 },
 {
-"i": 475,
-"k": "text",
-"p": "/contact",
-"t": "Îți mulțumim! Un arhitect tehnic Reverb Digital te va contacta în maximum 24 de ore lucrătoare cu analiza inițială a proiectului.",
-"c": "",
-"key": "Îți mulțumim! Un arhitect tehnic Reverb Digital te va contacta în maximum # de ore lucrătoare cu analiza inițială a proiectului."
-},
-{
-"i": 476,
+"i": 425,
 "k": "text",
 "p": "/contact",
 "t": "Trimite alt mesaj →",
@@ -3808,7 +3400,7 @@
 "key": "Trimite alt mesaj →"
 },
 {
-"i": 477,
+"i": 426,
 "k": "text",
 "p": "/magazine-online",
 "t": "Magazin Digital",
@@ -3816,7 +3408,7 @@
 "key": "Magazin Digital"
 },
 {
-"i": 478,
+"i": 427,
 "k": "text",
 "p": "/magazine-online",
 "t": "Alegem platforma potrivită pentru modelul tău de business și construim un sistem complet: produse, plăți, livrare, conversie.",
@@ -3824,7 +3416,7 @@
 "key": "Alegem platforma potrivită pentru modelul tău de business și construim un sistem complet: produse, plăți, livrare, conversie."
 },
 {
-"i": 479,
+"i": 428,
 "k": "text",
 "p": "/magazine-online",
 "t": "Programează o discuție",
@@ -3832,7 +3424,7 @@
 "key": "Programează o discuție"
 },
 {
-"i": 480,
+"i": 429,
 "k": "text",
 "p": "/magazine-online",
 "t": "Vezi prețul",
@@ -3840,7 +3432,7 @@
 "key": "Vezi prețul"
 },
 {
-"i": 481,
+"i": 430,
 "k": "text",
 "p": "/magazine-online",
 "t": "Termeni: 50% avans / 50% la livrare · Livrare 14–30 zile · Preț transparent",
@@ -3848,7 +3440,7 @@
 "key": "Termeni: #% avans / #% la livrare · Livrare #–# zile · Preț transparent"
 },
 {
-"i": 482,
+"i": 431,
 "k": "text",
 "p": "/magazine-online",
 "t": "Ce primești în versiunea standard",
@@ -3856,7 +3448,7 @@
 "key": "Ce primești în versiunea standard"
 },
 {
-"i": 483,
+"i": 432,
 "k": "text",
 "p": "/magazine-online",
 "t": "Setup platformă eCommerce potrivită proiectului",
@@ -3864,7 +3456,7 @@
 "key": "Setup platformă eCommerce potrivită proiectului"
 },
 {
-"i": 484,
+"i": 433,
 "k": "text",
 "p": "/magazine-online",
 "t": "Structură categorii + primele produse încărcate",
@@ -3872,7 +3464,7 @@
 "key": "Structură categorii + primele produse încărcate"
 },
 {
-"i": 485,
+"i": 434,
 "k": "text",
 "p": "/magazine-online",
 "t": "Checkout optimizat pentru conversie",
@@ -3880,7 +3472,7 @@
 "key": "Checkout optimizat pentru conversie"
 },
 {
-"i": 486,
+"i": 435,
 "k": "text",
 "p": "/magazine-online",
 "t": "Plăți & livrare configurate",
@@ -3888,7 +3480,7 @@
 "key": "Plăți & livrare configurate"
 },
 {
-"i": 487,
+"i": 436,
 "k": "text",
 "p": "/magazine-online",
 "t": "Tracking esențial (vânzări, add-to-cart, checkout)",
@@ -3896,7 +3488,7 @@
 "key": "Tracking esențial (vânzări, add-to-cart, checkout)"
 },
 {
-"i": 488,
+"i": 437,
 "k": "text",
 "p": "/magazine-online",
 "t": "Proces clar, fără improvizații",
@@ -3904,7 +3496,7 @@
 "key": "Proces clar, fără improvizații"
 },
 {
-"i": 489,
+"i": 438,
 "k": "text",
 "p": "/magazine-online",
 "t": "Implementare completă, nu doar design",
@@ -3912,7 +3504,7 @@
 "key": "Implementare completă, nu doar design"
 },
 {
-"i": 490,
+"i": 439,
 "k": "text",
 "p": "/magazine-online",
 "t": "Pentru cine",
@@ -3920,7 +3512,7 @@
 "key": "Pentru cine"
 },
 {
-"i": 491,
+"i": 440,
 "k": "text",
 "p": "/magazine-online",
 "t": "Retail & producători",
@@ -3928,7 +3520,7 @@
 "key": "Retail & producători"
 },
 {
-"i": 492,
+"i": 441,
 "k": "text",
 "p": "/magazine-online",
 "t": "Catalog structurat, checkout rapid, procese simple.",
@@ -3936,7 +3528,7 @@
 "key": "Catalog structurat, checkout rapid, procese simple."
 },
 {
-"i": 493,
+"i": 442,
 "k": "text",
 "p": "/magazine-online",
 "t": "Branduri în creștere",
@@ -3944,7 +3536,7 @@
 "key": "Branduri în creștere"
 },
 {
-"i": 494,
+"i": 443,
 "k": "text",
 "p": "/magazine-online",
 "t": "Ai vânzări offline sau pe social, vrei o bază solidă online.",
@@ -3952,7 +3544,7 @@
 "key": "Ai vânzări offline sau pe social, vrei o bază solidă online."
 },
 {
-"i": 495,
+"i": 444,
 "k": "text",
 "p": "/magazine-online",
 "t": "Business-uri B2B",
@@ -3960,7 +3552,7 @@
 "key": "Business-uri B#B"
 },
 {
-"i": 496,
+"i": 445,
 "k": "text",
 "p": "/magazine-online",
 "t": "Cereri / comenzi structurate, configurări și fluxuri clare.",
@@ -3968,7 +3560,7 @@
 "key": "Cereri / comenzi structurate, configurări și fluxuri clare."
 },
 {
-"i": 497,
+"i": 446,
 "k": "text",
 "p": "/magazine-online",
 "t": "Multiplatformă",
@@ -3976,7 +3568,7 @@
 "key": "Multiplatformă"
 },
 {
-"i": 498,
+"i": 447,
 "k": "text",
 "p": "/magazine-online",
 "t": "Nu forțăm o tehnologie. Alegem în funcție de catalog, buget, administrare și scalare.",
@@ -3984,7 +3576,7 @@
 "key": "Nu forțăm o tehnologie. Alegem în funcție de catalog, buget, administrare și scalare."
 },
 {
-"i": 499,
+"i": 448,
 "k": "text",
 "p": "/magazine-online",
 "t": "WooCommerce",
@@ -3992,7 +3584,7 @@
 "key": "WooCommerce"
 },
 {
-"i": 500,
+"i": 449,
 "k": "text",
 "p": "/magazine-online",
 "t": "Shopify",
@@ -4000,7 +3592,7 @@
 "key": "Shopify"
 },
 {
-"i": 501,
+"i": 450,
 "k": "text",
 "p": "/magazine-online",
 "t": "Magento",
@@ -4008,7 +3600,7 @@
 "key": "Magento"
 },
 {
-"i": 502,
+"i": 451,
 "k": "text",
 "p": "/magazine-online",
 "t": "PrestaShop",
@@ -4016,7 +3608,7 @@
 "key": "PrestaShop"
 },
 {
-"i": 503,
+"i": 452,
 "k": "text",
 "p": "/magazine-online",
 "t": "OpenCart",
@@ -4024,7 +3616,7 @@
 "key": "OpenCart"
 },
 {
-"i": 504,
+"i": 453,
 "k": "text",
 "p": "/magazine-online",
 "t": "CS-Cart",
@@ -4032,7 +3624,7 @@
 "key": "CS-Cart"
 },
 {
-"i": 505,
+"i": 454,
 "k": "text",
 "p": "/magazine-online",
 "t": "Custom",
@@ -4040,7 +3632,7 @@
 "key": "Custom"
 },
 {
-"i": 506,
+"i": 455,
 "k": "text",
 "p": "/magazine-online",
 "t": "Ce construim",
@@ -4048,7 +3640,7 @@
 "key": "Ce construim"
 },
 {
-"i": 507,
+"i": 456,
 "k": "text",
 "p": "/magazine-online",
 "t": "Structură & experiență",
@@ -4056,7 +3648,7 @@
 "key": "Structură & experiență"
 },
 {
-"i": 508,
+"i": 457,
 "k": "text",
 "p": "/magazine-online",
 "t": "Arhitectură categorii / filtre",
@@ -4064,7 +3656,7 @@
 "key": "Arhitectură categorii / filtre"
 },
 {
-"i": 509,
+"i": 458,
 "k": "text",
 "p": "/magazine-online",
 "t": "Pagini produs clare (beneficii + încredere)",
@@ -4072,7 +3664,7 @@
 "key": "Pagini produs clare (beneficii + încredere)"
 },
 {
-"i": 510,
+"i": 459,
 "k": "text",
 "p": "/magazine-online",
 "t": "Search & navigație simplă",
@@ -4080,7 +3672,7 @@
 "key": "Search & navigație simplă"
 },
 {
-"i": 511,
+"i": 460,
 "k": "text",
 "p": "/magazine-online",
 "t": "Optimizare mobil-first",
@@ -4088,7 +3680,7 @@
 "key": "Optimizare mobil-first"
 },
 {
-"i": 512,
+"i": 461,
 "k": "text",
 "p": "/magazine-online",
 "t": "Checkout & conversie",
@@ -4096,7 +3688,7 @@
 "key": "Checkout & conversie"
 },
 {
-"i": 513,
+"i": 462,
 "k": "text",
 "p": "/magazine-online",
 "t": "Checkout simplificat (fără fricțiune)",
@@ -4104,7 +3696,7 @@
 "key": "Checkout simplificat (fără fricțiune)"
 },
 {
-"i": 514,
+"i": 463,
 "k": "text",
 "p": "/magazine-online",
 "t": "Mesaje clare (livrare, retur, garanție)",
@@ -4112,7 +3704,7 @@
 "key": "Mesaje clare (livrare, retur, garanție)"
 },
 {
-"i": 515,
+"i": 464,
 "k": "text",
 "p": "/magazine-online",
 "t": "Badge-uri de încredere",
@@ -4120,7 +3712,7 @@
 "key": "Badge-uri de încredere"
 },
 {
-"i": 516,
+"i": 465,
 "k": "text",
 "p": "/magazine-online",
 "t": "Optimizare pentru viteză",
@@ -4128,7 +3720,7 @@
 "key": "Optimizare pentru viteză"
 },
 {
-"i": 517,
+"i": 466,
 "k": "text",
 "p": "/magazine-online",
 "t": "Plăți, livrare, operațional",
@@ -4136,7 +3728,7 @@
 "key": "Plăți, livrare, operațional"
 },
 {
-"i": 518,
+"i": 467,
 "k": "text",
 "p": "/magazine-online",
 "t": "Integrare plăți (în funcție de platformă)",
@@ -4144,7 +3736,7 @@
 "key": "Integrare plăți (în funcție de platformă)"
 },
 {
-"i": 519,
+"i": 468,
 "k": "text",
 "p": "/magazine-online",
 "t": "Setare livrare / curieri",
@@ -4152,7 +3744,7 @@
 "key": "Setare livrare / curieri"
 },
 {
-"i": 520,
+"i": 469,
 "k": "text",
 "p": "/magazine-online",
 "t": "Emailuri tranzacționale (confirmări)",
@@ -4160,7 +3752,7 @@
 "key": "Emailuri tranzacționale (confirmări)"
 },
 {
-"i": 521,
+"i": 470,
 "k": "text",
 "p": "/magazine-online",
 "t": "Ghid administrare / predare",
@@ -4168,7 +3760,7 @@
 "key": "Ghid administrare / predare"
 },
 {
-"i": 522,
+"i": 471,
 "k": "text",
 "p": "/magazine-online",
 "t": "Tracking & măsurare",
@@ -4176,7 +3768,7 @@
 "key": "Tracking & măsurare"
 },
 {
-"i": 523,
+"i": 472,
 "k": "text",
 "p": "/magazine-online",
 "t": "Evenimente esențiale (view, add-to-cart, checkout, purchase)",
@@ -4184,7 +3776,7 @@
 "key": "Evenimente esențiale (view, add-to-cart, checkout, purchase)"
 },
 {
-"i": 524,
+"i": 473,
 "k": "text",
 "p": "/magazine-online",
 "t": "Raportare simplă (ce vinde, ce nu)",
@@ -4192,7 +3784,7 @@
 "key": "Raportare simplă (ce vinde, ce nu)"
 },
 {
-"i": 525,
+"i": 474,
 "k": "text",
 "p": "/magazine-online",
 "t": "Setup de bază pentru campanii",
@@ -4200,7 +3792,7 @@
 "key": "Setup de bază pentru campanii"
 },
 {
-"i": 526,
+"i": 475,
 "k": "text",
 "p": "/magazine-online",
 "t": "Fundament pentru Promovare Continuă",
@@ -4208,7 +3800,7 @@
 "key": "Fundament pentru Promovare Continuă"
 },
 {
-"i": 527,
+"i": 476,
 "k": "text",
 "p": "/magazine-online",
 "t": "Preț transparent",
@@ -4216,7 +3808,7 @@
 "key": "Preț transparent"
 },
 {
-"i": 528,
+"i": 477,
 "k": "text",
 "p": "/magazine-online",
 "t": "Pachet de pornire, preț fix",
@@ -4224,7 +3816,7 @@
 "key": "Pachet de pornire, preț fix"
 },
 {
-"i": 529,
+"i": 478,
 "k": "text",
 "p": "/magazine-online",
 "t": "Livrare:",
@@ -4232,7 +3824,7 @@
 "key": "Livrare:"
 },
 {
-"i": 530,
+"i": 479,
 "k": "text",
 "p": "/magazine-online",
 "t": "Solicită ofertă",
@@ -4240,7 +3832,7 @@
 "key": "Solicită ofertă"
 },
 {
-"i": 531,
+"i": 480,
 "k": "text",
 "p": "/magazine-online",
 "t": "Termeni: 50% avans / 50% la livrare.",
@@ -4248,7 +3840,7 @@
 "key": "Termeni: #% avans / #% la livrare."
 },
 {
-"i": 532,
+"i": 481,
 "k": "text",
 "p": "/magazine-online",
 "t": "Notă: integrare ERP/CRM, import produse, multi-warehouse, funcții custom → ofertă separată.",
@@ -4256,7 +3848,7 @@
 "key": "Notă: integrare ERP/CRM, import produse, multi-warehouse, funcții custom → ofertă separată."
 },
 {
-"i": 533,
+"i": 482,
 "k": "text",
 "p": "/magazine-online",
 "t": "Opțiune recomandată",
@@ -4264,7 +3856,7 @@
 "key": "Opțiune recomandată"
 },
 {
-"i": 534,
+"i": 483,
 "k": "text",
 "p": "/magazine-online",
 "t": "Lansare + Primele 30 zile + Promovare Continuă",
@@ -4272,7 +3864,7 @@
 "key": "Lansare + Primele # zile + Promovare Continuă"
 },
 {
-"i": 535,
+"i": 484,
 "k": "text",
 "p": "/magazine-online",
 "t": "Pentru ca magazinul să înceapă să vândă, nu doar să existe.",
@@ -4280,7 +3872,7 @@
 "key": "Pentru ca magazinul să înceapă să vândă, nu doar să existe."
 },
 {
-"i": 536,
+"i": 485,
 "k": "text",
 "p": "/magazine-online",
 "t": "Optimizare conversie",
@@ -4288,7 +3880,7 @@
 "key": "Optimizare conversie"
 },
 {
-"i": 537,
+"i": 486,
 "k": "text",
 "p": "/magazine-online",
 "t": "Setup campanii + iterare",
@@ -4296,7 +3888,7 @@
 "key": "Setup campanii + iterare"
 },
 {
-"i": 538,
+"i": 487,
 "k": "text",
 "p": "/magazine-online",
 "t": "Raport lunar clar",
@@ -4304,7 +3896,7 @@
 "key": "Raport lunar clar"
 },
 {
-"i": 539,
+"i": 488,
 "k": "text",
 "p": "/magazine-online",
 "t": "Ajustări structură & mesaje",
@@ -4312,7 +3904,7 @@
 "key": "Ajustări structură & mesaje"
 },
 {
-"i": 540,
+"i": 489,
 "k": "text",
 "p": "/magazine-online",
 "t": "Programează discuție",
@@ -4320,7 +3912,7 @@
 "key": "Programează discuție"
 },
 {
-"i": 541,
+"i": 490,
 "k": "text",
 "p": "/magazine-online",
 "t": "Proces",
@@ -4328,7 +3920,7 @@
 "key": "Proces"
 },
 {
-"i": 542,
+"i": 491,
 "k": "text",
 "p": "/magazine-online",
 "t": "Structurat, predictibil, orientat pe livrare.",
@@ -4336,7 +3928,7 @@
 "key": "Structurat, predictibil, orientat pe livrare."
 },
 {
-"i": 543,
+"i": 492,
 "k": "text",
 "p": "/magazine-online",
 "t": "Săpt. 1",
@@ -4344,7 +3936,7 @@
 "key": "Săpt. #"
 },
 {
-"i": 544,
+"i": 493,
 "k": "text",
 "p": "/magazine-online",
 "t": "Catalog, livrare, plăți, obiectiv. Înțelegem ce vinzi, cui vinzi și cum livrezi.",
@@ -4352,7 +3944,7 @@
 "key": "Catalog, livrare, plăți, obiectiv. Înțelegem ce vinzi, cui vinzi și cum livrezi."
 },
 {
-"i": 545,
+"i": 494,
 "k": "text",
 "p": "/magazine-online",
 "t": "Săpt. 1–2",
@@ -4360,7 +3952,7 @@
 "key": "Săpt. #–#"
 },
 {
-"i": 546,
+"i": 495,
 "k": "text",
 "p": "/magazine-online",
 "t": "Platformă + structură categorii + fluxuri. Totul validat cu tine înainte de implementare.",
@@ -4368,7 +3960,7 @@
 "key": "Platformă + structură categorii + fluxuri. Totul validat cu tine înainte de implementare."
 },
 {
-"i": 547,
+"i": 496,
 "k": "text",
 "p": "/magazine-online",
 "t": "Design, configurări, testare checkout. Plăți, livrare, tracking — totul funcțional.",
@@ -4376,7 +3968,7 @@
 "key": "Design, configurări, testare checkout. Plăți, livrare, tracking — totul funcțional."
 },
 {
-"i": 548,
+"i": 497,
 "k": "text",
 "p": "/magazine-online",
 "t": "Săpt. 4 +",
@@ -4384,7 +3976,7 @@
 "key": "Săpt. # +"
 },
 {
-"i": 549,
+"i": 498,
 "k": "text",
 "p": "/magazine-online",
 "t": "Predare + setări tracking + plan de creștere. Recomandat: Promovare Continuă după lansare.",
@@ -4392,7 +3984,7 @@
 "key": "Predare + setări tracking + plan de creștere. Recomandat: Promovare Continuă după lansare."
 },
 {
-"i": 550,
+"i": 499,
 "k": "text",
 "p": "/magazine-online",
 "t": "FAQ",
@@ -4400,7 +3992,7 @@
 "key": "FAQ"
 },
 {
-"i": 551,
+"i": 500,
 "k": "text",
 "p": "/magazine-online",
 "t": "Pe ce platformă îmi faceți magazinul?",
@@ -4408,7 +4000,7 @@
 "key": "Pe ce platformă îmi faceți magazinul?"
 },
 {
-"i": 552,
+"i": 501,
 "k": "text",
 "p": "/magazine-online",
 "t": "Alegem platforma potrivită în funcție de catalog, buget, administrare și scalare. Lucrăm multiplatformă.",
@@ -4416,7 +4008,7 @@
 "key": "Alegem platforma potrivită în funcție de catalog, buget, administrare și scalare. Lucrăm multiplatformă."
 },
 {
-"i": 553,
+"i": 502,
 "k": "text",
 "p": "/magazine-online",
 "t": "Prețul include plăți și livrare?",
@@ -4424,7 +4016,7 @@
 "key": "Prețul include plăți și livrare?"
 },
 {
-"i": 554,
+"i": 503,
 "k": "text",
 "p": "/magazine-online",
 "t": "Include configurarea metodelor de plată și livrare. Costurile percepute de procesatori sau curieri nu sunt incluse.",
@@ -4432,7 +4024,7 @@
 "key": "Include configurarea metodelor de plată și livrare. Costurile percepute de procesatori sau curieri nu sunt incluse."
 },
 {
-"i": 555,
+"i": 504,
 "k": "text",
 "p": "/magazine-online",
 "t": "Câte produse include pachetul?",
@@ -4440,7 +4032,7 @@
 "key": "Câte produse include pachetul?"
 },
 {
-"i": 556,
+"i": 505,
 "k": "text",
 "p": "/magazine-online",
 "t": "Pachetul Magazin Start include încărcarea primelor 50 de produse și structurarea catalogului. Importul masiv sau migrarea completă se oferă separat.",
@@ -4448,7 +4040,7 @@
 "key": "Pachetul Magazin Start include încărcarea primelor # de produse și structurarea catalogului. Importul masiv sau migrarea completă se oferă separat."
 },
 {
-"i": 557,
+"i": 506,
 "k": "text",
 "p": "/magazine-online",
 "t": "Pot începe fără campanii de promovare?",
@@ -4456,7 +4048,7 @@
 "key": "Pot începe fără campanii de promovare?"
 },
 {
-"i": 558,
+"i": 507,
 "k": "text",
 "p": "/magazine-online",
 "t": "Da, dar pentru vânzări constante recomandăm Promovare Continuă după lansare: optimizare conversie, campanii și raportare.",
@@ -4464,7 +4056,7 @@
 "key": "Da, dar pentru vânzări constante recomandăm Promovare Continuă după lansare: optimizare conversie, campanii și raportare."
 },
 {
-"i": 559,
+"i": 508,
 "k": "text",
 "p": "/magazine-online",
 "t": "Cum se face plata?",
@@ -4472,7 +4064,7 @@
 "key": "Cum se face plata?"
 },
 {
-"i": 560,
+"i": 509,
 "k": "text",
 "p": "/magazine-online",
 "t": "Standard: 50% avans și 50% la livrare. Pentru proiecte complexe se poate stabili etapizare.",
@@ -4480,7 +4072,7 @@
 "key": "Standard: #% avans și #% la livrare. Pentru proiecte complexe se poate stabili etapizare."
 },
 {
-"i": 561,
+"i": 510,
 "k": "text",
 "p": "/magazine-online",
 "t": "Spune-ne ce vinzi și cum livrezi. Îți recomandăm platforma potrivită și pașii de lansare.",
@@ -4488,7 +4080,7 @@
 "key": "Spune-ne ce vinzi și cum livrezi. Îți recomandăm platforma potrivită și pașii de lansare."
 },
 {
-"i": 562,
+"i": 511,
 "k": "text",
 "p": "/magazine-online",
 "t": "Vezi toate serviciile",
@@ -4496,7 +4088,7 @@
 "key": "Vezi toate serviciile"
 },
 {
-"i": 563,
+"i": 512,
 "k": "text",
 "p": "/magazine-online",
 "t": "Discuție inițială 20–30 minute · Fără obligații",
@@ -4504,7 +4096,7 @@
 "key": "Discuție inițială #–# minute · Fără obligații"
 },
 {
-"i": 564,
+"i": 513,
 "k": "linie",
 "p": "/magazine-online",
 "t": "Un magazin online construit pentru vânzare.",
@@ -4512,7 +4104,7 @@
 "key": "Un magazin online construit pentru vânzare."
 },
 {
-"i": 565,
+"i": 514,
 "k": "linie",
 "p": "/magazine-online",
 "t": "Pentru firme care vor să vândă online serios.",
@@ -4520,7 +4112,7 @@
 "key": "Pentru firme care vor să vândă online serios."
 },
 {
-"i": 566,
+"i": 515,
 "k": "linie",
 "p": "/magazine-online",
 "t": "Platforma potrivită, nu platforma la modă.",
@@ -4528,7 +4120,7 @@
 "key": "Platforma potrivită, nu platforma la modă."
 },
 {
-"i": 567,
+"i": 516,
 "k": "linie",
 "p": "/magazine-online",
 "t": "Un magazin online complet, cu structură de conversie.",
@@ -4536,7 +4128,7 @@
 "key": "Un magazin online complet, cu structură de conversie."
 },
 {
-"i": 568,
+"i": 517,
 "k": "linie",
 "p": "/magazine-online",
 "t": "Punctul de plecare este clar.",
@@ -4544,7 +4136,7 @@
 "key": "Punctul de plecare este clar."
 },
 {
-"i": 569,
+"i": 518,
 "k": "linie",
 "p": "/magazine-online",
 "t": "Proces clar în 4 pași.",
@@ -4552,7 +4144,7 @@
 "key": "Proces clar în # pași."
 },
 {
-"i": 570,
+"i": 519,
 "k": "linie",
 "p": "/magazine-online",
 "t": "Clarificare",
@@ -4560,7 +4152,7 @@
 "key": "Clarificare"
 },
 {
-"i": 571,
+"i": 520,
 "k": "linie",
 "p": "/magazine-online",
 "t": "Arhitectură",
@@ -4568,7 +4160,7 @@
 "key": "Arhitectură"
 },
 {
-"i": 572,
+"i": 521,
 "k": "linie",
 "p": "/magazine-online",
 "t": "Implementare",
@@ -4576,7 +4168,7 @@
 "key": "Implementare"
 },
 {
-"i": 573,
+"i": 522,
 "k": "linie",
 "p": "/magazine-online",
 "t": "Lansare",
@@ -4584,7 +4176,7 @@
 "key": "Lansare"
 },
 {
-"i": 574,
+"i": 523,
 "k": "linie",
 "p": "/magazine-online",
 "t": "Întrebări frecvente",
@@ -4592,7 +4184,7 @@
 "key": "Întrebări frecvente"
 },
 {
-"i": 575,
+"i": 524,
 "k": "linie",
 "p": "/magazine-online",
 "t": "Vrei un magazin online care poate fi scalat și optimizat?",
@@ -4600,7 +4192,7 @@
 "key": "Vrei un magazin online care poate fi scalat și optimizat?"
 },
 {
-"i": 576,
+"i": 525,
 "k": "title",
 "p": "/magazine-online",
 "t": "Magazin Digital | Reverb",
@@ -4608,7 +4200,7 @@
 "key": "Magazin Digital | Reverb"
 },
 {
-"i": 577,
+"i": 526,
 "k": "text",
 "p": "/showcase",
 "t": "Concepte · Studii de stil",
@@ -4616,7 +4208,7 @@
 "key": "Concepte · Studii de stil"
 },
 {
-"i": 578,
+"i": 527,
 "k": "text",
 "p": "/showcase",
 "t": "45 machete și studii de stil, fiecare gândită pentru altă nișă — de la rigoarea medicală la industrialul B2B. Sunt mostre de direcție vizuală. Sistemele aflate în producție sunt în Portofoliu.",
@@ -4624,7 +4216,7 @@
 "key": "# machete și studii de stil, fiecare gândită pentru altă nișă — de la rigoarea medicală la industrialul B#B. Sunt mostre de direcție vizuală. Sistemele aflate în producție sunt în Portofoliu."
 },
 {
-"i": 579,
+"i": 528,
 "k": "text",
 "p": "/showcase",
 "t": "Brutalism Desyres",
@@ -4632,7 +4224,7 @@
 "key": "Brutalism Desyres"
 },
 {
-"i": 580,
+"i": 529,
 "k": "text",
 "p": "/showcase",
 "t": "Surya Group",
@@ -4640,7 +4232,7 @@
 "key": "Surya Group"
 },
 {
-"i": 581,
+"i": 530,
 "k": "text",
 "p": "/showcase",
 "t": "Design webflow robust, bazat pe typography imens și delimitări tăioase B2B.",
@@ -4648,7 +4240,7 @@
 "key": "Design webflow robust, bazat pe typography imens și delimitări tăioase B#B."
 },
 {
-"i": 582,
+"i": 531,
 "k": "text",
 "p": "/showcase",
 "t": "Deschide macheta",
@@ -4656,7 +4248,7 @@
 "key": "Deschide macheta"
 },
 {
-"i": 583,
+"i": 532,
 "k": "text",
 "p": "/showcase",
 "t": "Pastel Sage & Rose",
@@ -4664,7 +4256,7 @@
 "key": "Pastel Sage & Rose"
 },
 {
-"i": 584,
+"i": 533,
 "k": "text",
 "p": "/showcase",
 "t": "Florarte Textile",
@@ -4672,7 +4264,7 @@
 "key": "Florarte Textile"
 },
 {
-"i": 585,
+"i": 534,
 "k": "text",
 "p": "/showcase",
 "t": "Atelier floral B2C axat pe estetica textila matura și claritatea prezenței.",
@@ -4680,7 +4272,7 @@
 "key": "Atelier floral B#C axat pe estetica textila matura și claritatea prezenței."
 },
 {
-"i": 586,
+"i": 535,
 "k": "text",
 "p": "/showcase",
 "t": "Industrial B2B",
@@ -4688,7 +4280,7 @@
 "key": "Industrial B#B"
 },
 {
-"i": 587,
+"i": 536,
 "k": "text",
 "p": "/showcase",
 "t": "Xiaolong Packaging",
@@ -4696,7 +4288,7 @@
 "key": "Xiaolong Packaging"
 },
 {
-"i": 588,
+"i": 537,
 "k": "text",
 "p": "/showcase",
 "t": "Design corporativ matur B2B pentru un producător asiatic global, cu modul dinamic de markup +25%.",
@@ -4704,7 +4296,7 @@
 "key": "Design corporativ matur B#B pentru un producător asiatic global, cu modul dinamic de markup +#%."
 },
 {
-"i": 589,
+"i": 538,
 "k": "text",
 "p": "/showcase",
 "t": "Bio-Interface",
@@ -4712,7 +4304,7 @@
 "key": "Bio-Interface"
 },
 {
-"i": 590,
+"i": 539,
 "k": "text",
 "p": "/showcase",
 "t": "Medical Clinic",
@@ -4720,7 +4312,7 @@
 "key": "Medical Clinic"
 },
 {
-"i": 591,
+"i": 540,
 "k": "text",
 "p": "/showcase",
 "t": "Rigoare absolută. Sterilitate albă dublată de ticker live pentru starea sălilor.",
@@ -4728,7 +4320,7 @@
 "key": "Rigoare absolută. Sterilitate albă dublată de ticker live pentru starea sălilor."
 },
 {
-"i": 592,
+"i": 541,
 "k": "text",
 "p": "/showcase",
 "t": "Legal Logic Brutal",
@@ -4736,7 +4328,7 @@
 "key": "Legal Logic Brutal"
 },
 {
-"i": 593,
+"i": 542,
 "k": "text",
 "p": "/showcase",
 "t": "Legal Firm",
@@ -4744,7 +4336,7 @@
 "key": "Legal Firm"
 },
 {
-"i": 594,
+"i": 543,
 "k": "text",
 "p": "/showcase",
 "t": "Titluri masive tăiate orizontal de linii infinite. Autoritatea legii redată digital.",
@@ -4752,7 +4344,7 @@
 "key": "Titluri masive tăiate orizontal de linii infinite. Autoritatea legii redată digital."
 },
 {
-"i": 595,
+"i": 544,
 "k": "text",
 "p": "/showcase",
 "t": "Monolithic Grid",
@@ -4760,7 +4352,7 @@
 "key": "Monolithic Grid"
 },
 {
-"i": 596,
+"i": 545,
 "k": "text",
 "p": "/showcase",
 "t": "Architecture Studio",
@@ -4768,7 +4360,7 @@
 "key": "Architecture Studio"
 },
 {
-"i": 597,
+"i": 546,
 "k": "text",
 "p": "/showcase",
 "t": "Gri de piatră brută expusă și arhitectură web ghidată de proporția 1.618.",
@@ -4776,7 +4368,7 @@
 "key": "Gri de piatră brută expusă și arhitectură web ghidată de proporția #."
 },
 {
-"i": 598,
+"i": 547,
 "k": "text",
 "p": "/showcase",
 "t": "Terminal Logic",
@@ -4784,7 +4376,7 @@
 "key": "Terminal Logic"
 },
 {
-"i": 599,
+"i": 548,
 "k": "text",
 "p": "/showcase",
 "t": "Cyber Security B2B",
@@ -4792,7 +4384,7 @@
 "key": "Cyber Security B#B"
 },
 {
-"i": 600,
+"i": 549,
 "k": "text",
 "p": "/showcase",
 "t": "Interfață de linie de comandă cu scanlines agresive și verde neon tech.",
@@ -4800,7 +4392,7 @@
 "key": "Interfață de linie de comandă cu scanlines agresive și verde neon tech."
 },
 {
-"i": 601,
+"i": 550,
 "k": "text",
 "p": "/showcase",
 "t": "Obsidian & Gold",
@@ -4808,7 +4400,7 @@
 "key": "Obsidian & Gold"
 },
 {
-"i": 602,
+"i": 551,
 "k": "text",
 "p": "/showcase",
 "t": "Real Estate Luxury",
@@ -4816,7 +4408,7 @@
 "key": "Real Estate Luxury"
 },
 {
-"i": 603,
+"i": 552,
 "k": "text",
 "p": "/showcase",
 "t": "Eleganță supremă, detalii aurii pe fundal adânc și accent imens pe fotografie.",
@@ -4824,7 +4416,7 @@
 "key": "Eleganță supremă, detalii aurii pe fundal adânc și accent imens pe fotografie."
 },
 {
-"i": 604,
+"i": 553,
 "k": "text",
 "p": "/showcase",
 "t": "High Contrast Vogue",
@@ -4832,7 +4424,7 @@
 "key": "High Contrast Vogue"
 },
 {
-"i": 605,
+"i": 554,
 "k": "text",
 "p": "/showcase",
 "t": "Fashion Editorial",
@@ -4840,7 +4432,7 @@
 "key": "Fashion Editorial"
 },
 {
-"i": 606,
+"i": 555,
 "k": "text",
 "p": "/showcase",
 "t": "Estetica alb-negru. Tipografie serifată, asimetrie elegantă și minimalism extrem.",
@@ -4848,7 +4440,7 @@
 "key": "Estetica alb-negru. Tipografie serifată, asimetrie elegantă și minimalism extrem."
 },
 {
-"i": 607,
+"i": 556,
 "k": "text",
 "p": "/showcase",
 "t": "Glassmorphism & Data",
@@ -4856,7 +4448,7 @@
 "key": "Glassmorphism & Data"
 },
 {
-"i": 608,
+"i": 557,
 "k": "text",
 "p": "/showcase",
 "t": "FinTech Startup",
@@ -4864,7 +4456,7 @@
 "key": "FinTech Startup"
 },
 {
-"i": 609,
+"i": 558,
 "k": "text",
 "p": "/showcase",
 "t": "Date financiare care se schimbă aleator via text rumble, iluminări bio-violet.",
@@ -4872,7 +4464,7 @@
 "key": "Date financiare care se schimbă aleator via text rumble, iluminări bio-violet."
 },
 {
-"i": 610,
+"i": 559,
 "k": "text",
 "p": "/showcase",
 "t": "Carbon & Racing Yellow",
@@ -4880,7 +4472,7 @@
 "key": "Carbon & Racing Yellow"
 },
 {
-"i": 611,
+"i": 560,
 "k": "text",
 "p": "/showcase",
 "t": "Auto Dealership",
@@ -4888,7 +4480,7 @@
 "key": "Auto Dealership"
 },
 {
-"i": 612,
+"i": 561,
 "k": "text",
 "p": "/showcase",
 "t": "Elemente grafice precum turometre vectoriale și forme unghiulare decise.",
@@ -4896,7 +4488,7 @@
 "key": "Elemente grafice precum turometre vectoriale și forme unghiulare decise."
 },
 {
-"i": 613,
+"i": 562,
 "k": "text",
 "p": "/showcase",
 "t": "Burgundy Mute Canvas",
@@ -4904,7 +4496,7 @@
 "key": "Burgundy Mute Canvas"
 },
 {
-"i": 614,
+"i": 563,
 "k": "text",
 "p": "/showcase",
 "t": "Fine Dining",
@@ -4912,7 +4504,7 @@
 "key": "Fine Dining"
 },
 {
-"i": 615,
+"i": 564,
 "k": "text",
 "p": "/showcase",
 "t": "Meniu funcțional abstractizat, atmosfere rafinate cu texturi puriste.",
@@ -4920,7 +4512,7 @@
 "key": "Meniu funcțional abstractizat, atmosfere rafinate cu texturi puriste."
 },
 {
-"i": 616,
+"i": 565,
 "k": "text",
 "p": "/showcase",
 "t": "Safety Orange & Sweat",
@@ -4928,7 +4520,7 @@
 "key": "Safety Orange & Sweat"
 },
 {
-"i": 617,
+"i": 566,
 "k": "text",
 "p": "/showcase",
 "t": "Gym & CrossFit",
@@ -4936,7 +4528,7 @@
 "key": "Gym & CrossFit"
 },
 {
-"i": 618,
+"i": 567,
 "k": "text",
 "p": "/showcase",
 "t": "Italic brutal. Cuvinte masive asimetrice și un vibe pur industrial de sală.",
@@ -4944,7 +4536,7 @@
 "key": "Italic brutal. Cuvinte masive asimetrice și un vibe pur industrial de sală."
 },
 {
-"i": 619,
+"i": 568,
 "k": "text",
 "p": "/showcase",
 "t": "Film Strip Limits",
@@ -4952,7 +4544,7 @@
 "key": "Film Strip Limits"
 },
 {
-"i": 620,
+"i": 569,
 "k": "text",
 "p": "/showcase",
 "t": "Photo/Video Studio",
@@ -4960,7 +4552,7 @@
 "key": "Photo/Video Studio"
 },
 {
-"i": 621,
+"i": 570,
 "k": "text",
 "p": "/showcase",
 "t": "Margini marcate ca frame-urile peliculei de 35mm, focalizat total pe cursor.",
@@ -4968,7 +4560,7 @@
 "key": "Margini marcate ca frame-urile peliculei de #mm, focalizat total pe cursor."
 },
 {
-"i": 622,
+"i": 571,
 "k": "text",
 "p": "/showcase",
 "t": "Kinetic Blob Marquee",
@@ -4976,7 +4568,7 @@
 "key": "Kinetic Blob Marquee"
 },
 {
-"i": 623,
+"i": 572,
 "k": "text",
 "p": "/showcase",
 "t": "Festival Promoters",
@@ -4984,7 +4576,7 @@
 "key": "Festival Promoters"
 },
 {
-"i": 624,
+"i": 573,
 "k": "text",
 "p": "/showcase",
 "t": "Liquid shapes combinat cu benzi uriașe infinite de artiști.",
@@ -4992,7 +4584,7 @@
 "key": "Liquid shapes combinat cu benzi uriașe infinite de artiști."
 },
 {
-"i": 625,
+"i": 574,
 "k": "text",
 "p": "/showcase",
 "t": "Terminal Gate Cobalt",
@@ -5000,7 +4592,7 @@
 "key": "Terminal Gate Cobalt"
 },
 {
-"i": 626,
+"i": 575,
 "k": "text",
 "p": "/showcase",
 "t": "Logistics & Cargo",
@@ -5008,7 +4600,7 @@
 "key": "Logistics & Cargo"
 },
 {
-"i": 627,
+"i": 576,
 "k": "text",
 "p": "/showcase",
 "t": "Tabele dense simulând plecări din aeroport. Grid rigid pentru logistica de top.",
@@ -5016,7 +4608,7 @@
 "key": "Tabele dense simulând plecări din aeroport. Grid rigid pentru logistica de top."
 },
 {
-"i": 628,
+"i": 577,
 "k": "text",
 "p": "/showcase",
 "t": "Holographic Orbital",
@@ -5024,7 +4616,7 @@
 "key": "Holographic Orbital"
 },
 {
-"i": 629,
+"i": 578,
 "k": "text",
 "p": "/showcase",
 "t": "AI Tech Core",
@@ -5032,7 +4624,7 @@
 "key": "AI Tech Core"
 },
 {
-"i": 630,
+"i": 579,
 "k": "text",
 "p": "/showcase",
 "t": "Platforme software vectoriale. 3D CSS de finețe reprezentând noduri activate.",
@@ -5040,7 +4632,7 @@
 "key": "Platforme software vectoriale. #D CSS de finețe reprezentând noduri activate."
 },
 {
-"i": 631,
+"i": 580,
 "k": "text",
 "p": "/showcase",
 "t": "Nocturnal Sacred",
@@ -5048,7 +4640,7 @@
 "key": "Nocturnal Sacred"
 },
 {
-"i": 632,
+"i": 581,
 "k": "text",
 "p": "/showcase",
 "t": "Creativ Noaptea",
@@ -5056,7 +4648,7 @@
 "key": "Creativ Noaptea"
 },
 {
-"i": 633,
+"i": 582,
 "k": "text",
 "p": "/showcase",
 "t": "Platformă curată Midnight-Blue dedicată analizei „bufnițelor de noapte”. Arhitectura somnului, cronotipuri și tradiții antice.",
@@ -5064,7 +4656,7 @@
 "key": "Platformă curată Midnight-Blue dedicată analizei „bufnițelor de noapte”. Arhitectura somnului, cronotipuri și tradiții antice."
 },
 {
-"i": 634,
+"i": 583,
 "k": "text",
 "p": "/showcase",
 "t": "Cognitive Reprogramming",
@@ -5072,7 +4664,7 @@
 "key": "Cognitive Reprogramming"
 },
 {
-"i": 635,
+"i": 584,
 "k": "text",
 "p": "/showcase",
 "t": "Inteligență Spirituală (APP)",
@@ -5080,7 +4672,7 @@
 "key": "Inteligență Spirituală (APP)"
 },
 {
-"i": 636,
+"i": 585,
 "k": "text",
 "p": "/showcase",
 "t": "Aplicație web complexă (React State). Motor interactiv pentru dizolvarea auto-sabotajului pe baza psihologiei Brianna Wiest.",
@@ -5088,7 +4680,7 @@
 "key": "Aplicație web complexă (React State). Motor interactiv pentru dizolvarea auto-sabotajului pe baza psihologiei Brianna Wiest."
 },
 {
-"i": 637,
+"i": 586,
 "k": "text",
 "p": "/showcase",
 "t": "Ethereal Sacred",
@@ -5096,7 +4688,7 @@
 "key": "Ethereal Sacred"
 },
 {
-"i": 638,
+"i": 587,
 "k": "text",
 "p": "/showcase",
 "t": "Metanoia Studio",
@@ -5104,7 +4696,7 @@
 "key": "Metanoia Studio"
 },
 {
-"i": 639,
+"i": 588,
 "k": "text",
 "p": "/showcase",
 "t": "Arhitectura Clarității. Eliminarea zgomotului vizual și metoda flip cards aplicată pentru conținut filozofic profund.",
@@ -5112,7 +4704,7 @@
 "key": "Arhitectura Clarității. Eliminarea zgomotului vizual și metoda flip cards aplicată pentru conținut filozofic profund."
 },
 {
-"i": 640,
+"i": 589,
 "k": "text",
 "p": "/showcase",
 "t": "Canvas Scrollytelling",
@@ -5120,7 +4712,7 @@
 "key": "Canvas Scrollytelling"
 },
 {
-"i": 641,
+"i": 590,
 "k": "text",
 "p": "/showcase",
 "t": "Reverb Master System",
@@ -5128,7 +4720,7 @@
 "key": "Reverb Master System"
 },
 {
-"i": 642,
+"i": 591,
 "k": "text",
 "p": "/showcase",
 "t": "O interfață complet asimetrică și scroll-driven, integrând magazinele Bricolando și Kalki într-un ecosistem uman+AI.",
@@ -5136,7 +4728,7 @@
 "key": "O interfață complet asimetrică și scroll-driven, integrând magazinele Bricolando și Kalki într-un ecosistem uman+AI."
 },
 {
-"i": 643,
+"i": 592,
 "k": "text",
 "p": "/showcase",
 "t": "Industrial Construction",
@@ -5144,7 +4736,7 @@
 "key": "Industrial Construction"
 },
 {
-"i": 644,
+"i": 593,
 "k": "text",
 "p": "/showcase",
 "t": "Bricolando DIY",
@@ -5152,7 +4744,7 @@
 "key": "Bricolando DIY"
 },
 {
-"i": 645,
+"i": 594,
 "k": "text",
 "p": "/showcase",
 "t": "Infrastructură digitală B2B robustă, dedicată mediului industrial și fluxului en-gros de mii de produse utilitare.",
@@ -5160,7 +4752,7 @@
 "key": "Infrastructură digitală B#B robustă, dedicată mediului industrial și fluxului en-gros de mii de produse utilitare."
 },
 {
-"i": 646,
+"i": 595,
 "k": "text",
 "p": "/showcase",
 "t": "High-End Vogue",
@@ -5168,7 +4760,7 @@
 "key": "High-End Vogue"
 },
 {
-"i": 647,
+"i": 596,
 "k": "text",
 "p": "/showcase",
 "t": "Kalki Fashion",
@@ -5176,7 +4768,7 @@
 "key": "Kalki Fashion"
 },
 {
-"i": 648,
+"i": 597,
 "k": "text",
 "p": "/showcase",
 "t": "Platformă luxury dominată de imagini. Spațiu negativ generos și paralaxă asimetrică specifică designului editorial.",
@@ -5184,7 +4776,7 @@
 "key": "Platformă luxury dominată de imagini. Spațiu negativ generos și paralaxă asimetrică specifică designului editorial."
 },
 {
-"i": 649,
+"i": 598,
 "k": "text",
 "p": "/showcase",
 "t": "Primal Masculine",
@@ -5192,7 +4784,7 @@
 "key": "Primal Masculine"
 },
 {
-"i": 650,
+"i": 599,
 "k": "text",
 "p": "/showcase",
 "t": "Virtus Protocol",
@@ -5200,7 +4792,7 @@
 "key": "Virtus Protocol"
 },
 {
-"i": 651,
+"i": 600,
 "k": "text",
 "p": "/showcase",
 "t": "Forță absolută. Design brutalist dominat de contrast extrem, typography all-caps masiv și focus pe spiritul masculin: disciplină, corp, frăție.",
@@ -5208,7 +4800,7 @@
 "key": "Forță absolută. Design brutalist dominat de contrast extrem, typography all-caps masiv și focus pe spiritul masculin: disciplină, corp, frăție."
 },
 {
-"i": 652,
+"i": 601,
 "k": "text",
 "p": "/showcase",
 "t": "Sacred Infographic",
@@ -5216,7 +4808,7 @@
 "key": "Sacred Infographic"
 },
 {
-"i": 653,
+"i": 602,
 "k": "text",
 "p": "/showcase",
 "t": "Arhitectura Clarității",
@@ -5224,7 +4816,7 @@
 "key": "Arhitectura Clarității"
 },
 {
-"i": 654,
+"i": 603,
 "k": "text",
 "p": "/showcase",
 "t": "Un tratat vizual. De la infrastructură tehnică (GitHub/Vercel) și structuri educaționale flashcard, până la estetica spațiului sacru.",
@@ -5232,7 +4824,7 @@
 "key": "Un tratat vizual. De la infrastructură tehnică (GitHub/Vercel) și structuri educaționale flashcard, până la estetica spațiului sacru."
 },
 {
-"i": 655,
+"i": 604,
 "k": "text",
 "p": "/showcase",
 "t": "Ethereal Solaris",
@@ -5240,7 +4832,7 @@
 "key": "Ethereal Solaris"
 },
 {
-"i": 656,
+"i": 605,
 "k": "text",
 "p": "/showcase",
 "t": "Soare & Izvoare",
@@ -5248,7 +4840,7 @@
 "key": "Soare & Izvoare"
 },
 {
-"i": 657,
+"i": 606,
 "k": "text",
 "p": "/showcase",
 "t": "„Până sus în soare, la marile izboare”. Interfață luminoasă, radiind căldură, creată pentru afaceri axate pe claritate, ascensiune și organicitate premium.",
@@ -5256,7 +4848,7 @@
 "key": "„Până sus în soare, la marile izboare”. Interfață luminoasă, radiind căldură, creată pentru afaceri axate pe claritate, ascensiune și organicitate premium."
 },
 {
-"i": 658,
+"i": 607,
 "k": "text",
 "p": "/showcase",
 "t": "Medical Copper",
@@ -5264,7 +4856,7 @@
 "key": "Medical Copper"
 },
 {
-"i": 659,
+"i": 608,
 "k": "text",
 "p": "/showcase",
 "t": "Cuprum Clinic",
@@ -5272,7 +4864,7 @@
 "key": "Cuprum Clinic"
 },
 {
-"i": 660,
+"i": 609,
 "k": "text",
 "p": "/showcase",
 "t": "Design clinic revoluționar construit în jurul oțelului și tăiat cu patina cuprului, reflectând moștenirea proprietăților sale antimicrobiene naturale.",
@@ -5280,7 +4872,7 @@
 "key": "Design clinic revoluționar construit în jurul oțelului și tăiat cu patina cuprului, reflectând moștenirea proprietăților sale antimicrobiene naturale."
 },
 {
-"i": 661,
+"i": 610,
 "k": "text",
 "p": "/showcase",
 "t": "Ancestral Minimalism",
@@ -5288,7 +4880,7 @@
 "key": "Ancestral Minimalism"
 },
 {
-"i": 662,
+"i": 611,
 "k": "text",
 "p": "/showcase",
 "t": "Origini & Măsură",
@@ -5296,7 +4888,7 @@
 "key": "Origini & Măsură"
 },
 {
-"i": 663,
+"i": 612,
 "k": "text",
 "p": "/showcase",
 "t": "Un manifesto vizual dedicat artelor populare, tradiției și bunului simț pământesc. Echilibru nealterat pe un fundal pur de cânepă și lemn.",
@@ -5304,7 +4896,7 @@
 "key": "Un manifesto vizual dedicat artelor populare, tradiției și bunului simț pământesc. Echilibru nealterat pe un fundal pur de cânepă și lemn."
 },
 {
-"i": 664,
+"i": 613,
 "k": "text",
 "p": "/showcase",
 "t": "Rhythmic Flow",
@@ -5312,7 +4904,7 @@
 "key": "Rhythmic Flow"
 },
 {
-"i": 665,
+"i": 614,
 "k": "text",
 "p": "/showcase",
 "t": "Inhale Exhale",
@@ -5320,7 +4912,7 @@
 "key": "Inhale Exhale"
 },
 {
-"i": 666,
+"i": 615,
 "k": "text",
 "p": "/showcase",
 "t": "O experiență digitală meditativă care respiră. Echilibrul perfect între absorbția de date și expresia creativă prin design pulsatil.",
@@ -5328,7 +4920,7 @@
 "key": "O experiență digitală meditativă care respiră. Echilibrul perfect între absorbția de date și expresia creativă prin design pulsatil."
 },
 {
-"i": 667,
+"i": 616,
 "k": "text",
 "p": "/showcase",
 "t": "Dolce Vita Efficiency",
@@ -5336,7 +4928,7 @@
 "key": "Dolce Vita Efficiency"
 },
 {
-"i": 668,
+"i": 617,
 "k": "text",
 "p": "/showcase",
 "t": "Veloce Mobility",
@@ -5344,7 +4936,7 @@
 "key": "Veloce Mobility"
 },
 {
-"i": 669,
+"i": 618,
 "k": "text",
 "p": "/showcase",
 "t": "Minimalism rotunjit, curbe aerodinamice și nuanțe de pastel mint. Un concept Vespa-vibe dedicat startup-urilor de mobilitate urbană.",
@@ -5352,7 +4944,7 @@
 "key": "Minimalism rotunjit, curbe aerodinamice și nuanțe de pastel mint. Un concept Vespa-vibe dedicat startup-urilor de mobilitate urbană."
 },
 {
-"i": 670,
+"i": 619,
 "k": "text",
 "p": "/showcase",
 "t": "Ethereal Brutalism",
@@ -5360,7 +4952,7 @@
 "key": "Ethereal Brutalism"
 },
 {
-"i": 671,
+"i": 620,
 "k": "text",
 "p": "/showcase",
 "t": "The Anchor",
@@ -5368,7 +4960,7 @@
 "key": "The Anchor"
 },
 {
-"i": 672,
+"i": 621,
 "k": "text",
 "p": "/showcase",
 "t": "Eseu filosofic vizual despre masculinitatea matură și susținerea partenerului în haos. Estetică întunecată și typography tensionat.",
@@ -5376,7 +4968,7 @@
 "key": "Eseu filosofic vizual despre masculinitatea matură și susținerea partenerului în haos. Estetică întunecată și typography tensionat."
 },
 {
-"i": 673,
+"i": 622,
 "k": "text",
 "p": "/showcase",
 "t": "Operating System Logic",
@@ -5384,7 +4976,7 @@
 "key": "Operating System Logic"
 },
 {
-"i": 674,
+"i": 623,
 "k": "text",
 "p": "/showcase",
 "t": "AI-First Framework",
@@ -5392,7 +4984,7 @@
 "key": "AI-First Framework"
 },
 {
-"i": 675,
+"i": 624,
 "k": "text",
 "p": "/showcase",
 "t": "Blog-prezentare premium pentru framework-ul de transformare AI-First. Tipografie tehnică, gradient indigo-cyan și narative pe 5 capitole despre AI ca sistem de operare al companiei.",
@@ -5400,7 +4992,7 @@
 "key": "Blog-prezentare premium pentru framework-ul de transformare AI-First. Tipografie tehnică, gradient indigo-cyan și narative pe # capitole despre AI ca sistem de operare al companiei."
 },
 {
-"i": 676,
+"i": 625,
 "k": "text",
 "p": "/showcase",
 "t": "Alpha State Science",
@@ -5408,7 +5000,7 @@
 "key": "Alpha State Science"
 },
 {
-"i": 677,
+"i": 626,
 "k": "text",
 "p": "/showcase",
 "t": "Metoda Silva",
@@ -5416,7 +5008,7 @@
 "key": "Metoda Silva"
 },
 {
-"i": 678,
+"i": 627,
 "k": "text",
 "p": "/showcase",
 "t": "O incursiune științifică, filosofică și psihologică în starea Alpha: mecanica mentală, protocolul creației și reprogramarea subconștientului.",
@@ -5424,7 +5016,7 @@
 "key": "O incursiune științifică, filosofică și psihologică în starea Alpha: mecanica mentală, protocolul creației și reprogramarea subconștientului."
 },
 {
-"i": 679,
+"i": 628,
 "k": "text",
 "p": "/showcase",
 "t": "Conscious Intimacy",
@@ -5432,7 +5024,7 @@
 "key": "Conscious Intimacy"
 },
 {
-"i": 680,
+"i": 629,
 "k": "text",
 "p": "/showcase",
 "t": "Spațiul Deschis",
@@ -5440,7 +5032,7 @@
 "key": "Spațiul Deschis"
 },
 {
-"i": 681,
+"i": 630,
 "k": "text",
 "p": "/showcase",
 "t": "Blog despre dinamica dintre masculin și feminin: deschidere emoțională, siguranță în cuplu și vulnerabilitate constructivă.",
@@ -5448,7 +5040,7 @@
 "key": "Blog despre dinamica dintre masculin și feminin: deschidere emoțională, siguranță în cuplu și vulnerabilitate constructivă."
 },
 {
-"i": 682,
+"i": 631,
 "k": "text",
 "p": "/showcase",
 "t": "Guide to the Unseen Plane",
@@ -5456,7 +5048,7 @@
 "key": "Guide to the Unseen Plane"
 },
 {
-"i": 683,
+"i": 632,
 "k": "text",
 "p": "/showcase",
 "t": "Elumia",
@@ -5464,7 +5056,7 @@
 "key": "Elumia"
 },
 {
-"i": 684,
+"i": 633,
 "k": "text",
 "p": "/showcase",
 "t": "Ghid interactiv bilingv pentru planul nevăzut: cei 7 Gardieni interiori, harta minții și conversația cu Operatorul.",
@@ -5472,7 +5064,7 @@
 "key": "Ghid interactiv bilingv pentru planul nevăzut: cei # Gardieni interiori, harta minții și conversația cu Operatorul."
 },
 {
-"i": 685,
+"i": 634,
 "k": "text",
 "p": "/showcase",
 "t": "Letters & Practices",
@@ -5480,7 +5072,7 @@
 "key": "Letters & Practices"
 },
 {
-"i": 686,
+"i": 635,
 "k": "text",
 "p": "/showcase",
 "t": "ARMONIA",
@@ -5488,7 +5080,7 @@
 "key": "ARMONIA"
 },
 {
-"i": 687,
+"i": 636,
 "k": "text",
 "p": "/showcase",
 "t": "Douăzeci și una de scrisori scurte, fiecare cu o practică și un aforism. Soluții filozofice pentru viața de zi cu zi.",
@@ -5496,7 +5088,7 @@
 "key": "Douăzeci și una de scrisori scurte, fiecare cu o practică și un aforism. Soluții filozofice pentru viața de zi cu zi."
 },
 {
-"i": 688,
+"i": 637,
 "k": "text",
 "p": "/showcase",
 "t": "Sacred Teaching",
@@ -5504,7 +5096,7 @@
 "key": "Sacred Teaching"
 },
 {
-"i": 689,
+"i": 638,
 "k": "text",
 "p": "/showcase",
 "t": "The Immortal Light",
@@ -5512,7 +5104,7 @@
 "key": "The Immortal Light"
 },
 {
-"i": 690,
+"i": 639,
 "k": "text",
 "p": "/showcase",
 "t": "Esența învățăturii divine prin toate religiile lumii: opt capitole, șapte piloni și The Teacher's Edition.",
@@ -5520,7 +5112,7 @@
 "key": "Esența învățăturii divine prin toate religiile lumii: opt capitole, șapte piloni și The Teacher's Edition."
 },
 {
-"i": 691,
+"i": 640,
 "k": "text",
 "p": "/showcase",
 "t": "52-Card Wisdom Oracle",
@@ -5528,7 +5120,7 @@
 "key": "#-Card Wisdom Oracle"
 },
 {
-"i": 692,
+"i": 641,
 "k": "text",
 "p": "/showcase",
 "t": "Oracolul celor Cinci Cercuri",
@@ -5536,7 +5128,7 @@
 "key": "Oracolul celor Cinci Cercuri"
 },
 {
-"i": 693,
+"i": 642,
 "k": "text",
 "p": "/showcase",
 "t": "Un oracol de 52 de cărți de înțelepciune: trage, respiră, ascultă.",
@@ -5544,7 +5136,7 @@
 "key": "Un oracol de # de cărți de înțelepciune: trage, respiră, ascultă."
 },
 {
-"i": 694,
+"i": 643,
 "k": "text",
 "p": "/showcase",
 "t": "Recovery Map",
@@ -5552,7 +5144,7 @@
 "key": "Recovery Map"
 },
 {
-"i": 695,
+"i": 644,
 "k": "text",
 "p": "/showcase",
 "t": "Când cineva bea",
@@ -5560,7 +5152,7 @@
 "key": "Când cineva bea"
 },
 {
-"i": 696,
+"i": 645,
 "k": "text",
 "p": "/showcase",
 "t": "Cele șase roluri din familia unei persoane care bea, modelul Minnesota, cei doisprezece pași și resurse de sprijin din România.",
@@ -5568,7 +5160,7 @@
 "key": "Cele șase roluri din familia unei persoane care bea, modelul Minnesota, cei doisprezece pași și resurse de sprijin din România."
 },
 {
-"i": 697,
+"i": 646,
 "k": "text",
 "p": "/showcase",
 "t": "Cyber-Ocean Collision",
@@ -5576,7 +5168,7 @@
 "key": "Cyber-Ocean Collision"
 },
 {
-"i": 698,
+"i": 647,
 "k": "text",
 "p": "/showcase",
 "t": "Abyss.io (Game Engine)",
@@ -5584,7 +5176,7 @@
 "key": "Abyss.io (Game Engine)"
 },
 {
-"i": 699,
+"i": 648,
 "k": "text",
 "p": "/showcase",
 "t": "Joc HTML5 Canvas 60FPS integrat în React. Detecție de coliziuni (eat & grow), AI Boids inamici și demo de monetizare (Stripe/Crypto).",
@@ -5592,7 +5184,7 @@
 "key": "Joc HTML# Canvas #FPS integrat în React. Detecție de coliziuni (eat & grow), AI Boids inamici și demo de monetizare (Stripe/Crypto)."
 },
 {
-"i": 700,
+"i": 649,
 "k": "text",
 "p": "/showcase",
 "t": "Dark to Light Recovery",
@@ -5600,7 +5192,7 @@
 "key": "Dark to Light Recovery"
 },
 {
-"i": 701,
+"i": 650,
 "k": "text",
 "p": "/showcase",
 "t": "NeuroLumina",
@@ -5608,7 +5200,7 @@
 "key": "NeuroLumina"
 },
 {
-"i": 702,
+"i": 651,
 "k": "text",
 "p": "/showcase",
 "t": "Platformă interactivă de tip scroll-telling. O explorare empatică, bazată pe neuroștiință a adicției, trecând de la haos la homeostazie.",
@@ -5616,7 +5208,7 @@
 "key": "Platformă interactivă de tip scroll-telling. O explorare empatică, bazată pe neuroștiință a adicției, trecând de la haos la homeostazie."
 },
 {
-"i": 703,
+"i": 652,
 "k": "text",
 "p": "/showcase",
 "t": "Premium Glassmorphism",
@@ -5624,7 +5216,7 @@
 "key": "Premium Glassmorphism"
 },
 {
-"i": 704,
+"i": 653,
 "k": "text",
 "p": "/showcase",
 "t": "Acasă Showcase",
@@ -5632,7 +5224,7 @@
 "key": "Acasă Showcase"
 },
 {
-"i": 705,
+"i": 654,
 "k": "text",
 "p": "/showcase",
 "t": "Prezentare digitală pentru proiectele extrase din arhiva Acasă: NevronixAI, Florarte, inteligență artificială și ecosisteme de startup.",
@@ -5640,7 +5232,7 @@
 "key": "Prezentare digitală pentru proiectele extrase din arhiva Acasă: NevronixAI, Florarte, inteligență artificială și ecosisteme de startup."
 },
 {
-"i": 706,
+"i": 655,
 "k": "text",
 "p": "/showcase",
 "t": "E-Commerce Fluid",
@@ -5648,7 +5240,7 @@
 "key": "E-Commerce Fluid"
 },
 {
-"i": 707,
+"i": 656,
 "k": "text",
 "p": "/showcase",
 "t": "Guru Store",
@@ -5656,7 +5248,7 @@
 "key": "Guru Store"
 },
 {
-"i": 708,
+"i": 657,
 "k": "text",
 "p": "/showcase",
 "t": "Prezentare interactivă de produse. Un magazin online fluid și rapid, cu animații elegante.",
@@ -5664,7 +5256,7 @@
 "key": "Prezentare interactivă de produse. Un magazin online fluid și rapid, cu animații elegante."
 },
 {
-"i": 709,
+"i": 658,
 "k": "text",
 "p": "/showcase",
 "t": "Ethereal Text",
@@ -5672,7 +5264,7 @@
 "key": "Ethereal Text"
 },
 {
-"i": 710,
+"i": 659,
 "k": "text",
 "p": "/showcase",
 "t": "Spiritual Reading",
@@ -5680,7 +5272,7 @@
 "key": "Spiritual Reading"
 },
 {
-"i": 711,
+"i": 660,
 "k": "text",
 "p": "/showcase",
 "t": "Platformă amplă de lectură conținând peste 140 de capitole, axată pe simplitate și claritatea textului pentru inteligență spirituală.",
@@ -5688,7 +5280,7 @@
 "key": "Platformă amplă de lectură conținând peste # de capitole, axată pe simplitate și claritatea textului pentru inteligență spirituală."
 },
 {
-"i": 712,
+"i": 661,
 "k": "text",
 "p": "/showcase",
 "t": "Mecanică monocromă",
@@ -5696,7 +5288,7 @@
 "key": "Mecanică monocromă"
 },
 {
-"i": 713,
+"i": 662,
 "k": "text",
 "p": "/showcase",
 "t": "Realitatea Umanoidă 2026",
@@ -5704,7 +5296,7 @@
 "key": "Realitatea Umanoidă #"
 },
 {
-"i": 714,
+"i": 663,
 "k": "text",
 "p": "/showcase",
 "t": "Website premium de prezentare despre revoluția robotică. Piața de 750 Mld $, liderii AI, VLA models și ghidul de supraviețuire pentru era post-umanoide.",
@@ -5712,7 +5304,7 @@
 "key": "Website premium de prezentare despre revoluția robotică. Piața de # Mld $, liderii AI, VLA models și ghidul de supraviețuire pentru era post-umanoide."
 },
 {
-"i": 715,
+"i": 664,
 "k": "linie",
 "p": "/showcase",
 "t": "Concepte și direcții",
@@ -5720,7 +5312,7 @@
 "key": "Concepte și direcții"
 },
 {
-"i": 716,
+"i": 665,
 "k": "linie",
 "p": "/showcase",
 "t": "de design.",
@@ -5728,7 +5320,7 @@
 "key": "de design."
 },
 {
-"i": 717,
+"i": 666,
 "k": "title",
 "p": "/showcase",
 "t": "Concepte și direcții de design | Reverb",
@@ -5736,7 +5328,7 @@
 "key": "Concepte și direcții de design | Reverb"
 },
 {
-"i": 718,
+"i": 667,
 "k": "linie",
 "p": "/",
 "t": "Pentru afaceri la început.",
@@ -5744,7 +5336,7 @@
 "key": "Pentru afaceri la început."
 },
 {
-"i": 719,
+"i": 668,
 "k": "text",
 "p": "/contact",
 "t": "Se procesează...",
@@ -5752,7 +5344,7 @@
 "key": "Se procesează..."
 },
 {
-"i": 720,
+"i": 669,
 "k": "text",
 "p": "/contact",
 "t": "Se încarcă formularul...",
@@ -5760,7 +5352,7 @@
 "key": "Se încarcă formularul..."
 },
 {
-"i": 721,
+"i": 670,
 "k": "text",
 "p": "/contact",
 "t": "Îți răspundem în română sau engleză.",
@@ -5768,7 +5360,7 @@
 "key": "Îți răspundem în română sau engleză."
 },
 {
-"i": 722,
+"i": 671,
 "k": "text",
 "p": "*",
 "t": "Această pagină există doar în română și engleză.",
@@ -5776,7 +5368,7 @@
 "key": "Această pagină există doar în română și engleză."
 },
 {
-"i": 723,
+"i": 672,
 "k": "text",
 "p": "*",
 "t": "Vezi în engleză",
@@ -5784,7 +5376,7 @@
 "key": "Vezi în engleză"
 },
 {
-"i": 724,
+"i": 673,
 "k": "attr",
 "p": "*",
 "t": "Închide",
@@ -5792,7 +5384,7 @@
 "key": "Închide"
 },
 {
-"i": 725,
+"i": 674,
 "k": "text",
 "p": "*",
 "t": "Limbă",
@@ -5800,7 +5392,7 @@
 "key": "Limbă"
 },
 {
-"i": 726,
+"i": 675,
 "k": "text",
 "p": "*",
 "t": "Țara detectată:",

@@ -161,16 +161,22 @@ async function main() {
     problems.push(`nu am putut citi package.json (${e.message})`);
   }
 
-  // 6b. Proiectul „Oglinda” din portofoliu (lib/liveProjects.ts) duce la reverb.ro/aura cât timp domeniul lui nu răspunde.
-  //     Când oglinda.eu începe să răspundă, legătura și numele se schimbă acolo (un avertisment, nu o eroare).
+  // 6b. Proiectul „Oglinda.eu” din portofoliu (lib/liveProjects.ts) duce la domeniul lui din 14 nov 2026 (DNS în Cloudflare,
+  //     găzduire Vercel). Dacă domeniul nu mai răspunde, legătura din portofoliu e moartă (un avertisment, nu o eroare):
+  //     aceeași aplicație e și la https://reverb.ro/aura/index.html.
   try {
     const src = fs.readFileSync(path.join(process.cwd(), "lib", "liveProjects.ts"), "utf8");
-    if (src.includes("https://reverb.ro/aura/index.html")) {
-      const r = await fetch("https://oglinda.eu/", { redirect: "manual", signal: AbortSignal.timeout(8000) });
-      if (r.status === 200) console.log("ATENȚIE: oglinda.eu răspunde acum. Schimbă `href` și numele proiectului „Oglinda” în lib/liveProjects.ts.");
+    if (src.includes("https://www.oglinda.eu/")) {
+      let cod = 0;
+      try {
+        cod = (await fetch("https://www.oglinda.eu/", { redirect: "manual", signal: AbortSignal.timeout(8000) })).status;
+      } catch {
+        cod = 0;
+      }
+      if (cod !== 200) console.log(`ATENȚIE: www.oglinda.eu nu răspunde (cod ${cod}). Legătura proiectului „Oglinda.eu” din portofoliu nu se deschide.`);
     }
   } catch {
-    // Domeniul nu răspunde încă: nimic de făcut.
+    // Fișierul nu se poate citi: verificarea de la pasul 6 a spus deja.
   }
 
   // 7. Prețurile altor firme din caseta de cost (lib/thirdPartyCosts.ts) au o dată a citirii: avertisment după 90 de zile.

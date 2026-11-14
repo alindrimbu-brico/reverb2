@@ -225,7 +225,7 @@ export const packages: Package[] = [
     delivery: "Proiect dedicat",
     category: "b2b",
     description:
-      "Proiecte mari, lucrate împreună cu partenerul nostru din Londra, Zylaris Group: portaluri pentru clienți și parteneri, automatizarea muncii repetitive din firmă, asistenți AI care lucrează singuri și găzduire securizată.",
+      "Portaluri pentru clienți și parteneri, automatizarea muncii repetitive din firmă, asistenți AI care lucrează singuri și găzduire securizată.",
     includes: [
       "Infrastructură proprie, care crește odată cu firma",
       "Portaluri securizate pentru clienți și parteneri",
