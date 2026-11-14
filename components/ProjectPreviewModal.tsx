@@ -109,7 +109,7 @@ export default function ProjectPreviewModal({
                 <span className="truncate">{project.href}</span>
               </div>
               <span className="text-[9px] uppercase tracking-wider text-emerald-400 shrink-0 font-bold">
-                {/lucru|progress/i.test(project.status ?? "") ? (isEn ? "IN PROGRESS" : "ÎN LUCRU") : "LIVE"}
+                LIVE
               </span>
             </div>
 
@@ -230,7 +230,7 @@ export default function ProjectPreviewModal({
 
           <div className="flex items-center gap-3 shrink-0">
             <span className="text-emerald-400 font-bold uppercase tracking-wider hidden sm:inline">
-              {project.status || "PRODUCȚIE LIVE"}
+              {project.status || (isEn ? "Managed" : "În administrare")}
             </span>
 
             {/* Prominent Footer Close Button */}

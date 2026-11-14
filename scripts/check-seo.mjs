@@ -150,15 +150,27 @@ async function main() {
     problems.push(`selectorul de limbă: nu am putut verifica dicționarele (${e.message})`);
   }
 
-  // 6. Nota despre cookie-uri (components/CookieConsent.tsx) spune „nu măsurăm ce faci pe site”. Un pachet de măsurare
-  //    o face falsă: întâi se reface banda ca cerere de acord (cu altă cheie), abia apoi intră pachetul.
+  // 6. Paginile agenției nu au nicio bandă de cookie-uri, fiindcă nu măsoară nimic (components/CookieConsent.tsx e gol
+  //    din 14 nov 2026). Un pachet de măsurare cere întâi o cerere de acord acolo, abia apoi intră pachetul.
   try {
     const pkg = JSON.parse(fs.readFileSync(path.join(process.cwd(), "package.json"), "utf8"));
     const deps = Object.keys({ ...pkg.dependencies, ...pkg.devDependencies });
     const masurare = deps.filter((d) => /^@vercel\/(analytics|speed-insights)$|^@next\/third-parties$|gtag|google-analytics|posthog|plausible|hotjar|facebook-pixel/.test(d));
-    if (masurare.length) problems.push(`pachet de măsurare în package.json (${masurare.join(", ")}), dar nota de cookie-uri spune că nu măsurăm nimic`);
+    if (masurare.length) problems.push(`pachet de măsurare în package.json (${masurare.join(", ")}), dar site-ul nu are cerere de acord pentru cookie-uri`);
   } catch (e) {
     problems.push(`nu am putut citi package.json (${e.message})`);
+  }
+
+  // 6b. Proiectul „Oglinda” din portofoliu (lib/liveProjects.ts) duce la reverb.ro/aura cât timp domeniul lui nu răspunde.
+  //     Când oglinda.eu începe să răspundă, legătura și numele se schimbă acolo (un avertisment, nu o eroare).
+  try {
+    const src = fs.readFileSync(path.join(process.cwd(), "lib", "liveProjects.ts"), "utf8");
+    if (src.includes("https://reverb.ro/aura/index.html")) {
+      const r = await fetch("https://oglinda.eu/", { redirect: "manual", signal: AbortSignal.timeout(8000) });
+      if (r.status === 200) console.log("ATENȚIE: oglinda.eu răspunde acum. Schimbă `href` și numele proiectului „Oglinda” în lib/liveProjects.ts.");
+    }
+  } catch {
+    // Domeniul nu răspunde încă: nimic de făcut.
   }
 
   // 7. Prețurile altor firme din caseta de cost (lib/thirdPartyCosts.ts) au o dată a citirii: avertisment după 90 de zile.

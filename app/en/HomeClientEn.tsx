@@ -100,7 +100,6 @@ const FILTERS: { label: string; badges?: string[] }[] = [
   { label: "APPS", badges: ["Application"] },
   { label: "TOOLS", badges: ["Utility"] },
   { label: "WEBSITES", badges: ["Publishing", "Portal"] },
-  { label: "CONCEPTS", badges: ["Showcase"] },
 ];
 /** The label shown on a card for a project's badge (same words as the filters). */
 const badgeLabel = (badge: string) => FILTERS.find((f) => f.badges?.includes(badge))?.label ?? badge;
@@ -145,7 +144,7 @@ export default function EnglishHomePage() {
       <div className="fixed inset-0 pointer-events-none z-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.03)_0%,transparent_70%)]" />
 
       {/* ── First screen ── */}
-      <section className="relative z-10 pt-32 pb-24 md:pt-40 md:pb-32 border-b border-white/10">
+      <section className="relative z-10 pt-32 pb-12 md:pt-40 md:pb-32 border-b border-white/10">
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[350px] bg-white/[0.025] blur-[140px] pointer-events-none rounded-full" />
 
         <div className="relative mx-auto max-w-5xl px-6 text-center flex flex-col items-center">
@@ -171,10 +170,6 @@ export default function EnglishHomePage() {
           <p className="mt-7 max-w-2xl text-sm md:text-base text-white leading-relaxed">
             {`Website from ${enPrice("site-start")} · online store from ${enPrice("magazin-start")} · videos from ${enPrice("social-growth")}`}
             <span className="block mt-1 text-xs text-neutral-400 font-light">{`Prices exclude VAT. In lei, VAT included: website from ${lei("site-start")}, online store from ${lei("magazin-start")}.`}</span>
-          </p>
-
-          <p className="mt-5 max-w-2xl text-base md:text-lg text-neutral-300 font-light leading-relaxed">
-            We build a presentation website (a few pages about your business) or an online store, at a fixed price. If you want, we also make short videos for social media and prepare the site so it can be found by people who ask ChatGPT.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row gap-4 items-center">
@@ -221,7 +216,7 @@ export default function EnglishHomePage() {
             {/* The figures come from the registry and the project list; the 30 days of support are in the package texts. */}
             <div>
               <div className="text-2xl font-light text-white mb-1">{noBreak(enDelivery("site-start"))}</div>
-              <div className="text-[10px] uppercase tracking-wider text-neutral-500">For a simple website</div>
+              <div className="text-[10px] uppercase tracking-wider text-neutral-500">Simple website</div>
             </div>
             <div>
               <div className="text-2xl font-light text-white mb-1">30 days</div>
@@ -229,7 +224,7 @@ export default function EnglishHomePage() {
             </div>
             <div>
               <div className="text-2xl font-light text-white mb-1">{`${inProduction(realProjects)} projects`}</div>
-              <div className="text-[10px] uppercase tracking-wider text-neutral-500">Built by us, online now</div>
+              <div className="text-[10px] uppercase tracking-wider text-neutral-500">Managed</div>
             </div>
             <div>
               <div className="text-2xl font-light text-white mb-1">Fixed Price</div>
@@ -240,43 +235,32 @@ export default function EnglishHomePage() {
         </div>
       </section>
 
-      {/* ── Three projects with a picture, right under the first screen (readers with no context: "I write to nobody before I see their work") ── */}
+      {/* ── Three projects with a picture, right under the first screen, and the agency's business card (data only). ── */}
       <section className="relative z-10 py-16 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
-        <p className="text-sm text-neutral-300 font-light leading-relaxed">
-          Before you choose, see what we have built. A few projects that are online now:
-        </p>
+        <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500">Managed</div>
         <WorkShots items={work} lang="en" />
         <div className="mt-4 flex flex-wrap gap-2.5">
-          <Link href="/en/portfolio" className="rounded-full bg-white px-4 py-2 text-xs font-mono font-bold text-black transition hover:bg-neutral-200">See all our work →</Link>
+          <Link href="/en/portfolio" className="rounded-full bg-white px-4 py-2 text-xs font-mono font-bold text-black transition hover:bg-neutral-200">Full portfolio →</Link>
           <Link href="/showcase" className="rounded-full border border-white/20 px-4 py-2 text-xs font-mono text-neutral-200 transition hover:bg-white hover:text-black">Concept gallery →</Link>
         </div>
-        {/* Who made the projects above (same block as on the Romanian home page). */}
         <div className="mt-8 border-t border-white/10 pt-6">
           <div className="mb-3 text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500">Who we are</div>
-          <WhoWeAre lang="en" full />
+          <WhoWeAre lang="en" />
         </div>
       </section>
 
       {/* ── How we work: four steps ── */}
       <section className="relative z-10 py-28 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
-        <div className="max-w-3xl mb-16">
-          <div className="text-xs font-mono uppercase tracking-[0.25em] text-neutral-500 mb-3">
-            Step by step
-          </div>
-          <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
-            <Linie>Four steps, from idea to launch.</Linie>
-          </h2>
-          <p className="mt-4 text-sm text-neutral-400 font-light leading-relaxed">
-            You do not need to know anything about websites. You tell us what you sell and give us the texts and photos; we take care of the rest, in four steps.
-          </p>
-        </div>
+        <h2 className="mb-14 text-3xl md:text-5xl font-light text-white tracking-tight">
+          <Linie>How we work.</Linie>
+        </h2>
 
         <div className="grid md:grid-cols-4 gap-6 font-mono text-xs">
           <div className="p-6 rounded-2xl border border-white/10 bg-neutral-900/30">
             <div className="text-2xl font-light text-neutral-600 mb-4">01</div>
             <h3 className="text-base font-medium text-white mb-2">We talk</h3>
             <p className="text-neutral-400 font-light leading-relaxed">
-              You tell us what you sell and to whom. You get a clear deadline and a fixed price before any work begins.
+              From you: texts and photos. From us: a deadline and a fixed price, before work begins.
             </p>
           </div>
 
@@ -284,7 +268,7 @@ export default function EnglishHomePage() {
             <div className="text-2xl font-light text-neutral-600 mb-4">02</div>
             <h3 className="text-base font-medium text-white mb-2">We build</h3>
             <p className="text-neutral-400 font-light leading-relaxed">
-              {`A simple website is ready in ${enDelivery("site-start")}, a store in ${enDelivery("magazin-start")}. For stores we connect card payments, invoices and the courier. You pay half at the start and half on delivery.`}
+              {`Website: ${enDelivery("site-start")}. Store: ${enDelivery("magazin-start")}. Payment: half at the start, half on delivery.`}
             </p>
           </div>
 
@@ -292,7 +276,7 @@ export default function EnglishHomePage() {
             <div className="text-2xl font-light text-neutral-600 mb-4">03</div>
             <h3 className="text-base font-medium text-white mb-2">We promote, if you want</h3>
             <p className="text-neutral-400 font-light leading-relaxed">
-              We make short videos for social media, with the help of AI, so people hear about you. These are separate packages, paid monthly.
+              Videos for social media. Separate packages, paid monthly.
             </p>
           </div>
 
@@ -300,7 +284,7 @@ export default function EnglishHomePage() {
             <div className="text-2xl font-light text-neutral-600 mb-4">04</div>
             <h3 className="text-base font-medium text-white mb-2">We stay for 30 days</h3>
             <p className="text-neutral-400 font-light leading-relaxed">
-              After launch you have 30 days of support on WhatsApp, by phone or face to face. We show you how to add products and texts and what to do to get your first orders.
+              Support on WhatsApp, by phone or face to face.
             </p>
           </div>
         </div>
@@ -313,15 +297,12 @@ export default function EnglishHomePage() {
 
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div>
-            <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500 mb-3">
-              You know the price in advance
-            </div>
             <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
-              <Linie>Fixed Pricing. Full Transparency.</Linie>
+              <Linie>Fixed prices.</Linie>
             </h2>
           </div>
           <p className="max-w-md text-xs md:text-sm text-neutral-400 font-light leading-relaxed">
-            Every package has a fixed list of what you get, with no hidden fees and no mandatory 12-month contract. {VAT_NOTE_EN}
+            No mandatory 12-month contract. {VAT_NOTE_EN}
           </p>
         </div>
 
@@ -337,15 +318,18 @@ export default function EnglishHomePage() {
               <div className="text-4xl font-light text-white tracking-tight mb-4">
                 <span className="text-xs font-mono text-neutral-500">from</span> {enPrice("site-start")} <span className="text-xs font-mono text-neutral-500">{VAT_LABEL_EN}</span>
               </div>
-              <p className="text-xs text-neutral-400 font-light leading-relaxed mb-8">
-                A website or an online store at a fixed price. The larger packages add custom design and launch videos.
-              </p>
-
               <div className="space-y-3 font-mono text-xs text-neutral-300 border-t border-white/5 pt-6 mb-8">
                 <div className="flex items-start gap-2">
                   <span className="text-neutral-500">—</span>
                   <span>{packagesEn["site-start"].name}: {enPrice("site-start")}, {noBreak(`in ${enDelivery("site-start")}`)}</span>
                 </div>
+                {/* What the price includes, from the registry (rows 1, 6 and 7 of the package: pages, hosting, domain). */}
+                {[0, 5, 6].map((i) => (
+                  <div key={i} className="flex items-start gap-2 pl-5 text-neutral-400">
+                    <span className="text-neutral-600">·</span>
+                    <span>{packagesEn["site-start"].includes[i]}</span>
+                  </div>
+                ))}
                 <div className="flex items-start gap-2">
                   <span className="text-neutral-500">—</span>
                   <span>Custom-design website + 15 videos: {enPrice("start-digital")}</span>
@@ -354,6 +338,12 @@ export default function EnglishHomePage() {
                   <span className="text-neutral-500">—</span>
                   <span>{packagesEn["magazin-start"].name}, with card payment, courier and invoices: {enPrice("magazin-start")}</span>
                 </div>
+                {[0, 5].map((i) => (
+                  <div key={i} className="flex items-start gap-2 pl-5 text-neutral-400">
+                    <span className="text-neutral-600">·</span>
+                    <span>{packagesEn["magazin-start"].includes[i]}</span>
+                  </div>
+                ))}
                 <div className="flex items-start gap-2">
                   <span className="text-neutral-500">—</span>
                   <span>Complete store + 30 videos: {enPrice("magazin-digital-activ")}</span>
@@ -380,10 +370,6 @@ export default function EnglishHomePage() {
               <div className="text-4xl font-light text-white tracking-tight mb-4">
                 {priceSocial.amount} <span className="text-xs font-mono text-neutral-500">{priceSocial.period} {VAT_LABEL_EN}</span>
               </div>
-              <p className="text-xs text-neutral-400 font-light leading-relaxed mb-8">
-                {social.tagline}
-              </p>
-
               <div className="space-y-3 font-mono text-xs text-neutral-300 border-t border-white/5 pt-6 mb-8">
                 {social.includes.slice(0, 4).map((point) => (
                   <div key={point} className="flex items-start gap-2">
@@ -418,10 +404,6 @@ export default function EnglishHomePage() {
               <div className="text-4xl font-light text-white tracking-tight mb-4">
                 {priceDaily.amount} <span className="text-xs font-mono text-neutral-400">{priceDaily.period} {VAT_LABEL_EN}</span>
               </div>
-              <p className="text-xs text-neutral-300 font-light leading-relaxed mb-8">
-                {daily.tagline}
-              </p>
-
               <div className="space-y-3 font-mono text-xs text-neutral-200 border-t border-white/10 pt-6 mb-8">
                 {daily.includes.slice(0, 4).map((point) => (
                   <div key={point} className="flex items-start gap-2">
@@ -449,44 +431,10 @@ export default function EnglishHomePage() {
       <section id="ai-search-geo" className="scroll-mt-16 relative z-20 py-28 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
         <div className="rounded-3xl border border-white/15 bg-gradient-to-b from-neutral-900/40 via-neutral-950/70 to-neutral-900/30 p-8 md:p-14 backdrop-blur-md">
 
-          <div className="max-w-3xl mb-12">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-mono uppercase tracking-widest text-neutral-300 mb-4">
-              <span>● How people search now</span>
-            </div>
-            <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight leading-tight">
-              <Linie>In 2026, people no longer just search Google.</Linie><br />
-              <span className="text-neutral-400"><Linie>They also ask AI assistants.</Linie></span>
-            </h2>
-            <p className="mt-5 text-sm md:text-base text-neutral-300 leading-relaxed font-light">
-              More and more people ask ChatGPT, Perplexity, Claude or Gemini things like “Where can I buy acacia honey, and what does it cost?” and get an answer on the spot, with a few names. If your site does not say clearly what you sell and at what price, the assistant may leave you out.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="mech-card rounded-2xl border border-white/10 bg-black/40 p-6">
-              <div className="text-xs font-mono uppercase text-emerald-400 mb-3 tracking-wider">01 / Easy for AI to read</div>
-              <h3 className="text-lg font-medium text-white mb-2">A site AI can read</h3>
-              <p className="text-xs text-neutral-400 font-light leading-relaxed">
-                We write clearly into the site who you are, what you sell and where customers can find you, in a way AI assistants can read too.
-              </p>
-            </div>
-
-            <div className="mech-card rounded-2xl border border-white/10 bg-black/40 p-6">
-              <div className="text-xs font-mono uppercase text-emerald-400 mb-3 tracking-wider">02 / Prices in plain sight</div>
-              <h3 className="text-lg font-medium text-white mb-2">Prices and services written clearly</h3>
-              <p className="text-xs text-neutral-400 font-light leading-relaxed">
-                AI assistants compare offers before a person calls anyone. We write your packages and prices clearly, so they can pick them up correctly.
-              </p>
-            </div>
-
-            <div className="mech-card rounded-2xl border border-white/10 bg-black/40 p-6">
-              <div className="text-xs font-mono uppercase text-emerald-400 mb-3 tracking-wider">03 / Beyond Google</div>
-              <h3 className="text-lg font-medium text-white mb-2">A reason for AI to recommend you</h3>
-              <p className="text-xs text-neutral-400 font-light leading-relaxed">
-                Besides what we do to get you on Google, we put on the site the answers to the questions people ask AI assistants, so they have a reason to recommend you.
-              </p>
-            </div>
-          </div>
+          <h2 className="max-w-3xl text-3xl md:text-5xl font-light text-white tracking-tight leading-tight">
+            <Linie>In 2026, people no longer just search Google.</Linie><br />
+            <span className="text-neutral-400"><Linie>They also ask AI assistants.</Linie></span>
+          </h2>
 
           {/* Which packages include it (names from the registry texts) and where to ask for it separately. */}
           <div className="mt-10 pt-8 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs text-neutral-400">
@@ -506,17 +454,9 @@ export default function EnglishHomePage() {
       <section id="projects" className="scroll-mt-16 relative z-10 py-28 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
 
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div>
-            <div className="text-xs font-mono uppercase tracking-[0.25em] text-neutral-500 mb-3">
-              Our work
-            </div>
-            <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
-              <Linie>What we have built so far.</Linie>
-            </h2>
-            <p className="mt-4 text-sm text-neutral-400 font-light max-w-xl">
-              Stores, apps and websites you can open right now.
-            </p>
-          </div>
+          <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
+            <Linie>Portfolio.</Linie>
+          </h2>
 
           {/* Filter Pills */}
           <div className="flex flex-wrap gap-2 font-mono text-xs">
@@ -548,9 +488,9 @@ export default function EnglishHomePage() {
               className="mech-card mech-float-card group relative rounded-2xl border border-white/10 bg-neutral-900/30 p-7 transition-all duration-300 hover:border-white/30 hover:bg-neutral-900/60 flex flex-col justify-between"
             >
               <div>
-                <div className="flex items-center justify-between font-mono text-[11px] mb-4">
-                  <span className="text-emerald-400 flex items-center gap-1.5">
-                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 font-mono text-[11px] mb-4">
+                  <span className={`flex items-center gap-1.5 uppercase tracking-wider ${p.state === "managed" ? "text-emerald-400" : "text-amber-400"}`}>
+                    <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${p.state === "managed" ? "bg-emerald-400" : "bg-amber-400"}`} />
                     {p.status}
                   </span>
                   <span className="text-neutral-500 uppercase tracking-wider">{badgeLabel(p.badge)}</span>
@@ -590,12 +530,11 @@ export default function EnglishHomePage() {
 
       {/* ── Final call to action ── */}
       <section className="relative z-10 py-28 px-6 text-center max-w-4xl mx-auto">
-        <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-4">Start here</div>
         <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight mb-6">
           <Linie>Ready to get your business online?</Linie>
         </h2>
         <p className="text-neutral-400 text-sm md:text-base leading-relaxed mb-10 max-w-2xl mx-auto font-light">
-          We start with a short talk about your business. You get a clear deadline and a fixed price before any work begins.
+          An answer within 24 working hours.
         </p>
         <Link
           href="/en/contact"

@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/en/portfolio", languages: { ro: "/portofoliu", en: "/en/portfolio", "x-default": "/portofoliu" } },
   title: "Portfolio",
   description:
-    "The Reverb portfolio: the websites, online stores and applications we built, each on its own address, with the road travelled and what it does today.",
+    "The Reverb Digital portfolio: online stores, websites and applications we manage, and projects in progress, each on its own address.",
 };
 
 export default function PortfolioPage() {

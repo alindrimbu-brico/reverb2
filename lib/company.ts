@@ -13,6 +13,8 @@ export const company = {
   phoneIntl: "+40 767 235 693",
   tel: "tel:+40767235693",
   whatsapp: "https://wa.me/40767235693",
+  /** Omul care răspunde la telefon și pe WhatsApp (Alin, 14 nov 2026: „Da, un prenume”). */
+  contactName: "Alin",
   email: "contact@reverb.ro",
   /** Căsuța din care pleacă ofertele și răspunsurile scrise de mână (Alin, 12 nov 2026). */
   offersEmail: "reverb@reverb.ro",

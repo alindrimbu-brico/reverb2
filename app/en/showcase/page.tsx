@@ -8,12 +8,9 @@ export const metadata: Metadata = {
 };
 
 const showcases: Concept[] = [
-  { id: "digital-greenhouse", name: "The Digital Greenhouse", vibe: "Botanical Minimalism", color: "#7C8F6B", description: "A minimalist concept in Romanian and English: clear structure and botanical elegance, with plenty of air between sections.", href: "https://the-digital-greenhouse.vercel.app/" },
   { id: "surya", name: "Surya Group", vibe: "Brutalism Desyres", color: "#111111", description: "Robust webflow design, based on massive typography and sharp B2B boundaries.", href: "/en/showcase/surya" },
   { id: "florarte", name: "Florarte Textile", vibe: "Pastel Sage & Rose", color: "#4E6E59", description: "B2C floral atelier focused on mature textile aesthetics and sheer presence clarity.", href: "/en/showcase/florarte" },
   { id: "xiaolong", name: "Xiaolong Packaging", vibe: "Industrial B2B", color: "#208b53", description: "Mature corporate B2B design for a global Asian manufacturer, featuring a dynamic markup module.", href: "/en/showcase/xiaolong" },
-  { id: "artisan-cafe", name: "Artisan Café", vibe: "Cassette Futurism", color: "#D64933", description: "Technical minimalism and visually extracted thermal data for coffee batches.", href: "/en/showcase/artisan-cafe" },
-  { id: "don-barbershop", name: "DON Barbershop & Coffee", vibe: "Gentleman's Evening", color: "#B08D57", description: "A complete site for a barbershop with a coffee bar in Mera, Romania: evening atmosphere, presentation film, services and bookings.", href: "https://don-barbershop.pages.dev/" },
   { id: "medical-center", name: "Medical Clinic", vibe: "Bio-Interface", color: "#0057FF", description: "Absolute rigor. White sterility paired with a live ticker for operating room status.", href: "/en/showcase/medical-center" },
   { id: "legal-firm", name: "Legal Firm", vibe: "Legal Logic Brutal", color: "#8B2520", description: "Massive headings cut horizontally by infinite lines. The authority of law rendered digitally.", href: "/en/showcase/legal-firm" },
   { id: "architecture", name: "Architecture Studio", vibe: "Monolithic Grid", color: "#7A7A7A", description: "Exposed rough stone gray and web architecture guided by the 1.618 golden ratio.", href: "/en/showcase/architecture" },
@@ -28,7 +25,6 @@ const showcases: Concept[] = [
   { id: "event-music", name: "Festival Promoters", vibe: "Kinetic Blob Marquee", color: "#EC4899", description: "Fluid kinetic shapes combined with infinite marquees of artists.", href: "/en/showcase/event-music" },
   { id: "logistics-hub", name: "Logistics & Cargo", vibe: "Terminal Gate Cobalt", color: "#1D4ED8", description: "Dense tables simulating airport departures. Rigid grid for top-tier logistics.", href: "/en/showcase/logistics-hub" },
   { id: "ai-future", name: "AI Tech Core", vibe: "Holographic Orbital", color: "#06B6D4", description: "Vector software platforms with 3D CSS nodes for next-generation intelligence.", href: "/en/showcase/ai-future" },
-  { id: "aura", name: "AURA Retreat", vibe: "Ethereal Glass", color: "#c09054", description: "Therapeutic digital environment with mindfulness interfaces anchored in cognitive ease.", href: "/aura/index.html" },
   { id: "noapte", name: "Night Creativity", vibe: "Nocturnal Sacred", color: "#1e3a8a", description: "Midnight-Blue platform dedicated to chronotypes, sleep architecture, and nocturnal focus.", href: "/noapte/index.html" },
   { id: "spiritual-app", name: "Spiritual Intelligence", vibe: "Cognitive Reprogramming", color: "#9333ea", description: "Interactive web app for dissolving self-sabotage based on cognitive clarity.", href: "/showcase/spiritual-blog" },
   { id: "metanoia", name: "Metanoia Studio", vibe: "Ethereal Sacred", color: "#D4AF37", description: "Clarity in architecture. Elimination of visual noise and pure interactive flip cards.", href: "/showcase/metanoia" },
@@ -47,8 +43,6 @@ const showcases: Concept[] = [
   { id: "silva-method", name: "The Silva Method", vibe: "Alpha State Science", color: "#7C3AED", description: "Scientific and psychological exploration of the Alpha state and subconscious focus.", href: "/silva-method/" },
   { id: "spatiul-deschis", name: "Open Space", vibe: "Conscious Intimacy", color: "#BE185D", description: "Digital publication on emotional grounding, clarity in communication, and mutual safety.", href: "/spatiul-deschis/" },
   { id: "elumia", name: "Elumia", vibe: "Guide to the Unseen Plane", color: "#A78BFA", description: "Interactive bilingual guide to inner faculties, mind navigation, and cognitive stillness.", href: "/elumia/" },
-  { id: "flooare-ro-site", name: "Flooare.ro", vibe: "Harmony of the Spheres", color: "#0EA5E9", description: "Portal of archetypes and harmonic resonance. Sacred geometry and acoustic purity.", href: "/flooare-ro-site/" },
-  { id: "flooare-portal", name: "Flooare Portal", vibe: "Archetype Portal", color: "#14B8A6", description: "Extended Flooare portal: archetypes, structural sound frequencies, and interactive paths.", href: "https://www.flooare.ro/" },
   { id: "armonia", name: "ARMONIA", vibe: "Letters & Practices", color: "#B45309", description: "Twenty-one short letters with practical stoic exercises and grounding aphorisms.", href: "https://yourfinestform.com/" },
   { id: "immortallight", name: "The Immortal Light", vibe: "Sacred Teaching", color: "#EAB308", description: "Distilled universal teachings across civilizations: eight chapters and seven core pillars.", href: "https://immortallight.app/" },
   { id: "oracol", name: "The Five Circles Oracle", vibe: "52-Card Wisdom Oracle", color: "#DC2626", description: "A 52-card wisdom oracle interface for intuitive decision-making and clarity.", href: "https://pentora.app/" },

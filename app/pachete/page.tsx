@@ -144,12 +144,10 @@ export default function PachetePage() {
             <div className="mt-6">
               <WhoWeAre />
             </div>
-            <p className="mt-6 text-sm text-neutral-300 font-light leading-relaxed">
-              Înainte să alegi, vezi ce am construit. Câteva lucrări care sunt online acum:
-            </p>
+            <div className="mt-6 text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500">În administrare</div>
             <WorkShots items={lucrari} />
             <div className="mt-4 flex flex-wrap gap-2.5">
-              <Link href="/portofoliu" className="rounded-full bg-white px-4 py-2 text-xs font-mono font-bold text-black transition hover:bg-neutral-200">Vezi toate lucrările →</Link>
+              <Link href="/portofoliu" className="rounded-full bg-white px-4 py-2 text-xs font-mono font-bold text-black transition hover:bg-neutral-200">Tot portofoliul →</Link>
               <Link href="/showcase" className="rounded-full border border-white/20 px-4 py-2 text-xs font-mono text-neutral-200 transition hover:bg-white hover:text-black">Galeria de concepte →</Link>
             </div>
             <p className="mt-6 text-sm text-neutral-400 font-light leading-relaxed">

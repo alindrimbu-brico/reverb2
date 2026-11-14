@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
 import Logo from "@/components/Logo";
 import { company } from "@/lib/company";
 
@@ -16,7 +15,6 @@ interface SocialFooterLink {
 export default function Footer({ socialLinks = [] }: { socialLinks?: SocialFooterLink[] }) {
   const pathname = usePathname() || "";
   const isEn = pathname.startsWith("/en");
-  const [activeTab, setActiveTab] = useState<"navigare" | "ecosistem">("navigare");
 
   const navInfo = {
     ro: [
@@ -47,34 +45,15 @@ export default function Footer({ socialLinks = [] }: { socialLinks?: SocialFoote
     (pathname.startsWith("/en/showcase/") && pathname !== "/en/showcase")
   );
 
-  const showcaseLinks = [
-    { href: "https://reverb.ro", label: "Reverb.ro", external: true },
-    { href: "https://bythefire.app", label: "ByTheFire.app", external: true },
-    { href: isEn ? "/en/showcase" : "/showcase", label: isEn ? "Design Concepts" : "Concepte de design" },
-    { href: "https://bricolando.ro", label: "Bricolando.ro", external: true },
-    { href: "https://raftplin.ro", label: "RaftPlin.ro", external: true },
-    { href: "https://kalki.work", label: "Kalki.work", external: true },
-    { href: "https://kalki.nexus", label: "Kalki.nexus", external: true },
-    { href: "https://numerarium.app", label: "Numerarium", external: true },
-    { href: "https://elumia.app", label: "Elumia", external: true },
-    { href: "https://don-barbershop.pages.dev", label: "DON Barbershop", external: true },
-  ];
-
+  // Subsolul ține doar date (Alin, 14 nov 2026: „Minimalist… Pure data”; „partener și atât”). Fără paragrafe explicative,
+  // fără a doua listă de lucrări (portofoliul are pagina lui).
   const t = {
-    desc: isEn 
-      ? "We build presentation websites, online stores and videos for new businesses."
-      : "Facem site-uri de prezentare, magazine online și clipuri video pentru afaceri la început.",
     tagline1: isEn ? "Fixed price" : "Preț Fix",
     tagline2: isEn ? "Clear steps" : "Pași clari",
     tagline3: isEn ? "Support after launch" : "Sprijin după lansare",
     communications: "Contact",
-    hq: isEn ? "Where we are" : "Unde suntem",
-    office: isEn ? "Our office" : "Biroul nostru",
-    partnerTitle: isEn ? "Our partner in London, for large projects" : "Partenerul nostru din Londra, pentru proiecte mari",
+    hq: isEn ? "Office" : "Sediu",
     partner: isEn ? "Partner" : "Partener",
-    whatsapp: isEn ? "Message us on WhatsApp" : "Scrie-ne pe WhatsApp",
-    navTab: isEn ? "Navigation" : "Navigare",
-    ecoTab: isEn ? "Our work" : "Lucrările noastre",
     clarity: isEn ? "Websites and online stores" : "Site-uri și magazine online",
     rights: isEn ? "ALL RIGHTS RESERVED" : "TOATE DREPTURILE REZERVATE",
   };
@@ -103,9 +82,6 @@ export default function Footer({ socialLinks = [] }: { socialLinks?: SocialFoote
                   <div className="text-[10px] text-neutral-600 dark:text-neutral-400 font-mono tracking-wider">{t.clarity}</div>
                 </div>
               </Link>
-              <p className="mt-6 text-xs text-neutral-700 dark:text-neutral-400 font-light leading-relaxed">
-                {t.desc}
-              </p>
               <div className="mt-8 text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-600 dark:text-neutral-500 border-l border-black/20 dark:border-white/20 pl-4 py-1 flex flex-wrap items-center gap-x-2 gap-y-1">
                 <span>{t.tagline1}</span>
                 <span className="text-neutral-400 dark:text-neutral-700">•</span>
@@ -119,82 +95,22 @@ export default function Footer({ socialLinks = [] }: { socialLinks?: SocialFoote
           {/* Coloana 2: Matricea de Navigare (Tab-uri Funcționale) */}
           <div className="p-8 lg:p-14 lg:col-span-4 xl:col-span-5 flex flex-col bg-[#F1F2F4] dark:bg-[#1d2024]">
             
-            {/* Headers Tab-uri cu contrast ridicat în ambele teme */}
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-2 mb-8 border-b border-black/10 dark:border-white/10 pb-4 font-mono">
-               <button 
-                  onClick={() => setActiveTab("navigare")} 
-                  className={`text-[10px] font-bold uppercase tracking-[0.2em] transition-all px-4 py-1.5 rounded-full ${
-                    activeTab === "navigare" 
-                      ? "bg-[#111215] text-[#ffffff] dark:bg-white dark:text-black shadow-md font-extrabold" 
-                      : "text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white"
-                  }`}
-               >
-                  {t.navTab}
-               </button>
-               <button 
-                  onClick={() => setActiveTab("ecosistem")} 
-                  className={`text-[10px] font-bold uppercase tracking-[0.2em] transition-all px-4 py-1.5 rounded-full ${
-                    activeTab === "ecosistem" 
-                      ? "bg-[#111215] text-[#ffffff] dark:bg-white dark:text-black shadow-md font-extrabold" 
-                      : "text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white"
-                  }`}
-               >
-                  {t.ecoTab}
-               </button>
-            </div>
-
-            {/* Conținut Tab-uri */}
             <div className="flex-1 w-full font-mono">
-               {/* TAB: NAVIGARE */}
-               {activeTab === "navigare" && (
-                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
-                    {nav.map(({ href, label }) => (
-                      <Link 
-                        key={href} 
-                        href={href} 
-                        className="mech-magnetic mech-btn group flex justify-center items-center w-full rounded-full border border-black/10 dark:border-white/15 bg-white dark:bg-white/[0.06] px-3.5 py-2.5 text-neutral-900 dark:text-neutral-200 font-bold transition-all duration-300 hover:bg-[#111215] hover:text-[#ffffff] dark:hover:bg-white dark:hover:border-white dark:hover:text-black shadow-sm text-center"
-                      >
-                        <span className="text-[10px] uppercase tracking-wider">
-                          {label}
-                        </span>
-                      </Link>
-                    ))}
-                  </div>
-               )}
-
-               {/* TAB: ECOSISTEM */}
-               {activeTab === "ecosistem" && (
-                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
-                    {showcaseLinks.map((item) => (
-                      item.external ? (
-                        <a 
-                          key={item.label}
-                          href={item.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="mech-magnetic mech-btn group flex justify-center items-center gap-1 w-full rounded-full border border-black/10 dark:border-white/15 bg-white dark:bg-white/[0.06] px-3.5 py-2.5 text-neutral-900 dark:text-neutral-200 font-bold transition-all duration-300 hover:bg-[#111215] hover:text-[#ffffff] dark:hover:bg-white dark:hover:border-white dark:hover:text-black shadow-sm text-center"
-                        >
-                          <span className="text-[10px] uppercase tracking-wider">
-                            {item.label}
-                          </span>
-                          <span className="text-[8px] text-neutral-500">↗</span>
-                        </a>
-                      ) : (
-                        <Link 
-                          key={item.label}
-                          href={item.href}
-                          className="mech-magnetic mech-btn group flex justify-center items-center w-full rounded-full border border-black/10 dark:border-white/15 bg-white dark:bg-white/[0.06] px-3.5 py-2.5 text-neutral-900 dark:text-neutral-200 font-bold transition-all duration-300 hover:bg-[#111215] hover:text-[#ffffff] dark:hover:bg-white dark:hover:border-white dark:hover:text-black shadow-sm text-center"
-                        >
-                          <span className="text-[10px] uppercase tracking-wider">
-                            {item.label}
-                          </span>
-                        </Link>
-                      )
-                    ))}
-                  </div>
-               )}
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
+                {nav.map(({ href, label }) => (
+                  <Link
+                    key={href}
+                    href={href}
+                    className="mech-magnetic mech-btn group flex justify-center items-center w-full rounded-full border border-black/10 dark:border-white/15 bg-white dark:bg-white/[0.06] px-3.5 py-2.5 text-neutral-900 dark:text-neutral-200 font-bold transition-all duration-300 hover:bg-[#111215] hover:text-[#ffffff] dark:hover:bg-white dark:hover:border-white dark:hover:text-black shadow-sm text-center"
+                  >
+                    <span className="text-[10px] uppercase tracking-wider">
+                      {label}
+                    </span>
+                  </Link>
+                ))}
+              </div>
             </div>
-            
+
           </div>
 
           {/* Coloana 3: Comunicații & Date Oficiale */}
@@ -219,7 +135,7 @@ export default function Footer({ socialLinks = [] }: { socialLinks?: SocialFoote
                     rel="noopener noreferrer"
                     className="flex items-center justify-between text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 transition-colors font-bold"
                   >
-                    <span>{t.whatsapp}</span>
+                    <span data-no-translate>WhatsApp</span>
                     <span>↗</span>
                   </a>
                 </div>
@@ -248,8 +164,8 @@ export default function Footer({ socialLinks = [] }: { socialLinks?: SocialFoote
                 <div className="space-y-3">
                   {/* Birou România */}
                   <div>
-                    <div className="text-[10px] uppercase font-bold text-neutral-900 dark:text-neutral-200 tracking-wider">
-                      {t.office}
+                    <div data-no-translate className="text-[10px] uppercase font-bold text-neutral-900 dark:text-neutral-200 tracking-wider">
+                      {company.brand}
                     </div>
                     <p className="text-neutral-700 dark:text-neutral-400 text-[11px] leading-relaxed mt-0.5">
                       {isEn ? "Focșani, Vrancea, Romania" : "Focșani, Vrancea, România"}<br />
@@ -263,7 +179,7 @@ export default function Footer({ socialLinks = [] }: { socialLinks?: SocialFoote
 
               <div className="space-y-3">
                 <div className="text-[9px] font-bold tracking-[0.3em] uppercase text-neutral-600 dark:text-neutral-500 border-b border-black/10 dark:border-white/10 pb-2">
-                  {t.partnerTitle}
+                  {t.partner}
                 </div>
                 <div className="space-y-3">
 
@@ -294,22 +210,8 @@ export default function Footer({ socialLinks = [] }: { socialLinks?: SocialFoote
           </div>
         </div>
 
-        {/* Bara Subsol: partenerul și drepturile */}
-        <div className="px-8 lg:px-14 py-6 flex flex-col gap-6 md:flex-row md:items-center md:justify-between bg-[#E9EBEE] dark:bg-[#101214] font-mono text-xs border-t border-black/10 dark:border-white/10">
-          {/* Strategic Partner */}
-          <div className="flex items-center gap-3">
-            <span className="text-[9px] uppercase tracking-[0.25em] text-neutral-600 dark:text-neutral-500">{t.partner}:</span>
-            <a
-              href="https://zylarisgroup.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-neutral-900 dark:text-neutral-300 hover:text-neutral-600 dark:hover:text-white underline underline-offset-4 text-[11px] font-semibold transition-colors"
-            >
-              <span>Zylaris Group London</span>
-              <span className="text-[9px] text-neutral-500">↗</span>
-            </a>
-          </div>
-
+        {/* Bara de jos: drepturile (partenerul are blocul lui, deasupra) */}
+        <div className="px-8 lg:px-14 py-6 flex flex-col gap-6 md:flex-row md:items-center md:justify-end bg-[#E9EBEE] dark:bg-[#101214] font-mono text-xs border-t border-black/10 dark:border-white/10">
           {/* Legal / Manifest Inline */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 text-neutral-600 dark:text-neutral-500 text-[10px]">
             <span>&copy; 2026 KALKI DRIM MAGAZIN S.R.L.</span>

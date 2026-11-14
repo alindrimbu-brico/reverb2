@@ -146,12 +146,10 @@ export default function PackagesPageEN() {
               <div className="mt-6">
                 <WhoWeAre lang="en" />
               </div>
-              <p className="mt-6 text-sm text-neutral-300 font-light leading-relaxed normal-case">
-                Before you choose, see what we have built. A few projects that are online now:
-              </p>
+              <div className="mt-6 text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500">Managed</div>
               <WorkShots items={work} lang="en" />
               <div className="mt-4 flex flex-wrap gap-2.5">
-                <Link href="/en/portfolio" className="rounded-full bg-white px-4 py-2 text-xs font-mono font-bold text-black transition hover:bg-neutral-200">See all our work →</Link>
+                <Link href="/en/portfolio" className="rounded-full bg-white px-4 py-2 text-xs font-mono font-bold text-black transition hover:bg-neutral-200">Full portfolio →</Link>
                 <Link href="/showcase" className="rounded-full border border-white/20 px-4 py-2 text-xs font-mono text-neutral-200 transition hover:bg-white hover:text-black">Concept gallery →</Link>
               </div>
               <p className="mt-6 text-sm text-neutral-400 font-light leading-relaxed">
