@@ -7,7 +7,9 @@
 //   ... --test   → trimite la reverb@reverb.ro (noi), cu „[TEST]” în subiect
 //   ... --da     → trimite la <adresa>, cu o copie ascunsă la reverb@reverb.ro; doar după „da”-ul lui Alin pe textul exact
 //
-// Cheile SMTP se citesc din .env.local și nu se afișează niciodată.
+// Din 14 nov 2026 scrisoarea pleacă de pe serverul site-ului (POST https://reverb.ro/api/scrisoare, cu cheia
+// REVERB_SCRISOARE_CHEIE): trimisă de pe laptop ajungea în Spam (obs. 888). `--laptop` = calea veche, direct prin SMTP.
+// Cheile se citesc din .env.local și nu se afișează niciodată.
 
 const fs = require("fs");
 const path = require("path");
@@ -39,6 +41,8 @@ function argumente(argv) {
     else if (x === "--eticheta") a.eticheta = argv[++i];
     else if (x === "--de") a.de = argv[++i];
     else if (x === "--doar-text") a.doarText = true;
+    else if (x === "--laptop") a.laptop = true;
+    else if (x === "--server") a.server = argv[++i];
     else if (x === "--da") a.da = true;
     else if (!a.fisier) a.fisier = x;
     else throw new Error(`argument necunoscut: ${x}`);
@@ -73,16 +77,39 @@ function citeste(text) {
   return { subiect: m[1].trim(), text: corp, blocuri };
 }
 
-function cheiSmtp() {
+function dinEnv(nume) {
   const t = fs.readFileSync(path.join(RADACINA, ".env.local"), "utf8");
-  const ia = (nume) => {
-    const r = new RegExp(`^${nume}\\s*=\\s*(.*)$`, "m").exec(t);
-    return r ? r[1].trim().replace(/^["']|["']$/g, "") : "";
-  };
-  const user = ia("REVERB_EMAIL_USER");
-  const pass = ia("REVERB_EMAIL_PASS");
+  const r = new RegExp(`^${nume}\\s*=\\s*(.*)$`, "m").exec(t);
+  return r ? r[1].trim().replace(/^["']|["']$/g, "") : "";
+}
+
+function cheiSmtp() {
+  const user = dinEnv("REVERB_EMAIL_USER");
+  const pass = dinEnv("REVERB_EMAIL_PASS");
   if (!user || !pass) throw new Error("REVERB_EMAIL_USER / REVERB_EMAIL_PASS lipsesc din .env.local");
   return { user, pass };
+}
+
+async function prinServer(a, subiect, text, html) {
+  const cheie = dinEnv("REVERB_SCRISOARE_CHEIE");
+  if (!cheie) throw new Error("REVERB_SCRISOARE_CHEIE lipsește din .env.local");
+  const adresa = a.server || "https://reverb.ro/api/scrisoare";
+  const r = await fetch(adresa, {
+    method: "POST",
+    headers: { "content-type": "application/json", authorization: `Bearer ${cheie}` },
+    body: JSON.stringify({
+      catre: a.catre,
+      test: a.test,
+      subiect: a.test ? `${a.eticheta ?? "[TEST]"} ${subiect}`.trim() : subiect,
+      text,
+      html: a.doarText ? undefined : html,
+      de: a.de,
+    }),
+    redirect: "error",
+  });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok || !j.ok) throw new Error(`serverul a răspuns ${r.status}: ${JSON.stringify(j).slice(0, 200)}`);
+  console.log(`TRIMIS de pe server ${j.test ? "(test, la noi)" : ""}: acceptat pentru ${(j.acceptat || []).join(", ")}; respins: ${(j.respins || []).join(", ") || "nimic"}; id ${j.id}`);
 }
 
 async function main() {
@@ -104,6 +131,7 @@ async function main() {
     console.log("PREVIZUALIZARE: nimic trimis (--test = la noi, --da = la destinatar)");
     return;
   }
+  if (!a.laptop) return prinServer(a, subiect, text, html);
   const { user, pass } = cheiSmtp();
   const t = nodemailer.createTransport({ host: "smtp.hostinger.com", port: 465, secure: true, auth: { user, pass } });
   const info = await t.sendMail({
