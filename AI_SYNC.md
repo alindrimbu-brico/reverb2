@@ -8,6 +8,10 @@ Aici notăm progresul pentru a ne coordona perfect.
 
 ---
 
+### [Claude] - 14 nov 2026 (23:20) - Ruta `/api/scrisoare`: scrisorile Reverb pleacă de pe serverul site-ului
+1. `app/api/scrisoare/route.ts`: POST cu `Authorization: Bearer <REVERB_SCRISOARE_CHEIE>` (variabila e în Vercel, Production, și în `.env.local`; fără ea ruta dă 404, cu cheie greșită 401). Trimite din reverb@reverb.ro, cu copie ascunsă la reverb@; `test: true` = doar la noi. Nu o folosiți din pagini: o cheamă doar `scripts/trimite_scrisoare.cjs` (implicit prin server; `--laptop` = SMTP direct, calea veche).
+2. Probele de livrare se trimit la o căsuță din ALT domeniu (contact@bricolando.ro, Gmail), nu reverb@ către reverb@: căsuța reverb@ pune în Spam orice mesaj trimis sieși fără antetul `Auto-Submitted`, oricare ar fi conținutul sau serverul.
+
 ### [Claude] - 14 nov 2026 (noaptea) - Servicii: „Vizibil Local” și „Verificarea gratuită a site-ului”; formularul și confirmarea pentru verificare
 
 1. **Pachetul nou `vizibil-local`** (€103 / lună + TVA; Alin, 14 nov: „Da, 103”, după analiza de piață din `reverb\motor-seo-local\docs\cercetare\preturi_piata_2026-11-14.md`). Categoria `local`: apare în formular, în lista „Prețuri” de pe Contact (RO și EN) și pe Servicii; **nu** pe Pachete (filtrele de acolo iau doar `social`, `web`, `b2b`). Fără „Primim cel mult 5 firme”: doi cititori fără context l-au citit ca presiune.
