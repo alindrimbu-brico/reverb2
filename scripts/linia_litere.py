@@ -40,8 +40,8 @@ CONTUR_MIN = 700       # contururile mai scurte (punctul, punctul de pe i) răm�
 
 # (fișier generat, numele exportului, textul exact din pagină)
 TITLURI = [
-    ("lib/outlineRun/heroRo.ts", "heroRo", "Pentru afaceri la început."),
-    ("lib/outlineRun/heroEn.ts", "heroEn", "For new businesses."),
+    ("lib/outlineRun/heroRo.ts", "heroRo", "De la lansare la scalare."),
+    ("lib/outlineRun/heroEn.ts", "heroEn", "From launch to scale."),
 ]
 
 

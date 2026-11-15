@@ -5,9 +5,9 @@ import HomeClientEn from "./HomeClientEn";
 // from a server file, so it lives here: its own canonical and its own title.
 export const metadata: Metadata = {
   alternates: { canonical: "/en", languages: { ro: "/", en: "/en", "x-default": "/" } },
-  title: "Websites and online stores for new businesses",
+  title: "Websites and online stores, from launch to scale",
   description:
-    "We take a business from zero to its first sale: a fast website or online store, daily AI video content and optimisation for search in ChatGPT, Perplexity and Gemini. Clear prices, set from the start.",
+    "Websites, online stores and video, from launch to scale. Optimised for Google and AI assistants. Clear prices, set from the start.",
 };
 
 export default function Page() {

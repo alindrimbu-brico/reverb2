@@ -8,6 +8,7 @@ import { OutlineRun, Linie } from "@/components/RunningLine";
 import { heroRo } from "@/lib/outlineRun/heroRo";
 import ProjectPreviewModal, { PreviewProject } from "@/components/ProjectPreviewModal";
 import { liveProjectsRo } from "@/lib/liveProjects";
+import { OWN_PRODUCTS, HOME_PORTFOLIO } from "@/lib/ownProducts";
 import { pkg, priceLei, splitPrice, noBreak, VAT_LABEL, VAT_NOTE } from "@/lib/packages";
 
 // Cardurile de preț de pe prima pagină citesc din registru (lib/packages.ts), ca /pachete.
@@ -20,6 +21,7 @@ const siteStart = pkg("site-start");
 const siteVideo = pkg("start-digital");
 const magazinStart = pkg("magazin-start");
 const magazinVideo = pkg("magazin-digital-activ");
+const vizibilLocal = pkg("vizibil-local");
 
 // ── Web Audio API Procedural Sound Engine ──
 class SoundEngine {
@@ -95,9 +97,10 @@ const lucrari = ["Bricolando.ro", "RaftPlin.ro", "Kalki.nexus"].map((n) => realP
 // „aproximativ 1.730 lei cu TVA” → „aproximativ 1.730 lei” (rândul de sub prețuri spune o singură dată că e cu TVA).
 const lei = (price: string) => priceLei(price).replace(" cu TVA", "");
 
-// Filtrele: eticheta e pe înțeles, filtrarea se face după câmpul `badge` din lib/liveProjects.ts (fără `badges` = toate).
+// Portofoliul de pe prima pagină: 6 lucrări alese (lib/ownProducts.ts, HOME_PORTFOLIO), ca „selected work” la agențiile mari
+// (Alin, 15 nov 2026). Filtrele rămân pe /portofoliu; aici dau doar eticheta de pe card.
+const lucrariAlese = HOME_PORTFOLIO.map((n) => realProjects.find((p) => p.name === n)).filter((p) => !!p);
 const FILTRE: { label: string; badges?: string[] }[] = [
-  { label: "TOATE" },
   { label: "MAGAZINE", badges: ["eCommerce"] },
   { label: "SOFTWARE", badges: ["Software AI"] },
   { label: "APLICAȚII", badges: ["Aplicație"] },
@@ -109,7 +112,6 @@ const tip = (badge: string) => FILTRE.find((f) => f.badges?.includes(badge))?.la
 
 export default function HomePage() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [activeFilter, setActiveFilter] = useState("TOATE");
   const [selectedPreview, setSelectedPreview] = useState<PreviewProject | null>(null);
 
   useEffect(() => {
@@ -120,8 +122,6 @@ export default function HomePage() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  const filtru = FILTRE.find((f) => f.label === activeFilter);
-  const filteredProjects = filtru?.badges ? realProjects.filter((p) => filtru.badges!.includes(p.badge)) : realProjects;
 
   return (
     <div className="relative bg-[#070809] text-neutral-100 min-h-screen font-sans selection:bg-neutral-700 selection:text-white overflow-x-hidden antialiased">
@@ -153,20 +153,13 @@ export default function HomePage() {
 
         <div className="relative mx-auto max-w-5xl px-6 text-center flex flex-col items-center">
           
-          <div className="inline-flex flex-wrap items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2 text-[10px] font-mono uppercase tracking-[0.22em] text-neutral-300 mb-8 backdrop-blur-md">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-white font-semibold">SITE-URI</span>
-            <span className="text-neutral-500">•</span>
-            <span>MAGAZINE ONLINE</span>
-            <span className="text-neutral-500">•</span>
-            <span>CLIPURI VIDEO</span>
-          </div>
-
-          {/* Textul rândului gri e și în lib/outlineRun/heroRo.ts (scripts/linia_litere.py) și în IN_PLUS din scripts/i18n_extrage.py: se schimbă împreună. */}
+          {/* Fără eticheta „SITE-URI • MAGAZINE ONLINE • CLIPURI VIDEO” de deasupra (repeta titlul; agențiile mari au titlu + un rând, 15 nov 2026). */}
+          {/* Rândul gri (Alin, 15 nov 2026: nu doar pentru afaceri la început, și pentru cele deja pornite; ecoul pilonilor Lansare / Scalare).
+              Textul e și în lib/outlineRun/heroRo.ts (scripts/linia_litere.py) și în IN_PLUS din scripts/i18n_extrage.py: se schimbă împreună. */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[68px] font-medium tracking-[-0.04em] leading-[1.04] text-white break-words">
             Site-uri și magazine online.<br />
             <span className="text-neutral-400 font-light">
-              <OutlineRun text="Pentru afaceri la început." data={heroRo} />
+              <OutlineRun text="De la lansare la scalare." data={heroRo} />
             </span>
           </h1>
 
@@ -195,8 +188,8 @@ export default function HomePage() {
             </a>
           </div>
 
-          {/* Quick Contact Line for Mobile & Fast Actions */}
-          <div className="mt-6 flex items-center justify-center gap-6 text-[11px] font-mono text-neutral-400">
+          {/* Contactul rapid: un singur număr, scris o dată (WhatsApp → mesaj, numărul → apel). */}
+          <div className="mt-6 flex items-center justify-center gap-3 text-[11px] font-mono text-neutral-400">
             <a
               href="https://wa.me/40767235693?text=Salut,%20vreau%20o%20discuție%20pentru%20un%20proiect%20cu%20Reverb%20Digital"
               target="_blank"
@@ -204,14 +197,15 @@ export default function HomePage() {
               className="inline-flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 transition-colors"
             >
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              WhatsApp Rapid: 0767&nbsp;235&nbsp;693
+              WhatsApp
             </a>
-            <span className="text-neutral-700">•</span>
+            <span className="text-neutral-700">·</span>
             <a
               href="tel:0767235693"
+              aria-label="Sună la 0767 235 693"
               className="hover:text-white transition-colors"
             >
-              Apel Direct: 0767&nbsp;235&nbsp;693
+              0767&nbsp;235&nbsp;693
             </a>
           </div>
 
@@ -431,6 +425,57 @@ export default function HomePage() {
 
         </div>
 
+        {/* Firma care are deja site (Alin, 15 nov 2026: „și pentru afaceri deja începute”). Textul și prețul din registru, un singur șir. */}
+        <div className="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/[0.02] px-6 py-4 text-xs text-neutral-400">
+          <div>{`Ai deja site? ${vizibilLocal.tagline} Pachetul ${vizibilLocal.name}, de la ${vizibilLocal.price} ${VAT_LABEL}.`}</div>
+          <Link href="/servicii" className="shrink-0 font-mono font-bold text-white hover:underline">
+            Vezi serviciile →
+          </Link>
+        </div>
+
+      </section>
+
+      {/* ── Software propriu (Alin, 15 nov 2026: aplicațiile noastre nu erau evidențiate; ca Labs / Deptify la agențiile mari).
+          Datele și sursa fiecărei afirmații: lib/ownProducts.ts. Aceeași secțiune în app/en/HomeClientEn.tsx. ── */}
+      <section id="software" className="scroll-mt-24 relative z-10 py-24 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+          <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
+            <Linie>Software propriu.</Linie>
+          </h2>
+          <a
+            href="https://kalki.work"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="shrink-0 self-start md:self-auto rounded-full border border-white/20 px-4 py-2 text-xs font-mono text-neutral-200 transition hover:bg-white hover:text-black"
+          >
+            <span data-no-translate>Kalki Work</span> ↗
+          </a>
+        </div>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          {OWN_PRODUCTS.map((p) => (
+            <div key={p.name} className="mech-card rounded-2xl border border-white/10 bg-neutral-900/30 p-8 flex flex-col justify-between">
+              <div>
+                <div className="font-mono text-xs text-neutral-500 mb-6">{p.label.ro}</div>
+                <h3 className="text-xl font-medium text-white mb-3" {...(p.isName ? { "data-no-translate": "" } : {})}>
+                  {p.isName ? p.name : <Linie>{p.name}</Linie>}
+                </h3>
+                <p className="text-xs text-neutral-400 leading-relaxed font-light">{p.desc.ro}</p>
+                {p.where && <p className="mt-3 text-xs text-neutral-400 font-light">{p.where.ro}</p>}
+              </div>
+              {p.href && (
+                <a
+                  href={p.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${p.name} pe kalki.work`}
+                  className="mt-6 self-start text-[11px] font-mono text-neutral-400 hover:text-white transition-colors"
+                >
+                  kalki.work ↗
+                </a>
+              )}
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* ── Cum caută oamenii acum: asistenții AI ── */}
@@ -461,26 +506,9 @@ export default function HomePage() {
           <Linie>Portofoliu.</Linie>
         </h2>
 
-        {/* Filter Tabs */}
-        <div className="flex flex-wrap gap-2 mb-10 pb-6 border-b border-white/5">
-          {FILTRE.map(({ label }) => (
-            <button
-              key={label}
-              onClick={() => { setActiveFilter(label); sounds.playClick(); }}
-              className={`mech-magnetic rounded-full px-4 py-1.5 text-[10px] font-mono uppercase tracking-widest transition-all ${
-                activeFilter === label
-                  ? "bg-white text-black font-bold shadow-sm"
-                  : "bg-white/5 text-neutral-400 border border-white/10 hover:border-white/20 hover:text-white"
-              }`}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
-
         {/* grid-cols-1 explicit: fără el, coloana implicită se lățește după textul netăiat și cardul iese din ecran pe telefon */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {filteredProjects.map((p) => (
+          {lucrariAlese.map((p) => (
             <div
               key={p.name}
               onMouseEnter={() => sounds.playHover()}
@@ -528,11 +556,16 @@ export default function HomePage() {
             </div>
           ))}
         </div>
+        <div className="mt-8">
+          <Link href="/portofoliu" className="inline-flex rounded-full bg-white px-5 py-2.5 text-xs font-mono font-bold text-black transition hover:bg-neutral-200">
+            Tot portofoliul →
+          </Link>
+        </div>
       </section>
-      {/* ── Chemarea de la capăt: aceleași texte ca la capătul paginii /despre (deja traduse în toate limbile). ── */}
+      {/* ── Chemarea de la capăt: „Hai să vorbim.” (15 nov 2026, ca la agențiile mari; același titlu ca pe Contact și Servicii, deja tradus). ── */}
       <section className="relative z-10 py-24 px-6 text-center max-w-4xl mx-auto">
         <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight mb-6">
-          <Linie>Hai să construim site-ul afacerii tale.</Linie>
+          <Linie>Hai să vorbim.</Linie>
         </h2>
         <p className="text-neutral-400 text-sm md:text-base leading-relaxed mb-10 max-w-2xl mx-auto">
           Răspuns în cel mult 24 de ore lucrătoare.

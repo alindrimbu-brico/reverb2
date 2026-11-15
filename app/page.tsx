@@ -5,9 +5,9 @@ import HomeClient from "./HomeClient";
 // doar dintr-un fișier server, de aceea stă aici: canonical propriu și titlu propriu.
 export const metadata: Metadata = {
   alternates: { canonical: "/", languages: { ro: "/", en: "/en", "x-default": "/" } },
-  title: { absolute: "Reverb — Site-uri și magazine online pentru afaceri la început" },
+  title: { absolute: "Reverb — Site-uri și magazine, de la lansare la scalare" },
   description:
-    "Ducem o afacere de la zero la prima vânzare: site sau magazin online rapid, conținut video zilnic cu AI și optimizare pentru căutarea în ChatGPT, Perplexity și Gemini. Prețuri clare, stabilite de la început.",
+    "Site-uri, magazine online și clipuri video, de la lansare la scalare. Optimizate pentru Google și asistenții AI. Prețuri clare, stabilite de la început.",
 };
 
 export default function Page() {

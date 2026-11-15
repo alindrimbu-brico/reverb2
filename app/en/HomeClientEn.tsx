@@ -8,6 +8,7 @@ import { OutlineRun, Linie } from "@/components/RunningLine";
 import { heroEn } from "@/lib/outlineRun/heroEn";
 import ProjectPreviewModal, { PreviewProject } from "@/components/ProjectPreviewModal";
 import { liveProjectsEn } from "@/lib/liveProjects";
+import { OWN_PRODUCTS, HOME_PORTFOLIO, MODULES_TITLE_EN } from "@/lib/ownProducts";
 import { pkg, priceEn, priceLei, splitPrice, noBreak } from "@/lib/packages";
 import { packagesEn, enPrice, enDelivery, VAT_LABEL_EN, VAT_NOTE_EN } from "@/lib/packagesEn";
 
@@ -92,9 +93,10 @@ const work = ["Bricolando.ro", "RaftPlin.ro", "Kalki.nexus"].map((n) => realProj
 // "approx. 1,730 lei incl. VAT" → "approx. 1,730 lei" (the row under the prices says once that VAT is included).
 const lei = (id: "site-start" | "magazin-start") => priceLei(pkg(id).price, "en").replace(" incl. VAT", "");
 
-// Filters: the label is plain English, filtering uses the `badge` field of lib/liveProjects.ts (no `badges` = everything).
+// The home page portfolio: 6 selected projects (lib/ownProducts.ts, HOME_PORTFOLIO), like "selected work" at the big agencies
+// (Alin, 15 Nov 2026). The filters stay on /en/portfolio; here they only give the card label.
+const selectedWork = HOME_PORTFOLIO.map((n) => realProjects.find((p) => p.name === n)).filter((p) => !!p);
 const FILTERS: { label: string; badges?: string[] }[] = [
-  { label: "ALL" },
   { label: "STORES", badges: ["eCommerce"] },
   { label: "SOFTWARE", badges: ["AI Software"] },
   { label: "APPS", badges: ["Application"] },
@@ -106,7 +108,6 @@ const badgeLabel = (badge: string) => FILTERS.find((f) => f.badges?.includes(bad
 
 export default function EnglishHomePage() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [activeFilter, setActiveFilter] = useState("ALL");
   const [selectedPreview, setSelectedPreview] = useState<PreviewProject | null>(null);
 
   useEffect(() => {
@@ -117,8 +118,6 @@ export default function EnglishHomePage() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  const filter = FILTERS.find((f) => f.label === activeFilter);
-  const filteredProjects = filter?.badges ? realProjects.filter((p) => filter.badges!.includes(p.badge)) : realProjects;
 
   return (
     <div className="relative bg-[#070809] text-neutral-100 min-h-screen font-sans selection:bg-neutral-700 selection:text-white overflow-x-hidden antialiased">
@@ -149,20 +148,13 @@ export default function EnglishHomePage() {
 
         <div className="relative mx-auto max-w-5xl px-6 text-center flex flex-col items-center">
           
-          <div className="inline-flex flex-wrap items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2 text-[10px] font-mono uppercase tracking-[0.22em] text-neutral-300 mb-8 backdrop-blur-md">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-white font-semibold">WEBSITES</span>
-            <span className="text-neutral-500">•</span>
-            <span>ONLINE STORES</span>
-            <span className="text-neutral-500">•</span>
-            <span>VIDEO CLIPS</span>
-          </div>
-
-          {/* The grey row's text is also in lib/outlineRun/heroEn.ts (scripts/linia_litere.py): they change together. */}
+          {/* No "WEBSITES • ONLINE STORES • VIDEO CLIPS" tag above (it repeated the title; 15 Nov 2026). */}
+          {/* The grey row (Alin, 15 Nov 2026: for new and for established businesses; echoes the Launch / Scale pillars).
+              Its text is also in lib/outlineRun/heroEn.ts (scripts/linia_litere.py): they change together. */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[68px] font-medium tracking-[-0.04em] leading-[1.04] text-white break-words">
             Websites and online stores.<br />
             <span className="text-neutral-400 font-light">
-              <OutlineRun text="For new businesses." data={heroEn} />
+              <OutlineRun text="From launch to scale." data={heroEn} />
             </span>
           </h1>
 
@@ -191,8 +183,8 @@ export default function EnglishHomePage() {
             </a>
           </div>
 
-          {/* Quick Contact Line for Mobile & Direct Communication */}
-          <div className="mt-6 flex items-center justify-center gap-6 text-[11px] font-mono text-neutral-400">
+          {/* Quick contact: one number, written once (WhatsApp → message, the number → call). */}
+          <div className="mt-6 flex items-center justify-center gap-3 text-[11px] font-mono text-neutral-400">
             <a
               href="https://wa.me/40767235693?text=Hello,%20I%20would%20like%20to%20discuss%20a%20project%20with%20Reverb%20Digital"
               target="_blank"
@@ -200,14 +192,15 @@ export default function EnglishHomePage() {
               className="inline-flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 transition-colors"
             >
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              Direct WhatsApp: +40 767 235 693
+              WhatsApp
             </a>
-            <span className="text-neutral-700">•</span>
+            <span className="text-neutral-700">·</span>
             <a
-              href="tel:0767235693"
+              href="tel:+40767235693"
+              aria-label="Call +40 767 235 693"
               className="hover:text-white transition-colors"
             >
-              Direct Call
+              +40&nbsp;767&nbsp;235&nbsp;693
             </a>
           </div>
 
@@ -427,6 +420,49 @@ export default function EnglishHomePage() {
 
       </section>
 
+      {/* ── Our own software (Alin, 15 Nov 2026; like Labs / Deptify at the big agencies). Data and the source of every claim:
+          lib/ownProducts.ts. The same section is in app/HomeClient.tsx; `#software` works on both. ── */}
+      <section id="software" className="scroll-mt-24 relative z-10 py-24 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+          <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
+            <Linie>Our own software.</Linie>
+          </h2>
+          <a
+            href="https://kalki.work"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="shrink-0 self-start md:self-auto rounded-full border border-white/20 px-4 py-2 text-xs font-mono text-neutral-200 transition hover:bg-white hover:text-black"
+          >
+            <span data-no-translate>Kalki Work</span> ↗
+          </a>
+        </div>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          {OWN_PRODUCTS.map((p) => (
+            <div key={p.name} className="mech-card rounded-2xl border border-white/10 bg-neutral-900/30 p-8 flex flex-col justify-between">
+              <div>
+                <div className="font-mono text-xs text-neutral-500 mb-6">{p.label.en}</div>
+                <h3 className="text-xl font-medium text-white mb-3" {...(p.isName ? { "data-no-translate": "" } : {})}>
+                  {p.isName ? p.name : <Linie>{MODULES_TITLE_EN}</Linie>}
+                </h3>
+                <p className="text-xs text-neutral-400 leading-relaxed font-light">{p.desc.en}</p>
+                {p.where && <p className="mt-3 text-xs text-neutral-400 font-light">{p.where.en}</p>}
+              </div>
+              {p.href && (
+                <a
+                  href={p.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${p.name} on kalki.work`}
+                  className="mt-6 self-start text-[11px] font-mono text-neutral-400 hover:text-white transition-colors"
+                >
+                  kalki.work ↗
+                </a>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* ── How people search now: AI assistants ── */}
       <section id="ai-search-geo" className="scroll-mt-16 relative z-20 py-28 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
         <div className="rounded-3xl border border-white/15 bg-gradient-to-b from-neutral-900/40 via-neutral-950/70 to-neutral-900/30 p-8 md:p-14 backdrop-blur-md">
@@ -453,35 +489,15 @@ export default function EnglishHomePage() {
       {/* ── Our work ── */}
       <section id="projects" className="scroll-mt-16 relative z-10 py-28 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
 
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div className="mb-12">
           <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
             <Linie>Portfolio.</Linie>
           </h2>
-
-          {/* Filter Pills */}
-          <div className="flex flex-wrap gap-2 font-mono text-xs">
-            {FILTERS.map(({ label }) => (
-              <button
-                key={label}
-                onClick={() => {
-                  sounds.playClick();
-                  setActiveFilter(label);
-                }}
-                className={`rounded-full px-4 py-1.5 transition-all ${
-                  activeFilter === label
-                    ? "bg-white text-black font-semibold shadow-sm"
-                    : "border border-white/10 bg-white/5 text-neutral-400 hover:text-white hover:bg-white/10"
-                }`}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
         </div>
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {filteredProjects.map((p) => (
+          {selectedWork.map((p) => (
             <div
               key={p.name}
               onMouseEnter={() => sounds.playHover()}
@@ -525,13 +541,18 @@ export default function EnglishHomePage() {
             </div>
           ))}
         </div>
+        <div className="mt-8">
+          <Link href="/en/portfolio" className="inline-flex rounded-full bg-white px-5 py-2.5 text-xs font-mono font-bold text-black transition hover:bg-neutral-200">
+            Full portfolio →
+          </Link>
+        </div>
 
       </section>
 
-      {/* ── Final call to action ── */}
+      {/* ── Final call to action: "Let's talk." (15 Nov 2026, like the big agencies; the same title as on /en/contact). ── */}
       <section className="relative z-10 py-28 px-6 text-center max-w-4xl mx-auto">
         <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight mb-6">
-          <Linie>Ready to get your business online?</Linie>
+          <Linie>Let&apos;s talk.</Linie>
         </h2>
         <p className="text-neutral-400 text-sm md:text-base leading-relaxed mb-10 max-w-2xl mx-auto font-light">
           An answer within 24 working hours.
