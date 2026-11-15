@@ -7,7 +7,7 @@ import WorkShots from "@/components/WorkShots";
 import { OutlineRun, Linie } from "@/components/RunningLine";
 import { heroEn } from "@/lib/outlineRun/heroEn";
 import ProjectPreviewModal, { PreviewProject } from "@/components/ProjectPreviewModal";
-import { inProduction, liveProjectsEn } from "@/lib/liveProjects";
+import { liveProjectsEn } from "@/lib/liveProjects";
 import { pkg, priceEn, priceLei, splitPrice, noBreak } from "@/lib/packages";
 import { packagesEn, enPrice, enDelivery, VAT_LABEL_EN, VAT_NOTE_EN } from "@/lib/packagesEn";
 
@@ -211,24 +211,24 @@ export default function EnglishHomePage() {
             </a>
           </div>
 
-          {/* Metrics Bar */}
-          <div className="mt-20 pt-10 border-t border-white/10 w-full grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-neutral-400 font-mono text-xs">
-            {/* The figures come from the registry and the project list; the 30 days of support are in the package texts. */}
+          {/* Four pillars (Alin, 15 Nov 2026: no "N projects", no "Fixed price"); the same four as app/HomeClient.tsx.
+              Delivery terms come from the registry; the 30 days and the SLA are in the package texts. */}
+          <div className="mt-20 pt-10 border-t border-white/10 w-full grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8 text-center">
             <div>
-              <div className="text-2xl font-light text-white mb-1">{noBreak(enDelivery("site-start"))}</div>
-              <div className="text-[10px] uppercase tracking-wider text-neutral-500">Simple website</div>
+              <div className="font-mono text-xl md:text-2xl font-light text-white mb-2">Strategy</div>
+              <p className="mx-auto max-w-[15rem] text-balance text-xs leading-relaxed text-neutral-400 font-light">Consulting for starting your business: from idea to launch plan.</p>
             </div>
             <div>
-              <div className="text-2xl font-light text-white mb-1">30 days</div>
-              <div className="text-[10px] uppercase tracking-wider text-neutral-500">Support after launch</div>
+              <div className="font-mono text-xl md:text-2xl font-light text-white mb-2">Launch</div>
+              <p className="mx-auto max-w-[15rem] text-balance text-xs leading-relaxed text-neutral-400 font-light">{`Website in ${enDelivery("site-start")}, online store in ${enDelivery("magazin-start")}.`}</p>
             </div>
             <div>
-              <div className="text-2xl font-light text-white mb-1">{`${inProduction(realProjects)} projects`}</div>
-              <div className="text-[10px] uppercase tracking-wider text-neutral-500">Managed</div>
+              <div className="font-mono text-xl md:text-2xl font-light text-white mb-2">Scale</div>
+              <p className="mx-auto max-w-[15rem] text-balance text-xs leading-relaxed text-neutral-400 font-light">Large projects: dedicated architecture, contract-backed SLA.</p>
             </div>
             <div>
-              <div className="text-2xl font-light text-white mb-1">Fixed Price</div>
-              <div className="text-[10px] uppercase tracking-wider text-neutral-500">No Hidden Costs</div>
+              <div className="font-mono text-xl md:text-2xl font-light text-white mb-2">Support</div>
+              <p className="mx-auto max-w-[15rem] text-balance text-xs leading-relaxed text-neutral-400 font-light">30 days included, then ongoing maintenance and advice.</p>
             </div>
           </div>
 

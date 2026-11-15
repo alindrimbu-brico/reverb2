@@ -7,7 +7,7 @@ import WorkShots from "@/components/WorkShots";
 import { OutlineRun, Linie } from "@/components/RunningLine";
 import { heroRo } from "@/lib/outlineRun/heroRo";
 import ProjectPreviewModal, { PreviewProject } from "@/components/ProjectPreviewModal";
-import { inProduction, liveProjectsRo } from "@/lib/liveProjects";
+import { liveProjectsRo } from "@/lib/liveProjects";
 import { pkg, priceLei, splitPrice, noBreak, VAT_LABEL, VAT_NOTE } from "@/lib/packages";
 
 // Cardurile de preț de pe prima pagină citesc din registru (lib/packages.ts), ca /pachete.
@@ -215,24 +215,25 @@ export default function HomePage() {
             </a>
           </div>
 
-          {/* Metrics Bar */}
-          <div className="mt-20 pt-10 border-t border-white/10 w-full grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-neutral-400 font-mono text-xs">
-            {/* Cifrele vin din registru și din lista de proiecte; nu se scriu de mână (în afară de cele 30 de zile de sprijin, care sunt în textul pachetelor). */}
+          {/* Patru piloni (Alin, 15 nov 2026: fără „N proiecte” și „Preț fix”; forma după agențiile mari și Zylaris Group: un cuvânt + o frază).
+              Termenele vin din registru (un singur șir pe frază, pentru traducere); cele 30 de zile și SLA-ul sunt în textele pachetelor.
+              Aceleași patru și în app/en/HomeClientEn.tsx. */}
+          <div className="mt-20 pt-10 border-t border-white/10 w-full grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8 text-center">
             <div>
-              <div className="text-2xl font-light text-white mb-1">{noBreak(siteStart.delivery)}</div>
-              <div className="text-[10px] uppercase tracking-wider text-neutral-500">Site simplu</div>
+              <div className="font-mono text-xl md:text-2xl font-light text-white mb-2">Strategie</div>
+              <p className="mx-auto max-w-[15rem] text-balance text-xs leading-relaxed text-neutral-400 font-light">Consultanță la pornirea afacerii: de la idee la planul de lansare.</p>
             </div>
             <div>
-              <div className="text-2xl font-light text-white mb-1">30 de zile</div>
-              <div className="text-[10px] uppercase tracking-wider text-neutral-500">Sprijin după lansare</div>
+              <div className="font-mono text-xl md:text-2xl font-light text-white mb-2">Lansare</div>
+              <p className="mx-auto max-w-[15rem] text-balance text-xs leading-relaxed text-neutral-400 font-light">{`Site în ${siteStart.delivery}, magazin online în ${magazinStart.delivery}.`}</p>
             </div>
             <div>
-              <div className="text-2xl font-light text-white mb-1">{`${inProduction(realProjects)} proiecte`}</div>
-              <div className="text-[10px] uppercase tracking-wider text-neutral-500">În administrare</div>
+              <div className="font-mono text-xl md:text-2xl font-light text-white mb-2">Scalare</div>
+              <p className="mx-auto max-w-[15rem] text-balance text-xs leading-relaxed text-neutral-400 font-light">Proiecte mari: arhitectură dedicată, SLA prin contract.</p>
             </div>
             <div>
-              <div className="text-2xl font-light text-white mb-1">Preț Fix</div>
-              <div className="text-[10px] uppercase tracking-wider text-neutral-500">Fără Costuri Ascunse</div>
+              <div className="font-mono text-xl md:text-2xl font-light text-white mb-2">Susținere</div>
+              <p className="mx-auto max-w-[15rem] text-balance text-xs leading-relaxed text-neutral-400 font-light">30 de zile incluse, apoi mentenanță și consultanță continuă.</p>
             </div>
           </div>
 

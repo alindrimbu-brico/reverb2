@@ -50,7 +50,7 @@ const withState = (lang: Lang, list: Entry[]): LiveProject[] =>
     return { ...p, state, status: STATUS_LABEL[lang][state] };
   });
 
-/** Câte proiecte sunt în administrare. Cifra de pe prima pagină se ia de aici, nu se scrie de mână. */
+/** Câte proiecte sunt în administrare. Cifrele de pe Despre se iau de aici, nu se scriu de mână. */
 export function inProduction(list: LiveProject[]): number {
   return list.filter((p) => p.state === "managed").length;
 }
