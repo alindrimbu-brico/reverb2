@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgress";
 import AmbientBeams from "@/components/AmbientBeams";
 import MechanicalInteractions from "@/components/MechanicalInteractions";
-import BackgroundWatermarkLogo from "@/components/BackgroundWatermarkLogo";
+import SolarBackground from "@/components/SolarBackground";
 import CookieConsent from "@/components/CookieConsent";
 import { SITE_URL, TITLE_TEMPLATE } from "@/lib/seo";
 
@@ -143,7 +143,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <AmbientBeams />
-        <BackgroundWatermarkLogo />
+        <SolarBackground />
         <MechanicalInteractions />
         <ScrollProgress />
         <Header />

@@ -72,16 +72,22 @@ export default function AmbientBeams() {
         line.style.height = `${normH * 2}px`;
       }
       lastDraw = -Infinity;
+      lastSlot = -1;
     };
 
     const startTime = performance.now();
     let lastDraw = -Infinity;
+    let lastSlot = -1;
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const render = (now: number) => {
       if (!reduceMotion) animationFrameId = requestAnimationFrame(render);
+      // Cadrele se aleg pe felii fixe de timp (sistemul solar din fundal desenează pe una din două), ca ambele straturi să se
+      // redeseneze în aceeași reîmprospătare și pagina să se recompună o singură dată. Nu schimbați felia fără să măsurați.
+      const slot = Math.floor(now / FRAME_MS);
+      if (slot === lastSlot) return;
+      lastSlot = slot;
       const dt = now - lastDraw;
-      if (dt < FRAME_MS - 1) return;
       lastDraw = now;
       const elapsed = now - startTime;
 
