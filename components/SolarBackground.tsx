@@ -15,7 +15,10 @@ const DEG = Math.PI / 180;
 const W = 340, H = 176, CX = 170, CY = 80, CAM_D = 720, SUN = 8.5, YEAR = 5;
 const STILL = 8.4;                 // clipa desenată la „mișcare redusă”, pe /studio și la pornire
 const SPEED = 0.34;                // 340 / 1000: pe laptop, aceeași viteză pe ecran ca proba de 340 px
-const CAP = 0.4;                   // cerneala de fundal: tot ce trece de 0,4 se desenează plin, restul proporțional
+const CAP = 0.35;                  // cerneala de fundal: tot ce trece de 0,35 se desenează plin, restul proporțional
+// Soarele stă fix în mijlocul ferestrei, deci tot textul trece prin el: e ținut la ~57 % din tăria planetelor și a orbitelor
+// (cât era în prima variantă, mai discretă), ca fundalul să poată fi mai vizibil fără să scadă contrastul în centru.
+const SUN_INK = 0.2, SUN_GLOW = 0.1;
 // 15 cadre pe secundă, pe felii fixe de timp care cad mereu pe un cadru al AmbientBeams (30 pe secundă, aceleași felii):
 // pagina se recompune la fel de des ca fără fundal, iar desenul costă jumătate față de 30 (măsurat, 15 nov 2026).
 const FRAME_MS = 2000 / 30;
@@ -242,7 +245,7 @@ function createRenderer(cv: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
       const rgb = m ? `${m[0]},${m[1]},${m[2]}` : "255,255,255";
       ink = Array.from({ length: LEVELS + 1 }, (_, k) => `rgba(${rgb},${Math.min(1, k / LEVELS / CAP).toFixed(3)})`);
       sunGlow = ctx.createRadialGradient(CX, CY, SUN * 0.7, CX, CY, SUN * 3.4);
-      sunGlow.addColorStop(0, col(0.18)); sunGlow.addColorStop(1, col(0));
+      sunGlow.addColorStop(0, col(SUN_GLOW)); sunGlow.addColorStop(1, col(0));
     },
     draw(t: number) {
       ctx.setTransform(1, 0, 0, 1, 0, 0);
@@ -285,7 +288,7 @@ function createRenderer(cv: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
 
       // Soarele, cu un halo slab
       if (sunGlow) { ctx.fillStyle = sunGlow; ctx.beginPath(); ctx.arc(CX, CY, SUN * 3.4, 0, TAU); ctx.fill(); }
-      ctx.beginPath(); ctx.arc(CX, CY, SUN, 0, TAU); ctx.fillStyle = col(1); ctx.fill();
+      ctx.beginPath(); ctx.arc(CX, CY, SUN, 0, TAU); ctx.fillStyle = col(SUN_INK); ctx.fill();
 
       // în față
       strokeOrbits(true, col(0.3));
