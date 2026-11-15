@@ -260,7 +260,7 @@ export default function EnglishHomePage() {
             <div className="text-2xl font-light text-neutral-600 mb-4">01</div>
             <h3 className="text-base font-medium text-white mb-2">We talk</h3>
             <p className="text-neutral-400 font-light leading-relaxed">
-              From you: texts and photos. From us: a deadline and a fixed price, before work begins.
+              From you: texts and photos. From us: the deadline and the price, both set before work begins.
             </p>
           </div>
 
@@ -298,11 +298,11 @@ export default function EnglishHomePage() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div>
             <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
-              <Linie>Fixed prices.</Linie>
+              <Linie>Clear pricing.</Linie>
             </h2>
           </div>
           <p className="max-w-md text-xs md:text-sm text-neutral-400 font-light leading-relaxed">
-            No mandatory 12-month contract. {VAT_NOTE_EN}
+            Packages adapt to your project. The price agreed at the start doesn't change: anything extra is approved by you first, with its price. No mandatory 12-month contract. {VAT_NOTE_EN}
           </p>
         </div>
 

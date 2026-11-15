@@ -89,12 +89,12 @@ export function contactConfirmation(i: {
         : en
         ? [
             { title: "A person reads your request", text: "Not a robot: someone on our team." },
-            { title: "We reply by e-mail within 24 working hours", text: "With our questions and a proposal at a fixed price." },
+            { title: "We reply by e-mail within 24 working hours", text: "With our questions and a proposal with a clear price from the start." },
             { title: "We set up a talk", text: `By phone, online or at our office in ${company.city}, whichever is easier for you.` },
           ]
         : [
             { title: "Un om îți citește cererea", text: "Nu un robot: cineva din echipa noastră." },
-            { title: "Îți răspundem pe e-mail în cel mult 24 de ore lucrătoare", text: "Cu întrebările noastre și o propunere cu preț fix." },
+            { title: "Îți răspundem pe e-mail în cel mult 24 de ore lucrătoare", text: "Cu întrebările noastre și o propunere cu prețul clar de la început." },
             { title: "Stabilim o discuție", text: `La telefon, online sau la biroul nostru din ${company.city}, cum îți e mai simplu.` },
           ],
     },

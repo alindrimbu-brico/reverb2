@@ -21,7 +21,7 @@ const hostingLater = priceEn(HOSTING_AFTER_FIRST_YEAR);
 export const metadata: Metadata = {
   alternates: { canonical: "/en/packages", languages: { ro: "/pachete", en: "/en/packages", "x-default": "/pachete" } },
   title: "Packages & Pricing — Reverb Digital",
-  description: `Fixed prices for presentation websites, online stores and short videos for social media. Website from ${enPrice("site-start")}, online store from ${enPrice("magazin-start")}, plus VAT.`,
+  description: `Clear prices for presentation websites, online stores and short videos for social media. Website from ${enPrice("site-start")}, online store from ${enPrice("magazin-start")}, plus VAT.`,
 };
 
 // The "What you pay in total" box: what the registry and the FAQ say; below it, example prices of other companies,
@@ -58,6 +58,10 @@ const faqsEN = [
   {
     q: "What else do I pay besides the package price?",
     a: "VAT, which is added to the prices shown. For a website: the domain (the site's name, a small yearly fee), which you buy in your company's name; in Website Start hosting is included for the first year, then you pay it yearly (the amount is written in the package) or you move the site wherever you want. For a store: hosting, the domain and the fees of the payment processor and the courier, on your own contracts. We tell you beforehand what to choose and what each one costs, then we connect them to the store.",
+  },
+  {
+    q: "Can the price change once we've started?",
+    a: "No. Before we start, we agree together on what goes into the package: we can add or remove things to fit your needs. The price agreed then stays the same until handover. If you want something extra along the way, we tell you first what it costs and only start once you agree.",
   },
   {
     q: "What does “prepared for AI assistants” mean?",
@@ -102,7 +106,7 @@ export default function PackagesPageEN() {
 
           <Reveal delay={0.1}>
             <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-white leading-tight">
-              <Linie>Fixed prices.</Linie><br />
+              <Linie>Clear pricing.</Linie><br />
               <span className="text-neutral-400 font-light"><Linie>No hidden costs.</Linie></span>
             </h1>
           </Reveal>
@@ -116,7 +120,7 @@ export default function PackagesPageEN() {
               <a href="#cost" className="text-white underline underline-offset-4 decoration-white/40 hover:decoration-white">See an example of the total cost ↓</a>
             </p>
             <p className="mx-auto mt-6 max-w-2xl text-base sm:text-lg text-neutral-400 font-light leading-relaxed">
-              Every package has a fixed list of what you get and a firm delivery date. What we build can be found on Google and by people who ask ChatGPT.
+              Every package has its own list of what you get and a firm delivery date, and it adapts to your project. The price agreed at the start doesn't change: anything extra is approved by you first, with its price. What we build can be found on Google and by people who ask ChatGPT.
             </p>
             <p className="mx-auto mt-5 max-w-2xl text-sm text-neutral-300 font-light leading-relaxed">
               Looking for videos for social media?{" "}
@@ -141,7 +145,7 @@ export default function PackagesPageEN() {
                 <Linie>Websites, Online Stores and Large Projects</Linie>
               </h2>
               <p className="mt-4 text-sm text-neutral-400 font-light leading-relaxed">
-                Presentation websites and online stores at a fixed price: from a simple start to complete systems with video clips, and projects for large companies.
+                Presentation websites and online stores with the price set from the start: from a simple start to complete systems with video clips, and projects for large companies.
               </p>
               <div className="mt-6">
                 <WhoWeAre lang="en" />

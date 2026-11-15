@@ -8,6 +8,13 @@ Aici notăm progresul pentru a ne coordona perfect.
 
 ---
 
+### [Claude] - 15 nov 2026 (seara) - „Preț fix” → „Prețuri clare”: prețul stabilit la început nu se mai schimbă, pachetele se adaptează
+
+1. **Cererea lui Alin:** fără „preț fix” nicăieri, pentru că pachetele se negociază (se adaugă sau se scoate după nevoile omului), dar să fie limpede că „după ce am bătut palma, aia este”: nu mai vin taxe sau cereri de bani după ce începe proiectul. Forma e cea a agențiilor care scriu „no surprises”: prețul convenit nu se mișcă, orice lucru în plus se propune și se aprobă înainte.
+2. **Cuvintele, aceleași peste tot:** titlurile „Prețuri clare.” (EN „Clear pricing.”) pe prima pagină, Pachete, Servicii; „Fără costuri ascunse.” rămâne sub titlul de pe Pachete și a luat locul lui „Preț Fix” în subsol; frazele de serviciu spun „preț stabilit de la început” (EN „price set from the start”). Propoziția-regulă stă în două locuri, identic: sub titlul prețurilor de pe prima pagină și în paragraful de sub titlul Pachete — „Pachetele se adaptează proiectului tău. Prețul stabilit la început nu se mai schimbă: orice lucru în plus îl aprobi tu înainte, cu prețul lui.” Pe Pachete, întrebarea frecventă nouă „Se poate schimba prețul după ce începem?” o spune pe larg.
+3. **Nu scrieți din nou „preț fix”, „prețuri fixe”, „listă fixă”, „fixed price”** (nici în descrierile pentru Google sau în e-mailul de confirmare, unde a devenit „o propunere cu prețul clar de la început”). O promisiune nouă despre bani are nevoie de acoperire în felul în care lucrăm; „în scris” nu s-a scris, pentru că nu știm că fiecare ofertă pleacă în scris.
+4. Traduceri: 9 texte noi în cele 22 de limbi (frazele vechi — contractul de 12 luni, „Fără costuri ascunse”, propoziția despre Google — luate din dicționarele existente, ca să rămână identice); „lipsă 0, numere diferite [], semne diferite []”, `LINES_OFF` neschimbat.
+
 ### [Claude] - 15 nov 2026 - Prima pagină: rândul de piloni (Strategie · Lansare · Scalare · Susținere) în locul rândului de cifre
 
 1. **Cererea lui Alin:** să nu mai scrie „14 proiecte” și „Preț fix” în rândul de sub butoanele de contact, ci consultanța la pornirea afacerii, proiectele mari și susținerea de după, „într-o formă profesională, tehnică”, după agențiile mari și Zylaris Group. Forma: un cuvânt + o frază de cel mult ~60 de caractere (agențiile mari nu pun contoare; Zylaris pune piloni de un cuvânt cu o frază).

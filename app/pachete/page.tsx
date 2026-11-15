@@ -19,7 +19,7 @@ const magazin = pkg("magazin-start");
 export const metadata: Metadata = {
   alternates: { canonical: "/pachete", languages: { ro: "/pachete", en: "/en/packages", "x-default": "/pachete" } },
   title: "Pachete & Prețuri — Reverb Digital",
-  description: `Prețuri fixe pentru site-uri de prezentare, magazine online și clipuri video pentru rețelele sociale. Site de la ${site.price}, magazin online de la ${magazin.price}, plus TVA.`,
+  description: `Prețuri clare pentru site-uri de prezentare, magazine online și clipuri video pentru rețelele sociale. Site de la ${site.price}, magazin online de la ${magazin.price}, plus TVA.`,
 };
 
 // Caseta „Cât plătești în total”: ce scrie în registru și în întrebările frecvente; dedesubt, exemple de prețuri ale altor
@@ -57,6 +57,10 @@ const faqs = [
   {
     q: "Ce mai plătesc pe lângă prețul pachetului?",
     a: "TVA-ul, care se adaugă la prețurile afișate. La un site: domeniul (numele site-ului, câteva zeci de lei pe an), pe care îl cumperi pe firma ta; la Site Start găzduirea e inclusă în primul an, apoi o plătești anual (suma e scrisă în pachet) sau muți site-ul unde vrei. La un magazin: găzduirea, domeniul și comisioanele procesatorului de plăți și ale curierului, pe contractele tale. Îți spunem dinainte ce să alegi și cât costă fiecare, apoi le legăm noi de magazin.",
+  },
+  {
+    q: "Se poate schimba prețul după ce începem?",
+    a: "Nu. Înainte de început stabilim împreună ce intră în pachet: putem adăuga sau scoate lucruri, după nevoile tale. Prețul stabilit atunci rămâne același până la predare. Dacă pe parcurs vrei ceva în plus, îți spunem întâi cât costă și lucrăm doar după ce ești de acord.",
   },
   {
     q: "Ce înseamnă „pregătit pentru asistenții AI”?",
@@ -100,7 +104,7 @@ export default function PachetePage() {
           </Reveal>
           <Reveal delay={80}>
             <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-white leading-tight">
-              <Linie>Prețuri fixe.</Linie><br />
+              <Linie>Prețuri clare.</Linie><br />
               <span className="text-neutral-400 font-light"><Linie>Fără costuri ascunse.</Linie></span>
             </h1>
           </Reveal>
@@ -113,7 +117,7 @@ export default function PachetePage() {
               <a href="#cost" className="text-white underline underline-offset-4 decoration-white/40 hover:decoration-white">Vezi un exemplu de cost total ↓</a>
             </p>
             <p className="mt-6 max-w-2xl mx-auto text-base md:text-lg text-neutral-400 font-light leading-relaxed">
-              Fiecare pachet are o listă fixă cu ce primești și un termen ferm de predare. Ce construim poate fi găsit pe Google și de oamenii care întreabă ChatGPT.
+              Fiecare pachet are lista lui cu ce primești și un termen ferm de predare și se adaptează proiectului tău. Prețul stabilit la început nu se mai schimbă: orice lucru în plus îl aprobi tu înainte, cu prețul lui. Ce construim poate fi găsit pe Google și de oamenii care întreabă ChatGPT.
             </p>
             <p className="mx-auto mt-5 max-w-2xl text-sm text-neutral-300 font-light leading-relaxed">
               Cauți clipuri pentru rețelele sociale?{" "}
@@ -139,7 +143,7 @@ export default function PachetePage() {
               <Linie>Site-uri, Magazine Online și Proiecte Mari</Linie>
             </h2>
             <p className="mt-4 text-sm text-neutral-400 font-light leading-relaxed">
-              Site-uri de prezentare și magazine online la preț fix: de la un început simplu, până la sisteme complete cu clipuri video și proiecte pentru companii mari.
+              Site-uri de prezentare și magazine online cu preț stabilit de la început: de la un început simplu, până la sisteme complete cu clipuri video și proiecte pentru companii mari.
             </p>
             <div className="mt-6">
               <WhoWeAre />

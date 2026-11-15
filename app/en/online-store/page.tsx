@@ -293,7 +293,7 @@ export default function OnlineStorePage() {
         <div className="grid gap-5 md:grid-cols-2">
           <Reveal>
             <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8">
-              <div className="text-sm font-medium text-neutral-400">Starter package, fixed price</div>
+              <div className="text-sm font-medium text-neutral-400">Starter package, price set from the start</div>
               <div className="mt-2 text-sm font-semibold text-white">{storeStart.name}</div>
               <div className="mt-4 text-4xl font-medium tracking-[-0.04em] text-white">{enPrice("magazin-start")} <span className="whitespace-nowrap text-sm font-normal tracking-normal text-neutral-500">{VAT_LABEL_EN}</span></div>
               <div className="mt-1 text-sm text-neutral-400">{priceLei(registryPkg("magazin-start").price, "en")}</div>

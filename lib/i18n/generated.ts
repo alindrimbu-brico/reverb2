@@ -2,6 +2,6 @@
 // DICT_VERSION: limbile care au dicționar în public/i18n/ și hash-ul fișierului (intră în adresă, pentru cache).
 // LINES_OFF: limbile în care cel puțin un titlu are litere în afara atlasului „liniei care merge”; acolo titlurile sunt text simplu.
 
-export const DICT_VERSION: Record<string, string> = {"bg": "b09f3b7c", "cs": "e18c7915", "da": "3209084e", "de": "8e395677", "el": "93c692c3", "es": "de09e77b", "et": "87933dfc", "fi": "f5578380", "fr": "777c62e3", "ga": "edc023ec", "hr": "728b9c45", "hu": "92c4a0e5", "it": "36dc8b90", "lt": "461640c3", "lv": "bd8d6689", "mt": "5d178d57", "nl": "df69e716", "pl": "cc47d291", "pt": "48c93995", "sk": "7c0ab3a3", "sl": "d7575b84", "sv": "1ac1e126"};
+export const DICT_VERSION: Record<string, string> = {"bg": "25e8239d", "cs": "d209076c", "da": "bc2334d0", "de": "b09e8b8e", "el": "d9cc3376", "es": "371085e2", "et": "b058c5b4", "fi": "cc0926a9", "fr": "d8ad5ce7", "ga": "fac3b3a3", "hr": "10d99c7f", "hu": "10f9382c", "it": "37faaca5", "lt": "b9b998a9", "lv": "d4dbebc9", "mt": "563dee38", "nl": "d5ec7555", "pl": "f00a0630", "pt": "b64ac8f4", "sk": "3968575c", "sl": "60675b47", "sv": "a303c5d5"};
 
 export const LINES_OFF: string[] = ["bg", "cs", "el", "hr", "hu", "lt", "lv", "mt", "pl", "sk", "sl"];

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/en/services", languages: { ro: "/servicii", en: "/en/services", "x-default": "/servicii" } },
   title: "Services — Reverb Digital",
   description:
-    "Websites and online stores at fixed prices, daily AI-made videos for social media, and help to be found and recommended by AI assistants such as ChatGPT.",
+    "Websites and online stores with prices set from the start, daily AI-made videos for social media, and help to be found and recommended by AI assistants such as ChatGPT.",
 };
 
 const mainServices = [
@@ -83,7 +83,7 @@ export default function ServicesPageEN() {
           <Reveal delay={0.1}>
             <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-white leading-tight">
               <Linie>Services.</Linie><br />
-              <span className="text-neutral-400 font-light"><Linie>Fixed prices.</Linie></span>
+              <span className="text-neutral-400 font-light"><Linie>Clear pricing.</Linie></span>
             </h1>
           </Reveal>
 

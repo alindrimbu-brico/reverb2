@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/en", languages: { ro: "/", en: "/en", "x-default": "/" } },
   title: "Websites and online stores for new businesses",
   description:
-    "We take a business from zero to its first sale: a fast website or online store, daily AI video content and optimisation for search in ChatGPT, Perplexity and Gemini. Fixed prices.",
+    "We take a business from zero to its first sale: a fast website or online store, daily AI video content and optimisation for search in ChatGPT, Perplexity and Gemini. Clear prices, set from the start.",
 };
 
 export default function Page() {

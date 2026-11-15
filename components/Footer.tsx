@@ -48,7 +48,7 @@ export default function Footer({ socialLinks = [] }: { socialLinks?: SocialFoote
   // Subsolul ține doar date (Alin, 14 nov 2026: „Minimalist… Pure data”; „partener și atât”). Fără paragrafe explicative,
   // fără a doua listă de lucrări (portofoliul are pagina lui).
   const t = {
-    tagline1: isEn ? "Fixed price" : "Preț Fix",
+    tagline1: isEn ? "No hidden costs" : "Fără costuri ascunse",
     tagline2: isEn ? "Clear steps" : "Pași clari",
     tagline3: isEn ? "Support after launch" : "Sprijin după lansare",
     communications: "Contact",

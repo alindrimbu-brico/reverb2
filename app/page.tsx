@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/", languages: { ro: "/", en: "/en", "x-default": "/" } },
   title: { absolute: "Reverb — Site-uri și magazine online pentru afaceri la început" },
   description:
-    "Ducem o afacere de la zero la prima vânzare: site sau magazin online rapid, conținut video zilnic cu AI și optimizare pentru căutarea în ChatGPT, Perplexity și Gemini. Prețuri fixe.",
+    "Ducem o afacere de la zero la prima vânzare: site sau magazin online rapid, conținut video zilnic cu AI și optimizare pentru căutarea în ChatGPT, Perplexity și Gemini. Prețuri clare, stabilite de la început.",
 };
 
 export default function Page() {

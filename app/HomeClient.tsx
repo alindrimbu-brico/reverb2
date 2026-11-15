@@ -267,7 +267,7 @@ export default function HomePage() {
             <div className="font-mono text-xs text-neutral-500 mb-6">/ 01 — DISCUTĂM</div>
             <h3 className="text-xl font-medium text-white mb-3"><Linie>Ce ai nevoie</Linie></h3>
             <p className="text-xs text-neutral-400 leading-relaxed font-light">
-              De la tine: texte și poze. De la noi: termen și preț fix, înainte de început.
+              De la tine: texte și poze. De la noi: termenul și prețul, stabilite înainte de început.
             </p>
           </div>
 
@@ -304,11 +304,11 @@ export default function HomePage() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div>
             <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
-              <Linie>Prețuri fixe.</Linie>
+              <Linie>Prețuri clare.</Linie>
             </h2>
           </div>
           <p className="max-w-md text-xs md:text-sm text-neutral-400 font-light leading-relaxed">
-            Fără contract obligatoriu pe 12 luni. {VAT_NOTE}
+            Pachetele se adaptează proiectului tău. Prețul stabilit la început nu se mai schimbă: orice lucru în plus îl aprobi tu înainte, cu prețul lui. Fără contract obligatoriu pe 12 luni. {VAT_NOTE}
           </p>
         </div>
 

@@ -292,7 +292,7 @@ export default function MagazineOnlinePage() {
         <div className="grid gap-5 md:grid-cols-2">
           <Reveal>
             <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8">
-              <div className="text-sm font-medium text-neutral-400">Pachet de pornire, preț fix</div>
+              <div className="text-sm font-medium text-neutral-400">Pachet de pornire, preț stabilit de la început</div>
               <div className="mt-2 text-sm font-semibold text-white">{magazinStart.name}</div>
               <div className="mt-4 text-4xl font-medium tracking-[-0.04em] text-white">{magazinStart.price} <span className="whitespace-nowrap text-sm font-normal tracking-normal text-neutral-500">{VAT_LABEL}</span></div>
               <div className="mt-1 text-sm text-neutral-400">{priceLei(magazinStart.price)}</div>

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/servicii", languages: { ro: "/servicii", en: "/en/services", "x-default": "/servicii" } },
   title: "Servicii — Reverb Digital",
   description:
-    "Site-uri și magazine online la preț fix, clipuri zilnice făcute cu AI pentru rețelele sociale și ajutor ca afacerea ta să fie găsită și recomandată de asistenți AI precum ChatGPT.",
+    "Site-uri și magazine online cu preț stabilit de la început, clipuri zilnice făcute cu AI pentru rețelele sociale și ajutor ca afacerea ta să fie găsită și recomandată de asistenți AI precum ChatGPT.",
 };
 
 type Service = {
@@ -133,7 +133,7 @@ export default function ServiciiPage() {
           <Reveal delay={80}>
             <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-white leading-tight">
               <Linie>Servicii.</Linie><br />
-              <span className="text-neutral-400 font-light"><Linie>Prețuri fixe.</Linie></span>
+              <span className="text-neutral-400 font-light"><Linie>Prețuri clare.</Linie></span>
             </h1>
           </Reveal>
           <Reveal delay={160}>
