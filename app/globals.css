@@ -916,7 +916,10 @@ html.light .rounded-full.bg-white.text-black:not(:where([role="dialog"] *, [data
 /* ── Sistemul solar din fundal (components/SolarBackground.tsx), în locul siglei statice ──
    Fix, centrat, sub conținut (`main` și subsolul au z-10). Înălțimea 100lvh: pe telefon nu sare când se strânge bara de adresă.
    Marginile se estompează, ca stelele și cometa să nu se taie într-un dreptunghi.
-   Opacitatea e plafonată de contrastul textului care trece peste Soare (măsurat): nu o ridicați fără să refaceți măsurătoarea.
+   Opacitatea e plafonată de contrastul textului care trece peste planete, orbite și Soare (măsurat pe toată pagina derulată,
+   la 12 momente, cu dungile AmbientBeams incluse; AI_SYNC, nota din 16 nov): nu o ridicați fără să refaceți măsurătoarea.
+   De la 16 nov 2026 e singurul desen cu linii din fundal (grila și firele oblice s-au scos). Opacitatea a rămas 0,12 / 0,10:
+   orice valoare mai mare a coborât textul de corp sub 4,5 : 1; sistemul e mai vizibil din componentă (orbitele, LINE_CAP, FRONT_W).
    Canvasul apare lin după primul desen (până atunci e gol). */
 .solar-bg {
   position: fixed; left: 0; top: 0; width: 100%; height: 100vh; height: 100lvh;
@@ -936,24 +939,6 @@ html.light .solar-bg canvas[data-drawn] { opacity: 0.1; }
 @media (prefers-reduced-motion: reduce) { .solar-bg canvas { transition: none; } }
 @media print { .solar-bg { display: none; } }
 @media (forced-colors: active) { .solar-bg { display: none; } }
-
-/* ── Fundalul animat (components/AmbientBeams.tsx) ──
-   Firul subțire din mijlocul fiecărei dungi de lumină. Poziția, înălțimea și unghiul le scrie componenta (transform). */
-.ambient-hairline {
-  position: absolute; left: 0; top: 0; width: 1.5px; height: 0;
-  transform-origin: 1px 50%; will-change: transform;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.052) 50%, rgba(255, 255, 255, 0));
-}
-html.light .ambient-hairline {
-  background: linear-gradient(to bottom, rgba(17, 18, 21, 0), rgba(17, 18, 21, 0.121) 50%, rgba(17, 18, 21, 0));
-}
-/* Pe ecrane obișnuite firul de 1,5 px se desenează pe 2 pixeli întregi, deci e mai slab cu 13 % ca să aibă aceeași tărie ca
-   în varianta desenată pe canvas (măsurat pe capturi, 13 nov 2026). Pe ecrane dense rămâne la valoarea de bază. */
-@media (min-resolution: 2dppx) {
-  .ambient-hairline { background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.06) 50%, rgba(255, 255, 255, 0)); }
-  html.light .ambient-hairline { background: linear-gradient(to bottom, rgba(17, 18, 21, 0), rgba(17, 18, 21, 0.14) 50%, rgba(17, 18, 21, 0)); }
-}
-@media print { .ambient-hairline { display: none; } }
 
 /* ── Selectorul de limbă (13 nov 2026) ──
    Cât se descarcă dicționarul limbii alese, scriptul din HTML (lib/i18n/inline.ts) pune `data-rv-i18n` pe <html>, ca omul să

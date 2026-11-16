@@ -8,6 +8,15 @@ Aici notăm progresul pentru a ne coordona perfect.
 
 ---
 
+### [Claude] - 16 nov 2026 - Fundalul fără linii: grila și firele oblice scoase, sistemul solar mai vizibil
+
+Înlocuiește regula 7 din nota de mai jos (15 nov, noaptea), completează regula 4 („Tăria”) din nota „Sistemul solar din fundal” (15 nov; valorile ei rămân) și anulează regula „grila lipsește pe light” din 12 nov.
+1. **Cererea lui Alin (15 nov, „da” pe 16 nov):** fără grila de linii din fundal și fără firele oblice; sistemul solar mai vizibil. Niciuna din cele 13 agenții citite pe 15 nov nu are grilă decorativă, iar grila se bătea cu orbitele (linii peste linii).
+2. **Grila de 48 px s-a scos din toate cele 10 locuri:** `components/PageBackdrop.tsx` (rămâne doar lumina de sus), `HomeClient`, `HomeClientEn`, `servicii`, `pachete`, `despre`, `contact`, `en/services`, `en/packages`, `en/about`. **Nu o readuceți.** Rămân, voit: grila din `/studio` (aplicația internă a lui Alin, cu regulile ei), cea de 32 px din fereastra `ProjectPreviewModal` și grilele demonstrațiilor de clienți (`/showcase/…`, `nevronix`), care sunt designul lor. Verificare: `grep -rn "48px 48px" app components` găsește doar `app/studio/page.tsx`.
+3. **Firele subțiri oblice (`.ambient-hairline`, cinci elemente în `AmbientBeams`) s-au scos**, cu CSS-ul lor. Dungile moi de culoare din canvas rămân, cu aceleași felii de timp (sistemul solar e aliniat pe ele).
+4. **Cum e mai vizibil sistemul solar fără să scadă contrastul:** opacitatea canvasului a rămas 0,12 (închisă) / 0,10 (deschisă), iar cerneala plină (alfa 1) e tot plafonul. În componentă: orbitele din față au 1,5 px CSS (`FRONT_W`, în loc de 1 px: adâncime și ~1,5× mai multă cerneală pe ecran); orbitele din spate și orbita cometei sunt pe o cerneală proprie a liniilor (`LINE_CAP` 0,2 în loc de `CAP` 0,35: ~75 % mai tari); planetele, Luna, centura, stelele și Soarele sunt neschimbate (cerneala `CAP`, `colB` în cod). **De ce nu s-a ridicat opacitatea (măsurat, 16 nov):** pixelul cel mai luminos al canvasului (cerneala plină × opacitatea) coboară contrastul textului care trece peste el, iar suprapunerile (orbită peste planetă, peste Soare, peste inele) ajung mereu la el. Cu opacitatea 0,2 textul de corp `text-neutral-400` a coborât la 3,8 : 1 în 39 de locuri; cu 0,2 și o a doua cerneală plafonată (alfa < 1), la 3,96–4,47 în 24 de locuri, pentru că straturile semitransparente se adună la suprapuneri (pe live, aceleași locuri: 4,40–6,1). **Nu ridicați opacitatea și nu coborâți alfa plină sub 1 pentru „mai vizibil”; vizibilitatea vine din grosimea și cerneala liniilor de sub plafon.**
+5. **Contrastul (poarta pentru orice schimbare de tărie):** se măsoară cu ceasul paginii falsificat, pe toată pagina derulată, la 12 momente dintr-o rotație a camerei (momentul 0 = cadrul nemișcat de la „mișcare redusă” și de la protecția pentru telefoane lente), cu textul ascuns, temele închisă și deschisă, 1366 și 390, pe `/`, `/en`, `/servicii`, față de construcția de dinainte. Textul de corp (contrast de bază ≥ 4,5 față de culoarea paginii) rămâne ≥ 4,5 în cel mai rău pixel de fundal de sub cutia lui sau nu scade față de dinainte (cutii peste poze sau carduri); textul secundar (bază sub 4,5: etichetele gri de 10–12 px) doar se raportează. Scripturile: `docs/designs/prima_pagina_agentii_2026-11-15/verificari/` (local): `contrast_fundal.py` + `compara.py`.
+
 ### [Claude] - 15 nov 2026 (noaptea) - Prima pagină după agențiile mari: „De la lansare la scalare.”, „Software propriu.”, 6 lucrări alese, „Hai să vorbim.”
 
 Înlocuiește regulile 1 („Pentru afaceri la început”) și 3 (ordinea) din nota din 13 nov „Primele pagini pe înțeles”.
@@ -17,7 +26,7 @@ Aici notăm progresul pentru a ne coordona perfect.
 4. **„Software propriu.”:** trei carduri din `lib/ownProducts.ts` (Argot, Kalki Voice, Module pentru magazine), fiecare afirmație cu sursa scrisă lângă ea; când una nu mai e adevărată (un modul iese dintr-un magazin, un produs nu se mai vinde), se schimbă acolo. Nu „Produse proprii” (pe un site cu două magazine se citește ca marcă proprie de produse fizice). Titlurile-nume au `data-no-translate`; Argot, Kalki Voice, Kalki Work, WooCommerce nu se traduc (verificarea: `verifica_nume` din dosarul planului, 0 probleme). Fără link în meniu până nu există o pagină proprie.
 5. **„Portofoliu.” pe prima pagină = 6 lucrări alese** (`HOME_PORTFOLIO` din `lib/ownProducts.ts`), fără filtre; filtrele și toată lista rămân pe `/portofoliu`. Nu repetați aici lucrările cu poză de sus sau Kalki.work (e în „Software propriu.”).
 6. **Chemarea de la capăt:** „Hai să vorbim.” / „Let's talk.” (același titlu ca pe Contact și Servicii). Pagina `/despre` nu mai are aceeași chemare: comentariul vechi era greșit.
-7. **Fundalul NU s-a schimbat în această lucrare:** scoaterea grilei (pe tema deschisă cerută de Alin pe 12 nov) și a firelor oblice și un sistem solar mai vizibil așteaptă „da”-ul lui Alin. Dacă vine: grila e în 10 locuri (`PageBackdrop.tsx`, `HomeClient`, `HomeClientEn`, `servicii`, `pachete`, `despre`, `contact`, `en/services`, `en/packages`, `en/about`) plus `/studio`; contrastul se măsoară pe toată pagina derulată, la momente fixe și pe cadrul nemișcat, nu doar în discul Soarelui (planul și reviziile: `docs/designs/prima_pagina_agentii_2026-11-15/`, local).
+7. ~~Fundalul NU s-a schimbat în această lucrare~~ — schimbat pe 16 nov, după „da”-ul lui Alin: vezi nota de deasupra („Fundalul fără linii”).
 8. Traduceri: 17 texte noi în 22 de limbi („lipsă 0, numere diferite [], semne diferite []”, `LINES_OFF` neschimbat, aceleași 11 limbi fără liniuțe).
 
 ### [Claude] - 15 nov 2026 (seara) - „Preț fix” → „Prețuri clare”: prețul stabilit la început nu se mai schimbă, pachetele se adaptează
@@ -179,7 +188,7 @@ Cererile lui Alin după proba din 12 nov. Plan, cele două revizii și verifică
 **5. Fundalul animat (`components/AmbientBeams.tsx`) era cauza pentru care site-ul mergea greu** (13 nov seara, măsurat prin eliminare: `verificari/greutate_cauza.py`). Umplea tot ecranul la rezoluție plină, de 60 de ori pe secundă: pe un telefon încetinit de 4 ori, 13–16 cadre pe secundă cu el și 60 fără el; liniuțele și estomparea contau puțin.
 - Refăcut fără schimbare de aspect (comparat la pixel, `verificari/fundal_compara.py`): dungile și vigneta pe un canvas de trei ori mai mic pe fiecare latură, mărit din CSS; firele subțiri sunt cinci `span.ambient-hairline` mutate cu `transform` (stilul în `globals.css`, „Fundalul animat”); cel mult 30 de redesenări pe secundă.
 - Măsurat vechi / nou, alternat (`verificari/greutate_vechi_nou.py`): telefon ×4: 15,9 → 57,6 cadre pe secundă; telefon la viteză normală: 840 → 105 ms de lucru pe secundă; laptop ×4: 12,7 → 45,4.
-- **Nu ridicați rezoluția canvasului, nu scoateți limita de cadre și nu desenați din nou firele pe canvas fără să rulați măsurătoarea.** Un test care ascunde fundalul ascunde `canvas` și `.ambient-hairline`.
+- **Nu ridicați rezoluția canvasului, nu scoateți limita de cadre și nu desenați din nou firele pe canvas fără să rulați măsurătoarea.** Un test care ascunde fundalul ascunde `canvas`. (16 nov: firele `span.ambient-hairline` s-au scos cu totul, la cererea lui Alin; nu le readuceți.)
 - Reparat pe drum: fundalul nu pornea când ajungeai de pe o machetă pe o pagină a agenției fără reîncărcare (efectul nu depindea de rută).
 
 **6. Textele de pe Pachete, Servicii și Despre, în română și engleză, sunt scrise pe înțelesul unui om care nu lucrează în IT** (Alin, 13 nov: „rescrie textele englezești pe înțeles”, apoi „da” și pentru `/servicii` și `/despre`). Aceleași oferte, prețuri și promisiuni ca înainte; fără „arhitectură”, „enterprise”, „video engines”, „JSON-LD”, „GEO”, „SLA”. Se spune ce primește clientul. Nu readuceți jargonul. Cele două prime pagini (`/`, `/en`) au fost rescrise la fel tot pe 13 nov (secțiunea „Primele pagini pe înțeles”, sus).
@@ -230,7 +239,7 @@ Cerută de Alin după observațiile lui Marius. Planul, reviziile și scripturil
 - `lib/liveProjects.ts` are câmpul scurt `kind` (felul proiectului, 1–2 cuvinte) pentru acest rând.
 
 **12 nov — detalii fine (Alin, de pe tabletă: „textele din butoane aproape ies din cadru… verdele nu se vede pe light… grila lipsește pe light”), commit-uri 4ad2011 + b95e67b:**
-- Grila de pătrate din fundal se desenează cu `currentColor`, nu cu `#ffffff` (altfel dispare în tema light); opacitatea: `opacity-[0.035] light:opacity-[0.075]`.
+- ~~Grila de pătrate din fundal se desenează cu `currentColor`…~~ — 16 nov: grila s-a scos de pe tot site-ul (Alin), vezi nota „Fundalul fără linii”.
 - Verdele temei light e unul singur: `#065F46` (text), cu fond și ramă din aceeași nuanță; dunga din mijloc din `AmbientBeams.tsx` folosește tot nuanța aceasta. Nu puneți `text-emerald-*` deschis fără să-l vedeți în light.
 - Trei coloane de carduri cu butoane abia de la `lg` (1024 px), nu de la `md`: la 768 px butoanele-pastilă se rup pe două rânduri.
 - O grilă de carduri are `grid-cols-1` explicit, iar textul cu `truncate` are `min-w-0`; altfel cardul iese din ecran pe telefon și e tăiat fără ca pagina să deruleze lateral.
@@ -262,7 +271,7 @@ Cerută de Alin după observațiile lui Marius. Planul, reviziile și scripturil
 2. Fără crem (`#f5f1ea`, `#FAF8F5`, `#F3EFEA`, `#1d2731`) în pagini noi. Paginile se scriu pe vocabularul paginii de pornire: `text-white`, `text-neutral-300/400/500`, `border-white/10`, carduri `bg-neutral-900/40`, buton principal `bg-white text-black`, etichete `font-mono` majuscule. Tema light vine din suprascrierile `html.light` existente.
 3. În `Header.tsx` / `Footer.tsx` culorile se scriu `X dark:Y` cu literale (clasele simple `text-white`, `bg-neutral-900` sunt rescrise de tema light).
 4. Lista de sisteme live e una singură: `lib/liveProjects.ts` (pagina de pornire + `/portofoliu`). Machetele stau în `/showcase` (`components/ConceptGallery.tsx`).
-5. Fundalul comun al paginilor: `components/PageBackdrop.tsx`.
+5. Fundalul comun al paginilor: `components/PageBackdrop.tsx` (din 16 nov doar lumina de sus; sistemul solar și dungile vin din `app/layout.tsx`).
 
 ### [Antigravity Log] - Ultimele Implementări (Astăzi)
 Salut, Claude și Revi! Am terminat integrarea **Guru Store** în platforma Reverb.

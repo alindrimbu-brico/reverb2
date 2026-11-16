@@ -10,8 +10,8 @@ import { usePathname } from "next/navigation";
  * varianta veche umplea tot ecranul, la rezoluție plină, de 60 de ori pe secundă, și ținea singură firul principal ocupat
  * (telefon încetinit de 4 ori: 13 cadre pe secundă cu ea, 60 fără ea). Acum:
  *  - dungile și vigneta, care sunt degradeuri moi, se desenează pe un canvas de trei ori mai mic pe fiecare latură, mărit din CSS;
- *  - firele subțiri din mijlocul dungilor sunt cinci elemente mutate cu `transform` (rămân la fel de fine, nu costă desen);
  *  - se redesenează de cel mult 30 de ori pe secundă (dungile se mișcă sub 40 px pe secundă).
+ * Firele subțiri din mijlocul dungilor s-au scos (Alin, 16 nov 2026: fundalul fără linii, doar sistemul solar și dungile moi).
  * NU ridicați rezoluția canvasului și nu scoateți limita de cadre fără să rulați din nou măsurătoarea.
  */
 const SCALE = 1 / 3; // rezoluția canvasului față de pixelii CSS
@@ -28,7 +28,6 @@ const BEAMS = [
 export default function AmbientBeams() {
   const pathname = usePathname() || "";
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const linesRef = useRef<(HTMLSpanElement | null)[]>([]);
 
   const isShowcaseDemo = Boolean(
     (pathname.startsWith("/showcase/") && pathname !== "/showcase") ||
@@ -65,12 +64,6 @@ export default function AmbientBeams() {
       canvas.height = Math.max(1, Math.round(normH * SCALE));
       // Se desenează în pixeli CSS; canvasul e mai mic și e mărit din CSS.
       ctx.setTransform(canvas.width / normW, 0, 0, canvas.height / normH, 0, 0);
-      // Firul din mijlocul fiecărei dungi: 1,5 px lățime, de la -normH la +normH în jurul punctului (x, 40 % din înălțime).
-      for (const line of linesRef.current) {
-        if (!line) continue;
-        line.style.top = `${normH * 0.4 - normH}px`;
-        line.style.height = `${normH * 2}px`;
-      }
       lastDraw = -Infinity;
       lastSlot = -1;
     };
@@ -130,10 +123,6 @@ export default function AmbientBeams() {
         // Draw an elongated beam rectangle extending far off canvas
         ctx.fillRect(-beamWidth * 0.5, -normH * 2, beamWidth, normH * 4);
         ctx.restore();
-
-        // Firul subțire din mijlocul dungii („architectural sharpness”): element separat, mutat cu transform.
-        const line = linesRef.current[idx];
-        if (line) line.style.transform = `translate3d(${(xPos - 1).toFixed(2)}px, 0, 0) rotate(${beam.angle}rad)`;
       });
 
       // Subtle atmospheric vignette overlay
@@ -165,14 +154,6 @@ export default function AmbientBeams() {
 
   return (
     <div aria-hidden="true" className="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
-      {/* Firele stau sub canvas: vigneta desenată pe canvas le stinge spre margini, ca în varianta dintr-o singură bucată. */}
-      {BEAMS.map((_, i) => (
-        <span
-          key={i}
-          ref={(el) => { linesRef.current[i] = el; }}
-          className="ambient-hairline"
-        />
-      ))}
       <canvas ref={canvasRef} className="ambient-canvas absolute inset-0 w-full h-full" style={{ display: "block" }} />
     </div>
   );

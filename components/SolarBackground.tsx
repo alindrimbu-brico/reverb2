@@ -16,6 +16,13 @@ const W = 340, H = 176, CX = 170, CY = 80, CAM_D = 720, SUN = 8.5, YEAR = 5;
 const STILL = 8.4;                 // clipa desenată la „mișcare redusă”, pe /studio și la pornire
 const SPEED = 0.34;                // 340 / 1000: pe laptop, aceeași viteză pe ecran ca proba de 340 px
 const CAP = 0.35;                  // cerneala de fundal: tot ce trece de 0,35 se desenează plin, restul proporțional
+// Sistemul mai vizibil fără să scadă contrastul textului (16 nov 2026, măsurat pe toată pagina derulată, la 12 momente):
+// pixelul cel mai luminos al canvasului (cerneala plină × opacitatea din CSS) e cel care coboară contrastul când trece pe sub
+// text, iar suprapunerile (orbită peste planetă, peste Soare, peste inele) ajung la el. De aceea opacitatea și cerneala plină
+// rămân cele de până acum, iar sistemul se vede mai bine prin: orbitele din față mai groase (FRONT_W, 1,5 px CSS: adâncime),
+// orbitele din spate și orbita cometei pe o cerneală proprie mai tare (LINE_CAP 0,2 în loc de CAP 0,35: ~75 % mai tari).
+// O opacitate mai mare sau a doua cerneală cu alfa sub 1 au coborât textul de corp la 3,8–4,4 : 1 (se adună la suprapuneri).
+const LINE_CAP = 0.2, FRONT_W = 1.5;
 // Soarele stă fix în mijlocul ferestrei, deci tot textul trece prin el: e ținut la ~57 % din tăria planetelor și a orbitelor
 // (cât era în prima variantă, mai discretă), ca fundalul să poată fi mai vizibil fără să scadă contrastul în centru.
 const SUN_INK = 0.2, SUN_GLOW = 0.1;
@@ -118,9 +125,11 @@ const screen = (n: number): Screen => ({ x: new Float32Array(n), y: new Float32A
 function createRenderer(cv: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
   let ca = 1, sa = 0, ce = 1, se = 0;
   let scale = 1;
-  let ink: string[] = [];
+  let ink: string[] = [], inkBody: string[] = [];
   let sunGlow: CanvasGradient | null = null;
-  const col = (a: number) => ink[Math.round(Math.max(0, Math.min(1, a)) * LEVELS)];
+  const lvl = (a: number) => Math.round(Math.max(0, Math.min(1, a)) * LEVELS);
+  const col = (a: number) => ink[lvl(a)];           // linii: orbite, inele, orbita și coada cometei (LINE_CAP)
+  const colB = (a: number) => inkBody[lvl(a)];      // Soarele și punctele pline: planete, Lună, capul cometei, centura, stele (CAP)
 
   // Bufere refolosite la fiecare cadru.
   const orbitS = ORBIT_W.map(() => screen(ORBIT_N + 1));
@@ -175,14 +184,14 @@ function createRenderer(cv: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
     const len = Math.hypot(wx, wy, wz) || 1;
     const lit = (1 + (-d / len)) / 2;
     if (r < 2.1) {
-      ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fillStyle = col(0.45 + 0.55 * lit); ctx.fill();
+      ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fillStyle = colB(0.45 + 0.55 * lit); ctx.fill();
       return;
     }
-    ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fillStyle = col(0.26); ctx.fill();
+    ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fillStyle = colB(0.26); ctx.fill();
     const dx = CX - x, dy = CY - y, dl = Math.hypot(dx, dy) || 1;
     const off = r * (1 - lit) * 0.95, gx = x + dx / dl * off, gy = y + dy / dl * off;
     const g = ctx.createRadialGradient(gx, gy, 0, gx, gy, r * (0.45 + 0.95 * lit));
-    g.addColorStop(0, col(1)); g.addColorStop(0.65, col(0.92)); g.addColorStop(1, col(0));
+    g.addColorStop(0, colB(1)); g.addColorStop(0.65, colB(0.92)); g.addColorStop(1, colB(0));
     ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fillStyle = g; ctx.fill();
   }
   function planet(i: number, t: number) {
@@ -219,7 +228,7 @@ function createRenderer(cv: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
       ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(one.x[0], one.y[0]); ctx.stroke();
       ctx.globalAlpha = 1; ctx.lineWidth = lw;
     }
-    ctx.beginPath(); ctx.arc(x, y, 1.2 * s, 0, TAU); ctx.fillStyle = col(1); ctx.fill();
+    ctx.beginPath(); ctx.arc(x, y, 1.2 * s, 0, TAU); ctx.fillStyle = colB(1); ctx.fill();
   }
   function drawItem(i: number, t: number) { if (i === 8) comet(); else planet(i, t); }
   function beltPath(front: boolean, k: number) {
@@ -243,9 +252,10 @@ function createRenderer(cv: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
     readInk() {
       const m = getComputedStyle(cv).color.match(/[\d.]+/g);
       const rgb = m ? `${m[0]},${m[1]},${m[2]}` : "255,255,255";
-      ink = Array.from({ length: LEVELS + 1 }, (_, k) => `rgba(${rgb},${Math.min(1, k / LEVELS / CAP).toFixed(3)})`);
+      ink = Array.from({ length: LEVELS + 1 }, (_, k) => `rgba(${rgb},${Math.min(1, k / LEVELS / LINE_CAP).toFixed(3)})`);
+      inkBody = Array.from({ length: LEVELS + 1 }, (_, k) => `rgba(${rgb},${Math.min(1, k / LEVELS / CAP).toFixed(3)})`);
       sunGlow = ctx.createRadialGradient(CX, CY, SUN * 0.7, CX, CY, SUN * 3.4);
-      sunGlow.addColorStop(0, col(SUN_GLOW)); sunGlow.addColorStop(1, col(0));
+      sunGlow.addColorStop(0, colB(SUN_GLOW)); sunGlow.addColorStop(1, colB(0));
     },
     draw(t: number) {
       ctx.setTransform(1, 0, 0, 1, 0, 0);
@@ -261,7 +271,7 @@ function createRenderer(cv: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
         const X = CX + x1 * 250, Y = CY - (y1 * se + s.z * ce) * 250;
         if (X < 0 || X > W || Y < 0 || Y > H) continue;
         ctx.beginPath(); ctx.arc(X, Y, s.r, 0, TAU);
-        ctx.fillStyle = col(0.1 + 0.35 * (0.5 + 0.5 * Math.sin(t * s.s + s.p))); ctx.fill();
+        ctx.fillStyle = colB(0.1 + 0.35 * (0.5 + 0.5 * Math.sin(t * s.s + s.p))); ctx.fill();
       }
 
       for (let i = 0; i < 8; i++) projAll(ORBIT_W[i], ORBIT_N + 1, orbitS[i]);
@@ -283,17 +293,19 @@ function createRenderer(cv: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
       // în spate
       strokeOrbits(false, col(0.13));
       strokeSplit(cometS, COMET_N + 1, 0, false, col(0.07));
-      beltPath(false, 0.55); ctx.fillStyle = col(0.22); ctx.fill();
+      beltPath(false, 0.55); ctx.fillStyle = colB(0.22); ctx.fill();
       for (const i of order) if (bodyS.d[i] < 0) drawItem(i, t);
 
       // Soarele, cu un halo slab
       if (sunGlow) { ctx.fillStyle = sunGlow; ctx.beginPath(); ctx.arc(CX, CY, SUN * 3.4, 0, TAU); ctx.fill(); }
-      ctx.beginPath(); ctx.arc(CX, CY, SUN, 0, TAU); ctx.fillStyle = col(SUN_INK); ctx.fill();
+      ctx.beginPath(); ctx.arc(CX, CY, SUN, 0, TAU); ctx.fillStyle = colB(SUN_INK); ctx.fill();
 
-      // în față
+      // în față: orbitele mai groase (adâncime și vizibilitate fără un pixel mai luminos decât planetele)
+      ctx.lineWidth = FRONT_W / scale;
       strokeOrbits(true, col(0.3));
+      ctx.lineWidth = 1 / scale;
       strokeSplit(cometS, COMET_N + 1, 0, true, col(0.12));
-      beltPath(true, 0.6); ctx.fillStyle = col(0.4); ctx.fill();
+      beltPath(true, 0.6); ctx.fillStyle = colB(0.4); ctx.fill();
       for (const i of order) if (bodyS.d[i] >= 0) drawItem(i, t);
     },
   };
