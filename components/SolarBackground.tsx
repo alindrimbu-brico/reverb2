@@ -16,16 +16,16 @@ const W = 340, H = 176, CX = 170, CY = 80, CAM_D = 720, SUN = 8.5, YEAR = 5;
 const STILL = 8.4;                 // clipa desenată la „mișcare redusă”, pe /studio și la pornire
 const SPEED = 0.34;                // 340 / 1000: pe laptop, aceeași viteză pe ecran ca proba de 340 px
 const CAP = 0.35;                  // cerneala de fundal: tot ce trece de 0,35 se desenează plin, restul proporțional
-// Sistemul mai vizibil fără să scadă contrastul textului (16 nov 2026, măsurat pe toată pagina derulată, la 12 momente):
-// pixelul cel mai luminos al canvasului (cerneala plină × opacitatea din CSS) e cel care coboară contrastul când trece pe sub
-// text, iar suprapunerile (orbită peste planetă, peste Soare, peste inele) ajung la el. De aceea opacitatea și cerneala plină
-// rămân cele de până acum, iar sistemul se vede mai bine prin: orbitele din față mai groase (FRONT_W, 1,5 px CSS: adâncime),
-// orbitele din spate și orbita cometei pe o cerneală proprie mai tare (LINE_CAP 0,2 în loc de CAP 0,35: ~75 % mai tari).
-// O opacitate mai mare sau a doua cerneală cu alfa sub 1 au coborât textul de corp la 3,8–4,4 : 1 (se adună la suprapuneri).
+// Orbitele din față mai groase (FRONT_W, în px CSS: adâncime); orbitele din spate și orbita cometei pe o cerneală proprie mai
+// tare (LINE_CAP 0,2 în loc de CAP 0,35: ~75 % mai tari). 16 nov 2026.
 const LINE_CAP = 0.2, FRONT_W = 1.5;
-// Soarele stă fix în mijlocul ferestrei, deci tot textul trece prin el: e ținut la ~57 % din tăria planetelor și a orbitelor
-// (cât era în prima variantă, mai discretă), ca fundalul să poată fi mai vizibil fără să scadă contrastul în centru.
-const SUN_INK = 0.2, SUN_GLOW = 0.1;
+// Soarele stă fix în mijlocul ferestrei, deci tot textul trece prin el. Din 17 nov canvasul e mai mare și opacitatea 0,18
+// (înainte 0,12), deci cerneala Soarelui a scăzut cât a crescut opacitatea, ca tăria lui pe ecran să rămână aceeași
+// (0,357 × 0,18 ≈ 0,536 × 0,12; halo 0,179 × 0,18 ≈ 0,268 × 0,12).
+const SUN_INK = 0.13, SUN_GLOW = 0.06;
+// Canvasul e mai lat decât fereastra (125vw în CSS); rezoluția lui de desen se oprește la MAX_PX, ca munca pe cadru să rămână
+// cea de până acum (la 1000 px lățime), iar liniile se desenează în px CSS (PX = px de canvas pe px CSS).
+const MAX_PX = 1200;
 // 15 cadre pe secundă, pe felii fixe de timp care cad mereu pe un cadru al AmbientBeams (30 pe secundă, aceleași felii):
 // pagina se recompune la fel de des ca fără fundal, iar desenul costă jumătate față de 30 (măsurat, 15 nov 2026).
 const FRAME_MS = 2000 / 30;
@@ -124,7 +124,7 @@ const screen = (n: number): Screen => ({ x: new Float32Array(n), y: new Float32A
 
 function createRenderer(cv: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
   let ca = 1, sa = 0, ce = 1, se = 0;
-  let scale = 1;
+  let scale = 1, px = 1;
   let ink: string[] = [], inkBody: string[] = [];
   let sunGlow: CanvasGradient | null = null;
   const lvl = (a: number) => Math.round(Math.max(0, Math.min(1, a)) * LEVELS);
@@ -245,8 +245,10 @@ function createRenderer(cv: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
     resize() {
       const w = cv.clientWidth;
       if (!w) return false;
-      cv.width = Math.round(w); cv.height = Math.round(w * H / W);
+      // Pe ecrane înguste (telefon) canvasul e de ~2× lățimea ferestrei: se desenează la 1,6× lățimea ferestrei, nu la mărimea lui.
+      cv.width = Math.round(Math.min(w, MAX_PX, Math.max(600, window.innerWidth * 1.6))); cv.height = Math.round(cv.width * H / W);
       scale = cv.width / W;
+      px = cv.width / w;
       return true;
     },
     readInk() {
@@ -261,7 +263,7 @@ function createRenderer(cv: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.clearRect(0, 0, cv.width, cv.height);
       ctx.setTransform(scale, 0, 0, scale, 0, 0);
-      ctx.lineWidth = 1 / scale;   // 1 px CSS
+      ctx.lineWidth = px / scale;   // 1 px CSS
       setCamera(t);
 
       // stelele: pe sfera cerului, se rotesc doar cu camera
@@ -301,9 +303,9 @@ function createRenderer(cv: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
       ctx.beginPath(); ctx.arc(CX, CY, SUN, 0, TAU); ctx.fillStyle = colB(SUN_INK); ctx.fill();
 
       // în față: orbitele mai groase (adâncime și vizibilitate fără un pixel mai luminos decât planetele)
-      ctx.lineWidth = FRONT_W / scale;
+      ctx.lineWidth = FRONT_W * px / scale;
       strokeOrbits(true, col(0.3));
-      ctx.lineWidth = 1 / scale;
+      ctx.lineWidth = px / scale;
       strokeSplit(cometS, COMET_N + 1, 0, true, col(0.12));
       beltPath(true, 0.6); ctx.fillStyle = colB(0.4); ctx.fill();
       for (const i of order) if (bodyS.d[i] >= 0) drawItem(i, t);

@@ -916,10 +916,10 @@ html.light .rounded-full.bg-white.text-black:not(:where([role="dialog"] *, [data
 /* ── Sistemul solar din fundal (components/SolarBackground.tsx), în locul siglei statice ──
    Fix, centrat, sub conținut (`main` și subsolul au z-10). Înălțimea 100lvh: pe telefon nu sare când se strânge bara de adresă.
    Marginile se estompează, ca stelele și cometa să nu se taie într-un dreptunghi.
-   Opacitatea e plafonată de contrastul textului care trece peste planete, orbite și Soare (măsurat pe toată pagina derulată,
-   la 12 momente, cu dungile AmbientBeams incluse; AI_SYNC, nota din 16 nov): nu o ridicați fără să refaceți măsurătoarea.
-   De la 16 nov 2026 e singurul desen cu linii din fundal (grila și firele oblice s-au scos). Opacitatea a rămas 0,12 / 0,10:
-   orice valoare mai mare a coborât textul de corp sub 4,5 : 1; sistemul e mai vizibil din componentă (orbitele, LINE_CAP, FRONT_W).
+   Din 17 nov 2026 (Alin: „mai mare și mai tare… să ocupe mai mult din pagină, chiar dacă cele mai îndepărtate traiectorii
+   depășesc pagina; scopul e mișcarea, subtilă”): canvasul e mai lat decât fereastra (125vw, cel puțin 820 px, centrat, iese
+   egal în ambele părți), deci orbitele exterioare trec de marginea ecranului; opacitatea 0,18 / 0,15. Alin a acceptat că textul
+   gri de corp coboară momentan sub 4,5 : 1 când trece o planetă pe sub el (AI_SYNC, nota din 17 nov).
    Canvasul apare lin după primul desen (până atunci e gol). */
 .solar-bg {
   position: fixed; left: 0; top: 0; width: 100%; height: 100vh; height: 100lvh;
@@ -927,15 +927,19 @@ html.light .rounded-full.bg-white.text-black:not(:where([role="dialog"] *, [data
   display: flex; align-items: center; justify-content: center;
 }
 .solar-bg canvas {
-  display: block; width: min(92vw, 1000px); height: auto; aspect-ratio: 340 / 176;
+  display: block; flex: none; width: max(125vw, 820px); height: auto; aspect-ratio: 340 / 176;
   opacity: 0; transition: opacity 0.8s ease;
-  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 9%, #000 88%, transparent), linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
-  -webkit-mask-composite: source-in;
-  mask-image: linear-gradient(to bottom, transparent, #000 9%, #000 88%, transparent), linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
-  mask-composite: intersect;
 }
-.solar-bg canvas[data-drawn] { opacity: 0.12; }
-html.light .solar-bg canvas[data-drawn] { opacity: 0.1; }
+/* Estomparea de sus și de jos doar unde canvasul e mai scund decât fereastra (telefon, tabletă în picioare). Pe laptop marginile
+   lui cad în afara ecranului, iar masca pe o suprafață de 3 ori mai mare a scăzut cadrele pe secundă (măsurat, 17 nov 2026). */
+@media (max-aspect-ratio: 1/1) {
+  .solar-bg canvas {
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 86%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 86%, transparent);
+  }
+}
+.solar-bg canvas[data-drawn] { opacity: 0.18; }
+html.light .solar-bg canvas[data-drawn] { opacity: 0.15; }
 @media (prefers-reduced-motion: reduce) { .solar-bg canvas { transition: none; } }
 @media print { .solar-bg { display: none; } }
 @media (forced-colors: active) { .solar-bg { display: none; } }

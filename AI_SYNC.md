@@ -8,6 +8,14 @@ Aici notăm progresul pentru a ne coordona perfect.
 
 ---
 
+### [Claude] - 17 nov 2026 - Sistemul solar mai mare decât ecranul și mai tare (hotărârea lui Alin)
+
+Înlocuiește regula 4 din nota de mai jos (16 nov) și „Nu ridicați tăria” din nota din 15 nov.
+1. **Cererea lui Alin (17 nov):** „și mai mare, și mai tare… să ocupe mai mult din pagină, chiar dacă atinge marginea și unele dintre cele mai îndepărtate traiectorii aproape depășesc pagina. Scopul nu este să se vadă exact sistemul solar, ci mișcarea… subtilă în fundal.” A răspuns „da” știind că textul gri de corp coboară momentan la ~3,8 : 1 când trece o planetă pe sub el.
+2. **Mărimea:** canvasul e `max(125vw, 820px)` lat (înainte `min(92vw, 1000px)`), `flex: none`, centrat, iese egal în ambele părți ale ferestrei; pe laptop orbitele exterioare trec de margine, pe telefon se văd Soarele și planetele interioare. Rezoluția de desen se oprește la `MAX_PX` 1200 (CSS-ul îl mărește), iar liniile se desenează în px CSS (`px` în componentă), ca să rămână fine.
+3. **Tăria:** opacitatea 0,18 (închisă) / 0,15 (deschisă), înainte 0,12 / 0,10; Soarele, fix sub titlu, are cerneala scăzută în aceeași proporție (`SUN_INK` 0,13, `SUN_GLOW` 0,06), deci pe ecran e la fel de tare ca înainte. Orbitele din față 1,5 px CSS și `LINE_CAP` 0,2 rămân.
+4. **Contrastul nu mai e poartă pentru fundal** (hotărârea lui Alin): se măsoară și se raportează (`docs/designs/prima_pagina_agentii_2026-11-15/verificari/`), nu se mai coboară tăria pentru el. Nu urcați mai sus fără să-l întrebați.
+
 ### [Claude] - 16 nov 2026 - Fundalul fără linii: grila și firele oblice scoase, sistemul solar mai vizibil
 
 Înlocuiește regula 7 din nota de mai jos (15 nov, noaptea), completează regula 4 („Tăria”) din nota „Sistemul solar din fundal” (15 nov; valorile ei rămân) și anulează regula „grila lipsește pe light” din 12 nov.
