@@ -133,6 +133,14 @@ export default function ShowcaseAIAgent({ industryContext }: { industryContext: 
               Go
             </button>
           </form>
+          {/* Alin, 18 nov 2026: vizitatorul află înainte să scrie unde pleacă mesajul (pagina de confidențialitate o spune și ea). */}
+          <p className="px-3 pb-3 bg-black/60 text-[10px] leading-4 text-white/50 font-mono">
+            {pathname?.startsWith("/en") ? (
+              <>Messages are sent to Perplexity AI for a reply. Do not enter personal data. <a href="/en/privacy" className="underline hover:text-white">Privacy</a></>
+            ) : (
+              <>Mesajele sunt trimise la Perplexity AI pentru răspuns. Nu scrie date personale. <a href="/confidentialitate" className="underline hover:text-white">Confidențialitate</a></>
+            )}
+          </p>
         </div>
       )}
     </>

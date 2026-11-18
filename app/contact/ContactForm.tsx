@@ -275,7 +275,8 @@ function ContactFormInner() {
       </button>
 
       <p className="mt-4 text-center text-[10px] font-mono text-neutral-500">
-        Nu facem spam și nu partajăm datele de contact cu nimeni.
+        Nu facem spam și nu partajăm datele de contact cu nimeni.{" "}
+        <a href="/confidentialitate" className="underline hover:text-neutral-300">Cum folosim datele</a>
       </p>
       {/* Doar în limbile din dicționar (motorul traduce rândul): omul află în ce limbă îi răspundem. */}
       {otherLang && (

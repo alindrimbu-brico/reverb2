@@ -245,7 +245,8 @@ function ContactFormInner() {
       </button>
 
       <p className="mt-4 text-center text-xs text-neutral-500">
-        We don&apos;t spam. Your data is safe and not shared with third parties.
+        We don&apos;t spam. Your data is safe and not shared with third parties.{" "}
+        <a href="/en/privacy" className="underline hover:text-neutral-300">How we use your data</a>
       </p>
     </form>
   );
