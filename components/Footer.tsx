@@ -25,6 +25,7 @@ export default function Footer({ socialLinks = [] }: { socialLinks?: SocialFoote
       { href: "/despre", label: "Despre" },
       { href: "/contact", label: "Contact" },
       { href: "/legal", label: "Legal" },
+      { href: "/confidentialitate", label: "Confidențialitate" },
     ],
     en: [
       { href: "/en", label: "Home" },
@@ -34,6 +35,7 @@ export default function Footer({ socialLinks = [] }: { socialLinks?: SocialFoote
       { href: "/en/about", label: "About" },
       { href: "/en/contact", label: "Contact" },
       { href: "/en/legal", label: "Legal" },
+      { href: "/en/privacy", label: "Privacy" },
     ]
   };
 

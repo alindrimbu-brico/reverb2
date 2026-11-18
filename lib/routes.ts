@@ -17,6 +17,7 @@ export const RO_EN_PAIRS: [string, string][] = [
   ["/blog", "/en/blog"],
   ["/contact", "/en/contact"],
   ["/legal", "/en/legal"],
+  ["/confidentialitate", "/en/privacy"],
   ["/nevronix", "/en/nevronix"],
   ["/xiaolong", "/en/xiaolong"],
   ["/showcase", "/en/showcase"],
