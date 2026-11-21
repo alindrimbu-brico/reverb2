@@ -8,6 +8,15 @@ Aici notăm progresul pentru a ne coordona perfect.
 
 ---
 
+### [Claude] - 21 nov 2026 - Sistemul solar se rotește după mouse și e mai tare (0,24 / 0,20)
+
+Completează nota din 17 nov de mai jos (regula 3, tăria).
+1. **Cererea lui Alin:** „fundalul, acel sistem solar, să se rotească tridimensional în funcție de mișcarea mouse-ului… în toate direcțiile, 360 de grade… mai vizibil, puțin mai evident”.
+2. **Cum merge (ca o bilă):** mișcarea mouse-ului rotește sistemul în aceeași direcție (partea din față merge cu mouse-ul); o mișcare cât lățimea ferestrei = o rotire întreagă, pe orizontală în jurul Soarelui, pe verticală peste cap, fără capăt. Camera ajunge ținta lin (`TURN_MS` 450); după `IDLE_MS` 2,5 s fără mișcare se întoarce încet (`RETURN_MS` 1600) la vederea obișnuită, pe drumul cel mai scurt. **Nu folosiți poziția fixă a mouse-ului** (prima variantă): la ±180° colțurile opuse dau aceeași vedere.
+3. **Doar mouse și creion** (`pointerType`); pe ecranele tactile atingerea e derulare, fundalul rămâne ca înainte. La „mișcare redusă”, în `/studio` și după protecția pentru dispozitive lente, nu se rotește (bucla nu rulează).
+4. **Cadre:** în repaus tot 15 pe secundă (feliile pare din 30); cât se rotește, 30 pe secundă (aceleași felii ca `AmbientBeams`). Măsurat local: pagina 60 de cadre pe secundă cu mouse-ul în mișcare, 0 sarcini lungi.
+5. **Tăria:** opacitatea 0,24 (închisă) / 0,20 (deschisă), înainte 0,18 / 0,15; Soarele scăzut în aceeași proporție (`SUN_INK` 0,0975, `SUN_GLOW` 0,045), deci la fel de tare pe ecran. Contrastul (măsurat pe prima pagină, 1366 px, 6 momente, vechi = live): cel mai slab text de corp coboară momentan la ~3,3 : 1 (înainte ~4,2 : 1), pe rândul „Prețuri fără TVA…” și pe „Ai deja site?…”. Raportat lui Alin; nu se coboară tăria fără el.
+
 ### [Claude] - 17 nov 2026 - Sistemul solar mai mare decât ecranul și mai tare (hotărârea lui Alin)
 
 Înlocuiește regula 4 din nota de mai jos (16 nov) și „Nu ridicați tăria” din nota din 15 nov.

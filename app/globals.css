@@ -938,8 +938,9 @@ html.light .rounded-full.bg-white.text-black:not(:where([role="dialog"] *, [data
     mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 86%, transparent);
   }
 }
-.solar-bg canvas[data-drawn] { opacity: 0.18; }
-html.light .solar-bg canvas[data-drawn] { opacity: 0.15; }
+/* 21 nov 2026 (Alin: „mai vizibil, puțin mai evident”): 0,24 / 0,20, înainte 0,18 / 0,15. */
+.solar-bg canvas[data-drawn] { opacity: 0.24; }
+html.light .solar-bg canvas[data-drawn] { opacity: 0.2; }
 @media (prefers-reduced-motion: reduce) { .solar-bg canvas { transition: none; } }
 @media print { .solar-bg { display: none; } }
 @media (forced-colors: active) { .solar-bg { display: none; } }

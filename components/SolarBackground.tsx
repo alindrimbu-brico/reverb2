@@ -22,13 +22,23 @@ const LINE_CAP = 0.2, FRONT_W = 1.5;
 // Soarele stă fix în mijlocul ferestrei, deci tot textul trece prin el. Din 17 nov canvasul e mai mare și opacitatea 0,18
 // (înainte 0,12), deci cerneala Soarelui a scăzut cât a crescut opacitatea, ca tăria lui pe ecran să rămână aceeași
 // (0,357 × 0,18 ≈ 0,536 × 0,12; halo 0,179 × 0,18 ≈ 0,268 × 0,12).
-const SUN_INK = 0.13, SUN_GLOW = 0.06;
+// 21 nov 2026 opacitatea a urcat la 0,24 (Alin: „mai vizibil, puțin mai evident”), deci Soarele a scăzut în aceeași proporție
+// și rămâne pe ecran la tăria de până acum (0,13 × 0,18 ≈ 0,0975 × 0,24).
+const SUN_INK = 0.0975, SUN_GLOW = 0.045;
 // Canvasul e mai lat decât fereastra (125vw în CSS); rezoluția lui de desen se oprește la MAX_PX, ca munca pe cadru să rămână
 // cea de până acum (la 1000 px lățime), iar liniile se desenează în px CSS (PX = px de canvas pe px CSS).
 const MAX_PX = 1200;
-// 15 cadre pe secundă, pe felii fixe de timp care cad mereu pe un cadru al AmbientBeams (30 pe secundă, aceleași felii):
-// pagina se recompune la fel de des ca fără fundal, iar desenul costă jumătate față de 30 (măsurat, 15 nov 2026).
-const FRAME_MS = 2000 / 30;
+// Felii de timp de 1/30 s, aceleași ca la AmbientBeams. În repaus se desenează doar feliile pare (15 cadre pe secundă: pagina se
+// recompune la fel de des ca fără fundal, iar desenul costă jumătate, măsurat 15 nov 2026); cât se rotește după mouse, toate
+// (30 pe secundă), ca rotirea să curgă.
+const SLOT_MS = 1000 / 30;
+// Rotirea după mouse (Alin, 21 nov 2026: „să se rotească tridimensional în funcție de mișcarea mouse-ului… în toate direcțiile,
+// 360 de grade”), ca o bilă: mișcarea mouse-ului rotește sistemul în aceeași direcție (partea din față merge cu mouse-ul), fără
+// capăt, deci o mișcare cât lățimea ferestrei = o rotire întreagă (TURN_PER_W), pe orizontală în jurul Soarelui, pe verticală
+// peste cap. O poziție fixă a mouse-ului nu se folosește: la ±180° colțurile opuse dădeau aceeași vedere. Camera ajunge din
+// urmă ținta lin (TURN_MS); după IDLE_MS fără mișcare se întoarce încet (RETURN_MS) la vederea de până acum, pe drumul cel mai
+// scurt. Rotirea lentă proprie continuă pe deasupra. Doar pe mouse sau creion: pe ecranele tactile atingerea înseamnă derulare.
+const TURN_PER_W = TAU, TURN_MS = 450, RETURN_MS = 1600, IDLE_MS = 2500, TURN_EPS = 0.002;
 const SLOW_MS = 12;                // protecția: mediana duratei unui desen
 const SLOW_GAP = 100;              // protecția: mediana intervalului dintre cadre (sub 10 cadre pe secundă)
 const MEASURE_AFTER = 2000, CHECK_EVERY = 300, SAMPLES = 30;
@@ -143,8 +153,8 @@ function createRenderer(cv: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
   const order = [0, 1, 2, 3, 4, 5, 6, 7, 8];
   const byDepth = (a: number, b: number) => bodyS.d[a] - bodyS.d[b];
 
-  function setCamera(t: number) {
-    const az = 0.6 + TAU * t / 240, el = (23 + 7 * Math.sin(TAU * t / 52)) * DEG;
+  function setCamera(t: number, yaw: number, pitch: number) {
+    const az = 0.6 + TAU * t / 240 + yaw, el = (23 + 7 * Math.sin(TAU * t / 52)) * DEG + pitch;
     ca = Math.cos(az); sa = Math.sin(az); ce = Math.cos(el); se = Math.sin(el);
   }
   function proj(x: number, y: number, z: number, out: Screen, k: number) {
@@ -259,12 +269,12 @@ function createRenderer(cv: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
       sunGlow = ctx.createRadialGradient(CX, CY, SUN * 0.7, CX, CY, SUN * 3.4);
       sunGlow.addColorStop(0, colB(SUN_GLOW)); sunGlow.addColorStop(1, colB(0));
     },
-    draw(t: number) {
+    draw(t: number, yaw = 0, pitch = 0) {
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.clearRect(0, 0, cv.width, cv.height);
       ctx.setTransform(scale, 0, 0, scale, 0, 0);
       ctx.lineWidth = px / scale;   // 1 px CSS
-      setCamera(t);
+      setCamera(t, yaw, pitch);
 
       // stelele: pe sfera cerului, se rotesc doar cu camera
       for (const s of STARS) {
@@ -328,6 +338,9 @@ const SolarCanvas = memo(function SolarCanvas({ still: alwaysStill }: { still: b
     const root = document.documentElement;
     const t0 = performance.now();
     let raf = 0, running = false, frozen = false, slot = -1, prev = 0, n = 0, shown = false;
+    // Rotirea după mouse: ținta (adunată din mișcări) și unghiurile la care a ajuns camera, în radiani.
+    let yawT = 0, pitchT = 0, yaw = 0, pitch = 0, last = 0, moved = 0, returning = false;
+    let mx: number | null = null, my = 0;
     const durs = new Float32Array(SAMPLES), gaps = new Float32Array(SAMPLES);
 
     // `data-drawn` pornește apariția lină din CSS; se pune o singură dată (un atribut rescris la fiecare cadru recalculează stilurile).
@@ -346,23 +359,46 @@ const SolarCanvas = memo(function SolarCanvas({ still: alwaysStill }: { still: b
     const loop = (now: number) => {
       raf = requestAnimationFrame(loop);
       // Felii fixe de timp, aliniate cu AmbientBeams: ambele straturi se redesenează în aceeași reîmprospătare.
-      const s = Math.floor(now / FRAME_MS);
+      const s = Math.floor(now / SLOT_MS);
       if (s === slot) return;
+      const turning = Math.abs(yawT - yaw) + Math.abs(pitchT - pitch) > TURN_EPS;
+      if (!turning && s % 2) return;
       slot = s;
+      // Fără mișcare de IDLE_MS: ținta devine vederea de acasă cea mai apropiată (un multiplu de 360°, ca să nu se desfacă rotirile).
+      if (!returning && moved && now - moved > IDLE_MS && (yawT || pitchT)) {
+        returning = true; yawT = Math.round(yaw / TAU) * TAU; pitchT = Math.round(pitch / TAU) * TAU;
+      }
+      const k = last ? 1 - Math.exp(-(now - last) / (returning ? RETURN_MS : TURN_MS)) : 1;
+      last = now;
+      yaw += (yawT - yaw) * k; pitch += (pitchT - pitch) * k;
+      // Ajuns acasă: unghiurile se aduc la 0 (aceeași vedere), ca numerele să nu crească la nesfârșit.
+      if (returning && Math.abs(yawT - yaw) + Math.abs(pitchT - pitch) < TURN_EPS) { returning = false; yaw = yawT = 0; pitch = pitchT = 0; }
       if (root.dataset.rvI18n === "full") { prev = 0; return; }   // conținutul e ascuns cât se încarcă traducerea
       const a = performance.now();
-      r.draw(STILL + SPEED * (now - t0) / 1000);
+      r.draw(STILL + SPEED * (now - t0) / 1000, yaw, pitch);
       show();
       guard(now, performance.now() - a);
     };
     const start = () => {
       if (running || frozen || alwaysStill || reduce.matches || document.hidden) return;
-      running = true; slot = -1; prev = 0; raf = requestAnimationFrame(loop);
+      running = true; slot = -1; prev = 0; last = 0; raf = requestAnimationFrame(loop);
     };
     function stop() { if (running) { running = false; cancelAnimationFrame(raf); } }
     const repaintIfIdle = () => { if (!running) still(); };
 
     const onVisibility = () => (document.hidden ? stop() : start());
+    const onPointer = (e: PointerEvent) => {
+      if (e.pointerType !== "mouse" && e.pointerType !== "pen") return;
+      if (mx !== null) {
+        const f = TURN_PER_W / (window.innerWidth || 1);
+        yawT += (e.clientX - mx) * f; pitchT += (e.clientY - my) * f;
+        returning = false; moved = performance.now();
+      }
+      mx = e.clientX; my = e.clientY;
+    };
+    // Mouse-ul iese din fereastră (sau fereastra pierde focusul): la intrare nu se socotește saltul de la marginea opusă.
+    const onOut = (e: MouseEvent) => { if (!e.relatedTarget) mx = null; };
+    const onBlur = () => { mx = null; };
     const onReduce = () => { stop(); if (reduce.matches) still(); else start(); };
     const ro = new ResizeObserver(() => { if (r.resize()) repaintIfIdle(); });
     const mo = new MutationObserver(() => { r.readInk(); repaintIfIdle(); });
@@ -373,6 +409,9 @@ const SolarCanvas = memo(function SolarCanvas({ still: alwaysStill }: { still: b
     reduce.addEventListener("change", onReduce);
     document.addEventListener("visibilitychange", onVisibility);
     window.addEventListener("pageshow", start);
+    window.addEventListener("pointermove", onPointer, { passive: true });
+    document.addEventListener("mouseout", onOut);
+    window.addEventListener("blur", onBlur);
     start();
 
     return () => {
@@ -381,6 +420,9 @@ const SolarCanvas = memo(function SolarCanvas({ still: alwaysStill }: { still: b
       reduce.removeEventListener("change", onReduce);
       document.removeEventListener("visibilitychange", onVisibility);
       window.removeEventListener("pageshow", start);
+      window.removeEventListener("pointermove", onPointer);
+      document.removeEventListener("mouseout", onOut);
+      window.removeEventListener("blur", onBlur);
     };
   }, [alwaysStill]);
 
