@@ -926,17 +926,14 @@ html.light .rounded-full.bg-white.text-black:not(:where([role="dialog"] *, [data
   z-index: 1; pointer-events: none; overflow: hidden;
   display: flex; align-items: center; justify-content: center;
 }
+/* Din 21 nov 2026 canvasul are cel puțin înălțimea ferestrei (pe telefon și tabletă în picioare rămânea gol sus și jos): lumea
+   crește în înălțime în componentă, scara orizontală rămâne. Marginile canvasului cad mereu în afara ecranului, deci masca de
+   estompare de sus și de jos s-a scos (ea stingea exact zona de umplut și costa cadre pe secundă). */
 .solar-bg canvas {
-  display: block; flex: none; width: max(125vw, 820px); height: auto; aspect-ratio: 340 / 176;
+  display: block; flex: none; width: max(125vw, 820px);
+  height: max(calc(max(125vw, 820px) * 176 / 340), 100vh);
+  height: max(calc(max(125vw, 820px) * 176 / 340), 100lvh);
   opacity: 0; transition: opacity 0.8s ease;
-}
-/* Estomparea de sus și de jos doar unde canvasul e mai scund decât fereastra (telefon, tabletă în picioare). Pe laptop marginile
-   lui cad în afara ecranului, iar masca pe o suprafață de 3 ori mai mare a scăzut cadrele pe secundă (măsurat, 17 nov 2026). */
-@media (max-aspect-ratio: 1/1) {
-  .solar-bg canvas {
-    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 86%, transparent);
-    mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 86%, transparent);
-  }
 }
 /* 21 nov 2026 (Alin: „mai vizibil, puțin mai evident”): 0,24 / 0,20, înainte 0,18 / 0,15. */
 .solar-bg canvas[data-drawn] { opacity: 0.24; }

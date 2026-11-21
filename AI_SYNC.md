@@ -8,6 +8,15 @@ Aici notăm progresul pentru a ne coordona perfect.
 
 ---
 
+### [Claude] - 21 nov 2026 (seara) - Fundalul pe telefon: canvas cât fereastra, vedere mai de sus, centura Kuiper, Pluto și Eris
+
+Plan, revizii, hotărâri: `docs/designs/fundal_dincolo_neptun_2026-11-21/` (`design_v1_decizii.md`).
+1. **Cererea lui Alin:** pe telefon sistemul solar era mic, cu mult gol sus și jos; „dacă există alte elemente pe lângă sistemul nostru solar, adaugă-le… chiar dacă pe desktop nu se încadrează”.
+2. **Canvasul are cel puțin înălțimea ferestrei** (`height: max(calc(max(125vw, 820px) * 176 / 340), 100lvh)`, fără `aspect-ratio`); lumea are `H` și `CY` variabile (`resize`), scara orizontală neschimbată; **masca de sus/jos s-a scos** (marginile cad mereu în afara ecranului). Haloul Soarelui se reface la redimensionare.
+3. **Pe ecranele în picioare camera privește mai de sus:** elevația de bază urcă de la 23° (laptop) la 55° (`EL_TALL`) la raportul canvasului 0,95 (`TALL_AT`), calculată direct din raport.
+4. **Dincolo de Neptun**, pe scara `far()` (logaritmică după 30,07 UA, continuă cu `dist`): centura Kuiper (260 de puncte), Pluto și Eris cu orbitele reale (comprimate punct cu punct). Stelele: 120 (primele 60 neschimbate), sfera cerului legată de mărimea ferestrei.
+5. **Nu adăugați fără Alin:** Haumea, Makemake, Sedna, norul Oort, Voyager, stelele vecine, heliosfera, Calea Lactee — încercate în plan sau pe planșă și scoase (motivele în `design_v1_decizii.md`).
+
 ### [Claude] - 21 nov 2026 - Sistemul solar se rotește după mouse și e mai tare (0,24 / 0,20)
 
 Completează nota din 17 nov de mai jos (regula 3, tăria).

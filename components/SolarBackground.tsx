@@ -12,7 +12,12 @@ import { usePathname } from "next/navigation";
 
 const TAU = Math.PI * 2;
 const DEG = Math.PI / 180;
-const W = 340, H = 176, CX = 170, CY = 80, CAM_D = 720, SUN = 8.5, YEAR = 5;
+// Lumea are lățimea fixă W; înălțimea (H) și centrul vertical (CY) urmează fereastra din 21 nov 2026 (vezi `resize`): H0 / CY0 sunt
+// valorile de pe laptop, unde nimic nu s-a schimbat.
+const W = 340, H0 = 176, CX = 170, CY0 = 80, CAM_D = 720, SUN = 8.5, YEAR = 5;
+// Pe ecranele în picioare (telefon, tabletă) camera privește mai de sus, ca discul să umple înălțimea: elevația de bază urcă lin
+// de la 23° (raportul de pe laptop) la EL_TALL la raportul TALL_AT al canvasului (înălțime / lățime). 21 nov 2026.
+const EL_TALL = 55, TALL_AT = 0.95;
 const STILL = 8.4;                 // clipa desenată la „mișcare redusă”, pe /studio și la pornire
 const SPEED = 0.34;                // 340 / 1000: pe laptop, aceeași viteză pe ecran ca proba de 340 px
 const CAP = 0.35;                  // cerneala de fundal: tot ce trece de 0,35 se desenează plin, restul proporțional
@@ -85,7 +90,8 @@ const BELT = Array.from({ length: 110 }, () => {
   const i = (rnd() * 2 - 1) * 9 * DEG, O = rnd() * TAU;
   return { a: dist(au), P: period(Math.pow(au, 1.5)), M0: rnd() * TAU, cO: Math.cos(O), sO: Math.sin(O), ci: Math.cos(i), si: Math.sin(i) };
 });
-const STARS = Array.from({ length: 60 }, () => {
+// 120 de stele (60 până pe 21 nov 2026): primele 60 ies la fel, pentru că șirul aleator e același.
+const STARS = Array.from({ length: 120 }, () => {
   const z = rnd() * 2 - 1, f = rnd() * TAU, q = Math.sqrt(1 - z * z);
   return { x: q * Math.cos(f), y: q * Math.sin(f), z, s: 0.4 + rnd() * 1.2, p: rnd() * 10, r: 0.45 + rnd() * 0.5 };
 });
@@ -112,15 +118,50 @@ function orbitPoints(o: Orbit, n: number) {
 const ORBIT_W = PLANETS.map((o) => orbitPoints(o, ORBIT_N));
 const COMET_W = orbitPoints(COMET, COMET_N);
 
+// ── Dincolo de Neptun (21 nov 2026; plan: docs/designs/fundal_dincolo_neptun_2026-11-21/) ──
+// Până la Neptun distanțele vin din `dist`; după el, pe o scară logaritmică legată continuu (far(30,07) = 150), altfel nimic nu
+// încape. Corpurile noi se calculează în UA și fiecare punct se comprimă după distanța lui reală (ordinea reală rămâne).
+const NEPTUNE_AU = 30.07;
+const far = (r: number) => (r <= NEPTUNE_AU ? dist(r) : 150 + 22 * Math.log(r / NEPTUNE_AU));
+function squash(p: Float32Array, k: number) {
+  const r = Math.hypot(p[k], p[k + 1], p[k + 2]) || 1, f = far(r) / r;
+  p[k] *= f; p[k + 1] *= f; p[k + 2] *= f;
+}
+// Planetele pitice cu orbitele cele mai deosebite: Pluto (17°) și Eris (44°, ridică un arc din planul planetelor). Elementele J2000.
+const DWARFS: Orbit[] = [
+  orbit(39.48, 0.249, 17.16 * DEG, 110.3 * DEG, 113.8 * DEG, period(248), 0, 14.9 * DEG),
+  orbit(67.9, 0.44, 44.0 * DEG, 35.9 * DEG, 151.6 * DEG, period(559), 0, 205 * DEG),
+];
+const DWARF_N = 160;
+const DWARF_W = DWARFS.map((o) => {
+  const p = orbitPoints(o, DWARF_N);
+  for (let k = 0; k <= DWARF_N; k++) squash(p, k * 3);
+  return p;
+});
+// Ecuația lui Kepler prin Newton (excentricitatea lui Eris e 0,44).
+function posMN(o: Orbit, M: number, out: Float32Array, k: number) {
+  let E = M;
+  for (let n = 0; n < 8; n++) E -= (E - o.e * Math.sin(E) - M) / (1 - o.e * Math.cos(E));
+  posE(o, E, out, k);
+  squash(out, k);
+}
+// Centura Kuiper: 85 % în centura clasică (39–48 UA, înclinări mici), restul împrăștiat (30–50 UA, înclinări mari).
+const KUIPER = Array.from({ length: 260 }, (_, n) => {
+  const classic = n < 221;
+  const au = classic ? 39 + rnd() * 9 : 30 + rnd() * 20;
+  const i = (rnd() * 2 - 1) * (classic ? 6 : 18) * DEG, O = rnd() * TAU;
+  return { a: far(au), P: period(Math.pow(au, 1.5)), M0: rnd() * TAU, cO: Math.cos(O), sO: Math.sin(O), ci: Math.cos(i), si: Math.sin(i) };
+});
+
 // Inele cu axa fixă față de stele (Saturn 26,7°, Uranus 97,8°): baza și cercul unitate se calculează o dată.
-function ringBasis(tilt: number, lon: number) {
+function ringBasis(tilt: number, lon: number, N = RING_N) {
   const n = [Math.sin(tilt) * Math.cos(lon), Math.sin(tilt) * Math.sin(lon), Math.cos(tilt)];
   let u = Math.hypot(n[0], n[1]) > 1e-6 ? [-n[1], n[0], 0] : [1, 0, 0];
   const ul = Math.hypot(u[0], u[1], u[2]); u = [u[0] / ul, u[1] / ul, u[2] / ul];
   const v = [n[1] * u[2] - n[2] * u[1], n[2] * u[0] - n[0] * u[2], n[0] * u[1] - n[1] * u[0]];
-  const pts = new Float32Array((RING_N + 1) * 3);
-  for (let k = 0; k <= RING_N; k++) {
-    const f = TAU * k / RING_N, cf = Math.cos(f), sf = Math.sin(f);
+  const pts = new Float32Array((N + 1) * 3);
+  for (let k = 0; k <= N; k++) {
+    const f = TAU * k / N, cf = Math.cos(f), sf = Math.sin(f);
     pts[k * 3] = u[0] * cf + v[0] * sf; pts[k * 3 + 1] = u[1] * cf + v[1] * sf; pts[k * 3 + 2] = u[2] * cf + v[2] * sf;
   }
   return pts;
@@ -135,8 +176,16 @@ const screen = (n: number): Screen => ({ x: new Float32Array(n), y: new Float32A
 function createRenderer(cv: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
   let ca = 1, sa = 0, ce = 1, se = 0;
   let scale = 1, px = 1;
+  // Înălțimea lumii, centrul vertical, raza sferei cerului și elevația de bază: din mărimea canvasului (`resize`).
+  let H = H0, CY = CY0, skyR = 250, elBase = 23, dot = 0.5;
   let ink: string[] = [], inkBody: string[] = [];
   let sunGlow: CanvasGradient | null = null;
+  // Haloul depinde de CY, deci se reface și la redimensionare, nu doar la schimbarea temei.
+  function makeGlow() {
+    if (!ink.length) return;
+    sunGlow = ctx.createRadialGradient(CX, CY, SUN * 0.7, CX, CY, SUN * 3.4);
+    sunGlow.addColorStop(0, colB(SUN_GLOW)); sunGlow.addColorStop(1, colB(0));
+  }
   const lvl = (a: number) => Math.round(Math.max(0, Math.min(1, a)) * LEVELS);
   const col = (a: number) => ink[lvl(a)];           // linii: orbite, inele, orbita și coada cometei (LINE_CAP)
   const colB = (a: number) => inkBody[lvl(a)];      // Soarele și punctele pline: planete, Lună, capul cometei, centura, stele (CAP)
@@ -152,9 +201,15 @@ function createRenderer(cv: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
   const tmp = new Float32Array(3);
   const order = [0, 1, 2, 3, 4, 5, 6, 7, 8];
   const byDepth = (a: number, b: number) => bodyS.d[a] - bodyS.d[b];
+  const dwarfOrbitS = DWARF_W.map(() => screen(DWARF_N + 1));
+  const dwarfW = new Float32Array(DWARFS.length * 3);
+  const dwarfS = screen(DWARFS.length);
+  const kuiperS = screen(KUIPER.length);
+  const starX = new Float32Array(STARS.length), starY = new Float32Array(STARS.length), starR = new Float32Array(STARS.length);
+  const starL = new Int8Array(STARS.length);
 
   function setCamera(t: number, yaw: number, pitch: number) {
-    const az = 0.6 + TAU * t / 240 + yaw, el = (23 + 7 * Math.sin(TAU * t / 52)) * DEG + pitch;
+    const az = 0.6 + TAU * t / 240 + yaw, el = (elBase + 7 * Math.sin(TAU * t / 52)) * DEG + pitch;
     ca = Math.cos(az); sa = Math.sin(az); ce = Math.cos(el); se = Math.sin(el);
   }
   function proj(x: number, y: number, z: number, out: Screen, k: number) {
@@ -249,16 +304,47 @@ function createRenderer(cv: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
       ctx.moveTo(beltS.x[b] + r, beltS.y[b]); ctx.arc(beltS.x[b], beltS.y[b], r, 0, TAU);
     }
   }
-
+  // Punctele Kuiper: cel puțin un pixel de canvas (`dot`), altfel pe ecranele late se pierd; pătrățele (la 1–2 px nu se deosebesc
+  // de cercuri, dar se desenează mai repede).
+  function kuiperPath(front: boolean, k: number) {
+    ctx.beginPath();
+    for (let b = 0; b < KUIPER.length; b++) {
+      if ((kuiperS.d[b] >= 0) !== front) continue;
+      const r = Math.max(dot, k * kuiperS.s[b]);
+      ctx.rect(kuiperS.x[b] - r, kuiperS.y[b] - r, 2 * r, 2 * r);
+    }
+  }
+  function dwarfOrbits(front: boolean, color: string) {
+    ctx.beginPath();
+    for (let i = 0; i < DWARFS.length; i++) addSplit(dwarfOrbitS[i], DWARF_N + 1, 0, front);
+    ctx.strokeStyle = color; ctx.stroke();
+  }
+  function dwarfBodies(front: boolean) {
+    ctx.beginPath();
+    for (let i = 0; i < DWARFS.length; i++) {
+      if ((dwarfS.d[i] >= 0) !== front) continue;
+      const r = Math.max(dot * 1.6, 0.85 * dwarfS.s[i]);
+      ctx.moveTo(dwarfS.x[i] + r, dwarfS.y[i]); ctx.arc(dwarfS.x[i], dwarfS.y[i], r, 0, TAU);
+    }
+    ctx.fillStyle = colB(0.55); ctx.fill();
+  }
   return {
     // Densitatea e fixă, 1: la tăria unui fundal, liniile nu se văd diferit, iar pixelii de desenat scad de 4–9 ori pe ecranele dense.
     resize() {
-      const w = cv.clientWidth;
-      if (!w) return false;
+      const w = cv.clientWidth, h = cv.clientHeight;
+      if (!w || !h) return false;
       // Pe ecrane înguste (telefon) canvasul e de ~2× lățimea ferestrei: se desenează la 1,6× lățimea ferestrei, nu la mărimea lui.
-      cv.width = Math.round(Math.min(w, MAX_PX, Math.max(600, window.innerWidth * 1.6))); cv.height = Math.round(cv.width * H / W);
+      cv.width = Math.round(Math.min(w, MAX_PX, Math.max(600, window.innerWidth * 1.6)));
+      // Din 21 nov 2026 canvasul are cel puțin înălțimea ferestrei (CSS): lumea crește în înălțime, scara orizontală rămâne.
+      H = Math.max(H0, W * h / w); CY = H / 2 - 8;
+      cv.height = Math.round(cv.width * H / W);
       scale = cv.width / W;
       px = cv.width / w;
+      dot = 0.5 / scale;
+      skyR = Math.max(250, 1.1 * Math.hypot(W / 2, H / 2 + 8));
+      const u = Math.max(0, Math.min(1, (H / W - H0 / W) / (TALL_AT - H0 / W)));
+      elBase = 23 + (EL_TALL - 23) * u;
+      makeGlow();
       return true;
     },
     readInk() {
@@ -266,8 +352,7 @@ function createRenderer(cv: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
       const rgb = m ? `${m[0]},${m[1]},${m[2]}` : "255,255,255";
       ink = Array.from({ length: LEVELS + 1 }, (_, k) => `rgba(${rgb},${Math.min(1, k / LEVELS / LINE_CAP).toFixed(3)})`);
       inkBody = Array.from({ length: LEVELS + 1 }, (_, k) => `rgba(${rgb},${Math.min(1, k / LEVELS / CAP).toFixed(3)})`);
-      sunGlow = ctx.createRadialGradient(CX, CY, SUN * 0.7, CX, CY, SUN * 3.4);
-      sunGlow.addColorStop(0, colB(SUN_GLOW)); sunGlow.addColorStop(1, colB(0));
+      makeGlow();
     },
     draw(t: number, yaw = 0, pitch = 0) {
       ctx.setTransform(1, 0, 0, 1, 0, 0);
@@ -277,13 +362,24 @@ function createRenderer(cv: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
       setCamera(t, yaw, pitch);
 
       // stelele: pe sfera cerului, se rotesc doar cu camera
+      let ns = 0;
       for (const s of STARS) {
         const x1 = s.x * ca - s.y * sa, y1 = s.x * sa + s.y * ca;
-        if (-y1 * ce + s.z * se < -0.15) continue;
-        const X = CX + x1 * 250, Y = CY - (y1 * se + s.z * ce) * 250;
-        if (X < 0 || X > W || Y < 0 || Y > H) continue;
-        ctx.beginPath(); ctx.arc(X, Y, s.r, 0, TAU);
-        ctx.fillStyle = colB(0.1 + 0.35 * (0.5 + 0.5 * Math.sin(t * s.s + s.p))); ctx.fill();
+        if (-y1 * ce + s.z * se < -0.15) { starL[ns] = -1; ns++; continue; }
+        const X = CX + x1 * skyR, Y = CY - (y1 * se + s.z * ce) * skyR;
+        if (X < 0 || X > W || Y < 0 || Y > H) { starL[ns] = -1; ns++; continue; }
+        starX[ns] = X; starY[ns] = Y; starR[ns] = Math.max(dot, s.r);
+        starL[ns] = lvl(0.1 + 0.35 * (0.5 + 0.5 * Math.sin(t * s.s + s.p))); ns++;
+      }
+      // O umplere pe treaptă de tărie, nu una pe stea (120 de stele din 21 nov 2026).
+      for (let L = 0; L <= LEVELS; L++) {
+        let any = false;
+        for (let k = 0; k < ns; k++) {
+          if (starL[k] !== L) continue;
+          if (!any) { ctx.beginPath(); any = true; }
+          ctx.moveTo(starX[k] + starR[k], starY[k]); ctx.arc(starX[k], starY[k], starR[k], 0, TAU);
+        }
+        if (any) { ctx.fillStyle = inkBody[L]; ctx.fill(); }
       }
 
       for (let i = 0; i < 8; i++) projAll(ORBIT_W[i], ORBIT_N + 1, orbitS[i]);
@@ -300,9 +396,22 @@ function createRenderer(cv: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
         tmp[0] = o.cO * x - o.sO * o.ci * y; tmp[1] = o.sO * x + o.cO * o.ci * y; tmp[2] = o.si * y;
         proj(tmp[0], tmp[1], tmp[2], beltS, b);
       }
+      for (let b = 0; b < KUIPER.length; b++) {
+        const o = KUIPER[b], M = o.M0 + TAU * t / o.P, x = o.a * Math.cos(M), y = o.a * Math.sin(M);
+        proj(o.cO * x - o.sO * o.ci * y, o.sO * x + o.cO * o.ci * y, o.si * y, kuiperS, b);
+      }
+      for (let i = 0; i < DWARFS.length; i++) {
+        projAll(DWARF_W[i], DWARF_N + 1, dwarfOrbitS[i]);
+        const o = DWARFS[i];
+        posMN(o, o.M0 + TAU * t / o.P, dwarfW, i * 3);
+        proj(dwarfW[i * 3], dwarfW[i * 3 + 1], dwarfW[i * 3 + 2], dwarfS, i);
+      }
       order.sort(byDepth);
 
-      // în spate
+      // în spate: întâi ce e dincolo de Neptun (piticele, centura Kuiper), apoi planetele
+      dwarfOrbits(false, col(0.06));
+      kuiperPath(false, 0.42); ctx.fillStyle = colB(0.16); ctx.fill();
+      dwarfBodies(false);
       strokeOrbits(false, col(0.13));
       strokeSplit(cometS, COMET_N + 1, 0, false, col(0.07));
       beltPath(false, 0.55); ctx.fillStyle = colB(0.22); ctx.fill();
@@ -312,7 +421,10 @@ function createRenderer(cv: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
       if (sunGlow) { ctx.fillStyle = sunGlow; ctx.beginPath(); ctx.arc(CX, CY, SUN * 3.4, 0, TAU); ctx.fill(); }
       ctx.beginPath(); ctx.arc(CX, CY, SUN, 0, TAU); ctx.fillStyle = colB(SUN_INK); ctx.fill();
 
-      // în față: orbitele mai groase (adâncime și vizibilitate fără un pixel mai luminos decât planetele)
+      // în față: dincolo de Neptun întâi, apoi orbitele mai groase (adâncime și vizibilitate fără un pixel mai luminos decât planetele)
+      dwarfOrbits(true, col(0.1));
+      kuiperPath(true, 0.46); ctx.fillStyle = colB(0.28); ctx.fill();
+      dwarfBodies(true);
       ctx.lineWidth = FRONT_W * px / scale;
       strokeOrbits(true, col(0.3));
       ctx.lineWidth = px / scale;
@@ -340,7 +452,7 @@ const SolarCanvas = memo(function SolarCanvas({ still: alwaysStill }: { still: b
     let raf = 0, running = false, frozen = false, slot = -1, prev = 0, n = 0, shown = false;
     // Rotirea după mouse: ținta (adunată din mișcări) și unghiurile la care a ajuns camera, în radiani.
     let yawT = 0, pitchT = 0, yaw = 0, pitch = 0, last = 0, moved = 0, returning = false;
-    let mx: number | null = null, my = 0;
+    let mx: number | null = null, my = 0, lastT = STILL;
     const durs = new Float32Array(SAMPLES), gaps = new Float32Array(SAMPLES);
 
     // `data-drawn` pornește apariția lină din CSS; se pune o singură dată (un atribut rescris la fiecare cadru recalculează stilurile).
@@ -375,7 +487,8 @@ const SolarCanvas = memo(function SolarCanvas({ still: alwaysStill }: { still: b
       if (returning && Math.abs(yawT - yaw) + Math.abs(pitchT - pitch) < TURN_EPS) { returning = false; yaw = yawT = 0; pitch = pitchT = 0; }
       if (root.dataset.rvI18n === "full") { prev = 0; return; }   // conținutul e ascuns cât se încarcă traducerea
       const a = performance.now();
-      r.draw(STILL + SPEED * (now - t0) / 1000, yaw, pitch);
+      lastT = STILL + SPEED * (now - t0) / 1000;
+      r.draw(lastT, yaw, pitch);
       show();
       guard(now, performance.now() - a);
     };
@@ -400,7 +513,8 @@ const SolarCanvas = memo(function SolarCanvas({ still: alwaysStill }: { still: b
     const onOut = (e: MouseEvent) => { if (!e.relatedTarget) mx = null; };
     const onBlur = () => { mx = null; };
     const onReduce = () => { stop(); if (reduce.matches) still(); else start(); };
-    const ro = new ResizeObserver(() => { if (r.resize()) repaintIfIdle(); });
+    // Redimensionarea golește canvasul: se redesenează imediat (și când animația rulează), ca să nu clipească gol până la cadrul următor.
+    const ro = new ResizeObserver(() => { if (r.resize()) { if (running) r.draw(lastT, yaw, pitch); else still(); } });
     const mo = new MutationObserver(() => { r.readInk(); repaintIfIdle(); });
 
     if (r.resize()) { r.readInk(); still(); }
