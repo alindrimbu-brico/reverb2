@@ -33,8 +33,7 @@ if sys.platform == "win32":
 MUSIC_ROOT = Path(r"C:\Users\alind\Music")
 SUNO_ROOT = MUSIC_ROOT / "Suno - melodiile lui Alin"
 REVERB_ROOT = Path(r"C:\Users\alind\reverb\reverb-site")
-PUBLIC_MEDIA = REVERB_ROOT / "public" / "media"
-PUBLIC_MEDIA.mkdir(parents=True, exist_ok=True)
+PUBLIC_MEDIA = REVERB_ROOT / "public" / "media"   # dosarul se creează în main(): importul nu scrie nimic (studio_muzica.py importă juriul)
 
 
 def sha256_file(path: Path) -> str:
@@ -162,10 +161,8 @@ def normalize_song_family(filename: str) -> str:
     stem = re.sub(r"\s*\.o\d+\s*$", "", stem, flags=re.IGNORECASE)
     stem = re.sub(r"\s*\([^)]*\)\s*$", "", stem)
     stem = re.sub(r"\s*-\s*\d+\s*$", "", stem)
-    if "together" in stem.lower() and "christmas" in stem.lower():
-        return "Together for Christmas (EN)"
-    if "magia" in stem.lower():
-        return "Magia Crăciunului (RO)"
+    # 11 nov 2026: colindele au nume distincte după versuri, perechile Suno = „Titlu (I)” / „Titlu (II)”
+    # (sufixul cade la linia de mai sus); vechea grupare „magia” / „together” le-ar fi amestecat.
     return stem.strip()
 
 
@@ -358,6 +355,7 @@ def render_cover_3000(src_img: Path, out_jpg: Path) -> bool:
 
 
 def main():
+    PUBLIC_MEDIA.mkdir(parents=True, exist_ok=True)
     print("=== PORNIRE JURIU AI & AUTOPILOT COLINDE (REVERB STUDIO) ===")
     audit = scan_and_audit_colinde()
 

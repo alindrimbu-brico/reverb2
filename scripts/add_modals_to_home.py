@@ -1,3 +1,10 @@
+# OPRIT-INCEPUT (14 nov 2026, verificarea lucrului lui Gemini; lucrarea verificare-lucru-gemini)
+import sys as _oprit_sys
+_OPRIT = "OPRIT pe 14 nov 2026: script de unica folosinta; rulat din nou rescrie app/page.tsx si app/en/page.tsx, care intre timp au alta forma. Nu se ruleaza; vezi C:\\Users\\alind\\lucrari\\verificare-lucru-gemini.md"
+if __name__ == "__main__":
+    _oprit_sys.exit(_OPRIT)
+raise ImportError(_OPRIT)
+# OPRIT-SFARSIT
 # 1. Update app/page.tsx
 with open(r'C:\Users\alind\reverb\reverb-site\app\page.tsx', 'r', encoding='utf-8') as f:
     c_ro = f.read()

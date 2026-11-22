@@ -45,3 +45,80 @@ next-env.d.ts
 
 # auditul acustic are căi locale de pe laptop; nu se publică (scos din public pe 12 nov 2026)
 public/media/music_audit.json
+
+# --- salvare-github: bloc comun (nu edita de mana; il pune salvare_github.py) ---
+# chei, parole, sesiuni
+*_keys.json
+*keys*.json
+*keys*.json.*
+*_keys.*
+.env
+.env.*
+!.env.example
+feeduri.txt
+*.pem
+*.key
+*.p12
+*.pfx
+*.keystore
+*.jks
+id_rsa*
+id_ed25519*
+settings.local.json
+credentials*.json
+token*.json
+*cookies*.json
+*storage_state*.json
+.npmrc
+.netrc
+.pypirc
+.git-credentials
+# baze de date si exporturi
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+*.jsonl
+# dependinte si build
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+.next/
+dist/
+out/
+.turbo/
+.vercel/
+# media si arhive mari
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+*.wav
+*.mp3
+*.m4a
+*.flac
+*.aac
+*.zip
+*.7z
+*.rar
+*.tar
+*.tar.gz
+*.tgz
+*.psd
+*.iso
+*.exe
+*.msi
+# cache-uri si jurnale
+.cache/
+cache/
+*_cache/
+*.log
+*.tmp
+*.mbtree
+ff2pass*
+*.part
+*.crdownload
+# --- salvare-github: sfarsit bloc comun ---

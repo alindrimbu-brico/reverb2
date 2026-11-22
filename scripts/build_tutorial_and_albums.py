@@ -17,6 +17,7 @@ import os
 import re
 import shutil
 import subprocess
+import sys
 import time
 import urllib.request
 import wave
@@ -77,16 +78,20 @@ def tts_algenib_strict(text: str, out_mp3: Path, voce: str = "Algenib") -> float
                 with urllib.request.urlopen(req, timeout=180) as r:
                     resp = json.loads(r.read().decode("utf-8"))
                 part = resp["candidates"][0]["content"]["parts"][0]["inlineData"]
-                pcm = base64.b64decode(part["data"])
+                # 12 nov 2026: modelul trimite un WAV întreg (antet + bloc C2PA la final), nu PCM brut; scris ca PCM dădea
+                # pârâit la început și fâșâit la finalul fiecărei fraze. Citirea corectă e în voce_gemini.pcm_din_raspuns.
+                sys.path.insert(0, r"C:\Users\alind\bricolando-price-agent\video\_unelte")
+                from voce_gemini import pcm_din_raspuns, MARGINI
+                pcm, rata = pcm_din_raspuns(base64.b64decode(part["data"]), part.get("mimeType", ""))
                 wav_tmp = cached_mp3.with_suffix(".wav")
                 with wave.open(str(wav_tmp), "wb") as w:
                     w.setnchannels(1)
                     w.setsampwidth(2)
-                    w.setframerate(24000)
+                    w.setframerate(rata)
                     w.writeframes(pcm)
                 subprocess.run(
                     ["ffmpeg", "-v", "error", "-y", "-i", str(wav_tmp),
-                     "-af", "loudnorm=I=-16:TP=-1.5:LRA=11", "-b:a", "160k", str(cached_mp3)],
+                     "-af", f"{MARGINI},loudnorm=I=-16:TP=-1.5:LRA=11,aresample=44100,{MARGINI}", "-b:a", "160k", str(cached_mp3)],
                     check=True
                 )
                 wav_tmp.unlink(missing_ok=True)
@@ -457,9 +462,10 @@ def build_extended_albums():
 
     # Selectam cate o singura varianta (cea mai buna / curata) pentru fiecare piesa in Engleza
     en_candidates = [
-        (MUSIC_ROOT / "01 Colinde si Craciun" / "Together at Christmas.wav", "Together at Christmas (Carol)"),
-        (MUSIC_ROOT / "01 Colinde si Craciun" / "Together for Christmas.wav", "Together for Christmas (Carol)"),
-        (MUSIC_ROOT / "01 Colinde si Craciun" / "Together for Christmas (you).wav", "Together for Christmas — Acoustic Version"),
+        # 11 nov 2026: fișierele redenumite după versuri (vezi memoria project_surya_music_youtube)
+        (MUSIC_ROOT / "01 Colinde si Craciun" / "Where Love Is the Song (II).wav", "Where Love Is the Song (Carol)"),
+        (MUSIC_ROOT / "01 Colinde si Craciun" / "Together for Christmas (I).wav", "Together for Christmas (Carol)"),
+        (MUSIC_ROOT / "01 Colinde si Craciun" / "Together for Christmas (II).wav", "Together for Christmas — Acoustic Version"),
         (MUSIC_ROOT / "03 Balade si poezie in engleza" / "Bridge of Light.wav", "Bridge of Light"),
         (MUSIC_ROOT / "03 Balade si poezie in engleza" / "Flight Without Wings.wav", "Flight Without Wings"),
         (MUSIC_ROOT / "03 Balade si poezie in engleza" / "Keep the Good.wav", "Keep the Good"),
@@ -477,9 +483,10 @@ def build_extended_albums():
 
     # Selectam cate o singura varianta (cea mai buna / curata) pentru fiecare piesa in Romana
     ro_candidates = [
-        (MUSIC_ROOT / "01 Colinde si Craciun" / "Magia Crăciunului .o1.wav", "Magia Crăciunului (Colind I)"),
-        (MUSIC_ROOT / "01 Colinde si Craciun" / "Magia Crăciunului .o2.wav", "Magia Crăciunului (Colind II — Coral)"),
-        (MUSIC_ROOT / "01 Colinde si Craciun" / "Magia Crăciunului o.3.wav", "Magia Crăciunului (Colind III — Acustic)"),
+        # 11 nov 2026: erau 3 colinde DIFERITE, nu 3 variante (transcriere Whisper + versurile din Suno)
+        (MUSIC_ROOT / "01 Colinde si Craciun" / "Crăciun, Crăciun, magia ta (II).wav", "Crăciun, Crăciun, magia ta"),
+        (MUSIC_ROOT / "01 Colinde si Craciun" / "Crăciunul e al nostru (I).wav", "Crăciunul e al nostru"),
+        (MUSIC_ROOT / "01 Colinde si Craciun" / "Pe ulițe ninge (II).wav", "Pe ulițe ninge"),
         (MUSIC_ROOT / "02 Poezie si versuri in romana" / "Lumina Prin Tine.wav", "Lumina Prin Tine"),
         (MUSIC_ROOT / "02 Poezie si versuri in romana" / "Cascada de Grație Dumnezeiască.wav", "Cascada de Grație Dumnezeiască"),
         (MUSIC_ROOT / "02 Poezie si versuri in romana" / "recunoștința.wav", "Recunoștința"),

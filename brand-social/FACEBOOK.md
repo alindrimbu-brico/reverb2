@@ -1,0 +1,15 @@
+---
+channel: facebook
+name: "Reverb Digital"
+handle: "reverbdigital.ro"
+status: in_pregatire
+url: ""
+updated_at: "2026-11-11"
+---
+
+# Poartă Canal Social — Facebook (`reverb.ro`)
+
+Când pagina oficială Facebook este creată:
+1. Completează `url: "https://www.facebook.com/reverbdigital.ro/"` mai sus.
+2. Schimbă `status: activ`.
+3. La următorul deploy / build, `lib/socialGates.ts` adaugă automat URL-ul în `Schema.org Organization -> sameAs` (`app/layout.tsx`) și în subsolul `Footer.tsx`.

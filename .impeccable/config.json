@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "hero-eyebrow-chip",
+        "value": "*",
+        "files": [
+          "docs/designs/emblema_pixel_2026-11-15/proba.html"
+        ],
+        "createdAt": "2026-11-15T06:17:13.190Z",
+        "reason": "Claude: the badge copies the live reverb.ro hero 1:1 so the emblem is judged in its real context; preview mock, not a new design"
+      }
+    ]
+  }
+}
