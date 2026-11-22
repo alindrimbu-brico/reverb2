@@ -121,4 +121,10 @@ cache/
 ff2pass*
 *.part
 *.crdownload
+# urmaribile in acest proiect (le foloseste site-ul / aplicatia)
+!/public/**/*.mp4
+!/public/**/*.mp3
+!/public/**/*.webm
+!/public/**/*.wav
+!/public/spiritual-site/node_modules/
 # --- salvare-github: sfarsit bloc comun ---
