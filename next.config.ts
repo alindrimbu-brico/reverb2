@@ -27,6 +27,9 @@ const nextConfig: NextConfig = {
     // Machetele cu nume de mărci reale au fost scoase (11 nov 2026); adresele vechi duc la galerie.
     { source: "/showcase/canapuff", destination: "/showcase", permanent: true },
     { source: "/showcase/jim-curtis", destination: "/showcase", permanent: true },
+    // 26 nov 2026: „Spiritual Reading” era textul întreg al unei cărți publicate (scanat, cu erori); scos, adresele duc la galerie.
+    { source: "/spiritual-site", destination: "/showcase", permanent: true },
+    { source: "/spiritual-site/:path*", destination: "/showcase", permanent: true },
     // Pagini vechi scoase pe 12 nov 2026 (prețuri și servicii care nu mai există, un formular de card fără plată în spate).
     { source: "/templates", destination: "/showcase", permanent: true },
     { source: "/en/templates", destination: "/en/showcase", permanent: true },

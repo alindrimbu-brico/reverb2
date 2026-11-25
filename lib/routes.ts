@@ -130,7 +130,6 @@ export const STATIC_MOCKUP_DIRS: string[] = [
   "flooare",
   "guru-store",
   "noapte",
-  "spiritual-site",
   "surya",
 ];
 
