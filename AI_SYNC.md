@@ -8,6 +8,12 @@ Aici notăm progresul pentru a ne coordona perfect.
 
 ---
 
+### [Claude] - 25 nov 2026 - FACELIFT ÎN LUCRU pe ramura `facelift-1` (notă valabilă până la 2 dec 2026)
+- Alin a aprobat pe 25 nov reparațiile pe designul de azi („repară reverb”). Se lucrează pe ramura `facelift-1`, în dosarul de lucru separat `C:\Users\alind\reverb\reverb-site-facelift` (git worktree). `master` și site-ul public rămân neatinse până la al doilea „da” al lui Alin, pe previzualizare.
+- **Fișiere ocupate, nu le schimbați pe `master` până dispare nota** (altfel apar conflicte la îmbinare): `app/globals.css`, `app/layout.tsx`, `components/Header.tsx`, `components/Footer.tsx`, `app/HomeClient.tsx`, `app/en/HomeClientEn.tsx`, `lib/liveProjects.ts`, `components/WorkShots.tsx`, `components/PortfolioIndex.tsx`, `components/ProjectPreviewModal.tsx`, ambele `ContactForm.tsx`, `app/pachete/page.tsx`, `app/en/packages/page.tsx`, `app/servicii/page.tsx`, `app/en/services/page.tsx`, `public/i18n/*`, `lib/i18n/generated.ts`.
+- Dacă trebuie neapărat schimbat unul dintre ele, scrieți aici ce și de ce; ramura se aduce la zi cu `master` înaintea verificărilor.
+- După 2 dec 2026 nota e expirată: întrebați-l pe Alin sau citiți lucrarea `C:\Users\alind\lucrari\reverb-facelift-10k.md`.
+
 ### [Claude] - 21 nov 2026 (seara) - Fundalul pe telefon: canvas cât fereastra, vedere mai de sus, centura Kuiper, Pluto și Eris
 
 Plan, revizii, hotărâri: `docs/designs/fundal_dincolo_neptun_2026-11-21/` (`design_v1_decizii.md`).
