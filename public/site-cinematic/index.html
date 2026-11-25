@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reverb Digital: site-uri, magazine online și clipuri</title>
+<meta name="description" content="Reverb Digital face site-uri, magazine online și clipuri pentru firme din România, cu preț stabilit de la început. Site Start de la €267 + TVA.">
+<meta property="og:title" content="Reverb Digital: site-uri, magazine online și clipuri">
+<meta property="og:description" content="Site-uri, magazine online și clipuri pentru firme din România.">
+<meta property="og:image" content="https://reverb.ro/site-cinematic/assets/plates/hero-1600.webp">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#070809">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23070809'/%3E%3Ccircle cx='16' cy='16' r='9' fill='%23000' stroke='%23fff' stroke-width='1.5'/%3E%3C/svg%3E">
+<link rel="preload" href="fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+<script>
+  // Mod cinematic doar pe ecrane mari cu mouse, fără „mișcare redusă”.
+  (function () {
+    var d = document.documentElement;
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) d.classList.add('reduce');
+    else if (matchMedia('(min-width: 721px) and (pointer: fine)').matches) d.classList.add('cine');
+  })();
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"Reverb Digital","url":"https://reverb.ro","telephone":"+40767235693","address":{"@type":"PostalAddress","addressLocality":"Focșani","addressRegion":"Vrancea","addressCountry":"RO"},"description":"Site-uri, magazine online și clipuri pentru firme din România."}
+</script>
+</head>
+<body>
+<a class="skip" href="#final">Sari la contact</a>
+
+<header class="bar">
+  <a class="wordmark" href="#top">Reverb Digital</a>
+  <nav class="chips" aria-label="Capitole">
+    <button type="button" data-chip="site">Site-uri</button>
+    <button type="button" data-chip="magazin">Magazine online</button>
+    <button type="button" data-chip="clipuri">Clipuri</button>
+    <button type="button" data-chip="gasit">Găsit</button>
+  </nav>
+</header>
+
+<main id="top">
+  <section id="scrolly" aria-hidden="true">
+    <div class="stage">
+      <img class="poster" src="assets/plates/hero-1600.webp" alt="">
+      <canvas id="film"></canvas>
+      <div class="overlays"></div>
+    </div>
+  </section>
+
+  <section class="opener" data-chapter="opener">
+    <img class="plate" src="assets/plates/hero-1080.webp" alt="O sferă neagră, nemișcată, în întuneric." width="1080" height="608">
+    <div class="copy">
+      <h1>Site-uri, magazine online și clipuri pentru firme din România.</h1>
+      <p class="line">De la lansare la scalare.</p>
+    </div>
+  </section>
+
+  <section class="chapter" id="site" data-chapter="site" data-film="f1">
+    <img class="plate" src="assets/plates/site-1080.webp" alt="Lame subțiri de lumină cyan se deschid în evantai în jurul sferei." width="1080" height="608" loading="lazy">
+    <div class="copy">
+      <h2>Site-ul tău, gata de lucru.</h2>
+      <p>Un site rapid, care arată bine pe telefon și pe calculator.</p>
+      <p class="fact">Site Start: €267 + TVA, preț stabilit de la început.</p>
+    </div>
+  </section>
+
+  <section class="chapter" id="magazin" data-chapter="magazin" data-film="f2">
+    <img class="plate" src="assets/plates/magazin-1080.webp" alt="Mărgele și picături de sticlă verde smarald se revarsă în jurul sferei." width="1080" height="608" loading="lazy">
+    <div class="copy">
+      <h2>Magazinul care vinde și când dormi.</h2>
+      <p>Produse, plăți cu cardul, facturi și etichete de curier făcute automat.</p>
+      <p class="fact">Magazin Start: €690 + TVA.</p>
+    </div>
+  </section>
+
+  <section class="chapter" id="clipuri" data-chapter="clipuri" data-film="f3">
+    <img class="plate" src="assets/plates/clipuri-1080.webp" alt="Panglici de lumină violetă se curbează în jurul sferei." width="1080" height="608" loading="lazy">
+    <div class="copy">
+      <h2>Clipuri scurte pentru rețelele tale.</h2>
+      <p>Clipuri făcute cu AI, care trimit oamenii spre magazin sau spre contact.</p>
+      <p class="fact">De la 12 clipuri pe lună: €330 + TVA / lună.</p>
+    </div>
+  </section>
+
+  <section class="chapter" id="gasit" data-chapter="gasit" data-film="f4">
+    <img class="plate" src="assets/plates/gasit-1080.webp" alt="Un inel de praf auriu orbitează în jurul sferei." width="1080" height="608" loading="lazy">
+    <div class="copy">
+      <h2>Găsit pe Google și de asistenții AI.</h2>
+      <p>Site-ul și fișa de pe Google ținute la zi, ca să te găsească cine te caută.</p>
+      <p class="fact">Verificarea site-ului e gratuită.</p>
+    </div>
+  </section>
+
+  <section class="final" id="final">
+    <h2>Începem cu o discuție.</h2>
+    <div class="actions">
+      <a class="btn primary" href="/contact" data-umami-event="contact-click" data-umami-event-loc="site-cinematic">Scrie-ne</a>
+      <a class="btn" href="https://wa.me/40767235693" data-umami-event="whatsapp-click" data-umami-event-loc="site-cinematic">WhatsApp</a>
+      <a class="btn" href="tel:+40767235693">Sună: 0767 235 693</a>
+      <a class="btn" href="/pachete">Vezi pachetele</a>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p>Reverb Digital este operat de Kalki Drim Magazin SRL.</p>
+  <p class="note">Concept din Galeria de concepte Reverb.</p>
+</footer>
+
+<div class="loader" role="status" aria-live="polite"><span class="ring" aria-hidden="true"></span><span class="txt">Se încarcă</span></div>
+<script src="app.js" defer></script>
+<script id="reverb-back-script">(function(){var h=location.hostname;if(!/(^|\.)reverb\.ro$|^localhost$|^127\.0\.0\.1$|\.vercel\.app$/.test(h))return;function pune(){if(document.getElementById('reverb-back'))return;var a=document.createElement('a');a.id='reverb-back';a.href='/showcase';a.textContent='\u2190 \u00CEnapoi la concepte';a.style.cssText='position:fixed;left:16px;bottom:16px;z-index:2147483000;display:inline-flex;align-items:center;padding:10px 16px;border-radius:999px;background:rgba(17,18,21,.9);color:#fff;font:700 10px/1 system-ui,-apple-system,Segoe UI,sans-serif;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;border:1px solid rgba(255,255,255,.25);box-shadow:0 8px 24px rgba(0,0,0,.35)';document.body.appendChild(a);}if(document.body)pune();else document.addEventListener('DOMContentLoaded',pune);})();</script>
+</body>
+</html>

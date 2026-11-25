@@ -8,6 +8,7 @@ export const metadata: Metadata = {
 };
 
 const showcases: Concept[] = [
+  { id: "site-cinematic", name: "Sfera Reverb", vibe: "Film derulat la scroll", color: "#E5E5E5", description: "O sferă neagră care se schimbă la fiecare capitol: site-uri, magazine, clipuri, Google. Imagini și clipuri legate cadru cu cadru, derulate odată cu pagina; pe telefon, clip în buclă.", href: "/site-cinematic/index.html" },
   { id: "surya", name: "Surya Group", vibe: "Brutalism Desyres", color: "#111111", description: "Design webflow robust, bazat pe typography imens și delimitări tăioase B2B.", href: "/showcase/surya" },
   { id: "florarte", name: "Florarte Textile", vibe: "Pastel Sage & Rose", color: "#4E6E59", description: "Atelier floral B2C axat pe estetica textila matura și claritatea prezenței.", href: "/showcase/florarte" },
   { id: "xiaolong", name: "Xiaolong Packaging", vibe: "Industrial B2B", color: "#208b53", description: "Design corporativ matur B2B pentru un producător asiatic global, cu modul dinamic de markup +25%.", href: "/showcase/xiaolong" },
