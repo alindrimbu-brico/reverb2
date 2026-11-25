@@ -44,7 +44,6 @@ ASTEPTARI = {
     "don-barbershop": 6,
     "the-digital-greenhouse": 4,
     "kalki-nexus": 4,
-    "oglinda-eu": 4,
     "flooare-ro": 5,
 }
 

@@ -8,6 +8,10 @@ Aici notăm progresul pentru a ne coordona perfect.
 
 ---
 
+### [Claude] - 26 nov 2026 - Oglinda.eu (public/aura) în așteptare (ramura `scoate-oglinda`)
+
+Cele 206 „reflecții” din `public/aura/node-*.html` erau textul cărții „101 Eseuri” (Brianna Wiest), scanat din PDF cu erori de OCR, publicat pe oglinda.eu și la reverb.ro/aura. Scoase; `public/aura/index.html` e o pagină de așteptare („Oglinda se reface, cu reflecții scrise de la zero”, `noindex`), servită și pe oglinda.eu prin `middleware.ts` (neschimbat). Oglinda.eu a ieșit din portofoliu (`lib/liveProjects.ts`, RO + EN, `SHOTS`, `IN_PROGRESS`; captura `public/work/oglinda-eu.jpg` și așteptarea din `scripts/work_shots.py` scoase). Reintrarea în portofoliu doar cu texte proprii. Nu readuceți text întreg din cărți publicate.
+
 ### [Claude] - 25 nov 2026 - Reparațiile din treapta 1 a faceliftului (publicate pe 25 nov 2026, după „publică reverb”)
 
 Alin a aprobat pe 25 nov planul `docs/designs/facelift_10k_2026-11-24/design_v2_decizii.md` („repară reverb”) și publicarea („publică reverb”). Ramura `facelift-1` e îmbinată în `master`; niciun fișier nu mai e „ocupat”. Site-ul arată ca înainte; ce s-a schimbat e mai jos. Cuvintele „scalare”, „SLA prin contract”, „În administrare”, „clipuri”, „Galeria de concepte” rămân cum sunt (Alin, 25 nov). **Unde o regulă de aici o contrazice pe una mai veche din acest fișier, câștigă cea de aici.**
