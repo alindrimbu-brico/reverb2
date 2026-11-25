@@ -33,7 +33,6 @@ type Lang = "ro" | "en";
 const IN_PROGRESS = new Set<string>([
   "DON Barbershop",
   "The Digital Greenhouse",
-  "Oglinda.eu",
   "Flooare.ro",
   "Artisan Café",
   "Arhitectura Vie a Numerelor",
@@ -64,7 +63,6 @@ const SHOTS: Record<string, Shot> = {
   "Millo.asia": { src: "/work/millo-asia.jpg", shot: "2026-11-25" },
   "DON Barbershop": { src: "/work/don-barbershop.jpg", shot: "2026-11-25" },
   "The Digital Greenhouse": { src: "/work/the-digital-greenhouse.jpg", shot: "2026-11-25" },
-  "Oglinda.eu": { src: "/work/oglinda-eu.jpg", shot: "2026-11-25" },
   "Flooare.ro": { src: "/work/flooare-ro.jpg", shot: "2026-11-25" },
   "Artisan Café": { src: "/work/artisan-cafe.jpg", shot: "2026-11-25" },
   "Arhitectura Vie a Numerelor": { src: "/work/arhitectura-vie-a-numerelor.jpg", shot: "2026-11-25" },
@@ -264,18 +262,6 @@ export const liveProjectsRo: LiveProject[] = withState("ro", [
     desc: "Site minimalist, cu teme botanice: mult aer între secțiuni și un cursor rotund care inversează culorile de sub el.",
     href: "https://the-digital-greenhouse.vercel.app/",
     badge: "Platformă"
-  },
-  {
-    // Sursa: public/aura (titlul paginii, fișierele). Domeniul oglinda.eu răspunde din 14 nov 2026 (două înregistrări DNS în
-    // Cloudflare, certificat Vercel); aceeași aplicație rămâne și la reverb.ro/aura. scripts/check-seo.mjs avertizează dacă domeniul cade.
-    name: "Oglinda.eu",
-    kind: "Aplicație web",
-    category: "Aplicație web de reflecție",
-    tech: "HTML, CSS și JavaScript simple",
-    host: "Vercel",
-    desc: "„Refugiu interior”: aplicație web de reflecție și conștientizare.",
-    href: "https://www.oglinda.eu/",
-    badge: "Aplicație"
   },
   {
     // Sursa: titlul paginii flooare.ro (14 nov 2026).
@@ -482,16 +468,6 @@ export const liveProjectsEn: LiveProject[] = withState("en", [
     desc: "A minimalist site with botanical themes: plenty of air between sections and a round cursor that inverts the colours beneath it.",
     href: "https://the-digital-greenhouse.vercel.app/",
     badge: "Portal"
-  },
-  {
-    name: "Oglinda.eu",
-    kind: "Web app",
-    category: "Web app for reflection",
-    tech: "Plain HTML, CSS and JavaScript",
-    host: "Vercel",
-    desc: "“Inner refuge”: a web app for reflection and awareness, in Romanian.",
-    href: "https://www.oglinda.eu/",
-    badge: "Application"
   },
   {
     name: "Flooare.ro",
