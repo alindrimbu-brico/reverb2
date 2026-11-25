@@ -199,12 +199,13 @@ export default function Footer({ socialLinks = [] }: { socialLinks?: SocialFoote
                       167–169 Great Portland Street<br />
                       London, W1W 5PF, United Kingdom
                     </p>
-                    <div className="mt-1.5 space-y-1 text-[13px] text-neutral-600 dark:text-neutral-400">
-                      <a href="mailto:office@zylarisgroup.com" className="flex items-center justify-between hover:text-neutral-900 dark:hover:text-white transition-colors">
+                    <div className="mt-0.5 text-[13px] text-neutral-600 dark:text-neutral-400">
+                      {/* `py-1`: ținta de atingere are cel puțin 24 px înălțime (rândurile de 19,5 px picau verificarea de accesibilitate). */}
+                      <a href="mailto:office@zylarisgroup.com" className="flex items-center justify-between py-1 hover:text-neutral-900 dark:hover:text-white transition-colors">
                         <span>office@zylarisgroup.com</span>
                         <span className="text-neutral-500">↗</span>
                       </a>
-                      <a href="tel:+442071838739" className="flex items-center justify-between hover:text-neutral-900 dark:hover:text-white transition-colors">
+                      <a href="tel:+442071838739" className="flex items-center justify-between py-1 hover:text-neutral-900 dark:hover:text-white transition-colors">
                         <span>+44 20 7183 8739</span>
                         <span className="text-neutral-500">↗</span>
                       </a>

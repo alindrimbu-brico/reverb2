@@ -396,6 +396,17 @@ html.light .text-neutral-600 {
   color: #475467 !important;
 }
 
+/* Tema închisă (25 nov 2026): etichetele `text-neutral-500` (#737373) aveau 4,1–4,2 : 1 pe fondul negru al paginilor, sub
+   pragul de 4,5 : 1 pentru text mic. Pe paginile agenției (conținut, bară, subsol) nuanța devine #8b8b8b, aproximativ 5,8 : 1.
+   Se schimbă variabila culorii, nu clasa: așa stările `hover:` rămân cum sunt. Machetele, Studio și raportul Humanoid
+   își păstrează nuanța veche (a doua regulă). */
+html:not(.light) :where(main, body > header, body > footer) {
+  --color-neutral-500: #8b8b8b;
+}
+html:not(.light) :where([data-keep-pills], .studio-light-root, .humanoid-root) {
+  --color-neutral-500: oklch(55.6% 0 0);
+}
+
 /* Status, Links & Accents (High-Contrast WCAG AA) */
 html.light .text-emerald-200,
 html.light .text-emerald-300,

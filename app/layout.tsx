@@ -14,7 +14,10 @@ import { SITE_URL, TITLE_TEMPLATE } from "@/lib/seo";
 const geist = Geist({ subsets: ["latin", "latin-ext"], variable: "--font-geist-sans" });
 // Fontul mono al agenției (25 nov 2026). Până acum `font-mono` cădea pe fontul sistemului (Consolas / SF Mono), diferit pe
 // fiecare calculator. Variabila ajunge în `--font-mono` din app/globals.css; machetele, Studio și raportul Humanoid rămân pe lista veche.
-const geistMono = Geist_Mono({ subsets: ["latin", "latin-ext"], variable: "--font-geist-mono" });
+// `adjustFontFallback: false`: altfel next/font pune înaintea listei de rezervă un Arial lărgit („Geist Mono Fallback”), iar
+// limbile fără litere în Geist Mono (greaca, bulgara) ieșeau în el, mai late decât butoanele. Fără el cad pe fontul mono al
+// sistemului, ca până acum.
+const geistMono = Geist_Mono({ subsets: ["latin", "latin-ext"], variable: "--font-geist-mono", adjustFontFallback: false });
 
 // Numele imaginii trebuie să se termine în `og.jpg` (scripts/check-seo.mjs).
 const ogImage = { url: "/reverb-2026-og.jpg", width: 1200, height: 630, alt: "Reverb Digital: site-uri și magazine online" };

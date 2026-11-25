@@ -127,7 +127,7 @@ export default function PortfolioIndex({ lang, projects }: { lang: Lang; project
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${p.name} — ${t.opens}`}
-                      className="group grid grid-cols-[5.5rem_minmax(0,1fr)_1.25rem] items-start gap-x-4 gap-y-3 py-6 transition-colors hover:bg-white/[0.03] focus-visible:bg-white/[0.03] md:grid-cols-[2rem_8rem_minmax(0,1fr)_1.25rem] md:gap-x-6 md:gap-y-2 md:py-7 lg:grid-cols-[2.5rem_9rem_minmax(0,0.9fr)_minmax(0,1.6fr)_1.25rem]"
+                      className="group grid grid-cols-[min(8.5rem,38%)_minmax(0,1fr)_1.25rem] items-start gap-x-4 gap-y-3 py-6 transition-colors hover:bg-white/[0.03] focus-visible:bg-white/[0.03] md:grid-cols-[2rem_10rem_minmax(0,1fr)_1.25rem] md:gap-x-6 md:gap-y-2 md:py-7 lg:grid-cols-[2.5rem_11rem_minmax(0,0.9fr)_minmax(0,1.6fr)_1.25rem]"
                     >
                       <span className="hidden pt-1.5 font-mono text-[13px] text-neutral-500 md:col-start-1 md:row-span-2 md:row-start-1 md:block lg:row-span-1">
                         {pad(i)}
@@ -141,7 +141,7 @@ export default function PortfolioIndex({ lang, projects }: { lang: Lang; project
                           width={800}
                           height={500}
                           loading="lazy"
-                          sizes="(min-width: 1024px) 144px, (min-width: 768px) 128px, 88px"
+                          sizes="(min-width: 1024px) 176px, (min-width: 768px) 160px, 136px"
                           className="col-start-1 row-start-1 block aspect-[8/5] h-auto w-full rounded-lg border border-white/10 object-cover object-top md:col-start-2 md:row-span-2 lg:row-span-1"
                         />
                       )}
