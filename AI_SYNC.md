@@ -23,6 +23,9 @@ Alin a aprobat pe 25 nov planul `docs/designs/facelift_10k_2026-11-24/design_v2_
 - `font-mono` înseamnă acum Geist Mono (încărcat în `app/layout.tsx`, legat în `app/globals.css`, „Fontul mono al agenției”). Machetele (`data-keep-pills`), Studio (`.studio-light-root`) și raportul Humanoid (`.humanoid-root`) rămân pe fontul mono al sistemului, după care au fost desenate.
 - Titlurile `h1–h3` din `main` au `text-wrap: balance`; pe pagina tradusă se despart în silabe doar cuvintele de cel puțin 12 litere.
 
+- Griul etichetelor (`text-neutral-500`) are pe tema închisă #8b8b8b pe paginile agenției (înainte #737373, 4,2 : 1): se schimbă variabila `--color-neutral-500` în `globals.css`, nu clasa. Geist Mono se încarcă fără rezerva „ajustată” a next/font (`adjustFontFallback: false`): greaca și bulgara cad pe fontul mono al sistemului.
+- Butoane: un buton nu poartă preț în text (prețul stă lângă el); pe telefon spațierea literelor cedează (`tracking-wide sm:tracking-widest`), iar dacă tot nu încape, trece pe două rânduri egale (`leading-snug text-balance`). Pe `/servicii`: „Cere acest serviciu →”.
+
 **Bara de sus** (`components/Header.tsx`).
 - Forma rămâne (colț de 16 px). Meniul e scris normal (14 px, 15 px de la 1280 px), nu cu majuscule rărite: cu ele nu încăpea pe un rând. Butonul de contact apare de la 1024 px, iar „Contact” nu se mai repetă în meniul de calculator.
 - Când nu încape (limbă cu cuvinte lungi, text mărit), bara cedează singură, pe trepte: dispare rândul mic de sub siglă, meniul se strânge, apoi trece pe trei liniuțe, apoi dispare numele de lângă siglă. Nu puneți lățimi fixe pe piesele ei.
@@ -39,7 +42,7 @@ Alin a aprobat pe 25 nov planul `docs/designs/facelift_10k_2026-11-24/design_v2_
 - `components/Reveal.tsx`: ce e pe ecran la încărcare nu se mai ascunde (clipea 30–180 ms); intră lin doar blocurile de sub ecran. Starea de la capăt e aceeași ca înainte (opacitate 1, transformare neutră): nu o scoateți, machetele se compară la pixel.
 
 **Lucrările.**
-- `/portofoliu` rămâne listă, cu miniatura primului ecran pe fiecare rând (Alin, 25 nov 2026; înlocuiește „fără imagini” din 11 nov). Capturile: `public/work/<slug>.jpg`, 800 × 500, trecute în harta `SHOTS` din `lib/liveProjects.ts` (singurul loc; din ea citește și `WorkShots`). Se refac cu `py -3 -X utf8 scripts/work_shots.py` (sau `--doar <slug>`), fiecare privită înainte să intre în hartă; la magazine, la fiecare publicare.
+- `/portofoliu` rămâne listă, cu miniatura primului ecran pe fiecare rând (Alin, 25 nov 2026; înlocuiește „fără imagini” din 11 nov). Miniatura are 112 px pe telefon, 160 px pe tabletă, 176 px pe calculator; numele are 16 px pe telefon, ca domeniile lungi să nu se rupă. Capturile: `public/work/<slug>.jpg`, 800 × 500, trecute în harta `SHOTS` din `lib/liveProjects.ts` (singurul loc; din ea citește și `WorkShots`). Se refac cu `py -3 -X utf8 scripts/work_shots.py` (sau `--doar <slug>`), fiecare privită înainte să intre în hartă; la magazine, la fiecare publicare.
 - DulceVrancea.ro e în registru, „În administrare” (sursa e scrisă lângă intrare).
 - Fereastra de previzualizare (`ProjectPreviewModal.tsx`) se desenează direct în `<body>` (stătea sub bara site-ului), e neagră pe ambele teme și nu folosește variante `light:` (regulile globale `html.light …` se bat cu ea). Textele ei sunt în `IN_PLUS` din `scripts/i18n_extrage.py`: se schimbă împreună.
 
