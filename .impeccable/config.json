@@ -11,6 +11,15 @@
         ],
         "createdAt": "2026-11-15T06:17:13.190Z",
         "reason": "Claude: the badge copies the live reverb.ro hero 1:1 so the emblem is judged in its real context; preview mock, not a new design"
+      },
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "public/surya/index.html"
+        ],
+        "createdAt": "2026-11-25T21:59:40.130Z",
+        "reason": "Claude, verified in Chrome 25 nov 2026: the only remaining low-contrast hit is the fixed nav, which uses mix-blend-mode: difference (#f0f0f0 renders near-black on the light page, light on the dark footer); every other text in the file passed the rendered check"
       }
     ]
   }

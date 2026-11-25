@@ -18,30 +18,7 @@ document.querySelectorAll('.fade-in').forEach(element => {
     observer.observe(element);
 });
 
-// Form submission handler
-const form = document.getElementById('contact-form');
-const successMessage = document.getElementById('success-message');
-
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    // Simulate sending
-    const btn = form.querySelector('.btn-submit');
-    const originalText = btn.innerText;
-    btn.innerText = "Se trimite...";
-    btn.disabled = true;
-
-    setTimeout(() => {
-        form.reset();
-        btn.innerText = originalText;
-        btn.disabled = false;
-        successMessage.classList.remove('hidden');
-        
-        setTimeout(() => {
-            successMessage.classList.add('hidden');
-        }, 5000);
-    }, 1500);
-});
+// (25 nov 2026) Scos: un „formular de contact” care doar simula trimiterea; paginile nu au formular, iar codul arunca o eroare pe fiecare pagină.
 
 // Smooth scrolling for navigation
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {

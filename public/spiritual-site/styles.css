@@ -17,7 +17,7 @@
 body {
     background-color: var(--bg-dark);
     color: var(--text-main);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Spectral', Georgia, serif;
     overflow-x: hidden;
     position: relative;
     line-height: 1.6;
@@ -62,7 +62,7 @@ header {
 section { padding: 6rem 5%; display: flex; flex-direction: column; justify-content: center; align-items: center; }
 .hero { text-align: center; }
 .hero h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem; }
-.hero h1 span { color: var(--gold); text-shadow: 0 0 30px var(--gold-glow); }
+.hero h1 span { color: var(--gold); }
 
 .grid { display: grid; gap: 2rem; width: 100%; max-width: 1200px; }
 .glass-card {
@@ -78,8 +78,8 @@ section { padding: 6rem 5%; display: flex; flex-direction: column; justify-conte
 }
 .toc-card:hover { transform: translateX(10px); border-left-color: var(--gold); background: rgba(255,255,255,0.06);}
 .chapter-num { font-size: 0.8rem; font-weight: 600; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 0.5rem;}
-.toc-card h3 { font-size: 1.8rem; color: var(--text-main); margin-bottom: 0.5rem;}
-.toc-card p { color: var(--text-muted); font-size: 1.1rem;}
+.toc-card h2 { font-size: 1.8rem; color: var(--text-main); margin-bottom: 0.5rem;}
+.toc-card p { color: var(--text-muted); font-size: 1.1rem; text-wrap: pretty;}
 
 /* Reading Layout Styles */
 .reading-body { background-color: #050209; }
@@ -96,7 +96,7 @@ section { padding: 6rem 5%; display: flex; flex-direction: column; justify-conte
     font-size: 2.5rem; color: var(--gold); margin-bottom: 3rem; text-align: center;
 }
 .text-content p {
-    font-size: 1.25rem; font-weight: 300; line-height: 1.8; color: var(--text-main); margin-bottom: 2rem; text-align: justify;
+    font-size: 1.25rem; font-weight: 400; line-height: 1.8; color: var(--text-main); margin-bottom: 2rem; text-align: left; text-wrap: pretty; hyphens: auto;
 }
 .text-content strong { color: var(--gold); font-weight: 500;}
 
