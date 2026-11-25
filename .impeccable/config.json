@@ -11,6 +11,24 @@
         ],
         "createdAt": "2026-11-15T06:17:13.190Z",
         "reason": "Claude: the badge copies the live reverb.ro hero 1:1 so the emblem is judged in its real context; preview mock, not a new design"
+      },
+      {
+        "rule": "overused-font",
+        "value": "geist",
+        "files": [
+          "public/site-cinematic/index.html"
+        ],
+        "createdAt": "2026-11-25T20:25:52.669Z",
+        "reason": "Reverb Digital brand font: reverb-site/AI_SYNC.md fixes Geist / Geist Mono for the agency (25 nov 2026); macheta Sfera Reverb uses the brand fonts"
+      },
+      {
+        "rule": "overused-font",
+        "value": "geist mono",
+        "files": [
+          "public/site-cinematic/index.html"
+        ],
+        "createdAt": "2026-11-25T20:25:52.968Z",
+        "reason": "Reverb Digital brand font: reverb-site/AI_SYNC.md fixes Geist / Geist Mono for the agency (25 nov 2026); macheta Sfera Reverb uses the brand fonts"
       }
     ]
   }
