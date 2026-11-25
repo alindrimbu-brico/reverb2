@@ -23,7 +23,7 @@ export default function ContactPageEN() {
         <div className="absolute inset-0" />
         <div className="relative mx-auto max-w-7xl px-6 pt-32 pb-20 lg:px-10 lg:pt-40 lg:pb-28">
           <Reveal>
-            <div className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-400">Contact</div>
+            <div className="font-mono text-[13px] uppercase tracking-[0.3em] text-neutral-400">Contact</div>
           </Reveal>
           <Reveal delay={80}>
             <h1 className="mt-4 max-w-3xl text-5xl font-medium leading-[0.94] tracking-[-0.04em] md:text-7xl lg:text-[80px]">
@@ -41,11 +41,12 @@ export default function ContactPageEN() {
       {/* Main content */}
       <section className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
-          {/* Left: info */}
-          <div className="space-y-8">
-            <Reveal>
+          {/* Left: info. Below 1024 px the column dissolves (display: contents) so the form sits between
+              "Direct contact" and "Prices"; from 1024 px the order is today's, in two columns. */}
+          <div className="contents lg:block lg:space-y-8">
+            <Reveal className="order-1 lg:order-none">
               <div className="card-hover rounded-3xl border border-white/10 bg-neutral-900/40 p-8">
-                <h2 className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-400">Direct contact</h2>
+                <h2 className="font-mono text-[13px] uppercase tracking-[0.3em] text-neutral-400">Direct contact</h2>
                 <div className="mt-5 space-y-4 text-sm">
                   <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
                     <span className="text-neutral-400">Contact</span>
@@ -57,7 +58,14 @@ export default function ContactPageEN() {
                   </div>
                   <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
                     <span className="text-neutral-400">WhatsApp</span>
-                    <a href={company.whatsapp} target="_blank" rel="noopener noreferrer" className="font-medium text-emerald-400 hover:underline">
+                    <a
+                      href={company.whatsapp}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-umami-event="whatsapp-click"
+                      data-umami-event-loc="contact"
+                      className="font-medium text-emerald-400 hover:underline"
+                    >
                       Message on WhatsApp ↗
                     </a>
                   </div>
@@ -69,9 +77,9 @@ export default function ContactPageEN() {
               </div>
             </Reveal>
 
-            <Reveal delay={100}>
+            <Reveal delay={100} className="order-3 lg:order-none">
               <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8 text-white">
-                <div className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-400">Prices</div>
+                <div className="font-mono text-[13px] uppercase tracking-[0.3em] text-neutral-400">Prices</div>
                 <div className="mt-5 space-y-4">
                   {packages.map((p) => (
                     <div key={p.id} className="flex items-start justify-between gap-4 text-sm">
@@ -80,13 +88,13 @@ export default function ContactPageEN() {
                     </div>
                   ))}
                 </div>
-                <div className="mt-5 text-xs text-neutral-500">{VAT_NOTE_EN}</div>
+                <div className="mt-5 text-[13px] text-neutral-500">{VAT_NOTE_EN}</div>
               </div>
             </Reveal>
           </div>
 
-          {/* Right: form */}
-          <Reveal delay={120}>
+          {/* Right: form (on phones and tablets: second, before the prices) */}
+          <Reveal delay={120} className="order-2 lg:order-none">
             <ContactForm />
           </Reveal>
         </div>

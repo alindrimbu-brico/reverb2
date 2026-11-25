@@ -39,6 +39,42 @@ const IN_PROGRESS = new Set<string>([
   "Arhitectura Vie a Numerelor",
 ]);
 
+/** Captura primului ecran a unei lucrări: fișierul din public/work/ (800 × 500) și ziua capturii. */
+export type Shot = { src: string; shot: string };
+
+/** Capturile lucrărilor, după nume (singurul loc; le citesc /portofoliu și components/WorkShots.tsx). Se refac cu
+ *  `py -3 -X utf8 scripts/work_shots.py` (toate, sau `--doar <slug>`), care tipărește și rândurile de mai jos; fiecare
+ *  captură se privește înainte să intre aici. Magazinele se schimbă des: capturile lor se refac la fiecare publicare.
+ *  O lucrare fără captură (fără site public) nu apare aici, iar rândul ei rămâne fără miniatură. */
+const SHOTS: Record<string, Shot> = {
+  "Bricolando.ro": { src: "/work/bricolando-ro.jpg", shot: "2026-11-25" },
+  "RaftPlin.ro": { src: "/work/raftplin-ro.jpg", shot: "2026-11-25" },
+  "DulceVrancea.ro": { src: "/work/dulcevrancea-ro.jpg", shot: "2026-11-25" },
+  "Kalki.work": { src: "/work/kalki-work.jpg", shot: "2026-11-25" },
+  "Kalki.nexus": { src: "/work/kalki-nexus.jpg", shot: "2026-11-25" },
+  "Numerarium.app": { src: "/work/numerarium-app.jpg", shot: "2026-11-25" },
+  "Bythefire.app": { src: "/work/bythefire-app.jpg", shot: "2026-11-25" },
+  "Elumia.app": { src: "/work/elumia-app.jpg", shot: "2026-11-25" },
+  "Immortallight.app": { src: "/work/immortallight-app.jpg", shot: "2026-11-25" },
+  "Pentora.app": { src: "/work/pentora-app.jpg", shot: "2026-11-25" },
+  "YourFinestForm.com": { src: "/work/yourfinestform-com.jpg", shot: "2026-11-25" },
+  "Salariuldupataxe.ro": { src: "/work/salariuldupataxe-ro.jpg", shot: "2026-11-25" },
+  "Arhitecturazilei.ro": { src: "/work/arhitecturazilei-ro.jpg", shot: "2026-11-25" },
+  "Candcinevabea.life": { src: "/work/candcinevabea-life.jpg", shot: "2026-11-25" },
+  "Millo.asia": { src: "/work/millo-asia.jpg", shot: "2026-11-25" },
+  "DON Barbershop": { src: "/work/don-barbershop.jpg", shot: "2026-11-25" },
+  "The Digital Greenhouse": { src: "/work/the-digital-greenhouse.jpg", shot: "2026-11-25" },
+  "Oglinda.eu": { src: "/work/oglinda-eu.jpg", shot: "2026-11-25" },
+  "Flooare.ro": { src: "/work/flooare-ro.jpg", shot: "2026-11-25" },
+  "Artisan Café": { src: "/work/artisan-cafe.jpg", shot: "2026-11-25" },
+  "Arhitectura Vie a Numerelor": { src: "/work/arhitectura-vie-a-numerelor.jpg", shot: "2026-11-25" },
+};
+
+/** Captura unei lucrări, sau undefined dacă nu are (rândul se arată atunci fără miniatură). */
+export function shotOf(name: string): Shot | undefined {
+  return SHOTS[name];
+}
+
 export const STATUS_LABEL: Record<Lang, Record<ProjectState, string>> = {
   ro: { managed: "În administrare", in_progress: "Proiect în desfășurare" },
   en: { managed: "Managed", in_progress: "Project in progress" },
@@ -74,6 +110,18 @@ export const liveProjectsRo: LiveProject[] = withState("ro", [
     host: "Hostinger",
     desc: "Magazin online pentru casă, grădină și copii, cu ghid de cadouri și card cadou.",
     href: "https://raftplin.ro",
+    badge: "eCommerce"
+  },
+  {
+    // Sursa: pagina dulcevrancea.ro (descrierea paginii, subsolul cu Kalki Drim Magazin SRL și „Site realizat de Reverb.ro”,
+    // generatorul WooCommerce), citită 25 nov 2026; găzduirea și modulul propriu (dulce-vrancea-marca) din notele proiectului.
+    name: "DulceVrancea.ro",
+    kind: "Magazin online",
+    category: "Magazin online de miere și produse apicole",
+    tech: "WooCommerce + modul propriu",
+    host: "Hostinger",
+    desc: "Magazin online de miere din Vrancea, produse apicole și alimente BIO, cu plată cu cardul sau ramburs și livrare prin curier.",
+    href: "https://dulcevrancea.ro",
     badge: "eCommerce"
   },
   {
@@ -283,6 +331,16 @@ export const liveProjectsEn: LiveProject[] = withState("en", [
     host: "Hostinger",
     desc: "Online store for home, garden and children, with a gift guide and gift cards.",
     href: "https://raftplin.ro",
+    badge: "eCommerce"
+  },
+  {
+    name: "DulceVrancea.ro",
+    kind: "Online store",
+    category: "Online store for honey and beekeeping products",
+    tech: "WooCommerce + our own module",
+    host: "Hostinger",
+    desc: "Online store for honey from Vrancea, beekeeping products and organic food, with card or cash-on-delivery payment and courier delivery. In Romanian.",
+    href: "https://dulcevrancea.ro",
     badge: "eCommerce"
   },
   {

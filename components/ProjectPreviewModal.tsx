@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 
 export interface PreviewProject {
   name: string;
@@ -19,6 +20,42 @@ interface ProjectPreviewModalProps {
   lang?: "ro" | "en";
 }
 
+// Textele ferestrei, după limbă. Mărimile: nimic sub 13 px (treapta 1, 25 nov 2026). Numele proiectului e nume propriu:
+// stă în data-no-translate, iar unde poate fi tăiat are title cu numele întreg.
+const TXT = {
+  ro: {
+    closeWindowAria: "Închide fereastra de previzualizare",
+    closeWindow: "Închide fereastra",
+    closeDot: "Închide fereastra",
+    viewDesktop: "Vedere pe calculator (100%)",
+    viewTablet: "Vedere pe tabletă (768 px)",
+    viewMobile: "Vedere pe telefon (390 px)",
+    openSite: "Deschide site-ul",
+    // un singur șir, fără numele lucrării: așa are traducere în toate limbile (numele e scris lângă buton)
+    openSiteAria: "Deschide site-ul într-o filă nouă",
+    close: "Închide",
+    closeAria: "Închide previzualizarea",
+    connecting: "Se încarcă site-ul…",
+    closePreview: "Închide previzualizarea",
+    managed: "În administrare",
+  },
+  en: {
+    closeWindowAria: "Close preview window",
+    closeWindow: "Close window",
+    closeDot: "Close window",
+    viewDesktop: "Desktop view (100%)",
+    viewTablet: "Tablet view (768 px)",
+    viewMobile: "Phone view (390 px)",
+    openSite: "Open the site",
+    openSiteAria: "Open the site in a new tab",
+    close: "Close",
+    closeAria: "Close preview",
+    connecting: "Loading the site…",
+    closePreview: "Close preview",
+    managed: "Managed",
+  },
+} as const;
+
 export default function ProjectPreviewModal({
   project,
   onClose,
@@ -26,7 +63,7 @@ export default function ProjectPreviewModal({
 }: ProjectPreviewModalProps) {
   const [device, setDevice] = useState<"desktop" | "tablet" | "mobile">("desktop");
   const [isLoading, setIsLoading] = useState(true);
-  const isEn = lang === "en";
+  const t = TXT[lang === "en" ? "en" : "ro"];
 
   useEffect(() => {
     setIsLoading(true);
@@ -48,106 +85,100 @@ export default function ProjectPreviewModal({
     mobile: "w-[390px]",
   };
 
-  return (
+  const views = [
+    { id: "desktop" as const, label: "1440px", title: t.viewDesktop },
+    { id: "tablet" as const, label: "768px", title: t.viewTablet },
+    { id: "mobile" as const, label: "390px", title: t.viewMobile },
+  ];
+
+  // Fereastra se pune direct în <body>: în pagină stătea sub bara fixă a site-ului (z-50, iar secțiunile părinte au
+  // contextul lor de stivuire), care îi acoperea bara de sus și jumătate din butonul „Închide fereastra”.
+  return createPortal(
     <div
       role="dialog"
       aria-modal="true"
       aria-label={project.name}
-      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-black/85 backdrop-blur-md transition-all duration-300"
+      className="fixed inset-0 z-[90] flex items-center justify-center p-2 pt-16 sm:p-4 sm:pt-16 md:p-6 bg-black/85 backdrop-blur-md transition-all duration-300"
       onClick={onClose}
     >
-      {/* Prominent Floating Top-Right Close Pill (Instant Visibility) */}
-      <div className="absolute top-3 right-4 sm:top-4 sm:right-6 md:top-5 md:right-8 z-[60]">
+      {/* Butonul plutitor „Închide fereastra”, deasupra ferestrei, doar sub 768 px (acolo bara ferestrei nu are loc de „Închide”).
+          De la 768 px acoperea butonul „Închide” din bară, deci acolo închid butoanele din bară și cel de jos. */}
+      <div className="absolute top-3 right-4 sm:top-4 sm:right-6 z-[60] md:hidden">
         <button
           onClick={onClose}
-          aria-label={isEn ? "Close preview window" : "Închide fereastra de previzualizare"}
-          className="mech-magnetic mech-btn flex items-center gap-2 px-4 py-2 rounded-full bg-black/90 dark:bg-black/90 light:bg-white/95 border border-white/20 dark:border-white/20 light:border-black/20 text-white dark:text-white light:text-neutral-900 font-mono text-xs font-bold uppercase tracking-widest shadow-2xl backdrop-blur-md hover:bg-rose-600 hover:border-rose-600 hover:text-white dark:hover:bg-rose-600 dark:hover:text-white transition-all"
+          aria-label={t.closeWindowAria}
+          className="mech-magnetic mech-btn flex items-center gap-2 px-4 py-2 rounded-full bg-black/90 border border-white/20 text-white font-mono text-[13px] font-bold uppercase tracking-widest shadow-2xl backdrop-blur-md hover:bg-rose-600 hover:border-rose-600 hover:text-white transition-all"
         >
-          <span>{isEn ? "Close Window" : "Închide Fereastra"}</span>
-          <span className="text-sm font-bold">✕</span>
+          <span>{t.closeWindow}</span>
+          <span aria-hidden="true" className="text-sm font-bold">✕</span>
         </button>
       </div>
 
       <div
-        className="relative w-full max-w-6xl h-[92vh] max-h-[920px] flex flex-col rounded-2xl border border-white/20 dark:border-white/20 light:border-black/20 bg-[#090a0d] dark:bg-[#090a0d] light:bg-[#F6F7F8] shadow-2xl overflow-hidden transition-all"
+        className="relative w-full max-w-6xl h-[calc(100dvh-5rem)] md:h-[92vh] max-h-[920px] flex flex-col rounded-2xl border border-white/20 bg-[#090a0d] shadow-2xl overflow-hidden transition-all"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Window Bar (Brutalist OS Chrome) */}
-        <div className="h-14 px-4 sm:px-6 border-b border-white/10 dark:border-white/10 light:border-black/10 flex items-center justify-between gap-3 bg-[#0c0d11] dark:bg-[#0c0d11] light:bg-[#EEF0F2] shrink-0 font-mono text-xs">
-          
+        <div className="h-14 px-4 sm:px-6 border-b border-white/10 flex items-center justify-between gap-3 bg-[#0c0d11] shrink-0 font-mono text-[13px]">
+
           {/* Left: Window Dots & Project Title */}
-          <div className="flex items-center gap-3 shrink-0">
-            <div className="flex items-center gap-1.5">
+          <div className="flex min-w-0 items-center gap-3">
+            <div className="flex shrink-0 items-center gap-1.5">
+              {/* Punctul roșu închide fereastra; fără literă în el (ar fi fost sub 13 px), numele îl dă aria-label. */}
               <button
                 onClick={onClose}
-                aria-label="Close window"
-                className="h-3.5 w-3.5 rounded-full bg-rose-500 hover:bg-rose-600 transition-colors flex items-center justify-center text-[8px] text-white font-bold group cursor-pointer"
-                title={isEn ? "Close Window" : "Închide Fereastra"}
-              >
-                <span>✕</span>
-              </button>
+                aria-label={t.closeDot}
+                title={t.closeDot}
+                className="h-3.5 w-3.5 rounded-full bg-rose-500 hover:bg-rose-600 transition-colors cursor-pointer"
+              />
               <span className="h-3 w-3 rounded-full bg-amber-500/80" />
               <span className="h-3 w-3 rounded-full bg-emerald-500/80" />
             </div>
 
-            <div className="hidden sm:flex items-center gap-2 pl-2 border-l border-white/10 dark:border-white/10 light:border-black/10">
-              <span className="font-bold text-white dark:text-white light:text-neutral-900 tracking-tight">
+            <div className="hidden min-w-0 sm:flex items-center gap-2 pl-2 border-l border-white/10">
+              <span
+                title={project.name}
+                data-no-translate
+                className="max-w-[16rem] truncate font-bold text-white tracking-tight"
+              >
                 {project.name}
               </span>
-              <span className="text-[10px] text-neutral-400 font-normal">
+              <span className="hidden xl:inline truncate text-[13px] text-neutral-400 font-normal">
                 [{project.category}]
               </span>
             </div>
           </div>
 
           {/* Center: Interactive Device Viewport Switcher & Simulated URL Bar */}
-          <div className="flex-1 max-w-xl mx-2 flex items-center gap-2">
-            {/* Simulated Address Bar */}
-            <div className="flex-1 hidden md:flex items-center justify-between px-3 py-1.5 rounded-full border border-white/10 dark:border-white/10 light:border-black/10 bg-black/40 dark:bg-black/40 light:bg-white/60 text-[10px] text-neutral-400">
-              <div className="flex items-center gap-2 truncate">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="truncate">{project.href}</span>
+          <div className="flex-1 min-w-0 max-w-xl mx-2 flex items-center justify-end gap-2">
+            {/* Simulated Address Bar. Fundalurile din bară sunt scrise ca valori (#000000/40, #ffffff/5): regulile globale
+                `html.light .bg-black/40` și `.bg-white/5` le-ar albi, iar fereastra rămâne neagră și pe tema deschisă. */}
+            <div className="flex-1 min-w-0 hidden lg:flex items-center justify-between gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-[#000000]/40 text-[13px] text-neutral-400">
+              {/* Fără eticheta „LIVE” (regula din AI_SYNC.md, 13 nov): adresa și punctul verde spun deja că e site-ul adevărat. */}
+              <div className="flex min-w-0 items-center gap-2">
+                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400 animate-pulse" />
+                <span title={project.href} data-no-translate className="truncate">{project.href}</span>
               </div>
-              <span className="text-[9px] uppercase tracking-wider text-emerald-400 shrink-0 font-bold">
-                LIVE
-              </span>
             </div>
 
             {/* Viewport Width Switchers */}
-            <div data-no-lift style={{ "--pill-r": "10px" } as React.CSSProperties} className="hidden sm:flex bg-white/5 dark:bg-white/5 light:bg-black/5 px-1 py-1 rounded-full border border-white/10 dark:border-white/10 light:border-black/10 shrink-0">
-              <button
-                onClick={() => setDevice("desktop")}
-                title={isEn ? "Desktop View (100%)" : "Vedere Desktop (100%)"}
-                className={`mech-magnetic px-2.5 py-1 text-[9px] font-bold uppercase rounded-full transition-all ${
-                  device === "desktop"
-                    ? "bg-white text-black shadow-sm font-extrabold"
-                    : "text-neutral-400 hover:text-white"
-                }`}
-              >
-                1440px
-              </button>
-              <button
-                onClick={() => setDevice("tablet")}
-                title={isEn ? "Tablet View (768px)" : "Vedere Tabletă (768px)"}
-                className={`mech-magnetic px-2.5 py-1 text-[9px] font-bold uppercase rounded-full transition-all ${
-                  device === "tablet"
-                    ? "bg-white text-black shadow-sm font-extrabold"
-                    : "text-neutral-400 hover:text-white"
-                }`}
-              >
-                768px
-              </button>
-              <button
-                onClick={() => setDevice("mobile")}
-                title={isEn ? "Mobile View (390px)" : "Vedere Mobil (390px)"}
-                className={`mech-magnetic px-2.5 py-1 text-[9px] font-bold uppercase rounded-full transition-all ${
-                  device === "mobile"
-                    ? "bg-white text-black shadow-sm font-extrabold"
-                    : "text-neutral-400 hover:text-white"
-                }`}
-              >
-                390px
-              </button>
+            <div data-no-lift style={{ "--pill-r": "10px" } as React.CSSProperties} className="hidden sm:flex bg-[#ffffff]/5 px-1 py-1 rounded-full border border-white/10 shrink-0">
+              {views.map((v) => (
+                <button
+                  key={v.id}
+                  onClick={() => setDevice(v.id)}
+                  title={v.title}
+                  aria-label={v.title}
+                  aria-pressed={device === v.id}
+                  className={`mech-magnetic px-2.5 py-1 text-[13px] font-bold uppercase rounded-full transition-all ${
+                    device === v.id
+                      ? "bg-white text-black shadow-sm font-extrabold"
+                      : "text-neutral-400 hover:text-white"
+                  }`}
+                >
+                  {v.label}
+                </button>
+              ))}
             </div>
           </div>
 
@@ -157,26 +188,27 @@ export default function ProjectPreviewModal({
               href={project.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="mech-magnetic mech-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white dark:bg-white light:bg-neutral-900 text-black dark:text-black light:text-white font-bold text-[10px] uppercase tracking-wider hover:opacity-90 transition-all shadow-sm"
+              aria-label={t.openSiteAria}
+              className="mech-magnetic mech-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white text-black font-bold text-[13px] uppercase tracking-wider whitespace-nowrap hover:opacity-90 transition-all shadow-sm"
             >
-              <span>{isEn ? "Open Site" : "Deschide Site"}</span>
-              <span>↗</span>
+              <span>{t.openSite}</span>
+              <span aria-hidden="true">↗</span>
             </a>
 
             <button
               onClick={onClose}
-              aria-label={isEn ? "Close preview" : "Închide previzualizarea"}
-              className="mech-magnetic mech-btn flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-rose-500/20 hover:bg-rose-500 border border-rose-500/40 hover:border-rose-500 text-rose-300 hover:text-white dark:text-rose-300 dark:hover:text-white light:text-rose-700 light:hover:text-white font-bold text-[10px] uppercase tracking-wider transition-all"
+              aria-label={t.closeAria}
+              className="mech-magnetic mech-btn hidden md:flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-rose-500/20 hover:bg-rose-500 border border-rose-500/40 hover:border-rose-500 text-rose-300 hover:text-white font-bold text-[13px] uppercase tracking-wider whitespace-nowrap transition-all"
             >
-              <span>{isEn ? "Close" : "Închide"}</span>
-              <span className="text-xs">✕</span>
+              <span>{t.close}</span>
+              <span aria-hidden="true" className="text-[13px]">✕</span>
             </button>
           </div>
         </div>
 
         {/* Viewport Canvas Stage */}
-        <div className="flex-1 relative bg-[#050608] dark:bg-[#050608] light:bg-[#EBE7E1] flex items-center justify-center p-2 sm:p-4 overflow-hidden">
-          
+        <div className="flex-1 relative bg-[#050608] flex items-center justify-center p-2 sm:p-4 overflow-hidden">
+
           {/* Background Grid Pattern inside Stage */}
           <div
             className="absolute inset-0 pointer-events-none opacity-5"
@@ -189,19 +221,17 @@ export default function ProjectPreviewModal({
 
           {/* Device Frame */}
           <div
-            className={`h-full max-h-full transition-all duration-300 relative flex flex-col rounded-xl overflow-hidden shadow-2xl border border-white/15 dark:border-white/15 light:border-black/15 bg-white ${deviceWidths[device]}`}
+            className={`h-full max-h-full max-w-full transition-all duration-300 relative flex flex-col rounded-xl overflow-hidden shadow-2xl border border-white/15 bg-white ${deviceWidths[device]}`}
           >
             {/* Loading Scanner Bar */}
             {isLoading && (
-              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-[#090a0d] text-white font-mono text-xs">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
-                  <span className="tracking-[0.2em] uppercase">
-                    {isEn ? "Connecting live viewport..." : "Se conectează la sistemul live..."}
-                  </span>
+              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 px-4 text-center bg-[#090a0d] text-white font-mono text-[13px]">
+                <div className="flex items-center gap-3">
+                  <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-400 animate-ping" />
+                  <span className="tracking-[0.14em] uppercase">{t.connecting}</span>
                 </div>
-                <div className="text-[10px] text-neutral-500">
-                  {project.name} • {project.tech}
+                <div className="text-[13px] text-neutral-500">
+                  <span data-no-translate>{project.name}</span> • {project.tech}
                 </div>
               </div>
             )}
@@ -219,31 +249,34 @@ export default function ProjectPreviewModal({
         </div>
 
         {/* Bottom Technical Spec Bar */}
-        <div className="h-11 px-4 sm:px-6 border-t border-white/10 dark:border-white/10 light:border-black/10 flex items-center justify-between bg-[#08090b] dark:bg-[#08090b] light:bg-[#EEF0F2] font-mono text-[10px] text-neutral-400 shrink-0">
-          <div className="flex items-center gap-3 sm:gap-4 truncate">
-            <span className="text-white dark:text-white light:text-neutral-900 font-semibold truncate">
-              SYS: {project.name}
+        <div className="h-11 px-4 sm:px-6 border-t border-white/10 flex items-center justify-between gap-3 bg-[#08090b] font-mono text-[13px] text-neutral-400 shrink-0">
+          <div className="flex min-w-0 items-center gap-3 sm:gap-4">
+            <span title={project.name} data-no-translate className="min-w-0 text-white font-semibold truncate">
+              {project.name}
             </span>
-            <span className="hidden sm:inline text-neutral-500">•</span>
-            <span className="hidden sm:inline truncate">{project.tech}</span>
+            <span className="hidden lg:inline text-neutral-500">•</span>
+            <span className="hidden lg:inline truncate">{project.tech}</span>
           </div>
 
           <div className="flex items-center gap-3 shrink-0">
-            <span className="text-emerald-400 font-bold uppercase tracking-wider hidden sm:inline">
-              {project.status || (isEn ? "Managed" : "În administrare")}
+            {/* Culoarea scrisă direct: regula globală `html.light .text-emerald-400` o închide, iar fereastra rămâne neagră și pe tema deschisă. */}
+            <span className="text-[#34d399] font-bold uppercase tracking-wider hidden sm:inline whitespace-nowrap">
+              {project.status || t.managed}
             </span>
 
             {/* Prominent Footer Close Button */}
             <button
               onClick={onClose}
-              className="mech-magnetic mech-btn flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 hover:bg-rose-500 hover:text-white dark:bg-white/10 dark:hover:bg-rose-500 dark:hover:text-white light:bg-black/10 light:hover:bg-rose-600 light:hover:text-white text-white dark:text-white light:text-neutral-900 font-bold uppercase tracking-wider transition-all"
+              aria-label={t.closeAria}
+              className="mech-magnetic mech-btn flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 hover:bg-rose-500 text-white font-bold uppercase tracking-wider whitespace-nowrap transition-all"
             >
-              <span>{isEn ? "Close Preview" : "Închide Previzualizarea"}</span>
-              <span>✕</span>
+              <span>{t.closePreview}</span>
+              <span aria-hidden="true">✕</span>
             </button>
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

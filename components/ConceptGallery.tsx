@@ -47,11 +47,13 @@ export default function ConceptGallery({ lang, items }: { lang: Lang; items: Con
       {/* Hero — același tipar ca pe pagina de pornire */}
       <section className="relative z-10 pt-32 pb-16 md:pt-40 md:pb-20 border-b border-white/10">
         <div className="relative mx-auto max-w-5xl px-6 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.1em] sm:tracking-[0.25em] text-neutral-300 mb-6 backdrop-blur-md">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[13px] font-mono uppercase tracking-[0.1em] sm:tracking-[0.14em] text-neutral-300 mb-6 backdrop-blur-md">
             <span className="h-1.5 w-1.5 rounded-full bg-white" />
             <span>{t.badge}</span>
           </div>
-          <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-white leading-tight">
+          {/* min(3rem, 12.5vw): pe telefon tot 48 px ca azi (de la 384 px în sus), dar la zoom de text 200 % titlul nu mai
+              crește peste lățimea ecranului („Concepte” ieșea din ecran, P0). */}
+          <h1 className="text-[length:min(3rem,12.5vw)] md:text-7xl font-medium tracking-tight text-white leading-tight">
             <Linie>{t.h1a}</Linie>
             <br />
             <span className="text-neutral-400 font-light"><Linie>{t.h1b}</Linie></span>
@@ -62,7 +64,7 @@ export default function ConceptGallery({ lang, items }: { lang: Lang; items: Con
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
             <Link
               href={t.portfolioHref}
-              className="mech-btn rounded-full bg-white px-7 py-3.5 text-xs font-mono uppercase tracking-widest text-black font-bold hover:bg-neutral-200 transition-all"
+              className="mech-btn whitespace-nowrap rounded-full bg-white px-7 py-3.5 text-[13px] font-mono uppercase tracking-widest text-black font-bold hover:bg-neutral-200 transition-all"
             >
               {t.toPortfolio} <span className="mech-arrow">→</span>
             </Link>
@@ -71,7 +73,9 @@ export default function ConceptGallery({ lang, items }: { lang: Lang; items: Con
       </section>
 
       {/* Grila: toate cardurile în același stil; culoarea machetei rămâne doar ca punct */}
-      <section className="relative z-10 mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-24 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {/* grid-cols-1 explicit: fără el coloana implicită se lățește după cel mai lung nume de stil (rând `truncate`, fără rupere)
+          și, la zoom de text 200 %, pagina derula lateral pe telefon. */}
+      <section className="relative z-10 mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-24 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {items.map((s, i) => {
           const isExternal =
             /^https?:\/\//.test(s.href) || GITHUB_SHOWCASE_PATHS.some((p) => s.href.startsWith(`/${p}/`));
@@ -81,16 +85,19 @@ export default function ConceptGallery({ lang, items }: { lang: Lang; items: Con
               href={s.href}
               key={s.id}
               {...linkProps}
-              className="mech-card group rounded-2xl border border-white/10 bg-neutral-900/40 p-8 flex flex-col h-full transition-colors hover:border-white/30"
+              className="relative group min-w-0 rounded-2xl border border-white/10 bg-neutral-900/40 p-[32px] flex flex-col h-full [overflow-wrap:break-word] transition-colors hover:border-white/30"
             >
-              <div className="flex items-center justify-between gap-3 text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-500 mb-6">
+              {/* Pe telefon (sub 640 px), pe două coloane (768–1023 px) și mai ales pe trei înguste (1024–1279 px) spațierea literelor cedează prima,
+                  ca numele stilului să încapă întreg; `truncate` + `title` rămân doar ca plasă. */}
+              <div className="flex items-center justify-between gap-3 text-[13px] font-mono uppercase tracking-wider sm:tracking-[0.14em] md:tracking-wider lg:tracking-normal xl:tracking-[0.14em] text-neutral-500 mb-6">
                 <span className="flex items-center gap-2 min-w-0">
                   <span
                     aria-hidden="true"
                     className="h-2 w-2 shrink-0 rounded-full ring-1 ring-white/25 light:ring-black/25"
                     style={{ backgroundColor: s.color }}
                   />
-                  <span className="truncate">{s.vibe}</span>
+                  {/* Numele stilului se poate tăia la 13 px: întreg în `title` (breakui_limbi.md, tiparul 5). */}
+                  <span className="truncate" title={s.vibe}>{s.vibe}</span>
                 </span>
                 <span className="shrink-0">{String(i + 1).padStart(2, "0")}</span>
               </div>
@@ -98,7 +105,7 @@ export default function ConceptGallery({ lang, items }: { lang: Lang; items: Con
               <h2 className="text-xl font-medium tracking-tight text-white mb-3">{s.name}</h2>
               <p className="text-sm text-neutral-400 font-light leading-relaxed flex-grow">{s.description}</p>
 
-              <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-500">
+              <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between text-[13px] font-mono uppercase tracking-[0.14em] text-neutral-500">
                 <span>{t.open}</span>
                 <span aria-hidden="true" className="mech-arrow text-sm text-neutral-300 transition-colors group-hover:text-white">
                   {isExternal ? "↗" : "→"}

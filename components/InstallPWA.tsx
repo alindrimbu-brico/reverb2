@@ -202,6 +202,12 @@ export default function InstallPWA({
     checkQuick();
   };
 
+  // Mărimile: pe paginile agenției (mode="site", /instaleaza) nimic sub 13 px (facelift, 25 nov 2026);
+  // Panoul Studio (mode="studio") își păstrează mărimile de azi.
+  const site = mode === "site";
+  const fine = site ? "text-[13px]" : "text-xs"; // etichete și butoane
+  const citit = site ? "text-sm" : "text-xs"; // textul de citit din fereastră
+
   if (isInstalled) {
     if (compact) {
       return null;
@@ -209,7 +215,7 @@ export default function InstallPWA({
     const numeApp = mode === "site" ? "Reverb.ro" : "Reverb Studio";
     return (
       <span
-        className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-wider text-neutral-300 border border-white/15 px-3 py-1 rounded-full"
+        className={`inline-flex items-center gap-1.5 ${site ? "text-[13px]" : "text-[10px]"} font-mono uppercase tracking-wider text-neutral-300 border border-white/15 px-3 py-1 rounded-full`}
         title={`Aplicația e instalată pe acest dispozitiv. O găsești în lista tuturor aplicațiilor (glisează în sus pe ecranul principal) cu numele „${numeApp}”, sau din Chrome: ⋮ → „Deschide în aplicație”.`}
       >
         <span className="h-1.5 w-1.5 rounded-full bg-neutral-300" />
@@ -228,8 +234,8 @@ export default function InstallPWA({
   const btnStyle =
     mode === "site"
       ? compact
-        ? "inline-flex items-center gap-1.5 rounded-full bg-white text-black px-3 py-1.5 text-[10px] font-mono font-bold uppercase tracking-wider hover:bg-neutral-200 transition-all shrink-0"
-        : "inline-flex items-center justify-center gap-2 rounded-full bg-white text-black px-4 py-2.5 text-xs font-mono font-bold uppercase tracking-wider hover:bg-neutral-200 transition-all"
+        ? "inline-flex items-center gap-1.5 rounded-full bg-white text-black px-3 py-1.5 text-[13px] font-mono font-bold uppercase tracking-wider hover:bg-neutral-200 transition-all shrink-0"
+        : "inline-flex items-center justify-center gap-2 rounded-full bg-white text-black px-4 py-2.5 text-[13px] font-mono font-bold uppercase tracking-wider hover:bg-neutral-200 transition-all"
       : "inline-flex items-center gap-2 rounded-full border border-white/15 text-neutral-300 px-3.5 py-2 text-xs font-mono uppercase tracking-wider hover:bg-white/10 hover:text-white transition-all";
 
   const readyNow = Boolean(
@@ -252,7 +258,7 @@ export default function InstallPWA({
 
       {showPrepModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm pointer-events-auto">
-          <div className="w-full max-w-sm rounded-3xl border border-white/20 bg-neutral-900 p-6 text-center text-white font-mono text-xs shadow-2xl relative">
+          <div className={`w-full max-w-sm rounded-3xl border border-white/20 bg-neutral-900 p-6 text-center text-white font-mono ${fine} shadow-2xl relative`}>
             <button
               onClick={() => setShowPrepModal(false)}
               className="absolute top-4 right-4 h-8 w-8 rounded-full bg-white/10 text-white hover:bg-white/20 flex items-center justify-center text-sm"
@@ -273,10 +279,10 @@ export default function InstallPWA({
 
             {isIos ? (
               <>
-                <p className="text-neutral-300 mb-4 leading-relaxed font-sans text-xs">
+                <p className={`text-neutral-300 mb-4 leading-relaxed font-sans ${citit}`}>
                   Pe iPhone sau iPad, adaugă aplicația pe ecran:
                 </p>
-                <ol className="text-left space-y-2 mb-6 text-neutral-200 bg-black/50 p-4 rounded-xl border border-white/10 text-[11px] font-sans">
+                <ol className={`text-left space-y-2 mb-6 text-neutral-200 bg-black/50 p-4 rounded-xl border border-white/10 ${site ? "text-sm" : "text-[11px]"} font-sans`}>
                   <li>1. Apasă butonul <strong>Partajează (Share)</strong> din bară.</li>
                   <li>2. Alege <strong>„Adaugă pe ecranul principal”</strong>.</li>
                   <li>3. Apasă <strong>„Adaugă”</strong>.</li>
@@ -284,19 +290,19 @@ export default function InstallPWA({
               </>
             ) : readyNow ? (
               <>
-                <p className="text-neutral-300 mb-4 leading-relaxed font-sans text-xs font-semibold">
+                <p className={`text-neutral-300 mb-4 leading-relaxed font-sans ${citit} font-semibold`}>
                   ✓ Instalarea automată este pregătită! Apasă butonul de mai jos și confirmă cu „Instalează”:
                 </p>
                 <button
                   onClick={() => triggerNativeInstall(window.__reverbDeferredPrompt || deferredPrompt)}
-                  className="w-full rounded-full bg-white text-black py-3.5 px-5 font-bold uppercase tracking-wider text-xs hover:bg-neutral-200 transition-all mb-3"
+                  className={`w-full rounded-full bg-white text-black py-3.5 px-5 font-bold uppercase tracking-wider ${fine} hover:bg-neutral-200 transition-all mb-3`}
                 >
                   INSTALEAZĂ ACUM
                 </button>
               </>
             ) : !prepTimedOut ? (
               <>
-                <p className="text-neutral-300 mb-3 leading-relaxed font-sans text-xs">
+                <p className={`text-neutral-300 mb-3 leading-relaxed font-sans ${citit}`}>
                   Chrome pregătește pachetul aplicației (Service Worker). Durează câteva secunde — butonul se activează singur:
                 </p>
                 <div className="w-full h-2.5 bg-white/10 rounded-full overflow-hidden mb-4">
@@ -307,20 +313,20 @@ export default function InstallPWA({
                 </div>
                 <button
                   disabled
-                  className="w-full rounded-full bg-white/15 text-neutral-300 py-3 px-4 font-bold uppercase tracking-wider text-xs opacity-80 mb-3"
+                  className={`w-full rounded-full bg-white/15 text-neutral-300 py-3 px-4 font-bold uppercase tracking-wider ${fine} opacity-80 mb-3`}
                 >
                   Se pregătește instalarea ({prepProgress}%)…
                 </button>
               </>
             ) : (
-              <p className="text-neutral-300 mb-3 leading-relaxed font-sans text-xs">
+              <p className={`text-neutral-300 mb-3 leading-relaxed font-sans ${citit}`}>
                 Chrome nu a oferit singur instalarea (după un „Anulează” mai vechi o blochează o vreme). Instalează din meniu: apasă ⋮ sus în dreapta → „Instalează aplicația” sau „Adaugă pe ecranul de pornire” → „Instalează”. Dacă în meniu vezi „Deschide în aplicație”, e deja instalată: apasă acolo.
               </p>
             )}
 
             <button
               onClick={() => setShowPrepModal(false)}
-              className="w-full rounded-full border border-white/15 text-neutral-400 py-2 font-bold uppercase tracking-wider text-[10px] hover:text-white"
+              className={`w-full rounded-full border border-white/15 text-neutral-400 py-2 font-bold uppercase tracking-wider ${site ? "text-[13px]" : "text-[10px]"} hover:text-white`}
             >
               Închide
             </button>

@@ -14,6 +14,45 @@ Aici notăm progresul pentru a ne coordona perfect.
 - Dacă trebuie neapărat schimbat unul dintre ele, scrieți aici ce și de ce; ramura se aduce la zi cu `master` înaintea verificărilor.
 - După 2 dec 2026 nota e expirată: întrebați-l pe Alin sau citiți lucrarea `C:\Users\alind\lucrari\reverb-facelift-10k.md`.
 
+### [Claude] - 25 nov 2026 - Reparațiile din treapta 1 a faceliftului (ramura `facelift-1`; pe site doar după „da”-ul lui Alin)
+
+Alin a aprobat pe 25 nov planul `docs/designs/facelift_10k_2026-11-24/design_v2_decizii.md` („repară reverb”). Site-ul arată ca înainte; ce s-a schimbat e mai jos. **Unde o regulă de aici o contrazice pe una mai veche din acest fișier, câștigă cea de aici.**
+
+**Litere și font.**
+- Pe paginile agenției niciun text nu are sub 13 px. Etichete, butoane, rânduri mono: `text-[13px]`; text de citit: `text-sm`. Nu scrieți `text-xs`, `text-[10px]` și altele mai mici. Verificarea: `docs/designs/facelift_10k_2026-11-24/verificari/capturi.py … --prag 13` (ținta: 0).
+- `font-mono` înseamnă acum Geist Mono (încărcat în `app/layout.tsx`, legat în `app/globals.css`, „Fontul mono al agenției”). Machetele (`data-keep-pills`), Studio (`.studio-light-root`) și raportul Humanoid (`.humanoid-root`) rămân pe fontul mono al sistemului, după care au fost desenate.
+- Titlurile `h1–h3` din `main` au `text-wrap: balance`; pe pagina tradusă se despart în silabe doar cuvintele de cel puțin 12 litere.
+
+**Bara de sus** (`components/Header.tsx`).
+- Forma rămâne (colț de 16 px). Meniul e scris normal (14 px, 15 px de la 1280 px), nu cu majuscule rărite: cu ele nu încăpea pe un rând. Butonul de contact apare de la 1024 px, iar „Contact” nu se mai repetă în meniul de calculator.
+- Când nu încape (limbă cu cuvinte lungi, text mărit), bara cedează singură, pe trepte: dispare rândul mic de sub siglă, meniul se strânge, apoi trece pe trei liniuțe, apoi dispare numele de lângă siglă. Nu puneți lățimi fixe pe piesele ei.
+- Mărimile barei sunt în pixeli, nu în rem (la text mărit din browser butoanele se dublau).
+- Meniul cu trei liniuțe: `aria-expanded`, se închide la Esc și la clic în afară, etichete în limba paginii.
+- Verificări: `…/treapta1/verificari/coord_bara.py` (ro, de, hu, el la 1024–1440: un rând) și `coord_bara_zoom.py` (text mărit de două ori).
+
+**Tema.** Clasa `light` / `dark` o pune pe `<html>` primul script din `app/layout.tsx`, înaintea primei vopsiri (pagina nu mai clipește pe negru). `Header` o pune încă o dată după hidratare: pe paginile unde React reface arborele (Humanoid) clasa pusă de script se pierde. Nu scoateți niciuna dintre cele două.
+
+**Mișcare.**
+- Scoase definitiv: lumina de sub cursor de pe prima pagină, înclinarea cardurilor după cursor (`mech-card`), linia „laser” (`mech-scanline`), eticheta care sare (`mech-badge`), spațierea animată (`mech-telemetry`). Nu le readuceți.
+- Butoanele se ridică în 200 ms (înainte 450) și se așază la apăsare (`scale: 0.97`, în aceeași regulă din `globals.css`). Rămâne interzis `hover:scale-*` pe butoane; a fost scos și `hover:-translate-y-0.5`.
+- Magnetul (`lib/motion/magnetic.ts`) se socotește din timpul scurs, deci merge la fel pe 60 și pe 120 Hz.
+- `components/Reveal.tsx`: ce e pe ecran la încărcare nu se mai ascunde (clipea 30–180 ms); intră lin doar blocurile de sub ecran. Starea de la capăt e aceeași ca înainte (opacitate 1, transformare neutră): nu o scoateți, machetele se compară la pixel.
+
+**Lucrările.**
+- `/portofoliu` rămâne listă, cu miniatura primului ecran pe fiecare rând (Alin, 25 nov 2026; înlocuiește „fără imagini” din 11 nov). Capturile: `public/work/<slug>.jpg`, 800 × 500, trecute în harta `SHOTS` din `lib/liveProjects.ts` (singurul loc; din ea citește și `WorkShots`). Se refac cu `py -3 -X utf8 scripts/work_shots.py` (sau `--doar <slug>`), fiecare privită înainte să intre în hartă; la magazine, la fiecare publicare.
+- DulceVrancea.ro e în registru, „În administrare” (sursa e scrisă lângă intrare).
+- Fereastra de previzualizare (`ProjectPreviewModal.tsx`) se desenează direct în `<body>` (stătea sub bara site-ului), e neagră pe ambele teme și nu folosește variante `light:` (regulile globale `html.light …` se bat cu ea). Textele ei sunt în `IN_PLUS` din `scripts/i18n_extrage.py`: se schimbă împreună.
+
+**Formularul de contact** (ambele copii): etichete legate, erori anunțate, `autocomplete`, 16 px în câmpuri pe telefon; pe telefon ordinea e contact direct, formular, prețuri. Poarta: `…/treapta1/verificari/formular_poarta.py`.
+
+**Măsurarea (Umami).** Trei evenimente, cu nume fixe: `contact-click` (orice buton spre `/contact`), `whatsapp-click` (orice legătură `wa.me`), `form-sent` (după răspunsul 200, doar cu câmpul-capcană gol). Pe element: `data-umami-event` și `data-umami-event-loc`. Un buton nou spre contact primește și el atributele. Sunt scrise în `components/PrivacyContent.tsx`, RO și EN; orice măsurare nouă se scrie acolo în aceeași schimbare.
+
+**Distribuirea.** Imaginea e `public/reverb-2026-og.jpg` (numele trebuie să se termine în `og.jpg`); se reface din `docs/designs/facelift_10k_2026-11-24/treapta1/og/`. Textele ei sunt în `app/layout.tsx` (`SHARE_TITLE`, `SHARE_DESCRIPTION`).
+
+**Ce NU s-a schimbat și nu se schimbă fără Alin:** fundalul cu sistemul solar, liniuțele de pe titluri și rândul gri al titlului, prețurile din `lib/packages.ts`, cele 22 de limbi, pagina Humanoid, ordinea primei pagini, pilonii.
+
+**Poarta treptei** (toate scripturile sunt în `docs/designs/facelift_10k_2026-11-24/treapta1/verificari/` și în `…/verificari/`): mărimi și font, formular, limbi și rupturi (`breakui_maturare.py`), bara, traduceri, comparația la pixel a machetelor, Studioului și Humanoidului față de `master` (`coord_pixeli.py`, ținta: 0 pixeli diferiți), `check-seo.mjs`.
+
 ### [Claude] - 21 nov 2026 (seara) - Fundalul pe telefon: canvas cât fereastra, vedere mai de sus, centura Kuiper, Pluto și Eris
 
 Plan, revizii, hotărâri: `docs/designs/fundal_dincolo_neptun_2026-11-21/` (`design_v1_decizii.md`).

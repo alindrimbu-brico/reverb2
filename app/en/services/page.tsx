@@ -71,37 +71,38 @@ export default function ServicesPageEN() {
 
       {/* Hero */}
       <section className="relative z-10 pt-32 pb-20 md:pt-40 md:pb-28 border-b border-white/10">
-        <div className="relative mx-auto max-w-5xl px-6 text-center">
+        <div className="relative mx-auto max-w-5xl px-[min(1.5rem,6.2vw)] text-center">
           <Reveal delay={0.1}>
-            <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-white leading-tight">
+            {/* The base size has a vw cap: the same 48 px at 390 px, and the word stays on screen at 200 % text zoom. */}
+            <h1 className="text-[length:min(3rem,12.5vw)] md:text-7xl font-medium tracking-tight text-white leading-tight">
               <Linie>Services.</Linie><br />
               <span className="text-neutral-400 font-light"><Linie>Clear pricing.</Linie></span>
             </h1>
           </Reveal>
 
           <Reveal delay={0.2}>
-            <p className="mt-8 text-xs font-mono text-neutral-400">{VAT_NOTE_EN}</p>
+            <p className="mt-8 text-[13px] font-mono text-neutral-400">{VAT_NOTE_EN}</p>
           </Reveal>
         </div>
       </section>
 
       {/* Main 3 Pillars Grid */}
       <section className="relative z-10 py-20 md:py-32">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-7xl px-[min(1.5rem,6.2vw)]">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {mainServices.map((srv, idx) => (
               <Reveal key={srv.id} delay={0.1 * idx}>
-                <div 
-                  className={`relative flex flex-col justify-between p-8 sm:p-10 rounded-2xl border transition-all duration-300 h-full ${
-                    srv.featured 
-                      ? "bg-gradient-to-b from-neutral-900/60 to-neutral-950/80 border-white/30 shadow-[0_0_40px_rgba(255,255,255,0.05)]" 
+                <div
+                  className={`relative flex flex-col justify-between break-words p-[min(2rem,8.2vw)] sm:p-10 rounded-2xl border transition-all duration-300 h-full ${
+                    srv.featured
+                      ? "bg-gradient-to-b from-neutral-900/60 to-neutral-950/80 border-white/30 shadow-[0_0_40px_rgba(255,255,255,0.05)]"
                       : "bg-[#0c0d0e]/80 border-white/10 hover:border-white/20"
                   }`}
                 >
                   <div>
-                    <div className="flex items-center justify-between font-mono text-xs text-neutral-400 mb-6 pb-4 border-b border-white/10">
+                    <div className="flex flex-wrap items-center justify-between gap-2 font-mono text-[13px] text-neutral-400 mb-6 pb-4 border-b border-white/10">
                       <span className="tracking-[0.2em]">{srv.id} / 03</span>
-                      <span className="text-[10px] uppercase tracking-widest text-neutral-300 bg-white/5 px-2.5 py-1 rounded-full border border-white/10">
+                      <span className="whitespace-nowrap text-[13px] uppercase tracking-widest text-neutral-300 bg-white/5 px-2.5 py-1 rounded-full border border-white/10">
                         {srv.tag}
                       </span>
                     </div>
@@ -114,14 +115,14 @@ export default function ServicesPageEN() {
                       <Linie>{srv.title}</Linie>
                     </h2>
 
-                    <div className="space-y-2.5 pt-6 border-t border-white/10 font-mono text-xs text-neutral-400 mb-8">
-                      <div className="text-[10px] uppercase tracking-[0.2em] text-neutral-400 font-bold mb-3">
+                    <div className="space-y-2.5 pt-6 border-t border-white/10 font-mono text-[13px] text-neutral-400 mb-8">
+                      <div className="text-[13px] uppercase tracking-[0.14em] text-neutral-400 font-bold mb-3">
                         What you get:
                       </div>
                       {srv.deliverables.map((item, i) => (
                         <div key={i} className="flex items-start gap-2.5">
-                          <span className="text-white text-xs mt-0.5">▪</span>
-                          <span className="text-neutral-300 font-sans text-xs leading-relaxed">{item}</span>
+                          <span className="text-white text-[13px] mt-0.5">▪</span>
+                          <span className="min-w-0 text-neutral-300 font-sans text-sm leading-relaxed">{item}</span>
                         </div>
                       ))}
                     </div>
@@ -129,7 +130,9 @@ export default function ServicesPageEN() {
 
                   <Link
                     href={srv.href}
-                    className={`inline-flex items-center justify-center rounded-full py-3.5 px-6 text-xs font-mono uppercase tracking-widest transition-all text-center ${
+                    data-umami-event="contact-click"
+                    data-umami-event-loc="servicii-card"
+                    className={`inline-flex items-center justify-center rounded-full py-3.5 px-4 lg:px-2 text-[13px] leading-snug text-balance font-mono uppercase tracking-wider lg:tracking-normal xl:tracking-widest transition-all text-center ${
                       srv.featured 
                         ? "bg-white text-black hover:bg-neutral-200 shadow-md font-bold" 
                         : "border border-white/20 bg-white/5 text-white hover:bg-white/10"
@@ -146,7 +149,7 @@ export default function ServicesPageEN() {
 
       {/* Bottom CTA */}
       <section className="relative z-10 py-20 border-t border-white/10 bg-[#050607]">
-        <div className="mx-auto max-w-4xl px-6 text-center">
+        <div className="mx-auto max-w-4xl px-[min(1.5rem,6.2vw)] text-center">
           <Reveal>
             <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight mb-6">
               <Linie>Let&apos;s talk.</Linie>
@@ -156,7 +159,9 @@ export default function ServicesPageEN() {
             </p>
             <Link
               href="/en/contact"
-              className="inline-flex items-center justify-center rounded-full bg-white px-8 py-3.5 text-xs font-mono uppercase tracking-widest text-black hover:bg-neutral-200 transition-colors font-bold shadow-lg"
+              data-umami-event="contact-click"
+              data-umami-event-loc="final"
+              className="inline-flex items-center justify-center rounded-full bg-white px-8 py-3.5 text-[13px] leading-snug text-balance font-mono uppercase tracking-widest text-black hover:bg-neutral-200 transition-colors font-bold shadow-lg"
             >
               Talk to us →
             </Link>

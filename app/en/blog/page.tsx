@@ -27,12 +27,12 @@ export default function BlogPageEN() {
         <PageBackdrop />
         {/* Hero */}
         <section className="border-b border-white/10">
-          <div className="mx-auto max-w-7xl px-6 pt-32 pb-16 lg:px-10 lg:pt-40 lg:pb-24">
+          <div className="mx-auto max-w-7xl px-[min(1.5rem,6.2vw)] pt-32 pb-16 lg:px-10 lg:pt-40 lg:pb-24">
             <Reveal>
-              <div className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-400">Blog</div>
+              <div className="font-mono text-[13px] uppercase tracking-[0.3em] text-neutral-400">Blog</div>
             </Reveal>
             <Reveal delay={80}>
-              <h1 className="mt-4 max-w-3xl text-4xl font-medium leading-tight tracking-[-0.03em] md:text-6xl">
+              <h1 className="mt-4 max-w-3xl text-[length:min(2.25rem,9.3vw)] font-medium leading-tight tracking-[-0.03em] md:text-6xl">
                 <Linie>Real perspectives on digital, marketing and AI.</Linie>
               </h1>
             </Reveal>
@@ -45,23 +45,23 @@ export default function BlogPageEN() {
         </section>
 
         {/* Posts */}
-        <section className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-24">
-          <div className="grid gap-5 md:grid-cols-2">
+        <section className="mx-auto max-w-7xl px-[min(1.5rem,6.2vw)] py-16 lg:px-10 lg:py-24">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
             {posts.map((post, i) => (
               <Reveal key={post.slug} delay={i * 80}>
                 <Link
                   href={`/blog/${post.slug}`}
-                  className="group flex h-full flex-col rounded-3xl border border-white/10 bg-neutral-900/40 p-8 shadow-[0_8px_32px_rgba(29,39,49,0.04)] transition hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(29,39,49,0.09)]"
+                  className="group flex h-full flex-col rounded-3xl border border-white/10 bg-neutral-900/40 p-[min(2rem,8.2vw)] break-words shadow-[0_8px_32px_rgba(29,39,49,0.04)] transition hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(29,39,49,0.09)]"
                 >
                   <div className="mb-5 flex items-center gap-3">
                     <span
-                      className={`rounded-full px-3 py-1 text-xs font-medium ${
+                      className={`rounded-full px-3 py-1 text-[13px] font-medium ${
                         categoryColors[post.category] ?? "bg-white/5 text-neutral-400"
                       }`}
                     >
                       {post.category}
                     </span>
-                    <span className="text-xs text-neutral-500">{post.readTime} read</span>
+                    <span className="text-[13px] text-neutral-500">{post.readTime} read</span>
                   </div>
 
                   <h2 className="text-xl font-medium leading-snug tracking-[-0.02em] text-white transition group-hover:text-white">
@@ -70,14 +70,14 @@ export default function BlogPageEN() {
                   <p className="mt-3 flex-1 text-[15px] leading-7 text-neutral-400">{post.excerpt}</p>
 
                   <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-5">
-                    <time className="text-xs text-neutral-500">
+                    <time className="text-[13px] text-neutral-500">
                       {new Date(post.date).toLocaleDateString("en-GB", {
                         day: "numeric",
                         month: "long",
                         year: "numeric",
                       })}
                     </time>
-                    <span className="text-xs font-medium text-neutral-400 transition group-hover:text-white">
+                    <span className="text-[13px] font-medium text-neutral-400 transition group-hover:text-white">
                       Read →
                     </span>
                   </div>
@@ -89,8 +89,8 @@ export default function BlogPageEN() {
 
         {/* CTA */}
         <Reveal>
-          <section className="mx-auto max-w-7xl px-6 pb-16 lg:px-10 lg:pb-24">
-            <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8 text-white md:p-10">
+          <section className="mx-auto max-w-7xl px-[min(1.5rem,6.2vw)] pb-16 lg:px-10 lg:pb-24">
+            <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-[min(2rem,8.2vw)] text-white md:p-10 break-words">
               <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
                 <div>
                   <h2 className="text-2xl font-medium tracking-[-0.02em]">
@@ -102,7 +102,9 @@ export default function BlogPageEN() {
                 </div>
                 <Link
                   href="/en/contact"
-                  className="shrink-0 inline-flex items-center justify-center rounded-full bg-white px-7 py-3.5 text-sm font-medium text-black transition hover:-translate-y-0.5 hover:shadow-lg"
+                  data-umami-event="contact-click"
+                  data-umami-event-loc="blog"
+                  className="shrink-0 md:max-w-[45%] text-center text-balance leading-snug inline-flex items-center justify-center rounded-full bg-white px-7 py-3.5 text-sm font-medium text-black transition hover:shadow-lg"
                 >
                   Schedule a call →
                 </Link>

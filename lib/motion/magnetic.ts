@@ -34,7 +34,10 @@ export type MagneticOptions = {
   auto?: boolean;
 };
 
-type State = { tx: number; ty: number; cx: number; cy: number; raf: number | null; over: boolean };
+type State = { tx: number; ty: number; cx: number; cy: number; raf: number | null; over: boolean; last: number };
+
+/** Durata unui cadru la 60 Hz. `ease` e scris pentru un astfel de cadru; pe alte ecrane se recalculează din timpul scurs. */
+const FRAME_MS = 1000 / 60;
 
 export function initMagnetic({ maxPull = 6, ease = 0.18, auto = true }: MagneticOptions = {}): () => void {
   if (typeof window === "undefined") return () => {};
@@ -55,7 +58,9 @@ export function initMagnetic({ maxPull = 6, ease = 0.18, auto = true }: Magnetic
     return el;
   };
 
-  const step = (el: HTMLElement) => {
+  // Apropierea de țintă se socotește din timpul scurs, nu pe cadru: altfel pe un ecran de 120 Hz butonul ajungea de două ori
+  // mai repede decât pe unul de 60 Hz. Un cadru foarte lung (filă revenită din fundal) se numără cel mult ca patru.
+  const step = (el: HTMLElement, now: number) => {
     const st = states.get(el);
     if (!st) return;
     if (!st.over && Math.abs(st.cx) < 0.1 && Math.abs(st.cy) < 0.1) {
@@ -64,10 +69,19 @@ export function initMagnetic({ maxPull = 6, ease = 0.18, auto = true }: Magnetic
       states.delete(el);
       return;
     }
-    st.cx += (st.tx - st.cx) * ease;
-    st.cy += (st.ty - st.cy) * ease;
+    const dt = st.last ? Math.min(now - st.last, FRAME_MS * 4) : FRAME_MS;
+    st.last = now;
+    const k = 1 - Math.pow(1 - ease, dt / FRAME_MS);
+    st.cx += (st.tx - st.cx) * k;
+    st.cy += (st.ty - st.cy) * k;
     el.style.transform = `translate3d(${st.cx.toFixed(2)}px, ${st.cy.toFixed(2)}px, 0)`;
-    st.raf = requestAnimationFrame(() => step(el));
+    st.raf = requestAnimationFrame((t) => step(el, t));
+  };
+
+  const start = (el: HTMLElement, st: State) => {
+    if (st.raf !== null) return;
+    st.last = 0;
+    st.raf = requestAnimationFrame((t) => step(el, t));
   };
 
   const release = (el: HTMLElement) => {
@@ -76,7 +90,7 @@ export function initMagnetic({ maxPull = 6, ease = 0.18, auto = true }: Magnetic
     st.over = false;
     st.tx = 0;
     st.ty = 0;
-    if (st.raf === null) st.raf = requestAnimationFrame(() => step(el));
+    start(el, st);
   };
 
   const onMove = (e: MouseEvent) => {
@@ -89,7 +103,7 @@ export function initMagnetic({ maxPull = 6, ease = 0.18, auto = true }: Magnetic
 
     let st = states.get(el);
     if (!st) {
-      st = { tx: 0, ty: 0, cx: 0, cy: 0, raf: null, over: true };
+      st = { tx: 0, ty: 0, cx: 0, cy: 0, raf: null, over: true, last: 0 };
       states.set(el, st);
     }
     st.over = true;
@@ -102,7 +116,7 @@ export function initMagnetic({ maxPull = 6, ease = 0.18, auto = true }: Magnetic
     const dy = (e.clientY - (rect.top - st.cy + rect.height / 2)) / (rect.height / 2);
     st.tx = Math.max(-pull, Math.min(pull, dx * pull));
     st.ty = Math.max(-pull, Math.min(pull, dy * pull));
-    if (st.raf === null) st.raf = requestAnimationFrame(() => step(el));
+    start(el, st);
   };
 
   const onLeaveDocument = () => {

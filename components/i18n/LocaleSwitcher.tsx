@@ -42,10 +42,10 @@ export function LocaleButton({ pathname, open, onToggle }: { pathname: string; o
       aria-expanded={open}
       aria-controls="rv-locale-panel"
       data-locale-button
-      className="mech-magnetic inline-flex h-8 items-center gap-1 rounded-full border border-black/10 dark:border-white/15 bg-black/[0.04] dark:bg-white/10 px-2.5 text-[9px] font-extrabold uppercase tracking-widest text-[#111215] dark:text-white transition-colors duration-300 hover:bg-black/[0.08] dark:hover:bg-white/20 shrink-0"
+      className="mech-magnetic inline-flex h-[36px] items-center gap-[4px] rounded-full border border-black/10 dark:border-white/15 bg-black/[0.04] dark:bg-white/10 px-[10px] text-[13px] font-bold uppercase tracking-[0.08em] text-[#111215] dark:text-white transition-colors duration-300 hover:bg-black/[0.08] dark:hover:bg-white/20 shrink-0"
     >
       <span data-no-translate>{shownCode(pathname, s)}</span>
-      <span aria-hidden="true" className={`text-[8px] transition-transform duration-300 ${open ? "rotate-180" : ""}`}>▾</span>
+      <span aria-hidden="true" className={`text-[13px] leading-none transition-transform duration-300 ${open ? "rotate-180" : ""}`}>▾</span>
     </button>
   );
 }
@@ -59,12 +59,12 @@ export function LocalePanel({ pathname, onClose }: { pathname: string; onClose: 
   const items = LOCALES.filter((l) => !isDict(l.code) || Object.prototype.hasOwnProperty.call(DICT_VERSION, l.code));
 
   const item = (active: boolean) =>
-    `flex w-full items-center justify-between gap-2 rounded-lg px-3 py-2 text-left text-[13px] transition-colors duration-200 ${
+    `flex w-full items-center justify-between gap-2 rounded-lg px-3 py-2 text-left text-sm transition-colors duration-200 ${
       active
         ? "bg-[#111215] text-[#ffffff] dark:bg-white dark:text-[#0a0a0c]"
         : "text-[#111215]/80 dark:text-neutral-200 hover:bg-black/[0.06] dark:hover:bg-white/10"
     }`;
-  const code = (active: boolean) => `text-[9px] font-mono uppercase tracking-widest ${active ? "opacity-70" : "opacity-45"}`;
+  const code = (active: boolean) => `text-[13px] font-mono uppercase tracking-[0.06em] ${active ? "opacity-70" : "opacity-45"}`;
 
   const pick = (lang: string) => {
     choose(lang);
@@ -85,9 +85,9 @@ export function LocalePanel({ pathname, onClose }: { pathname: string; onClose: 
         className="pointer-events-auto w-full sm:w-[34rem] max-h-[70vh] overflow-y-auto rounded-2xl border border-black/10 dark:border-white/15 bg-white/95 dark:bg-[#23262b]/95 backdrop-blur-lg p-4 sm:p-5 shadow-2xl"
       >
         <div className="mb-3 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-          <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#111215]/55 dark:text-neutral-400">{en ? "Language" : tr("Limbă")}</span>
+          <span className="text-[13px] font-bold uppercase tracking-[0.14em] text-[#111215]/65 dark:text-neutral-400">{en ? "Language" : tr("Limbă")}</span>
           {s.country ? (
-            <span className="text-[10px] font-mono text-[#111215]/55 dark:text-neutral-400">
+            <span className="text-[13px] font-mono text-[#111215]/65 dark:text-neutral-400">
               {en ? "Detected country:" : tr("Țara detectată:")} {countryName(s.country, current)}
             </span>
           ) : null}
@@ -168,7 +168,7 @@ export function LocaleNotice({ pathname }: { pathname: string }) {
     <div data-no-translate lang={s.locale} className="w-full max-w-6xl mt-2 px-0 sm:px-2 flex justify-center pointer-events-none">
       <div
         role="status"
-        className="pointer-events-auto inline-flex max-w-full flex-wrap items-center justify-center gap-x-3 gap-y-1 rounded-xl border border-black/10 dark:border-white/15 bg-white/95 dark:bg-[#23262b]/95 backdrop-blur-lg px-4 py-2 text-[11px] leading-snug text-[#111215]/80 dark:text-neutral-200 shadow-lg"
+        className="pointer-events-auto inline-flex max-w-full flex-wrap items-center justify-center gap-x-3 gap-y-1 rounded-xl border border-black/10 dark:border-white/15 bg-white/95 dark:bg-[#23262b]/95 backdrop-blur-lg px-4 py-2 text-[13px] leading-snug text-[#111215]/80 dark:text-neutral-200 shadow-lg"
       >
         <span>{tr("Această pagină există doar în română și engleză.")}</span>
         {english ? (

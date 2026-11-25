@@ -6,7 +6,7 @@
 import { company } from "@/lib/company";
 
 const BTN =
-  "rounded-full border border-white/20 px-4 py-2 text-xs font-mono text-neutral-200 transition hover:bg-white hover:text-black";
+  "rounded-full border border-white/20 px-4 py-2 text-[13px] font-mono text-neutral-200 transition hover:bg-white hover:text-black";
 
 /** Definiția agenției, în două bucăți (două chei de traducere): pagina Despre le folosește ca titlu și ca rând de sub titlu. */
 export const AGENCY_DEF = {
@@ -18,11 +18,14 @@ export default function WhoWeAre({
   lang = "ro",
   center = false,
   showDef = true,
+  umamiLoc = "cine-suntem",
 }: {
   lang?: "ro" | "en";
   center?: boolean;
   /** `false` pe pagina Despre, unde definiția e deja titlul paginii. */
   showDef?: boolean;
+  /** Locul trimis la Umami cu `whatsapp-click` (scurt, fără diacritice). */
+  umamiLoc?: string;
 }) {
   const en = lang === "en";
   const def = AGENCY_DEF[lang];
@@ -33,18 +36,25 @@ export default function WhoWeAre({
           <span>{def.what}</span> <span>{def.does}</span>
         </p>
       )}
-      <p data-no-translate className="text-xs font-mono leading-relaxed text-neutral-400">
+      <p data-no-translate className="text-[13px] font-mono leading-relaxed text-neutral-400">
         {`${company.brand} · ${company.legalName} · ${company.city} · CUI ${company.cui}`}
       </p>
       <div className={`flex flex-wrap items-center gap-2.5 ${center ? "justify-center" : ""}`}>
-        <span className="text-xs font-mono text-neutral-300">
+        <span className="text-[13px] font-mono text-neutral-300">
           <span>Contact</span>
           <span data-no-translate>{`: ${company.contactName}`}</span>
         </span>
         <a href={company.tel} className={BTN}>
           {en ? `Call ${company.phoneIntl}` : `Sună: ${company.phoneDisplay}`}
         </a>
-        <a href={company.whatsapp} target="_blank" rel="noopener noreferrer" className={BTN}>
+        <a
+          href={company.whatsapp}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-umami-event="whatsapp-click"
+          data-umami-event-loc={umamiLoc}
+          className={BTN}
+        >
           <span data-no-translate>WhatsApp ↗</span>
         </a>
       </div>

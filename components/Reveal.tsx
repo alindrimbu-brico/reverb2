@@ -22,6 +22,18 @@ export default function Reveal({ children, className = "", delay = 0 }: RevealPr
     const el = ref.current;
     if (!el) return;
 
+    // Ce e deja pe ecran la încărcare rămâne cum e: blocul fusese vopsit, iar ascunderea lui după hidratare se vedea ca o
+    // clipire (30–180 ms) pe primul ecran. Intră lin doar blocurile de sub ecran. La „mișcare redusă” nu se ascunde nimic.
+    // Starea de la capăt e aceeași ca după o intrare (opacitate 1, transformare neutră), ca blocul să se deseneze la fel
+    // oriunde ar fi fost la încărcare; diferă doar că nu mai trece prin „ascuns”.
+    const rect = el.getBoundingClientRect();
+    const onScreen = rect.top < window.innerHeight && rect.bottom > 0;
+    if (onScreen || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      el.style.opacity = "1";
+      el.style.transform = "translateY(0)";
+      return;
+    }
+
     // Hide element (only on client after hydration)
     el.style.opacity = "0";
     el.style.transform = "translateY(20px)";

@@ -17,7 +17,8 @@ export default function HumanoidFrame({ children }: { children: ReactNode }) {
     <LanguageProvider>
       <MotionConfig reducedMotion="user">
         <MechProvider>
-          <div className="relative text-white">
+          {/* `humanoid-root`: raportul își păstrează fontul mono după care a fost desenat (app/globals.css, „Fontul mono al agenției”). */}
+          <div className="humanoid-root relative text-white">
             <PageBackdrop />
             <Shutter />
             <Caliper />

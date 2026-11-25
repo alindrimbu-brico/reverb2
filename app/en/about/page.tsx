@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 };
 
 const BTN =
-  "inline-flex items-center justify-center rounded-full border border-white/20 px-6 py-3 text-center text-xs font-mono uppercase tracking-wider text-neutral-200 transition hover:bg-white hover:text-black";
+  "inline-flex items-center justify-center rounded-full border border-white/20 px-6 py-3 text-center text-[13px] leading-snug text-balance font-mono uppercase tracking-wider text-neutral-200 transition hover:bg-white hover:text-black";
 
 export default function AboutPageEN() {
   const managed = liveProjectsEn.filter((p) => p.state === "managed");
@@ -34,15 +34,16 @@ export default function AboutPageEN() {
 
       {/* Definition and company data */}
       <section className="relative z-10 pt-32 pb-20 md:pt-40 md:pb-28 border-b border-white/10">
-        <div className="relative mx-auto max-w-5xl px-6 text-center">
+        <div className="relative mx-auto max-w-5xl px-[min(1.5rem,6.2vw)] text-center">
           <Reveal>
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.1em] sm:tracking-[0.25em] text-neutral-300 mb-6 backdrop-blur-md">
-              <span className="h-1.5 w-1.5 rounded-full bg-white" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[13px] font-mono uppercase tracking-[0.1em] sm:tracking-[0.14em] text-neutral-300 mb-6 backdrop-blur-md">
+              <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-white" />
               <span>About us</span>
             </div>
           </Reveal>
           <Reveal delay={80}>
-            <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-white leading-tight">
+            {/* The base size has a vw cap: the same 48 px at 390 px, and the word stays on screen at 200 % text zoom. */}
+            <h1 className="text-[length:min(3rem,12.5vw)] md:text-7xl font-medium tracking-tight text-white leading-tight">
               <Linie>{AGENCY_DEF.en.what}</Linie>
             </h1>
           </Reveal>
@@ -60,22 +61,22 @@ export default function AboutPageEN() {
       </section>
 
       {/* The portfolio in figures */}
-      <section className="relative z-10 py-24 px-6 lg:px-10 max-w-5xl mx-auto text-center">
+      <section className="relative z-10 py-24 px-[min(1.5rem,6.2vw)] lg:px-10 max-w-5xl mx-auto text-center">
         <Reveal>
           <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
             <Linie>Portfolio.</Linie>
           </h2>
         </Reveal>
 
-        <div className={`mt-12 grid gap-6 ${wip > 0 ? "sm:grid-cols-2" : ""}`}>
-          <div className="rounded-2xl border border-white/10 bg-neutral-900/30 p-8">
+        <div className={`mt-12 grid grid-cols-1 gap-6 ${wip > 0 ? "sm:grid-cols-2" : ""}`}>
+          <div className="rounded-2xl border border-white/10 bg-neutral-900/30 p-[min(2rem,8.2vw)] break-words">
             <div className="font-mono text-5xl font-light text-white">{managed.length}</div>
-            <div className="mt-3 text-xs font-mono uppercase tracking-widest text-neutral-300">{STATUS_LABEL.en.managed}</div>
+            <div className="mt-3 text-[13px] font-mono uppercase tracking-widest text-neutral-300">{STATUS_LABEL.en.managed}</div>
           </div>
           {wip > 0 && (
-            <div className="rounded-2xl border border-white/10 bg-neutral-900/30 p-8">
+            <div className="rounded-2xl border border-white/10 bg-neutral-900/30 p-[min(2rem,8.2vw)] break-words">
               <div className="font-mono text-5xl font-light text-white">{wip}</div>
-              <div className="mt-3 text-xs font-mono uppercase tracking-widest text-neutral-300">
+              <div className="mt-3 text-[13px] font-mono uppercase tracking-widest text-neutral-300">
                 {wip === 1 ? STATUS_LABEL.en.in_progress : "Projects in progress"}
               </div>
             </div>
@@ -90,12 +91,12 @@ export default function AboutPageEN() {
         <div className="mt-12 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4">
           <Link
             href="/en/portfolio"
-            className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-center text-xs font-mono uppercase tracking-wider text-black font-bold transition hover:bg-neutral-200"
+            className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-center text-[13px] leading-snug text-balance font-mono uppercase tracking-wider text-black font-bold transition hover:bg-neutral-200"
           >
             Full portfolio →
           </Link>
           <Link href="/en/services" className={BTN}>Services and prices →</Link>
-          <Link href="/en/contact" className={BTN}>Contact →</Link>
+          <Link href="/en/contact" className={BTN} data-umami-event="contact-click" data-umami-event-loc="despre">Contact →</Link>
         </div>
       </section>
 

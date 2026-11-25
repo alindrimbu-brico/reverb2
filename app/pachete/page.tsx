@@ -87,15 +87,16 @@ export default function PachetePage() {
 
       {/* Hero */}
       <section className="relative z-10 pt-32 pb-20 md:pt-40 md:pb-28 border-b border-white/10">
-        <div className="relative mx-auto max-w-5xl px-6 text-center">
+        <div className="relative mx-auto max-w-5xl px-[min(1.5rem,6.2vw)] text-center">
           <Reveal>
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.1em] sm:tracking-[0.25em] text-neutral-300 mb-6 backdrop-blur-md">
-              <span className="h-1.5 w-1.5 rounded-full bg-white" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[13px] leading-snug text-balance font-mono uppercase tracking-[0.04em] sm:tracking-[0.14em] text-neutral-300 mb-6 backdrop-blur-md">
+              <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-white" />
               <span>[ SITE-URI • MAGAZINE ONLINE • CLIPURI VIDEO ]</span>
             </div>
           </Reveal>
           <Reveal delay={80}>
-            <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-white leading-tight">
+            {/* Mărimea de bază are un plafon în vw: la 390 px e aceeași (48 px), la zoom de text 200 % cuvântul încape pe ecran. */}
+            <h1 className="text-[length:min(3rem,12.5vw)] md:text-7xl font-medium tracking-tight text-white leading-tight">
               <Linie>Prețuri clare.</Linie><br />
               <span className="text-neutral-400 font-light"><Linie>Fără costuri ascunse.</Linie></span>
             </h1>
@@ -116,9 +117,9 @@ export default function PachetePage() {
               <a href="#video" className="text-white underline underline-offset-4 decoration-white/40 hover:decoration-white">Vezi pachetele video ↓</a>
             </p>
             <div className="mt-6">
-              <WhoWeAre center />
+              <WhoWeAre center umamiLoc="pachete-sus" />
             </div>
-            <div className="mt-8 mx-auto flex max-w-xl items-start gap-3 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-5 py-3.5 text-left text-xs leading-relaxed font-mono text-emerald-300">
+            <div className="mt-8 mx-auto flex max-w-xl items-start gap-3 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-5 py-3.5 text-left text-sm leading-relaxed font-mono text-emerald-300">
               <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-emerald-400" />
               <span>Fără contract obligatoriu pe 12 luni: testezi o lună, măsori rezultatele și decizi dacă dorești continuarea.</span>
             </div>
@@ -127,24 +128,24 @@ export default function PachetePage() {
       </section>
 
       {/* Platforme Web & E-Commerce & B2B */}
-      <section id="web" className="scroll-mt-16 relative z-10 py-24 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
+      <section id="web" className="scroll-mt-16 relative z-10 py-24 px-[min(1.5rem,6.2vw)] lg:px-10 max-w-7xl mx-auto border-b border-white/10">
         <Reveal>
           <div className="max-w-5xl mb-16">
-            <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-3">01 / SITE-URI ȘI MAGAZINE</div>
+            <div className="text-[13px] font-mono uppercase tracking-[0.3em] text-neutral-500 mb-3">01 / SITE-URI ȘI MAGAZINE</div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-tight leading-tight">
-              <Linie>Site-uri, Magazine Online și Proiecte Mari</Linie>
+              <Linie>Site-uri, magazine online și proiecte mari</Linie>
             </h2>
             <p className="mt-4 text-sm text-neutral-400 font-light leading-relaxed">
               Site-uri de prezentare și magazine online cu preț stabilit de la început: de la un început simplu, până la sisteme complete cu clipuri video și proiecte pentru companii mari.
             </p>
             <div className="mt-6">
-              <WhoWeAre />
+              <WhoWeAre umamiLoc="pachete-jos" />
             </div>
-            <div className="mt-6 text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500">În administrare</div>
+            <div className="mt-6 text-[13px] font-mono uppercase tracking-[0.14em] text-neutral-500">În administrare</div>
             <WorkShots items={lucrari} />
             <div className="mt-4 flex flex-wrap gap-2.5">
-              <Link href="/portofoliu" className="rounded-full bg-white px-4 py-2 text-xs font-mono font-bold text-black transition hover:bg-neutral-200">Tot portofoliul →</Link>
-              <Link href="/showcase" className="rounded-full border border-white/20 px-4 py-2 text-xs font-mono text-neutral-200 transition hover:bg-white hover:text-black">Galeria de concepte →</Link>
+              <Link href="/portofoliu" className="rounded-full bg-white px-4 py-2 text-[13px] font-mono font-bold text-black transition hover:bg-neutral-200">Tot portofoliul →</Link>
+              <Link href="/showcase" className="rounded-full border border-white/20 px-4 py-2 text-[13px] font-mono text-neutral-200 transition hover:bg-white hover:text-black">Galeria de concepte →</Link>
             </div>
             <p className="mt-6 text-sm text-neutral-400 font-light leading-relaxed">
               „Cere acest pachet” deschide un formular scurt. Îți răspundem în cel mult 24 de ore lucrătoare, fără nicio obligație.
@@ -189,9 +190,10 @@ export default function PachetePage() {
                           target="_blank"
                           rel="noopener noreferrer nofollow"
                           data-no-translate
-                          className="whitespace-nowrap font-mono text-xs text-neutral-400 underline underline-offset-4 transition hover:text-white"
+                          // Cutie întreagă pe rândul ei (ca „nowrap”), dar se poate rupe înăuntru când e mai lată decât rândul (zoom de text 200 %).
+                          className="inline-block max-w-full [overflow-wrap:anywhere] font-mono text-[13px] text-neutral-400 underline underline-offset-4 transition hover:text-white"
                         >
-                          {rand.host} ↗
+                          {`${rand.host}\u00a0↗`}
                         </a>
                       </span>
                     </li>
@@ -203,51 +205,55 @@ export default function PachetePage() {
           </div>
         </Reveal>
 
-        <div className="grid gap-8 lg:grid-cols-3 items-stretch">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 items-stretch">
           {webPackages.map((pkg, idx) => (
             <Reveal key={pkg.id} delay={idx * 100}>
               <div
-                className={`relative h-full rounded-3xl p-8 md:p-10 flex flex-col justify-between border transition-all duration-300 ${
+                className={`relative h-full rounded-3xl p-[min(2rem,8.2vw)] md:p-10 flex flex-col justify-between break-words border transition-all duration-300 ${
                   pkg.highlight
                     ? "bg-gradient-to-b from-neutral-900 to-[#121316] border-white/30 shadow-[0_0_40px_rgba(255,255,255,0.06)] scale-100 lg:scale-[1.02]"
                     : "bg-neutral-900/30 border-white/10"
                 }`}
               >
                 {pkg.badge && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-white px-4 py-1 text-[9px] font-mono font-bold uppercase tracking-widest text-black shadow-md">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-white px-4 py-1 text-[13px] font-mono font-bold uppercase tracking-widest text-black shadow-md">
                     {pkg.badge}
                   </div>
                 )}
 
                 <div>
-                  <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-2">
+                  <div className="text-[13px] font-mono uppercase tracking-widest text-neutral-500 mb-2">
                     {pkg.delivery}
                   </div>
                   <h3 className="text-2xl font-medium text-white mb-2"><Linie>{pkg.name}</Linie></h3>
-                  <div className="text-4xl font-light text-white mb-1">{pkg.price} <span className="text-sm font-mono text-neutral-300">{VAT_LABEL}</span></div>
-                  <div className="mb-4 text-xs text-neutral-400">{priceLei(pkg.price)}</div>
-                  <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6 border-b border-white/10 pb-6">
+                  {/* Prețul și „+ TVA” nu se despart (spațiu care nu se rupe); plafonul în vw ține prețul pe ecran la zoom de text 200 %. */}
+                  <div className="text-[length:min(2.25rem,11vw)] font-light text-white mb-1">{pkg.price}{"\u00a0"}<span className="whitespace-nowrap text-sm font-mono text-neutral-300">{VAT_LABEL}</span></div>
+                  <div className="mb-4 text-[13px] text-neutral-400">{priceLei(pkg.price)}</div>
+                  <p className="text-sm text-neutral-400 font-light leading-relaxed mb-6 border-b border-white/10 pb-6">
                     {pkg.description}
                   </p>
 
-                  <ul className="space-y-3 text-xs text-neutral-300 font-mono mb-8">
+                  <ul className="space-y-3 text-[13px] text-neutral-300 font-mono mb-8">
                     {pkg.includes.map((inc) => (
                       <li key={inc} className="flex items-start gap-2.5">
                         <span className="text-neutral-400 mt-0.5">•</span>
-                        <span>{inc}</span>
+                        <span className="min-w-0">{inc}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
                 <div>
-                  <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5 text-[11px] text-neutral-400 font-light mb-6">
+                  <div className="p-[min(1rem,4.1vw)] rounded-xl bg-white/[0.02] border border-white/5 text-[13px] text-neutral-400 font-light mb-6">
                     <strong className="text-neutral-300 block mb-1">Ideal pentru:</strong>
                     {pkg.ideal}
                   </div>
                   <Link
                     href={`/contact?pachet=${pkg.id}`}
-                    className={`block w-full text-center rounded-full py-3.5 text-xs font-mono uppercase tracking-widest transition-all ${
+                    data-umami-event="contact-click"
+                    data-umami-event-loc="pachete-card"
+                    data-umami-event-pachet={pkg.id}
+                    className={`block w-full text-center rounded-full px-3 lg:px-1 py-3.5 text-[13px] leading-snug text-balance font-mono uppercase tracking-wider lg:tracking-normal xl:tracking-widest transition-all ${
                       pkg.highlight
                         ? "bg-white text-black font-bold hover:bg-neutral-200 shadow-md"
                         : "border border-white/20 text-white hover:bg-white hover:text-black"
@@ -263,64 +269,68 @@ export default function PachetePage() {
       </section>
 
       {/* Promovare Video Social Media AI */}
-      <section id="video" className="scroll-mt-16 relative z-10 py-24 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
+      <section id="video" className="scroll-mt-16 relative z-10 py-24 px-[min(1.5rem,6.2vw)] lg:px-10 max-w-7xl mx-auto border-b border-white/10">
         <Reveal>
           <div className="max-w-5xl mb-16">
-            <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-3">02 / CLIPURI PENTRU REȚELELE SOCIALE</div>
+            <div className="text-[13px] font-mono uppercase tracking-[0.3em] text-neutral-500 mb-3">02 / CLIPURI PENTRU REȚELELE SOCIALE</div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-tight leading-tight">
-              <Linie>Pachete Social Media • Video Scurt și Imagini</Linie>
+              <Linie>Pachete social media • Video scurt și imagini</Linie>
             </h2>
             <p className="mt-4 text-sm text-neutral-400 font-light leading-relaxed">
-              Generăm conținut video de înaltă fidelitate cu Google Imagen & Veo pentru TikTok, Reels, Shorts și Facebook. Demonstrații de produse, scenarii de vânzare și subtitrări dinamice fără bătăi de cap.
+              Facem cu AI clipuri scurte și imagini pentru TikTok, Reels, Shorts și Facebook: produsele tale arătate pe rând, cu text pe ecran. Tu nu filmezi nimic.
             </p>
           </div>
         </Reveal>
 
-        <div className="grid gap-8 lg:grid-cols-3 items-stretch">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 items-stretch">
           {socialPackages.map((pkg, idx) => (
             <Reveal key={pkg.id} delay={idx * 100}>
               <div
-                className={`relative h-full rounded-3xl p-8 md:p-10 flex flex-col justify-between border transition-all duration-300 ${
+                className={`relative h-full rounded-3xl p-[min(2rem,8.2vw)] md:p-10 flex flex-col justify-between break-words border transition-all duration-300 ${
                   pkg.highlight
                     ? "bg-gradient-to-b from-neutral-900 to-[#121316] border-white/30 shadow-[0_0_40px_rgba(255,255,255,0.06)] scale-100 lg:scale-[1.02]"
                     : "bg-neutral-900/30 border-white/10"
                 }`}
               >
                 {pkg.badge && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-white px-4 py-1 text-[9px] font-mono font-bold uppercase tracking-widest text-black shadow-md">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-white px-4 py-1 text-[13px] font-mono font-bold uppercase tracking-widest text-black shadow-md">
                     {pkg.badge}
                   </div>
                 )}
 
                 <div>
-                  <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 mb-2">
+                  <div className="text-[13px] font-mono uppercase tracking-widest text-neutral-500 mb-2">
                     {pkg.delivery}
                   </div>
                   <h3 className="text-2xl font-medium text-white mb-2"><Linie>{pkg.name}</Linie></h3>
-                  <div className="text-4xl font-light text-white mb-1">{pkg.price} <span className="text-sm font-mono text-neutral-300">{VAT_LABEL}</span></div>
-                  <div className="mb-4 text-xs text-neutral-400">{priceLei(pkg.price)}</div>
-                  <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6 border-b border-white/10 pb-6">
+                  {/* Prețul și „+ TVA” nu se despart (spațiu care nu se rupe); plafonul în vw ține prețul pe ecran la zoom de text 200 %. */}
+                  <div className="text-[length:min(2.25rem,11vw)] font-light text-white mb-1">{pkg.price}{"\u00a0"}<span className="whitespace-nowrap text-sm font-mono text-neutral-300">{VAT_LABEL}</span></div>
+                  <div className="mb-4 text-[13px] text-neutral-400">{priceLei(pkg.price)}</div>
+                  <p className="text-sm text-neutral-400 font-light leading-relaxed mb-6 border-b border-white/10 pb-6">
                     {pkg.description}
                   </p>
 
-                  <ul className="space-y-3 text-xs text-neutral-300 font-mono mb-8">
+                  <ul className="space-y-3 text-[13px] text-neutral-300 font-mono mb-8">
                     {pkg.includes.map((inc) => (
                       <li key={inc} className="flex items-start gap-2.5">
                         <span className="text-neutral-400 mt-0.5">•</span>
-                        <span>{inc}</span>
+                        <span className="min-w-0">{inc}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
                 <div>
-                  <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5 text-[11px] text-neutral-400 font-light mb-6">
+                  <div className="p-[min(1rem,4.1vw)] rounded-xl bg-white/[0.02] border border-white/5 text-[13px] text-neutral-400 font-light mb-6">
                     <strong className="text-neutral-300 block mb-1">Ideal pentru:</strong>
                     {pkg.ideal}
                   </div>
                   <Link
                     href={`/contact?pachet=${pkg.id}`}
-                    className={`block w-full text-center rounded-full py-3.5 text-xs font-mono uppercase tracking-widest transition-all ${
+                    data-umami-event="contact-click"
+                    data-umami-event-loc="pachete-card"
+                    data-umami-event-pachet={pkg.id}
+                    className={`block w-full text-center rounded-full px-3 lg:px-1 py-3.5 text-[13px] leading-snug text-balance font-mono uppercase tracking-wider lg:tracking-normal xl:tracking-widest transition-all ${
                       pkg.highlight
                         ? "bg-white text-black font-bold hover:bg-neutral-200 shadow-md"
                         : "border border-white/20 text-white hover:bg-white hover:text-black"
@@ -336,10 +346,10 @@ export default function PachetePage() {
       </section>
 
       {/* Întrebări Frecvente */}
-      <section className="relative z-10 py-24 px-6 lg:px-10 max-w-5xl mx-auto border-b border-white/10">
+      <section className="relative z-10 py-24 px-[min(1.5rem,6.2vw)] lg:px-10 max-w-5xl mx-auto border-b border-white/10">
         <Reveal>
           <div className="text-center mb-16">
-            <div className="text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 mb-3">Claritate Operațională</div>
+            <div className="text-[13px] font-mono uppercase tracking-[0.3em] text-neutral-500 mb-3">Întrebări</div>
             <h2 className="text-3xl md:text-4xl font-light text-white tracking-tight">
               <Linie>Întrebări frecvente despre colaborare.</Linie>
             </h2>
@@ -349,7 +359,7 @@ export default function PachetePage() {
         <div className="space-y-6">
           {faqs.map((faq) => (
             <Reveal key={faq.q}>
-              <div className="rounded-2xl border border-white/10 bg-neutral-900/30 p-8">
+              <div className="rounded-2xl border border-white/10 bg-neutral-900/30 p-[min(2rem,8.2vw)] break-words">
                 <h3 className="text-lg font-medium text-white mb-3">{faq.q}</h3>
                 <p className="text-sm text-neutral-400 font-light leading-relaxed">{faq.a}</p>
               </div>

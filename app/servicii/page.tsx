@@ -19,7 +19,8 @@ type Service = {
   deliverables: string[];
   href: string;
   featured?: boolean;
-  /** Textul butonului, când „Cere acest serviciu • preț” nu se potrivește. */
+  /** Textul butonului, când „Cere acest serviciu” nu se potrivește. Fără preț în buton (25 nov 2026): prețul e în eticheta
+   *  de deasupra, iar cu el butonul nu încăpea pe un rând la 13 px, în nicio limbă. */
   cta?: string;
 };
 
@@ -28,7 +29,7 @@ const mainServices: Service[] = [
     id: "01",
     tag: "SITE-URI ȘI MAGAZINE",
     price: `de la ${pkg("site-start").price}`,
-    title: "Site-uri și Magazine Online",
+    title: "Site-uri și magazine online",
     deliverables: [
       // Prețul și termenul vin din registru (lib/packages.ts): cititorii nu știau care preț e al site-ului și care al magazinului.
       `Site: ${pkg("site-start").price}, în ${pkg("site-start").delivery}`,
@@ -47,7 +48,7 @@ const mainServices: Service[] = [
     id: "02",
     tag: "FIRME LOCALE",
     price: pkg("vizibil-local").price,
-    title: "Site-ul și Fișa de pe Google, Ținute la Zi",
+    title: "Site-ul și fișa de pe Google, ținute la zi",
     deliverables: pkg("vizibil-local").includes,
     href: "/contact?pachet=vizibil-local",
   },
@@ -56,7 +57,7 @@ const mainServices: Service[] = [
     id: "03",
     tag: "VERIFICARE GRATUITĂ",
     price: "Gratuit",
-    title: "Verificarea Gratuită a Site-ului",
+    title: "Verificarea gratuită a site-ului",
     deliverables: [
       "Citim până la 25 de pagini din site-ul tău",
       "Îți scriem pe e-mail, pe înțeles, ce e de reparat, cu exemple pe care le poți deschide",
@@ -65,13 +66,13 @@ const mainServices: Service[] = [
       "Nu te obligă la nimic: lista o poate repara și cine ți-a făcut site-ul",
     ],
     href: "/contact?pachet=verificare-site",
-    cta: "Cere verificarea • Gratuit →",
+    cta: "Cere verificarea →",
   },
   {
     id: "04",
     tag: "REȚELE SOCIALE",
     price: `de la ${pkg("social-growth").price}`,
-    title: "Clipuri Zilnice pentru Rețelele Sociale",
+    title: "Clipuri zilnice pentru rețelele sociale",
     deliverables: [
       "30 până la 90 de clipuri scurte pe lună",
       "TikTok, Instagram Reels, YouTube Shorts, Facebook",
@@ -88,7 +89,7 @@ const mainServices: Service[] = [
     tag: "CĂUTAREA CU AI",
     // Serviciul GEO nu e pachet în registru: prețul lui se scrie aici.
     price: "de la €588 / lună",
-    title: "Găsit de Asistenții AI",
+    title: "Găsit de asistenții AI",
     deliverables: [
       "Firma, produsele și prețurile scrise astfel încât asistenții AI să le citească corect",
       "O listă de prețuri clară și publică pentru pachetele tale",
@@ -102,7 +103,7 @@ const mainServices: Service[] = [
     id: "06",
     tag: "FIRME MARI",
     price: pkg("infrastructura-enterprise").price,
-    title: "Proiecte Mari și Sisteme pentru Firme",
+    title: "Proiecte mari și sisteme pentru firme",
     deliverables: [
       "Servere dedicate, care cresc odată cu firma",
       "Portaluri sigure pentru comenzi și contracte între firme",
@@ -121,62 +122,67 @@ export default function ServiciiPage() {
 
       {/* Hero */}
       <section className="relative z-10 pt-32 pb-20 md:pt-40 md:pb-28 border-b border-white/10">
-        <div className="relative mx-auto max-w-5xl px-6 text-center">
+        <div className="relative mx-auto max-w-5xl px-[min(1.5rem,6.2vw)] text-center">
           <Reveal delay={80}>
-            <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-white leading-tight">
+            {/* Mărimea de bază are un plafon în vw: la 390 px e aceeași (48 px), la zoom de text 200 % cuvântul încape pe ecran. */}
+            <h1 className="text-[length:min(3rem,12.5vw)] md:text-7xl font-medium tracking-tight text-white leading-tight">
               <Linie>Servicii.</Linie><br />
               <span className="text-neutral-400 font-light"><Linie>Prețuri clare.</Linie></span>
             </h1>
           </Reveal>
           <Reveal delay={160}>
-            <p className="mt-8 text-xs font-mono text-neutral-400">{VAT_NOTE}</p>
+            <p className="mt-8 text-[13px] font-mono text-neutral-400">{VAT_NOTE}</p>
           </Reveal>
         </div>
       </section>
 
       {/* Lista de Servicii Detaliate */}
-      <section className="relative z-10 py-24 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
+      <section className="relative z-10 py-24 px-[min(1.5rem,6.2vw)] lg:px-10 max-w-7xl mx-auto border-b border-white/10">
         <div className="space-y-12">
           {mainServices.map((srv, idx) => (
             <Reveal key={srv.id} delay={idx * 80}>
-              <div className={`rounded-3xl border p-8 md:p-12 lg:p-14 transition-all duration-300 ${
-                srv.featured 
-                  ? "bg-gradient-to-b from-neutral-900/60 to-neutral-950/80 border-white/30 shadow-[0_0_40px_rgba(255,255,255,0.05)]" 
+              <div className={`rounded-3xl border p-[min(2rem,8.2vw)] md:p-12 lg:p-14 break-words transition-all duration-300 ${
+                srv.featured
+                  ? "bg-gradient-to-b from-neutral-900/60 to-neutral-950/80 border-white/30 shadow-[0_0_40px_rgba(255,255,255,0.05)]"
                   : "bg-neutral-900/30 border-white/10"
               }`}>
-                <div className="grid lg:grid-cols-12 gap-10 items-start">
-                  
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+
                   <div className="lg:col-span-5">
-                    <div className="flex flex-wrap items-center gap-3 font-mono text-xs text-neutral-500 mb-4">
+                    <div className="flex flex-wrap items-center gap-3 font-mono text-[13px] text-neutral-500 mb-4">
                       <span>/ {srv.id}</span>
                       <span>•</span>
                       <span className="text-neutral-300 uppercase tracking-wider">{srv.tag}</span>
-                      <span className="ml-auto inline-block rounded-full bg-white/10 px-3 py-0.5 text-[10px] text-white font-bold border border-white/20">
+                      <span className="ml-auto inline-block whitespace-nowrap rounded-full bg-white/10 px-3 py-0.5 text-[13px] text-white font-bold border border-white/20">
                         {srv.price}
                       </span>
                     </div>
-                    <h2 className="text-3xl md:text-4xl font-medium text-white mb-6">
+                    {/* Plafon în vw pe mărimea de bază: neschimbat la 390 px, încape pe ecran la zoom de text 200 %. */}
+                    <h2 className="text-[length:min(1.875rem,9vw)] md:text-4xl font-medium text-white mb-6">
                       <Linie>{srv.title}</Linie>
                     </h2>
+                    {/* Un singur rând în română; într-o limbă cu text mai lung butonul are voie pe două rânduri echilibrate. */}
                     <Link
                       href={srv.href}
-                      className="inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-center text-[11px] font-mono uppercase tracking-wider text-black hover:bg-neutral-200 transition-all font-bold"
+                      data-umami-event="contact-click"
+                      data-umami-event-loc="servicii-card"
+                      className="inline-flex items-center justify-center rounded-full bg-white px-5 lg:px-3 xl:px-5 py-3 text-center text-[13px] leading-snug text-balance font-mono uppercase tracking-normal text-black hover:bg-neutral-200 transition-all font-bold"
                     >
-                      {srv.cta ?? `Cere acest serviciu • ${srv.price} →`}
+                      {srv.cta ?? "Cere acest serviciu →"}
                     </Link>
                   </div>
 
                   <div className="lg:col-span-7 space-y-6">
-                    
+
                     <div>
-                      <div className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-4">
+                      <div className="text-[13px] font-mono uppercase tracking-widest text-neutral-500 mb-4">
                         Ce primești:
                       </div>
-                      <div className="grid sm:grid-cols-1 gap-3">
+                      <div className="grid grid-cols-1 gap-3">
                         {srv.deliverables.map((item) => (
-                          <div key={item} className="flex items-center gap-3 text-xs font-mono text-neutral-300">
+                          <div key={item} className="flex items-center gap-3 text-[13px] font-mono text-neutral-300">
                             <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-white" />
-                            <span>{item}</span>
+                            <span className="min-w-0">{item}</span>
                           </div>
                         ))}
                       </div>
@@ -192,7 +198,7 @@ export default function ServiciiPage() {
       </section>
 
       {/* Banner CTA */}
-      <section className="relative z-10 py-24 px-6 text-center max-w-4xl mx-auto">
+      <section className="relative z-10 py-24 px-[min(1.5rem,6.2vw)] text-center max-w-4xl mx-auto">
         <Reveal>
           <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight mb-6">
             <Linie>Hai să vorbim.</Linie>
@@ -200,16 +206,19 @@ export default function ServiciiPage() {
           <p className="text-neutral-400 text-sm md:text-base leading-relaxed mb-10 max-w-2xl mx-auto">
             <span>Prima evaluare e gratuită.</span> <span>Răspuns în cel mult 24 de ore lucrătoare.</span>
           </p>
+          {/* Pe telefon spațierea literelor și umplutura cedează, ca eticheta să rămână pe un rând și în limbile lungi. */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center rounded-full bg-white px-8 py-3.5 text-xs font-mono uppercase tracking-widest text-black hover:bg-neutral-200 transition-all font-bold"
+              data-umami-event="contact-click"
+              data-umami-event-loc="final"
+              className="inline-flex items-center justify-center rounded-full bg-white px-5 sm:px-8 py-3.5 text-[13px] leading-snug text-balance font-mono uppercase tracking-normal sm:tracking-wider lg:tracking-widest text-black hover:bg-neutral-200 transition-all font-bold"
             >
               Contactează Reverb Digital →
             </Link>
             <Link
               href="/pachete"
-              className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-3.5 text-xs font-mono uppercase tracking-widest text-neutral-300 hover:bg-white/5 transition-all"
+              className="inline-flex items-center justify-center rounded-full border border-white/20 px-5 sm:px-8 py-3.5 text-[13px] leading-snug text-balance font-mono uppercase tracking-normal sm:tracking-wider lg:tracking-widest text-neutral-300 hover:bg-white/5 transition-all"
             >
               Vezi Toate Pachetele
             </Link>

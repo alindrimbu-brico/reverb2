@@ -113,13 +113,13 @@ export default function MagazineOnlinePage() {
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-white/10">
         <div className="absolute inset-0" />
-        <div className="relative mx-auto grid max-w-7xl gap-12 px-6 pt-32 pb-20 lg:grid-cols-[1.1fr_0.9fr] lg:px-10 lg:pt-40 lg:pb-28">
+        <div className="relative mx-auto grid grid-cols-1 max-w-7xl gap-12 px-[min(1.5rem,6.2vw)] pt-32 pb-20 lg:grid-cols-[1.1fr_0.9fr] lg:px-10 lg:pt-40 lg:pb-28">
           <div>
             <Reveal>
-              <div className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-400">Magazin Digital</div>
+              <div className="font-mono text-[13px] uppercase tracking-[0.3em] text-neutral-400">Magazin Digital</div>
             </Reveal>
             <Reveal delay={80}>
-              <h1 className="mt-4 text-5xl font-medium leading-[0.94] tracking-[-0.04em] md:text-6xl lg:text-[72px]">
+              <h1 className="mt-4 text-[length:min(3rem,12.5vw)] font-medium leading-[0.94] tracking-[-0.04em] md:text-6xl lg:text-[72px]">
                 <Linie>Un magazin online construit pentru vânzare.</Linie>
               </h1>
             </Reveal>
@@ -132,7 +132,9 @@ export default function MagazineOnlinePage() {
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                 <Link
                   href="/contact"
-                  className="group inline-flex items-center justify-center rounded-full bg-white px-7 py-4 text-sm font-medium text-black transition hover:-translate-y-0.5 hover:shadow-xl"
+                  data-umami-event="contact-click"
+                  data-umami-event-loc="hero"
+                  className="group inline-flex items-center justify-center rounded-full bg-white px-7 py-4 text-sm font-medium text-black transition hover:shadow-xl"
                 >
                   Programează o discuție
                   <span className="ml-2 transition group-hover:translate-x-1">→</span>
@@ -147,13 +149,14 @@ export default function MagazineOnlinePage() {
             </Reveal>
             <Reveal delay={320}>
               <div className="mt-6 text-sm text-neutral-400">
-                Termeni: 50% avans / 50% la livrare · Livrare 14–30 zile · Preț transparent
+                {/* Termenul vine din registru: pachetul paginii e Magazin Start (cardul de preț de mai jos). */}
+                {`Termeni: 50% avans / 50% la livrare · Livrare ${magazinStart.delivery} · Preț transparent`}
               </div>
             </Reveal>
           </div>
 
           <Reveal delay={200}>
-            <div className="rounded-[30px] border border-white/10 bg-neutral-900/40 p-8 shadow-[0_20px_70px_rgba(29,39,49,0.08)]">
+            <div className="rounded-[30px] border border-white/10 bg-neutral-900/40 p-[min(2rem,8.2vw)] break-words shadow-[0_20px_70px_rgba(29,39,49,0.08)]">
               <div className="text-sm font-semibold text-white mb-5">Ce primești în versiunea standard</div>
               <ul className="space-y-3">
                 {[
@@ -178,16 +181,16 @@ export default function MagazineOnlinePage() {
 
       {/* Pentru cine */}
       <section className="border-b border-white/10 bg-white/[0.02]">
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+        <div className="mx-auto max-w-7xl px-[min(1.5rem,6.2vw)] py-20 lg:px-10 lg:py-28">
           <Reveal>
             <div className="mb-12">
-              <div className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-400">Pentru cine</div>
+              <div className="font-mono text-[13px] uppercase tracking-[0.3em] text-neutral-400">Pentru cine</div>
               <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
                 <Linie>Pentru firme care vor să vândă online serios.</Linie>
               </h2>
             </div>
           </Reveal>
-          <div className="grid gap-5 md:grid-cols-3 tab-blur-group">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-3 tab-blur-group">
             {[
               { title: "Retail & producători", text: "Catalog structurat, checkout rapid, procese simple." },
               { title: "Branduri în creștere", text: "Ai vânzări offline sau pe social, vrei o bază solidă online." },
@@ -200,7 +203,7 @@ export default function MagazineOnlinePage() {
                     style={{ animation: `float-${i % 3 === 0 ? 'a' : i % 3 === 1 ? 'b' : 'c'} ${7 + (i % 3)}s ease-in-out infinite` }}
                   />
                   <div 
-                    className="relative z-10 p-7 transition-all duration-500"
+                    className="relative z-10 p-[min(1.75rem,7.2vw)] break-words transition-all duration-500"
                     style={{ animation: `float-text-${i % 3 === 0 ? 'a' : i % 3 === 1 ? 'b' : 'c'} ${7 + (i % 3)}s ease-in-out infinite` }}
                   >
                     <h3 className="text-lg font-medium text-white">{item.title}</h3>
@@ -214,10 +217,10 @@ export default function MagazineOnlinePage() {
       </section>
 
       {/* Platforma potrivită */}
-      <section className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+      <section className="mx-auto max-w-7xl px-[min(1.5rem,6.2vw)] py-20 lg:px-10 lg:py-28">
         <Reveal>
           <div className="mb-12">
-            <div className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-400">Multiplatformă</div>
+            <div className="font-mono text-[13px] uppercase tracking-[0.3em] text-neutral-400">Multiplatformă</div>
             <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
               <Linie>Platforma potrivită, nu platforma la modă.</Linie>
             </h2>
@@ -239,17 +242,17 @@ export default function MagazineOnlinePage() {
 
       {/* Ce construim concret */}
       <section className="border-y border-white/10 bg-white/[0.02]">
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+        <div className="mx-auto max-w-7xl px-[min(1.5rem,6.2vw)] py-20 lg:px-10 lg:py-28">
           <Reveal>
             <div className="mb-12">
-              <div className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-400">Ce construim</div>
+              <div className="font-mono text-[13px] uppercase tracking-[0.3em] text-neutral-400">Ce construim</div>
               <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
                 <Linie>Un magazin online complet, cu structură de conversie.</Linie>
               </h2>
             </div>
           </Reveal>
 
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4 tab-blur-group">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4 tab-blur-group">
             {included.map((cat, i) => (
               <Reveal key={cat.category} delay={i * 70}>
                 <div className="relative group rounded-3xl h-full">
@@ -258,7 +261,7 @@ export default function MagazineOnlinePage() {
                     style={{ animation: `float-${i % 3 === 0 ? 'a' : i % 3 === 1 ? 'b' : 'c'} ${7 + (i % 3)}s ease-in-out infinite` }}
                   />
                   <div 
-                    className="relative z-10 p-7 transition-all duration-500 h-full"
+                    className="relative z-10 p-[min(1.75rem,7.2vw)] break-words transition-all duration-500 h-full"
                     style={{ animation: `float-text-${i % 3 === 0 ? 'a' : i % 3 === 1 ? 'b' : 'c'} ${7 + (i % 3)}s ease-in-out infinite` }}
                   >
                     <h3 className="text-base font-semibold text-white">{cat.category}</h3>
@@ -279,19 +282,19 @@ export default function MagazineOnlinePage() {
       </section>
 
       {/* Preț */}
-      <section id="pret" className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+      <section id="pret" className="mx-auto max-w-7xl px-[min(1.5rem,6.2vw)] py-20 lg:px-10 lg:py-28">
         <Reveal>
           <div className="mb-12">
-            <div className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-400">Preț transparent</div>
+            <div className="font-mono text-[13px] uppercase tracking-[0.3em] text-neutral-400">Preț transparent</div>
             <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
               <Linie>Punctul de plecare este clar.</Linie>
             </h2>
           </div>
         </Reveal>
 
-        <div className="grid gap-5 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
           <Reveal>
-            <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8">
+            <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-[min(2rem,8.2vw)] break-words">
               <div className="text-sm font-medium text-neutral-400">Pachet de pornire, preț stabilit de la început</div>
               <div className="mt-2 text-sm font-semibold text-white">{magazinStart.name}</div>
               <div className="mt-4 text-4xl font-medium tracking-[-0.04em] text-white">{magazinStart.price} <span className="whitespace-nowrap text-sm font-normal tracking-normal text-neutral-500">{VAT_LABEL}</span></div>
@@ -307,20 +310,22 @@ export default function MagazineOnlinePage() {
               </ul>
               <Link
                 href="/contact"
-                className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-white px-6 py-3.5 text-sm font-medium text-black transition hover:-translate-y-0.5 hover:shadow-lg"
+                data-umami-event="contact-click"
+                data-umami-event-loc="pret"
+                className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-white px-6 py-3.5 text-sm font-medium text-black transition hover:shadow-lg"
               >
                 Solicită ofertă
               </Link>
-              <div className="mt-3 text-center text-xs text-neutral-500">Termeni: 50% avans / 50% la livrare.</div>
-              <div className="mt-2 text-center text-xs text-neutral-400">
+              <div className="mt-3 text-center text-sm text-neutral-500">Termeni: 50% avans / 50% la livrare.</div>
+              <div className="mt-2 text-center text-sm text-neutral-400">
                 Notă: integrare ERP/CRM, import produse, multi-warehouse, funcții custom → ofertă separată.
               </div>
             </div>
           </Reveal>
 
           <Reveal delay={100}>
-            <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8 text-white">
-              <div className="mb-4 inline-block rounded-full bg-white px-3 py-1 text-xs font-medium text-black">
+            <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-[min(2rem,8.2vw)] break-words text-white">
+              <div className="mb-4 inline-block rounded-full bg-white px-3 py-1 text-[13px] font-medium text-black">
                 Opțiune recomandată
               </div>
               <div className="text-lg font-medium">Lansare + Primele 30 zile + Promovare Continuă</div>
@@ -342,7 +347,9 @@ export default function MagazineOnlinePage() {
               </ul>
               <Link
                 href="/contact"
-                className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-white px-6 py-3.5 text-sm font-medium text-black transition hover:-translate-y-0.5 hover:shadow-lg"
+                data-umami-event="contact-click"
+                data-umami-event-loc="pret-recomandat"
+                className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-white px-6 py-3.5 text-sm font-medium text-black transition hover:shadow-lg"
               >
                 Programează discuție
               </Link>
@@ -353,10 +360,10 @@ export default function MagazineOnlinePage() {
 
       {/* Process */}
       <section className="border-y border-white/10 bg-white/[0.02]">
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+        <div className="mx-auto max-w-7xl px-[min(1.5rem,6.2vw)] py-20 lg:px-10 lg:py-28">
           <Reveal>
             <div className="mb-12">
-              <div className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-400">Proces</div>
+              <div className="font-mono text-[13px] uppercase tracking-[0.3em] text-neutral-400">Proces</div>
               <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
                 <Linie>Proces clar în 4 pași.</Linie>
               </h2>
@@ -366,7 +373,7 @@ export default function MagazineOnlinePage() {
             </div>
           </Reveal>
 
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4 tab-blur-group">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4 tab-blur-group">
             {steps.map((s, i) => (
               <Reveal key={s.num} delay={i * 80}>
                 <div className="relative group rounded-3xl h-full">
@@ -375,12 +382,12 @@ export default function MagazineOnlinePage() {
                     style={{ animation: `float-${i % 3 === 0 ? 'a' : i % 3 === 1 ? 'b' : 'c'} ${7 + (i % 3)}s ease-in-out infinite` }}
                   />
                   <div 
-                    className="relative z-10 p-7 transition-all duration-500 h-full flex flex-col"
+                    className="relative z-10 p-[min(1.75rem,7.2vw)] break-words transition-all duration-500 h-full flex flex-col"
                     style={{ animation: `float-text-${i % 3 === 0 ? 'a' : i % 3 === 1 ? 'b' : 'c'} ${7 + (i % 3)}s ease-in-out infinite` }}
                   >
-                    <div className="mb-2 flex items-center justify-between">
+                    <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
                       <div className="text-4xl font-medium tracking-[-0.04em] text-neutral-500">{s.num}</div>
-                      <div className="rounded-full border border-white/10 px-3 py-1 text-xs text-neutral-400">{s.duration}</div>
+                      <div className="whitespace-nowrap rounded-full border border-white/10 px-3 py-1 text-[13px] text-neutral-400">{s.duration}</div>
                     </div>
                     <h3 className="mt-4 text-xl font-medium text-white"><Linie>{s.title}</Linie></h3>
                     <p className="mt-3 text-[15px] leading-7 text-neutral-300">{s.text}</p>
@@ -394,10 +401,10 @@ export default function MagazineOnlinePage() {
 
       {/* FAQ */}
       <section className="bg-white/[0.02]">
-        <div className="mx-auto max-w-5xl px-6 py-20 lg:px-10 lg:py-28">
+        <div className="mx-auto max-w-5xl px-[min(1.5rem,6.2vw)] py-20 lg:px-10 lg:py-28">
           <Reveal>
             <div className="text-center">
-              <div className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-400">FAQ</div>
+              <div className="font-mono text-[13px] uppercase tracking-[0.3em] text-neutral-400">FAQ</div>
               <h2 className="mt-4 text-3xl font-medium tracking-[-0.03em] md:text-5xl">
                 <Linie>Întrebări frecvente</Linie>
               </h2>
@@ -413,7 +420,7 @@ export default function MagazineOnlinePage() {
                     style={{ animation: `float-c ${8 + (i % 2)}s ease-in-out infinite` }}
                   />
                   <div 
-                    className="relative z-10 p-6 md:p-8 transition-all duration-500"
+                    className="relative z-10 p-[min(1.5rem,6.2vw)] md:p-8 break-words transition-all duration-500"
                     style={{ animation: `float-text-c ${8 + (i % 2)}s ease-in-out infinite` }}
                   >
                     <div className="text-lg font-medium text-white">{item.q}</div>
@@ -428,10 +435,10 @@ export default function MagazineOnlinePage() {
 
       {/* Final CTA */}
       <Reveal>
-        <section className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
-          <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-8 text-white md:p-12 lg:p-16">
+        <section className="mx-auto max-w-7xl px-[min(1.5rem,6.2vw)] py-20 lg:px-10 lg:py-28">
+          <div className="rounded-3xl border border-white/10 bg-neutral-900/40 p-[min(2rem,8.2vw)] break-words text-white md:p-12 lg:p-16">
             <div className="mx-auto max-w-3xl text-center">
-              <h2 className="text-3xl font-medium leading-tight tracking-[-0.03em] md:text-5xl">
+              <h2 className="text-[length:min(1.875rem,9vw)] font-medium leading-tight tracking-[-0.03em] md:text-5xl">
                 <Linie>Vrei un magazin online care poate fi scalat și optimizat?</Linie>
               </h2>
               <p className="mt-6 text-lg leading-8 text-neutral-300">
@@ -440,7 +447,9 @@ export default function MagazineOnlinePage() {
               <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-sm font-medium text-black transition hover:-translate-y-0.5 hover:shadow-lg"
+                  data-umami-event="contact-click"
+                  data-umami-event-loc="final"
+                  className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-sm font-medium text-black transition hover:shadow-lg"
                 >
                   Programează o discuție
                 </Link>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -10,9 +10,17 @@ import SolarBackground from "@/components/SolarBackground";
 import CookieConsent from "@/components/CookieConsent";
 import { SITE_URL, TITLE_TEMPLATE } from "@/lib/seo";
 
-const geist = Geist({ subsets: ["latin"], variable: "--font-geist-sans" });
+// `latin-ext` ține diacriticele românești (ș, ț, ă) în fișierul preîncărcat, nu într-unul cerut după prima vopsire.
+const geist = Geist({ subsets: ["latin", "latin-ext"], variable: "--font-geist-sans" });
+// Fontul mono al agenției (25 nov 2026). Până acum `font-mono` cădea pe fontul sistemului (Consolas / SF Mono), diferit pe
+// fiecare calculator. Variabila ajunge în `--font-mono` din app/globals.css; machetele, Studio și raportul Humanoid rămân pe lista veche.
+const geistMono = Geist_Mono({ subsets: ["latin", "latin-ext"], variable: "--font-geist-mono" });
 
-const ogImage = { url: "/og.jpg", width: 1200, height: 630, alt: "Reverb" };
+// Numele imaginii trebuie să se termine în `og.jpg` (scripts/check-seo.mjs).
+const ogImage = { url: "/reverb-2026-og.jpg", width: 1200, height: 630, alt: "Reverb Digital: site-uri și magazine online" };
+const SHARE_TITLE = "Reverb — site-uri și magazine online";
+const SHARE_DESCRIPTION =
+  "Site-uri și magazine online, de la lansare la scalare. Prețuri clare și termen stabilit înainte de început.";
 
 export const metadata: Metadata = {
   title: { default: "Reverb — Structură, execuție, rezultate", template: TITLE_TEMPLATE },
@@ -24,16 +32,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "ro_RO",
     siteName: "Reverb",
-    title: "Reverb — Structură, execuție, rezultate",
-    description:
-      "Ecosisteme digitale executate cu inginerie robustă, comunicate cu claritate umană pură.",
+    title: SHARE_TITLE,
+    description: SHARE_DESCRIPTION,
     images: [ogImage],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Reverb — Structură, execuție, rezultate",
-    description:
-      "Ecosisteme digitale executate cu inginerie robustă, comunicate cu claritate umană pură.",
+    title: SHARE_TITLE,
+    description: SHARE_DESCRIPTION,
     images: [ogImage.url],
   },
   robots: {
@@ -68,9 +74,9 @@ const jsonLd = {
       name: "Reverb",
       alternateName: ["Reverb.ro", "Reverb Digital"],
       url: SITE_URL,
-      logo: `${SITE_URL}/og.jpg`,
-      description:
-        "Ecosisteme digitale executate cu inginerie robustă, comunicate cu claritate umană pură.",
+      logo: `${SITE_URL}/icon-512.png`,
+      image: `${SITE_URL}${ogImage.url}`,
+      description: SHARE_DESCRIPTION,
       address: {
         "@type": "PostalAddress",
         streetAddress: "Str. Măgura 57 F",
@@ -102,11 +108,18 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ro" className={geist.variable} suppressHydrationWarning>
+    <html lang="ro" className={`${geist.variable} ${geistMono.variable}`} suppressHydrationWarning>
       <body suppressHydrationWarning>
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){
+  // Tema aleasă se pune pe <html> înaintea primei vopsiri (altfel pagina clipea întâi pe negru). Rulează pe orice pagină,
+  // inclusiv în Studio și pe machete; bara (components/Header.tsx) doar își potrivește starea după clasa pusă aici.
+  try {
+    var t = localStorage.getItem('reverb_theme') === 'light' ? 'light' : 'dark';
+    var c = document.documentElement.classList;
+    c.add(t); c.remove(t === 'light' ? 'dark' : 'light');
+  } catch(err) { document.documentElement.classList.add('dark'); }
   window.__reverbDeferredPrompt = null;
   window.addEventListener('beforeinstallprompt', function(e) {
     e.preventDefault();

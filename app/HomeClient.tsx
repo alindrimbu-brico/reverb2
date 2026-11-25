@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import WhoWeAre from "@/components/WhoWeAre";
 import WorkShots from "@/components/WorkShots";
@@ -91,7 +91,7 @@ const sounds = new SoundEngine();
 // ── Lucrările Reverb (lista unică din lib/liveProjects.ts) ──
 const realProjects = liveProjectsRo;
 
-// Trei lucrări arătate cu poză imediat sub primul ecran (aceleași ca pe /pachete; pozele sunt în components/WorkShots.tsx).
+// Trei lucrări arătate cu poză imediat sub primul ecran (aceleași ca pe /pachete; pozele sunt în harta SHOTS din lib/liveProjects.ts).
 const lucrari = ["Bricolando.ro", "RaftPlin.ro", "Kalki.nexus"].map((n) => realProjects.find((p) => p.name === n)).filter((p) => !!p);
 
 // „aproximativ 1.730 lei cu TVA” → „aproximativ 1.730 lei” (rândul de sub prețuri spune o singură dată că e cu TVA).
@@ -111,29 +111,13 @@ const FILTRE: { label: string; badges?: string[] }[] = [
 const tip = (badge: string) => FILTRE.find((f) => f.badges?.includes(badge))?.label ?? badge;
 
 export default function HomePage() {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [selectedPreview, setSelectedPreview] = useState<PreviewProject | null>(null);
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
-
-
+  // Fără lumina de sub cursor (facelift, 25 nov 2026): dubla munca procesorului la fiecare mișcare a mouse-ului
+  // și redesena toată pagina. Fără înclinarea cardurilor, linia „laser”, eticheta care sare și spațierea animată (clasele mech-card,
+  // mech-scanline, mech-badge, mech-telemetry); magnetul și ridicarea butoanelor rămân.
   return (
     <div className="relative bg-[#070809] text-neutral-100 min-h-screen font-sans selection:bg-neutral-700 selection:text-white overflow-x-hidden antialiased">
-      
-      {/* ── Grila de fundal și lumina de sub cursor ── */}
-      <div
-        className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300"
-        style={{
-          background: `radial-gradient(750px circle at ${mousePos.x}px ${mousePos.y}px, rgba(255, 255, 255, 0.04), transparent 80%)`,
-        }}
-      />
-
 
       {/* Ambient Radial Vignette */}
       <div className="fixed inset-0 pointer-events-none z-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.03)_0%,transparent_70%)]" />
@@ -158,7 +142,7 @@ export default function HomePage() {
           {/* De la cât pornește fiecare (din registru). Un singur șir, ca traducerea să nu se facă pe bucăți. */}
           <p className="mt-7 max-w-2xl text-sm md:text-base text-white leading-relaxed">
             {`Site de la ${siteStart.price} · magazin online de la ${magazinStart.price} · clipuri de la ${social.price}`}
-            <span className="block mt-1 text-xs text-neutral-400 font-light">{`Prețuri fără TVA. În lei, cu TVA inclus: site de la ${lei(siteStart.price)}, magazin de la ${lei(magazinStart.price)}.`}</span>
+            <span className="block mt-1 text-[13px] leading-snug text-neutral-400 font-light">{`Prețuri fără TVA. În lei, cu TVA inclus: site de la ${lei(siteStart.price)}, magazin de la ${lei(magazinStart.price)}.`}</span>
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row gap-4 items-center">
@@ -166,26 +150,30 @@ export default function HomePage() {
               href="/contact"
               onMouseEnter={() => sounds.playHover()}
               onClick={() => sounds.playClick()}
-              className="rounded-full bg-white px-8 py-3.5 text-xs font-mono uppercase tracking-widest text-black hover:bg-neutral-200 transition-all hover:scale-105 shadow-[0_0_30px_rgba(255,255,255,0.15)] font-bold"
+              data-umami-event="contact-click"
+              data-umami-event-loc="hero"
+              className="rounded-full bg-white px-5 sm:px-8 py-3.5 text-center text-[13px] leading-snug text-balance font-mono uppercase tracking-wide sm:tracking-widest text-black hover:bg-neutral-200 transition-all shadow-[0_0_30px_rgba(255,255,255,0.15)] font-bold"
             >
-              Discută Proiectul Tău →
+              Discută Proiectul Tău&nbsp;→
             </Link>
             <a
               href="#pachete"
               onMouseEnter={() => sounds.playHover()}
               onClick={() => sounds.playClick()}
-              className="rounded-full border border-white/15 bg-white/5 backdrop-blur-md px-8 py-3.5 text-xs font-mono uppercase tracking-widest text-neutral-300 hover:bg-white/10 hover:text-white transition-all"
+              className="rounded-full border border-white/15 bg-white/5 backdrop-blur-md px-5 sm:px-8 py-3.5 text-center text-[13px] leading-snug text-balance font-mono uppercase tracking-wide sm:tracking-widest text-neutral-300 hover:bg-white/10 hover:text-white transition-all"
             >
-              Vezi pachetele și prețurile ↓
+              Vezi pachetele și prețurile&nbsp;↓
             </a>
           </div>
 
           {/* Contactul rapid: un singur număr, scris o dată (WhatsApp → mesaj, numărul → apel). */}
-          <div className="mt-6 flex items-center justify-center gap-3 text-[11px] font-mono text-neutral-400">
+          <div className="mt-6 flex items-center justify-center gap-3 text-[13px] font-mono text-neutral-400">
             <a
               href="https://wa.me/40767235693?text=Salut,%20vreau%20o%20discuție%20pentru%20un%20proiect%20cu%20Reverb%20Digital"
               target="_blank"
               rel="noopener noreferrer"
+              data-umami-event="whatsapp-click"
+              data-umami-event-loc="hero"
               className="inline-flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 transition-colors"
             >
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
@@ -203,24 +191,30 @@ export default function HomePage() {
 
           {/* Patru piloni (Alin, 15 nov 2026: fără „N proiecte” și „Preț fix”; forma după agențiile mari și Zylaris Group: un cuvânt + o frază).
               Termenele vin din registru (un singur șir pe frază, pentru traducere); cele 30 de zile și SLA-ul sunt în textele pachetelor.
-              Aceleași patru și în app/en/HomeClientEn.tsx. */}
-          <div className="mt-20 pt-10 border-t border-white/10 w-full grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8 text-center">
-            <div>
+              Aceleași patru și în app/en/HomeClientEn.tsx.
+              Coloanele se aleg după lățimea rândului măsurată în rem (container query), nu după ecran: la mărimea normală a textului
+              rămân 2 coloane pe telefon și 4 de la 768 px (45rem = 720 px de rând = ecran de 768 px minus marginile px-6), iar la zoom
+              de text 200 % (rem dublat) cuvântul „Strategie” nu mai e înghesuit într-o celulă de 123 px: trece pe o coloană (P0 Z2,
+              rapoarte/breakui_limbi.md). */}
+          <div className="@container mt-20 w-full">
+          <div className="pt-10 border-t border-white/10 w-full grid grid-cols-1 @min-[19rem]:grid-cols-2 @min-[45rem]:grid-cols-4 gap-x-6 gap-y-8 text-center">
+            <div className="min-w-0">
               <div className="font-mono text-xl md:text-2xl font-light text-white mb-2">Strategie</div>
-              <p className="mx-auto max-w-[15rem] text-balance text-xs leading-relaxed text-neutral-400 font-light">Consultanță la pornirea afacerii: de la idee la planul de lansare.</p>
+              <p className="mx-auto max-w-[15rem] text-balance text-sm leading-relaxed text-neutral-400 font-light">Consultanță la pornirea afacerii: de la idee la planul de lansare.</p>
             </div>
-            <div>
+            <div className="min-w-0">
               <div className="font-mono text-xl md:text-2xl font-light text-white mb-2">Lansare</div>
-              <p className="mx-auto max-w-[15rem] text-balance text-xs leading-relaxed text-neutral-400 font-light">{`Site în ${siteStart.delivery}, magazin online în ${magazinStart.delivery}.`}</p>
+              <p className="mx-auto max-w-[15rem] text-balance text-sm leading-relaxed text-neutral-400 font-light">{`Site în ${siteStart.delivery}, magazin online în ${magazinStart.delivery}.`}</p>
             </div>
-            <div>
+            <div className="min-w-0">
               <div className="font-mono text-xl md:text-2xl font-light text-white mb-2">Scalare</div>
-              <p className="mx-auto max-w-[15rem] text-balance text-xs leading-relaxed text-neutral-400 font-light">Proiecte mari: arhitectură dedicată, SLA prin contract.</p>
+              <p className="mx-auto max-w-[15rem] text-balance text-sm leading-relaxed text-neutral-400 font-light">Proiecte mari: arhitectură dedicată, SLA prin contract.</p>
             </div>
-            <div>
+            <div className="min-w-0">
               <div className="font-mono text-xl md:text-2xl font-light text-white mb-2">Susținere</div>
-              <p className="mx-auto max-w-[15rem] text-balance text-xs leading-relaxed text-neutral-400 font-light">30 de zile incluse, apoi mentenanță și consultanță continuă.</p>
+              <p className="mx-auto max-w-[15rem] text-balance text-sm leading-relaxed text-neutral-400 font-light">30 de zile incluse, apoi mentenanță și consultanță continuă.</p>
             </div>
+          </div>
           </div>
 
         </div>
@@ -228,55 +222,60 @@ export default function HomePage() {
 
       {/* ── Trei lucrări cu poză, imediat sub primul ecran, și cartea de vizită a agenției (Alin, 14 nov 2026: doar date). ── */}
       <section className="relative z-10 py-16 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
-        <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500">În administrare</div>
+        <div className="text-[13px] font-mono uppercase tracking-[0.14em] text-neutral-500">În administrare</div>
         <WorkShots items={lucrari} />
         <div className="mt-4 flex flex-wrap gap-2.5">
-          <Link href="/portofoliu" className="rounded-full bg-white px-4 py-2 text-xs font-mono font-bold text-black transition hover:bg-neutral-200">Tot portofoliul →</Link>
-          <Link href="/showcase" className="rounded-full border border-white/20 px-4 py-2 text-xs font-mono text-neutral-200 transition hover:bg-white hover:text-black">Galeria de concepte →</Link>
+          <Link href="/portofoliu" className="rounded-full bg-white px-4 py-2 text-[13px] font-mono font-bold text-black transition hover:bg-neutral-200">Tot portofoliul&nbsp;→</Link>
+          <Link href="/showcase" className="rounded-full border border-white/20 px-4 py-2 text-[13px] font-mono text-neutral-200 transition hover:bg-white hover:text-black">Galeria de concepte&nbsp;→</Link>
         </div>
         <div className="mt-8 border-t border-white/10 pt-6">
-          <div className="mb-3 text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500">Cine suntem</div>
+          <div className="mb-3 text-[13px] font-mono uppercase tracking-[0.14em] text-neutral-500">Cine suntem</div>
           <WhoWeAre />
         </div>
       </section>
 
       {/* ── Cum lucrăm: patru pași ── */}
-      <section id="how-we-operate" className="scroll-mt-16 relative z-20 py-28 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
+      {/* Grilele de carduri de mai jos (Cum lucrăm, Prețuri, Software, Portofoliu) își aleg coloanele după lățimea secțiunii
+          măsurată în rem (@container), nu după ecran: la mărimea normală a textului e aceeași așezare ca azi (45rem = 720 px de
+          conținut = ecran de 768 px; 59rem = 944 px = ecran de 1024 px), iar la zoom de text 200 % cardurile trec pe mai puține
+          coloane în loc să se strivească (cuvinte ieșite din card, breakui_limbi.md). Pe telefon cardurile de aici, de la prețuri și
+          caseta AI au marginea interioară în px (p-[32px] = p-8 de azi): nu se dublează la zoom de text, ca titlurile să încapă. */}
+      <section id="how-we-operate" className="@container scroll-mt-16 relative z-20 py-28 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
 
         <h2 className="mb-14 text-3xl md:text-5xl font-light text-white tracking-tight leading-tight">
           <Linie>Cum lucrăm.</Linie>
         </h2>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-6 @min-[45rem]:grid-cols-2 @min-[59rem]:grid-cols-4">
 
-          <div className="mech-card rounded-2xl border border-white/10 bg-neutral-900/30 p-8">
-            <div className="font-mono text-xs text-neutral-500 mb-6">/ 01 — DISCUTĂM</div>
+          <div className="relative rounded-2xl border border-white/10 bg-neutral-900/30 p-[32px]">
+            <div className="font-mono text-[13px] text-neutral-500 mb-6">/ 01 — DISCUTĂM</div>
             <h3 className="text-xl font-medium text-white mb-3"><Linie>Ce ai nevoie</Linie></h3>
-            <p className="text-xs text-neutral-400 leading-relaxed font-light">
+            <p className="text-sm text-neutral-400 leading-relaxed font-light">
               De la tine: texte și poze. De la noi: termenul și prețul, stabilite înainte de început.
             </p>
           </div>
 
-          <div className="mech-card rounded-2xl border border-white/10 bg-neutral-900/30 p-8">
-            <div className="font-mono text-xs text-neutral-500 mb-6">/ 02 — CONSTRUIM</div>
+          <div className="relative rounded-2xl border border-white/10 bg-neutral-900/30 p-[32px]">
+            <div className="font-mono text-[13px] text-neutral-500 mb-6">/ 02 — CONSTRUIM</div>
             <h3 className="text-xl font-medium text-white mb-3"><Linie>Site-ul sau magazinul</Linie></h3>
-            <p className="text-xs text-neutral-400 leading-relaxed font-light">
+            <p className="text-sm text-neutral-400 leading-relaxed font-light">
               {`Site: ${siteStart.delivery}. Magazin: ${magazinStart.delivery}. Plată: jumătate la început, jumătate la predare.`}
             </p>
           </div>
 
-          <div className="mech-card rounded-2xl border border-white/10 bg-neutral-900/30 p-8">
-            <div className="font-mono text-xs text-neutral-500 mb-6">/ 03 — PROMOVĂM</div>
+          <div className="relative rounded-2xl border border-white/10 bg-neutral-900/30 p-[32px]">
+            <div className="font-mono text-[13px] text-neutral-500 mb-6">/ 03 — PROMOVĂM</div>
             <h3 className="text-xl font-medium text-white mb-3"><Linie>Clipuri, dacă le vrei</Linie></h3>
-            <p className="text-xs text-neutral-400 leading-relaxed font-light">
+            <p className="text-sm text-neutral-400 leading-relaxed font-light">
               Clipuri video pentru rețelele sociale. Pachete separate, cu plată lunară.
             </p>
           </div>
 
-          <div className="mech-card rounded-2xl border border-white/10 bg-neutral-900/30 p-8">
-            <div className="font-mono text-xs text-neutral-500 mb-6">/ 04 — RĂMÂNEM</div>
+          <div className="relative rounded-2xl border border-white/10 bg-neutral-900/30 p-[32px]">
+            <div className="font-mono text-[13px] text-neutral-500 mb-6">/ 04 — RĂMÂNEM</div>
             <h3 className="text-xl font-medium text-white mb-3"><Linie>30 de zile lângă tine</Linie></h3>
-            <p className="text-xs text-neutral-400 leading-relaxed font-light">
+            <p className="text-sm text-neutral-400 leading-relaxed font-light">
               Sprijin pe WhatsApp, la telefon sau față în față.
             </p>
           </div>
@@ -285,7 +284,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Pachete și prețuri: site-urile întâi, apoi clipurile (ca pe /pachete) ── */}
-      <section id="pachete" className="scroll-mt-16 py-24 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
+      <section id="pachete" className="@container scroll-mt-16 py-24 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
 
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div>
@@ -293,24 +292,27 @@ export default function HomePage() {
               <Linie>Prețuri clare.</Linie>
             </h2>
           </div>
-          <p className="max-w-md text-xs md:text-sm text-neutral-400 font-light leading-relaxed">
+          <p className="max-w-md text-sm text-neutral-400 font-light leading-relaxed">
             Pachetele se adaptează proiectului tău. Prețul stabilit la început nu se mai schimbă: orice lucru în plus îl aprobi tu înainte, cu prețul lui. Fără contract obligatoriu pe 12 luni. {VAT_NOTE}
           </p>
         </div>
 
-        <div className="rounded-3xl border border-white/10 bg-[#070809] grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-white/10 overflow-hidden">
+        {/* Fiecare card își împarte rândurile cu vecinii (grid-rows-subgrid, 5 rânduri: eticheta, titlul, prețul, lista, butonul):
+            când eticheta mărită la 13 px trece pe două rânduri într-o coloană, titlurile, prețurile și butoanele rămân aliniate
+            (breakui_limbi.md, tiparul 4). */}
+        <div className="rounded-3xl border border-white/10 bg-[#070809] grid grid-cols-1 @min-[59rem]:grid-cols-3 divide-y @min-[59rem]:divide-y-0 @min-[59rem]:divide-x divide-white/10 overflow-hidden">
 
           {/* Coloana 1: Site sau magazin online (prețurile vin din lib/packages.ts) */}
-          <div className="mech-card mech-scanline p-8 lg:p-10 flex flex-col justify-between bg-white/[0.01] hover:bg-white/[0.02] transition-colors">
-            <div>
-              <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500 mb-4">
+          <div className="relative p-[32px] lg:p-10 grid grid-cols-[minmax(0,1fr)] grid-rows-subgrid row-span-5 bg-white/[0.01] hover:bg-white/[0.02] transition-colors">
+              <div className="text-[13px] leading-snug font-mono uppercase tracking-[0.14em] text-neutral-500 mb-4">
                 01 / Site-uri și magazine
               </div>
-              <h3 className="text-2xl font-light text-white mb-2"><Linie>Site sau Magazin Online</Linie></h3>
+              <h3 className="text-2xl font-light text-white mb-2"><Linie>Site sau magazin online</Linie></h3>
+              {/* Prețul și „+ TVA” nu se despart pe două rânduri (breakui_limbi.md, tiparul 5). */}
               <div className="text-4xl font-light text-white tracking-tight mb-4">
-                <span className="text-xs font-mono text-neutral-500">de la</span> {siteStart.price} <span className="text-xs font-mono text-neutral-500">{VAT_LABEL}</span>
+                <span className="text-[13px] font-mono text-neutral-500">de la</span> <span className="whitespace-nowrap">{siteStart.price} <span className="text-[13px] font-mono text-neutral-500">{VAT_LABEL}</span></span>
               </div>
-              <div className="space-y-3 font-mono text-xs text-neutral-300 border-t border-white/5 pt-6 mb-8">
+              <div className="space-y-3 font-mono text-[13px] text-neutral-300 border-t border-white/5 pt-6 mb-8">
                 <div className="flex items-start gap-2">
                   <span className="text-neutral-500">—</span>
                   <span>{siteStart.name}: {siteStart.price}, {noBreak(`în ${siteStart.delivery}`)}</span>
@@ -341,28 +343,26 @@ export default function HomePage() {
                   <span>Magazin complet + 30 de clipuri: {magazinVideo.price}</span>
                 </div>
               </div>
-            </div>
 
             <Link
               href="/pachete#web"
               onClick={() => sounds.playClick()}
-              className="mech-magnetic mech-btn block w-full text-center rounded-full px-4 border border-white/20 py-3 text-xs font-mono uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all"
+              className="mech-magnetic mech-btn self-end block w-full text-center rounded-full px-4 border border-white/20 py-3 text-[13px] font-mono uppercase leading-snug text-balance tracking-wide lg:tracking-normal xl:tracking-widest text-white hover:bg-white hover:text-black transition-all"
             >
-              Vezi toate pachetele →
+              Vezi toate pachetele&nbsp;→
             </Link>
           </div>
 
           {/* Coloana 2: Social Growth (descrierea și punctele din registru) */}
-          <div className="mech-card mech-scanline p-8 lg:p-10 flex flex-col justify-between bg-white/[0.01] hover:bg-white/[0.02] transition-colors">
-            <div>
-              <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-500 mb-4">
+          <div className="relative p-[32px] lg:p-10 grid grid-cols-[minmax(0,1fr)] grid-rows-subgrid row-span-5 bg-white/[0.01] hover:bg-white/[0.02] transition-colors">
+              <div className="text-[13px] leading-snug font-mono uppercase tracking-[0.14em] text-neutral-500 mb-4">
                 02 / Clipuri, de 3 ori pe săptămână
               </div>
               <h3 className="text-2xl font-light text-white mb-2"><Linie>Social Growth</Linie></h3>
               <div className="text-4xl font-light text-white tracking-tight mb-4">
-                {pretSocial.amount} <span className="text-xs font-mono text-neutral-500">{pretSocial.period} {VAT_LABEL}</span>
+                {pretSocial.amount} <span className="whitespace-nowrap text-[13px] font-mono text-neutral-500">{pretSocial.period} {VAT_LABEL}</span>
               </div>
-              <div className="space-y-3 font-mono text-xs text-neutral-300 border-t border-white/5 pt-6 mb-8">
+              <div className="space-y-3 font-mono text-[13px] text-neutral-300 border-t border-white/5 pt-6 mb-8">
                 {social.includes.slice(0, 4).map((punct) => (
                   <div key={punct} className="flex items-start gap-2">
                     <span className="text-neutral-500">—</span>
@@ -370,33 +370,33 @@ export default function HomePage() {
                   </div>
                 ))}
               </div>
-            </div>
 
             <Link
               href="/contact?pachet=social-growth"
               onClick={() => sounds.playClick()}
-              className="mech-magnetic mech-btn block w-full text-center rounded-full px-4 border border-white/20 py-3 text-xs font-mono uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all"
+              data-umami-event="contact-click"
+              data-umami-event-loc="pachete-card"
+              className="mech-magnetic mech-btn self-end block w-full text-center rounded-full px-4 border border-white/20 py-3 text-[13px] font-mono uppercase leading-snug text-balance tracking-wide lg:tracking-normal xl:tracking-widest text-white hover:bg-white hover:text-black transition-all"
             >
-              Cere acest pachet →
+              Cere acest pachet&nbsp;→
             </Link>
           </div>
 
           {/* Coloana 3: Daily Impact • RECOMANDAT (descrierea și punctele din registru) */}
-          <div className="mech-card mech-scanline p-8 lg:p-10 flex flex-col justify-between bg-neutral-900/40 relative">
-            <div>
-              <div className="flex items-center justify-between gap-3 mb-4">
-                <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-neutral-400">
+          <div className="p-[32px] lg:p-10 grid grid-cols-[minmax(0,1fr)] grid-rows-subgrid row-span-5 bg-neutral-900/40 relative">
+              <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2 mb-4">
+                <span className="text-[13px] leading-snug font-mono uppercase tracking-[0.14em] text-neutral-400">
                   03 / Un clip în fiecare zi
                 </span>
-                <span className="mech-badge shrink-0 text-[9px] font-mono font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-white text-black">
+                <span className="shrink-0 text-[13px] font-mono font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-white text-black">
                   Recomandat
                 </span>
               </div>
               <h3 className="text-2xl font-light text-white mb-2"><Linie>Daily Impact</Linie></h3>
               <div className="text-4xl font-light text-white tracking-tight mb-4">
-                {pretDaily.amount} <span className="text-xs font-mono text-neutral-400">{pretDaily.period} {VAT_LABEL}</span>
+                {pretDaily.amount} <span className="whitespace-nowrap text-[13px] font-mono text-neutral-400">{pretDaily.period} {VAT_LABEL}</span>
               </div>
-              <div className="space-y-3 font-mono text-xs text-neutral-200 border-t border-white/10 pt-6 mb-8">
+              <div className="space-y-3 font-mono text-[13px] text-neutral-200 border-t border-white/10 pt-6 mb-8">
                 {daily.includes.slice(0, 4).map((punct) => (
                   <div key={punct} className="flex items-start gap-2">
                     <span className="text-emerald-400">★</span>
@@ -404,24 +404,27 @@ export default function HomePage() {
                   </div>
                 ))}
               </div>
-            </div>
 
             <Link
               href="/contact?pachet=daily-impact"
               onClick={() => sounds.playClick()}
-              className="mech-magnetic mech-btn block w-full text-center rounded-full px-4 bg-white py-3 text-xs font-mono font-bold uppercase tracking-widest text-black hover:bg-neutral-200 transition-all shadow-md"
+              data-umami-event="contact-click"
+              data-umami-event-loc="pachete-card"
+              className="mech-magnetic mech-btn self-end block w-full text-center rounded-full px-4 bg-white py-3 text-[13px] font-mono font-bold uppercase leading-snug text-balance tracking-wide lg:tracking-normal xl:tracking-widest text-black hover:bg-neutral-200 transition-all shadow-md"
             >
-              Cere acest pachet →
+              Cere acest pachet&nbsp;→
             </Link>
           </div>
 
         </div>
 
-        {/* Firma care are deja site (Alin, 15 nov 2026: „și pentru afaceri deja începute”). Textul și prețul din registru, un singur șir. */}
-        <div className="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/[0.02] px-6 py-4 text-xs text-neutral-400">
-          <div>{`Ai deja site? ${vizibilLocal.tagline} Pachetul ${vizibilLocal.name}, de la ${vizibilLocal.price} ${VAT_LABEL}.`}</div>
-          <Link href="/servicii" className="shrink-0 font-mono font-bold text-white hover:underline">
-            Vezi serviciile →
+        {/* Firma care are deja site (Alin, 15 nov 2026: „și pentru afaceri deja începute”). Textul și prețul din registru, un singur șir.
+            Spațiul nedespărțit dinaintea lui „+ TVA” îl ține lângă preț (VAT_LABEL are deja unul înăuntru); spațiile nedespărțite
+            se strâng la traducere (`norm` din lib/i18n/store.ts), deci cheia de traducere rămâne aceeași. */}
+        <div className="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/[0.02] px-6 py-4 text-sm text-neutral-400">
+          <div>{`Ai deja site? ${vizibilLocal.tagline} Pachetul ${vizibilLocal.name}, de la ${vizibilLocal.price}\u00a0${VAT_LABEL}.`}</div>
+          <Link href="/servicii" className="shrink-0 text-[13px] font-mono font-bold text-white hover:underline">
+            Vezi serviciile&nbsp;→
           </Link>
         </div>
 
@@ -429,7 +432,7 @@ export default function HomePage() {
 
       {/* ── Software propriu (Alin, 15 nov 2026: aplicațiile noastre nu erau evidențiate; ca Labs / Deptify la agențiile mari).
           Datele și sursa fiecărei afirmații: lib/ownProducts.ts. Aceeași secțiune în app/en/HomeClientEn.tsx. ── */}
-      <section id="software" className="scroll-mt-24 relative z-10 py-24 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
+      <section id="software" className="@container scroll-mt-24 relative z-10 py-24 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
             <Linie>Software propriu.</Linie>
@@ -438,21 +441,21 @@ export default function HomePage() {
             href="https://kalki.work"
             target="_blank"
             rel="noopener noreferrer"
-            className="shrink-0 self-start md:self-auto rounded-full border border-white/20 px-4 py-2 text-xs font-mono text-neutral-200 transition hover:bg-white hover:text-black"
+            className="shrink-0 self-start md:self-auto rounded-full border border-white/20 px-4 py-2 text-[13px] font-mono text-neutral-200 transition hover:bg-white hover:text-black"
           >
             <span data-no-translate>Kalki Work</span> ↗
           </a>
         </div>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 @min-[45rem]:grid-cols-3">
           {OWN_PRODUCTS.map((p) => (
-            <div key={p.name} className="mech-card rounded-2xl border border-white/10 bg-neutral-900/30 p-8 flex flex-col justify-between">
+            <div key={p.name} className="relative rounded-2xl border border-white/10 bg-neutral-900/30 p-[32px] flex flex-col justify-between [overflow-wrap:break-word]">
               <div>
-                <div className="font-mono text-xs text-neutral-500 mb-6">{p.label.ro}</div>
+                <div className="font-mono text-[13px] text-neutral-500 mb-6">{p.label.ro}</div>
                 <h3 className="text-xl font-medium text-white mb-3" {...(p.isName ? { "data-no-translate": "" } : {})}>
                   {p.isName ? p.name : <Linie>{p.name}</Linie>}
                 </h3>
-                <p className="text-xs text-neutral-400 leading-relaxed font-light">{p.desc.ro}</p>
-                {p.where && <p className="mt-3 text-xs text-neutral-400 font-light">{p.where.ro}</p>}
+                <p className="text-sm text-neutral-400 leading-relaxed font-light">{p.desc.ro}</p>
+                {p.where && <p className="mt-3 text-sm text-neutral-400 font-light">{p.where.ro}</p>}
               </div>
               {p.href && (
                 <a
@@ -460,7 +463,7 @@ export default function HomePage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${p.name} pe kalki.work`}
-                  className="mt-6 self-start text-[11px] font-mono text-neutral-400 hover:text-white transition-colors"
+                  className="mt-6 self-start text-[13px] font-mono text-neutral-400 hover:text-white transition-colors"
                 >
                   kalki.work ↗
                 </a>
@@ -473,18 +476,19 @@ export default function HomePage() {
       {/* ── Cum caută oamenii acum: asistenții AI ── */}
       <section id="ai-search-geo" className="scroll-mt-16 relative z-20 py-28 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
 
-        <div className="rounded-3xl border border-white/15 bg-gradient-to-b from-neutral-900/40 via-neutral-950/70 to-neutral-900/30 p-8 md:p-14 backdrop-blur-md">
+        <div className="rounded-3xl border border-white/15 bg-gradient-to-b from-neutral-900/40 via-neutral-950/70 to-neutral-900/30 p-[32px] md:p-14 backdrop-blur-md">
 
-          <h2 className="max-w-3xl text-3xl md:text-5xl font-light text-white tracking-tight leading-tight">
+          {/* min(1.875rem, 8vw): 30 px pe telefon ca azi (de la 375 px în sus); la zoom de text 200 % titlul nu mai depășește caseta. */}
+          <h2 className="max-w-3xl text-[length:min(1.875rem,8vw)] md:text-5xl font-light text-white tracking-tight leading-tight">
             <Linie>În 2026, clienții nu mai caută doar pe Google.</Linie><br />
             <span className="text-neutral-400"><Linie>Întreabă și asistenții AI.</Linie></span>
           </h2>
 
           {/* În ce pachete intră (numele din registru) și unde se cere separat. Un singur șir. */}
-          <div className="mt-10 pt-8 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs text-neutral-400">
+          <div className="mt-10 pt-8 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-sm text-neutral-400">
             <div>{`Intră în pachetele ${siteVideo.name} și ${magazinVideo.name}. Se poate face și separat, pentru orice site.`}</div>
-            <Link href="/servicii" className="shrink-0 font-mono font-bold text-white hover:underline">
-              Vezi serviciile →
+            <Link href="/servicii" className="shrink-0 text-[13px] font-mono font-bold text-white hover:underline">
+              Vezi serviciile&nbsp;→
             </Link>
           </div>
 
@@ -492,24 +496,24 @@ export default function HomePage() {
       </section>
 
       {/* ── Portofoliul (Alin, 14 nov 2026: „portofoliu scurt… pure data”) ── */}
-      <section id="proiecte" className="scroll-mt-16 py-28 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
+      <section id="proiecte" className="@container scroll-mt-16 py-28 px-6 lg:px-10 max-w-7xl mx-auto border-b border-white/10">
 
         <h2 className="mb-12 text-3xl md:text-5xl font-light text-white tracking-tight">
           <Linie>Portofoliu.</Linie>
         </h2>
 
         {/* grid-cols-1 explicit: fără el, coloana implicită se lățește după textul netăiat și cardul iese din ecran pe telefon */}
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 @min-[45rem]:grid-cols-2 @min-[59rem]:grid-cols-3">
           {lucrariAlese.map((p) => (
             <div
               key={p.name}
               onMouseEnter={() => sounds.playHover()}
               onClick={() => { setSelectedPreview(p); sounds.playClick(); }}
-              className="mech-card mech-float-card group cursor-pointer rounded-2xl border border-white/10 bg-neutral-900/20 p-8 flex flex-col justify-between hover:border-white/30 hover:bg-neutral-900/40 transition-all duration-300 shadow-sm hover:shadow-xl"
+              className="relative mech-float-card group cursor-pointer rounded-2xl border border-white/10 bg-neutral-900/20 p-8 flex flex-col justify-between [overflow-wrap:break-word] hover:border-white/30 hover:bg-neutral-900/40 transition-all duration-300 shadow-sm hover:shadow-xl"
             >
               <div>
                 {/* Starea are rândul ei și se poate rupe (traducerile lungi nu ies din card). */}
-                <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-[10px] font-mono uppercase tracking-wider mb-6">
+                <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-[13px] leading-snug font-mono uppercase tracking-wider mb-6">
                   <span className="inline-flex items-center gap-1.5 text-neutral-300">
                     <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${p.state === "managed" ? "bg-emerald-400" : "bg-amber-400"}`} />
                     {p.status}
@@ -519,18 +523,17 @@ export default function HomePage() {
                 <h3 className="text-xl font-medium text-white mb-1 tracking-tight group-hover:text-emerald-300 transition-colors">
                   {p.name}
                 </h3>
-                <div className="text-[11px] font-mono text-neutral-500 mb-3">{p.category}</div>
-                <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6">
+                <div className="text-[13px] font-mono text-neutral-500 mb-3">{p.category}</div>
+                <p className="text-sm text-neutral-400 font-light leading-relaxed mb-6">
                   {p.desc}
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-white/5 text-[10px] font-mono">
+              <div className="pt-4 border-t border-white/5 text-[13px] leading-snug font-mono">
                 <div className="mb-2.5 text-neutral-500">{p.tech}</div>
                 <div className="flex flex-wrap items-center justify-between gap-2.5">
-                  <span className="mech-telemetry inline-flex items-center gap-1 text-[10px] uppercase tracking-wider font-semibold text-neutral-400 group-hover:text-emerald-400 transition-colors">
+                  <span className="inline-flex items-center gap-1 text-[13px] uppercase tracking-wider font-semibold text-neutral-400 group-hover:text-emerald-400 transition-colors">
                     <span>PREVIZUALIZARE</span>
-                    <span className="text-xs">👁️</span>
                   </span>
                   <a
                     href={p.href}
@@ -541,7 +544,7 @@ export default function HomePage() {
                     className="text-neutral-400 hover:text-white transition-colors flex items-center gap-0.5"
                   >
                     <span>{p.host}</span>
-                    <span className="text-[9px]">↗</span>
+                    <span className="text-[13px]">↗</span>
                   </a>
                 </div>
               </div>
@@ -549,8 +552,8 @@ export default function HomePage() {
           ))}
         </div>
         <div className="mt-8">
-          <Link href="/portofoliu" className="inline-flex rounded-full bg-white px-5 py-2.5 text-xs font-mono font-bold text-black transition hover:bg-neutral-200">
-            Tot portofoliul →
+          <Link href="/portofoliu" className="inline-flex rounded-full bg-white px-5 py-2.5 text-[13px] font-mono font-bold text-black transition hover:bg-neutral-200">
+            Tot portofoliul&nbsp;→
           </Link>
         </div>
       </section>
@@ -564,9 +567,11 @@ export default function HomePage() {
         </p>
         <Link
           href="/contact"
-          className="inline-flex items-center justify-center rounded-full bg-white px-6 sm:px-8 py-4 text-center text-xs font-mono uppercase tracking-wider sm:tracking-widest text-black hover:bg-neutral-200 transition-colors"
+          data-umami-event="contact-click"
+          data-umami-event-loc="final"
+          className="inline-flex items-center justify-center rounded-full bg-white px-5 sm:px-8 py-4 text-center text-[13px] leading-snug text-balance font-mono uppercase tracking-normal sm:tracking-widest text-black hover:bg-neutral-200 transition-colors"
         >
-          Programează o Discuție Directă →
+          Programează o Discuție Directă&nbsp;→
         </Link>
       </section>
 

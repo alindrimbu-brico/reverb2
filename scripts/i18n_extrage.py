@@ -33,7 +33,7 @@ PAGINI = ["/", "/servicii", "/pachete", "/portofoliu", "/despre", "/contact", "/
 # Texte care nu se pot atinge prin apăsări (stări trecătoare, elemente care apar doar în altă limbă).
 IN_PLUS = [
     ("linie", "/", "De la lansare la scalare."),  # rândul gri al titlului (OutlineRun): același text ca în app/HomeClient.tsx
-    ("text", "/contact", "Se procesează..."),
+    ("text", "/contact", "Se trimite…"),
     ("text", "/contact", "Se încarcă formularul..."),
     ("text", "/contact", "Îți răspundem în română sau engleză."),
     ("text", "*", "Această pagină există doar în română și engleză."),
@@ -42,6 +42,24 @@ IN_PLUS = [
     ("attr", "*", "Alege limba"),
     ("text", "*", "Limbă"),
     ("text", "*", "Țara detectată:"),
+    # Bara (25 nov 2026): etichetele butoanelor de temă și de meniu depind de stare, deci o singură culegere nu le prinde pe toate.
+    ("attr", "*", "Treci pe tema deschisă"),
+    ("attr", "*", "Treci pe tema închisă"),
+    ("attr", "*", "Deschide meniul"),
+    ("attr", "*", "Închide meniul"),
+    ("attr", "*", "Meniu"),
+    # Fereastra de previzualizare a unei lucrări (components/ProjectPreviewModal.tsx) se deschide doar la clic pe o lucrare,
+    # iar unele butoane apar doar la anumite lățimi: textele ei se trec aici. Se schimbă împreună cu tabelul TXT de acolo.
+    ("text", "/", "Închide fereastra"),
+    ("text", "/", "Deschide site-ul"),
+    ("text", "/", "Închide"),
+    ("text", "/", "Se încarcă site-ul…"),
+    ("text", "/", "Închide previzualizarea"),
+    ("attr", "/", "Închide fereastra de previzualizare"),
+    ("attr", "/", "Deschide site-ul într-o filă nouă"),
+    ("attr", "/", "Vedere pe calculator (100%)"),
+    ("attr", "/", "Vedere pe tabletă (768 px)"),
+    ("attr", "/", "Vedere pe telefon (390 px)"),
 ]
 
 # Aceeași funcție ca `norm` din lib/i18n/translator.ts.
