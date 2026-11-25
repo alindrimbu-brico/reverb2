@@ -1,0 +1,50 @@
+{
+ "ext": "webp",
+ "films": [
+  {
+   "id": "f1",
+   "dir": "frames/f1",
+   "first": 1,
+   "count": 110,
+   "chapter": "site",
+   "scrollVh": 240,
+   "holdVh": 110
+  },
+  {
+   "id": "f2",
+   "dir": "frames/f2",
+   "first": 2,
+   "count": 109,
+   "chapter": "magazin",
+   "scrollVh": 240,
+   "holdVh": 110
+  },
+  {
+   "id": "f3",
+   "dir": "frames/f3",
+   "first": 2,
+   "count": 109,
+   "chapter": "clipuri",
+   "scrollVh": 240,
+   "holdVh": 110
+  },
+  {
+   "id": "f4",
+   "dir": "frames/f4",
+   "first": 2,
+   "count": 109,
+   "chapter": "gasit",
+   "scrollVh": 240,
+   "holdVh": 110
+  },
+  {
+   "id": "f5",
+   "dir": "frames/f5",
+   "first": 2,
+   "count": 109,
+   "chapter": null,
+   "scrollVh": 240,
+   "holdVh": 40
+  }
+ ]
+}

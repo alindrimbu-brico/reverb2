@@ -8,6 +8,13 @@ Aici notăm progresul pentru a ne coordona perfect.
 
 ---
 
+### [Claude] - 25 nov 2026 (seara) - Macheta „Sfera Reverb” în Galeria de concepte (ramura `galerie-cinematic`)
+
+Alin, 25 nov: „da galerie”. Proba skill-ului `site-cinematic` (sursa: `C:\Users\alind\reverb\cinematic-proba\`, cu `PROMPT.md`) e pagină statică în `public/site-cinematic/` (15 MB: cadre WebP în `frames/`, 4 clipuri de telefon în `assets/mobile/`). Primul card din `/showcase` și `/en/showcase`; `site-cinematic` e în `STATIC_MOCKUP_DIRS` (noindex), are butonul „Înapoi la concepte” și `<meta name="robots" content="noindex, follow">`.
+- Pagina nu folosește nimic din Next: HTML, CSS, JS în dosarul ei. Butoanele din final duc la `/contact` (cu `data-umami-event-loc="site-cinematic"`) și `/pachete`.
+- Textul capitolelor stă la cel puțin 80 px de jos, ca să nu-l acopere butonul „Înapoi la concepte”.
+- Cadre refăcute = dosar nou (`frames-v2/`) și `manifest.json` schimbat, ca un cache vechi să nu amestece cadre.
+
 ### [Claude] - 25 nov 2026 - Reparațiile din treapta 1 a faceliftului (publicate pe 25 nov 2026, după „publică reverb”)
 
 Alin a aprobat pe 25 nov planul `docs/designs/facelift_10k_2026-11-24/design_v2_decizii.md` („repară reverb”) și publicarea („publică reverb”). Ramura `facelift-1` e îmbinată în `master`; niciun fișier nu mai e „ocupat”. Site-ul arată ca înainte; ce s-a schimbat e mai jos. Cuvintele „scalare”, „SLA prin contract”, „În administrare”, „clipuri”, „Galeria de concepte” rămân cum sunt (Alin, 25 nov). **Unde o regulă de aici o contrazice pe una mai veche din acest fișier, câștigă cea de aici.**
