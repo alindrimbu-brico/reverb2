@@ -124,7 +124,16 @@ footer { padding: 8rem 3rem; display: flex; flex-direction: column; align-items:
     .work-row { grid-template-columns: 1fr; gap: 1rem; padding: 2rem; }
     .hero-title { font-size: 20vw; }
 }
+@media (max-width: 900px) {
+    .section-title { font-size: 3rem; }
+    .work-name { font-size: 2.25rem; }
+}
 @media (max-width: 600px) {
+    .section-title { font-size: 2.25rem; overflow-wrap: anywhere; }
+    .work-name { font-size: 1.75rem; }
+    .marquee-content { font-size: 1.25rem; letter-spacing: 0.12em; }
+    .hero, .expertise, .stats, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .fixed-nav { padding: 1.25rem 1.5rem; }
     .grid-4 { grid-template-columns: 1fr; }
     .flex-split { flex-direction: column; gap: 2rem; }
     .footer-title { font-size: 3rem; }
