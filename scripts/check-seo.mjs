@@ -18,7 +18,6 @@ const MOCKUP_SAMPLES = [
   "/acasa-showcase/index.html",
   "/aura/index.html",
   "/noapte/index.html",
-  "/spiritual-site/index.html",
   "/guru-store/index.html",
 ];
 const isMockup = (route) => {

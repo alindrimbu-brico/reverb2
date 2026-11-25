@@ -15,6 +15,13 @@ Alin, 25 nov: „da galerie”. Proba skill-ului `site-cinematic` (sursa: `C:\Us
 - Textul capitolelor stă la cel puțin 80 px de jos, ca să nu-l acopere butonul „Înapoi la concepte”.
 - Cadre refăcute = dosar nou (`frames-v2/`) și `manifest.json` schimbat, ca un cache vechi să nu amestece cadre.
 
+### [Claude] - 26 nov 2026 - Machetele reparate (ramura `design-machete`)
+
+Alin, 25 nov: „rezolvă toate problemele pe care le întâlnești”. Pornit de la semnalările detectorului de design pe machetele statice:
+- **„Spiritual Reading” (`public/spiritual-site/`) e scoasă:** era textul întreg al cărții „101 Eseuri” (Brianna Wiest), scanat din PDF, cu erori de OCR, în 143 de pagini publice. Adresele `/spiritual-site/…` duc la `/showcase` (308, `next.config.ts`); scoasă și din galerie (RO + EN), din `STATIC_MOCKUP_DIRS` și din `check-seo.mjs`. Scripturile care o generau sunt în `docs/spiritual-site-sursa/`. Nu readuceți text întreg din cărți publicate. Macheta `/showcase/spiritual-blog` rămâne: comentează ideile cărții cu texte proprii și numește autoarea.
+- **`public/surya/`** (florarte.ro și surya.ro duc aici, se indexează): scoase cifra fără sursă („99% Improved Model Integration”), insigna „Powered by Google Ultra AI” cu punctul care pâlpâie, legăturile moarte („← PREVIOUS”, „Style Guide”, „License”), rândurile „View” care păreau apăsabile, etichetele mici de deasupra titlurilor; „Contact Surya” duce la `/contact`; ancora `#about` există; banda nu se mai derulează singură; textul funcțional are cel puțin 12 px; contrast reparat; fontul Archivo (în loc de Inter); `prefers-reduced-motion` respectat. Meniul folosește `mix-blend-mode: difference`, deci detectorul vede contrast 1:1 acolo: excepție scrisă în `.impeccable/config.json`.
+- **Butonul „Înapoi la concepte”** din machetele statice are 12 px (era 10).
+
 ### [Claude] - 25 nov 2026 - Reparațiile din treapta 1 a faceliftului (publicate pe 25 nov 2026, după „publică reverb”)
 
 Alin a aprobat pe 25 nov planul `docs/designs/facelift_10k_2026-11-24/design_v2_decizii.md` („repară reverb”) și publicarea („publică reverb”). Ramura `facelift-1` e îmbinată în `master`; niciun fișier nu mai e „ocupat”. Site-ul arată ca înainte; ce s-a schimbat e mai jos. Cuvintele „scalare”, „SLA prin contract”, „În administrare”, „clipuri”, „Galeria de concepte” rămân cum sunt (Alin, 25 nov). **Unde o regulă de aici o contrazice pe una mai veche din acest fișier, câștigă cea de aici.**

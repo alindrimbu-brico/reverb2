@@ -52,7 +52,6 @@ const showcases: Concept[] = [
   { id: "neuro-recovery", name: "NeuroLumina", vibe: "Dark to Light Recovery", color: "#10B981", description: "Scroll-telling platform exploring addiction biology, dopamine recalibration, and homeostasis.", href: "/en/showcase/neuro-recovery" },
   { id: "acasa-showcase", name: "Acasă Showcase", vibe: "Premium Glassmorphism", color: "#6c5ce7", description: "Digital showcase for innovative product architectures and AI startup ecosystems.", href: "/acasa-showcase/index.html" },
   { id: "guru-store", name: "Guru Store", vibe: "E-Commerce Fluid", color: "#f59e0b", description: "High-speed interactive product catalog with fluid motions and rapid 1-click checkout.", href: "/guru-store/index.html" },
-  { id: "spiritual-site", name: "Spiritual Reading", vibe: "Ethereal Text", color: "#8b5cf6", description: "Minimalist editorial reading interface containing over 140 structured essays.", href: "/spiritual-site/index.html" },
   { id: "humanoid-reality-2026", name: "Humanoid Reality 2026", vibe: "Monochrome mechanics", color: "#D4D4D4", description: "Market analysis and architectural review of the $750B humanoid robotics ecosystem.", href: "/humanoid-reality-2026" }
 ];
 

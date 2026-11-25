@@ -30,7 +30,7 @@ body {
     transform: translateX(-50%);
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 60%);
+    background: none;
     z-index: -1;
     pointer-events: none;
     opacity: 0.6;
@@ -63,7 +63,7 @@ header {
 .cart-icon:hover {
     background: rgba(255, 255, 255, 0.1);
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px var(--accent-glow);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.35);
 }
 
 .hero {
@@ -81,7 +81,6 @@ header {
 
 .highlight {
     color: var(--accent);
-    text-shadow: 0 0 20px var(--accent-glow);
 }
 
 .hero p {
@@ -114,7 +113,7 @@ header {
 .idea-card:hover {
     transform: translateY(-10px);
     border-color: var(--accent);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px var(--accent-glow);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
 .idea-title {
@@ -227,7 +226,7 @@ header {
 
 .checkout-btn:hover {
     background: #e0981e;
-    box-shadow: 0 0 15px var(--accent-glow);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.35);
 }
 
 @media (max-width: 600px) {

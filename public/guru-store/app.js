@@ -42,7 +42,7 @@ function renderIdeas() {
         card.className = 'idea-card';
         card.innerHTML = `
             <div>
-                <h3 class="idea-title">${idea.title}</h3>
+                <h2 class="idea-title">${idea.title}</h2>
                 <p class="idea-desc">${idea.desc}</p>
             </div>
             <div class="idea-footer">
